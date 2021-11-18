@@ -271,9 +271,9 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
    The Dilithium public key MUST be encoded using the ASN.1 type
    DilithiumPublicKey:
 
-
-
-
+   DilithiumPublicKey ::= SEQUENCE {
+       rho         OCTET STRING,     -- nonce/seed
+       t           OCTET STRING  }   -- encoded vector
 
 
 
@@ -281,10 +281,6 @@ Massimo & Kampanakis       Expires 22 May 2022                  [Page 5]
 
 Internet-Draft           PQ Algorithms for X.509           November 2021
 
-
-   DilithiumPublicKey ::= SEQUENCE {
-       rho         OCTET STRING,     -- nonce/seed
-       t           OCTET STRING  }   -- encoded vector
 
    where rho is the nonce used to seed the XOF to produce the matrix A,
    and t is a vector encoded in 320*k bytes where k is the rank of the
@@ -295,7 +291,6 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
    The parameters may be inherited from the issuer, implicitly included
    through reference to a "security level", or explicitly included in
    the certificate.
-
 
    DilithiumPkParameters ::= CHOICE {
      dilithiumParameters  DilithiumParameters,
@@ -308,13 +303,18 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
    dilithium OIDs based on security level. e.g. id-dilithium-3-shake256
    or id-dilithium-4x4-shake256.
 
+   The object identifier id-securityLevel specifies an arc containing
+   the object identifiers of each security level.  It has the following
+   value:
+
+  id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }
+
    When the parameters are inherited, the parameters field SHALL contain
    implictlyCA, which is the ASN.1 value NULL.  When parameters are
    specified by reference, the parameters field SHALL contain the
    security level choice, which is an object identifier.  When the
    parameters are explicitly included, they SHALL be encoded in the
    ASN.1 structure DilithiumParameters:
-
 
  DilithiumParameters ::= SEQUENCE {
      n        INTEGER,   -- the dimension of the polynomial ring R_q
@@ -350,7 +350,6 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
    listed in the Figure 1, along with the resulting public key and
    private key sizes in bytes.
 
-
   |==========+=====+=========+=======+=====+========+========+=========|
   | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
   | Level    |     |         |       |     |        | Key(B) | Key(B)  |
@@ -381,6 +380,7 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 8.  IANA Considerations
 
    This memo includes no request to IANA.
+
 
 
 

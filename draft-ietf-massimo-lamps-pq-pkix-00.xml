@@ -205,8 +205,7 @@
                 </ul>
                 <t>The size required to hold all public key elements is therefore 32+320*k bytes, where k is the rank of the vector over the polynomial ring R_q.</t>
           -->
-         <artwork name="" type="" align="left" alt="">
-                    <![CDATA[
+         <artwork name="" type="" align="left" alt=""><![CDATA[
 DilithiumPublicKey ::= SEQUENCE {
     rho         OCTET STRING,     -- nonce/seed
     t           OCTET STRING  }   -- encoded vector ]]>
@@ -215,17 +214,19 @@ DilithiumPublicKey ::= SEQUENCE {
 
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
         <t>Dilithium requires the use of certain parameters with the public key. The parameters may be inherited from the issuer, implicitly included through reference to a "security level", or explicitly included in the certificate.</t>
-         <artwork name="" type="" align="left" alt="">
-                    <![CDATA[
+         <artwork name="" type="" align="left" alt=""><![CDATA[
 DilithiumPkParameters ::= CHOICE {
   dilithiumParameters  DilithiumParameters,
   securityLevel        OBJECT IDENTIFIER,
   implicitlyCA         NULL } ]]>
                 </artwork>
-      <t>EDNOTE: security level is used analogously to how "named-curves" was used in ECDSA and ECDH keys, alternatively, this same distinction between parameter sets could be achieved by instead defining multiple dilithium OIDs based on security level. e.g. id-dilithium-3-shake256 or id-dilithium-4x4-shake256.</t>         
+      <t>EDNOTE: security level is used analogously to how "named-curves" was used in ECDSA and ECDH keys, alternatively, this same distinction between parameter sets could be achieved by instead defining multiple dilithium OIDs based on security level. e.g. id-dilithium-3-shake256 or id-dilithium-4x4-shake256.</t>
+      <t>The object identifier id-securityLevel specifies an arc containing the object identifiers of each security level.  It has the following value:</t>     
+               <artwork name="" type="" align="left" alt=""><![CDATA[
+id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
+                </artwork> 
       <t> When the parameters are inherited, the parameters field SHALL contain implictlyCA, which is the ASN.1 value NULL. When parameters are specified by reference, the parameters field SHALL contain the security level choice, which is an object identifier.  When the parameters are explicitly included, they SHALL be encoded in the ASN.1 structure DilithiumParameters:</t>
-         <artwork name="" type="" align="left" alt="">
-                    <![CDATA[
+         <artwork name="" type="" align="left" alt=""><![CDATA[
 DilithiumParameters ::= SEQUENCE {
     n        INTEGER,   -- the dimension of the polynomial ring R_q
     q        INTEGER,   -- the modulus of the polynomial ring R_q
@@ -244,8 +245,7 @@ DilithiumParameters ::= SEQUENCE {
 
 <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
                 <figure anchor="DilithiumParameters">
-                    <artwork align="left" name="" type="" alt="">
-                        <![CDATA[
+                    <artwork align="left" name="" type="" alt=""><![CDATA[
 |==========+=====+=========+=======+=====+========+========+=========|
 | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
 | Level    |     |         |       |     |        | Key(B) | Key(B)  |
