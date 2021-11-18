@@ -30,7 +30,7 @@ Note
    appropriate algorithms and parameters before proceeding to
    ratification.  The algorithm Dilithium has been added as an example
    in this draft, to provide a more detailed illustration of the content
-   - it by no means indiciates its inclusion in the final version.  This
+   - it by no means indicates its inclusion in the final version.  This
    specification will use object identifiers for the new algorithms that
    are assigned by NIST, and will use placeholders until these are
    released.
@@ -121,9 +121,9 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
    6.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   7
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   7
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
      10.2.  Informative References . . . . . . . . . . . . . . . . .   8
    Appendix A.  Additional Stuff . . . . . . . . . . . . . . . . . .   9
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
@@ -148,7 +148,7 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
    This document also identifies additional one-way hash functions for
    use in the generation of quantum-safe digital signatures.  These
    algorithms are used in conjunction with digital signature algorithms,
-   and suppliment those described within RFC 3279, RFC 5758, and RFC
+   and supplement those described within RFC 3279, RFC 5758, and RFC
    8692.
 
 1.1.  Requirements Language
@@ -327,9 +327,9 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
      beta     INTEGER,   -- the reduction in the bound for verfification
      }
 
-   The parameter sets defined for NIST security levels 2, 3 and 5 are
-   listed in the Figure 1, along with the resulting public key and
-   private key sizes in bytes.
+   The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
+   within a certificate where the parameters may be used.  If the
+   Dilithium parameters are specified as implicitlyCA in the
 
 
 
@@ -338,16 +338,29 @@ Massimo & Kampanakis       Expires 22 May 2022                  [Page 6]
 Internet-Draft           PQ Algorithms for X.509           November 2021
 
 
- |==========+=====+=========+=======+=======+========+========+========|
- | Security |  n  |    q    | (k,l) |  eta  | gamma1 | Public | Secret |
- | Level    |     |         |       |       |        | Key(B) | Key(B) |
- |==========+=====+=========+=======+=======+========+========+========|
- | 2        | 256 | 8380417 | (4,4) |   2   |  2^17  |  1312  |  2528  |
- | 3        | 256 | 8380417 | (6,5) |   2   |  2^19  |  1952  |  4000  |
- | 5        | 256 | 8380417 | (8,7) |   2   |  2^19  |  2596  |  4864  |
- |==========+=====+=========+=======+=======+========+========+========|
+   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
+   subject certificate using Dilithium, then the certificate issuer's
+   Dilithium parameters apply to the subject's Dilithium key.  If the
+   Dilithium parameters are specified as implicitlyCA in the
+   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
+   certificate using a signature algorithm other than Dilithium, then
+   clients MUST not make use of the Dilithium public key.
 
-                                Figure 1
+   The parameter sets defined for NIST security levels 2, 3 and 5 are
+   listed in the Figure 1, along with the resulting public key and
+   private key sizes in bytes.
+
+
+  |==========+=====+=========+=======+=====+========+========+=========|
+  | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
+  | Level    |     |         |       |     |        | Key(B) | Key(B)  |
+  |==========+=====+=========+=======+=====+========+========+=========|
+  | 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  |
+  | 3        | 256 | 8380417 | (6,5) |  2  |  2^19  |  1952  |   4000  |
+  | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
+  |==========+=====+=========+=======+=====+========+========+=========|
+
+                                 Figure 1
 
 4.2.  TBD Public Keys
 
@@ -369,6 +382,18 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
    This memo includes no request to IANA.
 
+
+
+
+
+
+
+
+Massimo & Kampanakis       Expires 22 May 2022                  [Page 7]
+
+Internet-Draft           PQ Algorithms for X.509           November 2021
+
+
    All drafts are required to have an IANA considerations section (see
    Guidelines for Writing an IANA Considerations Section in RFCs
    [RFC5226] for a guide).  If the draft does not require IANA to do
@@ -384,15 +409,6 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 10.  References
 
 10.1.  Normative References
-
-
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 7]
-
-Internet-Draft           PQ Algorithms for X.509           November 2021
-
 
    [FIPS202]  National Institute of Standards and Technology (NIST),
               "SHA-3 Standard: Permutation-Based Hash and Extendable
@@ -425,6 +441,15 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
 10.2.  Informative References
 
+
+
+
+
+Massimo & Kampanakis       Expires 22 May 2022                  [Page 8]
+
+Internet-Draft           PQ Algorithms for X.509           November 2021
+
+
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
               Schwabe, P., Seiler, G., and D. Stehlé, "CRYSTALS-
@@ -439,16 +464,6 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
               Algorithm X.509 Certificates", August 2018,
               <https://datatracker.ietf.org/doc/html/draft-truskovsky-
               lamps-pq-hybrid-x509-01>.
-
-
-
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 8]
-
-Internet-Draft           PQ Algorithms for X.509           November 2021
-
 
    [Fiat-Shamir]
               Lyubashevsky, V., "Fiat-Shamir with aborts: Applications
@@ -480,9 +495,20 @@ Authors' Addresses
    Email: jakemas@amazon.com
 
 
+
+
+
+
+
+
+Massimo & Kampanakis       Expires 22 May 2022                  [Page 9]
+
+Internet-Draft           PQ Algorithms for X.509           November 2021
+
+
    Panos Kampanakis
    AWS
-   United Kingdom
+   United States of America
 
    Email: kpanos@amazon.com
 
@@ -501,4 +527,34 @@ Authors' Addresses
 
 
 
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Massimo & Kampanakis       Expires 22 May 2022                 [Page 10]
