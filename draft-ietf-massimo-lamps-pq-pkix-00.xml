@@ -1,0 +1,523 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- This template is for creating an Internet Draft using xml2rfc,
+    which is available here: http://xml.resource.org. -->
+<!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<!-- used by XSLT processors -->
+<!-- For a complete list and description of processing instructions (PIs), 
+    please see http://xml.resource.org/authoring/README.html. -->
+<rfc
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      category="std"
+      consensus="true"
+      docName="draft-ietf-massimo-lamps-pq-pkix-00"
+      ipr="trust200902"
+      obsoletes=""
+      updates=""
+      submissionType="IETF"
+      xml:lang="en"
+      tocInclude="true"
+      tocDepth="4"
+      symRefs="true"
+      sortRefs="true"
+      version="3">
+  <!-- xml2rfc v2v3 conversion 2.38.1 -->
+  <!-- category values: std, bcp, info, exp, and historic
+    ipr values: trust200902, noModificationTrust200902, noDerivativesTrust200902,
+       or pre5378Trust200902
+    you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+    they will automatically be output with "(if approved)" -->
+
+ <!-- ***** FRONT MATTER ***** -->
+
+ <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+        full title is longer than 39 characters -->
+
+   <title abbrev="PQ Algorithms for X.509">Algorithms and Identifiers for Post-Quantum Algorithms <br/> in the Internet X.509 Public Key Infrastructure</title>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-massimo-lamps-pq-pkix-00"/>
+    <!-- add 'role="editor"' below for the editors if appropriate -->
+
+   <!-- Another author who claims to be an editor -->
+
+   <author fullname="Jake Massimo" initials="J." surname="Massimo">
+      <organization>AWS</organization>
+      <address>
+        <postal>
+          <street/>
+          <!-- Reorder these if your country does things differently -->
+          <region/>
+          <code/>
+          <country>UK</country>
+        </postal>
+        <email>jakemas@amazon.com</email>
+        <!-- uri and facsimile elements may also be added -->
+     </address>
+    </author>
+    <author fullname="Panos Kampanakis" initials="P." surname="Kampanakis">
+      <organization>AWS</organization>
+      <address>
+        <postal>
+          <street/>
+          <!-- Reorder these if your country does things differently -->
+          <region/>
+          <code/>
+          <country>UK</country>
+        </postal>
+        <email>kpanos@amazon.com</email>
+        <!-- uri and facsimile elements may also be added -->
+     </address>
+    </author>
+    <date year="2021"/>
+
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
+        in the current day for you. If only the current year is specified, xml2rfc will fill 
+	 in the current day and month for you. If the year is not the current one, it is 
+	 necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the 
+	 purpose of calculating the expiry date).  With drafts it is normally sufficient to 
+	 specify just the year. -->
+
+   <!-- Meta-data Declarations -->
+
+   <area>General</area>
+    <workgroup>Internet Engineering Task Force</workgroup>
+    <!-- WG name at the upperleft corner of the doc,
+        IETF is fine for individual submissions.  
+	 If this element is not present, the default is "Network Working Group",
+        which is used by the RFC Editor as a nod to the history of the IETF. -->
+
+   <keyword>template</keyword>
+    <!-- Keywords will be incorporated into HTML output
+        files in a meta tag but they have no effect on text or nroff
+        output. If you submit your draft to the RFC Editor, the
+        keywords will be used for the search engine. -->
+
+   <abstract>
+      <t>This document updates RFC 3279 to specify algorithm identifiers and ASN.1 encoding formats for post-quantum digital signatures and subject public keys used in the Internet X.509 Public Key Infrastructure (PKI). The signature algorithms covered are Dilithium, TBD and TBD1. The encoding for public key, private key, and Post-Quantum Digital Signature Algorithm (PQDSA) structures is provided.</t>
+    </abstract>
+
+    <note>
+    <t>EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized this document will replace TBD, TBD1 with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indiciates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.</t>
+
+    <t>The migration from traditional public-key cryptographic algorithms (such as RSA and ECDSA) to quantum-safe algorithms is often facilitated though a transitional phase in which a hybrid of both types of algorithms are used simultaneously. In PKIX, there are two methodologies for achieving this, i) to utilize “dual certificates” in which one certificate contains traditional digital signature algorithms, and the other one or more quantum-secure algorithm from the NIST PQC, or ii) “dual signature certificates” in which a single certificate combines one or more traditional signature algorithm with one or more NIST PQC signature algorithm.</t>
+    <t> Current draft <xref target="draft-truskovsky-lamps-pq-hybrid-x509-01" format="default"></xref> specifies a way to achieve option (ii) “dual signature certificates”, whereas this document targets the specification of option (i) “dual certificates”. More specifically, the certificate containing only quantum-secure NIST PQC algorithms (or a PQC algorithm vetted by the CFRG). However, this specification may also be utilized by option (i) when defining the use of NIST PQC algorithms within the “dual signature certificates”.</t>
+    </note>
+  </front>
+  <middle>
+    <section numbered="true" toc="default">
+      <name>Introduction</name>
+      <!-- [JM] Could put in the classic introduction to why we need PQ crypto, but I don't think it is needed, we don't need to convince people why PQ is important here, nist has standardized it and we are just defining how to use it-->
+
+      <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document supplements <xref target="RFC3279" format="default"></xref> and will specify the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates. These specifications will use object identifiers algorithms that are assigned by NIST.</t>
+
+      <t>This specification defines additional content for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates <xref target="RFC3279" format="default"></xref> and CRLs <xref target="RFC5280" format="default"></xref>. This specification describes the encoding of digital signatures generated with the following cryptographic algorithms: Dilithium, TBD, and TBD1.</t>
+
+      <t>This document also identifies additional one-way hash functions for use in the generation of quantum-safe digital signatures. These algorithms are used in conjunction with digital signature algorithms, and suppliment those described within RFC 3279, RFC 5758, and RFC 8692.</t>
+
+      <section numbered="true" toc="default">
+        <name>Requirements Language</name>
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+       "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+       document are to be interpreted as described in <xref target="RFC2119" format="default">RFC 2119</xref>.</t>
+      </section>
+
+    </section>
+    <section anchor="hashfunctions" numbered="true" toc="default">
+      <name>One-Way Hash Functions</name>
+      <t>This sections identifies five additional hash algorithms for use with post-quantum digital signature algorithms in the Internet X.509 certificate and CRL profile. The hash functions SHA3-256, SHA3-384, SHA3-512 produce 256-bit, 384-bit and 512-bit "hash" of the input, respectively, and are fully described in the "Secure Hash Standard" <xref target="FIPS202" format="default"></xref>. The extendable-output functions SHAKE-128 and SHAKE-256 provide extendable (and thus variable) output sizes and are also fully described in the "Secure Hash Standard" <xref target="FIPS202" format="default"></xref>.</t>
+
+      <t>When one of these OIDs appears in an AlgorithmIdentifier, all implementations MUST accept both NULL and absent parameters as legal and equivalent encodings.</t>
+
+      <t>Conforming certification authority (CA) implementations SHOULD use SHA3-256, SHA3-384, SHA3-512, SHAKE-128 or SHAKE-256 when generating quantum-secure certificates or CRLs.</t>
+
+        <section numbered="true" toc="default">
+         <name>SHA-3 One-Way Hash Functions</name>
+         <t>The listed SHA-3 one-way hash functions are identified by the following object identifiers (OIDs):</t>
+          <dl newline="true" spacing="normal" indent="8">
+          <dt>id-sha3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) 8 }</dd>
+
+          <dt>id-sha3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) 9 }</dd>
+
+          <dt>id-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) 10 }</dd>
+          </dl>
+        </section>
+        <section numbered="true" toc="default">
+         <name>SHA-3 Extendable-Output Functions</name>
+          <t>The listed SHA-3 extendable-output functions (XOF) are identified by the following object identifiers (OIDs):</t>
+          <dl newline="true" spacing="normal" indent="8">
+          <dt>id-shake-128 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) 11 }</dd>
+
+          <dt>id-shake-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) 12 }</dd>
+          </dl>
+        </section>
+    </section>
+    <section anchor="signaturealgorithms" numbered="true" toc="default">
+      <name>Signature Algorithms</name>
+      <t>This section identifies OIDS for the post-quantum digital signature algorithms (PQDSA) Dilithium, TBD, and TBD1. The contents of the parameters component for each algorithm vary; details are provided for each algorithm.
+
+      Each algorithm can offer parameter sets for at most five quantum security categories numbered 1 to 5 as defined by NIST <xref target="NIST-PQC" format="default"></xref>.</t>
+
+        <section numbered="true" toc="default">
+         <name>Dilithium Signature Algorithm</name>
+         <t>Dilithium is a digital signature scheme built upon the Fiat-Shamir with aborts framework <xref target="Fiat-Shamir" format="default"></xref>. The security is based upon the hardness of lattice problems over module lattices <xref target="Dilithium" format="default"></xref>. Dilithium provides 3 parameter sets for the security categories 2,3 and 5.</t>
+
+         <t>When SHAKE-256 is used, the OIDs are:</t>
+          <dl newline="true" spacing="normal" indent="8">
+          <dt>id-dilithium-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) X }</dd>
+          </dl>
+          <t>When the id-dilithium-shake256 identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding MUST omit the parameters field.  That is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the OID id-dilithium-shake256.</t>
+        </section>
+        <section numbered="true" toc="default">
+         <name>TBD Signature Algorithm</name>
+         <t>TBD</t>
+        </section>
+    </section>
+    <!--
+    <section anchor="subjectpublickeyalgorithms" numbered="true" toc="default">
+      <name>Subject Public Key Algorithms</name>
+      <t>I am here </t>
+      <t>This section identifies preferred OIDs and parameters for the post-quantum digital signature algorithms. Conforming CAs MUST use the identified OIDs when issuing certificates containing public keys for these algorithms. Conforming applications supporting any of these algorithms MUST, at a minimum, recognize the OID identified in this section.</t>
+        <section numbered="true" toc="default">
+         <name>Dilithium Signature Keys</name>
+         <t>text</t>
+        </section>
+        <section numbered="true" toc="default">
+         <name>TBD Signature Keys</name>
+         <t>text</t>
+        </section>
+    </section>
+  -->
+    <section anchor="subjectpublickey" numbered="true" toc="default">
+    <name>Subject Public Key Fields</name>
+        <section numbered="true" toc="default">
+         <name>Dilithium Public Keys</name>
+         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!---This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most breif of an explaination I could give for where rho, and k come from. -->
+         <t>The Dilithium public key MUST be encoded using the ASN.1 type DilithiumPublicKey:</t>
+                <!---<ul spacing="compact">
+                    <li>rho: nonce</li>
+                    <li>t:  a vector encoded in 320*k bytes</li>
+                </ul>
+                <t>The size required to hold all public key elements is therefore 32+320*k bytes, where k is the rank of the vector over the polynomial ring R_q.</t>
+          -->
+         <artwork name="" type="" align="left" alt="">
+                    <![CDATA[
+DilithiumPublicKey ::= SEQUENCE {
+    rho         OCTET STRING,     -- nonce/seed
+    t           OCTET STRING  }   -- encoded vector ]]>
+                </artwork>
+                <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
+
+          <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
+        <t>Dilithium requires the use of certain parameters with the public key. The parameters may be inherited from the issuer, implicitly included through reference to a "security level", or explicitly included in the certificate.</t>
+         <artwork name="" type="" align="left" alt="">
+                    <![CDATA[
+DilithiumPkParameters ::= CHOICE {
+  dilithiumParameters  DilithiumParameters,
+  securityLevel        OBJECT IDENTIFIER,
+  implicitlyCA         NULL } ]]>
+                </artwork>
+      <t>EDNOTE: security level is used analogously to how "named-curves" was used in ECDSA and ECDH keys, alternatively, this same distinction between parameter sets could be achieved by instead defining multiple dilithium OIDs based on security level. e.g. id-dilithium-3-shake256 or id-dilithium-4x4-shake256.</t>         
+      <t> When the parameters are inherited, the parameters field SHALL contain implictlyCA, which is the ASN.1 value NULL. When parameters are specified by reference, the parameters field SHALL contain the security level choice, which is an object identifier.  When the parameters are explicitly included, they SHALL be encoded in the ASN.1 structure DilithiumParameters:</t>
+         <artwork name="" type="" align="left" alt="">
+                    <![CDATA[
+DilithiumParameters ::= SEQUENCE {
+    n        INTEGER,   -- the dimension of the polynomial ring R_q
+    q        INTEGER,   -- the modulus of the polynomial ring R_q
+    k        INTEGER,   -- rank of the vector over R_q
+    l        INTEGER,   -- rank of the vector over R_q
+    eta      INTEGER,   -- bound on size of the coefficients for keygen
+    gamma1   INTEGER,   -- bound on size of coefficients for signing
+    gamma2   INTEGER,   -- bound on size of coefficients for signing
+    beta     INTEGER,   -- the reduction in the bound for verfification
+    }]]>
+                </artwork>
+<!-- I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
+<t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
+                <figure anchor="DilithiumParameters">
+                    <artwork align="left" name="" type="" alt="">
+                        <![CDATA[
+|==========+=====+=========+=======+=======+========+========+========|
+| Security |  n  |    q    | (k,l) |  eta  | gamma1 | Public | Secret |
+| Level    |     |         |       |       |        | Key(B) | Key(B) |
+|==========+=====+=========+=======+=======+========+========+========|
+| 2        | 256 | 8380417 | (4,4) |   2   |  2^17  |  1312  |  2528  | 
+| 3        | 256 | 8380417 | (6,5) |   2   |  2^19  |  1952  |  4000  | 
+| 5        | 256 | 8380417 | (8,7) |   2   |  2^19  |  2596  |  4864  |
+|==========+=====+=========+=======+=======+========+========+========| ]]>
+                    </artwork>
+                </figure>
+
+
+        </section>
+        <section numbered="true" toc="default">
+         <name>TBD Public Keys</name>
+         <t>text</t>
+        </section>
+    </section>
+
+    <section anchor="privatekeyformat" numbered="true" toc="default">
+    <name>Private Key Format</name>
+        <section numbered="true" toc="default">
+         <name>Dilithium Private Keys</name>
+
+          </section>
+        <section numbered="true" toc="default">
+          <name>TBD Private Keys</name>
+          <t>text</t>
+        </section>
+    </section>
+    <section anchor="asn1" numbered="true" toc="default">
+      <name>ASN.1 Module</name>
+    </section>
+
+    <section anchor="Acknowledgements" numbered="true" toc="default">
+      <name>Acknowledgements</name>
+    </section>
+    <!-- Possibly a 'Contributors' section ... -->
+
+   <section anchor="IANA" numbered="true" toc="default">
+      <name>IANA Considerations</name>
+      <t>This memo includes no request to IANA.</t>
+      <t>All drafts are required to have an IANA considerations section (see
+     <xref target="RFC5226" format="default">Guidelines for Writing an IANA Considerations Section in RFCs</xref> for a guide). If the draft does not require IANA to do
+     anything, the section contains an explicit statement that this is the
+     case (as above). If there are no requirements for IANA, the section will
+     be removed during conversion into an RFC by the RFC Editor.</t>
+    </section>
+    <section anchor="Security" numbered="true" toc="default">
+      <name>Security Considerations</name>
+      <t>All drafts are required to have a security considerations section.
+     See <xref target="RFC3552" format="default">RFC 3552</xref> for a guide.</t>
+    </section>
+  </middle>
+  <!--  *****BACK MATTER ***** -->
+
+ <back>
+    <!-- References split into informative and normative -->
+
+   <!-- There are 2 ways to insert reference entries from the citation libraries:
+    1. define an ENTITY at the top, and use "ampersand character"RFC2629; here (as shown)
+    2. simply use a PI "less than character"?rfc include="reference.RFC.2119.xml"?> here
+       (for I-Ds: include="reference.I-D.narten-iana-considerations-rfc2434bis.xml")
+
+    Both are cited textually in the same manner: by using xref elements.
+    If you use the PI option, xml2rfc will, by default, try to find included files in the same
+    directory as the including file. You can also define the XML_LIBRARY environment variable
+    with a value containing a set of directories to search.  These can be either in the local
+    filing system or remote ones accessed by http (http://domain/dir/... ).-->
+
+   <references>
+      <name>References</name>
+      <references>
+        <name>Normative References</name>
+        <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
+     <reference anchor="RFC2119" target="https://www.rfc-editor.org/info/rfc2119" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+          <front>
+            <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+            <seriesInfo name="DOI" value="10.17487/RFC2119"/>
+            <seriesInfo name="RFC" value="2119"/>
+            <seriesInfo name="BCP" value="14"/>
+            <author initials="S." surname="Bradner" fullname="S. Bradner">
+              <organization/>
+            </author>
+            <date year="1997" month="March"/>
+            <abstract>
+              <t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
+            </abstract>
+          </front>
+        </reference>
+
+        <reference anchor="RFC3279" target="https://www.rfc-editor.org/info/rfc3279" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3279.xml">
+          <front>
+            <title>Algorithms and Identifiers for the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</title>
+            <seriesInfo name="DOI" value="10.17487/RFC3279"/>
+            <seriesInfo name="RFC" value="3279"/>
+            <author initials="R." surname="Housley" fullname="R. Housley">
+              <organization/>
+            </author>
+             <author initials="T." surname="Polk" fullname="T. Polk">
+              <organization/>
+            </author>
+            <author initials="L.E." surname="Bassham" fullname="L.E. Bassham">
+              <organization/>
+            </author>
+            <date year="2002" month="May"/>
+          </front>
+        </reference>
+
+        <reference anchor="RFC5280" target="https://www.rfc-editor.org/info/rfc5280" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml">
+          <front>
+            <title>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</title>
+            <seriesInfo name="DOI" value="10.17487/RFC5280"/>
+            <seriesInfo name="RFC" value="5280"/>
+            <author initials="S." surname="Boeyen" fullname="S. Boeyen">
+              <organization/>
+            </author>
+            <author initials="S." surname="Santesson" fullname="S. Santesson">
+              <organization/>
+            </author>
+            <author initials="T." surname="Polk" fullname="T. Polk">
+              <organization/>
+            </author>
+            <author initials="R." surname="Housley" fullname="R. Housley">
+              <organization/>
+            </author>
+            <author initials="S" surname="Farrell" fullname="S. Farrell">
+              <organization/>
+            </author>
+            <author initials="D" surname="Cooper" fullname="D. Cooper">
+              <organization/>
+            </author>
+            <date year="2008" month="May"/>
+          </front>
+        </reference>
+
+     <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/Call-for-Proposals">
+          <front>
+            <title>Post-Quantum Cryptography</title>
+            <author initials="" surname="National Institute of Standards and Technology (NIST)" fullname="">
+              <organization/>
+            </author>
+            <date year="2016"/>
+          </front>
+        </reference>
+
+      <reference anchor="FIPS202" target="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf">
+          <front>
+            <title>SHA-3 Standard: Permutation-Based Hash and Extendable Output Functions</title>
+            <author initials="" surname="National Institute of Standards and Technology (NIST)" fullname="">
+              <organization/>
+            </author>
+            <date year="2015" month="August"/>
+          </front>
+        </reference>
+
+      </references>
+      <references>
+        <name>Informative References</name>
+        <!-- Here we use entities that we defined at the beginning. -->
+        <reference anchor="RFC3552" target="https://www.rfc-editor.org/info/rfc3552" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3552.xml">
+          <front>
+            <title>Guidelines for Writing RFC Text on Security Considerations</title>
+            <seriesInfo name="DOI" value="10.17487/RFC3552"/>
+            <seriesInfo name="RFC" value="3552"/>
+            <seriesInfo name="BCP" value="72"/>
+            <author initials="E." surname="Rescorla" fullname="E. Rescorla">
+              <organization/>
+            </author>
+            <author initials="B." surname="Korver" fullname="B. Korver">
+              <organization/>
+            </author>
+            <date year="2003" month="July"/>
+            <abstract>
+              <t>All RFCs are required to have a Security Considerations section. Historically, such sections have been relatively weak.  This document provides guidelines to RFC authors on how to write a good Security Considerations section.   This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
+            </abstract>
+          </front>
+        </reference>
+        <reference anchor="RFC5226" target="https://www.rfc-editor.org/info/rfc5226" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
+          <front>
+            <title>Guidelines for Writing an IANA Considerations Section in RFCs</title>
+            <seriesInfo name="DOI" value="10.17487/RFC5226"/>
+            <seriesInfo name="RFC" value="5226"/>
+            <author initials="T." surname="Narten" fullname="T. Narten">
+              <organization/>
+            </author>
+            <author initials="H." surname="Alvestrand" fullname="H. Alvestrand">
+              <organization/>
+            </author>
+            <date year="2008" month="May"/>
+            <abstract>
+              <t>Many protocols make use of identifiers consisting of constants and other well-known values.  Even after a protocol has been defined and deployment has begun, new values may need to be assigned (e.g., for a new option type in DHCP, or a new encryption or authentication transform for IPsec).  To ensure that such quantities have consistent values and interpretations across all implementations, their assignment must be administered by a central authority.  For IETF protocols, that role is provided by the Internet Assigned Numbers Authority (IANA).</t>
+              <t>In order for IANA to manage a given namespace prudently, it needs guidelines describing the conditions under which new values can be assigned or when modifications to existing values can be made.  If IANA is expected to play a role in the management of a namespace, IANA must be given clear and concise instructions describing that role.  This document discusses issues that should be considered in formulating a policy for assigning values to a namespace and provides guidelines for authors on the specific text that must be included in documents that place demands on IANA.</t>
+              <t>This document obsoletes RFC 2434.  This document specifies an Internet Best  Current Practices for the Internet Community, and requests discussion and  suggestions for improvements.</t>
+            </abstract>
+          </front>
+        </reference>
+        <!-- A reference written by by an organization not a person. -->
+
+     <reference anchor="Dilithium" target="https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf">
+          <front>
+            <title>CRYSTALS-Dilithium Algorithm Specifications and Supporting Documentation</title>
+            <author initials="S." surname="Bai" fullname="S. Bai">
+            </author>
+            <author initials="L." surname="Ducas" fullname="L. Ducas">
+            </author>
+            <author initials="T." surname="Lepoint" fullname="T. Lepoint">
+            </author>
+            <author initials="V." surname="Lyubashevsky" fullname="V. Lyubashevsky">
+            </author>
+            <author initials="P." surname="Schwabe" fullname="P. Schwabe">
+            </author>
+            <author initials="G." surname="Seiler" fullname="G. Seiler">
+            </author>
+            <author initials="D." surname="Stehlé" fullname="D. Stehlé">
+            </author>
+            <date year="2021"/>
+          </front>
+        </reference>
+
+        <reference anchor="Fiat-Shamir" target="https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf">
+          <front>
+            <title>Fiat-Shamir with aborts: Applications to lattice and factoring-based signatures</title>
+            <author initials="V." surname="Lyubashevsky" fullname="V. Lyubashevsky">
+            </author>
+            <date year="2009"/>
+          </front>
+          <refcontent>International Conference on the Theory and Application of Cryptology and Information Security</refcontent>
+        </reference>
+
+      <reference anchor="draft-truskovsky-lamps-pq-hybrid-x509-01" target="https://datatracker.ietf.org/doc/html/draft-truskovsky-lamps-pq-hybrid-x509-01">
+          <front>
+            <title>Multiple Public-Key Algorithm X.509 Certificates</title>
+            <author initials="A." surname="Truskovsky" fullname="A. Truskovsky">
+            </author>
+            <author initials="D." surname="Van Geest" fullname="D. Van Geest">
+            </author>
+            <author initials="S." surname="Fluhrer" fullname="S. Fluhrer">
+            </author>
+            <author initials="P." surname="Kampanakis" fullname="P. Kampanakis">
+            </author>
+            <author initials="M." surname="Ounsworth" fullname="M. Ounsworth">
+            </author>
+            <author initials="S." surname="Mister" fullname="S. Mister">
+            </author>
+            <date year="2018" month="August"/>
+          </front>
+        </reference>
+
+      </references>
+    </references>
+    <section anchor="app-additional" numbered="true" toc="default">
+      <name>Additional Stuff</name>
+      <t>This becomes an Appendix.</t>
+    </section>
+    <!-- Change Log
+
+v00 2006-03-15  EBD   Initial version
+
+v01 2006-04-03  EBD   Moved PI location back to position 1 -
+                     v3.1 of XMLmind is better with them at this location.
+v02 2007-03-07  AH    removed extraneous nested_list attribute,
+                     other minor corrections
+v03 2007-03-09  EBD   Added comments on null IANA sections and fixed heading capitalization.
+                     Modified comments around figure to reflect non-implementation of
+                     figure indent control.  Put in reference using anchor="DOMINATION".
+                     Fixed up the date specification comments to reflect current truth.
+v04 2007-03-09 AH     Major changes: shortened discussion of PIs,
+                     added discussion of rfc include.
+v05 2007-03-10 EBD    Added preamble to C program example to tell about ABNF and alternative 
+                     images. Removed meta-characters from comments (causes problems).
+
+v06 2010-04-01 TT     Changed ipr attribute values to latest ones. Changed date to
+                     year only, to be consistent with the comments. Updated the 
+                     IANA guidelines reference from the I-D to the finished RFC.
+v07 2020-01-21 HL    Converted the template to use XML schema version 3.
+    -->
+ </back>
+</rfc>
