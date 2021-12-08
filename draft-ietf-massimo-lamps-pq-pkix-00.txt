@@ -4,8 +4,8 @@
 
 Internet Engineering Task Force                               J. Massimo
 Internet-Draft                                             P. Kampanakis
-Intended status: Standards Track                                     AWS
-Expires: 22 May 2022                                    18 November 2021
+Intended status: Experimental                                        AWS
+Expires: 11 June 2022                                    8 December 2021
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -41,27 +41,26 @@ Note
    types of algorithms are used simultaneously.  In PKIX, there are two
    methodologies for achieving this, i) to utilize "dual certificates"
    in which one certificate contains traditional digital signature
-   algorithms, and the other one or more quantum-secure algorithm from
-   the NIST PQC, or ii) "dual signature certificates" in which a single
-   certificate combines one or more traditional signature algorithm with
-   one or more NIST PQC signature algorithm.
+   algorithms, and the other a quantum-secure algorithm from the NIST
+   PQC, or ii) "composite certificates" in which a single certificate
+   combines one or more traditional signature algorithms with one or
+   more NIST PQC signature algorithms.
 
    Current draft [draft-truskovsky-lamps-pq-hybrid-x509-01] specifies a
-   way to achieve option (ii) "dual signature certificates", whereas
-   this document targets the specification of option (i) "dual
-   certificates".  More specifically, the certificate containing only
+   way to achieve composite certificates, whereas this document targets
+   the specification of option (i) "dual certificates".  More
+   specifically, the certificate containing only quantum-secure NIST PQC
 
 
 
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 1]
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 1]
 
-Internet-Draft           PQ Algorithms for X.509           November 2021
+Internet-Draft           PQ Algorithms for X.509           December 2021
 
 
-   quantum-secure NIST PQC algorithms (or a PQC algorithm vetted by the
-   CFRG).  However, this specification may also be utilized by option
-   (i) when defining the use of NIST PQC algorithms within the "dual
-   signature certificates".
+   algorithms (or a PQC algorithm vetted by the CFRG).  However, this
+   specification may also be utilized by option (ii) when defining the
+   use of NIST PQC algorithms within the composite certificates.
 
 Status of This Memo
 
@@ -78,7 +77,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 May 2022.
+   This Internet-Draft will expire on 11 June 2022.
 
 Copyright Notice
 
@@ -106,27 +105,27 @@ Table of Contents
      3.2.  TBD Signature Algorithm . . . . . . . . . . . . . . . . .   5
    4.  Subject Public Key Fields . . . . . . . . . . . . . . . . . .   5
      4.1.  Dilithium Public Keys . . . . . . . . . . . . . . . . . .   5
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 2]
-
-Internet-Draft           PQ Algorithms for X.509           November 2021
-
-
      4.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   7
+
+
+
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 2]
+
+Internet-Draft           PQ Algorithms for X.509           December 2021
+
+
    5.  Private Key Format  . . . . . . . . . . . . . . . . . . . . .   7
      5.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   7
-     5.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   7
-   6.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   7
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+     5.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   8
+   6.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   8
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
    10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
-     10.2.  Informative References . . . . . . . . . . . . . . . . .   8
-   Appendix A.  Additional Stuff . . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
+     10.2.  Informative References . . . . . . . . . . . . . . . . .   9
+   Appendix A.  Additional Stuff . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -165,9 +164,10 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
 
 
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 3]
+
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 3]
 
-Internet-Draft           PQ Algorithms for X.509           November 2021
+Internet-Draft           PQ Algorithms for X.509           December 2021
 
 
 2.  One-Way Hash Functions
@@ -221,9 +221,9 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
 
 
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 4]
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 4]
 
-Internet-Draft           PQ Algorithms for X.509           November 2021
+Internet-Draft           PQ Algorithms for X.509           December 2021
 
 
 3.  Signature Algorithms
@@ -273,17 +273,17 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
    DilithiumPublicKey ::= SEQUENCE {
        rho         OCTET STRING,     -- nonce/seed
-       t           OCTET STRING  }   -- encoded vector
+       t1          OCTET STRING  }   -- encoded vector
 
 
 
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 5]
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 5]
 
-Internet-Draft           PQ Algorithms for X.509           November 2021
+Internet-Draft           PQ Algorithms for X.509           December 2021
 
 
    where rho is the nonce used to seed the XOF to produce the matrix A,
-   and t is a vector encoded in 320*k bytes where k is the rank of the
+   and t1 is a vector encoded in 320*k bytes where k is the rank of the
    vector over the polynomial ring R_q.  The size required to hold all
    public key elements is therefore 32+320*k bytes.
 
@@ -324,7 +324,7 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
      eta      INTEGER,   -- bound on size of the coefficients for keygen
      gamma1   INTEGER,   -- bound on size of coefficients for signing
      gamma2   INTEGER,   -- bound on size of coefficients for signing
-     beta     INTEGER,   -- the reduction in the bound for verfification
+     beta     INTEGER,   -- the reduction in the bound for verification
      }
 
    The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
@@ -333,9 +333,9 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
 
 
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 6]
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 6]
 
-Internet-Draft           PQ Algorithms for X.509           November 2021
+Internet-Draft           PQ Algorithms for X.509           December 2021
 
 
    SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
@@ -369,6 +369,37 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
 5.1.  Dilithium Private Keys
 
+   A Dilithium private key is encoded as DilithiumPrivateKey in the
+   privateKey field as an OCTET STRING.  Dilithium public keys are
+   optionally distributed in the publicKey field of the PrivateKeyInfo
+   structure.
+
+   The ASN.1 encoding for a Dilithium private key is as follows:
+
+ DilithiumPrivateKey ::= SEQUENCE {
+     rho         BIT STRING,         -- nonce/seed
+     K           BIT STRING,         -- key/seed
+     tr          BIT STRING,         -- PRF bytes (CRH in specification)
+     s1          BIT STRING,         -- vector l
+     s2          BIT STRING,         -- vector k
+     t0          BIT STRING,         -- encoded vector
+     PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
+ }
+
+
+
+
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 7]
+
+Internet-Draft           PQ Algorithms for X.509           December 2021
+
+
+   Dilithium offers both deterministic and randomized versions.  The
+   deterministic version creates a signature based on a function of the
+   key K and the message, whereas the randomized version selects instead
+   these values at random.  The randomized version can be invoked by
+   leaving K as EMPTY.
+
 5.2.  TBD Private Keys
 
    text
@@ -380,19 +411,6 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 8.  IANA Considerations
 
    This memo includes no request to IANA.
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 7]
-
-Internet-Draft           PQ Algorithms for X.509           November 2021
-
 
    All drafts are required to have an IANA considerations section (see
    Guidelines for Writing an IANA Considerations Section in RFCs
@@ -422,6 +440,16 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
               post-quantum-cryptography-standardization/Call-for-
               Proposals>.
 
+
+
+
+
+
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 8]
+
+Internet-Draft           PQ Algorithms for X.509           December 2021
+
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -440,15 +468,6 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
               <https://www.rfc-editor.org/info/rfc5280>.
 
 10.2.  Informative References
-
-
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 8]
-
-Internet-Draft           PQ Algorithms for X.509           November 2021
-
 
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
@@ -477,6 +496,16 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
               DOI 10.17487/RFC3552, July 2003,
               <https://www.rfc-editor.org/info/rfc3552>.
 
+
+
+
+
+
+Massimo & Kampanakis      Expires 11 June 2022                  [Page 9]
+
+Internet-Draft           PQ Algorithms for X.509           December 2021
+
+
    [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
               IANA Considerations Section in RFCs", RFC 5226,
               DOI 10.17487/RFC5226, May 2008,
@@ -493,17 +522,6 @@ Authors' Addresses
    United Kingdom
 
    Email: jakemas@amazon.com
-
-
-
-
-
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                  [Page 9]
-
-Internet-Draft           PQ Algorithms for X.509           November 2021
 
 
    Panos Kampanakis
@@ -539,22 +557,4 @@ Internet-Draft           PQ Algorithms for X.509           November 2021
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis       Expires 22 May 2022                 [Page 10]
+Massimo & Kampanakis      Expires 11 June 2022                 [Page 10]

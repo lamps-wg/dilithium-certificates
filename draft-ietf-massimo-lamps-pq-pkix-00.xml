@@ -8,7 +8,7 @@
     please see http://xml.resource.org/authoring/README.html. -->
 <rfc
       xmlns:xi="http://www.w3.org/2001/XInclude"
-      category="std"
+      category="exp"
       consensus="true"
       docName="draft-ietf-massimo-lamps-pq-pkix-00"
       ipr="trust200902"
@@ -99,8 +99,8 @@
     <note>
     <t>EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized this document will replace TBD, TBD1 with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indicates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.</t>
 
-    <t>The migration from traditional public-key cryptographic algorithms (such as RSA and ECDSA) to quantum-safe algorithms is often facilitated though a transitional phase in which a hybrid of both types of algorithms are used simultaneously. In PKIX, there are two methodologies for achieving this, i) to utilize “dual certificates” in which one certificate contains traditional digital signature algorithms, and the other one or more quantum-secure algorithm from the NIST PQC, or ii) “dual signature certificates” in which a single certificate combines one or more traditional signature algorithm with one or more NIST PQC signature algorithm.</t>
-    <t> Current draft <xref target="draft-truskovsky-lamps-pq-hybrid-x509-01" format="default"></xref> specifies a way to achieve option (ii) “dual signature certificates”, whereas this document targets the specification of option (i) “dual certificates”. More specifically, the certificate containing only quantum-secure NIST PQC algorithms (or a PQC algorithm vetted by the CFRG). However, this specification may also be utilized by option (i) when defining the use of NIST PQC algorithms within the “dual signature certificates”.</t>
+    <t>The migration from traditional public-key cryptographic algorithms (such as RSA and ECDSA) to quantum-safe algorithms is often facilitated though a transitional phase in which a hybrid of both types of algorithms are used simultaneously. In PKIX, there are two methodologies for achieving this, i) to utilize “dual certificates” in which one certificate contains traditional digital signature algorithms, and the other a quantum-secure algorithm from the NIST PQC, or ii) “composite certificates” in which a single certificate combines one or more traditional signature algorithms with one or more NIST PQC signature algorithms.</t>
+    <t> Current draft <xref target="draft-truskovsky-lamps-pq-hybrid-x509-01" format="default"></xref> specifies a way to achieve composite certificates, whereas this document targets the specification of option (i) “dual certificates”. More specifically, the certificate containing only quantum-secure NIST PQC algorithms (or a PQC algorithm vetted by the CFRG). However, this specification may also be utilized by option (ii) when defining the use of NIST PQC algorithms within the composite certificates.</t>
     </note>
   </front>
   <middle>
@@ -208,9 +208,9 @@
          <artwork name="" type="" align="left" alt=""><![CDATA[
 DilithiumPublicKey ::= SEQUENCE {
     rho         OCTET STRING,     -- nonce/seed
-    t           OCTET STRING  }   -- encoded vector ]]>
+    t1          OCTET STRING  }   -- encoded vector ]]>
                 </artwork>
-                <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
+                <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
 
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
         <t>Dilithium requires the use of certain parameters with the public key. The parameters may be inherited from the issuer, implicitly included through reference to a "security level", or explicitly included in the certificate.</t>
@@ -235,7 +235,7 @@ DilithiumParameters ::= SEQUENCE {
     eta      INTEGER,   -- bound on size of the coefficients for keygen
     gamma1   INTEGER,   -- bound on size of coefficients for signing
     gamma2   INTEGER,   -- bound on size of coefficients for signing
-    beta     INTEGER,   -- the reduction in the bound for verfification
+    beta     INTEGER,   -- the reduction in the bound for verification
     }]]>
                 </artwork>
 <!-- I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
@@ -269,7 +269,22 @@ DilithiumParameters ::= SEQUENCE {
     <name>Private Key Format</name>
         <section numbered="true" toc="default">
          <name>Dilithium Private Keys</name>
-
+         <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the PrivateKeyInfo structure.</t>
+         <t>The ASN.1 encoding for a Dilithium private key is as follows:</t>
+         <artwork name="" type="" align="left" alt=""><![CDATA[
+DilithiumPrivateKey ::= SEQUENCE {
+    rho         BIT STRING,         -- nonce/seed
+    K           BIT STRING,         -- key/seed
+    tr          BIT STRING,         -- PRF bytes (CRH in specification)
+    s1          BIT STRING,         -- vector l
+    s2          BIT STRING,         -- vector k
+    t0          BIT STRING,         -- encoded vector
+    PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
+}
+]]>
+                </artwork>
+                <!--Could talk about deterministic vs random signatures here, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
+                <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version selects instead these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
           </section>
         <section numbered="true" toc="default">
           <name>TBD Private Keys</name>
