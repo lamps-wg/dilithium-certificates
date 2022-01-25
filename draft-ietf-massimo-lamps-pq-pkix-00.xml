@@ -48,7 +48,7 @@
           <!-- Reorder these if your country does things differently -->
           <region/>
           <code/>
-          <country>UK</country>
+          <country>USA</country>
         </postal>
         <email>jakemas@amazon.com</email>
         <!-- uri and facsimile elements may also be added -->
@@ -68,7 +68,7 @@
         <!-- uri and facsimile elements may also be added -->
      </address>
     </author>
-    <date year="2021"/>
+    <date year="2022"/>
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
         in the current day for you. If only the current year is specified, xml2rfc will fill 
@@ -244,6 +244,7 @@ DilithiumParameters ::= SEQUENCE {
 </t>
 
 <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
+<!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
                 <figure anchor="DilithiumParameters">
                     <artwork align="left" name="" type="" alt=""><![CDATA[
 |==========+=====+=========+=======+=====+========+========+=========|
@@ -251,7 +252,7 @@ DilithiumParameters ::= SEQUENCE {
 | Level    |     |         |       |     |        | Key(B) | Key(B)  |
 |==========+=====+=========+=======+=====+========+========+=========|
 | 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  | 
-| 3        | 256 | 8380417 | (6,5) |  2  |  2^19  |  1952  |   4000  | 
+| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  | 
 | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
 |==========+=====+=========+=======+=====+========+========+=========|]]>
                     </artwork>
@@ -284,17 +285,31 @@ DilithiumPrivateKey ::= SEQUENCE {
 ]]>
                 </artwork>
                 <!--Could talk about deterministic vs random signatures here, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
-                <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version selects instead these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
+                <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
+
+                <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta are as described in DilithiumParameters). The public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1.
+ </t>
           </section>
         <section numbered="true" toc="default">
           <name>TBD Private Keys</name>
           <t>text</t>
         </section>
     </section>
+<!-- do we need a ASN.1 module section? can we refer to another source? -->
+   
     <section anchor="asn1" numbered="true" toc="default">
       <name>ASN.1 Module</name>
-    </section>
+      <t>For reference purposes, the ASN.1 syntax is presented as an ASN.1 module here.</t>
+     <t>-- ASN.1 Module </t>
+<artwork name="" type="" align="left" alt=""><![CDATA[
+PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
+   internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
+   id-mod-pkix1-PQ-algorithms(X) }
 
+DEFINITIONS EXPLICIT TAGS ::= BEGIN
+]]>
+                </artwork>
+    </section>
     <section anchor="Acknowledgements" numbered="true" toc="default">
       <name>Acknowledgements</name>
     </section>
