@@ -99,7 +99,7 @@
     <note>
     <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized this document will replace TBD, TBD1 with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indicates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]</t>
 
-    <!-- PK: No need to talk for transitions. Here we are doing the simplest thing, introducing a PQ algorithm in X.509. No need to worry about others doing other things --> 
+    <!-- [PK] No need to talk for transitions. Here we are doing the simplest thing, introducing a PQ algorithm in X.509. No need to worry about others doing other things --> 
     <!-- <t>The migration from traditional public-key cryptographic algorithms (such as RSA and ECDSA) to quantum-safe algorithms is often facilitated though a transitional phase in which a hybrid of both types of algorithms are used simultaneously. In PKIX, there are two methodologies for achieving this, i) to utilize “dual certificates” in which one certificate contains traditional digital signature algorithms, and the other a quantum-secure algorithm from the NIST PQC, or ii) “composite certificates” in which a single certificate combines one or more traditional signature algorithms with one or more NIST PQC signature algorithms.</t>
     <t> Current draft <xref target="draft-truskovsky-lamps-pq-hybrid-x509-01" format="default"></xref> specifies a way to achieve composite certificates, whereas this document targets the specification of option (i) “dual certificates”. More specifically, the certificate containing only quantum-secure NIST PQC algorithms (or a PQC algorithm vetted by the CFRG). However, this specification may also be utilized by option (ii) when defining the use of NIST PQC algorithms within the composite certificates.</t> -->
     </note>
@@ -123,7 +123,10 @@
       </section>
 
     </section>
-    <section anchor="hashfunctions" numbered="true" toc="default">
+    
+    
+    <!-- [PK]: Due to the message committment property, hashes are not used for the message any more. We don't need to hash and then sign. Thus we don't need to define new OIDs for those. The message is taken care of by the algorithm. -->
+    <!-- <section anchor="hashfunctions" numbered="true" toc="default">
       <name>One-Way Hash Functions</name>
       <t>This sections identifies five additional hash algorithms for use with post-quantum digital signature algorithms in the Internet X.509 certificate and CRL profile. The hash functions SHA3-256, SHA3-384, SHA3-512 produce 256-bit, 384-bit and 512-bit "hash" of the input, respectively, and are fully described in the "Secure Hash Standard" <xref target="FIPS202" format="default"></xref>. The extendable-output functions SHAKE-128 and SHAKE-256 provide extendable (and thus variable) output sizes and are also fully described in the "Secure Hash Standard" <xref target="FIPS202" format="default"></xref>.</t>
 
@@ -156,7 +159,8 @@
           <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) 12 }</dd>
           </dl>
         </section>
-    </section>
+    </section> -->
+    
     <section anchor="signaturealgorithms" numbered="true" toc="default">
       <name>Signature Algorithms</name>
       <t>This section identifies OIDS for the post-quantum digital signature algorithms (PQDSA) Dilithium, TBD, and TBD1. The contents of the parameters component for each algorithm vary; details are provided for each algorithm.
@@ -320,7 +324,7 @@ DEFINITIONS EXPLICIT TAGS ::= BEGIN
     </section>
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>text</t>
+      <t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>
     </section>
   </middle>
   <!--  *****BACK MATTER ***** -->
