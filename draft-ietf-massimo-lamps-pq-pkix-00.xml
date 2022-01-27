@@ -173,10 +173,10 @@
 
          <t>When SHAKE-256 is used, the OIDs are:</t>
           <dl newline="true" spacing="normal" indent="8">
-          <dt>id-dilithium-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
+          <dt>id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)</dt>
           <dd>country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) X }</dd>
           </dl>
-          <t>When the id-dilithium-shake256 identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding MUST omit the parameters field.  That is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the OID id-dilithium-shake256.</t>
+          <t>When the id-dilithiumTBD-shake256 identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding MUST omit the parameters field.  That is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the OID id-dilithiumTBD-shake256.</t>
         </section>
         <section numbered="true" toc="default">
          <name>TBD Signature Algorithm</name>
