@@ -325,6 +325,7 @@ DEFINITIONS EXPLICIT TAGS ::= BEGIN
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
       <t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>
+      <t>EDNOTE: Discuss implications of not hash-them-sign. Implications in performance too.</t>
     </section>
   </middle>
   <!--  *****BACK MATTER ***** -->
