@@ -5,7 +5,7 @@
 Internet Engineering Task Force                               J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 28 July 2022                                    24 January 2022
+Expires: 30 July 2022                                    26 January 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,7 +53,7 @@ Note
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 1]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 1]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -77,7 +77,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 July 2022.
+   This Internet-Draft will expire on 30 July 2022.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 2]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 2]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -121,8 +121,8 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   8
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   9
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
      10.2.  Informative References . . . . . . . . . . . . . . . . .   9
    Appendix A.  Additional Stuff . . . . . . . . . . . . . . . . . .  10
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
@@ -165,7 +165,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 3]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 3]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -221,7 +221,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 4]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 4]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -277,7 +277,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 5]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 5]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -333,7 +333,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 6]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 6]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -389,7 +389,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 7]
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 7]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -428,31 +428,27 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 8.  IANA Considerations
 
-   This memo includes no request to IANA.
-
-   All drafts are required to have an IANA considerations section (see
-   Guidelines for Writing an IANA Considerations Section in RFCs
-   [RFC5226] for a guide).  If the draft does not require IANA to do
-   anything, the section contains an explicit statement that this is the
-   case (as above).  If there are no requirements for IANA, the section
-   will be removed during conversion into an RFC by the RFC Editor.
+   Extensions in certificates and CRLs are identified using object
+   Identifiers (OIDs).  The creation and delegation of these arcs is to
+   be determined.
 
 9.  Security Considerations
 
-   All drafts are required to have a security considerations section.
-   See RFC 3552 [RFC3552] for a guide.
-
-
-
-
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 8]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
+   text
 
 10.  References
 
 10.1.  Normative References
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 8]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
 
    [FIPS202]  National Institute of Standards and Technology (NIST),
               "SHA-3 Standard: Permutation-Based Hash and Extendable
@@ -493,19 +489,6 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
               crystals.org/dilithium/data/dilithium-specification-
               round3-20210208.pdf>.
 
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 28 July 2022                  [Page 9]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
-
    [draft-truskovsky-lamps-pq-hybrid-x509-01]
               Truskovsky, A., Van Geest, D., Fluhrer, S., Kampanakis,
               P., Ounsworth, M., and S. Mister, "Multiple Public-Key
@@ -513,22 +496,22 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
               <https://datatracker.ietf.org/doc/html/draft-truskovsky-
               lamps-pq-hybrid-x509-01>.
 
+
+
+
+
+
+Massimo & Kampanakis      Expires 30 July 2022                  [Page 9]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
+
    [Fiat-Shamir]
               Lyubashevsky, V., "Fiat-Shamir with aborts: Applications
               to lattice and factoring-based signatures", International
               Conference on the Theory and Application of Cryptology and
               Information Security, 2009, <https://www.iacr.org/archive/
               asiacrypt2009/59120596/59120596.pdf>.
-
-   [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
-              Text on Security Considerations", BCP 72, RFC 3552,
-              DOI 10.17487/RFC3552, July 2003,
-              <https://www.rfc-editor.org/info/rfc3552>.
-
-   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", RFC 5226,
-              DOI 10.17487/RFC5226, May 2008,
-              <https://www.rfc-editor.org/info/rfc5226>.
 
 Appendix A.  Additional Stuff
 
@@ -557,4 +540,21 @@ Authors' Addresses
 
 
 
-Massimo & Kampanakis      Expires 28 July 2022                 [Page 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 30 July 2022                 [Page 10]

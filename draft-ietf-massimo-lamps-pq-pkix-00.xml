@@ -240,8 +240,7 @@ DilithiumParameters ::= SEQUENCE {
                 </artwork>
 <!-- I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
 
-<t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.
-</t>
+<t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.</t>
 
 <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
 <!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
@@ -287,8 +286,7 @@ DilithiumPrivateKey ::= SEQUENCE {
                 <!--Could talk about deterministic vs random signatures here, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
                 <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
 
-                <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta are as described in DilithiumParameters). The public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1.
- </t>
+                <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta are as described in DilithiumParameters). The public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1.</t>
           </section>
         <section numbered="true" toc="default">
           <name>TBD Private Keys</name>
@@ -317,17 +315,11 @@ DEFINITIONS EXPLICIT TAGS ::= BEGIN
 
    <section anchor="IANA" numbered="true" toc="default">
       <name>IANA Considerations</name>
-      <t>This memo includes no request to IANA.</t>
-      <t>All drafts are required to have an IANA considerations section (see
-     <xref target="RFC5226" format="default">Guidelines for Writing an IANA Considerations Section in RFCs</xref> for a guide). If the draft does not require IANA to do
-     anything, the section contains an explicit statement that this is the
-     case (as above). If there are no requirements for IANA, the section will
-     be removed during conversion into an RFC by the RFC Editor.</t>
+      <t>Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these arcs is to be determined.</t>
     </section>
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>All drafts are required to have a security considerations section.
-     See <xref target="RFC3552" format="default">RFC 3552</xref> for a guide.</t>
+      <t>text</t>
     </section>
   </middle>
   <!--  *****BACK MATTER ***** -->
@@ -435,45 +427,6 @@ DEFINITIONS EXPLICIT TAGS ::= BEGIN
       </references>
       <references>
         <name>Informative References</name>
-        <!-- Here we use entities that we defined at the beginning. -->
-        <reference anchor="RFC3552" target="https://www.rfc-editor.org/info/rfc3552" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3552.xml">
-          <front>
-            <title>Guidelines for Writing RFC Text on Security Considerations</title>
-            <seriesInfo name="DOI" value="10.17487/RFC3552"/>
-            <seriesInfo name="RFC" value="3552"/>
-            <seriesInfo name="BCP" value="72"/>
-            <author initials="E." surname="Rescorla" fullname="E. Rescorla">
-              <organization/>
-            </author>
-            <author initials="B." surname="Korver" fullname="B. Korver">
-              <organization/>
-            </author>
-            <date year="2003" month="July"/>
-            <abstract>
-              <t>All RFCs are required to have a Security Considerations section. Historically, such sections have been relatively weak.  This document provides guidelines to RFC authors on how to write a good Security Considerations section.   This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
-            </abstract>
-          </front>
-        </reference>
-        <reference anchor="RFC5226" target="https://www.rfc-editor.org/info/rfc5226" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
-          <front>
-            <title>Guidelines for Writing an IANA Considerations Section in RFCs</title>
-            <seriesInfo name="DOI" value="10.17487/RFC5226"/>
-            <seriesInfo name="RFC" value="5226"/>
-            <author initials="T." surname="Narten" fullname="T. Narten">
-              <organization/>
-            </author>
-            <author initials="H." surname="Alvestrand" fullname="H. Alvestrand">
-              <organization/>
-            </author>
-            <date year="2008" month="May"/>
-            <abstract>
-              <t>Many protocols make use of identifiers consisting of constants and other well-known values.  Even after a protocol has been defined and deployment has begun, new values may need to be assigned (e.g., for a new option type in DHCP, or a new encryption or authentication transform for IPsec).  To ensure that such quantities have consistent values and interpretations across all implementations, their assignment must be administered by a central authority.  For IETF protocols, that role is provided by the Internet Assigned Numbers Authority (IANA).</t>
-              <t>In order for IANA to manage a given namespace prudently, it needs guidelines describing the conditions under which new values can be assigned or when modifications to existing values can be made.  If IANA is expected to play a role in the management of a namespace, IANA must be given clear and concise instructions describing that role.  This document discusses issues that should be considered in formulating a policy for assigning values to a namespace and provides guidelines for authors on the specific text that must be included in documents that place demands on IANA.</t>
-              <t>This document obsoletes RFC 2434.  This document specifies an Internet Best  Current Practices for the Internet Community, and requests discussion and  suggestions for improvements.</t>
-            </abstract>
-          </front>
-        </reference>
-        <!-- A reference written by by an organization not a person. -->
 
      <reference anchor="Dilithium" target="https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf">
           <front>
