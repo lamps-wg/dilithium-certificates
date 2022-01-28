@@ -219,13 +219,14 @@
                 <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
 
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
-        <t>Dilithium requires the use of certain parameters with the public key. The parameters may be inherited from the issuer, implicitly included through reference to a "security level", or explicitly included in the certificate.</t>
+        <!-- [PK] In the past using parameters in OIDs have caused all types of issues. Nowadays the IETF hardcodes all parameters to the OID. For example OID XYZ gives everything needed for the algorithm like security level, hash algorithm key sizes etc. --> 
+        <!-- <t>Dilithium requires the use of certain parameters with the public key. The parameters may be inherited from the issuer, implicitly included through reference to a "security level", or explicitly included in the certificate.</t>
       <sourcecode type="asn.1" markers="false" pn="section-4">
   DilithiumPkParameters ::= CHOICE {
     dilithiumParameters  DilithiumParameters,
     securityLevel        OBJECT IDENTIFIER,
     implicitlyCA         NULL } 
-      </sourcecode> 
+      </sourcecode> -->
       <t>EDNOTE: security level is used analogously to how "named-curves" was used in ECDSA and ECDH keys, alternatively, this same distinction between parameter sets could be achieved by instead defining multiple dilithium OIDs based on security level. e.g. id-dilithium-3-shake256 or id-dilithium-4x4-shake256.</t>
       <t>The object identifier id-securityLevel specifies an arc containing the object identifiers of each security level.  It has the following value:</t>     
                <artwork name="" type="" align="left" alt=""><![CDATA[
