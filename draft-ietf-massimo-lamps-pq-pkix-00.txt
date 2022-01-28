@@ -2,10 +2,10 @@
 
 
 
-Internet Engineering Task Force                               J. Massimo
+LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 30 July 2022                                    26 January 2022
+Expires: 1 August 2022                                   28 January 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -24,7 +24,7 @@ Abstract
 
 Note
 
-   EDNOTE: This draft is not expected to be finalized before the NIST
+   [EDNOTE: This draft is not expected to be finalized before the NIST
    PQC Project has standardized PQ algorithms.  After NIST has
    standardized this document will replace TBD, TBD1 with the
    appropriate algorithms and parameters before proceeding to
@@ -33,34 +33,7 @@ Note
    - it by no means indicates its inclusion in the final version.  This
    specification will use object identifiers for the new algorithms that
    are assigned by NIST, and will use placeholders until these are
-   released.
-
-   The migration from traditional public-key cryptographic algorithms
-   (such as RSA and ECDSA) to quantum-safe algorithms is often
-   facilitated though a transitional phase in which a hybrid of both
-   types of algorithms are used simultaneously.  In PKIX, there are two
-   methodologies for achieving this, i) to utilize "dual certificates"
-   in which one certificate contains traditional digital signature
-   algorithms, and the other a quantum-secure algorithm from the NIST
-   PQC, or ii) "composite certificates" in which a single certificate
-   combines one or more traditional signature algorithms with one or
-   more NIST PQC signature algorithms.
-
-   Current draft [draft-truskovsky-lamps-pq-hybrid-x509-01] specifies a
-   way to achieve composite certificates, whereas this document targets
-   the specification of option (i) "dual certificates".  More
-   specifically, the certificate containing only quantum-secure NIST PQC
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 1]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
-
-   algorithms (or a PQC algorithm vetted by the CFRG).  However, this
-   specification may also be utilized by option (ii) when defining the
-   use of NIST PQC algorithms within the composite certificates.
+   released.]
 
 Status of This Memo
 
@@ -77,7 +50,15 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 July 2022.
+
+
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 1]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
+
+   This Internet-Draft will expire on 1 August 2022.
 
 Copyright Notice
 
@@ -95,37 +76,26 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
-   2.  One-Way Hash Functions  . . . . . . . . . . . . . . . . . . .   4
-     2.1.  SHA-3 One-Way Hash Functions  . . . . . . . . . . . . . .   4
-     2.2.  SHA-3 Extendable-Output Functions . . . . . . . . . . . .   4
-   3.  Signature Algorithms  . . . . . . . . . . . . . . . . . . . .   5
-     3.1.  Dilithium Signature Algorithm . . . . . . . . . . . . . .   5
-     3.2.  TBD Signature Algorithm . . . . . . . . . . . . . . . . .   5
-   4.  Subject Public Key Fields . . . . . . . . . . . . . . . . . .   5
-     4.1.  Dilithium Public Keys . . . . . . . . . . . . . . . . . .   5
-     4.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   7
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 2]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
-
-   5.  Private Key Format  . . . . . . . . . . . . . . . . . . . . .   7
-     5.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   7
-     5.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   8
-   6.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   8
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   8
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
-     10.2.  Informative References . . . . . . . . . . . . . . . . .   9
-   Appendix A.  Additional Stuff . . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   2.  Signature Algorithms  . . . . . . . . . . . . . . . . . . . .   3
+     2.1.  Dilithium Signature Algorithm . . . . . . . . . . . . . .   3
+     2.2.  TBD Signature Algorithm . . . . . . . . . . . . . . . . .   4
+   3.  Subject Public Key Fields . . . . . . . . . . . . . . . . . .   4
+     3.1.  Dilithium Public Keys . . . . . . . . . . . . . . . . . .   4
+     3.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   5
+   4.  Private Key Format  . . . . . . . . . . . . . . . . . . . . .   5
+     4.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   6
+     4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   6
+   5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   6
+   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   7
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Additional Stuff . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -136,6 +106,13 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    Post-Quantum public key algorithms with Public Key Infrastructure
    X.509 (PKIX) certificates.  These specifications will use object
    identifiers algorithms that are assigned by NIST.
+
+
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 2]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
 
    This specification defines additional content for the
    signatureAlgorithm, signatureValue, signature, and
@@ -156,77 +133,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in RFC 2119 [RFC2119].
 
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 3]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
-
-2.  One-Way Hash Functions
-
-   This sections identifies five additional hash algorithms for use with
-   post-quantum digital signature algorithms in the Internet X.509
-   certificate and CRL profile.  The hash functions SHA3-256, SHA3-384,
-   SHA3-512 produce 256-bit, 384-bit and 512-bit "hash" of the input,
-   respectively, and are fully described in the "Secure Hash Standard"
-   [FIPS202].  The extendable-output functions SHAKE-128 and SHAKE-256
-   provide extendable (and thus variable) output sizes and are also
-   fully described in the "Secure Hash Standard" [FIPS202].
-
-   When one of these OIDs appears in an AlgorithmIdentifier, all
-   implementations MUST accept both NULL and absent parameters as legal
-   and equivalent encodings.
-
-   Conforming certification authority (CA) implementations SHOULD use
-   SHA3-256, SHA3-384, SHA3-512, SHAKE-128 or SHAKE-256 when generating
-   quantum-secure certificates or CRLs.
-
-2.1.  SHA-3 One-Way Hash Functions
-
-   The listed SHA-3 one-way hash functions are identified by the
-   following object identifiers (OIDs):
-
-   id-sha3-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-           country(16) us(840) organization(1) gov(101) csor(3)
-           nistAlgorithm(4) hashAlgs(2) 8 }
-
-   id-sha3-384 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-           country(16) us(840) organization(1) gov(101) csor(3)
-           nistAlgorithm(4) hashAlgs(2) 9 }
-
-   id-sha3-512 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-           country(16) us(840) organization(1) gov(101) csor(3)
-           nistAlgorithm(4) hashAlgs(2) 10 }
-
-2.2.  SHA-3 Extendable-Output Functions
-
-   The listed SHA-3 extendable-output functions (XOF) are identified by
-   the following object identifiers (OIDs):
-
-   id-shake-128 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-           country(16) us(840) organization(1) gov(101) csor(3)
-           nistAlgorithm(4) hashAlgs(2) 11 }
-
-   id-shake-256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-           country(16) us(840) organization(1) gov(101) csor(3)
-           nistAlgorithm(4) hashAlgs(2) 12 }
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 4]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
-
-3.  Signature Algorithms
+2.  Signature Algorithms
 
    This section identifies OIDS for the post-quantum digital signature
    algorithms (PQDSA) Dilithium, TBD, and TBD1.  The contents of the
@@ -235,7 +142,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    most five quantum security categories numbered 1 to 5 as defined by
    NIST [NIST-PQC].
 
-3.1.  Dilithium Signature Algorithm
+2.1.  Dilithium Signature Algorithm
 
    Dilithium is a digital signature scheme built upon the Fiat-Shamir
    with aborts framework [Fiat-Shamir].  The security is based upon the
@@ -245,22 +152,31 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
    When SHAKE-256 is used, the OIDs are:
 
-   id-dilithium-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-           country(16) us(840) organization(1) gov(101) csor(3)
-           nistAlgorithm(4) hashAlgs(2) X }
+      id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) hashAlgs(2) TBD }
 
-   When the id-dilithium-shake256 identifier appears in the algorithm
+   When the id-dilithiumTBD-shake256 identifier appears in the algorithm
    field as an AlgorithmIdentifier, the encoding MUST omit the
    parameters field.  That is, the AlgorithmIdentifier SHALL be a
-   SEQUENCE of one component, the OID id-dilithium-shake256.
+   SEQUENCE of one component, the OID id-dilithiumTBD-shake256.
 
-3.2.  TBD Signature Algorithm
+
+
+
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 3]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
+
+2.2.  TBD Signature Algorithm
 
    TBD
 
-4.  Subject Public Key Fields
+3.  Subject Public Key Fields
 
-4.1.  Dilithium Public Keys
+3.1.  Dilithium Public Keys
 
    The public parameters for Dilithium are based upon a polynomial ring
    R_q for prime q.  A (k*l) public matrix A is produced, consisting of
@@ -271,31 +187,14 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    The Dilithium public key MUST be encoded using the ASN.1 type
    DilithiumPublicKey:
 
-   DilithiumPublicKey ::= SEQUENCE {
-       rho         OCTET STRING,     -- nonce/seed
-       t1          OCTET STRING  }   -- encoded vector
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 5]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
+     DilithiumPublicKey ::= SEQUENCE {
+         rho         OCTET STRING,     -- nonce/seed
+         t1          OCTET STRING  }   -- encoded vector
 
    where rho is the nonce used to seed the XOF to produce the matrix A,
    and t1 is a vector encoded in 320*k bytes where k is the rank of the
    vector over the polynomial ring R_q.  The size required to hold all
    public key elements is therefore 32+320*k bytes.
-
-   Dilithium requires the use of certain parameters with the public key.
-   The parameters may be inherited from the issuer, implicitly included
-   through reference to a "security level", or explicitly included in
-   the certificate.
-
-   DilithiumPkParameters ::= CHOICE {
-     dilithiumParameters  DilithiumParameters,
-     securityLevel        OBJECT IDENTIFIER,
-     implicitlyCA         NULL }
 
    EDNOTE: security level is used analogously to how "named-curves" was
    used in ECDSA and ECDH keys, alternatively, this same distinction
@@ -307,7 +206,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    the object identifiers of each security level.  It has the following
    value:
 
-  id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }
+   id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }
 
    When the parameters are inherited, the parameters field SHALL contain
    implictlyCA, which is the ASN.1 value NULL.  When parameters are
@@ -316,28 +215,31 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    parameters are explicitly included, they SHALL be encoded in the
    ASN.1 structure DilithiumParameters:
 
- DilithiumParameters ::= SEQUENCE {
-     n        INTEGER,   -- the dimension of the polynomial ring R_q
-     q        INTEGER,   -- the modulus of the polynomial ring R_q
-     k        INTEGER,   -- rank of the vector over R_q
-     l        INTEGER,   -- rank of the vector over R_q
-     eta      INTEGER,   -- bound on size of the coefficients for keygen
-     gamma1   INTEGER,   -- bound on size of coefficients for signing
-     gamma2   INTEGER,   -- bound on size of coefficients for signing
-     beta     INTEGER,   -- the reduction in the bound for verification
-     }
-
-   The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
-   within a certificate where the parameters may be used.  If the
-   Dilithium parameters are specified as implicitlyCA in the
 
 
 
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 6]
+
+
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 4]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
+     DilithiumParameters ::= SEQUENCE {
+         n        INTEGER,   -- the dimension of the polynomial ring R_q
+         q        INTEGER,   -- the modulus of the polynomial ring R_q
+         k        INTEGER,   -- rank of the vector over R_q
+         l        INTEGER,   -- rank of the vector over R_q
+         eta      INTEGER,   -- bound on size of the coefficients for keygen
+         gamma1   INTEGER,   -- bound on size of coefficients for signing
+         gamma2   INTEGER,   -- bound on size of coefficients for signing
+         beta     INTEGER,   -- the reduction in the bound for verification
+         }
+
+   The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
+   within a certificate where the parameters may be used.  If the
+   Dilithium parameters are specified as implicitlyCA in the
    SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
    subject certificate using Dilithium, then the certificate issuer's
    Dilithium parameters apply to the subject's Dilithium key.  If the
@@ -350,24 +252,37 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    listed in the Figure 1, along with the resulting public key and
    private key sizes in bytes.
 
-  |==========+=====+=========+=======+=====+========+========+=========|
-  | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
-  | Level    |     |         |       |     |        | Key(B) | Key(B)  |
-  |==========+=====+=========+=======+=====+========+========+=========|
-  | 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  |
-  | 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  |
-  | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
-  |==========+=====+=========+=======+=====+========+========+=========|
+   |==========+=====+=========+=======+=====+========+========+=========|
+   | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
+   | Level    |     |         |       |     |        | Key(B) | Key(B)  |
+   |==========+=====+=========+=======+=====+========+========+=========|
+   | 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  |
+   | 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  |
+   | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
+   |==========+=====+=========+=======+=====+========+========+=========|
 
-                                 Figure 1
+                                  Figure 1
 
-4.2.  TBD Public Keys
+3.2.  TBD Public Keys
 
    text
 
-5.  Private Key Format
+4.  Private Key Format
 
-5.1.  Dilithium Private Keys
+
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 5]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
+
+4.1.  Dilithium Private Keys
 
    A Dilithium private key is encoded as DilithiumPrivateKey in the
    privateKey field as an OCTET STRING.  Dilithium public keys are
@@ -376,23 +291,15 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
    The ASN.1 encoding for a Dilithium private key is as follows:
 
- DilithiumPrivateKey ::= SEQUENCE {
-     rho         BIT STRING,         -- nonce/seed
-     K           BIT STRING,         -- key/seed
-     tr          BIT STRING,         -- PRF bytes (CRH in specification)
-     s1          BIT STRING,         -- vector l
-     s2          BIT STRING,         -- vector k
-     t0          BIT STRING,         -- encoded vector
-     PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
- }
-
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 7]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
+     DilithiumPrivateKey ::= SEQUENCE {
+         rho         BIT STRING,         -- nonce/seed
+         K           BIT STRING,         -- key/seed
+         tr          BIT STRING,         -- PRF bytes (CRH in specification)
+         s1          BIT STRING,         -- vector l
+         s2          BIT STRING,         -- vector k
+         t0          BIT STRING,         -- encoded vector
+         PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
+     }
 
    Dilithium offers both deterministic and randomized signing.  The
    deterministic version creates a signature based on a function of the
@@ -406,49 +313,52 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    are as described in DilithiumParameters).  The public key and secret
    key sizes for security levels 2, 3, and 5 can be found in Figure 1.
 
-5.2.  TBD Private Keys
+4.2.  TBD Private Keys
 
    text
 
-6.  ASN.1 Module
+5.  ASN.1 Module
 
    For reference purposes, the ASN.1 syntax is presented as an ASN.1
    module here.
 
    -- ASN.1 Module
 
-   PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
-      internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
-      id-mod-pkix1-PQ-algorithms(X) }
+     PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
+        internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
+        id-mod-pkix1-PQ-algorithms(X) }
 
-   DEFINITIONS EXPLICIT TAGS ::= BEGIN
+     DEFINITIONS EXPLICIT TAGS ::= BEGIN
 
 
-7.  Acknowledgements
 
-8.  IANA Considerations
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 6]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
+
+6.  Acknowledgements
+
+7.  IANA Considerations
 
    Extensions in certificates and CRLs are identified using object
    Identifiers (OIDs).  The creation and delegation of these arcs is to
    be determined.
 
-9.  Security Considerations
+8.  Security Considerations
 
-   text
+   TODO: Add discussion about digests in classical signatures hash-then-
+   sign and how that does not apply to PQ like Dilithium.  And how
+   committing to a message is additional security.  Reference NIST
+   discussion from Peiker and Makku.
 
-10.  References
+   EDNOTE: Discuss implications of not hash-them-sign.  Implications in
+   performance too.
 
-10.1.  Normative References
+9.  References
 
-
-
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 8]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
+9.1.  Normative References
 
    [FIPS202]  National Institute of Standards and Technology (NIST),
               "SHA-3 Standard: Permutation-Based Hash and Extendable
@@ -476,10 +386,18 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    [RFC5280]  Boeyen, S., Santesson, S., Polk, T., Housley, R., Farrell,
               S., and D. Cooper, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
+
+
+
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 7]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
+
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/info/rfc5280>.
 
-10.2.  Informative References
+9.2.  Informative References
 
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
@@ -495,16 +413,6 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
               Algorithm X.509 Certificates", August 2018,
               <https://datatracker.ietf.org/doc/html/draft-truskovsky-
               lamps-pq-hybrid-x509-01>.
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                  [Page 9]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
 
    [Fiat-Shamir]
               Lyubashevsky, V., "Fiat-Shamir with aborts: Applications
@@ -537,24 +445,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 30 July 2022                 [Page 10]
+Massimo & Kampanakis      Expires 1 August 2022                 [Page 8]
