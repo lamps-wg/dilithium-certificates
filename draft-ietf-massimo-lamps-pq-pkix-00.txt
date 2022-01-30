@@ -5,7 +5,7 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 1 August 2022                                   28 January 2022
+Expires: 3 August 2022                                   30 January 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -14,26 +14,26 @@ Expires: 1 August 2022                                   28 January 2022
 
 Abstract
 
-   This document updates RFC 3279 to specify algorithm identifiers and
-   ASN.1 encoding formats for post-quantum digital signatures and
-   subject public keys used in the Internet X.509 Public Key
-   Infrastructure (PKI).  The signature algorithms covered are
-   Dilithium, TBD and TBD1.  The encoding for public key, private key,
-   and Post-Quantum Digital Signature Algorithm (PQDSA) structures is
-   provided.
+   Digital signatures are used to sign messages, X.509 certificates, and
+   Certificate Revocation Lists (CRLs).  This document updates the
+   "Algorithms and Identifiers for the Internet X.509 Public Key
+   Infrastructure Certificate and Certificate Revocation List (CRL)
+   Profile" [RFC 3279] and describes the conventions for using Dilithium
+   quantum-resistance signatures in Internet X.509 certificates and
+   revocation lists.  The conventions for the associated post-quantum
+   signatures, subject public keys, private key are also described.
 
 Note
 
    [EDNOTE: This draft is not expected to be finalized before the NIST
    PQC Project has standardized PQ algorithms.  After NIST has
-   standardized this document will replace TBD, TBD1 with the
-   appropriate algorithms and parameters before proceeding to
-   ratification.  The algorithm Dilithium has been added as an example
-   in this draft, to provide a more detailed illustration of the content
-   - it by no means indicates its inclusion in the final version.  This
-   specification will use object identifiers for the new algorithms that
-   are assigned by NIST, and will use placeholders until these are
-   released.]
+   standardized this document will replace TBD, with the appropriate
+   algorithms and parameters before proceeding to ratification.  The
+   algorithm Dilithium has been added as an example in this draft, to
+   provide a more detailed illustration of the content - it by no means
+   indicates its inclusion in the final version.  This specification
+   will use object identifiers for the new algorithms that are assigned
+   by NIST, and will use placeholders until these are released.]
 
 Status of This Memo
 
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 1]
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 1]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
-   This Internet-Draft will expire on 1 August 2022.
+   This Internet-Draft will expire on 3 August 2022.
 
 Copyright Notice
 
@@ -80,7 +80,7 @@ Table of Contents
      1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
    2.  Signature Algorithms  . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Dilithium Signature Algorithm . . . . . . . . . . . . . .   3
-     2.2.  TBD Signature Algorithm . . . . . . . . . . . . . . . . .   4
+     2.2.  TBD Signature Algorithm . . . . . . . . . . . . . . . . .   3
    3.  Subject Public Key Fields . . . . . . . . . . . . . . . . . .   4
      3.1.  Dilithium Public Keys . . . . . . . . . . . . . . . . . .   4
      3.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   5
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 2]
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 2]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -119,13 +119,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    subjectPublicKeyInfo fields within Internet X.509 certificates
    [RFC3279] and CRLs [RFC5280].  This specification describes the
    encoding of digital signatures generated with the following
-   cryptographic algorithms: Dilithium, TBD, and TBD1.
-
-   This document also identifies additional one-way hash functions for
-   use in the generation of quantum-safe digital signatures.  These
-   algorithms are used in conjunction with digital signature algorithms,
-   and supplement those described within RFC 3279, RFC 5758, and RFC
-   8692.
+   cryptographic algorithms: Dilithium.
 
 1.1.  Requirements Language
 
@@ -136,11 +130,11 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 2.  Signature Algorithms
 
    This section identifies OIDS for the post-quantum digital signature
-   algorithms (PQDSA) Dilithium, TBD, and TBD1.  The contents of the
-   parameters component for each algorithm vary; details are provided
-   for each algorithm.  Each algorithm can offer parameter sets for at
-   most five quantum security categories numbered 1 to 5 as defined by
-   NIST [NIST-PQC].
+   algorithms (PQDSA) Dilithium, TBD.  The contents of the parameters
+   component for each algorithm vary; details are provided for each
+   algorithm.  Each algorithm can offer parameter sets for at most five
+   quantum security categories numbered 1 to 5 as defined by NIST
+   [NIST-PQC].
 
 2.1.  Dilithium Signature Algorithm
 
@@ -161,18 +155,20 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
    parameters field.  That is, the AlgorithmIdentifier SHALL be a
    SEQUENCE of one component, the OID id-dilithiumTBD-shake256.
 
-
-
-
-
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 3]
-
-Internet-Draft           PQ Algorithms for X.509            January 2022
-
-
 2.2.  TBD Signature Algorithm
 
    TBD
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 3]
+
+Internet-Draft           PQ Algorithms for X.509            January 2022
+
 
 3.  Subject Public Key Fields
 
@@ -221,7 +217,11 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 4]
+
+
+
+
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 4]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -277,7 +277,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 5]
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 5]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -333,7 +333,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 6]
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 6]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -389,7 +389,7 @@ Internet-Draft           PQ Algorithms for X.509            January 2022
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 7]
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 7]
 
 Internet-Draft           PQ Algorithms for X.509            January 2022
 
@@ -445,4 +445,4 @@ Authors' Addresses
 
 
 
-Massimo & Kampanakis      Expires 1 August 2022                 [Page 8]
+Massimo & Kampanakis      Expires 3 August 2022                 [Page 8]
