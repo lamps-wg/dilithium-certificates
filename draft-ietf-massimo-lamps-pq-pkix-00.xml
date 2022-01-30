@@ -164,6 +164,36 @@
     
     <section anchor="signaturealgorithms" numbered="true" toc="default">
       <name>Signature Algorithms</name>
+        <t pn="section-4.1-1">Signatures are used in a number of different ASN.1 structures.
+        As shown in the ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/> 
+		below, in an X.509 certificate, a signature is encoded with an 
+		algorithm identifier in the signatureAlgorithm attribute and 
+		a signatureValue attribute that contains the actual signature.  
+        </t>
+        <sourcecode type="asn.1" markers="false" pn="section-4.1-2">
+   Certificate  ::=  SEQUENCE  {
+      tbsCertificate       TBSCertificate,
+      signatureAlgorithm   AlgorithmIdentifier,
+      signatureValue       BIT STRING  }
+</sourcecode>
+        <t pn="section-4.1-3">The identifiers defined in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> can be used 
+		as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence 
+		Certificate and the signature field in the sequence TBSCertificate in X.509  
+		<xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>. 
+		The parameters of these signature algorithms are absent, as explained 
+		in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
+        <t pn="section-4.1-4">Conforming Certification Authority (CA) implementations <bcp14>MUST</bcp14> specify the algorithms  
+		explicitly by using the OIDs specified in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> when 
+		encoding RSASSA-PSS or ECDSA with SHAKE signatures 
+		in certificates and CRLs.
+		Conforming client implementations that process certificates and CRLs 
+		using RSASSA-PSS or ECDSA with SHAKE <bcp14>MUST</bcp14> recognize the corresponding OIDs.
+		Encoding rules for RSASSA-PSS and ECDSA 
+		signature values are specified in <xref target="RFC4055" format="default" sectionFormat="of" derivedContent="RFC4055"/> and 
+		<xref target="RFC5480" format="default" sectionFormat="of" derivedContent="RFC5480"/>, respectively.</t>
+        <t pn="section-4.1-5">When using RSASSA-PSS or ECDSA with SHAKEs, the RSA modulus and ECDSA 
+		curve order <bcp14>SHOULD</bcp14> be chosen in line with the SHAKE output length. 
+		Refer to <xref target="Security" format="default" sectionFormat="of" derivedContent="Section 6"/> for more details.</t>
       <t>This section identifies OIDS for the post-quantum digital signature algorithms (PQDSA) Dilithium, TBD. The contents of the parameters component for each algorithm vary; details are provided for each algorithm.
 
       Each algorithm can offer parameter sets for at most five quantum security categories numbered 1 to 5 as defined by NIST <xref target="NIST-PQC" format="default"></xref>.</t>
