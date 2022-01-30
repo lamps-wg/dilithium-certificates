@@ -93,7 +93,7 @@
         keywords will be used for the search engine. -->
 
    <abstract>
-      <t>This document updates RFC 3279 to specify algorithm identifiers and ASN.1 encoding formats for post-quantum digital signatures and subject public keys used in the Internet X.509 Public Key Infrastructure (PKI). The signature algorithms covered are Dilithium, TBD and TBD1. The encoding for public key, private key, and Post-Quantum Digital Signature Algorithm (PQDSA) structures is provided.</t>
+      <t>Digital signatures are used to sign messages, X.509 certificates, and Certificate Revocation Lists (CRLs). This document updates the "Algorithms and Identifiers for the Internet X.509 Public Key   Infrastructure Certificate and Certificate Revocation List (CRL) Profile" [RFC 3279] and describes the conventions for using Dilithium quantum-resistance signatures in Internet X.509 certificates and revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, private key are also described.</t>
     </abstract>
 
     <note>
