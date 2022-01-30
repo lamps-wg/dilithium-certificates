@@ -113,7 +113,8 @@
 
       <t>This specification defines additional content for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates <xref target="RFC3279" format="default"></xref> and CRLs <xref target="RFC5280" format="default"></xref>. This specification describes the encoding of digital signatures generated with the following cryptographic algorithms: Dilithium.</t>
 
-      <t>This document also identifies additional one-way hash functions for use in the generation of quantum-safe digital signatures. These algorithms are used in conjunction with digital signature algorithms, and supplement those described within RFC 3279, RFC 5758, and RFC 8692.</t>
+       <!-- [PK]: No digests here since they are included in the PQ sig. -->
+      <!-- <t>This document also identifies additional one-way hash functions for use in the generation of quantum-safe digital signatures. These algorithms are used in conjunction with digital signature algorithms, and supplement those described within RFC 3279, RFC 5758, and RFC 8692.</t>-->
 
       <section numbered="true" toc="default">
         <name>Requirements Language</name>
