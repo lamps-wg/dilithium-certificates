@@ -97,7 +97,7 @@
     </abstract>
 
     <note>
-    <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized this document will replace TBD, TBD1 with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indicates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]</t>
+    <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized this document will replace TBD, with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indicates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]</t>
 
     <!-- [PK] No need to talk for transitions. Here we are doing the simplest thing, introducing a PQ algorithm in X.509. No need to worry about others doing other things --> 
     <!-- <t>The migration from traditional public-key cryptographic algorithms (such as RSA and ECDSA) to quantum-safe algorithms is often facilitated though a transitional phase in which a hybrid of both types of algorithms are used simultaneously. In PKIX, there are two methodologies for achieving this, i) to utilize “dual certificates” in which one certificate contains traditional digital signature algorithms, and the other a quantum-secure algorithm from the NIST PQC, or ii) “composite certificates” in which a single certificate combines one or more traditional signature algorithms with one or more NIST PQC signature algorithms.</t>
@@ -111,7 +111,7 @@
 
       <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document supplements <xref target="RFC3279" format="default"></xref> and will specify the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates. These specifications will use object identifiers algorithms that are assigned by NIST.</t>
 
-      <t>This specification defines additional content for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates <xref target="RFC3279" format="default"></xref> and CRLs <xref target="RFC5280" format="default"></xref>. This specification describes the encoding of digital signatures generated with the following cryptographic algorithms: Dilithium, TBD, and TBD1.</t>
+      <t>This specification defines additional content for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates <xref target="RFC3279" format="default"></xref> and CRLs <xref target="RFC5280" format="default"></xref>. This specification describes the encoding of digital signatures generated with the following cryptographic algorithms: Dilithium.</t>
 
       <t>This document also identifies additional one-way hash functions for use in the generation of quantum-safe digital signatures. These algorithms are used in conjunction with digital signature algorithms, and supplement those described within RFC 3279, RFC 5758, and RFC 8692.</t>
 
@@ -163,7 +163,7 @@
     
     <section anchor="signaturealgorithms" numbered="true" toc="default">
       <name>Signature Algorithms</name>
-      <t>This section identifies OIDS for the post-quantum digital signature algorithms (PQDSA) Dilithium, TBD, and TBD1. The contents of the parameters component for each algorithm vary; details are provided for each algorithm.
+      <t>This section identifies OIDS for the post-quantum digital signature algorithms (PQDSA) Dilithium, TBD. The contents of the parameters component for each algorithm vary; details are provided for each algorithm.
 
       Each algorithm can offer parameter sets for at most five quantum security categories numbered 1 to 5 as defined by NIST <xref target="NIST-PQC" format="default"></xref>.</t>
 
