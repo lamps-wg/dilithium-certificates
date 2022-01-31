@@ -226,6 +226,8 @@
         </section>
     </section>
   -->
+  
+  
     <section anchor="subjectpublickey" numbered="true" toc="default">
     <name>Subject Public Key Fields</name>
         <section numbered="true" toc="default">
@@ -253,7 +255,7 @@
     dilithiumParameters  DilithiumParameters,
     securityLevel        OBJECT IDENTIFIER,
     implicitlyCA         NULL } 
-      </sourcecode> -->
+      </sourcecode> 
       <t>EDNOTE: security level is used analogously to how "named-curves" was used in ECDSA and ECDH keys, alternatively, this same distinction between parameter sets could be achieved by instead defining multiple dilithium OIDs based on security level. e.g. id-dilithium-3-shake256 or id-dilithium-4x4-shake256.</t>
       <t>The object identifier id-securityLevel specifies an arc containing the object identifiers of each security level.  It has the following value:</t>     
                <artwork name="" type="" align="left" alt=""><![CDATA[
@@ -262,21 +264,21 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <t> When the parameters are inherited, the parameters field SHALL contain implictlyCA, which is the ASN.1 value NULL. When parameters are specified by reference, the parameters field SHALL contain the security level choice, which is an object identifier.  When the parameters are explicitly included, they SHALL be encoded in the ASN.1 structure DilithiumParameters:</t>
       <sourcecode type="asn.1" markers="false" pn="section-5">
   DilithiumParameters ::= SEQUENCE {
-      n        INTEGER,   -- the dimension of the polynomial ring R_q
-      q        INTEGER,   -- the modulus of the polynomial ring R_q
-      k        INTEGER,   -- rank of the vector over R_q
-      l        INTEGER,   -- rank of the vector over R_q
-      eta      INTEGER,   -- bound on size of the coefficients for keygen
-      gamma1   INTEGER,   -- bound on size of coefficients for signing
-      gamma2   INTEGER,   -- bound on size of coefficients for signing
-      beta     INTEGER,   -- the reduction in the bound for verification
+      n        INTEGER,    the dimension of the polynomial ring R_q
+      q        INTEGER,    the modulus of the polynomial ring R_q
+      k        INTEGER,    rank of the vector over R_q
+      l        INTEGER,    rank of the vector over R_q
+      eta      INTEGER,    bound on size of the coefficients for keygen
+      gamma1   INTEGER,    bound on size of coefficients for signing
+      gamma2   INTEGER,    bound on size of coefficients for signing
+      beta     INTEGER,    the reduction in the bound for verification
       }
-      </sourcecode> 
-<!-- I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
+      </sourcecode> -->
+<!-- EDNOTE: I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
 
 <t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.</t>
-
         </section>
+        
         <section numbered="true" toc="default">
          <name>TBD Public Keys</name>
          <t>text</t>
