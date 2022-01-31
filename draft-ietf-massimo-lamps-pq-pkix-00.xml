@@ -322,6 +322,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
      id-mod-pkix1-PQ-algorithms(X) }
 
   DEFINITIONS EXPLICIT TAGS ::= BEGIN
+  
+  [ EDNOTE: Add ASN.1 here ] 
       </sourcecode> 
     </section>
     <section anchor="Acknowledgements" numbered="true" toc="default">
