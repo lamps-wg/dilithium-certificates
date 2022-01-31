@@ -344,13 +344,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       </sourcecode> 
     </section>     <!-- End of ASN.1 Module Section -->
     
-    
-    <section anchor="Acknowledgements" numbered="true" toc="default">
-      <name>Acknowledgements</name>
-      <t>We would like to thank ... for his insightful comments.</t>
-    </section>  <!-- End of Acknowledgements Section -->
- 
-
+  
    <section anchor="IANA" numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these arcs is to be determined.</t>
@@ -470,7 +464,12 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
       </references>
     </references>  <!-- End of References -->
-    
+
+    <section anchor="Acknowledgements" numbered="true" toc="default">
+      <name>Acknowledgements</name>
+      <t>We would like to thank ... for his insightful comments.</t>
+    </section>  <!-- End of Acknowledgements Section -->    
+
     <section anchor="app-additional" numbered="true" toc="default">
       <name>Appendix</name>
         <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
