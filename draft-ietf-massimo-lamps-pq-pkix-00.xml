@@ -276,22 +276,6 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
 <t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.</t>
 
-<t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
-<!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
-                <figure anchor="DilithiumParameters">
-                    <artwork align="left" name="" type="" alt=""><![CDATA[
-|==========+=====+=========+=======+=====+========+========+=========|
-| Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
-| Level    |     |         |       |     |        | Key(B) | Key(B)  |
-|==========+=====+=========+=======+=====+========+========+=========|
-| 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  | 
-| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  | 
-| 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
-|==========+=====+=========+=======+=====+========+========+=========|]]>
-                    </artwork>
-                </figure>
-
-
         </section>
         <section numbered="true" toc="default">
          <name>TBD Public Keys</name>
@@ -464,7 +448,20 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     </references>
     <section anchor="app-additional" numbered="true" toc="default">
       <name>Appendix</name>
-      <t>This becomes an Appendix.</t>
+        <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
+        <!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
+        <figure anchor="DilithiumParameters">
+          <artwork align="left" name="" type="" alt=""><![CDATA[
+|==========+=====+=========+=======+=====+========+========+=========|
+| Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
+| Level    |     |         |       |     |        | Key(B) | Key(B)  |
+|==========+=====+=========+=======+=====+========+========+=========|
+| 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  | 
+| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  | 
+| 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
+|==========+=====+=========+=======+=====+========+========+=========|]]>
+          </artwork>
+        </figure>
     </section>
     <!-- Change Log
 
