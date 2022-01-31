@@ -121,9 +121,9 @@
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
        document are to be interpreted as described in <xref target="RFC2119" format="default">RFC 2119</xref>.</t>
-      </section>
+      </section> <!-- End of Requirements Language Section -->
 
-    </section>
+    </section> <!-- End of Introduction Section -->
     
     
     <!-- [PK]: Due to the message committment property, hashes are not used for the message any more. We don't need to hash and then sign. Thus we don't need to define new OIDs for those. The message is taken care of by the algorithm. -->
@@ -162,6 +162,7 @@
         </section>
     </section> -->
     
+
     <section anchor="signaturealgorithms" numbered="true" toc="default">
       <name>Signature Algorithms</name>
         <t pn="section-4.1-1">Signatures are used in a number of different ASN.1 structures.
@@ -205,12 +206,16 @@
             nistAlgorithm(4) hashAlgs(2) TBD }     
       </sourcecode>
           <t>When the id-dilithiumTBD-shake256 identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding MUST omit the parameters field.  That is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the OID id-dilithiumTBD-shake256.</t>
-        </section>
+        </section> <!-- End of Dilithium Signature Algorithm Section -->
+
         <section numbered="true" toc="default">
          <name>TBD Signature Algorithm</name>
+         <!-- [PK] What is this section going to include? -->
          <t>TBD</t>
-        </section>
-    </section>
+        </section> <!-- End of TBD Signature Algorithm Section -->
+    </section> <!-- End of Signature Algorithms Section -->
+    
+    
     <!--
     <section anchor="subjectpublickeyalgorithms" numbered="true" toc="default">
       <name>Subject Public Key Algorithms</name>
@@ -230,6 +235,7 @@
   
     <section anchor="subjectpublickey" numbered="true" toc="default">
     <name>Subject Public Key Fields</name>
+    
         <section numbered="true" toc="default">
          <name>Dilithium Public Keys</name>
          <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!---This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most breif of an explaination I could give for where rho, and k come from. -->
@@ -277,13 +283,16 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 <!-- EDNOTE: I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
 
 <t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.</t>
-        </section>
+        </section>  <!-- End of Dilithium Public Keys Section -->
         
         <section numbered="true" toc="default">
          <name>TBD Public Keys</name>
-         <t>text</t>
-        </section>
-    </section>
+         <!-- [PK] What is this section going to include? -->
+         <t>TBD</t>
+        </section>  <!-- End of TBD Public Keys Section -->
+        
+    </section> <!-- End of Subject Public Key Fields Section -->
+
 
     <section anchor="privatekeyformat" numbered="true" toc="default">
     <name>Private Key Format</name>
@@ -306,18 +315,24 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
                 <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
 
                 <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta are as described in DilithiumParameters). The public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1.</t>
-          </section>
+          </section>  <!-- End of Dilithium Private Keys Section -->
+          
         <section numbered="true" toc="default">
           <name>TBD Private Keys</name>
-          <t>text</t>
-        </section>
-    </section>
+         <!-- [PK] What is this section going to include? -->
+          <t>TBD</t>
+        </section>  <!-- End of TBD Private Keys Section -->
+        
+    </section>  <!-- End of Private Key Format Section -->
+    
 <!-- do we need a ASN.1 module section? can we refer to another source? -->
+<!-- [PK] We need it. We will need to write one and also validate it. I have notes on this and Russ Housley can also help us. -->
+   
    
     <section anchor="asn1" numbered="true" toc="default">
       <name>ASN.1 Module</name>
       <t>For reference purposes, the ASN.1 syntax is presented as an ASN.1 module here.</t>
-     <t>-- ASN.1 Module </t>
+      <t> ASN.1 Module </t>
       <sourcecode type="asn.1" markers="false" pn="section-6">
   PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
      internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
@@ -327,16 +342,20 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
   
   [ EDNOTE: Add ASN.1 here ] 
       </sourcecode> 
-    </section>
+    </section>     <!-- End of ASN.1 Module Section -->
+    
+    
     <section anchor="Acknowledgements" numbered="true" toc="default">
       <name>Acknowledgements</name>
-    </section>
-    <!-- Possibly a 'Contributors' section ... -->
+      <t>We would like to thank ... for his insightful comments.</t>
+    </section>  <!-- End of Acknowledgements Section -->
+ 
 
    <section anchor="IANA" numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these arcs is to be determined.</t>
-    </section>
+    </section>  <!-- End of IANA Considerations Section -->
+    
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
       <t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>
@@ -345,7 +364,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <t>This document updates RFC 3279 <xref target="RFC3279" format="default"></xref>. The Security Considerations section of that document therefore applies to this specification as well.</t>
 
       <t>Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of “bits of security,” NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 – key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 – collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 – key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 – collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 – key search on a block cipher with a 256-bit key (e.g., AES 256).</t>
-    </section>
+    </section>  <!-- End of Security Considerations Section -->
+    
   </middle>
   <!--  *****BACK MATTER ***** -->
 
@@ -449,7 +469,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         </reference>
 
       </references>
-    </references>
+    </references>  <!-- End of References -->
+    
     <section anchor="app-additional" numbered="true" toc="default">
       <name>Appendix</name>
         <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
@@ -466,7 +487,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 |==========+=====+=========+=======+=====+========+========+=========|]]>
           </artwork>
         </figure>
-    </section>
+    </section> <!-- End of Appendix Section -->
+    
     <!-- Change Log
 
 v00 2006-03-15  EBD   Initial version
