@@ -184,21 +184,17 @@
 		in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
         <t pn="section-4.1-4">Conforming Certification Authority (CA) implementations <bcp14>MUST</bcp14> specify the algorithms  
 		explicitly by using the OIDs specified in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> when 
-		encoding RSASSA-PSS or ECDSA with SHAKE signatures 
+		encoding Dilithium signatures 
 		in certificates and CRLs.
 		Conforming client implementations that process certificates and CRLs 
-		using RSASSA-PSS or ECDSA with SHAKE <bcp14>MUST</bcp14> recognize the corresponding OIDs.
-		Encoding rules for RSASSA-PSS and ECDSA 
-		signature values are specified in <xref target="RFC4055" format="default" sectionFormat="of" derivedContent="RFC4055"/> and 
-		<xref target="RFC5480" format="default" sectionFormat="of" derivedContent="RFC5480"/>, respectively.</t>
-        <t pn="section-4.1-5">When using RSASSA-PSS or ECDSA with SHAKEs, the RSA modulus and ECDSA 
-		curve order <bcp14>SHOULD</bcp14> be chosen in line with the SHAKE output length. 
-		Refer to <xref target="Security" format="default" sectionFormat="of" derivedContent="Section 6"/> for more details.</t>
-      <t>This section identifies OIDS for the post-quantum digital signature algorithms (PQDSA) Dilithium, TBD. The contents of the parameters component for each algorithm vary; details are provided for each algorithm.
+		using Dilithium <bcp14>MUST</bcp14> recognize the corresponding OIDs.
+		Encoding rules for Dilithium 
+		signature values are specified <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
 
-      Each algorithm can offer parameter sets for at most five quantum security categories numbered 1 to 5 as defined by NIST <xref target="NIST-PQC" format="default"></xref>.</t>
+        <t>This section identifies OIDS for the post-quantum Dilithium digital signature algorithms. The contents of the parameters component for each algorithm are absent, as explained 
+		in <xref target="oids" format="default"/></t>
 
-        <section numbered="true" toc="default">
+        <section numbered="true" toc="default" anchor="oids">
          <name>Dilithium Signature Algorithm</name>
          <t>Dilithium is a digital signature scheme built upon the Fiat-Shamir with aborts framework <xref target="Fiat-Shamir" format="default"></xref>. The security is based upon the hardness of lattice problems over module lattices <xref target="Dilithium" format="default"></xref>. Dilithium provides 3 parameter sets for the security categories 2,3 and 5.</t>
 
@@ -383,67 +379,12 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <name>References</name>
       <references>
         <name>Normative References</name>
-        <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
-     <reference anchor="RFC2119" target="https://www.rfc-editor.org/info/rfc2119" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-          <front>
-            <title>Key words for use in RFCs to Indicate Requirement Levels</title>
-            <seriesInfo name="DOI" value="10.17487/RFC2119"/>
-            <seriesInfo name="RFC" value="2119"/>
-            <seriesInfo name="BCP" value="14"/>
-            <author initials="S." surname="Bradner" fullname="S. Bradner">
-              <organization/>
-            </author>
-            <date year="1997" month="March"/>
-            <abstract>
-              <t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
-            </abstract>
-          </front>
-        </reference>
-
-        <reference anchor="RFC3279" target="https://www.rfc-editor.org/info/rfc3279" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3279.xml">
-          <front>
-            <title>Algorithms and Identifiers for the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</title>
-            <seriesInfo name="DOI" value="10.17487/RFC3279"/>
-            <seriesInfo name="RFC" value="3279"/>
-            <author initials="R." surname="Housley" fullname="R. Housley">
-              <organization/>
-            </author>
-             <author initials="T." surname="Polk" fullname="T. Polk">
-              <organization/>
-            </author>
-            <author initials="L.E." surname="Bassham" fullname="L.E. Bassham">
-              <organization/>
-            </author>
-            <date year="2002" month="May"/>
-          </front>
-        </reference>
-
-        <reference anchor="RFC5280" target="https://www.rfc-editor.org/info/rfc5280" xml:base="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml">
-          <front>
-            <title>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</title>
-            <seriesInfo name="DOI" value="10.17487/RFC5280"/>
-            <seriesInfo name="RFC" value="5280"/>
-            <author initials="S." surname="Boeyen" fullname="S. Boeyen">
-              <organization/>
-            </author>
-            <author initials="S." surname="Santesson" fullname="S. Santesson">
-              <organization/>
-            </author>
-            <author initials="T." surname="Polk" fullname="T. Polk">
-              <organization/>
-            </author>
-            <author initials="R." surname="Housley" fullname="R. Housley">
-              <organization/>
-            </author>
-            <author initials="S" surname="Farrell" fullname="S. Farrell">
-              <organization/>
-            </author>
-            <author initials="D" surname="Cooper" fullname="D. Cooper">
-              <organization/>
-            </author>
-            <date year="2008" month="May"/>
-          </front>
-        </reference>
+          <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
+          <?rfc include="reference.RFC.2119.xml"?>
+          <?rfc include="reference.RFC.3279.xml"?>
+          <!--<?rfc include="reference.RFC.4055.xml"?>-->
+          <?rfc include="reference.RFC.5280.xml"?>
+          <!--<?rfc include="reference.RFC.5480.xml"?>-->
 
      <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/Call-for-Proposals">
           <front>
@@ -522,7 +463,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       </references>
     </references>
     <section anchor="app-additional" numbered="true" toc="default">
-      <name>Additional Stuff</name>
+      <name>Appendix</name>
       <t>This becomes an Appendix.</t>
     </section>
     <!-- Change Log
