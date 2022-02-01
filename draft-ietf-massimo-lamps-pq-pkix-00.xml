@@ -371,16 +371,20 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
       <t>Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of “bits of security,” NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 – key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 – collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 – key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 – collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 – key search on a block cipher with a 256-bit key (e.g., AES 256).</t>
 
-      <!-- [JM] Shall we comment on EUF-CMA security, as mandated by NIST, to give some idea of the security properties associated with the algorithm (dilithium)? -->
+      <!-- [JM] how deep should we go on EUF-CMA security? I don't really want to get into "games" here -->
 
-      <t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>
-      <t>EDNOTE: Discuss implications of not hash-them-sign. Implications in performance too.</t>
-      <t>A fundamental security property associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme Dilithium possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
+      <t>The digital signature schemes <!--note remove plural if only one--> defined within this document are modeled under existentially unforgeable digital signatures with respect to an adaptive chosen message attack (EUF-CMA). For the purpose of estimating security strength, it has been assumed that the attacker has access to signatures for no more than 2^{64} chosen messages.</t>
+
+      <!--<t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>-->
+      
+      <t>A fundamental security property also associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme Dilithium possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
 
       Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot produce a valid signature under another key given a signature sigma for some unknown message m. These properties are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such as Duplicate-Signature Key Selection (DSKS) attacks <!--[BWM99, MS04]-->, and attacks on the protocols for secure routing <!--[JCCS19]-->. A full discussion of these properties in Dilithium can be found at <xref target="CDFFJ21" format="default"></xref>.
 
 
       These properties are dependent in part, on unambiguous public key serialization. It for this reason the public key structure defined in <xref target=" subjectpublickey" format="default"/> are intentionally encoded as a single OCTET STRING.</t>
+
+      <t>EDNOTE: Discuss implications of not hash-them-sign. Implications in performance too.</t>
 
     </section>  <!-- End of Security Considerations Section -->
     
