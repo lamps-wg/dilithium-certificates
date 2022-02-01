@@ -93,7 +93,7 @@
         keywords will be used for the search engine. -->
 
    <abstract>
-      <t>Digital signatures are used to sign messages, X.509 certificates, and Certificate Revocation Lists (CRLs). This document updates the "Algorithms and Identifiers for the Internet X.509 Public Key   Infrastructure Certificate and Certificate Revocation List (CRL) Profile" [RFC 3279] and describes the conventions for using Dilithium quantum-resistance signatures in Internet X.509 certificates and revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, private key are also described.</t>
+      <t>Digital signatures are an authentication mechanism used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document updates the "Algorithms and Identifiers for the Internet X.509 Public Key   Infrastructure Certificate and Certificate Revocation List (CRL) Profile" [RFC 3279] and describes the conventions for using Dilithium quantum-resistant signatures in Internet X.509 certificates and revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, private key are also described.</t>
     </abstract>
 
     <note>
@@ -211,6 +211,7 @@
         <section numbered="true" toc="default">
          <name>TBD Signature Algorithm</name>
          <!-- [PK] What is this section going to include? -->
+         <!-- [JM] Should another algorithm be selected by NIST, we would include a summary of the algorithm, and then the ASN.1 definition and OIDs, just like we did for Dilithium above.-->
          <t>TBD</t>
         </section> <!-- End of TBD Signature Algorithm Section -->
     </section> <!-- End of Signature Algorithms Section -->
@@ -238,7 +239,7 @@
     
         <section numbered="true" toc="default">
          <name>Dilithium Public Keys</name>
-         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!---This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most breif of an explaination I could give for where rho, and k come from. -->
+         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
          <t>The Dilithium public key MUST be encoded using the ASN.1 type DilithiumPublicKey:</t>
                 <!---<ul spacing="compact">
                     <li>rho: nonce</li>
@@ -288,6 +289,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         <section numbered="true" toc="default">
          <name>TBD Public Keys</name>
          <!-- [PK] What is this section going to include? -->
+         <!-- [JM] Say NIST standardize both dilihtium and falcon, then this section would describe falcons public keys, just as we did for dilithium above. -->
          <t>TBD</t>
         </section>  <!-- End of TBD Public Keys Section -->
         
@@ -304,7 +306,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
   DilithiumPrivateKey ::= SEQUENCE {
       rho         BIT STRING,         -- nonce/seed
       K           BIT STRING,         -- key/seed
-      tr          BIT STRING,         -- PRF bytes (CRH in specification)
+      tr          BIT STRING,         -- PRF bytes (CRH in spec.)
       s1          BIT STRING,         -- vector l
       s2          BIT STRING,         -- vector k
       t0          BIT STRING,         -- encoded vector
@@ -320,6 +322,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         <section numbered="true" toc="default">
           <name>TBD Private Keys</name>
          <!-- [PK] What is this section going to include? -->
+         <!-- [JM] Say NIST standardize both dilihtium and falcon, then this section would describe falcons private keys, just as we did for dilithium above. -->
           <t>TBD</t>
         </section>  <!-- End of TBD Private Keys Section -->
         
@@ -398,6 +401,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
           </front>
         </reference>
 
+      <!-- 
       <reference anchor="FIPS202" target="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf">
           <front>
             <title>SHA-3 Standard: Permutation-Based Hash and Extendable Output Functions</title>
@@ -407,7 +411,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
             <date year="2015" month="August"/>
           </front>
         </reference>
-
+      -->
       </references>
       <references>
         <name>Informative References</name>
@@ -442,7 +446,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
           </front>
           <refcontent>International Conference on the Theory and Application of Cryptology and Information Security</refcontent>
         </reference>
-
+        <!--
       <reference anchor="draft-truskovsky-lamps-pq-hybrid-x509-01" target="https://datatracker.ietf.org/doc/html/draft-truskovsky-lamps-pq-hybrid-x509-01">
           <front>
             <title>Multiple Public-Key Algorithm X.509 Certificates</title>
@@ -461,19 +465,20 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
             <date year="2018" month="August"/>
           </front>
         </reference>
-
+    -->
       </references>
     </references>  <!-- End of References -->
 
     <section anchor="Acknowledgements" numbered="true" toc="default">
       <name>Acknowledgements</name>
-      <t>We would like to thank ... for his insightful comments.</t>
+      <t>We would like to thank ... for their insightful comments.</t>
     </section>  <!-- End of Acknowledgements Section -->    
 
     <section anchor="app-additional" numbered="true" toc="default">
       <name>Appendix</name>
         <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting public key and private key sizes in bytes.</t>
         <!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
+        <!-- [JM] we can consider the usefulness of this table/domain parameter discussion here, since we do not want to include the parameter selection in the document -->
         <figure anchor="DilithiumParameters">
           <artwork align="left" name="" type="" alt=""><![CDATA[
 |==========+=====+=========+=======+=====+========+========+=========|
