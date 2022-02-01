@@ -5,7 +5,7 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 4 August 2022                                   31 January 2022
+Expires: 5 August 2022                                   1 February 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 1]
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 1]
 
-Internet-Draft        Dilithium Signatures in X.509         January 2022
+Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   This Internet-Draft will expire on 4 August 2022.
+   This Internet-Draft will expire on 5 August 2022.
 
 Copyright Notice
 
@@ -86,16 +86,16 @@ Table of Contents
      3.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   5
    4.  Private Key Format  . . . . . . . . . . . . . . . . . . . . .   5
      4.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   5
-     4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   5
+     4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   6
    5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   7
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   8
    Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 2]
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 2]
 
-Internet-Draft        Dilithium Signatures in X.509         January 2022
+Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
    This specification defines additional content for the
@@ -165,9 +165,9 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 
 
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 3]
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 3]
 
-Internet-Draft        Dilithium Signatures in X.509         January 2022
+Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 2.1.  Dilithium Signature Algorithm
@@ -211,21 +211,22 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    where DilithiumPublicKey is a concatenation of rho and t1.  Here, rho
    is the nonce used to seed the XOF to produce the matrix A, and t1 is
    a vector encoded in 320*k bytes where k is the rank of the vector
-   over the polynomial ring R_q.  The size required to hold all public
-   key elements is therefore 32+320*k bytes.
+   over the polynomial ring R_q.  These parameters MUST be encoded as a
+   single OCTET STRING.  The size required to hold a DilithiumPublicKey
+   public key element is therefore 32+320*k bytes.
 
    The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
    within a certificate where the parameters may be used.  If the
    Dilithium parameters are specified as implicitlyCA in the
-   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
 
 
 
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 4]
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 4]
 
-Internet-Draft        Dilithium Signatures in X.509         January 2022
+Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
+   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
    subject certificate using Dilithium, then the certificate issuer's
    Dilithium parameters apply to the subject's Dilithium key.  If the
    Dilithium parameters are specified as implicitlyCA in the
@@ -270,17 +271,20 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    are as described in DilithiumParameters).  The public key and secret
    key sizes for security levels 2, 3, and 5 can be found in Figure 1.
 
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 5]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
 4.2.  TBD Private Keys
 
    TBD
-
-
-
-
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 5]
-
-Internet-Draft        Dilithium Signatures in X.509         January 2022
-
 
 5.  ASN.1 Module
 
@@ -326,17 +330,18 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
    block cipher with a 256-bit key (e.g., AES 256).
 
+
+
+
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 6]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    TODO: Add discussion about digests in classical signatures hash-then-
    sign and how that does not apply to PQ like Dilithium.  And how
    committing to a message is additional security.  Reference NIST
    discussion from Peiker and Makku.
-
-
-
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 6]
-
-Internet-Draft        Dilithium Signatures in X.509         January 2022
-
 
    EDNOTE: Discuss implications of not hash-them-sign.  Implications in
    performance too.
@@ -346,14 +351,25 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    owner of a signature key pair that was capable of generating an
    existing signature corresponding to certain data cannot convincingly
    deny having signed the data.  The digital signature scheme Dilithium
-   possess two security properties associated with non-repudiation.
-   These are "strong binding" and "message binding", based tightly on
-   the assumed collision resistance of the hash function used (in this
-   case SHAKE-256).  TODO: Describe strong binding and message binding.
-   Strong binding (and the related collision attack countermeasure) is
-   dependent on unambiguous public key serialization.  It for this
-   reason the public key structure defined in Section 3 is intentionally
-   encoded as a single OCTET STRING.
+   possess three security properties beyond unforgeability, that are
+   associated with non-repudiation.  These are exclusive ownership,
+   message-bound signatures, and non-resignability.  These properties
+   are based tightly on the assumed collision resistance of the hash
+   function used (in this case SHAKE-256).  Exclusive ownership is a
+   property in which a signature sigma uniquely determines the public
+   key and message for which it is valid.  Message-bound signatures is
+   the property that a valid signature uniquely determines the message
+   for which it is valid, but not necessarily the public key.  Non-
+   resignability is the property in which one cannot produce a valid
+   signature under another key given a signature sigma for some unknown
+   message m.  These properties are not provided by classical signature
+   schemes such as DSA or ECDSA, and have led to a variety of attacks
+   such as Duplicate-Signature Key Selection (DSKS) attacks , and
+   attacks on the protocols for secure routing . A full discussion of
+   these properties in Dilithium can be found at [CDFFJ21].  These
+   properties are dependent in part, on unambiguous public key
+   serialization.  It for this reason the public key structure defined
+   in Section 3 are intentionally encoded as a single OCTET STRING.
 
 8.  References
 
@@ -370,6 +386,14 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
               Identifiers for the Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -384,15 +408,11 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 8.2.  Informative References
 
-
-
-
-
-
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 7]
-
-Internet-Draft        Dilithium Signatures in X.509         January 2022
-
+   [CDFFJ21]  Cremers, Cas., Düzlü, S., Fiedler, R., Fischlin, M., and
+              C. Janson, "BUFFing signature schemes beyond
+              unforgeability and the case of post-quantum signatures",
+              In Proceedings of the 42nd IEEE Symposium on Security and
+              Privacy, 2021, <https://eprint.iacr.org/2020/1525.pdf>.
 
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
@@ -419,6 +439,17 @@ Appendix B.  Appendix
    listed in the Figure 1, along with the resulting public key and
    private key sizes in bytes.
 
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
   |==========+=====+=========+=======+=====+========+========+=========|
   | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
   | Level    |     |         |       |     |        | Key(B) | Key(B)  |
@@ -437,17 +468,6 @@ Authors' Addresses
    United States of America
 
    Email: jakemas@amazon.com
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 8]
-
-Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 
    Panos Kampanakis
@@ -481,24 +501,4 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 9]
+Massimo & Kampanakis      Expires 5 August 2022                 [Page 9]
