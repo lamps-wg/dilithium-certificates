@@ -235,7 +235,7 @@
     <section anchor="subjectpublickey" numbered="true" toc="default">
     <name>Subject Public Key Fields</name>
     
-        <section numbered="true" toc="default">
+        <section anchor="dilithiumpublickey" numbered="true" toc="default">
          <name>Dilithium Public Keys</name>
          <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
          <t>The Dilithium public key MUST be encoded using the ASN.1 type DilithiumPublicKey:</t>
@@ -263,7 +263,7 @@
        <sourcecode type="asn.1" markers="false" pn="section">
   DilithiumPublicKey ::= OCTET STRING
       </sourcecode> 
-                <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
+                <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. These parameters MUST be encoded as a single OCTET STRING. The size required to hold a DilithiumPublicKey public key element is therefore 32+320*k bytes.</t>
 
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
         <!-- [PK] In the past using parameters in OIDs have caused all types of issues. Nowadays the IETF hardcodes all parameters to the OID. For example OID XYZ gives everything needed for the algorithm like security level, hash algorithm key sizes etc. --> 
@@ -371,14 +371,16 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
       <t>Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of “bits of security,” NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 – key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 – collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 – key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 – collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 – key search on a block cipher with a 256-bit key (e.g., AES 256).</t>
 
+      <!-- [JM] Shall we comment on EUF-CMA security, as mandated by NIST, to give some idea of the security properties associated with the algorithm (dilithium)? -->
+
       <t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>
       <t>EDNOTE: Discuss implications of not hash-them-sign. Implications in performance too.</t>
-      <t>A fundamental security property associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme Dilithium possess two security properties associated with non-repudiation. These are “strong binding” and “message binding”, based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
+      <t>A fundamental security property associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme Dilithium possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
 
-      TODO: Describe strong binding and message binding. <!-- will also add references -->
+      Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot produce a valid signature under another key given a signature sigma for some unknown message m. These properties are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such as Duplicate-Signature Key Selection (DSKS) attacks <!--[BWM99, MS04]-->, and attacks on the protocols for secure routing <!--[JCCS19]-->. A full discussion of these properties in Dilithium can be found at <xref target="CDFFJ21" format="default"></xref>.
 
-      Strong binding (and the related collision attack countermeasure) is dependent on unambiguous public key serialization. It for this reason the public key structure defined in <xref target=" subjectpublickey" format="default"/> is intentionally encoded as a single OCTET STRING.
- </t>
+
+      These properties are dependent in part, on unambiguous public key serialization. It for this reason the public key structure defined in <xref target=" subjectpublickey" format="default"/> are intentionally encoded as a single OCTET STRING.</t>
 
     </section>  <!-- End of Security Considerations Section -->
     
@@ -465,6 +467,27 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
           </front>
           <refcontent>International Conference on the Theory and Application of Cryptology and Information Security</refcontent>
         </reference>
+
+        <reference anchor="CDFFJ21" target="https://eprint.iacr.org/2020/1525.pdf">
+          <front>
+            <title>BUFFing signature schemes beyond unforgeability and the case of post-quantum signatures</title>
+            <author initials="Cas" surname="Cremers" fullname="C. Cremers">
+            </author>
+            <author initials="S." surname="Düzlü" fullname="S. Düzlü">
+            </author>
+            <author initials="R." surname="Fiedler" fullname="R. Fiedler">
+            </author>
+            <author initials="M." surname="Fischlin" fullname="M. Fischlin">
+            </author>
+            <author initials="C." surname="Janson" fullname="C. Janson">
+            </author>
+            <date year="2021"/>
+          </front>
+        <refcontent>In Proceedings of the 42nd IEEE Symposium on Security and Privacy</refcontent>
+        </reference>
+
+  
+
         <!--
       <reference anchor="draft-truskovsky-lamps-pq-hybrid-x509-01" target="https://datatracker.ietf.org/doc/html/draft-truskovsky-lamps-pq-hybrid-x509-01">
           <front>
