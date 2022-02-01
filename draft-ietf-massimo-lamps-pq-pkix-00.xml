@@ -247,12 +247,25 @@
                 </ul>
                 <t>The size required to hold all public key elements is therefore 32+320*k bytes, where k is the rank of the vector over the polynomial ring R_q.</t>
           -->
+       <!--   
       <sourcecode type="asn.1" markers="false" pn="section">
   DilithiumPublicKey ::= SEQUENCE {
-      rho         OCTET STRING,     -- nonce/seed
-      t1          OCTET STRING  }   -- encoded vector 
+      rho         OCTET STRING,      nonce/seed
+      t1          OCTET STRING  }    encoded vector 
       </sourcecode> 
-                <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
+      <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
+        -->
+        <!--[JM] I've modified the public key encoding based on Markku's comments from pqc-forum (https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/eAaiJO1qzkA/m/4eclSTZbBwAJ). On the use of a sequence tag, and separation bytes:
+
+        "The "internal" separator bytes break verification unless both signer and verifier just implement a weakened hash-and-sign mode (or if the signer always adds the same non-standard padding bytes, or if a re-serialization step is implemented for hash computation.) Note that the additional encoding is unnecessary for X.509 interoperability; in addition to OID, the entire public key can be encoded as a single OCTET STRING (as the standard encoding is unambiguous); this also results in a 10-byte saving in certificate length."
+
+        This is part of the discussion for Dilithium's security property of non-repudiation.
+
+         -->
+       <sourcecode type="asn.1" markers="false" pn="section">
+  DilithiumPublicKey ::= OCTET STRING
+      </sourcecode> 
+                <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
 
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
         <!-- [PK] In the past using parameters in OIDs have caused all types of issues. Nowadays the IETF hardcodes all parameters to the OID. For example OID XYZ gives everything needed for the algorithm like security level, hash algorithm key sizes etc. --> 
@@ -471,7 +484,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
     <section anchor="Acknowledgements" numbered="true" toc="default">
       <name>Acknowledgements</name>
-      <t>We would like to thank ... for their insightful comments.</t>
+      <t>We would like to thank ... <!--Markuu, Peikert -->for their insightful comments.</t>
     </section>  <!-- End of Acknowledgements Section -->    
 
     <section anchor="app-additional" numbered="true" toc="default">
