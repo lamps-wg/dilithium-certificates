@@ -86,7 +86,7 @@ Table of Contents
      3.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   5
    4.  Private Key Format  . . . . . . . . . . . . . . . . . . . . .   5
      4.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   5
-     4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   6
+     4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   5
    5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
@@ -206,18 +206,18 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    The Dilithium public key MUST be encoded using the ASN.1 type
    DilithiumPublicKey:
 
-     DilithiumPublicKey ::= SEQUENCE {
-         rho         OCTET STRING,     -- nonce/seed
-         t1          OCTET STRING  }   -- encoded vector
+     DilithiumPublicKey ::= OCTET STRING
 
-   where rho is the nonce used to seed the XOF to produce the matrix A,
-   and t1 is a vector encoded in 320*k bytes where k is the rank of the
-   vector over the polynomial ring R_q.  The size required to hold all
-   public key elements is therefore 32+320*k bytes.
+   where DilithiumPublicKey is a concatenation of rho and t1.  Here, rho
+   is the nonce used to seed the XOF to produce the matrix A, and t1 is
+   a vector encoded in 320*k bytes where k is the rank of the vector
+   over the polynomial ring R_q.  The size required to hold all public
+   key elements is therefore 32+320*k bytes.
 
    The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
    within a certificate where the parameters may be used.  If the
    Dilithium parameters are specified as implicitlyCA in the
+   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
 
 
 
@@ -226,7 +226,6 @@ Massimo & Kampanakis      Expires 4 August 2022                 [Page 4]
 Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 
-   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
    subject certificate using Dilithium, then the certificate issuer's
    Dilithium parameters apply to the subject's Dilithium key.  If the
    Dilithium parameters are specified as implicitlyCA in the
@@ -271,8 +270,9 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    are as described in DilithiumParameters).  The public key and secret
    key sizes for security levels 2, 3, and 5 can be found in Figure 1.
 
+4.2.  TBD Private Keys
 
-
+   TBD
 
 
 
@@ -281,10 +281,6 @@ Massimo & Kampanakis      Expires 4 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509         January 2022
 
-
-4.2.  TBD Private Keys
-
-   TBD
 
 5.  ASN.1 Module
 
@@ -330,6 +326,10 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    cryptography, which NIST expects to offer significant resistance to
    quantum cryptanalysis.  These categories describe any attack that
    breaks the relevant security definition that must require
+   computational resources comparable to or greater than those required
+   for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
+   AES128), Level 2 - collision search on a 256-bit hash function (e.g.,
+   SHA256/ SHA3-256), Level 3 - key search on a block cipher with a
 
 
 
@@ -338,10 +338,6 @@ Massimo & Kampanakis      Expires 4 August 2022                 [Page 6]
 Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 
-   computational resources comparable to or greater than those required
-   for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
-   AES128), Level 2 - collision search on a 256-bit hash function (e.g.,
-   SHA256/ SHA3-256), Level 3 - key search on a block cipher with a
    192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit
    hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
    block cipher with a 256-bit key (e.g., AES 256).
@@ -386,6 +382,10 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    [Fiat-Shamir]
               Lyubashevsky, V., "Fiat-Shamir with aborts: Applications
               to lattice and factoring-based signatures", International
+              Conference on the Theory and Application of Cryptology and
+              Information Security, 2009, <https://www.iacr.org/archive/
+              asiacrypt2009/59120596/59120596.pdf>.
+
 
 
 
@@ -393,10 +393,6 @@ Massimo & Kampanakis      Expires 4 August 2022                 [Page 7]
 
 Internet-Draft        Dilithium Signatures in X.509         January 2022
 
-
-              Conference on the Theory and Application of Cryptology and
-              Information Security, 2009, <https://www.iacr.org/archive/
-              asiacrypt2009/59120596/59120596.pdf>.
 
 Appendix A.  Acknowledgements
 
@@ -433,6 +429,10 @@ Authors' Addresses
    United States of America
 
    Email: kpanos@amazon.com
+
+
+
+
 
 
 
