@@ -94,7 +94,7 @@ Table of Contents
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
      8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   8
-   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .   8
+   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .   9
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
@@ -338,38 +338,41 @@ Massimo & Kampanakis      Expires 5 August 2022                 [Page 6]
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   TODO: Add discussion about digests in classical signatures hash-then-
-   sign and how that does not apply to PQ like Dilithium.  And how
-   committing to a message is additional security.  Reference NIST
-   discussion from Peiker and Makku.
+   The digital signature schemes defined within this document are
+   modeled under existentially unforgeable digital signatures with
+   respect to an adaptive chosen message attack (EUF-CMA).  For the
+   purpose of estimating security strength, it has been assumed that the
+   attacker has access to signatures for no more than 2^{64} chosen
+   messages.
+
+   A fundamental security property also associated with digital
+   signatures is non-repudiation.  Non-repudiation refers to the
+   assurance that the owner of a signature key pair that was capable of
+   generating an existing signature corresponding to certain data cannot
+   convincingly deny having signed the data.  The digital signature
+   scheme Dilithium possess three security properties beyond
+   unforgeability, that are associated with non-repudiation.  These are
+   exclusive ownership, message-bound signatures, and non-resignability.
+   These properties are based tightly on the assumed collision
+   resistance of the hash function used (in this case SHAKE-256).
+   Exclusive ownership is a property in which a signature sigma uniquely
+   determines the public key and message for which it is valid.
+   Message-bound signatures is the property that a valid signature
+   uniquely determines the message for which it is valid, but not
+   necessarily the public key.  Non-resignability is the property in
+   which one cannot produce a valid signature under another key given a
+   signature sigma for some unknown message m.  These properties are not
+   provided by classical signature schemes such as DSA or ECDSA, and
+   have led to a variety of attacks such as Duplicate-Signature Key
+   Selection (DSKS) attacks , and attacks on the protocols for secure
+   routing . A full discussion of these properties in Dilithium can be
+   found at [CDFFJ21].  These properties are dependent in part, on
+   unambiguous public key serialization.  It for this reason the public
+   key structure defined in Section 3 are intentionally encoded as a
+   single OCTET STRING.
 
    EDNOTE: Discuss implications of not hash-them-sign.  Implications in
    performance too.
-
-   A fundamental security property associated with digital signatures is
-   non-repudiation.  Non-repudiation refers to the assurance that the
-   owner of a signature key pair that was capable of generating an
-   existing signature corresponding to certain data cannot convincingly
-   deny having signed the data.  The digital signature scheme Dilithium
-   possess three security properties beyond unforgeability, that are
-   associated with non-repudiation.  These are exclusive ownership,
-   message-bound signatures, and non-resignability.  These properties
-   are based tightly on the assumed collision resistance of the hash
-   function used (in this case SHAKE-256).  Exclusive ownership is a
-   property in which a signature sigma uniquely determines the public
-   key and message for which it is valid.  Message-bound signatures is
-   the property that a valid signature uniquely determines the message
-   for which it is valid, but not necessarily the public key.  Non-
-   resignability is the property in which one cannot produce a valid
-   signature under another key given a signature sigma for some unknown
-   message m.  These properties are not provided by classical signature
-   schemes such as DSA or ECDSA, and have led to a variety of attacks
-   such as Duplicate-Signature Key Selection (DSKS) attacks , and
-   attacks on the protocols for secure routing . A full discussion of
-   these properties in Dilithium can be found at [CDFFJ21].  These
-   properties are dependent in part, on unambiguous public key
-   serialization.  It for this reason the public key structure defined
-   in Section 3 are intentionally encoded as a single OCTET STRING.
 
 8.  References
 
@@ -381,10 +384,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               post-quantum-cryptography-standardization/Call-for-
               Proposals>.
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
+
 
 
 
@@ -393,6 +393,11 @@ Massimo & Kampanakis      Expires 5 August 2022                 [Page 7]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
               Identifiers for the Internet X.509 Public Key
@@ -433,11 +438,6 @@ Appendix A.  Acknowledgements
 
    We would like to thank ... for their insightful comments.
 
-Appendix B.  Appendix
-
-   The parameter sets defined for NIST security levels 2, 3 and 5 are
-   listed in the Figure 1, along with the resulting public key and
-   private key sizes in bytes.
 
 
 
@@ -449,6 +449,12 @@ Massimo & Kampanakis      Expires 5 August 2022                 [Page 8]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
+
+Appendix B.  Appendix
+
+   The parameter sets defined for NIST security levels 2, 3 and 5 are
+   listed in the Figure 1, along with the resulting public key and
+   private key sizes in bytes.
 
   |==========+=====+=========+=======+=====+========+========+=========|
   | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
@@ -475,12 +481,6 @@ Authors' Addresses
    United States of America
 
    Email: kpanos@amazon.com
-
-
-
-
-
-
 
 
 
