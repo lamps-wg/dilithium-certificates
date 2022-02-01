@@ -305,14 +305,6 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 7.  Security Considerations
 
-   TODO: Add discussion about digests in classical signatures hash-then-
-   sign and how that does not apply to PQ like Dilithium.  And how
-   committing to a message is additional security.  Reference NIST
-   discussion from Peiker and Makku.
-
-   EDNOTE: Discuss implications of not hash-them-sign.  Implications in
-   performance too.
-
    This document updates RFC 3279 [RFC3279].  The Security
    Considerations section of that document therefore applies to this
    specification as well.
@@ -330,6 +322,14 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
    for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
    AES128), Level 2 - collision search on a 256-bit hash function (e.g.,
    SHA256/ SHA3-256), Level 3 - key search on a block cipher with a
+   192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit
+   hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
+   block cipher with a 256-bit key (e.g., AES 256).
+
+   TODO: Add discussion about digests in classical signatures hash-then-
+   sign and how that does not apply to PQ like Dilithium.  And how
+   committing to a message is additional security.  Reference NIST
+   discussion from Peiker and Makku.
 
 
 
@@ -338,9 +338,22 @@ Massimo & Kampanakis      Expires 4 August 2022                 [Page 6]
 Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 
-   192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit
-   hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
-   block cipher with a 256-bit key (e.g., AES 256).
+   EDNOTE: Discuss implications of not hash-them-sign.  Implications in
+   performance too.
+
+   A fundamental security property associated with digital signatures is
+   non-repudiation.  Non-repudiation refers to the assurance that the
+   owner of a signature key pair that was capable of generating an
+   existing signature corresponding to certain data cannot convincingly
+   deny having signed the data.  The digital signature scheme Dilithium
+   possess two security properties associated with non-repudiation.
+   These are "strong binding" and "message binding", based tightly on
+   the assumed collision resistance of the hash function used (in this
+   case SHAKE-256).  TODO: Describe strong binding and message binding.
+   Strong binding (and the related collision attack countermeasure) is
+   dependent on unambiguous public key serialization.  It for this
+   reason the public key structure defined in Section 3 is intentionally
+   encoded as a single OCTET STRING.
 
 8.  References
 
@@ -371,6 +384,16 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
 
 8.2.  Informative References
 
+
+
+
+
+
+Massimo & Kampanakis      Expires 4 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509         January 2022
+
+
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
               Schwabe, P., Seiler, G., and D. Stehlé, "CRYSTALS-
@@ -385,14 +408,6 @@ Internet-Draft        Dilithium Signatures in X.509         January 2022
               Conference on the Theory and Application of Cryptology and
               Information Security, 2009, <https://www.iacr.org/archive/
               asiacrypt2009/59120596/59120596.pdf>.
-
-
-
-
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 7]
-
-Internet-Draft        Dilithium Signatures in X.509         January 2022
-
 
 Appendix A.  Acknowledgements
 
@@ -424,6 +439,17 @@ Authors' Addresses
    Email: jakemas@amazon.com
 
 
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 4 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509         January 2022
+
+
    Panos Kampanakis
    AWS
    United States of America
@@ -445,4 +471,34 @@ Authors' Addresses
 
 
 
-Massimo & Kampanakis      Expires 4 August 2022                 [Page 8]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 4 August 2022                 [Page 9]
