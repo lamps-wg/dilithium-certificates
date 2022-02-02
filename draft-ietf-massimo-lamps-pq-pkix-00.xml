@@ -300,7 +300,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         <section numbered="true" toc="default">
          <name>TBD Public Keys</name>
          <!-- [PK] What is this section going to include? -->
-         <!-- [JM] Say NIST standardize both dilihtium and falcon, then this section would describe falcons public keys, just as we did for dilithium above. -->
+         <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons public keys, just as we did for Dilithium above. -->
          <t>TBD</t>
         </section>  <!-- End of TBD Public Keys Section -->
         
@@ -324,7 +324,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
   }
       </sourcecode> 
-                <!--Could talk about deterministic vs random signatures here, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
+                <!-- [JM] I'm unsure if BIT STRING is the correct data type here. Please confirm or suggest alt. -->
+                <!--[JM] deterministic vs random signatures, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
                 <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
 
                 <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta are as described in DilithiumParameters). The public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1.</t>
@@ -333,7 +334,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         <section numbered="true" toc="default">
           <name>TBD Private Keys</name>
          <!-- [PK] What is this section going to include? -->
-         <!-- [JM] Say NIST standardize both dilithium and falcon, then this section would describe falcons private keys, just as we did for dilithium above. -->
+         <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons private keys, just as we did for Dilithium above. -->
           <t>TBD</t>
         </section>  <!-- End of TBD Private Keys Section -->
         
@@ -385,6 +386,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       These properties are dependent in part, on unambiguous public key serialization. It for this reason the public key structure defined in <xref target=" subjectpublickey" format="default"/> are intentionally encoded as a single OCTET STRING.</t>
 
       <t>EDNOTE: Discuss implications of not hash-them-sign. Implications in performance too.</t>
+      <!-- [JM] Small note on hash-then-sign. Dilithium (see fig 4 line 10 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf) " Our full scheme in Fig. 4 also makes use of basic optimizations such as pre-hashing the message M so as to not rehash it with every signing attempt." -->
+     
 
     </section>  <!-- End of Security Considerations Section -->
     
