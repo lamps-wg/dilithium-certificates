@@ -5,7 +5,7 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 5 August 2022                                   1 February 2022
+Expires: 6 August 2022                                   2 February 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 1]
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 1]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   This Internet-Draft will expire on 5 August 2022.
+   This Internet-Draft will expire on 6 August 2022.
 
 Copyright Notice
 
@@ -88,14 +88,14 @@ Table of Contents
      4.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   5
      4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   6
    5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   6
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   8
-   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .   9
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
+   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 2]
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 2]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -165,7 +165,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 3]
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 3]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -221,7 +221,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 4]
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 4]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -277,7 +277,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 5]
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -288,18 +288,68 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 5.  ASN.1 Module
 
-   For reference purposes, the ASN.1 syntax is presented as an ASN.1
-   module here.
+   This section includes the ASN.1 module for Post-Quantum algorithms in
+   X.509.  This module does not come from any previously existing RFC.
+   This module references [RFC5912].
 
-   ASN.1 Module
+   [ EDNOTE: Add ASN.1 here ]
 
      PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
         internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
         id-mod-pkix1-PQ-algorithms(X) }
 
-     DEFINITIONS EXPLICIT TAGS ::= BEGIN
+     DEFINITIONS EXPLICIT TAGS ::=
 
-     [ EDNOTE: Add ASN.1 here ]
+      BEGIN
+
+      -- EXPORTS ALL;
+
+      IMPORTS
+
+      -- FROM RFC 5912
+
+      PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
+      FROM AlgorithmInformation-2009
+        { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+          mechanisms(5) pkix(7) id-mod(0)
+          id-mod-algorithmInformation-02(58) }
+
+      --
+      -- Public Key (pk-) Algorithms
+      --
+      PublicKeys PUBLIC-KEY ::= {
+        -- This expands PublicKeys from RFC 5912
+        pk-dilithiumTBD-shake256 |
+        pk-TBD-TBD,
+        ...
+      }
+
+
+
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 6]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
+      -- The hashAlgorithm is mda-shake256
+      -- The XOF seed rho is 32 bytes
+      -- The vector t1 is 320*k bytes
+      -- These are encoded as a single string
+      pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
+        IDENTIFIER id-dilithiumTBD-shake256
+        KEY DilithiumPublicKey
+        PARAMS ARE absent
+        CERT-KEY-USAGE { nonRepudiation, digitalSignature,
+                         keyCertSign, cRLSign }
+        PRIVATE-KEY DilithiumPrivateKey
+      }
 
 6.  IANA Considerations
 
@@ -330,20 +380,19 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
    block cipher with a 256-bit key (e.g., AES 256).
 
-
-
-
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 6]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    The digital signature schemes defined within this document are
    modeled under existentially unforgeable digital signatures with
    respect to an adaptive chosen message attack (EUF-CMA).  For the
    purpose of estimating security strength, it has been assumed that the
    attacker has access to signatures for no more than 2^{64} chosen
    messages.
+
+
+
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
    A fundamental security property also associated with digital
    signatures is non-repudiation.  Non-repudiation refers to the
@@ -384,20 +433,22 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               post-quantum-cryptography-standardization/Call-for-
               Proposals>.
 
-
-
-
-
-
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 7]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
    [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
               Identifiers for the Internet X.509 Public Key
@@ -410,6 +461,11 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               Infrastructure Certificate and Certificate Revocation List
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/info/rfc5280>.
+
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/info/rfc5912>.
 
 8.2.  Informative References
 
@@ -445,7 +501,7 @@ Appendix A.  Acknowledgements
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 8]
+Massimo & Kampanakis      Expires 6 August 2022                 [Page 9]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -501,4 +557,4 @@ Authors' Addresses
 
 
 
-Massimo & Kampanakis      Expires 5 August 2022                 [Page 9]
+Massimo & Kampanakis      Expires 6 August 2022                [Page 10]
