@@ -33,7 +33,6 @@
  <front>
     <!-- The abbreviated title is used in the page header - it is only necessary if the 
         full title is longer than 39 characters -->
-
    <title abbrev="Dilithium Signatures in X.509">Algorithms and Identifiers for Post-Quantum Algorithms <br/> in the Internet X.509 Public Key Infrastructure</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-massimo-lamps-pq-pkix-00"/>
     <!-- add 'role="editor"' below for the editors if appropriate -->
@@ -346,16 +345,54 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
    
     <section anchor="asn1" numbered="true" toc="default">
       <name>ASN.1 Module</name>
-      <t>For reference purposes, the ASN.1 syntax is presented as an ASN.1 module here.</t>
-      <t> ASN.1 Module </t>
+      <t>This section includes the ASN.1 module for Post-Quantum algorithms in X.509. This module does not come from any previously existing RFC. This module references <xref target="RFC5912" format="default"></xref>.</t>
       <sourcecode type="asn.1" markers="false" pn="section-6">
+[ EDNOTE: Add ASN.1 here ] 
+
   PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
      internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
      id-mod-pkix1-PQ-algorithms(X) }
 
-  DEFINITIONS EXPLICIT TAGS ::= BEGIN
+  DEFINITIONS EXPLICIT TAGS ::=
+
+   BEGIN
+
+   -- EXPORTS ALL;
+
+   IMPORTS
+
+   -- FROM RFC 5912
+
+   PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
+   FROM AlgorithmInformation-2009
+     { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+       mechanisms(5) pkix(7) id-mod(0)
+       id-mod-algorithmInformation-02(58) }
+
+   --
+   -- Public Key (pk-) Algorithms
+   --
+   PublicKeys PUBLIC-KEY ::= {
+     -- This expands PublicKeys from RFC 5912
+     pk-dilithiumTBD-shake256 |
+     pk-TBD-TBD,
+     ...
+   }
   
-  [ EDNOTE: Add ASN.1 here ] 
+  </sourcecode> 
+  <sourcecode type="asn.1" markers="false" pn="section-6.1">
+   -- The hashAlgorithm is mda-shake256
+   -- The XOF seed rho is 32 bytes
+   -- The vector t1 is 320*k bytes
+   -- These are encoded as a single string
+   pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
+     IDENTIFIER id-dilithiumTBD-shake256
+     KEY DilithiumPublicKey
+     PARAMS ARE absent
+     CERT-KEY-USAGE { nonRepudiation, digitalSignature,
+                      keyCertSign, cRLSign }
+     PRIVATE-KEY DilithiumPrivateKey
+   }
       </sourcecode> 
     </section>     <!-- End of ASN.1 Module Section -->
     
@@ -417,6 +454,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
           <?rfc include="reference.RFC.3279.xml"?>
           <!--<?rfc include="reference.RFC.4055.xml"?>-->
           <?rfc include="reference.RFC.5280.xml"?>
+          <?rfc include="reference.RFC.5912.xml"?>
           <!--<?rfc include="reference.RFC.5480.xml"?>-->
 
      <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/Call-for-Proposals">
