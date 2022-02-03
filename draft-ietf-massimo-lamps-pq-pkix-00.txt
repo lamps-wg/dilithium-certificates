@@ -5,7 +5,7 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 6 August 2022                                   2 February 2022
+Expires: 7 August 2022                                   3 February 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 1]
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 1]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   This Internet-Draft will expire on 6 August 2022.
+   This Internet-Draft will expire on 7 August 2022.
 
 Copyright Notice
 
@@ -90,12 +90,12 @@ Table of Contents
    5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
-   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
+   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 2]
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 2]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -165,7 +165,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 3]
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 3]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -221,7 +221,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 4]
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 4]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -277,7 +277,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 5]
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -300,31 +300,29 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
      DEFINITIONS EXPLICIT TAGS ::=
 
-      BEGIN
+     BEGIN
 
-      -- EXPORTS ALL;
+     -- EXPORTS ALL;
 
-      IMPORTS
+     IMPORTS
 
-      -- FROM RFC 5912
+     -- FROM RFC 5912
 
-      PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
-      FROM AlgorithmInformation-2009
-        { iso(1) identified-organization(3) dod(6) internet(1) security(5)
-          mechanisms(5) pkix(7) id-mod(0)
-          id-mod-algorithmInformation-02(58) }
+     PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
+     FROM AlgorithmInformation-2009
+       { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+         mechanisms(5) pkix(7) id-mod(0)
+         id-mod-algorithmInformation-02(58) }
 
-      --
-      -- Public Key (pk-) Algorithms
-      --
-      PublicKeys PUBLIC-KEY ::= {
-        -- This expands PublicKeys from RFC 5912
-        pk-dilithiumTBD-shake256 |
-        pk-TBD-TBD,
-        ...
-      }
-
-
+     --
+     -- Public Key (pk-) Algorithms
+     --
+     PublicKeys PUBLIC-KEY ::= {
+       -- This expands PublicKeys from RFC 5912
+       pk-dilithiumTBD-shake256 |
+       pk-TBD-TBD,
+       ...
+     }
 
 
 
@@ -333,23 +331,47 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 6]
+
+
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 6]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-      -- The hashAlgorithm is mda-shake256
-      -- The XOF seed rho is 32 bytes
-      -- The vector t1 is 320*k bytes
-      -- These are encoded as a single string
-      pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
-        IDENTIFIER id-dilithiumTBD-shake256
-        KEY DilithiumPublicKey
-        PARAMS ARE absent
-        CERT-KEY-USAGE { nonRepudiation, digitalSignature,
-                         keyCertSign, cRLSign }
-        PRIVATE-KEY DilithiumPrivateKey
+     -- The hashAlgorithm is mda-shake256
+     -- The XOF seed rho is 32 bytes
+     -- The vector t1 is 320*k bytes
+     -- These are encoded as a single string
+     pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
+       IDENTIFIER id-dilithiumTBD-shake256
+       KEY DilithiumPublicKey
+       PARAMS ARE absent
+       CERT-KEY-USAGE { nonRepudiation, digitalSignature,
+                       keyCertSign, cRLSign }
+       PRIVATE-KEY DilithiumPrivateKey
+     }
+
+     --
+     -- Signature Values
+     --
+
+     -- Dilithium
+
+     -- z is the bit packed representation of the signature
+     -- vector. z is 32l(1 + log gamma1) bytes, where l is
+     -- the rank of the vector over R_q and gamma1 is the
+     -- bound on size of the coefficients used for signing.
+     -- The hint h is an encoded vector of bits which requires
+     -- omega + k bytes where omega is the number of ones
+     -- in h and k is the rank of the vector over R_q.
+     -- The challenge c is 32 bytes.
+     Dilithium-Sig-Value ::= SEQUENCE {
+        z  OCTET STRING,
+        h  OCTET STRING,
+        c  OCTET STRING
       }
+
+     END
 
 6.  IANA Considerations
 
@@ -362,6 +384,15 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    This document updates RFC 3279 [RFC3279].  The Security
    Considerations section of that document therefore applies to this
    specification as well.
+
+
+
+
+
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
    Instead of defining the strength of a quantum algorithm in a
    traditional manner using precise estimates of the number of "bits of
@@ -389,7 +420,32 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 8]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -445,7 +501,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 8]
+Massimo & Kampanakis      Expires 7 August 2022                 [Page 9]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -501,7 +557,7 @@ Appendix A.  Acknowledgements
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                 [Page 9]
+Massimo & Kampanakis      Expires 7 August 2022                [Page 10]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -557,4 +613,4 @@ Authors' Addresses
 
 
 
-Massimo & Kampanakis      Expires 6 August 2022                [Page 10]
+Massimo & Kampanakis      Expires 7 August 2022                [Page 11]
