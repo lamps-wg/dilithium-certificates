@@ -173,24 +173,11 @@
       tbsCertificate       TBSCertificate,
       signatureAlgorithm   AlgorithmIdentifier,
       signatureValue       BIT STRING  }
-</sourcecode>
-        <t pn="section-4.1-3">The identifiers defined in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> can be used 
-		as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence 
-		Certificate and the signature field in the sequence TBSCertificate in X.509  
-		<xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>. 
-		The parameters of these signature algorithms are absent, as explained 
-		in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
-        <t pn="section-4.1-4">Conforming Certification Authority (CA) implementations <bcp14>MUST</bcp14> specify the algorithms  
-		explicitly by using the OIDs specified in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> when 
-		encoding Dilithium signatures 
-		in certificates and CRLs.
-		Conforming client implementations that process certificates and CRLs 
-		using Dilithium <bcp14>MUST</bcp14> recognize the corresponding OIDs.
-		Encoding rules for Dilithium 
-		signature values are specified <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
+        </sourcecode>
+        <t pn="section-4.1-3">The identifiers defined in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate and the signature field in the sequence TBSCertificate in X.509 <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>. The parameters of these signature algorithms are absent, as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
+        <t pn="section-4.1-4">Conforming Certification Authority (CA) implementations <bcp14>MUST</bcp14> specify the algorithms explicitly by using the OIDs specified in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> when encoding Dilithium signatures in certificates and CRLs. Conforming client implementations that process certificates and CRLs using Dilithium <bcp14>MUST</bcp14> recognize the corresponding OIDs. Encoding rules for Dilithium signature values are specified <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
 
-        <t>This section identifies OIDS for the post-quantum Dilithium digital signature algorithms. The contents of the parameters component for each algorithm are absent, as explained 
-		in <xref target="oids" format="default"/></t>
+        <t>This section identifies OIDS for the post-quantum Dilithium digital signature algorithms. The contents of the parameters component for each algorithm are absent, as explained in <xref target="oids" format="default"/></t>
 
         <section numbered="true" toc="default" anchor="oids">
          <name>Dilithium Signature Algorithm</name>
@@ -237,7 +224,7 @@
         <section anchor="dilithiumpublickey" numbered="true" toc="default">
          <name>Dilithium Public Keys</name>
          <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
-         <t>The Dilithium public key MUST be encoded using the ASN.1 type DilithiumPublicKey:</t>
+         <t>The Dilithium public key <bcp14>MUST</bcp14> be encoded using the ASN.1 type DilithiumPublicKey:</t>
                 <!---<ul spacing="compact">
                     <li>rho: nonce</li>
                     <li>t:  a vector encoded in 320*k bytes</li>
@@ -341,7 +328,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     
 <!-- do we need a ASN.1 module section? can we refer to another source? -->
 <!-- [PK] We need it. We will need to write one and also validate it. I have notes on this and Russ Housley can also help us. -->
-   
+<!-- [JM] I've taken a stab at the ASN.1 module based on the guidance in https://www.rfc-editor.org/rfc/rfc5912.txt and the example in https://datatracker.ietf.org/doc/html/rfc8692. This should be treated as a rough draft and will require some checking.-->   
    
     <section anchor="asn1" numbered="true" toc="default">
       <name>ASN.1 Module</name>
@@ -355,46 +342,80 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
   DEFINITIONS EXPLICIT TAGS ::=
 
-   BEGIN
+  BEGIN
 
-   -- EXPORTS ALL;
+  -- EXPORTS ALL;
 
-   IMPORTS
+  IMPORTS
 
-   -- FROM RFC 5912
+  -- FROM RFC 5912
 
-   PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
-   FROM AlgorithmInformation-2009
-     { iso(1) identified-organization(3) dod(6) internet(1) security(5)
-       mechanisms(5) pkix(7) id-mod(0)
-       id-mod-algorithmInformation-02(58) }
+  PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
+  FROM AlgorithmInformation-2009
+    { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+      mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58) }
 
-   --
-   -- Public Key (pk-) Algorithms
-   --
-   PublicKeys PUBLIC-KEY ::= {
-     -- This expands PublicKeys from RFC 5912
-     pk-dilithiumTBD-shake256 |
-     pk-TBD-TBD,
-     ...
-   }
+  --
+  -- Public Key (pk-) Algorithms
+  --
+  PublicKeys PUBLIC-KEY ::= {
+    -- This expands PublicKeys from RFC 5912
+    pk-dilithiumTBD-shake256 |
+    pk-TBD-TBD,
+    ...
+  }
   
   </sourcecode> 
   <sourcecode type="asn.1" markers="false" pn="section-6.1">
-   -- The hashAlgorithm is mda-shake256
-   -- The XOF seed rho is 32 bytes
-   -- The vector t1 is 320*k bytes
-   -- These are encoded as a single string
-   pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
-     IDENTIFIER id-dilithiumTBD-shake256
-     KEY DilithiumPublicKey
-     PARAMS ARE absent
-     CERT-KEY-USAGE { nonRepudiation, digitalSignature,
-                      keyCertSign, cRLSign }
-     PRIVATE-KEY DilithiumPrivateKey
+  -- The hashAlgorithm is mda-shake256
+  -- The XOF seed rho is 32 bytes
+  -- The vector t1 is 320*k bytes
+  -- These are encoded as a single string
+  pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
+    IDENTIFIER id-dilithiumTBD-shake256
+    KEY DilithiumPublicKey
+    PARAMS ARE absent
+    CERT-KEY-USAGE { nonRepudiation, digitalSignature,
+                    keyCertSign, cRLSign }
+    PRIVATE-KEY DilithiumPrivateKey
+  }
+  </sourcecode> 
+
+    <!-- [JM] Do we need to add details of the signature values, as there is no where currently where we discuss the format
+    for example in RFC5480 https://datatracker.ietf.org/doc/html/rfc5480 they define:
+
+   DSA-Sig-Value ::= SEQUENCE {
+     r  INTEGER,
+     s  INTEGER
    }
-      </sourcecode> 
-    </section>     <!-- End of ASN.1 Module Section -->
+   This is included in https://www.rfc-editor.org/rfc/rfc5912.txt page 33. I feel like this may be nice to have, as this signature structure is different that that or RSA or ECDSA.
+    -->  
+
+  <sourcecode type="asn.1" markers="false" pn="section-6.2">  
+  --
+  -- Signature Values
+  --
+
+  -- Dilithium
+
+  -- z is the bit packed representation of the signature
+  -- vector. z is 32l(1 + log gamma1) bytes, where l is  
+  -- the rank of the vector over R_q and gamma1 is the   
+  -- bound on size of the coefficients used for signing.
+  -- The hint h is an encoded vector of bits which requires 
+  -- omega + k bytes where omega is the number of ones 
+  -- in h and k is the rank of the vector over R_q.
+  -- The challenge c is 32 bytes.
+  Dilithium-Sig-Value ::= SEQUENCE {
+     z  OCTET STRING,
+     h  OCTET STRING,
+     c  OCTET STRING
+   }
+
+  END
+  </sourcecode> 
+   </section>     <!-- End of ASN.1 Module Section -->
     
   
    <section anchor="IANA" numbered="true" toc="default">
