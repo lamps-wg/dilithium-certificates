@@ -90,7 +90,7 @@
         keywords will be used for the search engine. -->
 
    <abstract>
-      <t>Digital signatures are an authentication mechanism used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document updates the "Algorithms and Identifiers for the Internet X.509 Public Key   Infrastructure Certificate and Certificate Revocation List (CRL) Profile" [RFC 3279] and describes the conventions for using Dilithium quantum-resistant signatures in Internet X.509 certificates and revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, private key are also described.</t>
+      <t>Digital signatures are an authentication mechanism used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document updates the "Algorithms and Identifiers for the Internet X.509 Public Key   Infrastructure Certificate and Certificate Revocation List (CRL) Profile" [RFC 3279] and describes the conventions for using Dilithium quantum-resistant signatures in Internet X.509 certificates and revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, and private key are also described.</t>
     </abstract>
 
     <note>
