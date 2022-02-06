@@ -5,12 +5,12 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Experimental                                        AWS
-Expires: 7 August 2022                                   3 February 2022
+Expires: 10 August 2022                                  6 February 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
             in the Internet X.509 Public Key Infrastructure
-                  draft-ietf-massimo-lamps-pq-pkix-00
+                    draft-massimo-dilithium-pkix-00
 
 Abstract
 
@@ -21,7 +21,7 @@ Abstract
    Certificate Revocation List (CRL) Profile" [RFC 3279] and describes
    the conventions for using Dilithium quantum-resistant signatures in
    Internet X.509 certificates and revocation lists.  The conventions
-   for the associated post-quantum signatures, subject public keys,
+   for the associated post-quantum signatures, subject public keys, and
    private key are also described.
 
 Note
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 1]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 1]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   This Internet-Draft will expire on 7 August 2022.
+   This Internet-Draft will expire on 10 August 2022.
 
 Copyright Notice
 
@@ -92,10 +92,10 @@ Table of Contents
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
-   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  11
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 2]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 2]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -165,7 +165,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 3]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 3]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -221,7 +221,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 4]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 4]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -277,7 +277,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 5]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -333,7 +333,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 6]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 6]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -389,7 +389,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 7]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 7]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -418,38 +418,6 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    attacker has access to signatures for no more than 2^{64} chosen
    messages.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 8]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    A fundamental security property also associated with digital
    signatures is non-repudiation.  Non-repudiation refers to the
    assurance that the owner of a signature key pair that was capable of
@@ -473,6 +441,15 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    routing . A full discussion of these properties in Dilithium can be
    found at [CDFFJ21].  These properties are dependent in part, on
    unambiguous public key serialization.  It for this reason the public
+
+
+
+
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    key structure defined in Section 3 are intentionally encoded as a
    single OCTET STRING.
 
@@ -493,18 +470,6 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 7 August 2022                 [Page 9]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
 
    [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
               Identifiers for the Internet X.509 Public Key
@@ -533,6 +498,14 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
+
+
+
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 9]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
               Schwabe, P., Seiler, G., and D. Stehlé, "CRYSTALS-
               Dilithium Algorithm Specifications and Supporting
               Documentation", 2021, <https://pq-
@@ -550,34 +523,22 @@ Appendix A.  Acknowledgements
 
    We would like to thank ... for their insightful comments.
 
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 7 August 2022                [Page 10]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
 Appendix B.  Appendix
 
    The parameter sets defined for NIST security levels 2, 3 and 5 are
    listed in the Figure 1, along with the resulting public key and
    private key sizes in bytes.
 
-  |==========+=====+=========+=======+=====+========+========+=========|
-  | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
-  | Level    |     |         |       |     |        | Key(B) | Key(B)  |
-  |==========+=====+=========+=======+=====+========+========+=========|
-  | 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  |
-  | 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  |
-  | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
-  |==========+=====+=========+=======+=====+========+========+=========|
+   |==========+=====+=========+=======+=====+========+========+=========|
+   | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
+   | Level    |     |         |       |     |        | Key(B) | Key(B)  |
+   |==========+=====+=========+=======+=====+========+========+=========|
+   | 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528  |
+   | 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000  |
+   | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864  |
+   |==========+=====+=========+=======+=====+========+========+=========|
 
-                                 Figure 1
+                                  Figure 1
 
 Authors' Addresses
 
@@ -596,21 +557,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis      Expires 7 August 2022                [Page 11]
+Massimo & Kampanakis     Expires 10 August 2022                [Page 10]
