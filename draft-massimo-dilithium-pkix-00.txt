@@ -4,8 +4,9 @@
 
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
-Intended status: Experimental                                        AWS
-Expires: 10 August 2022                                  6 February 2022
+Updates: RFC3279 (if approved)                                       AWS
+Intended status: Experimental                            6 February 2022
+Expires: 10 August 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -14,27 +15,27 @@ Expires: 10 August 2022                                  6 February 2022
 
 Abstract
 
-   Digital signatures are an authentication mechanism used within X.509
-   certificates, Certificate Revocation Lists (CRLs), and to sign
-   messages.  This document updates the "Algorithms and Identifiers for
-   the Internet X.509 Public Key Infrastructure Certificate and
-   Certificate Revocation List (CRL) Profile" [RFC 3279] and describes
-   the conventions for using Dilithium quantum-resistant signatures in
-   Internet X.509 certificates and revocation lists.  The conventions
-   for the associated post-quantum signatures, subject public keys, and
-   private key are also described.
+   Digital signatures are used within X.509 certificates, Certificate
+   Revocation Lists (CRLs), and to sign messages.  This document updates
+   the "Algorithms and Identifiers for the Internet X.509 Public Key
+   Infrastructure Certificate and Certificate Revocation List (CRL)
+   Profile" [RFC 3279] and describes the conventions for using Dilithium
+   quantum-resistant signatures in Internet X.509 certificates and
+   revocation lists.  The conventions for the associated post-quantum
+   signatures, subject public keys, and private key are also described.
 
 Note
 
    [EDNOTE: This draft is not expected to be finalized before the NIST
    PQC Project has standardized PQ algorithms.  After NIST has
-   standardized this document will replace TBD, with the appropriate
-   algorithms and parameters before proceeding to ratification.  The
-   algorithm Dilithium has been added as an example in this draft, to
-   provide a more detailed illustration of the content - it by no means
-   indicates its inclusion in the final version.  This specification
-   will use object identifiers for the new algorithms that are assigned
-   by NIST, and will use placeholders until these are released.]
+   standardized its first algorithms, this document will replace TBD,
+   with the appropriate algorithms and parameters before proceeding to
+   ratification.  The algorithm Dilithium has been added as an example
+   in this draft, to provide a more detailed illustration of the content
+   - it by no means indicates its inclusion in the final version.  This
+   specification will use object identifiers for the new algorithms that
+   are assigned by NIST, and will use placeholders until these are
+   released.]
 
 Status of This Memo
 
@@ -48,8 +49,7 @@ Status of This Memo
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
-   time.  It is inappropriate to use Internet-Drafts as reference
-   material or to cite them other than as "work in progress."
+
 
 
 
@@ -57,6 +57,9 @@ Massimo & Kampanakis     Expires 10 August 2022                 [Page 1]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
+
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
 
    This Internet-Draft will expire on 10 August 2022.
 
@@ -78,34 +81,31 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
-   2.  Signature Algorithms  . . . . . . . . . . . . . . . . . . . .   3
-     2.1.  Dilithium Signature Algorithm . . . . . . . . . . . . . .   4
-     2.2.  TBD Signature Algorithm . . . . . . . . . . . . . . . . .   4
-   3.  Subject Public Key Fields . . . . . . . . . . . . . . . . . .   4
-     3.1.  Dilithium Public Keys . . . . . . . . . . . . . . . . . .   4
-     3.2.  TBD Public Keys . . . . . . . . . . . . . . . . . . . . .   5
-   4.  Private Key Format  . . . . . . . . . . . . . . . . . . . . .   5
-     4.1.  Dilithium Private Keys  . . . . . . . . . . . . . . . . .   5
-     4.2.  TBD Private Keys  . . . . . . . . . . . . . . . . . . . .   6
-   5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   6
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
-   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   2.  Identifiers . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  Dilithium Signatures in PKIX  . . . . . . . . . . . . . . . .   3
+   4.  Dilithium Public Keys in PKIX . . . . . . . . . . . . . . . .   4
+   5.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   5
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
+   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .   9
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
    The US National Institute of Standards and Technology (NIST) Post-
    Quantum Cryptography (PQC) effort has defined quantum-resistant
    public-key cryptographic algorithm standards [NIST-PQC].  This
-   document supplements [RFC3279] and will specify the use of these
-   Post-Quantum public key algorithms with Public Key Infrastructure
-   X.509 (PKIX) certificates.  These specifications will use object
-   identifiers algorithms that are assigned by NIST.
+   document updates [RFC3279] and will specify the use of these Post-
+   Quantum public key algorithms with Public Key Infrastructure X.509
+   (PKIX) certificates using object identifiers algorithms assigned by
+   NIST.
+
+   Signatures are used in a number of different ASN.1 structures.  As
+   shown in the ASN.1 representation from [RFC5280] below, in an X.509
 
 
 
@@ -114,23 +114,6 @@ Massimo & Kampanakis     Expires 10 August 2022                 [Page 2]
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   This specification defines additional content for the
-   signatureAlgorithm, signatureValue, signature, and
-   subjectPublicKeyInfo fields within Internet X.509 certificates
-   [RFC3279] and CRLs [RFC5280].  This specification describes the
-   encoding of digital signatures generated with the following
-   cryptographic algorithms: Dilithium.
-
-1.1.  Requirements Language
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in RFC 2119 [RFC2119].
-
-2.  Signature Algorithms
-
-   Signatures are used in a number of different ASN.1 structures.  As
-   shown in the ASN.1 representation from [RFC5280] below, in an X.509
    certificate, a signature is encoded with an algorithm identifier in
    the signatureAlgorithm attribute and a signatureValue attribute that
    contains the actual signature.
@@ -140,28 +123,45 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
          signatureAlgorithm   AlgorithmIdentifier,
          signatureValue       BIT STRING  }
 
-   The identifiers defined in Section 2.1 can be used as the
+   This specification defines additional content for the
+   signatureAlgorithm, signatureValue, signature, and
+   subjectPublicKeyInfo fields within Internet X.509 certificates
+   [RFC3279] and CRLs [RFC5280].  It describes the encoding of digital
+   signatures and public generated with quantum-resistant signature
+   algorithm Dilithium.
+
+1.1.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
+
+2.  Identifiers
+
+   This specification uses object identifiers for the new algorithms
+   that are assigned by NIST, and will use placeholders until these are
+   released.
+
+   The OIDs are:
+
+      id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) hashAlgs(2) TBD }
+
+   The contents of the parameters component for each algorithm are
+   absent.
+
+3.  Dilithium Signatures in PKIX
+
+   Dilithium is a digital signature scheme built upon the Fiat-Shamir
+   with aborts framework [Fiat-Shamir].  The security is based upon the
+   hardness of lattice problems over module lattices [Dilithium].
+   Dilithium provides 3 parameter sets for the security categories 2,3
+   and 5.
+
+   The identifiers defined in Section 2 can be used as the
    AlgorithmIdentifier in the signatureAlgorithm field in the sequence
    Certificate and the signature field in the sequence TBSCertificate in
-   X.509 [RFC5280].  The parameters of these signature algorithms are
-   absent, as explained in Section 2.1.
-
-   Conforming Certification Authority (CA) implementations MUST specify
-   the algorithms explicitly by using the OIDs specified in Section 2.1
-   when encoding Dilithium signatures in certificates and CRLs.
-   Conforming client implementations that process certificates and CRLs
-   using Dilithium MUST recognize the corresponding OIDs.  Encoding
-   rules for Dilithium signature values are specified Section 2.1.
-
-   This section identifies OIDS for the post-quantum Dilithium digital
-   signature algorithms.  The contents of the parameters component for
-   each algorithm are absent, as explained in Section 2.1
-
-
-
-
-
-
 
 
 
@@ -170,32 +170,22 @@ Massimo & Kampanakis     Expires 10 August 2022                 [Page 3]
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-2.1.  Dilithium Signature Algorithm
+   X.509 [RFC5280].  The parameters of these signature algorithms are
+   absent, as explained in Section 2.
 
-   Dilithium is a digital signature scheme built upon the Fiat-Shamir
-   with aborts framework [Fiat-Shamir].  The security is based upon the
-   hardness of lattice problems over module lattices [Dilithium].
-   Dilithium provides 3 parameter sets for the security categories 2,3
-   and 5.
-
-   When SHAKE-256 is used, the OIDs are:
-
-      id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
-               country(16) us(840) organization(1) gov(101) csor(3)
-               nistAlgorithm(4) hashAlgs(2) TBD }
+   Conforming Certification Authority (CA) implementations MUST specify
+   the algorithms explicitly by using the OIDs specified in Section 2
+   when encoding Dilithium signatures in certificates and CRLs.
+   Conforming client implementations that process certificates and CRLs
+   using Dilithium MUST recognize the corresponding OIDs.  Encoding
+   rules for Dilithium signature values are specified Section 2.
 
    When the id-dilithiumTBD-shake256 identifier appears in the algorithm
    field as an AlgorithmIdentifier, the encoding MUST omit the
    parameters field.  That is, the AlgorithmIdentifier SHALL be a
    SEQUENCE of one component, the OID id-dilithiumTBD-shake256.
 
-2.2.  TBD Signature Algorithm
-
-   TBD
-
-3.  Subject Public Key Fields
-
-3.1.  Dilithium Public Keys
+4.  Dilithium Public Keys in PKIX
 
    The public parameters for Dilithium are based upon a polynomial ring
    R_q for prime q.  A (k*l) public matrix A is produced, consisting of
@@ -215,9 +205,19 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    single OCTET STRING.  The size required to hold a DilithiumPublicKey
    public key element is therefore 32+320*k bytes.
 
-   The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place
-   within a certificate where the parameters may be used.  If the
-   Dilithium parameters are specified as implicitlyCA in the
+   The id-dilithiumTBD-shake256 identifier defined in Section 2 MUST be
+   used as the algorithm field in the SubjectPublicKeyInfo sequence
+   [RFC5280]. to identify a Dilithium public key.
+
+   Conforming CA implementations MUST specify the X.509 public key
+   algorithm explicitly by using the OIDs specified in this
+   specification when Dilithium public keys in certificates and CRLs.
+   Conforming client implementations that process Dilithium public keys
+   when processing certificates and CRLs MUST recognize the
+   corresponding OIDs.
+
+
+
 
 
 
@@ -225,66 +225,6 @@ Massimo & Kampanakis     Expires 10 August 2022                 [Page 4]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
-
-   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
-   subject certificate using Dilithium, then the certificate issuer's
-   Dilithium parameters apply to the subject's Dilithium key.  If the
-   Dilithium parameters are specified as implicitlyCA in the
-   SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the
-   certificate using a signature algorithm other than Dilithium, then
-   clients MUST not make use of the Dilithium public key.
-
-3.2.  TBD Public Keys
-
-   TBD
-
-4.  Private Key Format
-
-4.1.  Dilithium Private Keys
-
-   A Dilithium private key is encoded as DilithiumPrivateKey in the
-   privateKey field as an OCTET STRING.  Dilithium public keys are
-   optionally distributed in the publicKey field of the PrivateKeyInfo
-   structure.
-
-   The ASN.1 encoding for a Dilithium private key is as follows:
-
-     DilithiumPrivateKey ::= SEQUENCE {
-         rho         BIT STRING,         -- nonce/seed
-         K           BIT STRING,         -- key/seed
-         tr          BIT STRING,         -- PRF bytes (CRH in spec.)
-         s1          BIT STRING,         -- vector l
-         s2          BIT STRING,         -- vector k
-         t0          BIT STRING,         -- encoded vector
-         PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
-     }
-
-   Dilithium offers both deterministic and randomized signing.  The
-   deterministic version creates a signature based on a function of the
-   key K and the message, whereas the randomized version instead selects
-   these values at random.  The randomized version can be invoked by
-   leaving K as EMPTY.
-
-   A fully populated Dilithium private key consists of 6 parameters.
-   The size necessary to hold all private key elements is
-   32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta
-   are as described in DilithiumParameters).  The public key and secret
-   key sizes for security levels 2, 3, and 5 can be found in Figure 1.
-
-
-
-
-
-
-
-Massimo & Kampanakis     Expires 10 August 2022                 [Page 5]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
-4.2.  TBD Private Keys
-
-   TBD
 
 5.  ASN.1 Module
 
@@ -333,7 +273,11 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 10 August 2022                 [Page 6]
+
+
+
+
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -379,6 +323,8 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    Identifiers (OIDs).  The creation and delegation of these arcs is to
    be determined.
 
+   One object identifier for the ASN.1 module in the Appendix.
+
 7.  Security Considerations
 
    This document updates RFC 3279 [RFC3279].  The Security
@@ -387,36 +333,21 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-
-
-Massimo & Kampanakis     Expires 10 August 2022                 [Page 7]
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 6]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-   Instead of defining the strength of a quantum algorithm in a
-   traditional manner using precise estimates of the number of "bits of
-   security," NIST has instead elected to define a collection of broad
-   security strength categories.  Each category is defined by a
-   comparatively easy-to-analyze reference primitive that cover a range
-   of security strengths offered by existing NIST standards in symmetric
-   cryptography, which NIST expects to offer significant resistance to
-   quantum cryptanalysis.  These categories describe any attack that
-   breaks the relevant security definition that must require
-   computational resources comparable to or greater than those required
-   for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
-   AES128), Level 2 - collision search on a 256-bit hash function (e.g.,
-   SHA256/ SHA3-256), Level 3 - key search on a block cipher with a
-   192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit
-   hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
-   block cipher with a 256-bit key (e.g., AES 256).
+   The digital signature scheme defined within this document are modeled
+   under existentially unforgeable digital signatures with respect to an
+   adaptive chosen message attack (EUF-CMA).  For the purpose of
+   estimating security strength, it has been assumed that the attacker
+   has access to signatures for no more than 2^{64} chosen messages.
 
-   The digital signature schemes defined within this document are
-   modeled under existentially unforgeable digital signatures with
-   respect to an adaptive chosen message attack (EUF-CMA).  For the
-   purpose of estimating security strength, it has been assumed that the
-   attacker has access to signatures for no more than 2^{64} chosen
-   messages.
+   EDNOTE: Discuss implications of not hash-then-sign.  Implications in
+   performance too.
+
+   EDNOTE: Discuss side-channels for Dilithium. .
 
    A fundamental security property also associated with digital
    signatures is non-repudiation.  Non-repudiation refers to the
@@ -441,20 +372,8 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    routing . A full discussion of these properties in Dilithium can be
    found at [CDFFJ21].  These properties are dependent in part, on
    unambiguous public key serialization.  It for this reason the public
-
-
-
-
-Massimo & Kampanakis     Expires 10 August 2022                 [Page 8]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
-   key structure defined in Section 3 are intentionally encoded as a
+   key structure defined in Section 4 are intentionally encoded as a
    single OCTET STRING.
-
-   EDNOTE: Discuss implications of not hash-them-sign.  Implications in
-   performance too.
 
 8.  References
 
@@ -465,6 +384,15 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               <https://csrc.nist.gov/Projects/post-quantum-cryptography/
               post-quantum-cryptography-standardization/Call-for-
               Proposals>.
+
+
+
+
+
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -498,14 +426,6 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
-
-
-
-Massimo & Kampanakis     Expires 10 August 2022                 [Page 9]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
               Schwabe, P., Seiler, G., and D. Stehlé, "CRYSTALS-
               Dilithium Algorithm Specifications and Supporting
               Documentation", 2021, <https://pq-
@@ -519,11 +439,39 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               Information Security, 2009, <https://www.iacr.org/archive/
               asiacrypt2009/59120596/59120596.pdf>.
 
+
+
+
+
+
+
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
 Appendix A.  Acknowledgements
 
    We would like to thank ... for their insightful comments.
 
 Appendix B.  Appendix
+
+   Instead of defining the strength of a quantum algorithm in a
+   traditional manner using precise estimates of the number of "bits of
+   security," NIST has instead elected to define a collection of broad
+   security strength categories.  Each category is defined by a
+   comparatively easy-to-analyze reference primitive that cover a range
+   of security strengths offered by existing NIST standards in symmetric
+   cryptography, which NIST expects to offer significant resistance to
+   quantum cryptanalysis.  These categories describe any attack that
+   breaks the relevant security definition that must require
+   computational resources comparable to or greater than those required
+   for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
+   AES128), Level 2 - collision search on a 256-bit hash function (e.g.,
+   SHA256/ SHA3-256), Level 3 - key search on a block cipher with a
+   192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit
+   hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
+   block cipher with a 256-bit key (e.g., AES 256).
 
    The parameter sets defined for NIST security levels 2, 3 and 5 are
    listed in the Figure 1, along with the resulting public key and
@@ -549,11 +497,63 @@ Authors' Addresses
    Email: jakemas@amazon.com
 
 
+
+
+
+
+Massimo & Kampanakis     Expires 10 August 2022                 [Page 9]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    Panos Kampanakis
    AWS
    United States of America
 
    Email: kpanos@amazon.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
