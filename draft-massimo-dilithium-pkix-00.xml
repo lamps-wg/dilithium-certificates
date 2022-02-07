@@ -249,7 +249,8 @@
        <sourcecode type="asn.1" markers="false" pn="section">
   DilithiumPublicKey ::= OCTET STRING
       </sourcecode> 
-                <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. These parameters MUST be encoded as a single OCTET STRING. The size required to hold a DilithiumPublicKey public key element is therefore 32+320*k bytes.</t>
+      
+         <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. These parameters MUST be encoded as a single OCTET STRING. The size required to hold a DilithiumPublicKey public key element is therefore 32+320*k bytes.</t>
 
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
         <!-- [PK] In the past using parameters in OIDs have caused all types of issues. Nowadays the IETF hardcodes all parameters to the OID. For example OID XYZ gives everything needed for the algorithm like security level, hash algorithm key sizes etc. --> 
@@ -280,15 +281,21 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       </sourcecode> -->
 <!-- EDNOTE: I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
 
-<t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.</t>
+         <!-- [PK]: Commenting out as I think this goes back to the hardcoded paramters and is unecessary --> 
+         <!--<t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients MUST not make use of the Dilithium public key.</t>-->
+
+         <t>Conforming CA implementations MUST specify the X.509 public key algorithm explicitly by using the OIDs specified in this specification when Dilithium public keys in certificates and CRLs. Conforming client implementations that process Dilithium public keys when processing certificates and CRLs MUST recognize the corresponding OIDs. </t>
+
         </section>  <!-- End of Dilithium Public Keys Section -->
-        
-        <section numbered="true" toc="default">
-         <name>TBD Public Keys</name>
+
          <!-- [PK] What is this section going to include? -->
          <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons public keys, just as we did for Dilithium above. -->
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. -->      
+        <!-- <section numbered="true" toc="default">
+         <name>TBD Public Keys</name> 
+
          <t>TBD</t>
-        </section>  <!-- End of TBD Public Keys Section -->
+        </section> -->  <!-- End of TBD Public Keys Section -->
         
     </section> <!-- End of Subject Public Key Fields Section -->
 
