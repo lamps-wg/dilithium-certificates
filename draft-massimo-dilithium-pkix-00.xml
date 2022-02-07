@@ -161,7 +161,7 @@
     
 
     <section anchor="signaturealgorithms" numbered="true" toc="default">
-      <name>Signature Algorithms</name>
+      <name>Signatures in PKIX</name>
         <t pn="section-4.1-1">Signatures are used in a number of different ASN.1 structures.
         As shown in the ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/> 
 		below, in an X.509 certificate, a signature is encoded with an 
@@ -177,28 +177,31 @@
         <t pn="section-4.1-3">The identifiers defined in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate and the signature field in the sequence TBSCertificate in X.509 <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>. The parameters of these signature algorithms are absent, as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
         <t pn="section-4.1-4">Conforming Certification Authority (CA) implementations <bcp14>MUST</bcp14> specify the algorithms explicitly by using the OIDs specified in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> when encoding Dilithium signatures in certificates and CRLs. Conforming client implementations that process certificates and CRLs using Dilithium <bcp14>MUST</bcp14> recognize the corresponding OIDs. Encoding rules for Dilithium signature values are specified <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
 
+    </section> <!-- End of Signatures in PKIX Section -->
+
          <!--<t>This section identifies OIDS for the post-quantum Dilithium digital signature algorithms. The contents of the parameters component for each algorithm are absent, as explained in <xref target="oids" format="default"/></t> -->
 
         <section numbered="true" toc="default" anchor="oids">
-         <name>Dilithium Signature Algorithm</name>
+         <name>Dilithium Signatures in PKIX</name>
          <t>Dilithium is a digital signature scheme built upon the Fiat-Shamir with aborts framework <xref target="Fiat-Shamir" format="default"></xref>. The security is based upon the hardness of lattice problems over module lattices <xref target="Dilithium" format="default"></xref>. Dilithium provides 3 parameter sets for the security categories 2,3 and 5.</t>
 
-         <t>When SHAKE-256 is used, the OIDs are:</t>
+         <t>The OIDs are:</t>
       <sourcecode type="asn.1" markers="false" pn="section2-1">
    id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) 
             country(16) us(840) organization(1) gov(101) csor(3) 
             nistAlgorithm(4) hashAlgs(2) TBD }     
       </sourcecode>
           <t>When the id-dilithiumTBD-shake256 identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding MUST omit the parameters field.  That is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the OID id-dilithiumTBD-shake256.</t>
-        </section> <!-- End of Dilithium Signature Algorithm Section -->
+        </section> <!-- End of Dilithium Signatures in PKIX Section -->
 
-        <section numbered="true" toc="default">
-         <name>TBD Signature Algorithm</name>
+
          <!-- [PK] What is this section going to include? -->
          <!-- [JM] Should another algorithm be selected by NIST, we would include a summary of the algorithm, and then the ASN.1 definition and OIDs, just like we did for Dilithium above.-->
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->     
+        <!--<section numbered="true" toc="default">
+         <name>TBD Signature Algorithm</name>
          <t>TBD</t>
-        </section> <!-- End of TBD Signature Algorithm Section -->
-    </section> <!-- End of Signature Algorithms Section -->
+        </section> --> <!-- End of TBD Signature Algorithm Section -->
     
     
     <!--
@@ -218,11 +221,12 @@
   -->
   
   
-    <section anchor="subjectpublickey" numbered="true" toc="default">
-    <name>Subject Public Key Fields</name>
+    <!-- [PK] Commenting out for now since we only need it if we introduce more than one algorithms --> 
+    <!--<section anchor="subjectpublickey" numbered="true" toc="default">
+    <name>Subject Public Key Fields</name> --> 
     
         <section anchor="dilithiumpublickey" numbered="true" toc="default">
-         <name>Dilithium Public Keys</name>
+         <name>Dilithium Public Keys in PKIX</name>
          <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
          <t>The Dilithium public key <bcp14>MUST</bcp14> be encoded using the ASN.1 type DilithiumPublicKey:</t>
                 <!---<ul spacing="compact">
@@ -286,22 +290,23 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
          <t>Conforming CA implementations MUST specify the X.509 public key algorithm explicitly by using the OIDs specified in this specification when Dilithium public keys in certificates and CRLs. Conforming client implementations that process Dilithium public keys when processing certificates and CRLs MUST recognize the corresponding OIDs. </t>
 
-        </section>  <!-- End of Dilithium Public Keys Section -->
+        </section>  <!-- End of Dilithium Public Keys in PKIX Section -->
 
          <!-- [PK] What is this section going to include? -->
          <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons public keys, just as we did for Dilithium above. -->
-         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. -->      
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->      
         <!-- <section numbered="true" toc="default">
          <name>TBD Public Keys</name> 
 
          <t>TBD</t>
         </section> -->  <!-- End of TBD Public Keys Section -->
         
-    </section> <!-- End of Subject Public Key Fields Section -->
+    <!--</section>--> <!-- End of Subject Public Key Fields Section -->
 
 
-    <section anchor="privatekeyformat" numbered="true" toc="default">
-    <name>Private Key Format</name>
+    <!-- [PK] Commenting out for now since we only need it if we introduce more than one algorithms --> 
+    <!-- <section anchor="privatekeyformat" numbered="true" toc="default">
+    <name>Private Key Format</name> -->
         <section numbered="true" toc="default">
          <name>Dilithium Private Keys</name>
          <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the PrivateKeyInfo structure.</t>
@@ -323,15 +328,16 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
                 <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes (where k, l, eta are as described in DilithiumParameters). The public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1.</t>
           </section>  <!-- End of Dilithium Private Keys Section -->
-          
-        <section numbered="true" toc="default">
-          <name>TBD Private Keys</name>
+
          <!-- [PK] What is this section going to include? -->
-         <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons private keys, just as we did for Dilithium above. -->
+         <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons private keys, just as we did for Dilithium above. -->  
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->         
+        <!--<section numbered="true" toc="default">
+          <name>TBD Private Keys</name>
           <t>TBD</t>
-        </section>  <!-- End of TBD Private Keys Section -->
+        </section> -->  <!-- End of TBD Private Keys Section -->
         
-    </section>  <!-- End of Private Key Format Section -->
+    <!--</section>  --><!-- End of Private Key Format Section -->
     
 <!-- do we need a ASN.1 module section? can we refer to another source? -->
 <!-- [PK] We need it. We will need to write one and also validate it. I have notes on this and Russ Housley can also help us. -->
@@ -438,21 +444,22 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <t>Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of “bits of security,” NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 – key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 – collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 – key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 – collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 – key search on a block cipher with a 256-bit key (e.g., AES 256).</t>
 
       <!-- [JM] how deep should we go on EUF-CMA security? I don't really want to get into "games" here -->
-
-      <t>The digital signature schemes <!--note remove plural if only one--> defined within this document are modeled under existentially unforgeable digital signatures with respect to an adaptive chosen message attack (EUF-CMA). For the purpose of estimating security strength, it has been assumed that the attacker has access to signatures for no more than 2^{64} chosen messages.</t>
+      <!-- [PK] Not necessary. Just this paragraph is fine, if that.  -->
+      <t>The digital signature scheme <!--note remove plural if only one--> defined within this document are modeled under existentially unforgeable digital signatures with respect to an adaptive chosen message attack (EUF-CMA). For the purpose of estimating security strength, it has been assumed that the attacker has access to signatures for no more than 2^{64} chosen messages.</t>
 
       <!--<t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>-->
-      
+      <t>EDNOTE: Discuss implications of not hash-then-sign. Implications in performance too.</t>
+      <!-- [JM] Small note on hash-then-sign. Dilithium (see fig 4 line 10 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf) " Our full scheme in Fig. 4 also makes use of basic optimizations such as pre-hashing the message M so as to not rehash it with every signing attempt." -->
+
+      <t>EDNOTE: Discuss side-channels for Dilithium. .</t>
+
       <t>A fundamental security property also associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme Dilithium possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
 
       Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot produce a valid signature under another key given a signature sigma for some unknown message m. These properties are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such as Duplicate-Signature Key Selection (DSKS) attacks <!--[BWM99, MS04]-->, and attacks on the protocols for secure routing <!--[JCCS19]-->. A full discussion of these properties in Dilithium can be found at <xref target="CDFFJ21" format="default"></xref>.
 
 
-      These properties are dependent in part, on unambiguous public key serialization. It for this reason the public key structure defined in <xref target=" subjectpublickey" format="default"/> are intentionally encoded as a single OCTET STRING.</t>
+      These properties are dependent in part, on unambiguous public key serialization. It for this reason the public key structure defined in <xref target="dilithiumpublickey" format="default"/> are intentionally encoded as a single OCTET STRING.</t>
 
-      <t>EDNOTE: Discuss implications of not hash-them-sign. Implications in performance too.</t>
-      <!-- [JM] Small note on hash-then-sign. Dilithium (see fig 4 line 10 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf) " Our full scheme in Fig. 4 also makes use of basic optimizations such as pre-hashing the message M so as to not rehash it with every signing attempt." -->
-     
 
     </section>  <!-- End of Security Considerations Section -->
     
