@@ -9,5 +9,5 @@ This document updates [RFC 3279](https://datatracker.ietf.org/doc/html/rfc3279) 
 ## Compiling
 The file is compiled using xml2rfc available at https://pypi.org/project/xml2rfc/ using the command:
 ```
-xml2rfc draft-ietf-massimo-lamps-pq-pkix-00.xml
+xml2rfc draft-massimo-dilithium-pkix-00.xml
 ```
