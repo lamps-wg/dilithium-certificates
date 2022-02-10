@@ -392,22 +392,22 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
    }
    This is included in https://www.rfc-editor.org/rfc/rfc5912.txt page 33. I feel like this may be nice to have, as this signature structure is different that that or RSA or ECDSA.
     -->  
-
+  <!--
   <sourcecode type="asn.1" markers="false" pn="section-6.2">  
-  --
-  -- Signature Values
-  --
+ 
+   Signature Values
+  
 
-  -- Dilithium
+   Dilithium
 
-  -- z is the bit packed representation of the signature
-  -- vector. z is 32l(1 + log gamma1) bytes, where l is  
-  -- the rank of the vector over R_q and gamma1 is the   
-  -- bound on size of the coefficients used for signing.
-  -- The hint h is an encoded vector of bits which requires 
-  -- omega + k bytes where omega is the number of ones 
-  -- in h and k is the rank of the vector over R_q.
-  -- The challenge c is 32 bytes.
+   z is the bit packed representation of the signature
+   vector. z is 32l(1 + log gamma1) bytes, where l is  
+   the rank of the vector over R_q and gamma1 is the   
+   bound on size of the coefficients used for signing.
+   The hint h is an encoded vector of bits which requires 
+   omega + k bytes where omega is the number of ones 
+   in h and k is the rank of the vector over R_q.
+   The challenge c is 32 bytes.
   Dilithium-Sig-Value ::= SEQUENCE {
      z  OCTET STRING,
      h  OCTET STRING,
@@ -416,6 +416,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 
   END
   </sourcecode> 
+   -->
    </section>     <!-- End of ASN.1 Module Section -->
     
   
