@@ -5,8 +5,8 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Updates: RFC3279 (if approved)                                       AWS
-Intended status: Experimental                           10 February 2022
-Expires: 14 August 2022
+Intended status: Experimental                           11 February 2022
+Expires: 15 August 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 1]
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 1]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -63,7 +63,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 August 2022.
+   This Internet-Draft will expire on 15 August 2022.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 2]
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 2]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -165,7 +165,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 3]
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 3]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -221,7 +221,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 4]
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 4]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -277,7 +277,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 5]
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -320,6 +320,24 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
    EDNOTE: Discuss side-channels for Dilithium. .
 
+   Dilithium has been designed with an aim to provide side-channel
+   resilience by eliminating the reliance on Gaussian sampling.  While
+   deliberate design decisions such as these can help to deliver a
+   greater ease of secure implementation - particularly against side-
+   channel attacks - it does not necessarily provide resistance to more
+   powerful attacks such as differential power analysis.  Some amount of
+   side-channel leakage has been demonstrated in certain parts of the
+   signing algorithm.
+
+
+
+
+
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 6]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    A fundamental security property also associated with digital
    signatures is non-repudiation.  Non-repudiation refers to the
    assurance that the owner of a signature key pair that was capable of
@@ -330,14 +348,6 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    exclusive ownership, message-bound signatures, and non-resignability.
    These properties are based tightly on the assumed collision
    resistance of the hash function used (in this case SHAKE-256).
-
-
-
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 6]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    Exclusive ownership is a property in which a signature sigma uniquely
    determines the public key and message for which it is valid.
    Message-bound signatures is the property that a valid signature
@@ -375,6 +385,15 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               (CRL) Profile", RFC 3279, DOI 10.17487/RFC3279, April
               2002, <https://www.rfc-editor.org/info/rfc3279>.
 
+
+
+
+
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -385,14 +404,6 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
               DOI 10.17487/RFC5912, June 2010,
               <https://www.rfc-editor.org/info/rfc5912>.
-
-
-
-
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 7]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
 
 8.2.  Informative References
 
@@ -431,6 +442,14 @@ Appendix B.  Appendix
    of security strengths offered by existing NIST standards in symmetric
    cryptography, which NIST expects to offer significant resistance to
    quantum cryptanalysis.  These categories describe any attack that
+
+
+
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    breaks the relevant security definition that must require
    computational resources comparable to or greater than those required
    for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
@@ -439,16 +458,6 @@ Appendix B.  Appendix
    192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit
    hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
    block cipher with a 256-bit key (e.g., AES 256).
-
-
-
-
-
-
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 8]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
 
    The parameter sets defined for NIST security levels 2, 3 and 5 are
    listed in the Figure 1, along with the resulting public key and
@@ -492,13 +501,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis     Expires 14 August 2022                 [Page 9]
+Massimo & Kampanakis     Expires 15 August 2022                 [Page 9]
