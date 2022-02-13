@@ -106,19 +106,7 @@
       <!-- EDNOTE: Could put in the classic introduction to why we need PQ crypto, but I don't think it is needed, we don't need to convince people why PQ is important here, nist has standardized it and we are just defining how to use it-->
 
       <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document updates <xref target="RFC3279" format="default"></xref> and will specify the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates using object identifiers algorithms assigned by NIST.</t>
-
-        <t>Signatures are used in a number of different ASN.1 structures.
-        As shown in the ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/> 
-	below, in an X.509 certificate, a signature is encoded with an 
-	algorithm identifier in the signatureAlgorithm attribute and 
-	a signatureValue attribute that contains the actual signature.</t>
-        <sourcecode type="asn.1" markers="false" pn="section-4.1-2">
-   Certificate  ::=  SEQUENCE  {
-      tbsCertificate       TBSCertificate,
-      signatureAlgorithm   AlgorithmIdentifier,
-      signatureValue       BIT STRING  }
-        </sourcecode>
-
+      
       <t>This specification defines additional content for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates <xref target="RFC3279" format="default"></xref> and CRLs <xref target="RFC5280" format="default"></xref>. It describes the encoding of digital signatures and public generated with quantum-resistant signature algorithm Dilithium.</t>
 
       <!-- [PK]: No digests here since they are included in the PQ sig. -->
@@ -202,9 +190,24 @@
 
         <section numbered="true" toc="default">
          <name>Dilithium Signatures in PKIX</name>
+        
          <t>Dilithium is a digital signature scheme built upon the Fiat-Shamir with aborts framework <xref target="Fiat-Shamir" format="default"></xref>. The security is based upon the hardness of lattice problems over module lattices <xref target="Dilithium" format="default"></xref>. Dilithium provides 3 parameter sets for the security categories 2,3 and 5.</t>
 
-        <t>The identifiers defined in <xref target="oids" format="default"/> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate and the signature field in the sequence TBSCertificate in X.509 <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>. The parameters of these signature algorithms are absent, as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
+          <t>Signatures are used in a number of different ASN.1 structures.
+          As shown in the ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/> 
+	below, in an X.509 certificate, a signature is encoded with an 
+	algorithm identifier in the signatureAlgorithm attribute and 
+	a signatureValue attribute that contains the actual signature.</t>
+        <sourcecode type="asn.1" markers="false" pn="section-4.1-2">
+   Certificate  ::=  SEQUENCE  {
+      tbsCertificate       TBSCertificate,
+      signatureAlgorithm   AlgorithmIdentifier,
+      signatureValue       BIT STRING  }
+        </sourcecode>
+
+        <t>The identifiers defined in <xref target="oids" format="default"/> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate and the signature field in the sequence TBSCertificate in X.509 <xref target="RFC5280" format="default"/>. The parameters of these signature algorithms are absent, as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
+        
+        <t>The signatureValue field contains the corresponding Dilithium signature computed upon the ASN.1 DER encoded tbsCertificate <xref target="RFC5280" format="default"/>.</t>
         
         <t>Conforming Certification Authority (CA) implementations <bcp14>MUST</bcp14> specify the algorithms explicitly by using the OIDs specified in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/> when encoding Dilithium signatures in certificates and CRLs. Conforming client implementations that process certificates and CRLs using Dilithium <bcp14>MUST</bcp14> recognize the corresponding OIDs. Encoding rules for Dilithium signature values are specified <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
 
