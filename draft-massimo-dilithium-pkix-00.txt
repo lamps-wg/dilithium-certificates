@@ -89,7 +89,7 @@ Table of Contents
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   8
    Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
    Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .   9
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
@@ -338,28 +338,6 @@ Massimo & Kampanakis     Expires 16 August 2022                 [Page 6]
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
-     --
-     -- Signature Values
-     --
-
-     -- Dilithium
-
-     -- z is the bit packed representation of the signature
-     -- vector. z is 32l(1 + log gamma1) bytes, where l is
-     -- the rank of the vector over R_q and gamma1 is the
-     -- bound on size of the coefficients used for signing.
-     -- The hint h is an encoded vector of bits which requires
-     -- omega + k bytes where omega is the number of ones
-     -- in h and k is the rank of the vector over R_q.
-     -- The challenge c is 32 bytes.
-     Dilithium-Sig-Value ::= SEQUENCE {
-        z  OCTET STRING,
-        h  OCTET STRING,
-        c  OCTET STRING
-      }
-
-     END
-
 6.  IANA Considerations
 
    Extensions in certificates and CRLs are identified using object
@@ -385,14 +363,14 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
    EDNOTE: Discuss side-channels for Dilithium. .
 
-
-
-
-
-Massimo & Kampanakis     Expires 16 August 2022                 [Page 7]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
+   Dilithium has been designed with an aim to provide side-channel
+   resilience by eliminating the reliance on Gaussian sampling.  While
+   deliberate design decisions such as these can help to deliver a
+   greater ease of secure implementation - particularly against side-
+   channel attacks - it does not necessarily provide resistance to more
+   powerful attacks such as differential power analysis.  Some amount of
+   side-channel leakage has been demonstrated in certain parts of the
+   signing algorithm.
 
    A fundamental security property also associated with digital
    signatures is non-repudiation.  Non-repudiation refers to the
@@ -408,6 +386,14 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    determines the public key and message for which it is valid.
    Message-bound signatures is the property that a valid signature
    uniquely determines the message for which it is valid, but not
+
+
+
+Massimo & Kampanakis     Expires 16 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    necessarily the public key.  Non-resignability is the property in
    which one cannot produce a valid signature under another key given a
    signature sigma for some unknown message m.  These properties are not
@@ -441,15 +427,6 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               (CRL) Profile", RFC 3279, DOI 10.17487/RFC3279, April
               2002, <https://www.rfc-editor.org/info/rfc3279>.
 
-
-
-
-
-Massimo & Kampanakis     Expires 16 August 2022                 [Page 8]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -465,6 +442,14 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
    [CDFFJ21]  Cremers, Cas., Düzlü, S., Fiedler, R., Fischlin, M., and
               C. Janson, "BUFFing signature schemes beyond
+
+
+
+Massimo & Kampanakis     Expires 16 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
               unforgeability and the case of post-quantum signatures",
               In Proceedings of the 42nd IEEE Symposium on Security and
               Privacy, 2021, <https://eprint.iacr.org/2020/1525.pdf>.
@@ -498,14 +483,6 @@ Appendix B.  Appendix
    of security strengths offered by existing NIST standards in symmetric
    cryptography, which NIST expects to offer significant resistance to
    quantum cryptanalysis.  These categories describe any attack that
-
-
-
-Massimo & Kampanakis     Expires 16 August 2022                 [Page 9]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    breaks the relevant security definition that must require
    computational resources comparable to or greater than those required
    for: Level 1 - key search on a block cipher with a 128-bit key (e.g.,
@@ -518,6 +495,16 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    The parameter sets defined for NIST security levels 2, 3 and 5 are
    listed in the Figure 1, along with the resulting public key and
    private key sizes in bytes.
+
+
+
+
+
+
+Massimo & Kampanakis     Expires 16 August 2022                 [Page 9]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
    |==========+=====+=========+=======+=====+========+========+=========|
    | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private |
@@ -544,6 +531,19 @@ Authors' Addresses
    United States of America
 
    Email: kpanos@amazon.com
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
