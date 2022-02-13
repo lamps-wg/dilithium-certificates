@@ -138,6 +138,19 @@
       <name>Identifiers</name>
 
       <t>This specification uses object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.</t>
+      
+      <t>The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows: </t>
+
+       <sourcecode type="asn.1">
+   AlgorithmIdentifier  ::=  SEQUENCE  {
+       algorithm   OBJECT IDENTIFIER,
+       parameters  ANY DEFINED BY algorithm OPTIONAL
+   }
+       </sourcecode>
+       
+       <aside>  
+       <t>NOTE: The above syntax is from <xref target="RFC5280"/> and matches the version used therein, i.e., the 1988 ASN.1 syntax. See <xref target="RFC5912"/> for ASN.1 copmatible with the 2015 ASN.1 syntax.</t>
+       </aside>
 
       <t>The OIDs are:</t>
       <sourcecode type="asn.1" markers="false" pn="section2-1">
