@@ -230,7 +230,16 @@
     
         <section anchor="dilithiumpublickey" numbered="true" toc="default">
          <name>Dilithium Public Keys in PKIX</name>
-         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
+         
+         <t>In the X.509 certificate, the subjectPublicKeyInfo field has the SubjectPublicKeyInfo type, which has the following ASN.1 syntax: </t>
+        <sourcecode type="asn.1">
+  SubjectPublicKeyInfo  ::=  SEQUENCE  {
+      algorithm         AlgorithmIdentifier,
+      subjectPublicKey  BIT STRING
+  } 
+  </sourcecode>
+         
+         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce rho using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. --> 
          <t>The Dilithium public key <bcp14>MUST</bcp14> be encoded using the ASN.1 type DilithiumPublicKey:</t>
          
                 <!---<ul spacing="compact">
