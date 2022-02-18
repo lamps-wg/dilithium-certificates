@@ -5,8 +5,8 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Updates: RFC3279 (if approved)                                       AWS
-Intended status: Experimental                           17 February 2022
-Expires: 21 August 2022
+Intended status: Experimental                           18 February 2022
+Expires: 22 August 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 1]
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 1]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -63,7 +63,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2022.
+   This Internet-Draft will expire on 22 August 2022.
 
 Copyright Notice
 
@@ -92,7 +92,7 @@ Table of Contents
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
      8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  10
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .   9
    Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  10
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 2]
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 2]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -165,7 +165,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 3]
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 3]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -221,7 +221,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 4]
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 4]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -277,7 +277,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 5]
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 5]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -333,7 +333,7 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 6]
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 6]
 
 Internet-Draft        Dilithium Signatures in X.509        February 2022
 
@@ -361,38 +361,23 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    EDNOTE: Discuss implications of not hash-then-sign.  Implications in
    performance too.
 
-   Within the hash-then-sign paradigm, hash functions are used in part
-   as a domain restrictor over the message to be signed.  However, by
-   pre-hashing, the onus of resistance to forgeries becomes heavily
-   reliant on the collision-resistance of the hash function in use.  As
-   well as the security goal of preventing existential forgeries, the
-   hash-then-sign paradigm also has the ability to improve performance -
-   by reducing the size of signed messages.  As a corollary, hashing
-   remains mandatory even for short messages and assigns this
-   computational requirement onto the verifier.  This makes the
-   performance of hash-then-sign schemes more consistent, but not
+   Within the hash-then-sign paradigm, hash functions are used as a
+   domain restrictor over the message to be signed.  By pre-hashing, the
+   onus of resistance to existential forgeries becomes heavily reliant
+   on the collision-resistance of the hash function in use.  As well as
+   this security goal, the hash-then-sign paradigm also has the ability
+   to improve performance by reducing the size of signed messages.  As a
+   corollary, hashing remains mandatory even for short messages and
+   assigns a computational requirement onto the verifier.  This makes
+   the performance of hash-then-sign schemes more consistent, but not
    necessarily more efficient.  Dilithium diverges from the hash-then-
-   sign paradigm by ...
+   sign paradigm by ... . However, due to the fact that Dilithium
+   signatures may require the signing proceedure to be repeated several
+   times for a signature to be produced, Dilithium implementations can
+   make use of pre-hashing the message to prevent rehashing with each
+   attempt.
 
    EDNOTE: Discuss side-channels for Dilithium. .
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 7]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
 
    Dilithium has been designed with an aim to provide side-channel
    resilience by eliminating a reliance on Gaussian sampling.  While
@@ -401,6 +386,14 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
    channel attacks - it does not necessarily provide resistance to more
    powerful attacks such as differential power analysis.  Some amount of
    side-channel leakage has been demonstrated in parts of the signing
+
+
+
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 7]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
+
    algorithm (specifically the bit-unpacking function), from which a
    demonstration of key recovery has been made over a large sample of
    signatures.  Masking countermeasures exist for Dilithium, but come
@@ -442,18 +435,20 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               post-quantum-cryptography-standardization/Call-for-
               Proposals>.
 
-
-
-
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 8]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 8]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
    [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
               Identifiers for the Internet X.509 Public Key
@@ -495,20 +490,21 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
               Information Security, 2009, <https://www.iacr.org/archive/
               asiacrypt2009/59120596/59120596.pdf>.
 
-
-
-
-
-
-
-Massimo & Kampanakis     Expires 21 August 2022                 [Page 9]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
 Appendix A.  Acknowledgements
 
    We would like to thank ... for their insightful comments.
+
+
+
+
+
+
+
+
+Massimo & Kampanakis     Expires 22 August 2022                 [Page 9]
+
+Internet-Draft        Dilithium Signatures in X.509        February 2022
+
 
 Appendix B.  Appendix
 
@@ -553,15 +549,6 @@ Authors' Addresses
    Email: jakemas@amazon.com
 
 
-
-
-
-
-Massimo & Kampanakis     Expires 21 August 2022                [Page 10]
-
-Internet-Draft        Dilithium Signatures in X.509        February 2022
-
-
    Panos Kampanakis
    AWS
    United States of America
@@ -570,47 +557,4 @@ Internet-Draft        Dilithium Signatures in X.509        February 2022
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo & Kampanakis     Expires 21 August 2022                [Page 11]
+Massimo & Kampanakis     Expires 22 August 2022                [Page 10]
