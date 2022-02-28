@@ -400,9 +400,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     pk-TBD-TBD,
     ...
   }
-  
-  </sourcecode> 
-  <sourcecode type="asn.1" markers="false" pn="section-6.1">
+  <!--</sourcecode> 
+  <sourcecode type="asn.1" markers="false" pn="section6-1"> -->
   -- The hashAlgorithm is mda-shake256
   -- The XOF seed rho is 32 bytes
   -- The vector t1 is 320*k bytes
@@ -427,7 +426,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
    This is included in https://www.rfc-editor.org/rfc/rfc5912.txt page 33. I feel like this may be nice to have, as this signature structure is different that that or RSA or ECDSA.
     -->  
   <!--
-  <sourcecode type="asn.1" markers="false" pn="section-6.2">  
+  <sourcecode type="asn.1" markers="false">  
  
    Signature Values
   
@@ -458,7 +457,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <name>IANA Considerations</name>
       <t>Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these arcs is to be determined.</t>
       
-      <t>One object identifier for the ASN.1 module in the Appendix.</t>
+      <!--<t>One object identifier for the ASN.1 module in the Appendix.</t> [JM] commenting this out, as right now there isn't.--> 
     </section>  <!-- End of IANA Considerations Section -->
     
     <section anchor="Security" numbered="true" toc="default">
@@ -472,7 +471,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <!--<t>TODO: Add discussion about digests in classical signatures hash-then-sign and how that does not apply to PQ like Dilithium. And how committing to a message is additional security. Reference NIST discussion from Peiker and Makku.</t>-->
       <t>EDNOTE: Discuss implications of not hash-then-sign. Implications in performance too.</t>
       <!-- [JM] Small note on hash-then-sign. Dilithium (see fig 4 line 10 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf) " Our full scheme in Fig. 4 also makes use of basic optimizations such as pre-hashing the message M so as to not rehash it with every signing attempt." -->
-      <t>Within the hash-then-sign paradigm, hash functions are used as a domain restrictor over the message to be signed. By pre-hashing, the onus of resistance to existential forgeries becomes heavily reliant on the collision-resistance of the hash function in use. As well as this security goal, the hash-then-sign paradigm also has the ability to improve performance by reducing the size of signed messages. As a corollary, hashing remains mandatory even for short messages and assigns a computational requirement onto the verifier. This makes the performance of hash-then-sign schemes more consistent, but not necessarily more efficient. Dilithium diverges from the hash-then-sign paradigm by … <!--work in progress-->. However, due to the fact that Dilithium signatures may require the signing proceedure to be repeated several times for a signature to be produced, Dilithium implementations can make use of pre-hashing the message to prevent rehashing with each attempt.</t>
+      <t>Within the hash-then-sign paradigm, hash functions are used as a domain restrictor over the message to be signed. By pre-hashing, the onus of resistance to existential forgeries becomes heavily reliant on the collision-resistance of the hash function in use. As well as this security goal, the hash-then-sign paradigm also has the ability to improve performance by reducing the size of signed messages. As a corollary, hashing remains mandatory even for short messages and assigns a further computational requirement onto the verifier. This makes the performance of hash-then-sign schemes more consistent, but not necessarily more efficient. Dilithium diverges from the hash-then-sign paradigm by hashing the message during the signing procedure (at the point in which the challenge polynomial). However, due to the fact that Dilithium signatures may require the signing procedure to be repeated several times for a signature to be produced, Dilithium implementations can make use of pre-hashing the message to prevent rehashing with each attempt.</t>
 
       <t>EDNOTE: Discuss side-channels for Dilithium. .</t>
       <t>Dilithium has been designed with an aim to provide side-channel resilience by eliminating a reliance on Gaussian sampling. While deliberate design decisions such as these can help to deliver a greater ease of secure implementation - particularly against side-channel attacks - it does not necessarily provide resistance to more powerful attacks such as differential power analysis. Some amount of side-channel leakage has been demonstrated in parts of the signing algorithm (specifically the bit-unpacking function), from which a demonstration of key recovery has been made over a large sample of signatures. Masking countermeasures exist for Dilithium<!--[MGTF19]-->, but come with a performance overhead.</t>
