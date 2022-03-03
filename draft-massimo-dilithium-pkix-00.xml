@@ -105,7 +105,7 @@
       <name>Introduction</name>
       <!-- EDNOTE: Could put in the classic introduction to why we need PQ crypto, but I don't think it is needed, we don't need to convince people why PQ is important here, nist has standardized it and we are just defining how to use it-->
 
-      <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists using object identifiers algorithms assigned by NIST.</t>
+      <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists (CRLs) using object identifiers algorithms assigned by NIST.</t>
       
       <t>This document specifies the conventions for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates and CRLs <xref target="RFC5280" format="default"></xref> like <xref target="RFC3279" format="default"></xref> did for classic cryptography and <xref target="RFC5480" format="default"></xref> did for elliptic curve cryptography. It describes the encoding of digital signatures and public generated with quantum-resistant signature algorithm Dilithium.</t>
 
@@ -462,7 +462,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>The Security Considerations section of <xref target="RFC5480" format="default"></xref> applies to this specification as well.</t>
+      <t>The Security Considerations section of <xref target="RFC5280" format="default"></xref> applies to this specification as well.</t>
 
       <!-- [JM] how deep should we go on EUF-CMA security? I don't really want to get into "games" here -->
       <!-- [PK] Not necessary. Just this paragraph is fine, if that.  -->
