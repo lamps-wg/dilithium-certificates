@@ -13,7 +13,7 @@
       docName="draft-massimo-dilithium-pkix-00"
       ipr="trust200902"
       obsoletes=""
-      updates="RFC3279"
+      updates=""
       submissionType="IETF"
       xml:lang="en"
       tocInclude="true"
@@ -89,7 +89,7 @@
         keywords will be used for the search engine. -->
 
    <abstract>
-      <t>Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document updates the "Algorithms and Identifiers for the Internet X.509 Public Key   Infrastructure Certificate and Certificate Revocation List (CRL) Profile" [RFC 3279] and describes the conventions for using Dilithium quantum-resistant signatures in Internet X.509 certificates and revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, and private key are also described.</t>
+      <t>Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document describes the conventions for using Dilithium quantum-resistant signatures in Internet X.509 certificates and certifiate revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, and private key are also described.</t>
     </abstract>
 
     <note>
@@ -105,9 +105,9 @@
       <name>Introduction</name>
       <!-- EDNOTE: Could put in the classic introduction to why we need PQ crypto, but I don't think it is needed, we don't need to convince people why PQ is important here, nist has standardized it and we are just defining how to use it-->
 
-      <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document updates <xref target="RFC3279" format="default"></xref> and will specify the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates using object identifiers algorithms assigned by NIST.</t>
+      <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public-key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists using object identifiers algorithms assigned by NIST.</t>
       
-      <t>This specification defines additional content for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates <xref target="RFC3279" format="default"></xref> and CRLs <xref target="RFC5280" format="default"></xref>. It describes the encoding of digital signatures and public generated with quantum-resistant signature algorithm Dilithium.</t>
+      <t>This document specifies the conventions for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates and CRLs <xref target="RFC5280" format="default"></xref> like <xref target="RFC3279" format="default"></xref> did for classic cryptography and <xref target="RFC5480" format="default"></xref> did for elliptic curve cryptography. It describes the encoding of digital signatures and public generated with quantum-resistant signature algorithm Dilithium.</t>
 
       <!-- [PK]: No digests here since they are included in the PQ sig. -->
       <!-- <t>This document also identifies additional one-way hash functions for use in the generation of quantum-safe digital signatures. These algorithms are used in conjunction with digital signature algorithms, and supplement those described within RFC 3279, RFC 5758, and RFC 8692.</t>-->
@@ -462,7 +462,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
-      <t>This document updates RFC 3279 <xref target="RFC3279" format="default"></xref>. The Security Considerations section of that document therefore applies to this specification as well.</t>
+      <t>The Security Considerations section of <xref target="RFC5480" format="default"></xref> applies to this specification as well.</t>
 
       <!-- [JM] how deep should we go on EUF-CMA security? I don't really want to get into "games" here -->
       <!-- [PK] Not necessary. Just this paragraph is fine, if that.  -->
@@ -508,11 +508,9 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         <name>Normative References</name>
           <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
           <?rfc include="reference.RFC.2119.xml"?>
-          <?rfc include="reference.RFC.3279.xml"?>
           <!--<?rfc include="reference.RFC.4055.xml"?>-->
           <?rfc include="reference.RFC.5280.xml"?>
           <?rfc include="reference.RFC.5912.xml"?>
-          <!--<?rfc include="reference.RFC.5480.xml"?>-->
 
      <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/Call-for-Proposals">
           <front>
@@ -538,6 +536,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       </references>
       <references>
         <name>Informative References</name>
+          <?rfc include="reference.RFC.3279.xml"?>
+          <?rfc include="reference.RFC.5480.xml"?>
 
      <reference anchor="Dilithium" target="https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf">
           <front>
