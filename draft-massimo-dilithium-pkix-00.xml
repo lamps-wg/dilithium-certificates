@@ -205,7 +205,18 @@
       signatureValue       BIT STRING  }
         </sourcecode>
 
-        <t>The identifiers defined in <xref target="oids" format="default"/> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate and the signature field in the sequence TBSCertificate in X.509 <xref target="RFC5280" format="default"/>. The parameters of these signature algorithms are absent, as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
+          <t>Signatures are also used in the ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>
+        below, in a X.509 CRL, a signature is encoded with an
+        algorithm identifier in the signatureAlgorithm attribute and
+        a signatureValue attribute that contains the actual signature.</t>
+        <sourcecode type="asn.1" markers="false" pn="section-4.1-3">
+   CertificateList  ::=  SEQUENCE  {
+      tbsCertificate       TBSCertList,
+      signatureAlgorithm   AlgorithmIdentifier,
+      signatureValue       BIT STRING  }
+        </sourcecode>
+
+        <t>The identifiers defined in <xref target="oids" format="default"/> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate/CertificateList and the signature field in the sequence TBSCertificate/TBSCertList in certificates CRLs, respectively,<xref target="RFC5280" format="default"/>. The parameters of these signature algorithms are absent, as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
         
         <t>The signatureValue field contains the corresponding Dilithium signature computed upon the ASN.1 DER encoded tbsCertificate <xref target="RFC5280" format="default"/>.</t>
         
