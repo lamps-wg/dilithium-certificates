@@ -65,6 +65,13 @@
         <!-- uri and facsimile elements may also be added -->
      </address>
     </author>
+    <author fullname="Sean Turner" initials="S." surname="Turner">
+      <organization>sn3rd</organization>
+      <address>
+        <email>sean@ssn3rd.com</email>
+        <!-- uri and facsimile elements may also be added -->
+     </address>
+    </author>
     <date year="2022"/>
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
         in the current day for you. If only the current year is specified, xml2rfc will fill 
