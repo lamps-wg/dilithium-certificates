@@ -115,8 +115,9 @@
       <section numbered="true" toc="default">
         <name>Requirements Language</name>
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-       "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-       document are to be interpreted as described in <xref target="RFC2119" format="default">RFC 2119</xref>.</t>
+       "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+       document are to be interpreted as described in BCP 14 <xref target="RFC2119" format="default">RFC 2119</xref>
+       <xref target="RFC8174" /> when, and only when, they appear in all capitals, as shown here.</t>
       </section> <!-- End of Requirements Language Section -->
 
     </section> <!-- End of Introduction Section -->
@@ -525,6 +526,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
           <?rfc include="reference.RFC.5280.xml"?>
           <?rfc include="reference.RFC.5912.xml"?>
           <!--<?rfc include="reference.RFC.5480.xml"?>-->
+          <?rfc include="reference.RFC.8174.xml"?>
 
      <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/Call-for-Proposals">
           <front>
