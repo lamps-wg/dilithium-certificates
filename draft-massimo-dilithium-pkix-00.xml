@@ -457,7 +457,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       <name>IANA Considerations</name>
       <t>Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these arcs is to be determined.</t>
       
-      <!--<t>One object identifier for the ASN.1 module in the Appendix.</t> [JM] commenting this out, as right now there isn't.--> 
+      <t>IANA is requested to register the id-mod-pkix1-PQ-algorithms OID for the ASN.1 module identifier found in Section 5 in the "SMI Security for PKIX Module Identifier" registry.</t>
     </section>  <!-- End of IANA Considerations Section -->
     
     <section anchor="Security" numbered="true" toc="default">
