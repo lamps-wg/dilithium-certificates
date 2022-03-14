@@ -419,8 +419,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     pk-TBD-TBD,
     ...
   }
-  <!--</sourcecode> 
-  <sourcecode type="asn.1" markers="false" pn="section6-1"> -->
+
   -- The hashAlgorithm is mda-shake256
   -- The XOF seed rho is 32 bytes
   -- The vector t1 is 320*k bytes
@@ -433,39 +432,6 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
                     keyCertSign, cRLSign }
     PRIVATE-KEY DilithiumPrivateKey
   }
-  </sourcecode> 
-
-    <!-- [JM] Do we need to add details of the signature values, as there is no where currently where we discuss the format
-    for example in RFC5480 https://datatracker.ietf.org/doc/html/rfc5480 they define:
-
-   DSA-Sig-Value ::= SEQUENCE {
-     r  INTEGER,
-     s  INTEGER
-   }
-   This is included in https://www.rfc-editor.org/rfc/rfc5912.txt page 33. I feel like this may be nice to have, as this signature structure is different that that or RSA or ECDSA.
-    -->  
-  <!--
-  <sourcecode type="asn.1" markers="false">  
- 
-   Signature Values
-  
-
-   Dilithium
-
-   z is the bit packed representation of the signature
-   vector. z is 32l(1 + log gamma1) bytes, where l is  
-   the rank of the vector over R_q and gamma1 is the   
-   bound on size of the coefficients used for signing.
-   The hint h is an encoded vector of bits which requires 
-   omega + k bytes where omega is the number of ones 
-   in h and k is the rank of the vector over R_q.
-   The challenge c is 32 bytes.
-  Dilithium-Sig-Value ::= SEQUENCE {
-     z  OCTET STRING,
-     h  OCTET STRING,
-     c  OCTET STRING
-   }
-   -->
 
   END
   </sourcecode> 
