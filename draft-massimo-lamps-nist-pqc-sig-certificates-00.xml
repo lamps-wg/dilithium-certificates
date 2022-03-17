@@ -10,7 +10,7 @@
       xmlns:xi="http://www.w3.org/2001/XInclude"
       category="std"
       consensus="true"
-      docName="draft-massimo-dilithium-pkix-00"
+      docName="draft-massimo-lamps-nist-pqc-sig-certificates-00"
       ipr="trust200902"
       obsoletes=""
       updates=""
@@ -33,7 +33,7 @@
  <front>
     <!-- The abbreviated title is used in the page header - it is only necessary if the 
         full title is longer than 39 characters -->
-   <title abbrev="Dilithium Signatures in X.509">Algorithms and Identifiers for Post-Quantum Algorithms <br/> in the Internet X.509 Public Key Infrastructure</title>
+   <title abbrev="PQC SIG for Certificates">Algorithms and Identifiers for Post-Quantum Algorithms <br/> in the Internet X.509 Public Key Infrastructure</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-massimo-lamps-pq-pkix-00"/>
     <!-- add 'role="editor"' below for the editors if appropriate -->
 
