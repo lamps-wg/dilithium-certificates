@@ -5,14 +5,14 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 15 September 2022                                     S. Turner
+Expires: 18 September 2022                                     S. Turner
                                                                    sn3rd
-                                                           14 March 2022
+                                                           17 March 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
             in the Internet X.509 Public Key Infrastructure
-                    draft-massimo-dilithium-pkix-00
+            draft-massimo-lamps-nist-pqc-sig-certificates-00
 
 Abstract
 
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 1]
+Massimo, et al.         Expires 18 September 2022               [Page 1]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
-   This Internet-Draft will expire on 15 September 2022.
+   This Internet-Draft will expire on 18 September 2022.
 
 Copyright Notice
 
@@ -95,7 +95,7 @@ Table of Contents
 
    The US National Institute of Standards and Technology (NIST) Post-
    Quantum Cryptography (PQC) effort has defined quantum-resistant
-   public-key cryptographic algorithm standards [NIST-PQC].  This
+   public key cryptographic algorithm standards [NIST-PQC].  This
    document specifies the use of these Post-Quantum public key
    algorithms with Public Key Infrastructure X.509 (PKIX) certificates
    and Certificate Revocation Lists (CRLs) using object identifiers
@@ -109,17 +109,17 @@ Table of Contents
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 2]
+Massimo, et al.         Expires 18 September 2022               [Page 2]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
-   This document specifies the conventions for the signatureAlgorithm,
+   This specification includes conventions for the signatureAlgorithm,
    signatureValue, signature, and subjectPublicKeyInfo fields within
-   Internet X.509 certificates and CRLs [RFC5280] like [RFC3279] did for
-   classic cryptography and [RFC5480] did for elliptic curve
+   Internet X.509 certificates and CRLs [RFC5280], like [RFC3279] did
+   for classic cryptography and [RFC5480] did for elliptic curve
    cryptography.  It describes the encoding of digital signatures and
-   public generated with quantum-resistant signature algorithm
+   public keys generated with quantum-resistant signature algorithm
    Dilithium.
 
 1.1.  Requirements Language
@@ -127,14 +127,13 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 RFC 2119 [RFC2119] [RFC8174] when, and only when, they appear in
-   all capitals, as shown here.
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
 2.  Identifiers
 
-   This specification uses object identifiers for the new algorithms
-   that are assigned by NIST, and will use placeholders until these are
-   released.
+   This specification uses placeholders for object identifiers until the
+   identifiers for the new algorithms are assigned by NIST.
 
    The AlgorithmIdentifier type, which is included herein for
    convenience, is defined as follows:
@@ -150,9 +149,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
    The OIDs are:
 
-      id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+      id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
                country(16) us(840) organization(1) gov(101) csor(3)
-               nistAlgorithm(4) hashAlgs(2) TBD }
+               nistAlgorithm(4) sigAlgs(3) TBD }
 
    The contents of the parameters component for each algorithm are
    absent.
@@ -165,18 +164,19 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 3]
+
+Massimo, et al.         Expires 18 September 2022               [Page 3]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
 3.  Dilithium Signatures in PKIX
 
-   Dilithium is a digital signature scheme built upon the Fiat-Shamir
-   with aborts framework [Fiat-Shamir].  The security is based upon the
+   Dilithium is a digital signature scheme built upon the Fiat-Shamir-
+   with-aborts framework [Fiat-Shamir].  The security is based upon the
    hardness of lattice problems over module lattices [Dilithium].
-   Dilithium provides 3 parameter sets for the security categories 2, 3
-   and 5.
+   Dilithium provides three parameter sets for the security categories
+   2, 3 and 5.
 
    Signatures are used in a number of different ASN.1 structures.  As
    shown in the ASN.1 representation from [RFC5280] below, in an X.509
@@ -202,9 +202,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
    The identifiers defined in Section 2 can be used as the
    AlgorithmIdentifier in the signatureAlgorithm field in the sequence
    Certificate/CertificateList and the signature field in the sequence
-   TBSCertificate/TBSCertList in certificates CRLs,
-   respectively,[RFC5280].  The parameters of these signature algorithms
-   are absent, as explained in Section 2.
+   TBSCertificate/TBSCertList in certificates CRLs, respectively,
+   [RFC5280].  The parameters of these signature algorithms are absent,
+   as explained in Section 2.
 
    The signatureValue field contains the corresponding Dilithium
    signature computed upon the ASN.1 DER encoded tbsCertificate
@@ -221,9 +221,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 4]
+Massimo, et al.         Expires 18 September 2022               [Page 4]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
    When the id-dilithiumTBD-shake256 identifier appears in the algorithm
@@ -277,20 +277,20 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 5]
+Massimo, et al.         Expires 18 September 2022               [Page 5]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
    Requirements about the keyUsage extension bits defined in [RFC5280]
    still apply.
 
    Conforming CA implementations MUST specify the X.509 public key
-   algorithm explicitly by using the OIDs specified in this
-   specification when Dilithium public keys in certificates and CRLs.
-   Conforming client implementations that process Dilithium public keys
-   when processing certificates and CRLs MUST recognize the
-   corresponding OIDs.
+   algorithm explicitly by using the OIDs specified in Section 2 when
+   using Dilithium public keys in certificates and CRLs.  Conforming
+   client implementations that process Dilithium public keys when
+   processing certificates and CRLs MUST recognize the corresponding
+   OIDs.
 
 5.  ASN.1 Module
 
@@ -333,9 +333,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 6]
+Massimo, et al.         Expires 18 September 2022               [Page 6]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
    [ EDNOTE: Add ASN.1 here ]
@@ -365,7 +365,7 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
      --
      PublicKeys PUBLIC-KEY ::= {
        -- This expands PublicKeys from RFC 5912
-       pk-dilithiumTBD-shake256 |
+       pk-dilithiumTBD |
        pk-TBD-TBD,
        ...
      }
@@ -374,8 +374,8 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
      -- The XOF seed rho is 32 bytes
      -- The vector t1 is 320*k bytes
      -- These are encoded as a single string
-     pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
-       IDENTIFIER id-dilithiumTBD-shake256
+     pk-dilithiumTBD PUBLIC-KEY ::= {
+       IDENTIFIER id-dilithiumTBD
        KEY DilithiumPublicKey
        PARAMS ARE absent
        CERT-KEY-USAGE { nonRepudiation, digitalSignature,
@@ -389,9 +389,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 7]
+Massimo, et al.         Expires 18 September 2022               [Page 7]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
 6.  IANA Considerations
@@ -437,25 +437,25 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
    EDNOTE: Discuss side-channels for Dilithium. .
 
-   Dilithium has been designed with an aim to provide side-channel
-   resilience by eliminating a reliance on Gaussian sampling.  While
-   deliberate design decisions such as these can help to deliver a
-   greater ease of secure implementation - particularly against side-
-   channel attacks - it does not necessarily provide resistance to more
+   Dilithium has been designed to provide side-channel resilience by
+   eliminating a reliance on Gaussian sampling.  While deliberate design
+   decisions such as these can help to deliver a greater ease of secure
+   implementation - particularly against side-channel attacks - it does
+   not necessarily provide resistance to more powerful attacks such as
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 8]
+Massimo, et al.         Expires 18 September 2022               [Page 8]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
-   powerful attacks such as differential power analysis.  Some amount of
-   side-channel leakage has been demonstrated in parts of the signing
-   algorithm (specifically the bit-unpacking function), from which a
-   demonstration of key recovery has been made over a large sample of
-   signatures.  Masking countermeasures exist for Dilithium, but come
-   with a performance overhead.
+   differential power analysis.  Some amount of side-channel leakage has
+   been demonstrated in parts of the signing algorithm (specifically the
+   bit-unpacking function), from which a demonstration of key recovery
+   has been made over a large sample of signatures.  Masking
+   countermeasures exist for Dilithium, but come with a performance
+   overhead.
 
    A fundamental security property also associated with digital
    signatures is non-repudiation.  Non-repudiation refers to the
@@ -478,9 +478,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
    have led to a variety of attacks such as Duplicate-Signature Key
    Selection (DSKS) attacks , and attacks on the protocols for secure
    routing.  A full discussion of these properties in Dilithium can be
-   found at [CDFFJ21].  These properties are dependent in part, on
+   found at [CDFFJ21].  These properties are dependent, in part, on
    unambiguous public key serialization.  It for this reason the public
-   key structure defined in Section 4 are intentionally encoded as a
+   key structure defined in Section 4 is intentionally encoded as a
    single OCTET STRING.
 
 8.  References
@@ -501,9 +501,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022               [Page 9]
+Massimo, et al.         Expires 18 September 2022               [Page 9]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
@@ -557,9 +557,9 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022              [Page 10]
+Massimo, et al.         Expires 18 September 2022              [Page 10]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
 Appendix A.  Acknowledgements
@@ -613,9 +613,9 @@ Authors' Addresses
 
 
 
-Massimo, et al.         Expires 15 September 2022              [Page 11]
+Massimo, et al.         Expires 18 September 2022              [Page 11]
 
-Internet-Draft        Dilithium Signatures in X.509           March 2022
+Internet-Draft          PQC SIG for Certificates              March 2022
 
 
    Panos Kampanakis
@@ -669,4 +669,4 @@ Internet-Draft        Dilithium Signatures in X.509           March 2022
 
 
 
-Massimo, et al.         Expires 15 September 2022              [Page 12]
+Massimo, et al.         Expires 18 September 2022              [Page 12]
