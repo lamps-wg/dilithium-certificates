@@ -150,9 +150,9 @@
 
       <t>The OIDs are:</t>
       <sourcecode type="asn.1" markers="false" pn="section2-1">
-   id-dilithiumTBD-shake256 OBJECT IDENTIFIER ::= {
-            joint-iso-itu-t(2) country(16) us(840) organization(1)
-            gov(101) csor(3) nistAlgorithm(4) hashAlgs(2) TBD }
+   id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) 
+            country(16) us(840) organization(1) gov(101) csor(3) 
+            nistAlgorithm(4) sigAlgs(3) TBD }  
       </sourcecode>
       
        <t>The contents of the parameters component for each algorithm are absent.</t>
@@ -416,7 +416,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
   --
   PublicKeys PUBLIC-KEY ::= {
     -- This expands PublicKeys from RFC 5912
-    pk-dilithiumTBD-shake256 |
+    pk-dilithiumTBD |
     pk-TBD-TBD,
     ...
   }
@@ -425,8 +425,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
   -- The XOF seed rho is 32 bytes
   -- The vector t1 is 320*k bytes
   -- These are encoded as a single string
-  pk-dilithiumTBD-shake256 PUBLIC-KEY ::= {
-    IDENTIFIER id-dilithiumTBD-shake256
+  pk-dilithiumTBD PUBLIC-KEY ::= {
+    IDENTIFIER id-dilithiumTBD
     KEY DilithiumPublicKey
     PARAMS ARE absent
     CERT-KEY-USAGE { nonRepudiation, digitalSignature,
