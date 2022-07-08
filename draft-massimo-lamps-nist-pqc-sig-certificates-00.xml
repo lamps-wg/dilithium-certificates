@@ -175,8 +175,8 @@
       signatureValue       BIT STRING  }
         </sourcecode>
 
-          <t>Signatures are also used in the ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>
-        below, in a X.509 CRL, a signature is encoded with an
+          <t>Signatures are also used in the CRL list ASN.1 representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>
+        below. In a X.509 CRL, a signature is encoded with an
         algorithm identifier in the signatureAlgorithm attribute and
         a signatureValue attribute that contains the actual signature.</t>
         <sourcecode type="asn.1" markers="false" pn="section-4.1-3">
