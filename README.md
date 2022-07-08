@@ -9,5 +9,5 @@ Digital signatures are used within X.509 certificates, Certificate Revocation Li
 ## Compiling
 The file is compiled using xml2rfc available at https://pypi.org/project/xml2rfc/ using the command:
 ```
-xml2rfc draft-massimo-lamps-nist-pqc-sig-certificates-00.xml
+xml2rfc draft-massimo-lamps-pq-sig-certificates-00.xml
 ```
