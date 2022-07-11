@@ -315,7 +315,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     <!-- [PK] In the other drafts that update RFC3279 I did not see them including a Private Key format for any of the algorithms. Do we need a private key section for Dilithium? Encoding private keys is useful to the signer, but does this specification need to define it? Usually these would be defined elsewhere. Commenting Private Key section for now, and I will let JK bring it back if he thinks it should be there.  -->     
         <section numbered="true" toc="default">
          <name>Dilithium Private Keys</name>
-         <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the PrivateKeyInfo structure.</t>
+         <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the DilithiumPrivateKey structure.</t>
          <t>The ASN.1 encoding for a Dilithium private key is as follows:</t>
       <sourcecode type="asn.1" markers="false" pn="section-7">
   DilithiumPrivateKey ::= SEQUENCE {
