@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 9 January 2023                                        S. Turner
+Expires: 26 January 2023                                       S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                             8 July 2022
+                                                            25 July 2022
 
 
          Algorithms and Identifiers for Post-Quantum Algorithms
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 1]
+Massimo, et al.          Expires 26 January 2023                [Page 1]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -63,7 +63,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2023.
+   This Internet-Draft will expire on 26 January 2023.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 2]
+Massimo, et al.          Expires 26 January 2023                [Page 2]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -165,7 +165,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 3]
+Massimo, et al.          Expires 26 January 2023                [Page 3]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -221,7 +221,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 4]
+Massimo, et al.          Expires 26 January 2023                [Page 4]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -277,7 +277,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 5]
+Massimo, et al.          Expires 26 January 2023                [Page 5]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -296,8 +296,8 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
    A Dilithium private key is encoded as DilithiumPrivateKey in the
    privateKey field as an OCTET STRING.  Dilithium public keys are
-   optionally distributed in the publicKey field of the PrivateKeyInfo
-   structure.
+   optionally distributed in the publicKey field of the
+   DilithiumPrivateKey structure.
 
    The ASN.1 encoding for a Dilithium private key is as follows:
 
@@ -333,7 +333,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 6]
+Massimo, et al.          Expires 26 January 2023                [Page 6]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -389,7 +389,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 7]
+Massimo, et al.          Expires 26 January 2023                [Page 7]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -445,7 +445,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 8]
+Massimo, et al.          Expires 26 January 2023                [Page 8]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -501,7 +501,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                 [Page 9]
+Massimo, et al.          Expires 26 January 2023                [Page 9]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -557,7 +557,7 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                [Page 10]
+Massimo, et al.          Expires 26 January 2023               [Page 10]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -569,8 +569,8 @@ Appendix A.  Acknowledgements
 Appendix B.  Appendix
 
    Instead of defining the strength of a quantum algorithm in a
-   traditional manner using precise estimates of the number of "bits of
-   security," NIST has instead elected to define a collection of broad
+   traditional manner using precise estimates of the number of bits of
+   security, NIST has instead elected to define a collection of broad
    security strength categories.  Each category is defined by a
    comparatively easy-to-analyze reference primitive that cover a range
    of security strengths offered by existing NIST standards in symmetric
@@ -613,7 +613,7 @@ Authors' Addresses
 
 
 
-Massimo, et al.          Expires 9 January 2023                [Page 11]
+Massimo, et al.          Expires 26 January 2023               [Page 11]
 
 Internet-Draft          PQC SIG for Certificates               July 2022
 
@@ -669,4 +669,4 @@ Internet-Draft          PQC SIG for Certificates               July 2022
 
 
 
-Massimo, et al.          Expires 9 January 2023                [Page 12]
+Massimo, et al.          Expires 26 January 2023               [Page 12]
