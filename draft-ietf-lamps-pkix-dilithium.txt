@@ -5,16 +5,16 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 26 March 2023                                         S. Turner
+Expires: 30 March 2023                                         S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                       22 September 2022
+                                                       26 September 2022
 
 
   Internet X.509 Public Key Infrastructure: Algorithm Identifiers for
                                Dilithium
-                   draft-ietf-lamps-pkix-dilithium-00
+               draft-ietf-lamps-dilithium-certificates-00
 
 Abstract
 
@@ -48,20 +48,22 @@ Status of This Memo
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
 
-   Internet-Drafts are draft documents valid for a maximum of six months
-   and may be updated, replaced, or obsoleted by other documents at any
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 1]
+
+
+Massimo, et al.           Expires 30 March 2023                 [Page 1]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
 
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2023.
+   This Internet-Draft will expire on 30 March 2023.
 
 Copyright Notice
 
@@ -107,9 +109,7 @@ Table of Contents
 
 
 
-
-
-Massimo, et al.           Expires 26 March 2023                 [Page 2]
+Massimo, et al.           Expires 30 March 2023                 [Page 2]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -165,7 +165,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 3]
+Massimo, et al.           Expires 30 March 2023                 [Page 3]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -221,7 +221,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 4]
+Massimo, et al.           Expires 30 March 2023                 [Page 4]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -277,7 +277,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 5]
+Massimo, et al.           Expires 30 March 2023                 [Page 5]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -333,7 +333,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 6]
+Massimo, et al.           Expires 30 March 2023                 [Page 6]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -389,7 +389,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 7]
+Massimo, et al.           Expires 30 March 2023                 [Page 7]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -445,7 +445,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 8]
+Massimo, et al.           Expires 30 March 2023                 [Page 8]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -501,7 +501,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                 [Page 9]
+Massimo, et al.           Expires 30 March 2023                 [Page 9]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -557,7 +557,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                [Page 10]
+Massimo, et al.           Expires 30 March 2023                [Page 10]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -613,7 +613,7 @@ Authors' Addresses
 
 
 
-Massimo, et al.           Expires 26 March 2023                [Page 11]
+Massimo, et al.           Expires 30 March 2023                [Page 11]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -669,4 +669,4 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 26 March 2023                [Page 12]
+Massimo, et al.           Expires 30 March 2023                [Page 12]
