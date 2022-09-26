@@ -14,7 +14,7 @@ Expires: 30 March 2023                                         S. Turner
 
   Internet X.509 Public Key Infrastructure: Algorithm Identifiers for
                                Dilithium
-               draft-ietf-lamps-dilithium-certificates-00
+             draft-ietf-lamps-dilithium-certificates-latest
 
 Abstract
 

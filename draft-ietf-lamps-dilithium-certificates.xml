@@ -10,7 +10,7 @@
       xmlns:xi="http://www.w3.org/2001/XInclude"
       category="std"
       consensus="true"
-      docName="draft-ietf-lamps-dilithium-certificates-00"
+      docName="draft-ietf-lamps-dilithium-certificates-latest"
       ipr="trust200902"
       obsoletes=""
       updates=""
@@ -34,7 +34,7 @@
     <!-- The abbreviated title is used in the page header - it is only necessary if the 
         full title is longer than 39 characters -->
    <title abbrev="Dilithium for Certificates">Internet X.509 Public Key Infrastructure: Algorithm Identifiers for Dilithium</title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-lamps-dilithium-certificates-00"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-lamps-dilithium-certificates-latest"/>
     <!-- add 'role="editor"' below for the editors if appropriate -->
 
    <author fullname="Jake Massimo" initials="J." surname="Massimo">
