@@ -1,12 +1,16 @@
-# Internet-Draft Template Repository
+# Internet X.509 Public Key Infrastructure - Algorithm Identifiers for Dilithium
 
-Use this repository as a template if you want to start working on
-[IETF](https://www.ietf.org/) documents.
+This is the working area for the [IETF LAMPS Working Gorup](https://datatracker.ietf.org/wg/lamps/documents/) Internet-Draft, "Algorithm Identifiers for NIST's PQC Algorithm Dilithium for Use in the Internet X.509 Public Key Infrastructure".
 
-[Read the
-instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/TEMPLATE.md)
-for more information.
+* [Editor's Copy]
+* [Datatracker Page]
+* [WG Draft]
+* [Compare Editor's Copy to WG Draft]
 
-Once you have created your own repository, start work by renaming the
-`draft-todo-yourname-protocol.md` file
-[here](../../edit/main/draft-todo-yourname-protocol.md).
+## Contributing
+
+See the
+[guidelines for contributions](https://github.com/lamps-wg/documentsigning-eku/blob/main/CONTRIBUTING.md).
+
+Contributions can be made by creating pull requests.
+The GitHub interface supports creating pull requests using the Edit (✏) button.
