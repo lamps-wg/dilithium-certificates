@@ -4,7 +4,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <!-- used by XSLT processors -->
-<!-- For a complete list and description of processing instructions (PIs), 
+<!-- For a complete list and description of processing instructions (PIs),
     please see http://xml.resource.org/authoring/README.html. -->
 <rfc
       xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -25,11 +25,11 @@
   <!-- category values: std, bcp, info, exp, and historic
     ipr values: trust200902, noModificationTrust200902, noDerivativesTrust200902,
        or pre5378Trust200902
-    you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+    you can add the attributes updates="NNNN" and obsoletes="NNNN"
     they will automatically be output with "(if approved)" -->
  <!-- ***** FRONT MATTER ***** -->
  <front>
-    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+    <!-- The abbreviated title is used in the page header - it is only necessary if the
         full title is longer than 39 characters -->
    <title abbrev="Dilithium for Certificates">Internet X.509 Public Key Infrastructure: Algorithm Identifiers for Dilithium</title>
     <seriesInfo name="Internet-Draft" value="draft-ietf-lamps-dilithium-certificates-latest"/>
@@ -77,17 +77,17 @@
      </address>
     </author>
     <date year="2022"/>
-    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
-        in the current day for you. If only the current year is specified, xml2rfc will fill 
-	 in the current day and month for you. If the year is not the current one, it is 
-	 necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the 
-	 purpose of calculating the expiry date).  With drafts it is normally sufficient to 
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
+        in the current day for you. If only the current year is specified, xml2rfc will fill
+	 in the current day and month for you. If the year is not the current one, it is
+	 necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the
+	 purpose of calculating the expiry date).  With drafts it is normally sufficient to
 	 specify just the year. -->
    <!-- Meta-data Declarations -->
    <area>Security</area>
     <workgroup>LAMPS WG</workgroup>
     <!-- WG name at the upperleft corner of the doc,
-        IETF is fine for individual submissions.  
+        IETF is fine for individual submissions.
 	 If this element is not present, the default is "Network Working Group",
         which is used by the RFC Editor as a nod to the history of the IETF. -->
    <keyword>PQ Signatures, post-quantum X.509</keyword>
@@ -125,14 +125,14 @@
        parameters  ANY DEFINED BY algorithm OPTIONAL
    }
        </sourcecode>
-       <aside>  
+       <aside>
        <t>NOTE: The above syntax is from <xref target="RFC5280"/> and matches the version used therein, i.e., the 1988 ASN.1 syntax. See <xref target="RFC5912"/> for ASN.1 copmatible with the 2015 ASN.1 syntax.</t>
        </aside>
       <t>The OIDs are:</t>
       <sourcecode type="asn.1" markers="false">
-   id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) 
-            country(16) us(840) organization(1) gov(101) csor(3) 
-            nistAlgorithm(4) sigAlgs(3) TBD }  
+   id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+            country(16) us(840) organization(1) gov(101) csor(3)
+            nistAlgorithm(4) sigAlgs(3) TBD }
       </sourcecode>
        <t>The contents of the parameters component for each algorithm are absent.</t>
     </section> <!-- End of Identifiers Section -->
@@ -165,14 +165,14 @@
         </section> <!-- End of Dilithium Signatures in PKIX Section -->
          <!-- [PK] What is this section going to include? -->
          <!-- [JM] Should another algorithm be selected by NIST, we would include a summary of the algorithm, and then the ASN.1 definition and OIDs, just like we did for Dilithium above.-->
-         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->     
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->
         <!--<section numbered="true" toc="default">
          <name>TBD Signature Algorithm</name>
          <t>TBD</t>
         </section> --> <!-- End of TBD Signature Algorithm Section -->
-    <!-- [PK] Commenting out for now since we only need it if we introduce more than one algorithms --> 
+    <!-- [PK] Commenting out for now since we only need it if we introduce more than one algorithms -->
     <!--<section anchor="subjectpublickey" numbered="true" toc="default">
-    <name>Subject Public Key Fields</name> --> 
+    <name>Subject Public Key Fields</name> -->
         <section anchor="dilithiumpublickey" numbered="true" toc="default">
          <name>Dilithium Public Keys in PKIX</name>
          <t>In the X.509 certificate, the subjectPublicKeyInfo field has the SubjectPublicKeyInfo type, which has the following ASN.1 syntax: </t>
@@ -180,24 +180,24 @@
   SubjectPublicKeyInfo  ::=  SEQUENCE  {
       algorithm         AlgorithmIdentifier,
       subjectPublicKey  BIT STRING
-  } 
+  }
   </sourcecode>
-         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce (rho) using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. --> 
+         <t>The public parameters for Dilithium are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce (rho) using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
          <!--- [EC]I found the sentence about "rho" very hard to read. Something like "expanding a nonce (rho) using..." could help. I also found the "(k*l) public matrix" hard to read because of how 'l' is rendered. It's also not referenced in this section anywhere (it doesn't affect the size of the public key??), but it does make an appearance in the appendix. -->
          <t>The Dilithium public key <bcp14>MUST</bcp14> be encoded using the ASN.1 type DilithiumPublicKey:</t>
-         
+
                 <!---<ul spacing="compact">
                     <li>rho: nonce</li>
                     <li>t:  a vector encoded in 320*k bytes</li>
                 </ul>
                 <t>The size required to hold all public key elements is therefore 32+320*k bytes, where k is the rank of the vector over the polynomial ring R_q.</t>
           -->
-       <!--   
+       <!--
       <sourcecode type="asn.1" markers="false" pn="section">
   DilithiumPublicKey ::= SEQUENCE {
       rho         OCTET STRING,      nonce/seed
-      t1          OCTET STRING  }    encoded vector 
-      </sourcecode> 
+      t1          OCTET STRING  }    encoded vector
+      </sourcecode>
       <t>where rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. The size required to hold all public key elements is therefore 32+320*k bytes.</t>
         -->
         <!--[JM] I've modified the public key encoding based on Markku's comments from pqc-forum (https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/eAaiJO1qzkA/m/4eclSTZbBwAJ). On the use of a sequence tag, and separation bytes:
@@ -206,22 +206,22 @@
          -->
        <sourcecode type="asn.1" markers="false">
   DilithiumPublicKey ::= OCTET STRING
-      </sourcecode> 
+      </sourcecode>
          <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. These parameters <bcp14>MUST</bcp14> be encoded as a single OCTET STRING. The size required to hold a DilithiumPublicKey public key element is therefore 32+320*k bytes.</t>
           <!-- do we need to include this? I'm basing this on the original RFC 3279 which did this for ECC https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.3-->
-        <!-- [PK] In the past using parameters in OIDs have caused all types of issues. Nowadays the IETF hardcodes all parameters to the OID. For example OID XYZ gives everything needed for the algorithm like security level, hash algorithm key sizes etc. --> 
+        <!-- [PK] In the past using parameters in OIDs have caused all types of issues. Nowadays the IETF hardcodes all parameters to the OID. For example OID XYZ gives everything needed for the algorithm like security level, hash algorithm key sizes etc. -->
         <!-- <t>Dilithium requires the use of certain parameters with the public key. The parameters may be inherited from the issuer, implicitly included through reference to a "security level", or explicitly included in the certificate.</t>
       <sourcecode type="asn.1" markers="false" pn="section-4">
   DilithiumPkParameters ::= CHOICE {
     dilithiumParameters  DilithiumParameters,
     securityLevel        OBJECT IDENTIFIER,
-    implicitlyCA         NULL } 
-      </sourcecode> 
+    implicitlyCA         NULL }
+      </sourcecode>
       <t>EDNOTE: security level is used analogously to how "named-curves" was used in ECDSA and ECDH keys, alternatively, this same distinction between parameter sets could be achieved by instead defining multiple dilithium OIDs based on security level. e.g. id-dilithium-3-shake256 or id-dilithium-4x4-shake256.</t>
-      <t>The object identifier id-securityLevel specifies an arc containing the object identifiers of each security level.  It has the following value:</t>     
+      <t>The object identifier id-securityLevel specifies an arc containing the object identifiers of each security level.  It has the following value:</t>
                <artwork name="" type="" align="left" alt=""><![CDATA[
 id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
-                </artwork> 
+                </artwork>
       <t> When the parameters are inherited, the parameters field <bcp14>SHALL</bcp14> contain implictlyCA, which is the ASN.1 value NULL. When parameters are specified by reference, the parameters field <bcp14>SHALL</bcp14> contain the security level choice, which is an object identifier.  When the parameters are explicitly included, they <bcp14>SHALL</bcp14> be encoded in the ASN.1 structure DilithiumParameters:</t>
       <sourcecode type="asn.1" markers="false" pn="section-5">
   DilithiumParameters ::= SEQUENCE {
@@ -236,7 +236,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       }
       </sourcecode> -->
 <!-- EDNOTE: I dont know what data type all those variables should be, between integers, octet strings or bit strings. could also break them out even further into more objects -->
-         <!-- [PK]: Commenting out as I think this goes back to the hardcoded parameters and is unecessary --> 
+         <!-- [PK]: Commenting out as I think this goes back to the hardcoded parameters and is unecessary -->
          <!--<t>The AlgorithmIdentifier within SubjectPublicKeyInfo is the only place within a certificate where the parameters may be used. If the Dilithium parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the subject certificate using Dilithium, then the certificate issuer's Dilithium parameters apply to the subject's Dilithium key. If the Dilithium  parameters are specified as implicitlyCA in the SubjectPublicKeyInfo AlgorithmIdentifier and the CA signed the certificate using a signature algorithm other than Dilithium, then clients <bcp14>MUST</bcp14> not make use of the Dilithium public key.</t>-->
          <t>The id-dilithiumTBD identifier defined in <xref target="oids"/> <bcp14>MUST</bcp14> be used as the algorithm field in the SubjectPublicKeyInfo sequence <xref target="RFC5280" format="default"/> to identify a Dilithium public key.</t>
          <t>The intended application for the key is indicated in the keyUsage certificate extension; see <xref target="RFC5280" sectionFormat="of" section="4.2.1.3"/>. If the keyUsage extension is present in a certificate that indicates id-dilithiumTBD in the SubjectPublicKeyInfo, then the at least one of following <bcp14>MUST</bcp14> be present:</t>
@@ -251,16 +251,16 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
         </section>  <!-- End of Dilithium Public Keys in PKIX Section -->
          <!-- [PK] What is this section going to include? -->
          <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons public keys, just as we did for Dilithium above. -->
-         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->      
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->
         <!-- <section numbered="true" toc="default">
-         <name>TBD Public Keys</name> 
+         <name>TBD Public Keys</name>
          <t>TBD</t>
-        </section> -->  <!-- End of TBD Public Keys Section --> 
+        </section> -->  <!-- End of TBD Public Keys Section -->
     <!--</section>--> <!-- End of Subject Public Key Fields Section -->
-    <!-- [PK] Commenting out for now since we only need it if we introduce more than one algorithms --> 
+    <!-- [PK] Commenting out for now since we only need it if we introduce more than one algorithms -->
     <!-- <section anchor="privatekeyformat" numbered="true" toc="default">
     <name>Private Key Format</name> -->
-    <!-- [PK] In the other drafts that update RFC3279 I did not see them including a Private Key format for any of the algorithms. Do we need a private key section for Dilithium? Encoding private keys is useful to the signer, but does this specification need to define it? Usually these would be defined elsewhere. Commenting Private Key section for now, and I will let JK bring it back if he thinks it should be there.  -->     
+    <!-- [PK] In the other drafts that update RFC3279 I did not see them including a Private Key format for any of the algorithms. Do we need a private key section for Dilithium? Encoding private keys is useful to the signer, but does this specification need to define it? Usually these would be defined elsewhere. Commenting Private Key section for now, and I will let JK bring it back if he thinks it should be there.  -->
         <section numbered="true" toc="default">
          <name>Dilithium Private Keys</name>
          <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the DilithiumPrivateKey structure.</t>
@@ -275,7 +275,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
       t0          BIT STRING,         - encoded vector
       PublicKey   IMPLICIT DilithiumPublicKey OPTIONAL
   }
-      </sourcecode> 
+      </sourcecode>
                 <!-- [JM] I'm unsure if BIT STRING is the correct data type here. Please confirm or suggest alt. -->
                 <!--[JM] deterministic vs random signatures, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
                 <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
@@ -283,8 +283,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
                 <!-- [JM] section under construction. Do we need a basic description of each private key parameter? I think a breif overview (as we did for the public key would be nice to have.-->
           </section>  <!-- End of Dilithium Private Keys Section -->
          <!-- [PK] What is this section going to include? -->
-         <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons private keys, just as we did for Dilithium above. -->  
-         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->         
+         <!-- [JM] Say NIST standardize both Dilithium and falcon, then this section would describe falcons private keys, just as we did for Dilithium above. -->
+         <!-- [PK] I don't think we should do that. We should introduce one algorithm. Standardizing two without very obvious advantages is probably overhead for the whole industry. I think we should pick the one that makes sense. Commenting it out to similify draft. We can add it back. -->
         <!--<section numbered="true" toc="default">
           <name>TBD Private Keys</name>
           <t>TBD</t>
@@ -293,7 +293,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     <section anchor="asn1" numbered="true" toc="default">
       <name>ASN.1 Module</name>
       <t>This section includes the ASN.1 module for Post-Quantum algorithms in X.509. This module does not come from any previously existing RFC. This module references <xref target="RFC5912" format="default"></xref>.</t>
-      <sourcecode type="asn.1" markers="false">[ EDNOTE: Add ASN.1 here ] 
+      <sourcecode type="asn.1" markers="false">[ EDNOTE: Add ASN.1 here ]
 
   PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
      internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
@@ -339,7 +339,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
   }
 
   END
-      </sourcecode> 
+      </sourcecode>
    </section>     <!-- End of ASN.1 Module Section -->
    <section anchor="IANA" numbered="true" toc="default">
       <name>IANA Considerations</name>
@@ -485,7 +485,7 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
     <section anchor="Acknowledgements" numbered="true" toc="default">
       <name>Acknowledgements</name>
       <t>We would like to thank ... <!--Markuu, Peikert -->for their insightful comments.</t>
-    </section>  <!-- End of Acknowledgements Section -->    
+    </section>  <!-- End of Acknowledgements Section -->
     <section anchor="app-additional" numbered="true" toc="default">
       <name>Appendix</name>
         <t>Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of bits of security, NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 - key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 - collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 - key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 - key search on a block cipher with a 256-bit key (e.g., AES 256).</t>
@@ -498,8 +498,8 @@ id-securityLevel OBJECT IDENTIFIER ::= { XXXX-XX-XX securityLevel(X) }]]>
 | Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private|
 | Level    |     |         |       |     |        | Key(B) | Key(B) |
 |==========+=====+=========+=======+=====+========+========+========|
-| 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528 | 
-| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000 | 
+| 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528 |
+| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000 |
 | 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864 |
 |==========+=====+=========+=======+=====+========+========+========|]]>
           </artwork>
