@@ -234,7 +234,7 @@
   DilithiumPrivateKey ::= SEQUENCE {
       version                  Version,
       privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
-      privateKey               PrivateKey,
+      privateKey               OCTET STRING,
       publicKey                IMPLICIT DilithiumPublicKey OPTIONAL
   }
       </sourcecode>
@@ -493,7 +493,7 @@
         <figure anchor="DilithiumParameters">
           <artwork align="left" name="" type="" alt=""><![CDATA[
 |=======+=======+========+========+========|
-|Level  | (k,l) |  Sig.  | Public | Private|
+| Level | (k,l) |  Sig.  | Public | Private|
 |       |       |  (B)   | Key(B) | Key(B) |
 |=======+=======+========+========+========|
 |   2   | (4,4) |  2420  |  1312  |  2528  |

@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 1 April 2023                                          S. Turner
+Expires: 2 April 2023                                          S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                       28 September 2022
+                                                       29 September 2022
 
 
   Internet X.509 Public Key Infrastructure: Algorithm Identifiers for
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 1]
+Massimo, et al.           Expires 2 April 2023                  [Page 1]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -63,7 +63,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 April 2023.
+   This Internet-Draft will expire on 2 April 2023.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 2]
+Massimo, et al.           Expires 2 April 2023                  [Page 2]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -165,7 +165,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 3]
+Massimo, et al.           Expires 2 April 2023                  [Page 3]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -221,7 +221,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 4]
+Massimo, et al.           Expires 2 April 2023                  [Page 4]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -277,7 +277,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 5]
+Massimo, et al.           Expires 2 April 2023                  [Page 5]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -333,7 +333,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 6]
+Massimo, et al.           Expires 2 April 2023                  [Page 6]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -353,7 +353,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
      DilithiumPrivateKey ::= SEQUENCE {
          version                  Version,
          privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
-         privateKey               PrivateKey,
+         privateKey               OCTET STRING,
          publicKey                IMPLICIT DilithiumPublicKey OPTIONAL
      }
 
@@ -389,7 +389,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 7]
+Massimo, et al.           Expires 2 April 2023                  [Page 7]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -445,7 +445,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 8]
+Massimo, et al.           Expires 2 April 2023                  [Page 8]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -501,7 +501,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                  [Page 9]
+Massimo, et al.           Expires 2 April 2023                  [Page 9]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -557,7 +557,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                 [Page 10]
+Massimo, et al.           Expires 2 April 2023                 [Page 10]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -613,7 +613,7 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                 [Page 11]
+Massimo, et al.           Expires 2 April 2023                 [Page 11]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -651,7 +651,7 @@ Appendix B.  Appendix
    public key, and private key sizes in bytes.
 
    |=======+=======+========+========+========|
-   |Level  | (k,l) |  Sig.  | Public | Private|
+   | Level | (k,l) |  Sig.  | Public | Private|
    |       |       |  (B)   | Key(B) | Key(B) |
    |=======+=======+========+========+========|
    |   2   | (4,4) |  2420  |  1312  |  2528  |
@@ -669,7 +669,7 @@ Authors' Addresses
 
 
 
-Massimo, et al.           Expires 1 April 2023                 [Page 12]
+Massimo, et al.           Expires 2 April 2023                 [Page 12]
 
 Internet-Draft         Dilithium for Certificates         September 2022
 
@@ -725,4 +725,4 @@ Internet-Draft         Dilithium for Certificates         September 2022
 
 
 
-Massimo, et al.           Expires 1 April 2023                 [Page 13]
+Massimo, et al.           Expires 2 April 2023                 [Page 13]
