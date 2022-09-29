@@ -21,7 +21,7 @@ Abstract
    Digital signatures are used within X.509 certificates, Certificate
    Revocation Lists (CRLs), and to sign messages.  This document
    describes the conventions for using Dilithium quantum-resistant
-   signatures in Internet X.509 certificates and certifiate revocation
+   signatures in Internet X.509 certificates and certificate revocation
    lists.  The conventions for the associated post-quantum signatures,
    subject public keys, and private key are also described.
 
@@ -48,16 +48,6 @@ Status of This Memo
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
 
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 1]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
@@ -75,44 +65,28 @@ Copyright Notice
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
-   extracted from this document must include Simplified BSD License text
-   as described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Simplified BSD License.
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
-   2.  Identifiers . . . . . . . . . . . . . . . . . . . . . . . . .   3
-   3.  Dilithium Signatures in PKIX  . . . . . . . . . . . . . . . .   4
-   4.  Dilithium Public Keys in PKIX . . . . . . . . . . . . . . . .   5
-   5.  Key Usage Bits  . . . . . . . . . . . . . . . . . . . . . . .   6
-   6.  Dilithium Private Keys  . . . . . . . . . . . . . . . . . . .   7
-   7.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   7
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     10.2.  Informative References . . . . . . . . . . . . . . . . .  11
-   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  12
-   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  12
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 2]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
+   1.  Introduction
+     1.1.  Requirements Language
+   2.  Identifiers
+   3.  Dilithium Signatures in PKIX
+   4.  Dilithium Public Keys in PKIX
+   5.  Key Usage Bits
+   6.  Dilithium Private Keys
+   7.  ASN.1 Module
+   8.  IANA Considerations
+   9.  Security Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
+   Appendix A.  Acknowledgements
+   Appendix B.  Appendix
+   Authors' Addresses
 
 1.  Introduction
 
@@ -162,14 +136,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
    *  algorithm identifies the cryptographic algorithm with an object
       identifier.
 
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 3]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
    *  parameters, which are optional, are the associated parameters for
       the algorithm identifier in the algorithm field.
 
@@ -218,14 +184,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
    [RFC5280].  The parameters of these signature algorithms are absent,
    as explained in Section 2.
 
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 4]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
    The signatureValue field contains the corresponding Dilithium
    signature computed upon the ASN.1 DER encoded tbsCertificate
    [RFC5280].
@@ -271,16 +229,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
    DilithiumPublicKey:
 
      DilithiumPublicKey ::= OCTET STRING
-
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 5]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
 
    where DilithiumPublicKey is a concatenation of rho and t1.  Here, rho
    is the nonce used to seed the XOF to produce the matrix A, and t1 is
@@ -330,14 +278,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
    Requirements about the keyUsage extension bits defined in [RFC5280]
    still apply.
 
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 6]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
 6.  Dilithium Private Keys
 
    EDNOTE: this section is still under construction as we discuss the
@@ -375,24 +315,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
    This section includes the ASN.1 module for Post-Quantum algorithms in
    X.509.  This module does not come from any previously existing RFC.
    This module references [RFC5912].
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 7]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
 
    [ EDNOTE: Add ASN.1 here ]
 
@@ -440,15 +362,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
      }
 
      END
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 8]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
 
 8.  IANA Considerations
 
@@ -498,14 +411,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
    decisions such as these can help to deliver a greater ease of secure
    implementation - particularly against side-channel attacks - it does
    not necessarily provide resistance to more powerful attacks such as
-
-
-
-Massimo, et al.           Expires 2 April 2023                  [Page 9]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
    differential power analysis.  Some amount of side-channel leakage has
    been demonstrated in parts of the signing algorithm (specifically the
    bit-unpacking function), from which a demonstration of key recovery
@@ -553,14 +458,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                 [Page 10]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -610,14 +507,6 @@ Internet-Draft         Dilithium for Certificates         September 2022
               (CRL) Profile", RFC 3279, DOI 10.17487/RFC3279, April
               2002, <https://www.rfc-editor.org/info/rfc3279>.
 
-
-
-
-Massimo, et al.           Expires 2 April 2023                 [Page 11]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
    [RFC5480]  Turner, S., Brown, D., Yiu, K., Housley, R., and T. Polk,
               "Elliptic Curve Cryptography Subject Public Key
               Information", RFC 5480, DOI 10.17487/RFC5480, March 2009,
@@ -663,66 +552,23 @@ Appendix B.  Appendix
 
 Authors' Addresses
 
-
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                 [Page 12]
-
-Internet-Draft         Dilithium for Certificates         September 2022
-
-
    Jake Massimo
    AWS
    United States of America
-
    Email: jakemas@amazon.com
 
 
    Panos Kampanakis
    AWS
    United States of America
-
    Email: kpanos@amazon.com
 
 
    Sean Turner
    sn3rd
-
    Email: sean@sn3rd.com
 
 
    Bas Westerbaan
    Cloudflare
-
    Email: bas@westerbaan.name
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Massimo, et al.           Expires 2 April 2023                 [Page 13]
