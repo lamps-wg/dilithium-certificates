@@ -1,7 +1,7 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-16T02:42:25.087717+00:00",
-  "repo": "jakemas/dilithium-certificates",
+  "timestamp": "2022-10-18T02:35:48.903490+00:00",
+  "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
       "name": "bug",
@@ -54,7 +54,7 @@
       "number": 1,
       "id": "I_kwDOIEpj4c5SqJ6k",
       "title": "Misc Comments from Markku 9/6/2022",
-      "url": "https://github.com/jakemas/dilithium-certificates/issues/1",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/1",
       "state": "OPEN",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
@@ -74,7 +74,7 @@
       "number": 2,
       "id": "I_kwDOIEpj4c5SqJ-U",
       "title": "Add Dilithium-2 paragraph in Security Considerations",
-      "url": "https://github.com/jakemas/dilithium-certificates/issues/2",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/2",
       "state": "OPEN",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
@@ -92,7 +92,7 @@
       "number": 3,
       "id": "I_kwDOIEpj4c5SqKBR",
       "title": "hash-then-sign or not",
-      "url": "https://github.com/jakemas/dilithium-certificates/issues/3",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/3",
       "state": "OPEN",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
@@ -114,21 +114,21 @@
         },
         {
           "author": "jakemas",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "**From Scott Fluhrer**\r\n\r\n> Hi Jake, Panos, Sean, Bas,\r\n>\r\n>\r\n> We notice that your IETF draft-massimo-lamps-pq-sig-certificates-00 has the\r\n> following security consideration:\r\n>\r\n> > Within the hash-then-sign paradigm, hash functions are used as a\r\n> > domain restrictor over the message to be signed. By pre-hashing, the\r\n> > onus of resistance to existential forgeries becomes heavily reliant on\r\n> > the collision-resistance of the hash function in use. As well as this security\r\n> goal, the hash-then-sign paradigm also has the ability to improve\r\n> performance by reducing the size of signed messages. As a corollary, hashing\r\n> remains mandatory even for short messages and assigns a further\r\n> computational requirement onto the verifier. This makes the performance of\r\n> hash-then-sign schemes more consistent, but not necessarily more efficient.\r\n> > Dilithium diverges from the hash-then-sign paradigm by hashing the\r\n> message during the signing procedure (at the point in which the challenge\r\n> polynomial).\r\n> > However, due to the fact that Dilithium signatures may require the\r\n> > signing procedure to be repeated several times for a signature to be\r\n> produced, Dilithium implementations can make use of pre-hashing the\r\n> message to prevent rehashing with each attempt.\r\n>\r\n>\r\n> First, quoting from the Dilithium NIST Round 3 submission documents:\r\n>\r\n> > Since our signing procedure may need to be repeated several times\r\n> > until a signature is produced, we also append a counter in order to\r\n> > make the SHAKE-256 output differ with each signing attempt of the same\r\n> message.\r\n>\r\n> So it seems like the Dilithium designers explicitly want the hash to differ\r\n> across repeated attempts.\r\n>\r\n\r\nHmmm, I don't see that in Dilithium; are they referring to the internal ExpandMask function?  That isn't applied to the input message.\r\n\r\nIn any case, it's easy to derive SHAKE( M || 1 ), SHAKE( M || 2 ), ... without multiple passes through M; you compute the partial SHAKE state after process M, and then apply that partial state to 1, 2, ...\r\n\r\n>\r\n>\r\n> Second, we had a similar discussion within the context of composite\r\n> signatures when figuring out how to combine Dilithium and Falcon with\r\n> ECDSA and RSA. We came out with a different conclusion; that hash-then-\r\n> sign reduces the security properties of Dilithium and Falcon down to the\r\n> collision resistance of the hash function used to pre-hash.\r\n>\r\n> We would like community opinion on this.\r\n>\r\n>\r\n> Here's the Security Consideration text that we're working on:\r\n>\r\n>\r\n>\r\n>\r\n> In the hash-then-sign paradigm, the message to be signed is hashed\r\n> externally to the signature primitive, and then the hash value is signed.\r\n>\r\n> The hash-then-sign paradigm is required, for example, with RSA signatures in\r\n> order to sign messages larger than the RSA modulus. Hash-then-sign also\r\n> gives performance and bandwidth benefits, for example, when the signature\r\n> is performed by a networked cryptographic appliance since you only need to\r\n> send a small hash value rather than streaming the entire message.\r\n>\r\n> With Dilithium and Falcon signatures it is not recommended to pre-hash for\r\n> the following reasons:\r\n>\r\n>\r\n> The Dilithium construction includes\r\n>\r\n> ~~~\r\n> Sign(sk,M):\r\n> 10: mu \\in {0, 1}^384 := CRH(tr || M)\r\n> ~~~\r\n>\r\n> where `CRH` is any collision-resistant hash function and `tr` is a component\r\n> of the secret key.\r\n\r\nA hash of the public key, actually; see line 7 of the key generation process (which explicitly computes it from the components of the public key) - Dilithium stores it in the private key so the signer doesn't need to recompute it every time.\r\n\r\n> This provides strong security against pre-computed\r\n> collision attacks since an attacker has no a-priori knowledge of `r` and\r\n> provides per-key hash-domain separation of the message to be signed.\r\n\r\nRather, it limits the usability of any found collision to a specific public key; however it does nothing to frustrate a collision attack against a specific public key.\r\n\r\nNow, it does probably add a constant factor to any attack that searches for a simultaneous collision between the hash that RSA/ECDSA uses (without the prepend) and the hash that Dilithium uses (with the known prepend) - I would hesitate to give a value to that constant factor, but it is likely not large.\r\n",
           "createdAt": "2022-08-17T19:30:50Z",
           "updatedAt": "2022-08-17T19:30:50Z"
         },
         {
           "author": "jakemas",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "From Mike Ounsworth:\r\nI want to break out and expand our third point as it is actually a question to NIST and not to the IETF authors.\r\n\r\n\r\n> Third, I can imagine that some applications (like TLS) will want to use non-pre-hashed versions of Dilithium and Falcon, but other applications (like code-signing) would prefer pre-hashed versions. These are not interoperable with each other. Is NIST planning to produce algorithm definitions, OIDs, Codepoints, etc, for both versions?\r\n\r\nExpanding on the code-signing example: the messages to be signed can be very large; consider a several GB firmware image. Assuming our understanding below is correct, a direct-sign algorithm would require the entire thing to be streamed to a network HSM for signing and to a TPM for verification. Conversely code-signing environments often include counter-signatures from Time Stamping Authorities which protect against future discovery of collision attacks against the hash function -- as an example, Windows still accepts RSA-SHA1 signatures produced before SHA1 was deprecated. I can imagine that the code-signing community will decide that the performance gains of hash-then-sign outweigh the security loss.\r\n\r\nSo, will NIST standardize both direct-sign and some variant of hash-then-sign for PQC signature primitives?\r\n",
           "createdAt": "2022-08-17T19:31:58Z",
           "updatedAt": "2022-08-17T19:31:58Z"
         },
         {
           "author": "jakemas",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": ">>So it seems like the Dilithium designers explicitly want the hash to differ across repeated attempts.\r\n>    \r\n>Hmmm, I don't see that in Dilithium; are they referring to the internal ExpandMask function?  That isn't applied to the input message.\r\n>In any case, it's easy to derive SHAKE( M || 1 ), SHAKE( M || 2 ), ... without multiple passes through M; you compute the partial SHAKE state after process M, and then apply that partial state to 1, 2, ...\r\n\r\nI think we are referring to different parts of the signing process here. For reference, my security consideration was referring to page 4 of the Dilithium spec that states:\r\n\"Our full scheme in Fig. 4 also makes use of basic optimizations such as pre-hashing the message M so as to not rehash it with every signing attempt.\" and Figure 4 itself.\r\n\r\nIt was my understanding that the signing procedure may need to be repeated several times to produce a signature, and thus pre-hashing would prevent the need to individually hash the input message with each attempt. I believe the desired differing of the hash you mentioned is within the internals of the signing procedure and not on the input message itself.\r\n\r\n   >> Third, I can imagine that some applications (like TLS) will want to use non-pre-hashed versions of Dilithium and Falcon, but other applications (like code-signing) would prefer pre-hashed versions. These are not interoperable with each other. Is NIST planning to produce algorithm definitions, OIDs, Codepoints, etc, for both versions?\r\n\r\n   >Expanding on the code-signing example: the messages to be signed can be very large; consider a several GB firmware image. Assuming our understanding below is correct, a direct-sign algorithm would require the entire thing to be streamed to a network HSM for signing and to a TPM for verification. Conversely code-signing environments often include counter-signatures from Time Stamping Authorities which protect against future discovery of collision attacks against the hash function -- as an example, Windows still accepts RSA-SHA1 signatures produced before SHA1 was deprecated. I can imagine that the code-signing community will decide that the performance gains of hash-then-sign outweigh the security loss.\r\n\r\n>So, will NIST standardize both direct-sign and some variant of hash-then-sign for PQC signature primitives?\r\n\r\nI do agree that there may be optimizations that users may wish to make dependent on the context, i.e., hash-then-sign vs direct-sign. It's for this reason I tried to give an overview of the security of each option in the draft, but ultimately leave that up to the user. It is a good point regarding NISTs perspective on what should be explicitly standardized here.\r\n\r\n>> This provides strong security against pre-computed\r\n>> collision attacks since an attacker has no a-priori knowledge of `r` and\r\n>> provides per-key hash-domain separation of the message to be signed.\r\n>\r\n>Rather, it limits the usability of any found collision to a specific public key; however it does nothing to frustrate a collision attack against a specific public key.\r\n\r\nRight, more details on the advantages of message binding on the PQC-forum from C. Peikert's https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/eAaiJO1qzkA/m/K66R_ftNBwAJ. It was this discussion I was trying to encompass in the draft.",
           "createdAt": "2022-08-17T19:42:05Z",
           "updatedAt": "2022-08-17T19:42:05Z"
@@ -139,7 +139,7 @@
       "number": 4,
       "id": "I_kwDOIEpj4c5SqKEL",
       "title": "key as octet string",
-      "url": "https://github.com/jakemas/dilithium-certificates/issues/4",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/4",
       "state": "OPEN",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
