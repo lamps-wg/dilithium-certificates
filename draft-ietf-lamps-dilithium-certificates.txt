@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 2 April 2023                                          S. Turner
+Expires: 27 April 2023                                         S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                       29 September 2022
+                                                         24 October 2022
 
 
   Internet X.509 Public Key Infrastructure: Algorithm Identifiers for
@@ -31,12 +31,12 @@ Note
    PQC Project has standardized PQ algorithms.  After NIST has
    standardized its first algorithms, this document will replace TBD,
    with the appropriate algorithms and parameters before proceeding to
-   ratification.  The algorithm Dilithium has been added as an example
-   in this draft, to provide a more detailed illustration of the content
-   - it by no means indicates its inclusion in the final version.  This
-   specification will use object identifiers for the new algorithms that
-   are assigned by NIST, and will use placeholders until these are
-   released.]
+   ratification.  The algorithm Dilithium (version 3.1 2021-02-08) has
+   been added as an example in this draft, to provide a more detailed
+   illustration of the content - it by no means indicates its inclusion
+   in the final version.  This specification will use object identifiers
+   for the new algorithms that are assigned by NIST, and will use
+   placeholders until these are released.]
 
 Status of This Memo
 
@@ -48,12 +48,22 @@ Status of This Memo
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at https://datatracker.ietf.org/drafts/current/.
 
+
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 1]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2023.
+   This Internet-Draft will expire on 27 April 2023.
 
 Copyright Notice
 
@@ -65,28 +75,44 @@ Copyright Notice
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
-   extracted from this document must include Revised BSD License text as
-   described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Revised BSD License.
+   extracted from this document must include Simplified BSD License text
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
 
 Table of Contents
 
-   1.  Introduction
-     1.1.  Requirements Language
-   2.  Identifiers
-   3.  Dilithium Signatures in PKIX
-   4.  Dilithium Public Keys in PKIX
-   5.  Key Usage Bits
-   6.  Dilithium Private Keys
-   7.  ASN.1 Module
-   8.  IANA Considerations
-   9.  Security Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
-   Appendix A.  Acknowledgements
-   Appendix B.  Appendix
-   Authors' Addresses
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
+   2.  Identifiers . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  Dilithium Signatures in PKIX  . . . . . . . . . . . . . . . .   4
+   4.  Dilithium Public Keys in PKIX . . . . . . . . . . . . . . . .   5
+   5.  Key Usage Bits  . . . . . . . . . . . . . . . . . . . . . . .   6
+   6.  Dilithium Private Keys  . . . . . . . . . . . . . . . . . . .   7
+   7.  ASN.1 Module  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  11
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  11
+   Appendix A.  Acknowledgements . . . . . . . . . . . . . . . . . .  12
+   Appendix B.  Appendix . . . . . . . . . . . . . . . . . . . . . .  12
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  13
+
+
+
+
+
+
+
+
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 2]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
 
 1.  Introduction
 
@@ -136,10 +162,26 @@ Table of Contents
    *  algorithm identifies the cryptographic algorithm with an object
       identifier.
 
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 3]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
    *  parameters, which are optional, are the associated parameters for
       the algorithm identifier in the algorithm field.
 
    The OIDs are:
+
+      id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) sigAlgs(3) TBD }
+
+      id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) sigAlgs(3) TBD }
 
       id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
                country(16) us(840) organization(1) gov(101) csor(3)
@@ -176,6 +218,13 @@ Table of Contents
          tbsCertificate       TBSCertList,
          signatureAlgorithm   AlgorithmIdentifier,
          signatureValue       BIT STRING  }
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 4]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
 
    The identifiers defined in Section 2 can be used as the
    AlgorithmIdentifier in the signatureAlgorithm field in the sequence
@@ -225,6 +274,14 @@ Table of Contents
    the integers modulo q.  This sampling is performed by expanding a
    nonce (rho) using an XOF.
 
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 5]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
    The Dilithium public key MUST be encoded using the ASN.1 type
    DilithiumPublicKey:
 
@@ -270,6 +327,17 @@ Table of Contents
    dilithiumTBD in the SubjectPublicKeyInfo, then the at least one of
    following MUST be present:
 
+
+
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 6]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
      digitalSignature; or
      nonRepudiation; or
      keyCertSign; or
@@ -286,7 +354,8 @@ Table of Contents
    A Dilithium private key is encoded as DilithiumPrivateKey in the
    privateKey field as an OCTET STRING.  Dilithium public keys are
    optionally distributed in the publicKey field of the
-   DilithiumPrivateKey structure.
+   DilithiumPrivateKey structure.  This follows the OneAsymmetricKey
+   syntax.
 
    The ASN.1 encoding for a Dilithium private key is as follows:
 
@@ -294,14 +363,8 @@ Table of Contents
          version                  Version,
          privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
          privateKey               OCTET STRING,
-         publicKey                IMPLICIT DilithiumPublicKey OPTIONAL
+         publicKey                [1] DilithiumPublicKey OPTIONAL
      }
-
-   Dilithium offers both deterministic and randomized signing.  The
-   deterministic version creates a signature based on a function of the
-   key K and the message, whereas the randomized version instead selects
-   these values at random.  The randomized version can be invoked by
-   leaving K as EMPTY.
 
    A fully populated Dilithium private key consists of 6 parameters.
    The size necessary to hold all private key elements is
@@ -315,6 +378,21 @@ Table of Contents
    This section includes the ASN.1 module for Post-Quantum algorithms in
    X.509.  This module does not come from any previously existing RFC.
    This module references [RFC5912].
+
+
+
+
+
+
+
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 7]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
 
    [ EDNOTE: Add ASN.1 here ]
 
@@ -363,6 +441,15 @@ Table of Contents
 
      END
 
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 8]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
 8.  IANA Considerations
 
    Extensions in certificates and CRLs are identified using object
@@ -404,7 +491,30 @@ Table of Contents
    produced, Dilithium implementations can make use of pre-hashing the
    message to prevent rehashing with each attempt.
 
-   EDNOTE: Discuss side-channels for Dilithium. .
+   EDNOTE: Discuss deterministic vs randomized signing and the impact on
+   security.
+
+   Dilithium offers both deterministic and randomized signing.  The
+   difference between these two versions of the scheme is a one line
+   modification in which the seed is chosen at random (in the randomized
+   version) or as a hash of a key together with the message (in the
+
+
+
+Massimo, et al.           Expires 27 April 2023                 [Page 9]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
+   deterministic version).  A Hedged signature scheme may be obtained by
+   making a modification to the randomized version to include the
+   message and key into the seed that generates the the nonce y.  This
+   middle ground between a randomized nonce and one tied to the message
+   and key could be the solution to mitigiation both nonce-reuse attacks
+   in places of poor entropy, as well as mitigate fault attacks that
+   rely on differential analysis.
+
+   EDNOTE: Discuss side-channels for Dilithium.
 
    Dilithium has been designed to provide side-channel resilience by
    eliminating a reliance on Gaussian sampling.  While deliberate design
@@ -443,6 +553,14 @@ Table of Contents
    unambiguous public key serialization.  It for this reason the public
    key structure defined in Section 4 is intentionally encoded as a
    single OCTET STRING.
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                [Page 10]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
 
 10.  References
 
@@ -485,6 +603,20 @@ Table of Contents
               unforgeability and the case of post-quantum signatures",
               In Proceedings of the 42nd IEEE Symposium on Security and
               Privacy, 2021, <https://eprint.iacr.org/2020/1525.pdf>.
+
+
+
+
+
+
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                [Page 11]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
 
    [Dilithium]
               Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
@@ -535,18 +667,25 @@ Appendix B.  Appendix
    hash function (e.g.  SHA384/ SHA3-384), Level 5 - key search on a
    block cipher with a 256-bit key (e.g., AES 256).
 
+
+
+Massimo, et al.           Expires 27 April 2023                [Page 12]
+
+Internet-Draft         Dilithium for Certificates           October 2022
+
+
    The parameter sets defined for NIST security levels 2, 3 and 5 are
    listed in the Figure 1, along with the resulting signature size,
    public key, and private key sizes in bytes.
 
-   |=======+=======+========+========+========|
-   | Level | (k,l) |  Sig.  | Public | Private|
-   |       |       |  (B)   | Key(B) | Key(B) |
-   |=======+=======+========+========+========|
-   |   2   | (4,4) |  2420  |  1312  |  2528  |
-   |   3   | (6,5) |  3293  |  1952  |  4000  |
-   |   5   | (8,7) |  4595  |  2596  |  4864  |
-   |=======+=======+========+========+========|
+   |=======+=======+=====+========+========+========|
+   | Level | (k,l) | eta |  Sig.  | Public | Private|
+   |       |       |     |  (B)   | Key(B) | Key(B) |
+   |=======+=======+=====+========+========+========|
+   |   2   | (4,4) |  2  |  2420  |  1312  |  2528  |
+   |   3   | (6,5) |  4  |  3293  |  1952  |  4000  |
+   |   5   | (8,7) |  2  |  4595  |  2592  |  4864  |
+   |=======+=======+=====+========+========+========|
 
                                   Figure 1
 
@@ -555,20 +694,35 @@ Authors' Addresses
    Jake Massimo
    AWS
    United States of America
+
    Email: jakemas@amazon.com
 
 
    Panos Kampanakis
    AWS
    United States of America
+
    Email: kpanos@amazon.com
 
 
    Sean Turner
    sn3rd
+
    Email: sean@sn3rd.com
 
 
    Bas Westerbaan
    Cloudflare
+
    Email: bas@westerbaan.name
+
+
+
+
+
+
+
+
+
+
+Massimo, et al.           Expires 27 April 2023                [Page 13]

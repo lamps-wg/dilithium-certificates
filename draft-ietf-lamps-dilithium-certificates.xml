@@ -99,7 +99,7 @@
       <t>Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document describes the conventions for using Dilithium quantum-resistant signatures in Internet X.509 certificates and certificate revocation lists.  The conventions for the associated post-quantum signatures, subject public keys, and private key are also described.</t>
     </abstract>
     <note>
-    <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized its first algorithms, this document will replace TBD, with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indicates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]</t>
+    <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized PQ algorithms. After NIST has standardized its first algorithms, this document will replace TBD, with the appropriate algorithms and parameters before proceeding to ratification. The algorithm Dilithium (version 3.1 2021-02-08) has been added as an example in this draft, to provide a more detailed illustration of the content - it by no means indicates its inclusion in the final version. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]</t>
     </note>
   </front>
   <middle>
@@ -134,6 +134,16 @@
        <li>parameters, which are optional, are the associated parameters for the algorithm identifier in the algorithm field.</li>
        </ul>
        <t>The OIDs are:</t>
+       <sourcecode type="asn.1" markers="false">
+   id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+            country(16) us(840) organization(1) gov(101) csor(3)
+            nistAlgorithm(4) sigAlgs(3) TBD }
+       </sourcecode>
+       <sourcecode type="asn.1" markers="false">
+   id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+            country(16) us(840) organization(1) gov(101) csor(3)
+            nistAlgorithm(4) sigAlgs(3) TBD }
+       </sourcecode>
        <sourcecode type="asn.1" markers="false">
    id-dilithiumTBD OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
@@ -228,14 +238,14 @@
         <section numbered="true" toc="default">
         <name>Dilithium Private Keys</name>
         <t>EDNOTE: this section is still under construction as we discuss the best way to formulate the private key with the wider working group. </t>
-        <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the DilithiumPrivateKey structure.</t>
+        <t>A Dilithium private key is encoded as DilithiumPrivateKey in the privateKey field as an OCTET STRING. Dilithium public keys are optionally distributed in the publicKey field of the DilithiumPrivateKey structure. This follows the OneAsymmetricKey syntax.</t>
         <t>The ASN.1 encoding for a Dilithium private key is as follows:</t>
         <sourcecode type="asn.1" markers="false">
   DilithiumPrivateKey ::= SEQUENCE {
       version                  Version,
       privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
       privateKey               OCTET STRING,
-      publicKey                IMPLICIT DilithiumPublicKey OPTIONAL
+      publicKey                [1] DilithiumPublicKey OPTIONAL
   }
       </sourcecode>
         <!-- <sourcecode type="asn.1" markers="false">
@@ -251,7 +261,8 @@
       </sourcecode>-->
                 <!-- [JM] I'm unsure if BIT STRING is the correct data type here. Please confirm or suggest alt. -->
                 <!--[JM] deterministic vs random signatures, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
-                <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
+                <!-- <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
+              -->
                 <t>A fully populated Dilithium private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes. The description of k, l, and eta as well as public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1 of the Appendix.</t>
                 <!-- [JM] section under construction. Do we need a basic description of each private key parameter? I think a breif overview (as we did for the public key would be nice to have.-->
           </section>  <!-- End of Dilithium Private Keys Section -->
@@ -333,8 +344,9 @@
       <t>Within the hash-then-sign paradigm, hash functions are used as a domain restrictor over the message to be signed. By pre-hashing, the onus of resistance to existential forgeries becomes heavily reliant on the collision-resistance of the hash function in use. As well as this security goal, the hash-then-sign paradigm also has the ability to improve performance by reducing the size of signed messages. As a corollary, hashing remains mandatory even for short messages and assigns a further computational requirement onto the verifier. This makes the performance of hash-then-sign schemes more consistent, but not necessarily more efficient. Dilithium diverges from the hash-then-sign paradigm by hashing the message
       <!-- [EC] Something is wrong with "(at the point in which the challenge polynomial)"  -->
       during the signing procedure (at the point in which the challenge polynomial). However, due to the fact that Dilithium signatures may require the signing procedure to be repeated several times for a signature to be produced, Dilithium implementations can make use of pre-hashing the message to prevent rehashing with each attempt.</t>
-
-      <t>EDNOTE: Discuss side-channels for Dilithium. .</t>
+      <t>EDNOTE: Discuss deterministic vs randomized signing and the impact on security.</t>
+      <t>Dilithium offers both deterministic and randomized signing. The difference between these two versions of the scheme is a one line modification in which the seed is chosen at random (in the randomized version) or as a hash of a key together with the message (in the deterministic version). A Hedged signature scheme may be obtained by making a modification to the randomized version to include the message and key into the seed that generates the the nonce y. This middle ground between a randomized nonce and one tied to the message and key could be the solution to mitigiation both nonce-reuse attacks in places of poor entropy, as well as mitigate fault attacks that rely on differential analysis.</t>
+      <t>EDNOTE: Discuss side-channels for Dilithium.</t>
       <t>Dilithium has been designed to provide side-channel resilience by eliminating a reliance on Gaussian sampling. While deliberate design decisions such as these can help to deliver a greater ease of secure implementation - particularly against side-channel attacks - it does not necessarily provide resistance to more powerful attacks such as differential power analysis. Some amount of side-channel leakage has been demonstrated in parts of the signing algorithm (specifically the bit-unpacking function), from which a demonstration of key recovery has been made over a large sample of signatures. Masking countermeasures exist for Dilithium<!--[MGTF19]-->, but come with a performance overhead.</t>
 
       <t>A fundamental security property also associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme Dilithium possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
@@ -492,16 +504,26 @@
         </figure>-->
         <figure anchor="DilithiumParameters">
           <artwork align="left" name="" type="" alt=""><![CDATA[
-|=======+=======+========+========+========|
-| Level | (k,l) |  Sig.  | Public | Private|
-|       |       |  (B)   | Key(B) | Key(B) |
-|=======+=======+========+========+========|
-|   2   | (4,4) |  2420  |  1312  |  2528  |
-|   3   | (6,5) |  3293  |  1952  |  4000  |
-|   5   | (8,7) |  4595  |  2596  |  4864  |
-|=======+=======+========+========+========|]]>
+|=======+=======+=====+========+========+========|
+| Level | (k,l) | eta |  Sig.  | Public | Private|
+|       |       |     |  (B)   | Key(B) | Key(B) |
+|=======+=======+=====+========+========+========|
+|   2   | (4,4) |  2  |  2420  |  1312  |  2528  |
+|   3   | (6,5) |  4  |  3293  |  1952  |  4000  |
+|   5   | (8,7) |  2  |  4595  |  2592  |  4864  |
+|=======+=======+=====+========+========+========|]]>
           </artwork>
         </figure>
     </section> <!-- End of Appendix Section -->
  </back>
 </rfc>
+
+<!--
+Change log:
+24-10-2022 - Based on feedback from John Gray, Markku-Juhani O. Saarinen, and Mike Ounsworth.
+  - The DilithiumPrivateKey data structure has been modified, a call out to the OneAsymmetricKey structure has been explicitly made. 
+  - Multiple placeholders for the various OIDs at differing security levels have been added (we expect these to be id-dilithium2 id-dilithium3 and id-dilithium5, but await NIST for this).
+  - A mention of the Dilithium algorithm version number (version 3.1 2021-02-08) has been added - we can add a paragraph discussing more details of various algorithm versions if desired. 
+  - A typo in Appendix B that incorrectly listed the dilithium5 public key size has been fixed.
+  - The discussion of deterministic vs randomized signing has been removed from section 6 as we continue to decide how to address this. On this topic, deterministic vs randomized signing has been added to the security considerations as a place to discuss the security impact of these choices.
+--> 
