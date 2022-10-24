@@ -521,9 +521,9 @@
 <!--
 Change log:
 24-10-2022 - Based on feedback from John Gray, Markku-Juhani O. Saarinen, and Mike Ounsworth.
-  - The DilithiumPrivateKey data structure has been modified, a call out to the OneAsymmetricKey structure has been explicitly made. 
+  - The DilithiumPrivateKey data structure has been modified, a call out to the OneAsymmetricKey structure has been explicitly made.
   - Multiple placeholders for the various OIDs at differing security levels have been added (we expect these to be id-dilithium2 id-dilithium3 and id-dilithium5, but await NIST for this).
-  - A mention of the Dilithium algorithm version number (version 3.1 2021-02-08) has been added - we can add a paragraph discussing more details of various algorithm versions if desired. 
+  - A mention of the Dilithium algorithm version number (version 3.1 2021-02-08) has been added - we can add a paragraph discussing more details of various algorithm versions if desired.
   - A typo in Appendix B that incorrectly listed the dilithium5 public key size has been fixed.
   - The discussion of deterministic vs randomized signing has been removed from section 6 as we continue to decide how to address this. On this topic, deterministic vs randomized signing has been added to the security considerations as a place to discuss the security impact of these choices.
---> 
+-->
