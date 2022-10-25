@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-20T02:32:16.872454+00:00",
+  "timestamp": "2022-10-25T02:38:41.073337+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -64,11 +64,19 @@
       "labels": [
         "bug"
       ],
-      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [ ] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [ ] Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).\r\n",
+      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [ ] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
       "createdAt": "2022-09-06T13:18:10Z",
-      "updatedAt": "2022-09-29T17:28:21Z",
+      "updatedAt": "2022-10-25T02:33:45Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n\r\nI am not sure this will be of value in the end. It is probably useful right now for interop reasons, but in the end, there will only be one Dilithium algorithm, the one specified by NIST. ",
+          "createdAt": "2022-10-25T02:32:44Z",
+          "updatedAt": "2022-10-25T02:32:44Z"
+        }
+      ]
     },
     {
       "number": 2,
@@ -84,9 +92,17 @@
       ],
       "body": "Dilithium-2 offers a CoreSVP hardness of ~118 bits of security which is a little lower than it should. The Kyber submission refines the CoreSVP cost by using sieving cost simulations and claims that the gate and memory cost is ~2^150 and ~2^90 approximately which they argue is better than AES. I think it would be worth to call out the CoreSVP hardness and the refined estimate for Dilithium-2 in the Sec Considerations section. ",
       "createdAt": "2022-08-18T02:14:49Z",
-      "updatedAt": "2022-09-26T22:03:41Z",
+      "updatedAt": "2022-10-25T02:30:31Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Depending on what gets standardized, this will be of value in the end. In the end, there will only be one Dilithium algorithm, the one specified by NIST with or without the Dilithium-2 parameter. ",
+          "createdAt": "2022-10-25T02:30:31Z",
+          "updatedAt": "2022-10-25T02:30:31Z"
+        }
+      ]
     },
     {
       "number": 3,
@@ -163,6 +179,54 @@
           "body": "By Markku, \r\n\r\n> I guess it can be a BIT STRING, but it clearly must be of a specific length. For verification purposes, the algorithm identifiers for Dilithium2, Dilithium3, and Dilithium5 should be explicit. Determining that from the public key length is a hack and could be a security issue. Just noting that for completeness; the current \"id-dilithiumTBD\" is clearly temporary. Anyway, a Dilithium-in-PKI I-D would need very clear verification rules related to this issue.\r\n> \r\n> Whatever format the public key is wrapped in, the \"raw concatenated sequence of bytes\" (without any ASN.1 tags, as defined for algorithm designers for public keys) is actually used inside the signature process itself: the thing being signed is always prefixed by its hash: mu = H( H(pk) | m ). One obviously can't sign or verify in an interoperable fashion if one doesn't use that specific raw format for the hash prefix H(pk), also denoted \"tr\" in the spec. It is encoded into the secret key just to tie the public key with the secret key: Key import functions must check that the \"tr\" hash matches.\r\n",
           "createdAt": "2022-09-08T14:22:35Z",
           "updatedAt": "2022-09-08T14:23:16Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOIEpj4c5UvgUX",
+      "title": "Deterministic or randomized Signing? (from Markku)",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/6",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).",
+      "createdAt": "2022-10-25T02:25:26Z",
+      "updatedAt": "2022-10-25T02:29:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This version does not allow leaving K empty as it is a fixed-length octet string. Some implementations may need it, though.\r\n\r\nDilithium allows the same private key to be used for randomized and non-randomized signing; the K value does not affect the public key or break the compatibility of signatures. In fact, some implementors may choose to use the random seed K in a different way; additionally binding it in a hash with some RNG output, the public key, a device-intrinsic key, or whatever. This would often be sensible from security viewpoint. The K value is merely used to randomize the signing process. The only way having a different randomization method could be an issue is if ACVP / FIPS testing turns out to be overly rigid with Dilithium modules. But it is entirely up to the implementation.\r\n",
+          "createdAt": "2022-10-25T02:25:44Z",
+          "updatedAt": "2022-10-25T02:25:44Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOIEpj4c5Uvgu3",
+      "title": "Include \"tr\" in the private key?",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/7",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From John \r\n\r\n> I know there have also been suggestions about including a smaller value that could help in recomputing the public key from the private key.   I guess that could be an optional attribute (the [0] tag in OneAsymmetricKey) if someone decides that is better rather than including an entire public key.   I actually prefer to NOT include the public key in the private key, we already have large enough PQ keys, but some application uses might need it I guess.  \r\n",
+      "createdAt": "2022-10-25T02:27:18Z",
+      "updatedAt": "2022-10-25T02:28:38Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Markku\r\n\r\n> Yes, only the 32-byte \"tr\" variable, which is a hash of the public key, is required to create signatures and must be included in the private key. The public key is not required for this process.\r\n> \r\n> The size difference between \"t1\" and the actual Dilithium public key is only 32 bytes (size of \"rho\"), so it wouldn't make much sense to be passing that variable separately.\r\n> \r\n> Note 1: The \"tr\" hash in secret is useful for implementations since it allows one to verify that (pk,sk) forms a valid keypair just by checking a hash -- rather than going through most of the key generation process required to derive t1. A robust implementation would probably always do that hash value consistency check when supplied with a key pair.\r\n> \r\n> Note 2: Unlike Dilithium, Kyber requires that public keys are entirely contained in the private keys. CCA decapsulation involves a full re-encryption step. \r\n\r\n",
+          "createdAt": "2022-10-25T02:27:59Z",
+          "updatedAt": "2022-10-25T02:27:59Z"
         }
       ]
     }
