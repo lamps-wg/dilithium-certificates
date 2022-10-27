@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-25T02:38:41.073337+00:00",
+  "timestamp": "2022-10-27T02:09:05.095277+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -66,7 +66,7 @@
       ],
       "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [ ] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
       "createdAt": "2022-09-06T13:18:10Z",
-      "updatedAt": "2022-10-25T02:33:45Z",
+      "updatedAt": "2022-10-25T16:40:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -75,6 +75,13 @@
           "body": "> The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n\r\nI am not sure this will be of value in the end. It is probably useful right now for interop reasons, but in the end, there will only be one Dilithium algorithm, the one specified by NIST. ",
           "createdAt": "2022-10-25T02:32:44Z",
           "updatedAt": "2022-10-25T02:32:44Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with you Panos. I've mentioned in the EDNOTE on page 1 that this is concerning Dilithium 3.1 2021-02-08, but I am reluctant to go into more details of differing historic versions and I can see this being confusing to the reader once the NIST process itself has complete.",
+          "createdAt": "2022-10-25T16:40:05Z",
+          "updatedAt": "2022-10-25T16:40:05Z"
         }
       ]
     },
