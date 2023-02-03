@@ -76,7 +76,7 @@
         <!-- uri and facsimile elements may also be added -->
      </address>
     </author>
-    <date year="2022"/>
+    <date year="2023"/>
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
         in the current day for you. If only the current year is specified, xml2rfc will fill
 	 in the current day and month for you. If the year is not the current one, it is
@@ -105,7 +105,7 @@
   <middle>
     <section numbered="true" toc="default">
       <name>Introduction</name>
-      <t>The US National Institute of Standards and Technology (NIST) Post-Quantum Cryptography (PQC) effort has defined quantum-resistant public key cryptographic algorithm standards <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of these Post-Quantum public key algorithms with Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists (CRLs) using object identifiers algorithms assigned by NIST.</t>
+      <t>Dilithium is a quantum-resistant digital signature scheme standardized by the US National Institute of Standards and Technology (NIST) PQC project <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of the Dilithium algorithm in Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists (CRLs) at three security levels: Dilithium2, Dilithium3, and Dilithium5, using object identifiers assigned by NIST</t>
       <t>This specification includes conventions for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates and CRLs <xref target="RFC5280" format="default"></xref>, like <xref target="RFC3279" format="default"></xref> did for classic cryptography and <xref target="RFC5480" format="default"></xref> did for elliptic curve cryptography. It describes the encoding of digital signatures and public keys generated with quantum-resistant signature algorithm Dilithium.</t>
       <section numbered="true" toc="default">
         <name>Requirements Language</name>
@@ -215,11 +215,53 @@
          <t>where DilithiumPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. These parameters <bcp14>MUST</bcp14> be encoded as a single OCTET STRING. The size required to hold a DilithiumPublicKey public key element is therefore 32+320*k bytes.</t>
          <t>The id-dilithiumTBD identifier defined in <xref target="oids"/> <bcp14>MUST</bcp14> be used as the algorithm field in the SubjectPublicKeyInfo sequence <xref target="RFC5280" format="default"/> to identify a Dilithium public key.</t>
          <t>The Dilithium public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value of type BIT STRING) as follows: the most significant bit of the OCTET STRING value becomes the most significant bit of the BIT STRING value, and so on; the least significant bit of the OCTET STRING becomes the least significant bit of the BIT STRING. </t>
-         <t>The following is an example of a DilithiumTBD public key encoded using the textual encoding defined in <xref target="RFC7468"/>.</t>
+         <t>The following is an example of a Dilithium3 public key encoded using the textual encoding defined in <xref target="RFC7468"/>.</t>
          <artwork>
-  -----BEGIN PUBLIC KEY-----
-  TODO insert example public key
-  -----END PUBLIC KEY-------
+-----BEGIN PUBLIC KEY-----
+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
+x5AXF2HOm4o=
+-----END PUBLIC KEY-----
+
          </artwork>
         <t>Conforming CA implementations <bcp14>MUST</bcp14> specify the X.509 public key algorithm explicitly by using the OIDs specified in <xref target="oids"/> when using Dilithium public keys in certificates and CRLs. Conforming client implementations that process Dilithium public keys when processing certificates and CRLs <bcp14>MUST</bcp14> recognize the corresponding OIDs. </t>
         </section>  <!-- End of Dilithium Public Keys in PKIX Section -->
@@ -381,16 +423,6 @@
           <!--<?rfc include="reference.RFC.5480.xml"?>-->
           <?rfc include="reference.RFC.7468.xml"?>
           <?rfc include="reference.RFC.8174.xml"?>
-
-     <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/Call-for-Proposals">
-          <front>
-            <title>Post-Quantum Cryptography</title>
-            <author initials="" surname="National Institute of Standards and Technology (NIST)" fullname="">
-              <organization/>
-            </author>
-            <date year="2016"/>
-          </front>
-        </reference>
       </references>
       <references>
         <name>Informative References</name>
@@ -444,6 +476,16 @@
             <date year="2021"/>
           </front>
         <refcontent>In Proceedings of the 42nd IEEE Symposium on Security and Privacy</refcontent>
+        </reference>
+
+        <reference anchor="NIST-PQC" target="https://csrc.nist.gov/Projects/post-quantum-cryptography">
+          <front>
+            <title>Post-Quantum Cryptography Project</title>
+            <author initials="" surname="National Institute of Standards and Technology (NIST)" fullname="">
+              <organization/>
+            </author>
+            <date year="2016" month="12" day="20"/>
+          </front>
         </reference>
         <!--
       <reference anchor="draft-truskovsky-lamps-pq-hybrid-x509-01" target="https://datatracker.ietf.org/doc/html/draft-truskovsky-lamps-pq-hybrid-x509-01">
@@ -526,4 +568,8 @@ Change log:
   - A mention of the Dilithium algorithm version number (version 3.1 2021-02-08) has been added - we can add a paragraph discussing more details of various algorithm versions if desired.
   - A typo in Appendix B that incorrectly listed the dilithium5 public key size has been fixed.
   - The discussion of deterministic vs randomized signing has been removed from section 6 as we continue to decide how to address this. On this topic, deterministic vs randomized signing has been added to the security considerations as a place to discuss the security impact of these choices.
+
+02-02-2023
+  - Added example Dilithium3 encoded public key.
+  - Cleaned up NIST reference and rephrased first introduction paragraph
 -->
