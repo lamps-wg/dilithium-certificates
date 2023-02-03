@@ -515,7 +515,7 @@ x5AXF2HOm4o=
       <t>We would like to thank ... <!--Markuu, Peikert -->for their insightful comments.</t>
     </section>  <!-- End of Acknowledgements Section -->
     <section anchor="app-additional" numbered="true" toc="default">
-      <name>Appendix</name>
+      <name>Security Strengths</name>
         <t>Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of bits of security, NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 - key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 - collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 - key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 - key search on a block cipher with a 256-bit key (e.g., AES 256).</t>
         <t>The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting signature size, public key, and private key sizes in bytes.</t>
         <!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
