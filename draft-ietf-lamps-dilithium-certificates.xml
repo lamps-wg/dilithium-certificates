@@ -318,7 +318,7 @@ x5AXF2HOm4o=
     <!--</section> End of Private Key Format Section -->
     <section anchor="asn1" numbered="true" toc="default">
       <name>ASN.1 Module</name>
-      <t>This section includes the ASN.1 module for Post-Quantum algorithms in X.509. This module does not come from any previously existing RFC. This module references <xref target="RFC5912" format="default"></xref>.</t>
+      <t>This section includes the ASN.1 module for the Dilithium signature algorithm. This module does not come from any previously existing RFC. This module references <xref target="RFC5912" format="default"></xref>.</t>
       <sourcecode type="asn.1" markers="false">[ EDNOTE: Add ASN.1 here ]
 
   PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
