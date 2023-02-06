@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 6 August 2023                                         S. Turner
+Expires: 10 August 2023                                        S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                         2 February 2023
+                                                         6 February 2023
 
 
   Internet X.509 Public Key Infrastructure: Algorithm Identifiers for
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 August 2023.
+   This Internet-Draft will expire on 10 August 2023.
 
 Copyright Notice
 
@@ -85,7 +85,7 @@ Table of Contents
      10.1.  Normative References
      10.2.  Informative References
    Appendix A.  Acknowledgements
-   Appendix B.  Appendix
+   Appendix B.  Security Strengths
    Authors' Addresses
 
 1.  Introduction
@@ -357,9 +357,9 @@ Table of Contents
 
 7.  ASN.1 Module
 
-   This section includes the ASN.1 module for Post-Quantum algorithms in
-   X.509.  This module does not come from any previously existing RFC.
-   This module references [RFC5912].
+   This section includes the ASN.1 module for the Dilithium signature
+   algorithm.  This module does not come from any previously existing
+   RFC.  This module references [RFC5912].
 
    [ EDNOTE: Add ASN.1 here ]
 
@@ -575,7 +575,7 @@ Appendix A.  Acknowledgements
 
    We would like to thank ... for their insightful comments.
 
-Appendix B.  Appendix
+Appendix B.  Security Strengths
 
    Instead of defining the strength of a quantum algorithm in a
    traditional manner using precise estimates of the number of bits of
