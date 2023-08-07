@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 10 August 2023                                        S. Turner
+Expires: 8 February 2024                                       S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                         6 February 2023
+                                                           7 August 2023
 
 
   Internet X.509 Public Key Infrastructure: Algorithm Identifiers for
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 August 2023.
+   This Internet-Draft will expire on 8 February 2024.
 
 Copyright Notice
 
@@ -397,13 +397,14 @@ Table of Contents
      -- The XOF seed rho is 32 bytes
      -- The vector t1 is 320*k bytes
      -- These are encoded as a single string
+
      pk-dilithiumTBD PUBLIC-KEY ::= {
        IDENTIFIER id-dilithiumTBD
-       KEY DilithiumPublicKey
+       -- KEY no ASN.1 wrapping --
        PARAMS ARE absent
        CERT-KEY-USAGE { nonRepudiation, digitalSignature,
                        keyCertSign, cRLSign }
-       PRIVATE-KEY DilithiumPrivateKey
+       --- PRIVATE-KEY no ASN.1 wrapping --
      }
 
      END
@@ -460,7 +461,7 @@ Table of Contents
    making a modification to the randomized version to include the
    message and key into the seed that generates the the nonce y.  This
    middle ground between a randomized nonce and one tied to the message
-   and key could be the solution to mitigiation both nonce-reuse attacks
+   and key could be the solution to mitigation both nonce-reuse attacks
    in places of poor entropy, as well as mitigate fault attacks that
    rely on differential analysis.
 
