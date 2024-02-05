@@ -1,0 +1,386 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-11-24T01:48:13.742847+00:00",
+  "repo": "lamps-wg/dilithium-certificates",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOIEpj4c5SqJ6k",
+      "title": "Misc Comments from Markku 9/6/2022",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/1",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "jakemas"
+      ],
+      "labels": [
+        "bug"
+      ],
+      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [ ] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
+      "createdAt": "2022-09-06T13:18:10Z",
+      "updatedAt": "2022-10-25T16:40:06Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n\r\nI am not sure this will be of value in the end. It is probably useful right now for interop reasons, but in the end, there will only be one Dilithium algorithm, the one specified by NIST. ",
+          "createdAt": "2022-10-25T02:32:44Z",
+          "updatedAt": "2022-10-25T02:32:44Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with you Panos. I've mentioned in the EDNOTE on page 1 that this is concerning Dilithium 3.1 2021-02-08, but I am reluctant to go into more details of differing historic versions and I can see this being confusing to the reader once the NIST process itself has complete.",
+          "createdAt": "2022-10-25T16:40:05Z",
+          "updatedAt": "2022-10-25T16:40:05Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOIEpj4c5SqJ-U",
+      "title": "Add Dilithium-2 paragraph in Security Considerations",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/2",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "Dilithium-2 offers a CoreSVP hardness of ~118 bits of security which is a little lower than it should. The Kyber submission refines the CoreSVP cost by using sieving cost simulations and claims that the gate and memory cost is ~2^150 and ~2^90 approximately which they argue is better than AES. I think it would be worth to call out the CoreSVP hardness and the refined estimate for Dilithium-2 in the Sec Considerations section. ",
+      "createdAt": "2022-08-18T02:14:49Z",
+      "updatedAt": "2022-10-25T02:30:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Depending on what gets standardized, this will be of value in the end. In the end, there will only be one Dilithium algorithm, the one specified by NIST with or without the Dilithium-2 parameter. ",
+          "createdAt": "2022-10-25T02:30:31Z",
+          "updatedAt": "2022-10-25T02:30:31Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOIEpj4c5SqKBR",
+      "title": "hash-then-sign or not",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/3",
+      "state": "CLOSED",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "From Mike Ounsworth \r\n\r\n> Hi Jake, Panos, Sean, Bas,\r\n> \r\n> We notice that your IETF draft-massimo-lamps-pq-sig-certificates-00 has the following security consideration:\r\n> \r\n> > Within the hash-then-sign paradigm, hash functions are used as a \r\n> > domain restrictor over the message to be signed. By pre-hashing, the \r\n> > onus of resistance to existential forgeries becomes heavily reliant on \r\n> > the collision-resistance of the hash function in use. As well as this security goal, the hash-then-sign paradigm also has the ability to improve performance by reducing the size of signed messages. As a corollary, hashing remains mandatory even for short messages and assigns a further computational requirement onto the verifier. This makes the performance of hash-then-sign schemes more consistent, but not necessarily more efficient.\r\n> > Dilithium diverges from the hash-then-sign paradigm by hashing the message during the signing procedure (at the point in which the challenge polynomial).\r\n> > However, due to the fact that Dilithium signatures may require the \r\n> > signing procedure to be repeated several times for a signature to be produced, Dilithium implementations can make use of pre-hashing the message to prevent rehashing with each attempt.\r\n> \r\n> First, quoting from the Dilithium NIST Round 3 submission documents:\r\n> \r\n> > Since our signing procedure may need to be repeated several times \r\n> > until a signature is produced, we also append a counter in order to \r\n> > make the SHAKE-256 output differ with each signing attempt of the same message.\r\n> \r\n> So it seems like the Dilithium designers explicitly want the hash to differ across repeated attempts.\r\n> \r\n> Second, we had a similar discussion within the context of composite signatures when figuring out how to combine Dilithium and Falcon with ECDSA and RSA. We came out with a different conclusion; that hash-then-sign reduces the security properties of Dilithium and Falcon down to the collision resistance of the hash function used to pre-hash.\r\n> \r\n> We would like community opinion on this.\r\n> \r\n> Here's the Security Consideration text that we're working on:\r\n> \r\n> In the hash-then-sign paradigm, the message to be signed is hashed externally to the signature primitive, and then the hash value is signed.\r\n> \r\n> The hash-then-sign paradigm is required, for example, with RSA signatures in order to sign messages larger than the RSA modulus. Hash-then-sign also gives performance and bandwidth benefits, for example, when the signature is performed by a networked cryptographic appliance since you only need to send a small hash value rather than streaming the entire message.\r\n> \r\n> With Dilithium and Falcon signatures it is not recommended to pre-hash for the following reasons:\r\n> \r\n> The Dilithium construction includes\r\n> \r\n> ~~~\r\n> Sign(sk,M):\r\n> 10: mu \\in {0, 1}^384 := CRH(tr || M)\r\n> ~~~\r\n> \r\n> where `CRH` is any collision-resistant hash function and `tr` is a component of the secret key. This provides strong security against pre-computed collision attacks since an attacker has no a-priori knowledge of `r` and provides per-key hash-domain separation of the message to be signed.\r\n> \r\n> The Falcon construction includes\r\n> \r\n> ~~~\r\n> Sign (m, sk, beta^2):\r\n> 1: r <- {0, 1}^320 uniformly\r\n> 2: c <- HashToPoint(r || m, q, n)\r\n> ~~~\r\n> \r\n> where `HashToPoint` is a SHAKE-256-based construct. This provides strong security against pre-computed collision attacks since an attacker has no a-priori knowledge of `r` and provides per-signature hash-domain separation of the message to be signed.\r\n> \r\n> If the message to be signed is pre-hashed, for example `m0 = SHA256(m)` and then m0 provided to Dilithium or Falcon to sign, then you have re-introduced the collision problem since two messages m1 and m2 where SHA256(m1) == SHA256(m2) hash value will result a single Falcon or Dilithium signature value which is simultaneously valid for both m1 and m2. This removes the extra collision resistance built in to the Dilithium and Falcon primitives and reduces it to the collision resistance strength of the underlying hash function. For this reason it is in general not recommended to pre-hash when using Dilithium or Falcon except in cases where the implementor is comfortable with this reduction in security.\r\n> \r\n> Therefore, for the purpose of interoperability of composite signatures, implementations MUST NOT pre-hash messages for Dilithium and Falcon. If pre-hashed versions of these signatures are desired, then separate signature algorithms will need to be defined.\r\n> \r\n> Third, I can imagine that some applications (like TLS) will want to use non-pre-hashed versions of Dilithium and Falcon, but other applications (like code-signing) would prefer pre-hashed versions. These are not interoperable with each other. Is NIST planning to produce algorithm definitions, OIDs, Codepoints, etc, for both versions?\r\n\r\nMore details in the thread https://mailarchive.ietf.org/arch/msg/spasm/PT7jTztNfI1K6DkS7bQ_SkljoVI/ \r\n",
+      "createdAt": "2022-08-17T18:26:57Z",
+      "updatedAt": "2022-11-22T04:07:28Z",
+      "closedAt": "2022-11-22T04:07:28Z",
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "More details on the advantages of message binding on C. Peikert's https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/eAaiJO1qzkA/m/FIYT_anuAAAJ ",
+          "createdAt": "2022-08-17T19:04:01Z",
+          "updatedAt": "2022-08-17T19:04:01Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**From Scott Fluhrer**\r\n\r\n> Hi Jake, Panos, Sean, Bas,\r\n>\r\n>\r\n> We notice that your IETF draft-massimo-lamps-pq-sig-certificates-00 has the\r\n> following security consideration:\r\n>\r\n> > Within the hash-then-sign paradigm, hash functions are used as a\r\n> > domain restrictor over the message to be signed. By pre-hashing, the\r\n> > onus of resistance to existential forgeries becomes heavily reliant on\r\n> > the collision-resistance of the hash function in use. As well as this security\r\n> goal, the hash-then-sign paradigm also has the ability to improve\r\n> performance by reducing the size of signed messages. As a corollary, hashing\r\n> remains mandatory even for short messages and assigns a further\r\n> computational requirement onto the verifier. This makes the performance of\r\n> hash-then-sign schemes more consistent, but not necessarily more efficient.\r\n> > Dilithium diverges from the hash-then-sign paradigm by hashing the\r\n> message during the signing procedure (at the point in which the challenge\r\n> polynomial).\r\n> > However, due to the fact that Dilithium signatures may require the\r\n> > signing procedure to be repeated several times for a signature to be\r\n> produced, Dilithium implementations can make use of pre-hashing the\r\n> message to prevent rehashing with each attempt.\r\n>\r\n>\r\n> First, quoting from the Dilithium NIST Round 3 submission documents:\r\n>\r\n> > Since our signing procedure may need to be repeated several times\r\n> > until a signature is produced, we also append a counter in order to\r\n> > make the SHAKE-256 output differ with each signing attempt of the same\r\n> message.\r\n>\r\n> So it seems like the Dilithium designers explicitly want the hash to differ\r\n> across repeated attempts.\r\n>\r\n\r\nHmmm, I don't see that in Dilithium; are they referring to the internal ExpandMask function?  That isn't applied to the input message.\r\n\r\nIn any case, it's easy to derive SHAKE( M || 1 ), SHAKE( M || 2 ), ... without multiple passes through M; you compute the partial SHAKE state after process M, and then apply that partial state to 1, 2, ...\r\n\r\n>\r\n>\r\n> Second, we had a similar discussion within the context of composite\r\n> signatures when figuring out how to combine Dilithium and Falcon with\r\n> ECDSA and RSA. We came out with a different conclusion; that hash-then-\r\n> sign reduces the security properties of Dilithium and Falcon down to the\r\n> collision resistance of the hash function used to pre-hash.\r\n>\r\n> We would like community opinion on this.\r\n>\r\n>\r\n> Here's the Security Consideration text that we're working on:\r\n>\r\n>\r\n>\r\n>\r\n> In the hash-then-sign paradigm, the message to be signed is hashed\r\n> externally to the signature primitive, and then the hash value is signed.\r\n>\r\n> The hash-then-sign paradigm is required, for example, with RSA signatures in\r\n> order to sign messages larger than the RSA modulus. Hash-then-sign also\r\n> gives performance and bandwidth benefits, for example, when the signature\r\n> is performed by a networked cryptographic appliance since you only need to\r\n> send a small hash value rather than streaming the entire message.\r\n>\r\n> With Dilithium and Falcon signatures it is not recommended to pre-hash for\r\n> the following reasons:\r\n>\r\n>\r\n> The Dilithium construction includes\r\n>\r\n> ~~~\r\n> Sign(sk,M):\r\n> 10: mu \\in {0, 1}^384 := CRH(tr || M)\r\n> ~~~\r\n>\r\n> where `CRH` is any collision-resistant hash function and `tr` is a component\r\n> of the secret key.\r\n\r\nA hash of the public key, actually; see line 7 of the key generation process (which explicitly computes it from the components of the public key) - Dilithium stores it in the private key so the signer doesn't need to recompute it every time.\r\n\r\n> This provides strong security against pre-computed\r\n> collision attacks since an attacker has no a-priori knowledge of `r` and\r\n> provides per-key hash-domain separation of the message to be signed.\r\n\r\nRather, it limits the usability of any found collision to a specific public key; however it does nothing to frustrate a collision attack against a specific public key.\r\n\r\nNow, it does probably add a constant factor to any attack that searches for a simultaneous collision between the hash that RSA/ECDSA uses (without the prepend) and the hash that Dilithium uses (with the known prepend) - I would hesitate to give a value to that constant factor, but it is likely not large.\r\n",
+          "createdAt": "2022-08-17T19:30:50Z",
+          "updatedAt": "2022-08-17T19:30:50Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "From Mike Ounsworth:\r\nI want to break out and expand our third point as it is actually a question to NIST and not to the IETF authors.\r\n\r\n\r\n> Third, I can imagine that some applications (like TLS) will want to use non-pre-hashed versions of Dilithium and Falcon, but other applications (like code-signing) would prefer pre-hashed versions. These are not interoperable with each other. Is NIST planning to produce algorithm definitions, OIDs, Codepoints, etc, for both versions?\r\n\r\nExpanding on the code-signing example: the messages to be signed can be very large; consider a several GB firmware image. Assuming our understanding below is correct, a direct-sign algorithm would require the entire thing to be streamed to a network HSM for signing and to a TPM for verification. Conversely code-signing environments often include counter-signatures from Time Stamping Authorities which protect against future discovery of collision attacks against the hash function -- as an example, Windows still accepts RSA-SHA1 signatures produced before SHA1 was deprecated. I can imagine that the code-signing community will decide that the performance gains of hash-then-sign outweigh the security loss.\r\n\r\nSo, will NIST standardize both direct-sign and some variant of hash-then-sign for PQC signature primitives?\r\n",
+          "createdAt": "2022-08-17T19:31:58Z",
+          "updatedAt": "2022-08-17T19:31:58Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">>So it seems like the Dilithium designers explicitly want the hash to differ across repeated attempts.\r\n>    \r\n>Hmmm, I don't see that in Dilithium; are they referring to the internal ExpandMask function?  That isn't applied to the input message.\r\n>In any case, it's easy to derive SHAKE( M || 1 ), SHAKE( M || 2 ), ... without multiple passes through M; you compute the partial SHAKE state after process M, and then apply that partial state to 1, 2, ...\r\n\r\nI think we are referring to different parts of the signing process here. For reference, my security consideration was referring to page 4 of the Dilithium spec that states:\r\n\"Our full scheme in Fig. 4 also makes use of basic optimizations such as pre-hashing the message M so as to not rehash it with every signing attempt.\" and Figure 4 itself.\r\n\r\nIt was my understanding that the signing procedure may need to be repeated several times to produce a signature, and thus pre-hashing would prevent the need to individually hash the input message with each attempt. I believe the desired differing of the hash you mentioned is within the internals of the signing procedure and not on the input message itself.\r\n\r\n   >> Third, I can imagine that some applications (like TLS) will want to use non-pre-hashed versions of Dilithium and Falcon, but other applications (like code-signing) would prefer pre-hashed versions. These are not interoperable with each other. Is NIST planning to produce algorithm definitions, OIDs, Codepoints, etc, for both versions?\r\n\r\n   >Expanding on the code-signing example: the messages to be signed can be very large; consider a several GB firmware image. Assuming our understanding below is correct, a direct-sign algorithm would require the entire thing to be streamed to a network HSM for signing and to a TPM for verification. Conversely code-signing environments often include counter-signatures from Time Stamping Authorities which protect against future discovery of collision attacks against the hash function -- as an example, Windows still accepts RSA-SHA1 signatures produced before SHA1 was deprecated. I can imagine that the code-signing community will decide that the performance gains of hash-then-sign outweigh the security loss.\r\n\r\n>So, will NIST standardize both direct-sign and some variant of hash-then-sign for PQC signature primitives?\r\n\r\nI do agree that there may be optimizations that users may wish to make dependent on the context, i.e., hash-then-sign vs direct-sign. It's for this reason I tried to give an overview of the security of each option in the draft, but ultimately leave that up to the user. It is a good point regarding NISTs perspective on what should be explicitly standardized here.\r\n\r\n>> This provides strong security against pre-computed\r\n>> collision attacks since an attacker has no a-priori knowledge of `r` and\r\n>> provides per-key hash-domain separation of the message to be signed.\r\n>\r\n>Rather, it limits the usability of any found collision to a specific public key; however it does nothing to frustrate a collision attack against a specific public key.\r\n\r\nRight, more details on the advantages of message binding on the PQC-forum from C. Peikert's https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/eAaiJO1qzkA/m/K66R_ftNBwAJ. It was this discussion I was trying to encompass in the draft.",
+          "createdAt": "2022-08-17T19:42:05Z",
+          "updatedAt": "2022-08-17T19:42:05Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Doing a thorough analysis on the topic, it seems the best approach is to follow EdDSA and do not digest. There is no practical performance impact for most X.509 usecases and even for PKCS#11 with incremental APIs and big messages there will be no issue just for Dilithium. More details in the doc written for NCCOE. \r\n\r\nKeeping it as pure Dilithium, no digest. ",
+          "createdAt": "2022-11-22T04:07:19Z",
+          "updatedAt": "2022-11-22T04:07:19Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOIEpj4c5SqKEL",
+      "title": "public key as octet string",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/4",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Address discussion in https://mailarchive.ietf.org/arch/msg/spasm/pDD40rIFpdN7SijRp_2WgihRbxA/ about bit or octet string according to consensus",
+      "createdAt": "2022-08-09T18:12:30Z",
+      "updatedAt": "2022-11-03T16:44:51Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "By Simon G. \r\n\r\n> - I also support the byte array encoding for the private key proposed by the algorithm designers. It is an already defined encoding, so I think it makes sense to take that one.\r\nAlso the public key is encoded as an array (but as a BIT STRING instead, because of rfc 5912), so I think to be at least somewhat consistent the private and public key should be \r\nencoded as an OCTET STRING and BIT STRING respectively.\r\n> - On that note I just wanted to add that I think it would make more sense that the public key is also encoded as an OCTET STRING, but I guess that can't happen because of backward-compatibility.     \r\n",
+          "createdAt": "2022-09-08T14:22:31Z",
+          "updatedAt": "2022-09-08T14:23:32Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "By Markku, \r\n\r\n> I guess it can be a BIT STRING, but it clearly must be of a specific length. For verification purposes, the algorithm identifiers for Dilithium2, Dilithium3, and Dilithium5 should be explicit. Determining that from the public key length is a hack and could be a security issue. Just noting that for completeness; the current \"id-dilithiumTBD\" is clearly temporary. Anyway, a Dilithium-in-PKI I-D would need very clear verification rules related to this issue.\r\n> \r\n> Whatever format the public key is wrapped in, the \"raw concatenated sequence of bytes\" (without any ASN.1 tags, as defined for algorithm designers for public keys) is actually used inside the signature process itself: the thing being signed is always prefixed by its hash: mu = H( H(pk) | m ). One obviously can't sign or verify in an interoperable fashion if one doesn't use that specific raw format for the hash prefix H(pk), also denoted \"tr\" in the spec. It is encoded into the secret key just to tie the public key with the secret key: Key import functions must check that the \"tr\" hash matches.\r\n",
+          "createdAt": "2022-09-08T14:22:35Z",
+          "updatedAt": "2022-09-08T14:23:16Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Current language used is similar to [RFC3279](https://www.rfc-editor.org/rfc/rfc3279) says \r\n\r\n>   The elliptic curve public key (an ECPoint which is an OCTET STRING)\r\n>    is mapped to a subjectPublicKey (a BIT STRING) as follows:  the most\r\n>    significant bit of the OCTET STRING becomes the most significant bit\r\n>    of the BIT STRING, and the least significant bit of the OCTET STRING\r\n>    becomes the least significant bit of the BIT STRING.",
+          "createdAt": "2022-11-03T02:54:40Z",
+          "updatedAt": "2022-11-03T02:54:40Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Suggestion by @baentsch \r\n\r\n> may I suggest to (re-)add reference to [SEC1] as well as a sample pub key in section 4 of your draft? \r\n",
+          "createdAt": "2022-11-03T13:11:48Z",
+          "updatedAt": "2022-11-03T16:43:48Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From @baentsch\r\n\r\n> Should you be looking for a sample pub key, here we go: Dilithium2 with the next available NIST OID \"2.16.840.1.101.3.4.3.17\" as it's now generated by OpenSSL3+oqsprovider:\r\n> \r\n> -----BEGIN PUBLIC KEY-----\r\n> MIIFMjALBglghkgBZQMEAxEDggUhAGfo4APVpCWuTTvyoUpSRos6ku+jjqY5QeLz\r\n> SSERjGF26euQOc4vzl0BtR3IC7cNvFp4oKkplCPWuvHTB3mkW+KOBE+tm4xdxAXG\r\n> TwNrgCbUZVGfZpcVmNRQpliF1P5hC2s2jUtZvqOI1VMMOwy9S0i4XmgRIQo3MhOX\r\n> GPeTtAzp1EiyH6LlCVgHZKBLoof5dka5yLMkUidEf7JmsQVsPCd8PpfVOmkMgr0D\r\n> BY+iUx5xLM5IRw6eVCgZTgx62IRG0Qcu0FlpL0giV/tniV4R9y/4gIQT/ThRy1YU\r\n> 8KggifXDngNPyxRVd+Z/U81VBxTiSD8syqmn/Jg5QEbhBnV1FERV1kRBstMRNUld\r\n> pJ6u2j7ru03vnqlf0LhX57RP8gJmTqu2fsvuRCpCVQ/6WG89I3tBGjSrYshJIKLE\r\n> OtxSQTmKoqyRm8A2T/OGDflyQ9KBJZbdzP7ILJUUBbsS69/3Fd57ke8LIsxkhpNX\r\n> lXUSFxRQkz91WmE1yaVnawgb3H+pWxUWWlWj5Un95RYpLMeW1EATAXrAIGHHa2wX\r\n> VHofEMsHiow7PsWFvW6TCOPGeEifJPRFCbcGkiay7PqFW/WPiCqt/jPhf/43/SqB\r\n> 4Rm+5RdYdp+dRtWFgnw73WRA84eYwr9U692LwEu9J6QKcRXua7zCP/PDbIaDpVij\r\n> wLW8/Xso9F135VJxR9GHPa/IS1lHBE1NrCxTSOvgqgVKzWYvxYkn/UkGCRzKlDW4\r\n> q2r22+4Y5c9j8Pil9tlt/6BMVAai+rpTgbAnU2w81TsFtQMiCHAiKDzz1xow6Aic\r\n> dbX6+oLLuZrwsgKeXe7XtnhFQJuupgUbBRLTo6tVu/kwdpCwJBH4NtwkTwZUTDy8\r\n> NbPVFE7ljZ8J5lcsYCf780Bh4DRkg3Ld5RnrWif4yNGgzzSBKidgAiw1jJgsZaQa\r\n> ktb4wgGyx4iXw+SqDTewaUO8cPCtgvn5IYJIVFRidNUflpTpETjgQES8z8/VwgQW\r\n> gu3W639dygg+8D1QOytlI8gDrIOEa3+xQpoSIXAmzOT3y9ipSr57SuphFdHwvaw2\r\n> p5w+bMgAdSDk+CBEJPzjkdhp7iGk0i6JHxRbXns4kFJpdnNqZnh7T7fwgmpWaeuv\r\n> esXOn94Jucda4wSFNHxV/VIth3QtizysyY5gjsOfHTOxI8u4jDGG/m1Ei5oduRfj\r\n> NFQE+7VR/PisG/YM+rcBuE2uJITB68mRpiHG1lSpDOtOmDjAeIHvjSI7/eFyHU4M\r\n> DYXQZFoc77CrF/lSRYZPwN5uJAXJB9SiJsYbLNwUAIXlkVDq+p+YEedElR/rnH3V\r\n> +9Vha0zsLMmQFNrmJpkRedQ2LCSVUx8vuiFSB05a0sb2LmeOIGr4eoE9u6UvLNun\r\n> U1e8rhX1NZafATIWhqedJQjzSfsGQjkHrQfWRjH1IWdPP9ZJiNP0jSHTsMgnOpnz\r\n> YPe6ob9fwmCNTrtL79gUEDPe1s05+5JDzmyehMiEnYAm8xYXXFmEmi6dVzIKv5rf\r\n> 6ENJT90dba3PQM2jyLsqt0ywYzpL9xyg/dwpjhQa9gMm8cdJiJ6JrfdL8h1D1Rzt\r\n> c/2HHKoBkwssE3P/llbF3qD/j3dB7nM/2UXBZja2jLU6fOGxRnDdresWJK0qEPej\r\n> ixCjNQfTTCpFNc1/+6LAG6GnvPIUMgrT/Bc2HCW6AY1qWArUOwq2E2PQR3KhJ6rc\r\n> zXmCrNsf5s5Z2QoiGVuva6OiiVPFMB5TmXnuGU5pLO3FVyvxo9A=\r\n> -----END PUBLIC KEY-----\r\n\r\n",
+          "createdAt": "2022-11-03T16:44:50Z",
+          "updatedAt": "2022-11-03T16:44:50Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOIEpj4c5UvgUX",
+      "title": "Deterministic or randomized Signing? (from Markku)",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/6",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).",
+      "createdAt": "2022-10-25T02:25:26Z",
+      "updatedAt": "2022-10-25T02:29:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This version does not allow leaving K empty as it is a fixed-length octet string. Some implementations may need it, though.\r\n\r\nDilithium allows the same private key to be used for randomized and non-randomized signing; the K value does not affect the public key or break the compatibility of signatures. In fact, some implementors may choose to use the random seed K in a different way; additionally binding it in a hash with some RNG output, the public key, a device-intrinsic key, or whatever. This would often be sensible from security viewpoint. The K value is merely used to randomize the signing process. The only way having a different randomization method could be an issue is if ACVP / FIPS testing turns out to be overly rigid with Dilithium modules. But it is entirely up to the implementation.\r\n",
+          "createdAt": "2022-10-25T02:25:44Z",
+          "updatedAt": "2022-10-25T02:25:44Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOIEpj4c5Uvgu3",
+      "title": "Remove Public Key from the Private Key Structure",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/7",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From John \r\n\r\n> I know there have also been suggestions about including a smaller value that could help in recomputing the public key from the private key.   I guess that could be an optional attribute (the [0] tag in OneAsymmetricKey) if someone decides that is better rather than including an entire public key.   I actually prefer to NOT include the public key in the private key, we already have large enough PQ keys, but some application uses might need it I guess.  \r\n",
+      "createdAt": "2022-10-25T02:27:18Z",
+      "updatedAt": "2022-11-23T18:47:37Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Markku\r\n\r\n> Yes, only the 32-byte \"tr\" variable, which is a hash of the public key, is required to create signatures and must be included in the private key. The public key is not required for this process.\r\n> \r\n> The size difference between \"t1\" and the actual Dilithium public key is only 32 bytes (size of \"rho\"), so it wouldn't make much sense to be passing that variable separately.\r\n> \r\n> Note 1: The \"tr\" hash in secret is useful for implementations since it allows one to verify that (pk,sk) forms a valid keypair just by checking a hash -- rather than going through most of the key generation process required to derive t1. A robust implementation would probably always do that hash value consistency check when supplied with a key pair.\r\n> \r\n> Note 2: Unlike Dilithium, Kyber requires that public keys are entirely contained in the private keys. CCA decapsulation involves a full re-encryption step. \r\n\r\n",
+          "createdAt": "2022-10-25T02:27:59Z",
+          "updatedAt": "2022-10-25T02:27:59Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From David B. \r\n> There should not be an OPTIONAL copy of the public key in DilithiumPrivateKey. Either it's part of the structure, or it isn't, with no optionality. We've already learned this lesson with ECPrivateKey; the various optional fields have had a compounding negative effect up the stack. This is also the wrong layer to define this... whatever specification we have for Dilithium, be it NIST's actual document or a fixup document in CFRG, should come with a byte string representation that we just drop into PKCS#8 unmodified and unadorned.",
+          "createdAt": "2022-11-22T04:08:25Z",
+          "updatedAt": "2022-11-22T04:08:25Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Phillip H. B. \r\n\r\n>> So, does that mean for Dilithium there is no reason to ever carry the public key and the private key together because it\u2019s literally duplicate data that\u2019s easy to extract?\r\n> \r\n> I disagree with 'never'\r\n> \r\n> When dealing with a layered system, the outer layers do not understand the internals of the crypto algorithms by design. It is pretty easy to calculate the ECDH public key from the private but we never expect an implementation to do that because they are just blobs of bits.\r\n> \r\n> But this looks like a different question, the PKIX encoding of private key leaves this to the individual algorithm so that approach doesn't work for PKIX. But it does for other private key encodings and so we should not make an over-broad statement here.\r\n",
+          "createdAt": "2022-11-22T04:10:57Z",
+          "updatedAt": "2022-11-22T04:11:34Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "As Markku brought up in the list, in Dilithium the private key includes `rho, K , tr, s1, s2 , t0`. In terms of public key material, only `rho`, `tr=CRH(rho|| t1)` and `t0` are included in the private key, but not the `t1` part of the whole t (`t=(t0,t1)`). `t0, t1` are non-sensitive and they make the whole t value which could be looked as a public key. `t1` is only included in the Dilithium public key  `(rho, t1)` and is used for verification. That was done to optimize public key size by omitting `t0`. `t0` is used when signing and is only stored in the private key to optimize space.\r\n\r\nSomeone can derive the public key `(rho, t1)` from the private key `rho, K , tr, s1, s2 , t0` by performing the `t := A*s1+s2` computation and getting `t1` from `(t1, t0) := Power2Roundq(t, d)`. `t := A*s1+s2` is almost as expensive as key generation itself. \r\n\r\nIn other words, not including the public key `(rho, t1)` in the private key ASN.1 structure will require a signer that has the private key only to do a `t := A*s1+s2` operation in order to get the public key `(rho, t1)`. Given that signers usually do not use the public key to verify their own signatures and that the `A*s1+s2` is not awfully expensive, it seems that not putting the whole public key in the private key structure is justified to keep the private key size smaller, prevent issues of the past by putting optional parameters. \r\n\r\nI would expect signers to have a separate copy of their public key `(rho, t1)` and not only store their private key anyway. PKCS#8 could also take either of these in it. Additionally, the private and public key structures should just follow the Signature algorithm specification from NIST and not introduce additional structures that are unnecessary as David B. suggestion above. ",
+          "createdAt": "2022-11-22T17:14:55Z",
+          "updatedAt": "2022-11-22T17:23:19Z"
+        },
+        {
+          "author": "mjosaarinen",
+          "authorAssociation": "NONE",
+          "body": "> In other words, not including the public key `(rho, t1)` in the private key ASN.1 structure will require a signer that has the private key only to do a `t := A*s1+s2` operation in order to get the public key `(rho, t1)`. Given that signers usually do not use the public key to verify their own signatures and that the `A*s1+s2` is not awfully expensive, it seems that not putting the whole public key in the private key structure is justified to keep the private key size smaller, prevent issues of the past by putting optional parameters.\r\n> \r\n\r\nNote that while this can mathematically be done, no current Dilithium implementation provides this conversion functionality. You'd need to create special API calls just to facilitate this. And it would probably be outside NIST / FIPS / CAVP validation too, as it's a \"derive the public key from private key\" that is not covered by Signing, Verification, and Key Generation pseudocode. So it is not in any way certain that a future FIPS 140-? or NIAP Dilithium module is able to do this at all.",
+          "createdAt": "2022-11-22T18:18:54Z",
+          "updatedAt": "2022-11-22T18:18:54Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Note that while this can mathematically be done, no current Dilithium implementation provides this conversion functionality. You'd need to create special API calls just to facilitate this. And it would probably be outside NIST / FIPS / CAVP validation too, as it's a \"derive the public key from private key\" that is not covered by Signing, Verification, and Key Generation pseudocode. So it is not in any way certain that a future FIPS 140-? or NIAP Dilithium module is able to do this at all.\r\n\r\nACK. I still do not consider this as a big problem because the module ought to be able to keep a copy of both the public and private key structures separately. ",
+          "createdAt": "2022-11-22T19:53:30Z",
+          "updatedAt": "2022-11-22T19:53:30Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Bas W.\r\n\r\n>What about the following, more radical proposal: we simply use the seed as the private key.\r\n> \r\n> Key generation is fast compared to signing. But it's even better: a big chunk of the computation for key generation is the expansion of A, which is also done for signing. So combining them is less expensive than it seems.\r\n\r\n> I modified ref and it seems to be roughly sign + keypair - matrix_expand. [1] For ref on my laptop i5, it's a slowdown of 18%, 14%, 10% for 2, 3 and 5. With avx2 on my laptop I'd expect the slowdown to be 11%, 10%, 13%. Of course these numbers are very much platform dependent.\r\n\r\n",
+          "createdAt": "2022-11-23T18:41:26Z",
+          "updatedAt": "2022-11-23T18:42:17Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Uri B.\r\n> What about the following, more radical proposal: we simply use the seed as the private key.\r\n\r\nI like this idea.\r\n",
+          "createdAt": "2022-11-23T18:42:58Z",
+          "updatedAt": "2022-11-23T18:42:58Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Markku > The Dilithium specification contains a description of the secret key format; I'd suggest sticking with it.\r\n> \r\n> There are indeed use cases for using the seed as a secret key (especially since a fully deterministic seed expansion mechanism is described in the spec). Secure, non-volatile key storage is very expensive in hardware devices, and the 256-bit Dilithium seed can be internally managed exactly like an AES key. We have semiconductor customers that want this due to the storage issue, despite the performance penalty. However, such keys are managed without any ASN.1 encodings and hence are not really of interest to LAMPS.\r\n> \r\n> Clearly, converting a standard-format Dilithium key back to the seed is impossible. So you can't export the seed from an implementation that uses standard-format keys.\r\n> \r\n> There is a performance penalty from using the seed, but indeed it is not horribly high on a non-protected implementation (if you completely merge the key generation with signing in the implementation) -- I'd guess ~20%?\r\n> \r\n> With side-channel protections, it is a completely different matter due to the random sampling required in key generation.  Side-channel attacks generally require many traces of the same operation to be effective; if key generation is only performed only once, it is less vulnerable. But if key generation is performed for every signature, as proposed, then it needs the same level of protection.\r\n> \r\n> The sampling is uniform in a small range, but masked rejection sampling involves masked comparisons and a \"gather\" operation which are quite expensive. I'd guess the cost is 50%, but customers still want this as otherwise they would need tens of kilobytes of non-volatile storage inside the on-chip security boundary. So.. we happen to have side-channel protected determinstic Dilithium key generation even though an analogous RSA signature module would not  have it. This is because signature key generation is performed \"rarely\" (perhaps only once, during device enrollment) and is randomized. Others may choose not to implement signature algorithm key generation in such a manner.\r\n\r\nAnd Bas acknowledged \r\n>> With side-channel protections, it is a completely different matter due to the random sampling required in key generation.  Side-channel attacks generally require many traces of the same operation to be effective; if key generation is only performed only once, it is less vulnerable. But if key generation is performed for every signature, as proposed, then it needs the same level of protection.\r\n\r\n> This is a good argument against.\r\n\r\n",
+          "createdAt": "2022-11-23T18:46:23Z",
+          "updatedAt": "2022-11-23T18:47:37Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I like the seed idea too because it simplifies the private key. But I don\u2019t like that it basically requires keygen+sign every time you want to sign which is different to what we have traditionally been doing. Plus the side-channel concern Markku brought up. For now, let\u2019s keep the Dilithium PrivateKey in the structure, and we can consider keeping only the seed if there is a shift and keygen+sign for a seed becomes common. \r\n",
+          "createdAt": "2022-11-23T18:46:32Z",
+          "updatedAt": "2022-11-23T18:46:32Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOIEpj4c5XCSoE",
+      "title": "Public Key included in Private Key",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/8",
+      "state": "CLOSED",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From David B. \r\n> There should not be an OPTIONAL copy of the public key in DilithiumPrivateKey. Either it's part of the structure, or it isn't, with no optionality. We've already learned this lesson with ECPrivateKey; the various optional fields have had a compounding negative effect up the stack. This is also the wrong layer to define this... whatever specification we have for Dilithium, be it NIST's actual document or a fixup document in CFRG, should come with a byte string representation that we just drop into PKCS#8 unmodified and unadorned.",
+      "createdAt": "2022-11-22T16:45:36Z",
+      "updatedAt": "2022-11-22T16:47:31Z",
+      "closedAt": "2022-11-22T16:47:30Z",
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Dup of https://github.com/lamps-wg/dilithium-certificates/issues/7",
+          "createdAt": "2022-11-22T16:47:30Z",
+          "updatedAt": "2022-11-22T16:47:30Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 5,
+      "id": "PR_kwDOIEpj4c5A_td_",
+      "title": "Update README.md",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/5",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Make editor link point to the right repo.",
+      "createdAt": "2022-10-18T08:50:50Z",
+      "updatedAt": "2022-10-18T14:37:38Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "1c17ee20c7c9c0ceb25fc4af13ecdf7264c9eef0",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-patch-2",
+      "headRefOid": "025eb33a199ffc98dcc1939b1ffea03681dad21f",
+      "closedAt": "2022-10-18T14:37:38Z",
+      "mergedAt": "2022-10-18T14:37:38Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "9f65f13fdb5c3b7256c894667af32a4c78a777f6"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
