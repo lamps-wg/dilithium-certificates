@@ -96,7 +96,7 @@
         output. If you submit your draft to the RFC Editor, the
         keywords will be used for the search engine. -->
    <abstract>
-      <t>Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document describes the conventions for using the Module-Lattice-Based Digital Signatures (ML-DSA) in Internet X.509 certificates and certificate revocation lists.  The conventions for the associated signatures, subject public keys, and private key are also described.</t>
+      <t>Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document describes the conventions for using the Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates and certificate revocation lists.  The conventions for the associated signatures, subject public keys, and private key are also described.</t>
     </abstract>
     <note>
     <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized FIPS 204 Module-Lattice-Based Digital Signature Standard. The current FIPS draft was published August 24, 2023 for public review. Final versions are expected by April 2024. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]</t>
@@ -105,7 +105,7 @@
   <middle>
     <section numbered="true" toc="default">
       <name>Introduction</name>
-      <t>Module-Lattice-Based Digital Signatures (ML-DSA) is a quantum-resistant digital signature scheme standardized by the US National Institute of Standards and Technology (NIST) PQC project <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of the ML-DSA algorithm in Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87, using object identifiers assigned by NIST.</t>
+      <t>The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the US National Institute of Standards and Technology (NIST) PQC project <xref target="NIST-PQC" format="default"></xref>. This document specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87, using object identifiers assigned by NIST.</t>
       <t>This specification includes conventions for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates and CRLs <xref target="RFC5280" format="default"></xref>, like <xref target="RFC3279" format="default"></xref> did for classic cryptography and <xref target="RFC5480" format="default"></xref> did for elliptic curve cryptography. It describes the encoding of digital signatures and public keys generated with quantum-resistant signature algorithm ML-DSA.</t>
       <section numbered="true" toc="default">
         <name>Requirements Language</name>
