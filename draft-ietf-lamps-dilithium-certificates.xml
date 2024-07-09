@@ -212,7 +212,7 @@
       <t>The identifiers defined in <xref target="oids" format="default"/> can be used as the AlgorithmIdentifier
 	      in the signatureAlgorithm field in the sequence Certificate/CertificateList and the signature field
 	      in the sequence TBSCertificate/TBSCertList in certificates and CRLs, respectively,
-	      <xref target="RFC5280" format="default"/>. The parameters of these signature algorithms <bcp>MUST</bcp> be absent,
+	      <xref target="RFC5280" format="default"/>. The parameters of these signature algorithms <bcp14>MUST</bcp14> be absent,
 	      as explained in <xref target="oids" format="default" sectionFormat="of" derivedContent="Section 3"/>.</t>
       <t>The signatureValue field contains the corresponding ML-DSA signature computed upon the ASN.1 DER encoded
 	      tbsCertificate/tbsCertList <xref target="RFC5280" format="default"/>.</t>
