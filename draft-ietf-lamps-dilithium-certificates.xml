@@ -226,7 +226,7 @@
 	      the OID id-ML-DSA.</t>
       </section> <!-- End of Dilithium Signatures in PKIX Section -->
 
-      <section anchor="mlsdsapublickey" numbered="true" toc="default">
+      <section anchor="mldsapublickey" numbered="true" toc="default">
         <name>ML-DSA Public Keys in PKIX</name>
         <t>In the X.509 certificate, the subjectPublicKeyInfo field has the SubjectPublicKeyInfo type, which has the following
 		ASN.1 syntax: </t>
