@@ -128,7 +128,7 @@
     }
        </sourcecode>
        <aside>
-       <t>NOTE: The above syntax is from <xref target="RFC5912"/> and is compatible with the 2021 ASN.1 syntax {{X680}}. See
+       <t>NOTE: The above syntax is from <xref target="RFC5912"/> and is compatible with the 2021 ASN.1 syntax <xref target="X680"/>}. See
 	       <xref target="RFC5280"/> for the 1988 ASN.1 syntax.</t>
        </aside>
        <t>The fields in AlgorithmIdentifier have the following meanings:</t>
