@@ -504,7 +504,7 @@ x5AXF2HOm4o=
 	      corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme
 	      ML-DSA possess three security properties beyond unforgeability, that are associated with non-repudiation. These
 	      are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on
-	      the assumed collision resistance of the hash function used (in this case SHAKE-256).</t>
+	      the assumed collision resistance of the hash function used (in this case SHAKE-256).
 
       Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it
 	      is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for
