@@ -119,7 +119,7 @@
       <name>Identifiers</name>
       <t>This specification uses placeholders for object identifiers until the identifiers for the new algorithms are assigned by NIST.</t>
       <t>The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows: </t>
-       <sourcecode type="asn.1">
+       <artwork type="asn.1">
    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
      SEQUENCE {
        algorithm   ALGORITHM-TYPE.&id({AlgorithmSet}),
