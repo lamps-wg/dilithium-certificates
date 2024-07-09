@@ -516,7 +516,7 @@ x5AXF2HOm4o=
 	      <xref target="CDFFJ21" format="default"></xref>.
 
       These properties are dependent, in part, on unambiguous public key serialization. It for this reason the public key
-	      structure defined in <xref target="dilithiumpublickey" format="default"/> is intentionally encoded as a single
+	      structure defined in <xref target="mldsapublickey" format="default"/> is intentionally encoded as a single
 	      OCTET STRING.</t>
     </section>  <!-- End of Security Considerations Section -->
   </middle>
