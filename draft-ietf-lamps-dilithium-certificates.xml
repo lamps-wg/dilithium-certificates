@@ -119,14 +119,14 @@
       <name>Identifiers</name>
       <t>This specification uses placeholders for object identifiers until the identifiers for the new algorithms are assigned by NIST.</t>
       <t>The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows: </t>
-       <artwork type="asn.1">
+       <sourcecode type="asn.1">
    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
      SEQUENCE {
-       algorithm   ALGORITHM-TYPE.&id({AlgorithmSet}),
+       algorithm   ALGORITHM-TYPE."&amp;"id({AlgorithmSet}),
        parameters  ALGORITHM-TYPE.
-                     &Params({AlgorithmSet}{@algorithm}) OPTIONAL
+                     "&amp;"Params({AlgorithmSet}{@algorithm}) OPTIONAL
      }
-       </artwork>
+       </sourcecode>
        <aside>
        <t>NOTE: The above syntax is from <xref target="RFC5912"/> and is compatible with the 2021 ASN.1 syntax <xref target="X680"/>}. See
 	       <xref target="RFC5280"/> for the 1988 ASN.1 syntax.</t>
