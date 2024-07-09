@@ -546,7 +546,7 @@ x5AXF2HOm4o=
           <?rfc include="reference.RFC.7468.xml"?>
           <?rfc include="reference.RFC.8174.xml"?>
 
-        <reference anchor="FIPS204" target="https://doi.org/10.6028/NIST.FIPS.204.ipd">
+        <reference anchor="DRAFTFIPS204" target="https://doi.org/10.6028/NIST.FIPS.204.ipd">
           <front>
             <title>DRAFT FIPS 204 (Initial Public Draft): Module-Lattice-Based Digital Signature Standard</title>
             <author initials="G. M." surname="Raimondo" fullname="G. M. Raimondo">
