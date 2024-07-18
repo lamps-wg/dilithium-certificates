@@ -150,14 +150,16 @@
       </aside>
       <t>The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows:</t>
        <sourcecode type="asn.1">
-   AlgorithmIdentifier  ::=  SEQUENCE  {
-       algorithm   OBJECT IDENTIFIER,
-       parameters  ANY DEFINED BY algorithm OPTIONAL
-   }
+   AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
+     SEQUENCE {
+       algorithm   ALGORITHM-TYPE."&amp;"id({AlgorithmSet}),
+       parameters  ALGORITHM-TYPE.
+                     "&amp;"Params({AlgorithmSet}{@algorithm}) OPTIONAL
+     }
        </sourcecode>
        <aside>
-       <t>NOTE: The above syntax is from <xref target="RFC5280"/> and matches the version used therein, i.e., the 1988 ASN.1 syntax.
-	       See <xref target="RFC5912"/> for ASN.1 compatible with the 2021 ASN.1 syntax <xref target="X680"/>.</t>
+       <t>NOTE: The above syntax is from <xref target="RFC5912"/> and is compatible with the 2021 ASN.1 syntax <xref target="X680"/>}. See
+	       <xref target="RFC5280"/> for the 1988 ASN.1 syntax.</t>
        </aside>
        <t>The fields in AlgorithmIdentifier have the following meanings:</t>
        <ul>
