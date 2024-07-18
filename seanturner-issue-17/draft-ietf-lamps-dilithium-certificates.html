@@ -10,7 +10,11 @@
 <meta content="Sean Turner" name="author">
 <meta content="Bas Westerbaan" name="author">
 <meta content="
-       Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document describes the conventions for using the Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates and certificate revocation lists.  The conventions for the associated signatures, subject public keys, and private key are also described. 
+       Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs),
+       and to sign messages. This document describes the conventions for using the
+       Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates
+       and certificate revocation lists.  The conventions for the associated signatures, subject
+       public keys, and private key are also described. 
     " name="description">
 <meta content="xml2rfc 3.22.0" name="generator">
 <meta content="PQ Signatures, post-quantum X.509" name="keyword">
@@ -1026,12 +1030,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">Dilithium for Certificates</td>
+<td class="center">ML-DSA for Certificates</td>
 <td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 10 January 2025</td>
+<td class="center">Expires 19 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-09" class="published">9 July 2024</time>
+<time datetime="2024-07-18" class="published">18 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-10">10 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-01-19">19 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1074,10 +1078,18 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs), and to sign messages. This document describes the conventions for using the Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates and certificate revocation lists.  The conventions for the associated signatures, subject public keys, and private key are also described.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs),
+       and to sign messages. This document describes the conventions for using the
+       Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates
+       and certificate revocation lists.  The conventions for the associated signatures, subject
+       public keys, and private key are also described.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note" id="section-note.1">
-      <p id="section-note.1-1">[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized FIPS 204 Module-Lattice-Based Digital Signature Standard. The current FIPS draft was published August 24, 2023 for public review. Final versions are expected by April 2024. This specification will use object identifiers for the new algorithms that are assigned by NIST, and will use placeholders until these are released.]<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+      <p id="section-note.1-1">[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized
+     FIPS 204 Module-Lattice-Based Digital Signature Standard. The current FIPS draft was
+     published August 24, 2023 for public review. Final versions are expected by April 2024. This
+     specification will use object identifiers for the new algorithms that are assigned by NIST,
+     and will use placeholders until these are released.]<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1098,7 +1110,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1131,12 +1143,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-requirements-language" class="internal xref">Requirements Language</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-asn1-moudule-and-ml-dsa-ide" class="internal xref">ASN.1 Moudule and ML-DSA Identifiers</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-requirements-language" class="internal xref">Requirements Language</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-identifiers" class="internal xref">Identifiers</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-identifiers" class="internal xref">Identifiers</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-ml-dsa-signatures-in-pkix" class="internal xref">ML-DSA Signatures in PKIX</a></p>
@@ -1187,16 +1202,36 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant digital signature scheme standardized by the US National Institute of Standards and Technology (NIST) PQC project <span>[<a href="#NIST-PQC" class="cite xref">NIST-PQC</a>]</span>. This document specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX) certificates and Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87, using object identifiers assigned by NIST.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This specification includes conventions for the signatureAlgorithm, signatureValue, signature, and subjectPublicKeyInfo fields within Internet X.509 certificates and CRLs <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, like <span>[<a href="#RFC3279" class="cite xref">RFC3279</a>]</span> did for classic cryptography and <span>[<a href="#RFC5480" class="cite xref">RFC5480</a>]</span> did for elliptic curve cryptography. It describes the encoding of digital signatures and public keys generated with quantum-resistant signature algorithm ML-DSA.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant
+       digital signature scheme standardized by the US National Institute of Standards
+       and Technology (NIST) PQC project <span>[<a href="#NIST-PQC" class="cite xref">NIST-PQC</a>]</span>
+       in <span>[<a href="#DRAFTFIPS204" class="cite xref">DRAFTFIPS204</a>]</span>. This document specifies
+       the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX) certificates and
+       Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-44, ML-DSA-65,
+       and ML-DSA-87.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This specification includes conventions for the signatureAlgorithm, signatureValue,
+       signature, and subjectPublicKeyInfo fields within Internet X.509 certificates and
+       CRLs <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for ML-DSA, like
+       <span>[<a href="#RFC3279" class="cite xref">RFC3279</a>]</span> did for classic cryptography and
+       <span>[<a href="#RFC5480" class="cite xref">RFC5480</a>]</span> did for elliptic curve cryptography.
+       The private key format is also specified.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <section id="section-1.1">
-        <h3 id="name-requirements-language">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-requirements-language" class="section-name selfRef">Requirements Language</a>
+        <h3 id="name-asn1-moudule-and-ml-dsa-ide">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-asn1-moudule-and-ml-dsa-ide" class="section-name selfRef">ASN.1 Moudule and ML-DSA Identifiers</a>
         </h3>
-<p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-       "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-       document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
-          <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">An ASN.1 module <span>[<a href="#X680" class="cite xref">X680</a>]</span> is included for reference purposes. Note that as per <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>,
+ certificates use the Distinguished Encoding Rules; see <span>[<a href="#X690" class="cite xref">X690</a>]</span>. Also note that NIST
+ defined the object identifiers for the ML-DSA algorithms in an ASN.1 module; see
+ (TODO insert reference).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-1.2">
+        <h3 id="name-requirements-language">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-requirements-language" class="section-name selfRef">Requirements Language</a>
+        </h3>
+<p id="section-1.2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+ "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+ document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
+          <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </section>
 <div id="oids">
@@ -1204,7 +1239,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-identifiers">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifiers" class="section-name selfRef">Identifiers</a>
       </h2>
-<p id="section-2-1">This specification uses placeholders for object identifiers until the identifiers for the new algorithms are assigned by NIST.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<aside id="section-2-1">
+        <p id="section-2-1.1">NOTE: This specification uses placeholders for object identifiers until the identifiers for the new algorithms
+       are assigned by NIST.<a href="#section-2-1.1" class="pilcrow">¶</a></p>
+</aside>
 <p id="section-2-2">The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-2-3">
 <pre>
@@ -1215,7 +1253,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </pre><a href="#section-2-3" class="pilcrow">¶</a>
 </div>
 <aside id="section-2-4">
-        <p id="section-2-4.1">NOTE: The above syntax is from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> and matches the version used therein, i.e., the 1988 ASN.1 syntax. See <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> for ASN.1 copmatible with the 2015 ASN.1 syntax.<a href="#section-2-4.1" class="pilcrow">¶</a></p>
+        <p id="section-2-4.1">NOTE: The above syntax is from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> and matches the version used therein, i.e., the 1988 ASN.1 syntax.
+        See <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> for ASN.1 compatible with the 2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-2-4.1" class="pilcrow">¶</a></p>
 </aside>
 <p id="section-2-5">The fields in AlgorithmIdentifier have the following meanings:<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1246,15 +1285,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
             nistAlgorithm(4) sigAlgs(3) TBD }
 </pre><a href="#section-2-10" class="pilcrow">¶</a>
 </div>
-<p id="section-2-11">The contents of the parameters component for each algorithm are absent.<a href="#section-2-11" class="pilcrow">¶</a></p>
+<p id="section-2-11">The contents of the parameters component for each algorithm <span class="bcp14">MUST</span> be absent.<a href="#section-2-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-3">
       <h2 id="name-ml-dsa-signatures-in-pkix">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-ml-dsa-signatures-in-pkix" class="section-name selfRef">ML-DSA Signatures in PKIX</a>
       </h2>
-<p id="section-3-1">ML-DSA is a digital signature scheme built upon the Fiat-Shamir-with-aborts framework <span>[<a href="#Fiat-Shamir" class="cite xref">Fiat-Shamir</a>]</span>. The security is based upon the hardness of lattice problems over module lattices <span>[<a href="#Dilithium" class="cite xref">Dilithium</a>]</span>. ML-DSA provides three parameter sets for the security categories 2, 3 and 5.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">Signatures are used in a number of different ASN.1 structures. As shown in the ASN.1 representation from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below, in an X.509 certificate, a signature is encoded with an algorithm identifier in the signatureAlgorithm attribute and a signatureValue attribute that contains the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-1">ML-DSA is a digital signature scheme built upon the Fiat-Shamir-with-aborts framework
+       <span>[<a href="#Fiat-Shamir" class="cite xref">Fiat-Shamir</a>]</span>. The security is based upon
+       the hardness of lattice problems over module lattices <span>[<a href="#Dilithium" class="cite xref">Dilithium</a>]</span>.
+       ML-DSA provides three parameter sets for the security categories 2, 3 and 5.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Signatures are used in a number of different ASN.1 structures. As shown in the ASN.1
+       representation from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>
+       below, in an X.509 certificate, a signature is encoded with an algorithm identifier
+       in the signatureAlgorithm attribute and a signatureValue attribute that contains the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3-3">
 <pre>
    Certificate  ::=  SEQUENCE  {
@@ -1263,26 +1308,41 @@ svg :is([fill="white"], [fill^="#fff"]) {
       signatureValue       BIT STRING  }
 </pre><a href="#section-3-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3-4">Signatures are also used in the CRL list ASN.1 representation from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below. In a X.509 CRL, a signature is encoded with an algorithm identifier in the signatureAlgorithm attribute and a signatureValue attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-4">Signatures are also used in the CRL list ASN.1 representation from
+       <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below.
+       In a X.509 CRL, a signature is encoded with an algorithm identifier in the signatureAlgorithm
+       attribute and a signatureValue attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-3-5">
 <pre>
    CertificateList  ::=  SEQUENCE  {
-      tbsCertificate       TBSCertList,
+      tbsCertList          TBSCertList,
       signatureAlgorithm   AlgorithmIdentifier,
       signatureValue       BIT STRING  }
 </pre><a href="#section-3-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3-6">The identifiers defined in <a href="#oids" class="auto internal xref">Section 2</a> can be used as the AlgorithmIdentifier in the signatureAlgorithm field in the sequence Certificate/CertificateList and the signature field in the sequence TBSCertificate/TBSCertList in certificates CRLs, respectively, <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The parameters of these signature algorithms are absent, as explained in <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
-<p id="section-3-7">The signatureValue field contains the corresponding ML-DSA signature computed upon the ASN.1 DER encoded tbsCertificate <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-7" class="pilcrow">¶</a></p>
-<p id="section-3-8">Conforming Certification Authority (CA) implementations <span class="bcp14">MUST</span> specify the algorithms explicitly by using the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when encoding ML-DSA signatures in certificates and CRLs. Conforming client implementations that process certificates and CRLs using ML-DSA <span class="bcp14">MUST</span> recognize the corresponding OIDs. Encoding rules for ML-DSA signature values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
-<p id="section-3-9">When the id-ML-DSA identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding <span class="bcp14">MUST</span> omit the parameters field. That is, the AlgorithmIdentifier <span class="bcp14">SHALL</span> be a SEQUENCE of one component, the OID id-ML-DSA.<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-6">The identifiers defined in <a href="#oids" class="auto internal xref">Section 2</a> can be used as the AlgorithmIdentifier
+       in the signatureAlgorithm field in the sequence Certificate/CertificateList and the signature field
+       in the sequence TBSCertificate/TBSCertList in certificates and CRLs, respectively,
+       <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The parameters of these signature algorithms <span class="bcp14">MUST</span> be absent,
+       as explained in <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-7">The signatureValue field contains the corresponding ML-DSA signature computed upon the ASN.1 DER encoded
+       tbsCertificate/tbsCertList <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">Conforming Certification Authority (CA) implementations <span class="bcp14">MUST</span> specify the algorithms explicitly
+       by using the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a>
+       when encoding ML-DSA signatures in certificates and CRLs. Conforming client implementations that process
+       certificates and CRLs using ML-DSA <span class="bcp14">MUST</span> recognize the corresponding OIDs. Encoding rules
+       for ML-DSA signature values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
+<p id="section-3-9">When the id-ML-DSA identifier appears in the algorithm field as an AlgorithmIdentifier, the encoding <span class="bcp14">MUST</span>
+       omit the parameters field. That is, the AlgorithmIdentifier <span class="bcp14">SHALL</span> be a SEQUENCE of one component,
+       the OID id-ML-DSA.<a href="#section-3-9" class="pilcrow">¶</a></p>
 </section>
-<div id="dilithiumpublickey">
+<div id="mldsapublickey">
 <section id="section-4">
       <h2 id="name-ml-dsa-public-keys-in-pkix">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ml-dsa-public-keys-in-pkix" class="section-name selfRef">ML-DSA Public Keys in PKIX</a>
       </h2>
-<p id="section-4-1">In the X.509 certificate, the subjectPublicKeyInfo field has the SubjectPublicKeyInfo type, which has the following ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">In the X.509 certificate, the subjectPublicKeyInfo field has the SubjectPublicKeyInfo type, which has the following
+ ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4-2">
 <pre>
   SubjectPublicKeyInfo  ::=  SEQUENCE  {
@@ -1295,20 +1355,31 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="normal">
 <li class="normal" id="section-4-4.1">algorithm is the algorithm identifier and parameters for the public key (see above).<a href="#section-4-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-4-4.2">subjectPublicKey contains the byte stream of the public key.  The algorithms defined in this document always encode the public key as TODO.<a href="#section-4-4.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-4-4.2">subjectPublicKey contains the byte stream of the public key.  The algorithms defined in this document always encode
+ the public key as TODO.<a href="#section-4-4.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-4-5">The public parameters for ML-DSA are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce (rho) using an XOF.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-5">The public parameters for ML-DSA are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced,
+ consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This
+ sampling is performed by expanding a nonce (rho) using an XOF.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">The ML-DSA public key <span class="bcp14">MUST</span> be encoded using the ASN.1 type MLDSAPublicKey:<a href="#section-4-6" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4-7">
 <pre>
   MLDSAPublicKey ::= OCTET STRING
 </pre><a href="#section-4-7" class="pilcrow">¶</a>
 </div>
-<p id="section-4-8">where MLDSAPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring R_q. These parameters <span class="bcp14">MUST</span> be encoded as a single OCTET STRING. The size required to hold a MLDSAPublicKey public key element is therefore 32+320*k bytes.<a href="#section-4-8" class="pilcrow">¶</a></p>
-<p id="section-4-9">The id-ML-DSA identifier defined in <a href="#oids" class="auto internal xref">Section 2</a> <span class="bcp14">MUST</span> be used as the algorithm field in the SubjectPublicKeyInfo sequence <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> to identify a ML-DSA public key.<a href="#section-4-9" class="pilcrow">¶</a></p>
-<p id="section-4-10">The ML-DSA public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value of type BIT STRING) as follows: the most significant bit of the OCTET STRING value becomes the most significant bit of the BIT STRING value, and so on; the least significant bit of the OCTET STRING becomes the least significant bit of the BIT STRING.<a href="#section-4-10" class="pilcrow">¶</a></p>
-<p id="section-4-11">The following is an example of a ML-DSA-44 public key encoded using the textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-11" class="pilcrow">¶</a></p>
+<p id="section-4-8">where MLDSAPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the
+  matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring
+  R_q. These parameters <span class="bcp14">MUST</span> be encoded as a single OCTET STRING. The size required to hold a
+  MLDSAPublicKey public key element is therefore 32+320*k bytes.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9">The id-ML-DSA identifier defined in <a href="#oids" class="auto internal xref">Section 2</a> <span class="bcp14">MUST</span> be used as the algorithm field in the
+  SubjectPublicKeyInfo sequence <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> to identify a ML-DSA public key.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<p id="section-4-10">The ML-DSA public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value
+  of type BIT STRING) as follows: the most significant bit of the OCTET STRING value becomes the most significant
+  bit of the BIT STRING value, and so on; the least significant bit of the OCTET STRING becomes the least significant
+  bit of the BIT STRING.<a href="#section-4-10" class="pilcrow">¶</a></p>
+<p id="section-4-11">The following is an example of a ML-DSA-44 public key encoded using the textual encoding defined in
+  <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-11" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-12">
 <pre>
 -----BEGIN PUBLIC KEY-----
@@ -1358,14 +1429,20 @@ x5AXF2HOm4o=
 
 </pre><a href="#section-4-12" class="pilcrow">¶</a>
 </div>
-<p id="section-4-13">Conforming CA implementations <span class="bcp14">MUST</span> specify the X.509 public key algorithm explicitly by using the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when using ML-DSA public keys in certificates and CRLs. Conforming client implementations that process ML-DSA public keys when processing certificates and CRLs <span class="bcp14">MUST</span> recognize the corresponding OIDs.<a href="#section-4-13" class="pilcrow">¶</a></p>
+<p id="section-4-13">Conforming CA implementations <span class="bcp14">MUST</span> specify the X.509 public key algorithm explicitly by using
+ the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when using ML-DSA public keys in certificates and CRLs.
+ Conforming client implementations that process ML-DSA public keys when processing certificates and CRLs
+ <span class="bcp14">MUST</span> recognize the corresponding OIDs.<a href="#section-4-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-5">
       <h2 id="name-key-usage-bits">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-key-usage-bits" class="section-name selfRef">Key Usage Bits</a>
       </h2>
-<p id="section-5-1">The intended application for the key is indicated in the keyUsage certificate extension; see <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the keyUsage extension is present in a certificate that indicates id-ML-DSA in the SubjectPublicKeyInfo, then the at least one of following <span class="bcp14">MUST</span> be present:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The intended application for the key is indicated in the keyUsage certificate extension; see
+ <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the keyUsage extension is present in a
+ certificate that indicates id-ML-DSA in the SubjectPublicKeyInfo, then the at least one of following
+ <span class="bcp14">MUST</span> be present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
 <pre>
   digitalSignature; or
@@ -1390,8 +1467,13 @@ x5AXF2HOm4o=
       <h2 id="name-ml-dsa-private-keys">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-ml-dsa-private-keys" class="section-name selfRef">ML-DSA Private Keys</a>
       </h2>
-<p id="section-6-1">EDNOTE: this section is still under construction as we discuss the best way to formulate the private key with the wider working group.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">A ML-DSA private key is encoded as MLDSAPrivateKey in the privateKey field as an OCTET STRING. ML-DSA public keys are optionally distributed in the publicKey field of the MLDSAPrivateKey structure. This follows the OneAsymmetricKey syntax.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<aside id="section-6-1">
+        <p id="section-6-1.1">EDNOTE: This section is still under construction as we discuss the best way to formulate the private key with the wider
+ working group.<a href="#section-6-1.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-6-2">A ML-DSA private key is encoded as MLDSAPrivateKey in the privateKey field as an OCTET STRING. ML-DSA public keys are
+ optionally distributed in the publicKey field of the MLDSAPrivateKey structure. This follows the OneAsymmetricKey
+ syntax.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">The ASN.1 encoding for a ML-DSA private key is as follows:<a href="#section-6-3" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-6-4">
 <pre>
@@ -1403,14 +1485,17 @@ x5AXF2HOm4o=
   }
 </pre><a href="#section-6-4" class="pilcrow">¶</a>
 </div>
-<p id="section-6-5">A fully populated ML-DSA private key consists of 6 parameters. The size necessary to hold all private key elements is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes. The description of k, l, and eta as well as public key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1 of the Appendix.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-5">A fully populated ML-DSA private key consists of 6 parameters. The size necessary to hold all private key elements
+ is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes. The description of k, l, and eta as well as public
+ key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1 of the Appendix.<a href="#section-6-5" class="pilcrow">¶</a></p>
 </section>
 <div id="asn1">
 <section id="section-7">
       <h2 id="name-asn1-module">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-asn1-module" class="section-name selfRef">ASN.1 Module</a>
       </h2>
-<p id="section-7-1">This section includes the ASN.1 module for the ML-DSA signature algorithm. This module does not come from any previously existing RFC. This module references <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This section includes the ASN.1 module for the ML-DSA signature algorithm. This module does not come from any previously
+       existing RFC. This module references <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-7-2">
 <pre>[ EDNOTE: Add ASN.1 here ]
 
@@ -1468,8 +1553,10 @@ x5AXF2HOm4o=
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these arcs is to be determined.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">IANA is requested to register the id-mod-pkix1-PQ-algorithms OID for the ASN.1 module identifier found in Section 5 in the "SMI Security for PKIX Module Identifier" registry.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-1">Extensions in certificates and CRLs are identified using object Identifiers (OIDs). The creation and delegation of these
+       arcs is to be determined.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">IANA is requested to register the id-mod-pkix1-PQ-algorithms OID for the ASN.1 module identifier found in Section 5 in
+       the "SMI Security for PKIX Module Identifier" registry.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Security">
@@ -1478,20 +1565,56 @@ x5AXF2HOm4o=
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-9-1">The Security Considerations section of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> applies to this specification as well.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">The digital signature scheme  defined within this document are modeled under existentially unforgeable digital signatures with respect to an adaptive chosen message attack (EUF-CMA). For the purpose of estimating security strength, it has been assumed that the attacker has access to signatures for no more than 2^{64} chosen messages.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-2">The digital signature scheme  defined within this document are modeled under
+       strongly existentially unforgeable under chosen message attack (SUF-CMA).
+       For the purpose of estimating security strength, it has been assumed that the attacker has access to signatures
+       for no more than 2^{64} chosen messages.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <p id="section-9-3">EDNOTE: Discuss implications of not hash-then-sign. Implications in performance too.<a href="#section-9-3" class="pilcrow">¶</a></p>
-<p id="section-9-4">Within the hash-then-sign paradigm, hash functions are used as a domain restrictor over the message to be signed. By pre-hashing, the onus of resistance to existential forgeries becomes heavily reliant on the collision-resistance of the hash function in use. As well as this security goal, the hash-then-sign paradigm also has the ability to improve performance by reducing the size of signed messages. As a corollary, hashing remains mandatory even for short messages and assigns a further computational requirement onto the verifier. This makes the performance of hash-then-sign schemes more consistent, but not necessarily more efficient. ML-DSA diverges from the hash-then-sign paradigm by hashing the message
+<p id="section-9-4">Within the hash-then-sign paradigm, hash functions are used as a domain restrictor over the message to be signed. By
+       pre-hashing, the onus of resistance to existential forgeries becomes heavily reliant on the collision-resistance
+       of the hash function in use. As well as this security goal, the hash-then-sign paradigm also has the ability to
+       improve performance by reducing the size of signed messages. As a corollary, hashing remains mandatory even for
+       short messages and assigns a further computational requirement onto the verifier. This makes the performance of
+       hash-then-sign schemes more consistent, but not necessarily more efficient. ML-DSA diverges from the hash-then-sign
+       paradigm by hashing the message
       
-      during the signing procedure (at the point in which the challenge polynomial). However, due to the fact that ML-DSA signatures may require the signing procedure to be repeated several times for a signature to be produced, ML-DSA implementations can make use of pre-hashing the message to prevent rehashing with each attempt.<a href="#section-9-4" class="pilcrow">¶</a></p>
+      during the signing procedure (at the point in which the challenge polynomial). However, due to the fact that ML-DSA
+       signatures may require the signing procedure to be repeated several times for a signature to be produced, ML-DSA
+       implementations can make use of pre-hashing the message to prevent rehashing with each attempt.<a href="#section-9-4" class="pilcrow">¶</a></p>
 <p id="section-9-5">EDNOTE: Discuss deterministic vs randomized signing and the impact on security.<a href="#section-9-5" class="pilcrow">¶</a></p>
-<p id="section-9-6">ML-DSA offers both deterministic and randomized signing. By default ML-DSA signatures are non-deterministic, the private random seed rho' is pseudorandomly derived from the signer’s private key, the message, and a 256-bit string, rnd - where rnd should be generated by an approved RBG. In the deterministic version, rng is instead a 256-bit constant string. The source of randomness in the randomized mode has been "hedged" against sources of poor entropy, by including the signers private key and message into the derivation. The primary purpose of rnd is to facilitate countermeasures to side-channel attacks and fault attacks on deterministic signatures.<a href="#section-9-6" class="pilcrow">¶</a></p>
+<p id="section-9-6">ML-DSA offers both deterministic and randomized signing. By default ML-DSA signatures are non-deterministic, the private
+       random seed rho' is pseudorandomly derived from the signer’s private key, the message, and a 256-bit string,
+       rnd - where rnd should be generated by an approved RBG. In the deterministic version, rng is instead a 256-bit
+       constant string. The source of randomness in the randomized mode has been "hedged" against sources of poor entropy,
+       by including the signers private key and message into the derivation. The primary purpose of rnd is to facilitate
+       countermeasures to side-channel attacks and fault attacks on deterministic signatures.<a href="#section-9-6" class="pilcrow">¶</a></p>
 <p id="section-9-7">EDNOTE: Discuss side-channels for ML-DSA.<a href="#section-9-7" class="pilcrow">¶</a></p>
-<p id="section-9-8">ML-DSA has been designed to provide side-channel resilience by eliminating a reliance on Gaussian sampling. While deliberate design decisions such as these can help to deliver a greater ease of secure implementation - particularly against side-channel attacks - it does not necessarily provide resistance to more powerful attacks such as differential power analysis. Some amount of side-channel leakage has been demonstrated in parts of the signing algorithm (specifically the bit-unpacking function), from which a demonstration of key recovery has been made over a large sample of signatures. Masking countermeasures exist for ML-DSA, but come with a performance overhead.<a href="#section-9-8" class="pilcrow">¶</a></p>
-<p id="section-9-9">A fundamental security property also associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme ML-DSA possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256).
+<p id="section-9-8">ML-DSA has been designed to provide side-channel resilience by eliminating a reliance on Gaussian sampling. While
+       deliberate design decisions such as these can help to deliver a greater ease of secure implementation - particularly
+       against side-channel attacks - it does not necessarily provide resistance to more powerful attacks such as
+       differential power analysis. Some amount of side-channel leakage has been demonstrated in parts of the signing
+       algorithm (specifically the bit-unpacking function), from which a demonstration of key recovery has been made over
+       a large sample of signatures. Masking countermeasures exist for ML-DSA, but come with a performance
+       overhead.<a href="#section-9-8" class="pilcrow">¶</a></p>
+<p id="section-9-9">A fundamental security property also associated with digital signatures is non-repudiation. Non-repudiation refers to
+       the assurance that the owner of a signature key pair that was capable of generating an existing signature
+       corresponding to certain data cannot convincingly deny having signed the data. The digital signature scheme
+       ML-DSA possess three security properties beyond unforgeability, that are associated with non-repudiation. These
+       are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on
+       the assumed collision resistance of the hash function used (in this case SHAKE-256).
 
-      Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot produce a valid signature under another key given a signature sigma for some unknown message m. These properties are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such as Duplicate-Signature Key Selection (DSKS) attacks , and attacks on the protocols for secure routing. A full discussion of these properties in ML-DSA can be found at <span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.
+      Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it
+       is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for
+       which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot
+       produce a valid signature under another key given a signature sigma for some unknown message m. These properties
+       are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such
+       as Duplicate-Signature Key Selection (DSKS) attacks , and attacks on the protocols for secure
+       routing. A full discussion of these properties in ML-DSA can be found at
+       <span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.
 
-      These properties are dependent, in part, on unambiguous public key serialization. It for this reason the public key structure defined in <a href="#dilithiumpublickey" class="auto internal xref">Section 4</a> is intentionally encoded as a single OCTET STRING.<a href="#section-9-9" class="pilcrow">¶</a></p>
+      These properties are dependent, in part, on unambiguous public key serialization. It for this reason the public key
+       structure defined in <a href="#mldsapublickey" class="auto internal xref">Section 4</a> is intentionally encoded as a single
+       OCTET STRING.<a href="#section-9-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-10">
@@ -1503,6 +1626,10 @@ x5AXF2HOm4o=
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="DRAFTFIPS204">[DRAFTFIPS204]</dt>
+        <dd>
+<span class="refAuthor">Raimondo, G. M.</span> and <span class="refAuthor">L. E. Locascio</span>, <span class="refTitle">"DRAFT FIPS 204 (Initial Public Draft): Module-Lattice-Based Digital Signature Standard"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.FIPS.204.ipd">https://doi.org/10.6028/NIST.FIPS.204.ipd</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
@@ -1520,8 +1647,16 @@ x5AXF2HOm4o=
 <span class="refAuthor">Josefsson, S.</span> and <span class="refAuthor">S. Leonard</span>, <span class="refTitle">"Textual Encodings of PKIX, PKCS, and CMS Structures"</span>, <span class="seriesInfo">RFC 7468</span>, <span class="seriesInfo">DOI 10.17487/RFC7468</span>, <time datetime="2015-04" class="refDate">April 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7468">https://www.rfc-editor.org/info/rfc7468</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X680">[X680]</dt>
+        <dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation. ITU-T Recommendation X.680 (2021) | ISO/IEC 8824-1:2021."</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X690">[X690]</dt>
+      <dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology -- ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER). ITU-T Recommendation X.690 (2021) | ISO/IEC 8825-1:2021."</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.690">https://www.itu.int/rec/T-REC-X.690</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1541,10 +1676,6 @@ x5AXF2HOm4o=
 <dt id="Fiat-Shamir">[Fiat-Shamir]</dt>
         <dd>
 <span class="refAuthor">Lyubashevsky, V.</span>, <span class="refTitle">"Fiat-Shamir with aborts: Applications to lattice and factoring-based signatures"</span>, <span class="refContent">International Conference on the Theory and Application of Cryptology and Information Security</span>, <time datetime="2009" class="refDate">2009</time>, <span>&lt;<a href="https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf">https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="FIPS204">[FIPS204]</dt>
-        <dd>
-<span class="refAuthor">Raimondo, G. M.</span> and <span class="refAuthor">L. E. Locascio</span>, <span class="refTitle">"FIPS 204 (Initial Public Draft): Module-Lattice-Based Digital Signature Standard"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.FIPS.204.ipd">https://doi.org/10.6028/NIST.FIPS.204.ipd</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="NIST-PQC">[NIST-PQC]</dt>
         <dd>
@@ -1574,9 +1705,19 @@ x5AXF2HOm4o=
       <h2 id="name-security-strengths">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-security-strengths" class="section-name selfRef">Security Strengths</a>
       </h2>
-<p id="appendix-B-1">Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number of bits of security, NIST has instead elected to define a collection of broad security strength categories. Each category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that must require computational resources comparable to or greater than those required for: Level 1 - key search on a block cipher with a 128-bit key (e.g., AES128), Level 2 - collision search on a 256-bit hash function (e.g., SHA256/ SHA3-256), Level 3 - key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 - collision search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 - key search on a block cipher with a 256-bit key (e.g., AES 256).<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting signature size, public key, and private key sizes in bytes.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<div id="DilithiumParameters">
+<p id="appendix-B-1">Instead of defining the strength of a quantum algorithm in a traditional manner using precise estimates of the number
+ of bits of security, NIST has instead elected to define a collection of broad security strength categories. Each
+ category is defined by a comparatively easy-to-analyze reference primitive that cover a range of security strengths
+ offered by existing NIST standards in symmetric cryptography, which NIST expects to offer significant resistance
+ to quantum cryptanalysis. These categories describe any attack that breaks the relevant security definition that
+ must require computational resources comparable to or greater than those required for: Level 1 - key search on a
+ block cipher with a 128-bit key (e.g., AES128), Level 2 - collision search on a 256-bit hash function (e.g.,
+ SHA256/ SHA3-256), Level 3 - key search on a block cipher with a 192-bit key (e.g., AES192), Level 4 - collision
+ search on a 384-bit hash function (e.g. SHA384/ SHA3-384), Level 5 - key search on a block cipher with a 256-bit
+ key (e.g., AES 256).<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting
+ signature size, public key, and private key sizes in bytes.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<div id="MLS-DSAParameters">
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="appendix-B-3.1">
 <pre>
