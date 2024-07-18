@@ -348,9 +348,16 @@ x5AXF2HOm4o=
   keyCertSign; or
   cRLSign.
 ]]></artwork>
-        <t>Requirements about the keyUsage extension bits defined in <xref target="RFC5280" format="default"/> still apply.</t>
-        </section> <!-- End of Key Usage Bits -->
-
+	<t>If the keyUsage extension is present in a certificate that indicates id-ML-DSA in the SubjectPublicKeyInfo, then the following <bcp14>MUST NOT</bcp14> be present:</t>
+<artwork><![CDATA[
+   keyEncipherment; or
+   dataEncipherment; or
+   keyAgreement; or
+   encipherOnly; or
+   decipherOnly.
+]]></artwork>
+	<t>Requirements about the keyUsage extension bits defined in <xref target="RFC5280" format="default"/> still apply.</t>
+        </section>
         <section numbered="true" toc="default">
         <name>ML-DSA Private Keys</name>
         <aside>
