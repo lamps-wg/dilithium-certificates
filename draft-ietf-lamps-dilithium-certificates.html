@@ -1453,7 +1453,17 @@ x5AXF2HOm4o=
   cRLSign.
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3">Requirements about the keyUsage extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> still apply.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">If the keyUsage extension is present in a certificate that indicates id-ML-DSA in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be present:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5-4">
+<pre>
+   keyEncipherment; or
+   dataEncipherment; or
+   keyAgreement; or
+   encipherOnly; or
+   decipherOnly.
+</pre><a href="#section-5-4" class="pilcrow">¶</a>
+</div>
+<p id="section-5-5">Requirements about the keyUsage extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> still apply.<a href="#section-5-5" class="pilcrow">¶</a></p>
 </section>
 <section id="section-6">
       <h2 id="name-ml-dsa-private-keys">
