@@ -1246,15 +1246,17 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-2-2">The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-2-3">
 <pre>
-   AlgorithmIdentifier  ::=  SEQUENCE  {
-       algorithm   OBJECT IDENTIFIER,
-       parameters  ANY DEFINED BY algorithm OPTIONAL
-   }
+   AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
+     SEQUENCE {
+       algorithm   ALGORITHM-TYPE."&amp;"id({AlgorithmSet}),
+       parameters  ALGORITHM-TYPE.
+                     "&amp;"Params({AlgorithmSet}{@algorithm}) OPTIONAL
+     }
 </pre><a href="#section-2-3" class="pilcrow">¶</a>
 </div>
 <aside id="section-2-4">
-        <p id="section-2-4.1">NOTE: The above syntax is from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> and matches the version used therein, i.e., the 1988 ASN.1 syntax.
-        See <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> for ASN.1 compatible with the 2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-2-4.1" class="pilcrow">¶</a></p>
+        <p id="section-2-4.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the 2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>}. See
+        <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-2-4.1" class="pilcrow">¶</a></p>
 </aside>
 <p id="section-2-5">The fields in AlgorithmIdentifier have the following meanings:<a href="#section-2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
