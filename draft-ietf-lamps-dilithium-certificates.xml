@@ -127,7 +127,7 @@
 	      <xref target="RFC5480" format="default"></xref> did for elliptic curve cryptography.
 	      The private key format is also specified.</t>
       <section numbered="true" toc="default">
-        <name>ASN.1 Moudule and ML-DSA Identifiers</name>
+        <name>ASN.1 Module and ML-DSA Identifiers</name>
         <t>An ASN.1 module <xref target="X680"/> is included for reference purposes. Note that as per <xref target="RFC5280"/>,
 		certificates use the Distinguished Encoding Rules; see <xref target="X690"/>. Also note that NIST
 		defined the object identifiers for the ML-DSA algorithms in an ASN.1 module; see
