@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-11-24T01:48:13.742847+00:00",
+  "timestamp": "2024-07-21T00:50:44.846889+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -64,9 +64,9 @@
       "labels": [
         "bug"
       ],
-      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [ ] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
+      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [x] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
       "createdAt": "2022-09-06T13:18:10Z",
-      "updatedAt": "2022-10-25T16:40:06Z",
+      "updatedAt": "2023-02-03T00:31:28Z",
       "closedAt": null,
       "comments": [
         {
@@ -351,6 +351,130 @@
           "updatedAt": "2022-11-22T16:47:30Z"
         }
       ]
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOIEpj4c5ep5hf",
+      "title": "Add reference to OCSP? ",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/10",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From https://mailarchive.ietf.org/arch/msg/spasm/mHLRo-X8U7ZAF5BRjPEPA8lHQtk/ \r\n\r\n> Should this document also talk about Dilithium signatures in OCSP?  I realize that was not done when RFC 3279 and RFC 5480 were written.\r\n> Russ",
+      "createdAt": "2023-02-16T16:53:43Z",
+      "updatedAt": "2024-07-09T11:59:20Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hmm, we did not do that RFC8692 recently either. \r\nBut all these identifiers could be used in the SigAlgID in OCSP request/responses or staples as well. \r\nProbably it makes sense we reference OCSP in the draft. ",
+          "createdAt": "2023-02-16T16:54:21Z",
+          "updatedAt": "2023-02-16T16:54:21Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From Tim H.\r\n\r\n> I have a slight preference for keeping them separate.  When OCSP and CRLs are discussed in the same document, it's often confusing because they're quite different, and it's difficult to keep clear what applies to one or the other, and what applies to both.\r\n\r\n",
+          "createdAt": "2023-02-24T21:06:42Z",
+          "updatedAt": "2023-02-24T21:06:42Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We do need to add the sa- classes so that should get us some of the way there because those can be used by OCSP, PKCS#10, CMP, CMC, etc. But, as I mentioned in #12, we'll end up with some references dependencies we might not want.",
+          "createdAt": "2024-07-09T11:59:19Z",
+          "updatedAt": "2024-07-09T11:59:19Z"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOIEpj4c6Aw2Kx",
+      "title": "Review by John M. 2/28/2024",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/12",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- [ ]  In addition to Certificates and CRLs, 5G uses the following RFC 2986, 4210, 6090. \r\nCan we make sure that this document works with RFC 2986, 4210, and 6960 as well? Maybe it already does, then it should be good to mention that.\r\n\r\n- [x]  Would be good if the document started referring to Draft FIPS 204, so that the final update is just a reference update. Right now thing like the names ML-DSA-44, ML-DSA-65, ML-DSA-87, and \"security categories 2, 3 and 5\" do not have any reference to NIST.\r\n\r\n- [x]  \"It describes the encoding of digital signatures and public keys generated with quantum-resistant signature algorithm ML-DSA.\"\r\n\r\nThe keys are not generated with ML-DSA maybe \"encoding of public keys and digital signatures generated with\"\r\n\r\n- [x]  \"copmatible\" -> \"compatible\"\r\n\r\n- [x]  \u201cThe signatureValue field contains the corresponding ML-DSA signature computed upon the ASN.1 DER encoded tbsCertificate [[RFC5280](https://www.ietf.org/archive/id/draft-ietf-lamps-dilithium-certificates-03.html#RFC5280)].\u201d\r\n\r\nThis is only true for certificates. In certificate lists it is calculated over tbsCertList.\r\n\r\n- [x] \u201cThe public parameters for ML-DSA are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced, consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This sampling is performed by expanding a nonce (rho) using an XOF.\u201d\r\n\r\nI think this could be removed. This document can just refer to FIPS 204.\r\n\r\n- [x] \u201ck+l)*ceiling(log(2*eta+1))+13*k]\u201d\r\n|=======+=======+=====+========+========+========|\r\n| Level | (k,l) | eta |  Sig.  | Public | Private|\r\n|       |       |     |  (B)   | Key(B) | Key(B) |\r\n|=======+=======+=====+========+========+========|\r\n|   2   | (4,4) |  2  |  2420  |  1312  |  2528  |\r\n|   3   | (6,5) |  4  |  3293  |  1952  |  4000  |\r\n|   5   | (8,7) |  2  |  4595  |  2592  |  4864  |\r\n|=======+=======+=====+========+========+========|\r\n\r\nI think it is preferable to remove the formula and eta. People are not expected to make their own ML-DSA variants. I think the information in the table should be only: \r\n\r\nML-DSA-44 |   2   |  2420  |  1312  |  2528  |\r\nML-DSA-65 |   3   |  3293  |  1952  |  4000  |\r\nML-DSA-87 |   5   |  4595  |  2592  |  4864  |\r\n\r\n- [x] \u201cmodeled under existentially unforgeable digital signatures with respect to an adaptive chosen message attack (EUF-CMA).\u201d\r\n\r\nML-DSA is designed to be strongly existentially unforgeable under chosen message attack (SUF-CMA) i.e., it is expected that even if an adversary can get the honest party to sign arbitrary messages, the adversary cannot create any additional valid signatures based on the signer\u2019s public key, including on messages for which the signer has already provided a signature). This property is not provided by classical signature schemes such as ECDSA\r\n",
+      "createdAt": "2024-02-29T03:39:02Z",
+      "updatedAt": "2024-07-19T12:50:58Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@emanjon On the first point:\r\n\r\n- I am not sure that there is anything to add to support RFC 2986 (PKCS#10).  That RFC doesn't specify any signature algorithms for PKInfoAlgorithms nor SignatureAlgorithms (nor does RFC 5912).  Once the PK and Sig algorithms are defined they can just be used. Are you just looking for something that says that?\r\n- I guess ditto for 4210 (CMP).\r\n- I think maybe this might be a bad reference because 6090 is Fundamental ECC Algorithms",
+          "createdAt": "2024-06-18T19:03:12Z",
+          "updatedAt": "2024-06-18T19:03:12Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I guess my other concern here is that if we say something along the lines of the following in the ML-DSA Signatures in PKIX that we will end up with some normative dependencies:\r\n\r\n    These algorithms identifier are parameter conventions also apply to signature values for\r\n    PKCS #10 [RFC2986], CRMF (Certificate Request Message Format) [RFC4211], Certificate\r\n    Management Protocol (CMP) [I-D.ietf-lamps-rfc4210bis], and Certificate Management over\r\n    CMS (CMC) [I-D.ietf-lamps-rfc5272bis].",
+          "createdAt": "2024-07-09T00:45:38Z",
+          "updatedAt": "2024-07-09T00:45:38Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@jakemas @bwesterb @csosto-pk PTAL at these.\r\n\r\nOn the other points:\r\n\r\n- [x] 2nd: I am working on a PR that will add DRAFTFIPS204 as a normative reference while leaving NIST-PQC informative and this should pull in the 204 ref:\r\n\r\n        The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant\r\n        digital signature scheme standardized by the US National Institute of Standards\r\n        and Technology (NIST) PQC project <xref target=\"NIST-PQC\" format=\"default\"></xref>\r\n        in <xref target=\"DRAFTFIPS204\" format=\"default\"></xref>.\r\n\r\n- [x] 3rd: I noted this too, I like you suggestion.\r\n- [x] 4th: Noted and addressed.\r\n- [x] 5th: Will make it match the previous bullet by s/\"tbsCertificate\"/\"tbsCertificate/tbsCertificateList\".  I also noted that the CertificateList structure doesn't match 5280 ;) It's should be CertificateList.tbsCertList not CertificateList.Certificate.\r\n- [x] 6th: I tend to agree with you and the notes asking if this is too much.\r\n- [x] 7th: I think there was a public comment too add this in FIPS PUB 204. I have included it, but if that comments doesn't make it we can put the old text back.",
+          "createdAt": "2024-07-09T11:51:31Z",
+          "updatedAt": "2024-07-19T12:50:58Z"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOIEpj4c6O8CTB",
+      "title": "'88 or '21 ASN.1",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/15",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In looking at the ML-KEM and ML-DSA I-Ds, they both include the AlgorithmIdentifier syntax for convenience. ML-DSA uses the '88 syntax and ML-KEM uses the '21 syntax:\r\n\r\nML-DSA:\r\n\r\n     AlgorithmIdentifier  ::=  SEQUENCE  {\r\n         algorithm   OBJECT IDENTIFIER,\r\n         parameters  ANY DEFINED BY algorithm OPTIONAL\r\n     }\r\n\r\nML-KEM:\r\n\r\n    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=\r\n      SEQUENCE {\r\n        algorithm   ALGORITHM-TYPE.&id({AlgorithmSet}),\r\n        parameters  ALGORITHM-TYPE.\r\n                    &Params({AlgorithmSet}{@algorithm}) OPTIONAL\r\n      }\r\n\r\nWe should pick one for both. I prefer the later syntax because '88 was almost 40 years ago.",
+      "createdAt": "2024-07-09T12:39:44Z",
+      "updatedAt": "2024-07-18T20:07:21Z",
+      "closedAt": "2024-07-18T20:07:21Z",
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Merged in https://github.com/lamps-wg/dilithium-certificates/pull/16",
+          "createdAt": "2024-07-18T20:07:21Z",
+          "updatedAt": "2024-07-18T20:07:21Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOIEpj4c6O8kQo",
+      "title": "KeyUsage Bits",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/17",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Currently, the I-D says include any of the signing related KUs.  We ended up publishing [RFC8813](https://datatracker.ietf.org/doc/rfc8813/) and [RFC9295](https://datatracker.ietf.org/doc/rfc9295/) to prohibit the use of non-signing KUs.  Should we do the same here? ",
+      "createdAt": "2024-07-09T13:32:40Z",
+      "updatedAt": "2024-07-18T20:08:22Z",
+      "closedAt": "2024-07-18T20:08:22Z",
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We absolutely should -- thank you for this call-out. Merged in https://github.com/lamps-wg/dilithium-certificates/pull/18",
+          "createdAt": "2024-07-18T20:08:22Z",
+          "updatedAt": "2024-07-18T20:08:22Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -380,6 +504,476 @@
         "oid": "9f65f13fdb5c3b7256c894667af32a4c78a777f6"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOIEpj4c5JNtex",
+      "title": "Update Appendix Title",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/9",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Not wed to this, but we should pick something.",
+      "createdAt": "2023-02-03T15:53:03Z",
+      "updatedAt": "2023-02-03T20:58:27Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "7eee210facc674f61bb9696747b30b48a8a35dec",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-AppB-title",
+      "headRefOid": "ec43c641453b03d9da779d2ce2da1c6163430fbe",
+      "closedAt": "2023-02-03T20:58:27Z",
+      "mergedAt": "2023-02-03T20:58:27Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "e15ae0ebbae70070025fdf125cccfc278f6d30ba"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c5Mg-OW",
+          "commit": {
+            "abbreviatedOid": "ec43c64"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-02-03T20:58:15Z",
+          "updatedAt": "2023-02-03T20:58:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOIEpj4c5NILSX",
+      "title": "Remove public/private key wrappers",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/11",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "1st of two commits for this PR. This one addresses the ASN.1. Next one should address the removal of the DilithiumPrivateKey and DilithiumPublicKey fields.",
+      "createdAt": "2023-03-29T05:43:34Z",
+      "updatedAt": "2023-03-29T18:51:45Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "52dbea5787354f76fff832ec254c6a7e36b30bcf",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-no-wrappers",
+      "headRefOid": "d64b89deab48011c55e00204f6b9fcaaebe8047e",
+      "closedAt": "2023-03-29T18:51:45Z",
+      "mergedAt": "2023-03-29T18:51:45Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "c0a12cc7d8f5dc51f0253f5628f8082f57b7bb07"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOIEpj4c5y3G8j",
+      "title": "Editorial Nits",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/13",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Just making some editorial nits: The \"A\" in ML-DSA is algorithm ;)",
+      "createdAt": "2024-06-18T18:41:30Z",
+      "updatedAt": "2024-06-24T19:58:56Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "6a67d02bf1714c66b80d76a042033de7002401fb",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-nits-01",
+      "headRefOid": "8ac5866252b8bc0d2eb5cd945541921604acb4ec",
+      "closedAt": "2024-06-24T19:58:55Z",
+      "mergedAt": "2024-06-24T19:58:55Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "1afc70aec2338057fed7b5d49ebbf2ed4431ec39"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOIEpj4c500mze",
+      "title": "Address John's comment, editorial, alignment with ML-KEM I-D",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/14",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Partially deals with #12; didn't incorporate the refs to PKCS#10, CMP, CMC, etc.\r\n\r\nSome alignment with ML-KEM I-D.\r\n\r\nEditorial suggestions; added a lot of newlines because in codeview it was much easier to read without always have to scroll right.",
+      "createdAt": "2024-07-09T11:51:11Z",
+      "updatedAt": "2024-07-19T12:28:13Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "1afc70aec2338057fed7b5d49ebbf2ed4431ec39",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-john",
+      "headRefOid": "c4eda20d91263b99345966932062b8c84be204ed",
+      "closedAt": "2024-07-18T19:26:46Z",
+      "mergedAt": "2024-07-18T19:26:46Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "4c0239dd76ea3dc1e9312aad0e58dfacc750bbbe"
+      },
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I hate XML - it only took me 7 times to get this to work.",
+          "createdAt": "2024-07-09T12:28:11Z",
+          "updatedAt": "2024-07-09T12:28:11Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@jakemas @csosto-pk @bwesterb PTAL my plan would be to land this over the weekend so we upload a new I-D version to talk about at the LAMPS@IETF120 session. ",
+          "createdAt": "2024-07-18T19:01:22Z",
+          "updatedAt": "2024-07-18T19:01:22Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Perfect, thanks Sean! I\u2019ll take a look now and merge.\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Thursday, July 18, 2024 at 12:02\u202fPM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Mention ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Address John's comment, editorial, alignment with ML-KEM I-D (PR #14)\r\n\r\n\r\n@jakemas<https://github.com/jakemas> @csosto-pk<https://github.com/csosto-pk> @bwesterb<https://github.com/bwesterb> PTAL my plan would be to land this over the weekend so we upload a new I-D version to talk about at the ***@***.*** session.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/14#issuecomment-2237334036>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONEFBXVFFV3EKMTELF3ZNAGJRAVCNFSM6AAAAABKSWLBUGVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDEMZXGMZTIMBTGY>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n",
+          "createdAt": "2024-07-18T19:34:22Z",
+          "updatedAt": "2024-07-18T19:34:22Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "lgtm",
+          "createdAt": "2024-07-19T12:28:12Z",
+          "updatedAt": "2024-07-19T12:28:12Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6BHFS3",
+          "commit": {
+            "abbreviatedOid": "639a4db"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:03:52Z",
+          "updatedAt": "2024-07-09T12:03:52Z",
+          "comments": [
+            {
+              "originalPosition": 93,
+              "body": "```suggestion\r\n       <t>The contents of the parameters component for each algorithm <bcp14>MUST</bcp14> be absent.</t>\r\n```",
+              "createdAt": "2024-07-09T12:03:52Z",
+              "updatedAt": "2024-07-09T12:03:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHFz7",
+          "commit": {
+            "abbreviatedOid": "1f09132"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:04:58Z",
+          "updatedAt": "2024-07-09T12:04:58Z",
+          "comments": [
+            {
+              "originalPosition": 133,
+              "body": "```suggestion\r\n\t      <xref target=\"RFC5280\" format=\"default\"/>. The parameters of these signature algorithms <bcp14>MUST</bcp14> be absent,\r\n```",
+              "createdAt": "2024-07-09T12:04:58Z",
+              "updatedAt": "2024-07-09T12:04:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHHXz",
+          "commit": {
+            "abbreviatedOid": "96f021d"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:08:10Z",
+          "updatedAt": "2024-07-09T12:08:10Z",
+          "comments": [
+            {
+              "originalPosition": 346,
+              "body": "```suggestion\r\n\t      structure defined in <xref target=\"mldsapublickey\" format=\"default\"/> is intentionally encoded as a single\r\n```",
+              "createdAt": "2024-07-09T12:08:10Z",
+              "updatedAt": "2024-07-09T12:08:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHJkA",
+          "commit": {
+            "abbreviatedOid": "79ceea7"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:11:31Z",
+          "updatedAt": "2024-07-09T12:11:31Z",
+          "comments": [
+            {
+              "originalPosition": 332,
+              "body": "```suggestion\r\n\t      the assumed collision resistance of the hash function used (in this case SHAKE-256).\r\n```",
+              "createdAt": "2024-07-09T12:11:31Z",
+              "updatedAt": "2024-07-09T12:11:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHPNS",
+          "commit": {
+            "abbreviatedOid": "f9211b2"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:21:20Z",
+          "updatedAt": "2024-07-09T12:21:20Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "```suggestion\r\n      <section anchor=\"mldsapublickey\" numbered=\"true\" toc=\"default\">\r\n```",
+              "createdAt": "2024-07-09T12:21:20Z",
+              "updatedAt": "2024-07-09T12:21:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHQ1z",
+          "commit": {
+            "abbreviatedOid": "07122b9"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:24:02Z",
+          "updatedAt": "2024-07-09T12:24:02Z",
+          "comments": [
+            {
+              "originalPosition": 356,
+              "body": "```suggestion\r\n        <reference anchor=\"DRAFTFIPS204\" target=\"https://doi.org/10.6028/NIST.FIPS.204.ipd\">\r\n```",
+              "createdAt": "2024-07-09T12:24:02Z",
+              "updatedAt": "2024-07-09T12:24:02Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOIEpj4c501C6_",
+      "title": "Address #15",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/16",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #15.",
+      "createdAt": "2024-07-09T12:45:38Z",
+      "updatedAt": "2024-07-18T20:07:07Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "4c0239dd76ea3dc1e9312aad0e58dfacc750bbbe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-issue-15",
+      "headRefOid": "aae145c3bd7f7eee877edfb0526886363c7ce729",
+      "closedAt": "2024-07-18T20:07:07Z",
+      "mergedAt": "2024-07-18T20:07:07Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "61845bcf52993650c4375ae33587df54740952d0"
+      },
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Need to land #14 to get X680 ref.",
+          "createdAt": "2024-07-09T13:12:29Z",
+          "updatedAt": "2024-07-09T13:12:29Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixing conflict. Again @seanturner let me know if this looks good, and I will merge!",
+          "createdAt": "2024-07-18T19:33:40Z",
+          "updatedAt": "2024-07-18T19:33:40Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6BHfDQ",
+          "commit": {
+            "abbreviatedOid": "90d4f9f"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:48:21Z",
+          "updatedAt": "2024-07-09T12:48:21Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\n       <t>NOTE: The above syntax is from <xref target=\"RFC5912\"/> and is compatible with the 2021 ASN.1 syntax <xref target=\"X680\"/>}. See\r\n```",
+              "createdAt": "2024-07-09T12:48:21Z",
+              "updatedAt": "2024-07-09T12:48:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHi8i",
+          "commit": {
+            "abbreviatedOid": "73286dc"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:54:34Z",
+          "updatedAt": "2024-07-09T12:54:35Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n   AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=\r\n     SEQUENCE {\r\n       algorithm   ALGORITHM-TYPE.&id({AlgorithmSet}),\r\n       parameters  ALGORITHM-TYPE.\r\n                     &Params({AlgorithmSet}{@algorithm}) OPTIONAL\r\n     }\r\n```",
+              "createdAt": "2024-07-09T12:54:34Z",
+              "updatedAt": "2024-07-09T12:54:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHkKz",
+          "commit": {
+            "abbreviatedOid": "06701c6"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:56:21Z",
+          "updatedAt": "2024-07-09T12:56:21Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n       </artwork>\r\n```",
+              "createdAt": "2024-07-09T12:56:21Z",
+              "updatedAt": "2024-07-09T12:56:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHkdK",
+          "commit": {
+            "abbreviatedOid": "a44ae36"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T12:56:49Z",
+          "updatedAt": "2024-07-09T12:56:49Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "```suggestion\r\n       <artwork type=\"asn.1\">\r\n```",
+              "createdAt": "2024-07-09T12:56:49Z",
+              "updatedAt": "2024-07-09T12:56:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6BHtUG",
+          "commit": {
+            "abbreviatedOid": "84686e0"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-09T13:10:07Z",
+          "updatedAt": "2024-07-09T13:10:07Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\n       <sourcecode type=\"asn.1\">\r\n   AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=\r\n     SEQUENCE {\r\n       algorithm   ALGORITHM-TYPE.\"&amp;\"id({AlgorithmSet}),\r\n       parameters  ALGORITHM-TYPE.\r\n                     \"&amp;\"Params({AlgorithmSet}{@algorithm}) OPTIONAL\r\n     }\r\n       </sourcecode>\r\n```",
+              "createdAt": "2024-07-09T13:10:07Z",
+              "updatedAt": "2024-07-09T13:10:07Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOIEpj4c501iqW",
+      "title": "Address #17",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/18",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses #17.",
+      "createdAt": "2024-07-09T13:37:45Z",
+      "updatedAt": "2024-07-19T19:07:35Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "4c0239dd76ea3dc1e9312aad0e58dfacc750bbbe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-issue-17",
+      "headRefOid": "fff8dd8710a46ca32107d623788b067c368e6479",
+      "closedAt": "2024-07-18T20:08:16Z",
+      "mergedAt": "2024-07-18T20:08:16Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "f3757b10302d1c66ba30dfbf481be1c3c08a0330"
+      },
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed merge conflict. @seanturner can you confirm that I addressed the conflict in the way you would have intended? If so, then I will merge!",
+          "createdAt": "2024-07-18T19:31:31Z",
+          "updatedAt": "2024-07-18T19:31:31Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@jakemas belatedly lgtm!",
+          "createdAt": "2024-07-19T12:50:05Z",
+          "updatedAt": "2024-07-19T12:50:05Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you! If that\u2019s all the changes merged, I can release a new WG version ahead of the weekend.\r\n\r\nCheers,\r\nJake\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Friday, July 19, 2024 at 12:03\u202fPM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Mention ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Address #17 (PR #18)\r\n\r\n\r\n@jakemas<https://github.com/jakemas> belatedly lgtm!\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/18#issuecomment-2239066097>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONFDRO6SVHX3RZFTVVDZNEDRHAVCNFSM6AAAAABKS4XDOCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDEMZZGA3DMMBZG4>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n",
+          "createdAt": "2024-07-19T19:07:33Z",
+          "updatedAt": "2024-07-19T19:07:33Z"
+        }
+      ],
       "reviews": []
     }
   ]
