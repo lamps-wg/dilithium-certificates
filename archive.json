@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T00:50:44.846889+00:00",
+  "timestamp": "2024-07-23T00:46:07.069922+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -938,7 +938,7 @@
       "labels": [],
       "body": "Addresses #17.",
       "createdAt": "2024-07-09T13:37:45Z",
-      "updatedAt": "2024-07-19T19:07:35Z",
+      "updatedAt": "2024-07-22T18:18:02Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "4c0239dd76ea3dc1e9312aad0e58dfacc750bbbe",
@@ -972,6 +972,41 @@
           "body": "Thank you! If that\u2019s all the changes merged, I can release a new WG version ahead of the weekend.\r\n\r\nCheers,\r\nJake\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Friday, July 19, 2024 at 12:03\u202fPM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Mention ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Address #17 (PR #18)\r\n\r\n\r\n@jakemas<https://github.com/jakemas> belatedly lgtm!\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/18#issuecomment-2239066097>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONFDRO6SVHX3RZFTVVDZNEDRHAVCNFSM6AAAAABKS4XDOCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDEMZZGA3DMMBZG4>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n",
           "createdAt": "2024-07-19T19:07:33Z",
           "updatedAt": "2024-07-19T19:07:33Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Feel free to spin a new version when you get chance.",
+          "createdAt": "2024-07-22T17:24:42Z",
+          "updatedAt": "2024-07-22T17:24:42Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I did try late Friday night to give you an official version over the weekend (see release 4). But it seems the github workflow has broken, and it wasn\u2019t uploading the new releases. I pulled in new version of the github template we are using, but it didn\u2019t fix the issue. :(\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Monday, July 22, 2024 at 10:25\u202fAM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Mention ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Address #17 (PR #18)\r\n\r\n\r\nFeel free to spin a new version when you get chance.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/18#issuecomment-2243457030>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONEHP6BU5RKWURW2SHDZNU57BAVCNFSM6AAAAABKS4XDOCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDENBTGQ2TOMBTGA>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n",
+          "createdAt": "2024-07-22T17:27:21Z",
+          "updatedAt": "2024-07-22T17:27:21Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The submission window was closed until Saturday (or maybe Sunday).  Hopefully you can just retry and it'll work.",
+          "createdAt": "2024-07-22T17:36:27Z",
+          "updatedAt": "2024-07-22T17:36:27Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ahh okay! Looks like it\u2019s still not opened (https://github.com/lamps-wg/dilithium-certificates/actions/runs/10018760275) but I will keep trying!\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Monday, July 22, 2024 at 10:37\u202fAM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Mention ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Address #17 (PR #18)\r\n\r\n\r\nThe submission window was closed until Saturday (or maybe Sunday). Hopefully you can just retry and it'll work.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/18#issuecomment-2243476045>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONFCSHTNK6PNJOS4GP3ZNU7LBAVCNFSM6AAAAABKS4XDOCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDENBTGQ3TMMBUGU>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n",
+          "createdAt": "2024-07-22T18:15:56Z",
+          "updatedAt": "2024-07-22T18:15:56Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Got it!\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Monday, July 22, 2024 at 10:37\u202fAM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Mention ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Address #17 (PR #18)\r\n\r\n\r\nThe submission window was closed until Saturday (or maybe Sunday). Hopefully you can just retry and it'll work.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/18#issuecomment-2243476045>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONFCSHTNK6PNJOS4GP3ZNU7LBAVCNFSM6AAAAABKS4XDOCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDENBTGQ3TMMBUGU>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n",
+          "createdAt": "2024-07-22T18:18:01Z",
+          "updatedAt": "2024-07-22T18:18:01Z"
         }
       ],
       "reviews": []
