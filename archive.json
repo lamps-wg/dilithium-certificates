@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-23T00:46:07.069922+00:00",
+  "timestamp": "2024-07-25T00:45:57.577419+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -475,6 +475,22 @@
           "updatedAt": "2024-07-18T20:08:22Z"
         }
       ]
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOIEpj4c6Qlu9y",
+      "title": "Pre-hashing discussion in Security Considerations",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/19",
+      "state": "OPEN",
+      "author": "dcooper16",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The Security Considerations section of the draft says:\r\n\r\n> However, due to the fact that ML-DSA signatures may require the signing procedure to be repeated several times for a signature to be produced, ML-DSA implementations can make use of pre-hashing the message to prevent rehashing with each attempt.\r\n\r\nThis is not correct. It is true that the signing procedure may need to be repeated several times, but the message is only hashed once.\r\n\r\nThe signing algorithm can be found in Algorithm 2 of https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf. The message is only used once (on line 6) to create a message representative (\u03bc \u2190 H(_tr_ || _M_, 512)). Starting on line 11, a loop is run until a signature is successfully created. But, within this loop the message representative \u03bc is used rather than _M_. So, pre-hashing is not needed to prevent the message from being rehashed with each attempt.\r\n\r\nWhere ML-DSA differs from the traditional hash-then-sign paradigm is that the message is hashed as \u03bc \u2190 H(_tr_ || _M_, 512), where _tr_ is the hash of the public key, rather than just as \u03bc \u2190 H(_M_, 512).",
+      "createdAt": "2024-07-23T18:07:09Z",
+      "updatedAt": "2024-07-23T18:07:09Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
