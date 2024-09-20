@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 1 August 2024                                         S. Turner
+Expires: 21 January 2025                                       S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                         29 January 2024
+                                                            20 July 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -21,9 +21,9 @@ Abstract
    Digital signatures are used within X.509 certificates, Certificate
    Revocation Lists (CRLs), and to sign messages.  This document
    describes the conventions for using the Module-Lattice-Based Digital
-   Signatures (ML-DSA) in Internet X.509 certificates and certificate
-   revocation lists.  The conventions for the associated signatures,
-   subject public keys, and private key are also described.
+   Signature Algorithm (ML-DSA) in Internet X.509 certificates and
+   certificate revocation lists.  The conventions for the associated
+   signatures, subject public keys, and private key are also described.
 
 Note
 
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2024.
+   This Internet-Draft will expire on 21 January 2025.
 
 Copyright Notice
 
@@ -69,7 +69,8 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Requirements Language
+     1.1.  ASN.1 Module and ML-DSA Identifiers
+     1.2.  Requirements Language
    2.  Identifiers
    3.  ML-DSA Signatures in PKIX
    4.  ML-DSA Public Keys in PKIX
@@ -87,23 +88,29 @@ Table of Contents
 
 1.  Introduction
 
-   Module-Lattice-Based Digital Signatures (ML-DSA) is a quantum-
-   resistant digital signature scheme standardized by the US National
-   Institute of Standards and Technology (NIST) PQC project [NIST-PQC].
-   This document specifies the use of the ML-DSA algorithm in Public Key
-   Infrastructure X.509 (PKIX) certificates and Certificate Revocation
-   Lists (CRLs) at three security levels: ML-DSA-44, ML-DSA-65, and ML-
-   DSA-87, using object identifiers assigned by NIST.
+   The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
+   quantum-resistant digital signature scheme standardized by the US
+   National Institute of Standards and Technology (NIST) PQC project
+   [NIST-PQC] in [DRAFTFIPS204].  This document specifies the use of the
+   ML-DSA in Public Key Infrastructure X.509 (PKIX) certificates and
+   Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-
+   44, ML-DSA-65, and ML-DSA-87.
 
    This specification includes conventions for the signatureAlgorithm,
    signatureValue, signature, and subjectPublicKeyInfo fields within
-   Internet X.509 certificates and CRLs [RFC5280], like [RFC3279] did
-   for classic cryptography and [RFC5480] did for elliptic curve
-   cryptography.  It describes the encoding of digital signatures and
-   public keys generated with quantum-resistant signature algorithm ML-
-   DSA.
+   Internet X.509 certificates and CRLs [RFC5280] for ML-DSA, like
+   [RFC3279] did for classic cryptography and [RFC5480] did for elliptic
+   curve cryptography.  The private key format is also specified.
 
-1.1.  Requirements Language
+1.1.  ASN.1 Module and ML-DSA Identifiers
+
+   An ASN.1 module [X680] is included for reference purposes.  Note that
+   as per [RFC5280], certificates use the Distinguished Encoding Rules;
+   see [X690].  Also note that NIST defined the object identifiers for
+   the ML-DSA algorithms in an ASN.1 module; see (TODO insert
+   reference).
+
+1.2.  Requirements Language
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -113,20 +120,23 @@ Table of Contents
 
 2.  Identifiers
 
-   This specification uses placeholders for object identifiers until the
-   identifiers for the new algorithms are assigned by NIST.
+      |  NOTE: This specification uses placeholders for object
+      |  identifiers until the identifiers for the new algorithms are
+      |  assigned by NIST.
 
    The AlgorithmIdentifier type, which is included herein for
    convenience, is defined as follows:
 
-      AlgorithmIdentifier  ::=  SEQUENCE  {
-          algorithm   OBJECT IDENTIFIER,
-          parameters  ANY DEFINED BY algorithm OPTIONAL
-      }
+      AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
+        SEQUENCE {
+          algorithm   ALGORITHM-TYPE."&"id({AlgorithmSet}),
+          parameters  ALGORITHM-TYPE.
+                        "&"Params({AlgorithmSet}{@algorithm}) OPTIONAL
+        }
 
-      |  NOTE: The above syntax is from [RFC5280] and matches the
-      |  version used therein, i.e., the 1988 ASN.1 syntax.  See
-      |  [RFC5912] for ASN.1 copmatible with the 2015 ASN.1 syntax.
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680]}. See [RFC5280] for the 1988 ASN.1
+      |  syntax.
 
    The fields in AlgorithmIdentifier have the following meanings:
 
@@ -150,7 +160,7 @@ Table of Contents
                country(16) us(840) organization(1) gov(101) csor(3)
                nistAlgorithm(4) sigAlgs(3) TBD }
 
-   The contents of the parameters component for each algorithm are
+   The contents of the parameters component for each algorithm MUST be
    absent.
 
 3.  ML-DSA Signatures in PKIX
@@ -178,19 +188,20 @@ Table of Contents
    signatureValue attribute that contains the actual signature.
 
       CertificateList  ::=  SEQUENCE  {
-         tbsCertificate       TBSCertList,
+         tbsCertList          TBSCertList,
          signatureAlgorithm   AlgorithmIdentifier,
          signatureValue       BIT STRING  }
 
    The identifiers defined in Section 2 can be used as the
    AlgorithmIdentifier in the signatureAlgorithm field in the sequence
    Certificate/CertificateList and the signature field in the sequence
-   TBSCertificate/TBSCertList in certificates CRLs, respectively,
-   [RFC5280].  The parameters of these signature algorithms are absent,
-   as explained in Section 2.
+   TBSCertificate/TBSCertList in certificates and CRLs, respectively,
+   [RFC5280].  The parameters of these signature algorithms MUST be
+   absent, as explained in Section 2.
 
    The signatureValue field contains the corresponding ML-DSA signature
-   computed upon the ASN.1 DER encoded tbsCertificate [RFC5280].
+   computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
+   [RFC5280].
 
    Conforming Certification Authority (CA) implementations MUST specify
    the algorithms explicitly by using the OIDs specified in Section 2
@@ -320,13 +331,24 @@ Table of Contents
      keyCertSign; or
      cRLSign.
 
+   If the keyUsage extension is present in a certificate that indicates
+   id-ML-DSA in the SubjectPublicKeyInfo, then the following MUST NOT be
+   present:
+
+      keyEncipherment; or
+      dataEncipherment; or
+      keyAgreement; or
+      encipherOnly; or
+      decipherOnly.
+
    Requirements about the keyUsage extension bits defined in [RFC5280]
    still apply.
 
 6.  ML-DSA Private Keys
 
-   EDNOTE: this section is still under construction as we discuss the
-   best way to formulate the private key with the wider working group.
+      |  EDNOTE: This section is still under construction as we discuss
+      |  the best way to formulate the private key with the wider
+      |  working group.
 
    A ML-DSA private key is encoded as MLDSAPrivateKey in the privateKey
    field as an OCTET STRING.  ML-DSA public keys are optionally
@@ -419,10 +441,10 @@ Table of Contents
    specification as well.
 
    The digital signature scheme defined within this document are modeled
-   under existentially unforgeable digital signatures with respect to an
-   adaptive chosen message attack (EUF-CMA).  For the purpose of
-   estimating security strength, it has been assumed that the attacker
-   has access to signatures for no more than 2^{64} chosen messages.
+   under strongly existentially unforgeable under chosen message attack
+   (SUF-CMA).  For the purpose of estimating security strength, it has
+   been assumed that the attacker has access to signatures for no more
+   than 2^{64} chosen messages.
 
    EDNOTE: Discuss implications of not hash-then-sign.  Implications in
    performance too.
@@ -502,6 +524,13 @@ Table of Contents
 
 10.1.  Normative References
 
+   [DRAFTFIPS204]
+              Raimondo, G. M. and L. E. Locascio, "DRAFT FIPS 204
+              (Initial Public Draft): Module-Lattice-Based Digital
+              Signature Standard", National Institute of Standards and
+              Technology, 2023,
+              <https://doi.org/10.6028/NIST.FIPS.204.ipd>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -526,6 +555,18 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+   [X680]     ITU-T, "Information Technology - Abstract Syntax Notation
+              One (ASN.1): Specification of basic notation. ITU-T
+              Recommendation X.680 (2021) | ISO/IEC 8824-1:2021.",
+              February 2021, <https://www.itu.int/rec/T-REC-X.680>.
+
+   [X690]     ITU-T, "Information technology -- ASN.1 encoding rules:
+              Specification of Basic Encoding Rules (BER), Canonical
+              Encoding Rules (CER) and Distinguished Encoding Rules
+              (DER). ITU-T Recommendation X.690 (2021) | ISO/IEC
+              8825-1:2021.", February 2021,
+              <https://www.itu.int/rec/T-REC-X.690>.
+
 10.2.  Informative References
 
    [CDFFJ21]  Cremers, Cas., Düzlü, S., Fiedler, R., Fischlin, M., and
@@ -548,11 +589,6 @@ Table of Contents
               Conference on the Theory and Application of Cryptology and
               Information Security, 2009, <https://www.iacr.org/archive/
               asiacrypt2009/59120596/59120596.pdf>.
-
-   [FIPS204]  Raimondo, G. M. and L. E. Locascio, "FIPS 204 (Initial
-              Public Draft): Module-Lattice-Based Digital Signature
-              Standard", National Institute of Standards and Technology,
-              2023, <https://doi.org/10.6028/NIST.FIPS.204.ipd>.
 
    [NIST-PQC] National Institute of Standards and Technology (NIST),
               "Post-Quantum Cryptography Project", 20 December 2016,
