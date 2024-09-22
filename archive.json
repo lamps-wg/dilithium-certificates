@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-19T00:51:46.700910+00:00",
+  "timestamp": "2024-09-22T00:56:50.325959+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1025,6 +1025,32 @@
           "updatedAt": "2024-07-22T18:18:01Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOIEpj4c58LeuF",
+      "title": "Update workflows",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/20",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Update archive.yml.",
+      "createdAt": "2024-09-20T14:53:35Z",
+      "updatedAt": "2024-09-20T14:57:30Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "10697fcb7d67e1e79257e38d1fc66972a111cdb2",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-update-workflow",
+      "headRefOid": "13563326f0786735087173b1e3d234247058ab1d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
