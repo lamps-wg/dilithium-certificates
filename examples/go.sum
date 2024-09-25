@@ -1,0 +1,4 @@
+github.com/cloudflare/circl v1.4.1-0.20240925100306-16fa7b7b8dc9 h1:1xQFaYojVBfO+BHArxmL3y5d2ZSvQ0hhUmnc1gXYTl4=
+github.com/cloudflare/circl v1.4.1-0.20240925100306-16fa7b7b8dc9/go.mod h1:PDRU+oXvdD7KCtgKxW95M5Z8BpSCJXQORiZFnBQS5QU=
+golang.org/x/sys v0.10.0 h1:SqMFp9UcQJZa+pmYuAKjd9xq1f0j5rLcDIk0mj4qAsA=
+golang.org/x/sys v0.10.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
