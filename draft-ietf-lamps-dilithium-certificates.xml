@@ -170,17 +170,17 @@
        <sourcecode type="asn.1" markers="false">
    id-ML-DSA-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
-            nistAlgorithm(4) sigAlgs(3) TBD }
+            nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
        </sourcecode>
        <sourcecode type="asn.1" markers="false">
    id-ML-DSA-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
-            nistAlgorithm(4) sigAlgs(3) TBD }
+            nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
        </sourcecode>
        <sourcecode type="asn.1" markers="false">
    id-ML-DSA-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
-            nistAlgorithm(4) sigAlgs(3) TBD }
+            nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
        </sourcecode>
        <t>The contents of the parameters component for each algorithm <bcp14>MUST</bcp14> be absent.</t>
     </section> <!-- End of Identifiers Section -->
