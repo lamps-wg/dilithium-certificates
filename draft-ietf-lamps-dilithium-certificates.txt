@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 21 January 2025                                       S. Turner
+Expires: 29 March 2025                                         S. Turner
                                                                    sn3rd
                                                            B. Westerbaan
                                                               Cloudflare
-                                                            20 July 2024
+                                                       25 September 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -24,16 +24,6 @@ Abstract
    Signature Algorithm (ML-DSA) in Internet X.509 certificates and
    certificate revocation lists.  The conventions for the associated
    signatures, subject public keys, and private key are also described.
-
-Note
-
-   [EDNOTE: This draft is not expected to be finalized before the NIST
-   PQC Project has standardized FIPS 204 Module-Lattice-Based Digital
-   Signature Standard.  The current FIPS draft was published August 24,
-   2023 for public review.  Final versions are expected by April 2024.
-   This specification will use object identifiers for the new algorithms
-   that are assigned by NIST, and will use placeholders until these are
-   released.]
 
 Status of This Memo
 
@@ -50,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2025.
+   This Internet-Draft will expire on 29 March 2025.
 
 Copyright Notice
 
@@ -120,10 +110,6 @@ Table of Contents
 
 2.  Identifiers
 
-      |  NOTE: This specification uses placeholders for object
-      |  identifiers until the identifiers for the new algorithms are
-      |  assigned by NIST.
-
    The AlgorithmIdentifier type, which is included herein for
    convenience, is defined as follows:
 
@@ -150,15 +136,15 @@ Table of Contents
 
       id-ML-DSA-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
                country(16) us(840) organization(1) gov(101) csor(3)
-               nistAlgorithm(4) sigAlgs(3) TBD }
+               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
 
       id-ML-DSA-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
                country(16) us(840) organization(1) gov(101) csor(3)
-               nistAlgorithm(4) sigAlgs(3) TBD }
+               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
 
       id-ML-DSA-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
                country(16) us(840) organization(1) gov(101) csor(3)
-               nistAlgorithm(4) sigAlgs(3) TBD }
+               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 
    The contents of the parameters component for each algorithm MUST be
    absent.
@@ -263,54 +249,39 @@ Table of Contents
    the least significant bit of the OCTET STRING becomes the least
    significant bit of the BIT STRING.
 
-   The following is an example of a ML-DSA-44 public key encoded using
-   the textual encoding defined in [RFC7468].
+   The following is an example of the ML-DSA-44 public key for the all
+   zeroes seed encoded using the textual encoding defined in [RFC7468].
 
-   -----BEGIN PUBLIC KEY-----
-   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
-   x5AXF2HOm4o=
-   -----END PUBLIC KEY-----
-
+   -----BEGIN ML-DSA-44 PUBLIC KEY-----
+   MIIFMTAKBghghkgBZQMEEQOCBSEAunH59k4RuutY+pxvu24U5h8YZD2rSVtHU5qR
+   ZsoBmBMcRPgmu9VuNOVdteXi1zNIXjnqJg/GAAxepLqA00Vc3lO0bzRIKu39VFD8
+   Lhuk8l0V+cFEJC+zm7UihxiQMMUEmOFxe3x1ixkKZ0jqmqP3rKryx8tSbtcXyfea
+   64QhT6XNje2SoMP6FViBDxLHBQo2dwjRls0k5a+XSQSu2OTOiHLoaWsLe8pQ5FLN
+   fTDqmkrawDEdZyxr3oSWJAsHQxRjcIiVzZuvwxYy1zl2STiP2vy/fTBaPemkleyn
+   QzqPg7oPCyXEE8bjnJbrfWkbNNN8438e6tHPIX4l7zTuzz98YPhLjt/d6EBdT4Ml
+   dsYe+Y4KLyjaGHcAlTkk9oa5RhRwW89T0z/t1DSO3dvfKLUGXh8gd1BD6Fz5Mfgp
+   F5NjoafnQEqDjsAAhrCXY4b+Y3yYJEdX4/dp3dRGdHG/rWcPmgX4JG7lCnser4f8
+   QGnDriqiAzJYEXeS8LzUngg/0bx0lqv/KcyU5IaLISFO0xZSU5mmEPvdSoDnyAcV
+   8pV44qhLtAvd29n0ehG259oRihtljTWeiu9V60a1N2tbZVl5mEqSK+6/xZvNYA1T
+   CdzNctvweH24unV7U3wer9XA9Q6kvJWDVJ4oKaQsKMrCSMlteBJMRxWbGK7ddUq6
+   F7GdQw+3j2M+qdJvVKm9UPjY9rc1lPgol25+oJxTu7nxGlbJUH+4m5pevAN6NyZ6
+   lfhbjWTKlxkrEKZvQXs/Yf6cpXEwpI/ZJeriq1UC1XHIpRkDwdOY9MH3an4RdDl2
+   r9vGl/IwlKPNdh/5aF3jLgn7PCit1FNJAwC8fIncAXgAlgcXIpRXdfJk4bBiO89G
+   GccSyDh2EgXYdpG3XvNgGWy7npuSoNTE7WIyblAk13UQuO4sdCbMIuriCdyfE73m
+   vwj15xgb07RZRQtFGlFTmnFcIdZ90zDrWXDbANntv7KCKwNvoTuv64bY3HiGbj+N
+   Q+U9eMylWVpvr4hrXcES8c9K3PqHWADZC0iIOvlzFv4VBoc/wVflcOrL/SIoaNFC
+   NBAZZq+2v5lAgpJTqVOtqJ/HVraoSfcKy5g45p+qULunXj6Jwq21fobQiKubBKKO
+   ZwcJFyJD7F4ACKXOrz+HIvSHMCWW/9dVrRuCpJw0s0aVFbRqopDNhu446nqb4/ED
+   YQM1tTHMozPd/jKxRRD0sH75X8ZoToxFSpLBDbtdWcenxj+zBf6IGWfZnmaetjKE
+   BYJWC7QDQx1A91pJVJCEgieCkoIfTqkeQuePpIyu48g2FG3P1zjRF+kumhUTfSjo
+   5qS0YiZQy0E1BMs6M11EvuxXRsHClLHoy5nLYI2Sj4zjVjYyxSHyPRPGGo9hwB34
+   yWxzYNtPPGiqXS/dNCpi/zRZwRY4lCGrQ+hYTEWIK1Dm5OlttvC4/eiQ1dv63NiG
+   kLRJ5kJA3bICN0fzCDY+MBqnd1cWn8YVBijVkgtaoascjL9EywDgJdeHnXK0eeOv
+   UxHHhXJVkNqcibn8O4RQdpVU60TSA+uiu675ytIjcBHC6kTv8A8pmkj/4oypPd+F
+   92YIJC741swkYQoeIHj8rE+ThcMUkF7KqC5VORbZTRp8HsZSqgiJcIPaouuxd1+8
+   Rxrid3fXkE6p8bkrysPYoxWEJgh7ZFsRCPDWX+yTeJwFN0PKFP1j0F6YtlLfK5wv
+   +c4F8ZQHA/+yc/gODicy7KmWDZgbTP07e7gEWzw4MFRrndjbDQ==
+   -----END ML-DSA-44 PUBLIC KEY-----
 
    Conforming CA implementations MUST specify the X.509 public key
    algorithm explicitly by using the OIDs specified in Section 2 when
@@ -350,10 +321,11 @@ Table of Contents
       |  the best way to formulate the private key with the wider
       |  working group.
 
-   A ML-DSA private key is encoded as MLDSAPrivateKey in the privateKey
-   field as an OCTET STRING.  ML-DSA public keys are optionally
-   distributed in the publicKey field of the MLDSAPrivateKey structure.
-   This follows the OneAsymmetricKey syntax.
+   An ML-DSA private key is encoded by storing its 32-byte seed in the
+   privateKey field as an OCTET STRING.  FIPS 204 specifies two formats
+   for an ML-DSA private key: a 32-byte seed and an (expanded) private
+   key.  The expanded private key (and public key) is computed from the
+   seed using ML-DSA.KeyGen_internal (algorithm 6).
 
    The ASN.1 encoding for a ML-DSA private key is as follows:
 
@@ -361,15 +333,7 @@ Table of Contents
          version                  Version,
          privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
          privateKey               OCTET STRING,
-         publicKey                [1] MLDSAPublicKey OPTIONAL
      }
-
-   A fully populated ML-DSA private key consists of 6 parameters.  The
-   size necessary to hold all private key elements is
-   32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes.  The
-   description of k, l, and eta as well as public key and secret key
-   sizes for security levels 2, 3, and 5 can be found in Figure 1 of the
-   Appendix.
 
 7.  ASN.1 Module
 
@@ -471,7 +435,7 @@ Table of Contents
 
    ML-DSA offers both deterministic and randomized signing.  By default
    ML-DSA signatures are non-deterministic, the private random seed rho'
-   is pseudorandomly derived from the signer's private key, the message,
+   is pseudorandomly derived from the signer’s private key, the message,
    and a 256-bit string, rnd - where rnd should be generated by an
    approved RBG.  In the deterministic version, rng is instead a 256-bit
    constant string.  The source of randomness in the randomized mode has
@@ -637,9 +601,9 @@ Appendix B.  Security Strengths
    | Level | (k,l) | eta |  Sig.  | Public | Private|
    |       |       |     |  (B)   | Key(B) | Key(B) |
    |=======+=======+=====+========+========+========|
-   |   2   | (4,4) |  2  |  2420  |  1312  |  2528  |
-   |   3   | (6,5) |  4  |  3293  |  1952  |  4000  |
-   |   5   | (8,7) |  2  |  4595  |  2592  |  4864  |
+   |   2   | (4,4) |  2  |  2420  |  1312  |  32    |
+   |   3   | (6,5) |  4  |  3309  |  1952  |  32    |
+   |   5   | (8,7) |  2  |  4627  |  2592  |  32    |
    |=======+=======+=====+========+========+========|
 
                                   Figure 1
