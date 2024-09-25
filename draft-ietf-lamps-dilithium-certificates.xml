@@ -339,16 +339,15 @@ Rxrid3fXkE6p8bkrysPYoxWEJgh7ZFsRCPDWX+yTeJwFN0PKFP1j0F6YtlLfK5wv
 	<t>EDNOTE: This section is still under construction as we discuss the best way to formulate the private key with the wider
 		working group. </t>
 	</aside>
-	<t>A ML-DSA private key is encoded as MLDSAPrivateKey in the privateKey field as an OCTET STRING. ML-DSA public keys are
-		optionally distributed in the publicKey field of the MLDSAPrivateKey structure. This follows the OneAsymmetricKey
-		syntax.</t>
+    <t>An ML-DSA private key is encoded by storing its 32-byte seed in the privateKey field as an OCTET STRING.
+        FIPS 204 specifies two formats for an ML-DSA private key: a 32-byte seed and an (expanded) private key.
+        The expanded private key (and public key) is computed from the seed using ML-DSA.KeyGen_internal (algorithm 6).</t>
         <t>The ASN.1 encoding for a ML-DSA private key is as follows:</t>
         <sourcecode type="asn.1" markers="false">
   MLDSAPrivateKey ::= SEQUENCE {
       version                  Version,
       privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
       privateKey               OCTET STRING,
-      publicKey                [1] MLDSAPublicKey OPTIONAL
   }
       </sourcecode>
         <!-- <sourcecode type="asn.1" markers="false">
@@ -366,9 +365,6 @@ Rxrid3fXkE6p8bkrysPYoxWEJgh7ZFsRCPDWX+yTeJwFN0PKFP1j0F6YtlLfK5wv
                 <!--[JM] deterministic vs random signatures, see https://pq-crystals.org/dilithium/data/dilithium-specification-round3.pdf page 13 caption of figure 4 -->
                 <!-- <t>Dilithium offers both deterministic and randomized signing. The deterministic version creates a signature based on a function of the key K and the message, whereas the randomized version instead selects these values at random. The randomized version can be invoked by leaving K as EMPTY.</t>
               -->
-                <t>A fully populated ML-DSA private key consists of 6 parameters. The size necessary to hold all private key elements
-			is 32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes. The description of k, l, and eta as well as public
-			key and secret key sizes for security levels 2, 3, and 5 can be found in Figure 1 of the Appendix.</t>
                 <!-- [JM] section under construction. Do we need a basic description of each private key parameter? I think a breif overview (as we did for the public key would be nice to have.-->
           </section>  <!-- End of ML-DSA Private Keys Section -->
          <!-- [PK] What is this section going to include? -->
@@ -697,9 +693,9 @@ Rxrid3fXkE6p8bkrysPYoxWEJgh7ZFsRCPDWX+yTeJwFN0PKFP1j0F6YtlLfK5wv
 | Level | (k,l) | eta |  Sig.  | Public | Private|
 |       |       |     |  (B)   | Key(B) | Key(B) |
 |=======+=======+=====+========+========+========|
-|   2   | (4,4) |  2  |  2420  |  1312  |  2560  |
-|   3   | (6,5) |  4  |  3309  |  1952  |  4032  |
-|   5   | (8,7) |  2  |  4627  |  2592  |  4896  |
+|   2   | (4,4) |  2  |  2420  |  1312  |  32    |
+|   3   | (6,5) |  4  |  3309  |  1952  |  32    |
+|   5   | (8,7) |  2  |  4627  |  2592  |  32    |
 |=======+=======+=====+========+========+========|]]>
           </artwork>
         </figure>

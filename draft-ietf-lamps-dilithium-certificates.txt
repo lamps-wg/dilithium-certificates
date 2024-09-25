@@ -321,10 +321,11 @@ Table of Contents
       |  the best way to formulate the private key with the wider
       |  working group.
 
-   A ML-DSA private key is encoded as MLDSAPrivateKey in the privateKey
-   field as an OCTET STRING.  ML-DSA public keys are optionally
-   distributed in the publicKey field of the MLDSAPrivateKey structure.
-   This follows the OneAsymmetricKey syntax.
+   An ML-DSA private key is encoded by storing its 32-byte seed in the
+   privateKey field as an OCTET STRING.  FIPS 204 specifies two formats
+   for an ML-DSA private key: a 32-byte seed and an (expanded) private
+   key.  The expanded private key (and public key) is computed from the
+   seed using ML-DSA.KeyGen_internal (algorithm 6).
 
    The ASN.1 encoding for a ML-DSA private key is as follows:
 
@@ -332,15 +333,7 @@ Table of Contents
          version                  Version,
          privateKeyAlgorithm      PrivateKeyAlgorithmIdentifier,
          privateKey               OCTET STRING,
-         publicKey                [1] MLDSAPublicKey OPTIONAL
      }
-
-   A fully populated ML-DSA private key consists of 6 parameters.  The
-   size necessary to hold all private key elements is
-   32+32+32+32*[(k+l)*ceiling(log(2*eta+1))+13*k] bytes.  The
-   description of k, l, and eta as well as public key and secret key
-   sizes for security levels 2, 3, and 5 can be found in Figure 1 of the
-   Appendix.
 
 7.  ASN.1 Module
 
@@ -608,9 +601,9 @@ Appendix B.  Security Strengths
    | Level | (k,l) | eta |  Sig.  | Public | Private|
    |       |       |     |  (B)   | Key(B) | Key(B) |
    |=======+=======+=====+========+========+========|
-   |   2   | (4,4) |  2  |  2420  |  1312  |  2560  |
-   |   3   | (6,5) |  4  |  3309  |  1952  |  4032  |
-   |   5   | (8,7) |  2  |  4627  |  2592  |  4896  |
+   |   2   | (4,4) |  2  |  2420  |  1312  |  32    |
+   |   3   | (6,5) |  4  |  3309  |  1952  |  32    |
+   |   5   | (8,7) |  2  |  4627  |  2592  |  32    |
    |=======+=======+=====+========+========+========|
 
                                   Figure 1
