@@ -102,13 +102,6 @@
 	      and certificate revocation lists.  The conventions for the associated signatures, subject
 	      public keys, and private key are also described.</t>
     </abstract>
-    <note>
-    <t>[EDNOTE: This draft is not expected to be finalized before the NIST PQC Project has standardized
-	    FIPS 204 Module-Lattice-Based Digital Signature Standard. The current FIPS draft was
-	    published August 24, 2023 for public review. Final versions are expected by April 2024. This
-	    specification will use object identifiers for the new algorithms that are assigned by NIST,
-	    and will use placeholders until these are released.]</t>
-    </note>
   </front>
   <middle>
     <section numbered="true" toc="default">
@@ -144,10 +137,6 @@
 
     <section numbered="true" toc="default" anchor="oids">
       <name>Identifiers</name>
-      <aside>
-      <t>NOTE: This specification uses placeholders for object identifiers until the identifiers for the new algorithms
-	      are assigned by NIST.</t>
-      </aside>
       <t>The AlgorithmIdentifier type, which is included herein for convenience, is defined as follows:</t>
        <sourcecode type="asn.1">
    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
