@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T00:53:36.256321+00:00",
+  "timestamp": "2024-09-26T00:53:03.533997+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -229,7 +229,7 @@
       "labels": [],
       "body": "Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).",
       "createdAt": "2022-10-25T02:25:26Z",
-      "updatedAt": "2022-10-25T02:29:02Z",
+      "updatedAt": "2024-09-25T11:56:39Z",
       "closedAt": null,
       "comments": [
         {
@@ -238,6 +238,13 @@
           "body": "This version does not allow leaving K empty as it is a fixed-length octet string. Some implementations may need it, though.\r\n\r\nDilithium allows the same private key to be used for randomized and non-randomized signing; the K value does not affect the public key or break the compatibility of signatures. In fact, some implementors may choose to use the random seed K in a different way; additionally binding it in a hash with some RNG output, the public key, a device-intrinsic key, or whatever. This would often be sensible from security viewpoint. The K value is merely used to randomize the signing process. The only way having a different randomization method could be an issue is if ACVP / FIPS testing turns out to be overly rigid with Dilithium modules. But it is entirely up to the implementation.\r\n",
           "createdAt": "2022-10-25T02:25:44Z",
           "updatedAt": "2022-10-25T02:25:44Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed, I think it's fine to allow for deterministic signing.",
+          "createdAt": "2024-09-25T11:56:38Z",
+          "updatedAt": "2024-09-25T11:56:38Z"
         }
       ]
     },
@@ -489,6 +496,38 @@
       "body": "The Security Considerations section of the draft says:\r\n\r\n> However, due to the fact that ML-DSA signatures may require the signing procedure to be repeated several times for a signature to be produced, ML-DSA implementations can make use of pre-hashing the message to prevent rehashing with each attempt.\r\n\r\nThis is not correct. It is true that the signing procedure may need to be repeated several times, but the message is only hashed once.\r\n\r\nThe signing algorithm can be found in Algorithm 2 of https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf. The message is only used once (on line 6) to create a message representative (\u03bc \u2190 H(_tr_ || _M_, 512)). Starting on line 11, a loop is run until a signature is successfully created. But, within this loop the message representative \u03bc is used rather than _M_. So, pre-hashing is not needed to prevent the message from being rehashed with each attempt.\r\n\r\nWhere ML-DSA differs from the traditional hash-then-sign paradigm is that the message is hashed as \u03bc \u2190 H(_tr_ || _M_, 512), where _tr_ is the hash of the public key, rather than just as \u03bc \u2190 H(_M_, 512).",
       "createdAt": "2024-07-23T18:07:09Z",
       "updatedAt": "2024-07-23T18:07:09Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOIEpj4c6X2L68",
+      "title": "Update example to final NIST standard",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/21",
+      "state": "CLOSED",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-25T10:12:45Z",
+      "updatedAt": "2024-09-25T17:28:23Z",
+      "closedAt": "2024-09-25T17:28:23Z",
+      "comments": []
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOIEpj4c6X2_eQ",
+      "title": "Use seed as private key",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/22",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Following [working group consensus](https://mailarchive.ietf.org/arch/msg/spasm/KPg3lbPeNms2H5PNDBt0iJByuE0/)",
+      "createdAt": "2024-09-25T11:52:19Z",
+      "updatedAt": "2024-09-25T11:52:19Z",
       "closedAt": null,
       "comments": []
     }
@@ -1054,6 +1093,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOIEpj4c58pWbt",
+      "title": "Various updates",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/23",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-25T11:52:49Z",
+      "updatedAt": "2024-09-25T17:28:22Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "c6caaa48c681ae45bc3ab4270bb0a679b8b249ff",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "bas/updates",
+      "headRefOid": "326f1f0c971ade82dcdcfbb4945e307282acd53f",
+      "closedAt": "2024-09-25T17:28:21Z",
+      "mergedAt": "2024-09-25T17:28:21Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "b9064ecfcf8e78858dcc1c6919590247c8eed6b1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6K0cE_",
+          "commit": {
+            "abbreviatedOid": "326f1f0"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thank you!",
+          "createdAt": "2024-09-25T17:27:56Z",
+          "updatedAt": "2024-09-25T17:27:56Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
