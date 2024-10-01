@@ -179,7 +179,7 @@
       <t>ML-DSA is a digital signature scheme built upon the Fiat-Shamir-with-aborts framework
 	      <xref target="Fiat-Shamir" format="default"></xref>. The security is based upon
 	      the hardness of lattice problems over module lattices <xref target="Dilithium" format="default"></xref>.
-	      ML-DSA provides three parameter sets for the security categories 2, 3 and 5.</t>
+	      ML-DSA provides three parameter sets for the NIST PQC security categories 2, 3 and 5.</t>
       <t>Signatures are used in a number of different ASN.1 structures. As shown in the ASN.1
 	      representation from <xref target="RFC5280" format="default" sectionFormat="of" derivedContent="RFC5280"/>
 	      below, in an X.509 certificate, a signature is encoded with an algorithm identifier
