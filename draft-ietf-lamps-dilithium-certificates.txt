@@ -20,10 +20,11 @@ Abstract
 
    Digital signatures are used within X.509 certificates, Certificate
    Revocation Lists (CRLs), and to sign messages.  This document
-   describes the conventions for using the Module-Lattice-Based Digital
-   Signature Algorithm (ML-DSA) in Internet X.509 certificates and
-   certificate revocation lists.  The conventions for the associated
-   signatures, subject public keys, and private key are also described.
+   describes the conventions for using FIPS 204, the Module-Lattice-
+   Based Digital Signature Algorithm (ML-DSA) in Internet X.509
+   certificates and certificate revocation lists.  The conventions for
+   the associated signatures, subject public keys, and private key are
+   also described.
 
 Status of This Memo
 
@@ -81,8 +82,8 @@ Table of Contents
    The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
    quantum-resistant digital signature scheme standardized by the US
    National Institute of Standards and Technology (NIST) PQC project
-   [NIST-PQC] in [DRAFTFIPS204].  This document specifies the use of the
-   ML-DSA in Public Key Infrastructure X.509 (PKIX) certificates and
+   [NIST-PQC] in [FIPS204].  This document specifies the use of the ML-
+   DSA in Public Key Infrastructure X.509 (PKIX) certificates and
    Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-
    44, ML-DSA-65, and ML-DSA-87.
 
@@ -488,12 +489,10 @@ Table of Contents
 
 10.1.  Normative References
 
-   [DRAFTFIPS204]
-              Raimondo, G. M. and L. E. Locascio, "DRAFT FIPS 204
-              (Initial Public Draft): Module-Lattice-Based Digital
-              Signature Standard", National Institute of Standards and
-              Technology, 2023,
-              <https://doi.org/10.6028/NIST.FIPS.204.ipd>.
+   [FIPS204]  Raimondo, G. M. and L. E. Locascio, "FIPS 204: Module-
+              Lattice-Based Digital Signature Standard", National
+              Institute of Standards and Technology, 2024,
+              <https://doi.org/10.6028/NIST.FIPS.204>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

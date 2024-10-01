@@ -97,8 +97,8 @@
         keywords will be used for the search engine. -->
    <abstract>
       <t>Digital signatures are used within X.509 certificates, Certificate Revocation Lists (CRLs),
-	      and to sign messages. This document describes the conventions for using the
-	      Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates
+	      and to sign messages. This document describes the conventions for using FIPS 204, the
+      Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in Internet X.509 certificates
 	      and certificate revocation lists.  The conventions for the associated signatures, subject
 	      public keys, and private key are also described.</t>
     </abstract>
@@ -109,7 +109,7 @@
       <t>The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a quantum-resistant
 	      digital signature scheme standardized by the US National Institute of Standards
 	      and Technology (NIST) PQC project <xref target="NIST-PQC" format="default"></xref>
-	      in <xref target="DRAFTFIPS204" format="default"></xref>. This document specifies
+	      in <xref target="FIPS204" format="default"></xref>. This document specifies
 	      the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX) certificates and
 	      Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-44, ML-DSA-65,
 	      and ML-DSA-87.</t>
@@ -526,14 +526,14 @@ Rxrid3fXkE6p8bkrysPYoxWEJgh7ZFsRCPDWX+yTeJwFN0PKFP1j0F6YtlLfK5wv
           <?rfc include="reference.RFC.7468.xml"?>
           <?rfc include="reference.RFC.8174.xml"?>
 
-        <reference anchor="DRAFTFIPS204" target="https://doi.org/10.6028/NIST.FIPS.204.ipd">
+        <reference anchor="FIPS204" target="https://doi.org/10.6028/NIST.FIPS.204">
           <front>
-            <title>DRAFT FIPS 204 (Initial Public Draft): Module-Lattice-Based Digital Signature Standard</title>
+            <title>FIPS 204: Module-Lattice-Based Digital Signature Standard</title>
             <author initials="G. M." surname="Raimondo" fullname="G. M. Raimondo">
             </author>
             <author initials="L. E." surname="Locascio" fullname="L. E. Locascio">
             </author>
-            <date year="2023"/>
+            <date year="2024"/>
           </front>
         <refcontent>National Institute of Standards and Technology</refcontent>
         </reference>
