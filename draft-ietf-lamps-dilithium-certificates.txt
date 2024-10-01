@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 29 March 2025                                         S. Turner
+Expires: 4 April 2025                                          S. Turner
                                                                    sn3rd
-                                                           B. Westerbaan
+                                                         B.E. Westerbaan
                                                               Cloudflare
-                                                       25 September 2024
+                                                          1 October 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 March 2025.
+   This Internet-Draft will expire on 4 April 2025.
 
 Copyright Notice
 
@@ -629,4 +629,4 @@ Authors' Addresses
 
    Bas Westerbaan
    Cloudflare
-   Email: bas@westerbaan.name
+   Email: bas@cloudflare.com

@@ -69,10 +69,10 @@
         <!-- uri and facsimile elements may also be added -->
      </address>
     </author>
-    <author fullname="Bas Westerbaan" initials="B." surname="Westerbaan">
+    <author fullname="Bas Westerbaan" initials="B.E." surname="Westerbaan">
       <organization>Cloudflare</organization>
       <address>
-        <email>bas@westerbaan.name</email>
+        <email>bas@cloudflare.com</email>
         <!-- uri and facsimile elements may also be added -->
      </address>
     </author>
