@@ -233,10 +233,6 @@
         <li>subjectPublicKey contains the byte stream of the public key.  The algorithms defined in this document always encode
 		the public key as TODO.</li>
         </ul>
-        <t>The public parameters for ML-DSA are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced,
-		consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This
-		sampling is performed by expanding a nonce (rho) using an XOF.</t> <!--- [JM]This could be too much detail (I think it is) but otherwise if feels like are plucking letters out of the air. I guess we pluck p and q out of the air in the original RSA/DH spec, but because there are so many more letters in Dilithium, it feels worse. This is the most brief of an explanation I could give for where rho, and k come from. -->
-        <!--- [EC]I found the sentence about "rho" very hard to read. Something like "expanding a nonce (rho) using..." could help. I also found the "(k*l) public matrix" hard to read because of how 'l' is rendered. It's also not referenced in this section anywhere (it doesn't affect the size of the public key??), but it does make an appearance in the appendix. -->
         <t>The ML-DSA public key <bcp14>MUST</bcp14> be encoded using the ASN.1 type MLDSAPublicKey:</t>
 
                 <!---<ul spacing="compact">
@@ -260,10 +256,9 @@
        <sourcecode type="asn.1" markers="false">
   MLDSAPublicKey ::= OCTET STRING
       </sourcecode>
-         <t>where MLDSAPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the
-		 matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring
-		 R_q. These parameters <bcp14>MUST</bcp14> be encoded as a single OCTET STRING. The size required to hold a
-		 MLDSAPublicKey public key element is therefore 32+320*k bytes.</t>
+      <t>where MLDSAPublicKey is a ML-DSA public key as specified by FIPS 204.
+      Sizes for the three security levels are specified are given in <xref target="MLS-DSAParameters"/>.
+          These parameters <bcp14>MUST</bcp14> be encoded as a single OCTET STRING.</t>
          <t>The id-ML-DSA identifier defined in <xref target="oids"/> <bcp14>MUST</bcp14> be used as the algorithm field in the
 		 SubjectPublicKeyInfo sequence <xref target="RFC5280" format="default"/> to identify a ML-DSA public key.</t>
          <t>The ML-DSA public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value
