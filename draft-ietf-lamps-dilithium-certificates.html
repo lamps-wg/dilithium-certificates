@@ -1350,28 +1350,24 @@ svg :is([fill="white"], [fill^="#fff"]) {
  the public key as TODO.<a href="#section-4-4.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-4-5">The public parameters for ML-DSA are based upon a polynomial ring R_q for prime q. A (k*l) public matrix A is produced,
- consisting of polynomials whose coefficients are sampled uniformly at random from the integers modulo q. This
- sampling is performed by expanding a nonce (rho) using an XOF.<a href="#section-4-5" class="pilcrow">¶</a></p>
-<p id="section-4-6">The ML-DSA public key <span class="bcp14">MUST</span> be encoded using the ASN.1 type MLDSAPublicKey:<a href="#section-4-6" class="pilcrow">¶</a></p>
-<div class="lang-asn.1 sourcecode" id="section-4-7">
+<p id="section-4-5">The ML-DSA public key <span class="bcp14">MUST</span> be encoded using the ASN.1 type MLDSAPublicKey:<a href="#section-4-5" class="pilcrow">¶</a></p>
+<div class="lang-asn.1 sourcecode" id="section-4-6">
 <pre>
   MLDSAPublicKey ::= OCTET STRING
-</pre><a href="#section-4-7" class="pilcrow">¶</a>
+</pre><a href="#section-4-6" class="pilcrow">¶</a>
 </div>
-<p id="section-4-8">where MLDSAPublicKey is a concatenation of rho and t1. Here, rho is the nonce used to seed the XOF to produce the
-  matrix A, and t1 is a vector encoded in 320*k bytes where k is the rank of the vector over the polynomial ring
-  R_q. These parameters <span class="bcp14">MUST</span> be encoded as a single OCTET STRING. The size required to hold a
-  MLDSAPublicKey public key element is therefore 32+320*k bytes.<a href="#section-4-8" class="pilcrow">¶</a></p>
-<p id="section-4-9">The id-ML-DSA identifier defined in <a href="#oids" class="auto internal xref">Section 2</a> <span class="bcp14">MUST</span> be used as the algorithm field in the
-  SubjectPublicKeyInfo sequence <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> to identify a ML-DSA public key.<a href="#section-4-9" class="pilcrow">¶</a></p>
-<p id="section-4-10">The ML-DSA public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value
+<p id="section-4-7">where MLDSAPublicKey is a ML-DSA public key as specified by FIPS 204.
+      Sizes for the three security levels are specified are given in <a href="#MLS-DSAParameters" class="auto internal xref">Figure 1</a>.
+          These parameters <span class="bcp14">MUST</span> be encoded as a single OCTET STRING.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<p id="section-4-8">The id-ML-DSA identifier defined in <a href="#oids" class="auto internal xref">Section 2</a> <span class="bcp14">MUST</span> be used as the algorithm field in the
+  SubjectPublicKeyInfo sequence <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> to identify a ML-DSA public key.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9">The ML-DSA public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value
   of type BIT STRING) as follows: the most significant bit of the OCTET STRING value becomes the most significant
   bit of the BIT STRING value, and so on; the least significant bit of the OCTET STRING becomes the least significant
-  bit of the BIT STRING.<a href="#section-4-10" class="pilcrow">¶</a></p>
-<p id="section-4-11">The following is an example of the ML-DSA-44 public key for the all zeroes seed encoded using the textual encoding defined in
-  <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-11" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4-12">
+  bit of the BIT STRING.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<p id="section-4-10">The following is an example of the ML-DSA-44 public key for the all zeroes seed encoded using the textual encoding defined in
+  <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-10" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4-11">
 <pre>
 -----BEGIN ML-DSA-44 PUBLIC KEY-----
 MIIFMTAKBghghkgBZQMEEQOCBSEAunH59k4RuutY+pxvu24U5h8YZD2rSVtHU5qR
@@ -1403,12 +1399,12 @@ UxHHhXJVkNqcibn8O4RQdpVU60TSA+uiu675ytIjcBHC6kTv8A8pmkj/4oypPd+F
 Rxrid3fXkE6p8bkrysPYoxWEJgh7ZFsRCPDWX+yTeJwFN0PKFP1j0F6YtlLfK5wv
 +c4F8ZQHA/+yc/gODicy7KmWDZgbTP07e7gEWzw4MFRrndjbDQ==
 -----END ML-DSA-44 PUBLIC KEY-----
-</pre><a href="#section-4-12" class="pilcrow">¶</a>
+</pre><a href="#section-4-11" class="pilcrow">¶</a>
 </div>
-<p id="section-4-13">Conforming CA implementations <span class="bcp14">MUST</span> specify the X.509 public key algorithm explicitly by using
+<p id="section-4-12">Conforming CA implementations <span class="bcp14">MUST</span> specify the X.509 public key algorithm explicitly by using
  the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when using ML-DSA public keys in certificates and CRLs.
  Conforming client implementations that process ML-DSA public keys when processing certificates and CRLs
- <span class="bcp14">MUST</span> recognize the corresponding OIDs.<a href="#section-4-13" class="pilcrow">¶</a></p>
+ <span class="bcp14">MUST</span> recognize the corresponding OIDs.<a href="#section-4-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-5">
