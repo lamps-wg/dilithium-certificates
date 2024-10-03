@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-01T00:58:24.439412+00:00",
+  "timestamp": "2024-10-03T00:53:16.824563+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -530,6 +530,44 @@
       "updatedAt": "2024-09-25T11:52:19Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOIEpj4c6YhXgY",
+      "title": "Should we use the context string?",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/24",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Mike asks [which context string](https://mailarchive.ietf.org/arch/msg/spasm/voUR5EXhtd9fvZL1pYRpTvnDTLs/) to use. At the moment we don't set any.\r\n\r\nThis question is not specific to ML-DSA. Context strings have been discussed in general in [this LAMPS thread](https://mailarchive.ietf.org/arch/msg/spasm/XH_VtuiYt4YWxuDS3dHsR70aQF0/).",
+      "createdAt": "2024-10-01T10:58:43Z",
+      "updatedAt": "2024-10-02T16:48:24Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "body": "The correct answer is probably to use the empty string. One good reason for this is backwards-compatibility with signature primitives that do not have ctx params (ie if we want to use the same context string across all signature schemes, then this is the only option), and even compatibility with crypto libraries that offer ML-DSA but no not have a `.Sign()` interface that accepts a ctx parameter.\r\n\r\nEmpty string is already the default in FIPS 204, so in theory nothing needs to be said in draft-dilithium-certificates, but it would probably be polite to put in a sentence.",
+          "createdAt": "2024-10-01T13:27:30Z",
+          "updatedAt": "2024-10-01T13:28:14Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "There is an argument to be made to set a context string. Over time, the signature algorithms used will all have context. Also, requiring it here forces libraries to adopt it, which is very helpful to protocols where a context string is more useful but don't have the reach of X509. The clear downside is more work and added complexity. I have not made up my mind.",
+          "createdAt": "2024-10-01T14:22:35Z",
+          "updatedAt": "2024-10-01T14:22:35Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we should probably include the context string, as any FIPS implementation of ML-DSA will have it included. However, I do agree that minimizing complexity is important. The use of the empty string seems the most reasonable solution here.",
+          "createdAt": "2024-10-02T16:48:23Z",
+          "updatedAt": "2024-10-02T16:48:23Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1135,6 +1173,118 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOIEpj4c59Pjxv",
+      "title": "Small updates",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/25",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-01T11:53:29Z",
+      "updatedAt": "2024-10-02T16:42:32Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "b9064ecfcf8e78858dcc1c6919590247c8eed6b1",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "more-updates",
+      "headRefOid": "94c22f48a735a1d98600b160eef1ddfd63b1f62c",
+      "closedAt": "2024-10-02T16:42:32Z",
+      "mergedAt": "2024-10-02T16:42:32Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "408b2f500535f57bb83be833b073ba1565322c08"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOIEpj4c59Pnoc",
+      "title": "Don't talk about the internals of ML-DSA where it is not necessary",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/26",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-01T12:01:28Z",
+      "updatedAt": "2024-10-02T16:42:54Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "b9064ecfcf8e78858dcc1c6919590247c8eed6b1",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "remove-internals",
+      "headRefOid": "a5c34992d985645d7563f5d44c4230e3e3456759",
+      "closedAt": "2024-10-02T16:42:54Z",
+      "mergedAt": "2024-10-02T16:42:54Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "3772958eb053f6b2d5d004cdb923880c2436cf59"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOIEpj4c59PvmJ",
+      "title": "Rework securiy considerations",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/27",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Also removes incorrect remarks on hash-then-sign #19",
+      "createdAt": "2024-10-01T12:18:25Z",
+      "updatedAt": "2024-10-02T16:43:29Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "b9064ecfcf8e78858dcc1c6919590247c8eed6b1",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "sec-con-rework",
+      "headRefOid": "654f94dc7b6c3106936e207bb93644fba6372639",
+      "closedAt": "2024-10-02T16:43:29Z",
+      "mergedAt": "2024-10-02T16:43:29Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "baa757ad2260d847b3efebd2c5f0757536140eaa"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOIEpj4c59QFBP",
+      "title": "Add example of private key",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/28",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-01T12:58:49Z",
+      "updatedAt": "2024-10-02T16:44:01Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "b9064ecfcf8e78858dcc1c6919590247c8eed6b1",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "privatekey",
+      "headRefOid": "762d0b06bf2a5829ed374a09309fca2121009b4a",
+      "closedAt": "2024-10-02T16:44:01Z",
+      "mergedAt": "2024-10-02T16:44:01Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
