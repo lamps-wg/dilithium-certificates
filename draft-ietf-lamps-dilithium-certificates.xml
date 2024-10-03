@@ -119,6 +119,12 @@
 	      <xref target="RFC3279" format="default"></xref> did for classic cryptography and
 	      <xref target="RFC5480" format="default"></xref> did for elliptic curve cryptography.
 	      The private key format is also specified.</t>
+      <t><xref target="FIPS204" format="default"></xref> defines two versions of ML-DSA, the pure and the 
+	      pre-digest version. Only the former is specified for use in this document. 
+	      The size of the X.509 content signed in most certificates is small enought to not pose a 
+	      challenge with pure ML-DSA. For CRLs, CRL signing does not occur too frequently for ML-DSA 
+	      performance to be significant concern. Even then, CRL sharding is available to limit the 
+	      CRL lists to a size that does not affect ML-DSA performance. </t>
       <section numbered="true" toc="default">
         <name>ASN.1 Module and ML-DSA Identifiers</name>
         <t>An ASN.1 module <xref target="X680"/> is included for reference purposes. Note that as per <xref target="RFC5280"/>,
