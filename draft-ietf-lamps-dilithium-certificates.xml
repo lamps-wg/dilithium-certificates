@@ -265,7 +265,7 @@
 		 of type BIT STRING) as follows: the most significant bit of the OCTET STRING value becomes the most significant
 		 bit of the BIT STRING value, and so on; the least significant bit of the OCTET STRING becomes the least significant
 		 bit of the BIT STRING. </t>
-         <t>The following is an example of the ML-DSA-44 public key (for the seed 000102…1e1f) encoded using the textual encoding defined in
+         <t>The following is an example of the ML-DSA-65 public key (for the seed 000102…1e1f) encoded using the textual encoding defined in
 		 <xref target="RFC7468"/>.</t>
          <!-- examples/ML-DSA-44.pub -->
          <artwork>
