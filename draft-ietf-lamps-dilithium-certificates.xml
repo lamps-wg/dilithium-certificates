@@ -703,6 +703,7 @@ MDECAQAwCgYIYIZIAWUDBBEEIAABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhsc
 HR4f
 -----END ML-DSA-44 PRIVATE KEY-----
       </artwork>
+      </section>
       <section anchor="Examples Certificate" numbered="true" toc="default">
         <name>Example Certificate</name>
           <t>The following is an example of a self-signed ML-DSA-44 certificate using id-ml-dsa-44.</t>
