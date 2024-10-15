@@ -269,7 +269,7 @@
 		 <xref target="RFC7468"/>.</t>
          <!-- examples/ML-DSA-44.pub -->
          <artwork>
------BEGIN ML-DSA-44 PUBLIC KEY-----
+-----BEGIN PUBLIC KEY-----
 MIIFMTAKBghghkgBZQMEEQOCBSEA17K0clSq4NtF55MNSpjSyX2PE5fReJ2voXAk
 sxbpvslPyZRtQvGbeadBO7qjPnFJy0LtURVpOsBB+suYit61/g4dhjEYSZW1ksOX
 0ilOLhT5CqQUujgmiZrEP0zMrLwm6agyuVEY1ctDPL75ZgsAE44IF/YediyidMNq
@@ -298,7 +298,7 @@ Gq7EPKKbVMzQD4gVokZe8LRlFcx+QfMSTwnv/3OTCatYspoUWaALzlA46TjJZ49y
 6w5O5f2q5m2fhXP8l/xCtJWfS/i2HXhDPoawM11ukZHE2L9IezkFwQjP1qwksM63
 3LfPUfhNDtaHuV6uscUzwG8NlwI9kqcIJYN7Wbpst9TlawqHwgOGKujzFbpZJejt
 76Z5NpoiAnZhUfFqll+fgeznbMBwtVhp5NuXhM8FyDCzJCyDEg==
------END ML-DSA-44 PUBLIC KEY-----
+-----END PUBLIC KEY-----
          </artwork>
         <t>Conforming CA implementations <bcp14>MUST</bcp14> specify the X.509 public key algorithm explicitly by using
 		the OIDs specified in <xref target="oids"/> when using ML-DSA public keys in certificates and CRLs.

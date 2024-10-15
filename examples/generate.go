@@ -81,7 +81,7 @@ func example(name string) {
 	defer f.Close()
 
 	if err = pem.Encode(f, &pem.Block{
-		Type:  fmt.Sprintf("%s PUBLIC KEY", name),
+		Type:  "PUBLIC KEY",
 		Bytes: papk,
 	}); err != nil {
 		panic(err)
