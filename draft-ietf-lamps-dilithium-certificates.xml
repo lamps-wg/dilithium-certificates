@@ -257,8 +257,7 @@
   MLDSAPublicKey ::= OCTET STRING
       </sourcecode>
       <t>where MLDSAPublicKey is a ML-DSA public key as specified by FIPS 204.
-      Sizes for the three security levels are specified are given in <xref target="MLS-DSAParameters"/>.
-          These parameters <bcp14>MUST</bcp14> be encoded as a single OCTET STRING.</t>
+      Sizes for the three security levels are specified are given in <xref target="MLS-DSAParameters"/>.</t>
          <t>The id-ML-DSA identifier defined in <xref target="oids"/> <bcp14>MUST</bcp14> be used as the algorithm field in the
 		 SubjectPublicKeyInfo sequence <xref target="RFC5280" format="default"/> to identify a ML-DSA public key.</t>
          <t>The ML-DSA public key (a concatenation of rho and t1 that is an OCTET STRING) is mapped to a subjectPublicKey (a value
