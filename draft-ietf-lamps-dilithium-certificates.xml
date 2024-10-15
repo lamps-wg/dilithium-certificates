@@ -265,42 +265,8 @@
 		 of type BIT STRING) as follows: the most significant bit of the OCTET STRING value becomes the most significant
 		 bit of the BIT STRING value, and so on; the least significant bit of the OCTET STRING becomes the least significant
 		 bit of the BIT STRING. </t>
-         <t>The following is an example of the ML-DSA-44 public key (for the seed 000102…1e1f) encoded using the textual encoding defined in
-		 <xref target="RFC7468"/>.</t>
-         <!-- examples/ML-DSA-44.pub -->
-         <artwork>
------BEGIN ML-DSA-44 PUBLIC KEY-----
-MIIFMTAKBghghkgBZQMEEQOCBSEA17K0clSq4NtF55MNSpjSyX2PE5fReJ2voXAk
-sxbpvslPyZRtQvGbeadBO7qjPnFJy0LtURVpOsBB+suYit61/g4dhjEYSZW1ksOX
-0ilOLhT5CqQUujgmiZrEP0zMrLwm6agyuVEY1ctDPL75ZgsAE44IF/YediyidMNq
-1VTrIqrBFi5KsBrLoeOMTv2PgLZbMz0PcuVd/nHOnB67mInnxWEGwP1zgDoq7P6v
-3teqPLLO2lTRK9jNNqeM+XWUO0er0l6ICsRS5XQu0ejRqCr6huWQx1jBWuTShA2S
-vKGlCQ9ASWWX/KfYuVE/GhvabpUKqpjeRnUH1KT1pPBZkhZYLDVy9i7aiQWrNYFn
-DEoCd3oz4Mpylf2PT/bRoKOnaD1l9fX3/GDaAj6CbF+SFEwC99G6EHWYdVPqk2f8
-122ZC3+pnNRa/biDbUPkWfUYffBYR5cJoB6mg1k1+nBGCZDNPcG6QBupS6sd3kGs
-Z6szGdysoGBI1MTu8n7hOpwX0FOPQw8tZC3CQVZg3niHfY2KvHJSOXjAQuQoX0MZ
-hGxEEmJCl2hEwQ5Va6IVtacZ5Z0MayqW05hZBx/cws3nUkp77a5U6FsxjoVOj+Ky
-8+36yXGRKCcKr9HlBEw6T9r9n/MfkHhLjo5FlhRKDa9YZRHT2ZYrnqla8Ze05fxg
-8rHtFd46W+9fib3HnZEFHZsoFudPpUUx79wcvnTUSIV/R2vNWPIcC2U7O3ak4Ham
-VZowJxhVXMY/dIWaq6uSXwI4YcqM0Pe62yhx9n1VMm10URNa1F9KG6aRGPuyyKMO
-7JOS7z+XcGbJrdXHEMxkexUU0hfZWMcBfD6Q/SDATmdLkEhuk3CjGgAdMvRzl55J
-BnSefkd/oLdFCPil8jeDErg8Jb04jKCw//dHi69CtxZn7arJfEaxKWQ+WG5bBVoM
-IRlG1PNuZ1vtWGD6BCoxXZgmFk1qkjfDWl+/SVSQpb1N8ki5XEqud4S2BWcxZqxC
-RbW0sIKgnpMj5i8geMW3Z4NEbe/XNq06NwLUmwiYRJAKYYMzl7xEGbMNepegs4fB
-kRR0xNQbU+Mql3rLbw6nXbZbs55Z5wHnaVfe9vLURVnDGncSK1IE47XCGfFoixTt
-C8C4AbPm6C3NQ+nA6fQXRM2YFb0byIINi7Ej8E+s0bG2hd1aKxuNu/PtkzZw8JWh
-gLTxktCLELj6u9/MKyRRjjLuoKXgyQTKhEeACD87DNLQuLavZ7w1W5SUAl3HsKeP
-qA46Lb/rUTKIUdYHgZjpSTZRrnh+wCUfkiujDp9R32Km1yeEzz3SBTkxdt+jJKUS
-vZSXCjbdNKUUqGeR8Os28BRbCatkZRtKAxOymWEaKhxIiRYnWYdooxFAYLpEQ0ht
-9RUioc6IswmFwhb45u0XjdVnswSg1Mr7qIKig0LxepqiauWNtjAIPSw1j99WbD9d
-YqQoVnvJ6ozpXKoPNUdLC/qPM5olCrTfzyCDvo7vvBBV4Y/hU3DuyyYFZtg/8Gsh
-Gq7EPKKbVMzQD4gVokZe8LRlFcx+QfMSTwnv/3OTCatYspoUWaALzlA46TjJZ49y
-6w5O5f2q5m2fhXP8l/xCtJWfS/i2HXhDPoawM11ukZHE2L9IezkFwQjP1qwksM63
-3LfPUfhNDtaHuV6uscUzwG8NlwI9kqcIJYN7Wbpst9TlawqHwgOGKujzFbpZJejt
-76Z5NpoiAnZhUfFqll+fgeznbMBwtVhp5NuXhM8FyDCzJCyDEg==
------END ML-DSA-44 PUBLIC KEY-----
-         </artwork>
-        <t>Conforming CA implementations <bcp14>MUST</bcp14> specify the X.509 public key algorithm explicitly by using
+
+	 <t>Conforming CA implementations <bcp14>MUST</bcp14> specify the X.509 public key algorithm explicitly by using
 		the OIDs specified in <xref target="oids"/> when using ML-DSA public keys in certificates and CRLs.
 		Conforming client implementations that process ML-DSA public keys when processing certificates and CRLs
 		<bcp14>MUST</bcp14> recognize the corresponding OIDs. </t>
@@ -345,14 +311,9 @@ Gq7EPKKbVMzQD4gVokZe8LRlFcx+QfMSTwnv/3OTCatYspoUWaALzlA46TjJZ49y
       privateKey               OCTET STRING,
   }
       </sourcecode>
-      <t>An example of an ML-DSA-44 private key for the seed 0001…1e1f is:</t>
-     <!-- examples/ML-DSA-44.priv -->
-      <artwork>
------BEGIN ML-DSA-44 PRIVATE KEY-----
-MDECAQAwCgYIYIZIAWUDBBEEIAABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhsc
-HR4f
------END ML-DSA-44 PRIVATE KEY-----
-      </artwork>
+
+Appendix X contains an example of an id-ml-dsa-44 private key encoded using the textual encoding defined in <xref target="RFC7468"/>.
+		
         <!-- <sourcecode type="asn.1" markers="false">
   DilithiumPrivateKey ::= SEQUENCE {
       rho         BIT STRING,         - nonce/seed
@@ -378,60 +339,6 @@ HR4f
           <t>TBD</t>
         </section> -->  <!-- End of TBD Private Keys Section -->
     <!--</section> End of Private Key Format Section -->
-
-    <section anchor="asn1" numbered="true" toc="default">
-      <name>ASN.1 Module</name>
-      <t>This section includes the ASN.1 module for the ML-DSA signature algorithm. This module does not come from any previously
-	      existing RFC. This module references <xref target="RFC5912" format="default"></xref>.</t>
-      <sourcecode type="asn.1" markers="false">[ EDNOTE: Add ASN.1 here ]
-
-  PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
-     internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
-     id-mod-pkix1-PQ-algorithms(X) }
-
-  DEFINITIONS EXPLICIT TAGS ::=
-
-  BEGIN
-
-  -- EXPORTS ALL;
-
-  IMPORTS
-
-  -- FROM RFC 5912
-
-  PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
-  FROM AlgorithmInformation-2009
-    { iso(1) identified-organization(3) dod(6) internet(1)
-      security(5) mechanisms(5) pkix(7) id-mod(0)
-      id-mod-algorithmInformation-02(58) }
-
-  --
-  -- Public Key (pk-) Algorithms
-  --
-  PublicKeys PUBLIC-KEY ::= {
-    -- This expands PublicKeys from RFC 5912
-    pk-MLDSATBD |
-    pk-TBD-TBD,
-    ...
-  }
-
-  -- The hashAlgorithm is mda-shake256
-  -- The XOF seed rho is 32 bytes
-  -- The vector t1 is 320*k bytes
-  -- These are encoded as a single string
-
-  pk-MLDSA PUBLIC-KEY ::= {
-    IDENTIFIER id-MLDSA
-    -- KEY no ASN.1 wrapping --
-    PARAMS ARE absent
-    CERT-KEY-USAGE { nonRepudiation, digitalSignature,
-                    keyCertSign, cRLSign }
-    --- PRIVATE-KEY no ASN.1 wrapping --
-  }
-
-  END
-      </sourcecode>
-   </section>     <!-- End of ASN.1 Module Section -->
 
    <section anchor="IANA" numbered="true" toc="default">
       <name>IANA Considerations</name>
@@ -519,6 +426,7 @@ HR4f
           <!--<?rfc include="reference.RFC.5480.xml"?>-->
           <?rfc include="reference.RFC.7468.xml"?>
           <?rfc include="reference.RFC.8174.xml"?>
+	  <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-salter-lamps-cms-ml-dsa.xml"/>
 
         <reference anchor="FIPS204" target="https://doi.org/10.6028/NIST.FIPS.204">
           <front>
@@ -636,10 +544,55 @@ HR4f
       </references>
     </references>  <!-- End of References -->
 
-    <section anchor="Acknowledgements" numbered="true" toc="default">
-      <name>Acknowledgements</name>
-      <t>We would like to thank ... <!--Markuu, Peikert -->for their insightful comments.</t>
-    </section>  <!-- End of Acknowledgements Section -->
+    <section anchor="asn1" numbered="true" toc="default">
+      <name>ASN.1 Module</name>
+      <t>This section includes the ASN.1 module for the ML-DSA signature algorithm. This module does not come from any previously
+	      existing RFC. This module references <xref target="RFC5912" format="default"></xref> and <xref target="I-D.ietf-salter-lamps-cms-ml-dsa"/>.</t>
+      <sourcecode type="asn.1" markers="false">
+  X509-ML-DSA-2024 { iso(1) identified-organization(3) dod(6)
+     internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
+     id-mod-x509-ml-dsa-2024(TBD) }
+
+  DEFINITIONS EXPLICIT TAGS ::=
+
+  BEGIN
+
+  -- EXPORTS ALL;
+
+  IMPORTS
+
+  PUBLIC-KEY, SIGNATURE-ALGORITHM
+  FROM AlgorithmInformation-2009 -- From [RFC5912]
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58) }
+
+  id-ML-DSA-44, id-ML-DSA-65, id-ML-DSA-87
+  FROM ML-DSA-Module-2024  -- From [I-D.draft-ietf-lamps-cms-ml-dsa]
+    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+      id-smime(16) id-mod(0) iid-mod-ml-dsa-2024(TBD) } ;
+
+  --
+  -- Expand SignatureAlgorithms from RFC 5912
+  --
+  SignatureAlgorithms SIGNATURE-ALGORITHM ::= {
+    sa-ml-dsa-44 |
+    sa-ml-dsa-65 |
+    sa-ml-dsa-87,
+    ... }
+
+  --
+  -- Expand PublicKeyAlgorithms from RFC 5912
+  --
+  PublicKeyAlgorithms PUBLIC-KEY ::= {
+    pk-ml-dsa-44 |
+    pk-ml-dsa-65 |
+    pk-ml-dsa-87,
+    ... }
+
+  END
+      </sourcecode>
+    </section>     <!-- End of ASN.1 Module Section -->
 
     <section anchor="app-additional" numbered="true" toc="default">
       <name>Security Strengths</name>
@@ -697,7 +650,75 @@ HR4f
 |=======+=======+=====+========+========+========|]]>
           </artwork>
         </figure>
-    </section> <!-- End of Appendix Section -->
+    </section> <!-- End of Security Strengths Section -->
+
+    <section anchor="Examples" numbered="true" toc="default">
+      <name>Examples</name>
+      <t>This appendix contains examples of ML-DSA public keys, private keys and certificates.</t>
+      <section anchor="Examples Public Key" numbered="true" toc="default">
+        <name>Example Public Key</name>
+          <t>The following is an example of the ML-DSA-44 public key (for the seed 000102…1e1f).</t>
+         <!-- examples/ML-DSA-44.pub -->
+         <artwork>
+-----BEGIN ML-DSA-44 PUBLIC KEY-----
+MIIFMTAKBghghkgBZQMEEQOCBSEA17K0clSq4NtF55MNSpjSyX2PE5fReJ2voXAk
+sxbpvslPyZRtQvGbeadBO7qjPnFJy0LtURVpOsBB+suYit61/g4dhjEYSZW1ksOX
+0ilOLhT5CqQUujgmiZrEP0zMrLwm6agyuVEY1ctDPL75ZgsAE44IF/YediyidMNq
+1VTrIqrBFi5KsBrLoeOMTv2PgLZbMz0PcuVd/nHOnB67mInnxWEGwP1zgDoq7P6v
+3teqPLLO2lTRK9jNNqeM+XWUO0er0l6ICsRS5XQu0ejRqCr6huWQx1jBWuTShA2S
+vKGlCQ9ASWWX/KfYuVE/GhvabpUKqpjeRnUH1KT1pPBZkhZYLDVy9i7aiQWrNYFn
+DEoCd3oz4Mpylf2PT/bRoKOnaD1l9fX3/GDaAj6CbF+SFEwC99G6EHWYdVPqk2f8
+122ZC3+pnNRa/biDbUPkWfUYffBYR5cJoB6mg1k1+nBGCZDNPcG6QBupS6sd3kGs
+Z6szGdysoGBI1MTu8n7hOpwX0FOPQw8tZC3CQVZg3niHfY2KvHJSOXjAQuQoX0MZ
+hGxEEmJCl2hEwQ5Va6IVtacZ5Z0MayqW05hZBx/cws3nUkp77a5U6FsxjoVOj+Ky
+8+36yXGRKCcKr9HlBEw6T9r9n/MfkHhLjo5FlhRKDa9YZRHT2ZYrnqla8Ze05fxg
+8rHtFd46W+9fib3HnZEFHZsoFudPpUUx79wcvnTUSIV/R2vNWPIcC2U7O3ak4Ham
+VZowJxhVXMY/dIWaq6uSXwI4YcqM0Pe62yhx9n1VMm10URNa1F9KG6aRGPuyyKMO
+7JOS7z+XcGbJrdXHEMxkexUU0hfZWMcBfD6Q/SDATmdLkEhuk3CjGgAdMvRzl55J
+BnSefkd/oLdFCPil8jeDErg8Jb04jKCw//dHi69CtxZn7arJfEaxKWQ+WG5bBVoM
+IRlG1PNuZ1vtWGD6BCoxXZgmFk1qkjfDWl+/SVSQpb1N8ki5XEqud4S2BWcxZqxC
+RbW0sIKgnpMj5i8geMW3Z4NEbe/XNq06NwLUmwiYRJAKYYMzl7xEGbMNepegs4fB
+kRR0xNQbU+Mql3rLbw6nXbZbs55Z5wHnaVfe9vLURVnDGncSK1IE47XCGfFoixTt
+C8C4AbPm6C3NQ+nA6fQXRM2YFb0byIINi7Ej8E+s0bG2hd1aKxuNu/PtkzZw8JWh
+gLTxktCLELj6u9/MKyRRjjLuoKXgyQTKhEeACD87DNLQuLavZ7w1W5SUAl3HsKeP
+qA46Lb/rUTKIUdYHgZjpSTZRrnh+wCUfkiujDp9R32Km1yeEzz3SBTkxdt+jJKUS
+vZSXCjbdNKUUqGeR8Os28BRbCatkZRtKAxOymWEaKhxIiRYnWYdooxFAYLpEQ0ht
+9RUioc6IswmFwhb45u0XjdVnswSg1Mr7qIKig0LxepqiauWNtjAIPSw1j99WbD9d
+YqQoVnvJ6ozpXKoPNUdLC/qPM5olCrTfzyCDvo7vvBBV4Y/hU3DuyyYFZtg/8Gsh
+Gq7EPKKbVMzQD4gVokZe8LRlFcx+QfMSTwnv/3OTCatYspoUWaALzlA46TjJZ49y
+6w5O5f2q5m2fhXP8l/xCtJWfS/i2HXhDPoawM11ukZHE2L9IezkFwQjP1qwksM63
+3LfPUfhNDtaHuV6uscUzwG8NlwI9kqcIJYN7Wbpst9TlawqHwgOGKujzFbpZJejt
+76Z5NpoiAnZhUfFqll+fgeznbMBwtVhp5NuXhM8FyDCzJCyDEg==
+-----END ML-DSA-44 PUBLIC KEY-----
+         </artwork>
+      <t>An example of an ML-DSA-44 private key for the seed 0001…1e1f is:</t>
+     <!-- examples/ML-DSA-44.priv -->
+      <section anchor="Examples Public Key" numbered="true" toc="default">
+        <name>Example Private Key</name>
+          <t>The following is an example of the ML-DSA-44 private key (for the seed 000102…1e1f) encoded using the textual encoding defined in
+		 <xref target="RFC7468"/>.</t>
+      <artwork>
+-----BEGIN ML-DSA-44 PRIVATE KEY-----
+MDECAQAwCgYIYIZIAWUDBBEEIAABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhsc
+HR4f
+-----END ML-DSA-44 PRIVATE KEY-----
+      </artwork>
+      <section anchor="Examples Certificate" numbered="true" toc="default">
+        <name>Example Certificate</name>
+          <t>The following is an example of a self-signed ML-DSA-44 certificate using id-ml-dsa-44.</t>
+      <artwork>
+-----BEGIN CERTIFICATE-----
+TODO
+-----END CERTIFICATR-----
+      </artwork>
+
+    </section>  <!-- End of Examples Section -->
+
+    <section anchor="Acknowledgements" numbered="true" toc="default">
+      <name>Acknowledgements</name>
+      <t>We would like to thank ... <!--Markuu, Peikert -->for their insightful comments.</t>
+    </section>  <!-- End of Acknowledgements Section -->
+ 
  </back>
 </rfc>
 
