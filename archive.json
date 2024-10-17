@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T00:54:13.132964+00:00",
+  "timestamp": "2024-10-17T00:53:26.763401+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1358,13 +1358,13 @@
       "labels": [],
       "body": "The public key example looks to be from ML-DSA-65. The public key example looks to have an OID that ends in 65 and also 1.8KB size. So, it is ML-DSA-65, right @jakemas ?\r\n\r\nAlso, I am not sure what \r\n> These parameters MUST be encoded as a single OCTET STRING.\r\nis referring to. @jakemas ",
       "createdAt": "2024-10-03T17:33:11Z",
-      "updatedAt": "2024-10-04T16:14:00Z",
+      "updatedAt": "2024-10-15T16:27:07Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
       "headRepository": "csosto-pk/dilithium-certificates",
       "headRefName": "patch-1",
-      "headRefOid": "d5708ed058ae107ccfa866ddb7f54f53a2963aae",
+      "headRefOid": "11ac5a18d2747011377889f5359d9cdccd39b0b7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1390,6 +1390,27 @@
           "body": "Yes, I think we should remove \r\n\r\n> These parameters <bcp14>MUST</bcp14> be encoded as a single OCTET STRING.</t>",
           "createdAt": "2024-10-04T16:13:58Z",
           "updatedAt": "2024-10-04T16:13:58Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This PR still incorrectly renames 44 -> 65.",
+          "createdAt": "2024-10-15T10:06:03Z",
+          "updatedAt": "2024-10-15T10:06:03Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "ACK. Removed the mistake of 44 --> 65. \r\nOnly the removal of the \"OCTET STRING\" remains. ",
+          "createdAt": "2024-10-15T16:00:08Z",
+          "updatedAt": "2024-10-15T16:00:22Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "LGTM. (Can't add myself as reviewer.)",
+          "createdAt": "2024-10-15T16:27:06Z",
+          "updatedAt": "2024-10-15T16:27:06Z"
         }
       ],
       "reviews": []
@@ -1406,7 +1427,7 @@
       "labels": [],
       "body": "Added text to mention pure ML-DSA.\r\n\r\nAlso added text while pure ML-DSA is fine for X.509 and CRLs.\r\n\r\n@bwesterb , @seanturner please check.",
       "createdAt": "2024-10-03T18:26:32Z",
-      "updatedAt": "2024-10-03T22:03:44Z",
+      "updatedAt": "2024-10-15T15:40:36Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
@@ -1438,6 +1459,172 @@
               "updatedAt": "2024-10-03T22:03:44Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6NMlWH",
+          "commit": {
+            "abbreviatedOid": "3c5b967"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T10:36:45Z",
+          "updatedAt": "2024-10-15T10:36:46Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I propose we remove \"The size [...]  ML-DSA performance.\", and add\r\n\r\n> Pure ML-DSA (in contrast to SLH-DSA) allows for streaming the message that has to be signed. The only advantage of the pre-digest version, is that it allows a different hash to be used for hashing the message.",
+              "createdAt": "2024-10-15T10:36:45Z",
+              "updatedAt": "2024-10-15T10:36:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6NQMAm",
+          "commit": {
+            "abbreviatedOid": "3c5b967"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T15:40:35Z",
+          "updatedAt": "2024-10-15T15:40:36Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "The pre-digest people do not argue that you cannot stream the message. Their point is that maybe I don't want to stream it to the HSM over its slow bus. I may want to just send the digest of the message and sign that especially if the message will be signed a lot of times.  I don't fully buy it, but that is their main argument. ",
+              "createdAt": "2024-10-15T15:40:35Z",
+              "updatedAt": "2024-10-15T15:55:13Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOIEpj4c5-pvke",
+      "title": "Small fix",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/32",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-15T10:13:38Z",
+      "updatedAt": "2024-10-15T10:13:38Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "bas/fixes",
+      "headRefOid": "657c9f9537fe7e99b9e40889b7deb6549aedc5f3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOIEpj4c5-uOTU",
+      "title": "Move examples & asn.1 to appendicies",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/33",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Moving examples & asn.1 to appendices. Also, moving acks to be last.",
+      "createdAt": "2024-10-15T19:33:18Z",
+      "updatedAt": "2024-10-16T01:27:18Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-appendicies",
+      "headRefOid": "9ae182641d08eea95b9fc089f3431f7474f3c60a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6NST5z",
+          "commit": {
+            "abbreviatedOid": "702dae6"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T19:34:54Z",
+          "updatedAt": "2024-10-15T19:34:55Z",
+          "comments": [
+            {
+              "originalPosition": 250,
+              "body": "```suggestion\r\n      </section>\r\n      <section anchor=\"Examples Certificate\" numbered=\"true\" toc=\"default\">\r\n```",
+              "createdAt": "2024-10-15T19:34:54Z",
+              "updatedAt": "2024-10-15T19:34:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6NSWaL",
+          "commit": {
+            "abbreviatedOid": "55e6833"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-15T19:39:39Z",
+          "updatedAt": "2024-10-15T19:39:39Z",
+          "comments": [
+            {
+              "originalPosition": 259,
+              "body": "```suggestion\r\n     </section>\r\n```",
+              "createdAt": "2024-10-15T19:39:39Z",
+              "updatedAt": "2024-10-15T19:39:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6NUn-C",
+          "commit": {
+            "abbreviatedOid": "9ae1826"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-16T01:26:54Z",
+          "updatedAt": "2024-10-16T01:26:55Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "X is a TODO",
+              "createdAt": "2024-10-16T01:26:55Z",
+              "updatedAt": "2024-10-16T01:26:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6NUoDk",
+          "commit": {
+            "abbreviatedOid": "9ae1826"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Appendix X should be updated to a TODO",
+          "createdAt": "2024-10-16T01:27:17Z",
+          "updatedAt": "2024-10-16T01:27:17Z",
+          "comments": []
         }
       ]
     }
