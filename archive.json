@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T00:53:26.763401+00:00",
+  "timestamp": "2024-10-20T00:58:13.513378+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -628,6 +628,22 @@
           "updatedAt": "2024-10-03T18:27:13Z"
         }
       ]
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOIEpj4c6avo4p",
+      "title": "Swith to .md",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/34",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A plan is afoot to swap out the format from xml to md. Stay tuned.",
+      "createdAt": "2024-10-18T01:56:06Z",
+      "updatedAt": "2024-10-18T01:56:06Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
