@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T00:58:13.513378+00:00",
+  "timestamp": "2024-10-22T00:54:27.175795+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1530,7 +1530,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-15T10:13:38Z",
-      "updatedAt": "2024-10-15T10:13:38Z",
+      "updatedAt": "2024-10-21T19:57:16Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
@@ -1541,8 +1541,37 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@bwesterb I guess go ahead and land this and then I can convert to md.",
+          "createdAt": "2024-10-21T19:45:00Z",
+          "updatedAt": "2024-10-21T19:45:00Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "SGTM. @seanturner  I don't have permission to merge.",
+          "createdAt": "2024-10-21T19:56:48Z",
+          "updatedAt": "2024-10-21T19:57:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6ODDP7",
+          "commit": {
+            "abbreviatedOid": "657c9f9"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T19:43:44Z",
+          "updatedAt": "2024-10-21T19:43:44Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 33,
