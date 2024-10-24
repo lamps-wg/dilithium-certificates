@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-22T00:54:27.175795+00:00",
+  "timestamp": "2024-10-24T00:53:29.836077+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1367,24 +1367,26 @@
       "id": "PR_kwDOIEpj4c59h_d6",
       "title": "ML-DSA-44 or 65 example?",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/29",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The public key example looks to be from ML-DSA-65. The public key example looks to have an OID that ends in 65 and also 1.8KB size. So, it is ML-DSA-65, right @jakemas ?\r\n\r\nAlso, I am not sure what \r\n> These parameters MUST be encoded as a single OCTET STRING.\r\nis referring to. @jakemas ",
       "createdAt": "2024-10-03T17:33:11Z",
-      "updatedAt": "2024-10-15T16:27:07Z",
+      "updatedAt": "2024-10-22T15:44:06Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
       "headRepository": "csosto-pk/dilithium-certificates",
       "headRefName": "patch-1",
       "headRefOid": "11ac5a18d2747011377889f5359d9cdccd39b0b7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-22T15:44:06Z",
+      "mergedAt": "2024-10-22T15:44:06Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "b1879cef6224c3b7196e371b5a693daf4ce55297"
+      },
       "comments": [
         {
           "author": "bwesterb",
@@ -1429,7 +1431,21 @@
           "updatedAt": "2024-10-15T16:27:06Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6OMa4f",
+          "commit": {
+            "abbreviatedOid": "11ac5a1"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-22T15:43:52Z",
+          "updatedAt": "2024-10-22T15:43:52Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 31,
@@ -1523,24 +1539,26 @@
       "id": "PR_kwDOIEpj4c5-pvke",
       "title": "Small fix",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/32",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-10-15T10:13:38Z",
-      "updatedAt": "2024-10-21T19:57:16Z",
+      "updatedAt": "2024-10-22T16:14:55Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
       "headRepository": "bwesterb/dilithium-certificates",
       "headRefName": "bas/fixes",
       "headRefOid": "657c9f9537fe7e99b9e40889b7deb6549aedc5f3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-22T16:14:55Z",
+      "mergedAt": "2024-10-22T16:14:55Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "d788252ff402eb029f1d070102c677a1dbf5254d"
+      },
       "comments": [
         {
           "author": "seanturner",
