@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-24T00:53:29.836077+00:00",
+  "timestamp": "2024-10-27T00:57:51.145813+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -644,6 +644,30 @@
       "updatedAt": "2024-10-18T01:56:06Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOIEpj4c6bxcVf",
+      "title": "Wrong OID used in examples",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/35",
+      "state": "OPEN",
+      "author": "randombit",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The OID for ML-DSA-44 is defined as \r\n\r\n```\r\n      id-ML-DSA-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)\r\n               country(16) us(840) organization(1) gov(101) csor(3)\r\n               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }\r\n```\r\n\r\nwhich is AFAIK correct, however the example public and private keys use 2.16.840.1.101.3.4.17, there should be another arc of `3` right before the trailing `17`.",
+      "createdAt": "2024-10-25T08:22:10Z",
+      "updatedAt": "2024-10-25T08:33:58Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Whoops. Fixed in #36 ",
+          "createdAt": "2024-10-25T08:33:57Z",
+          "updatedAt": "2024-10-25T08:33:57Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1690,6 +1714,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOIEpj4c5_3vCw",
+      "title": "examples: Fix OIDs",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/36",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #35",
+      "createdAt": "2024-10-25T08:33:39Z",
+      "updatedAt": "2024-10-25T08:33:39Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "d788252ff402eb029f1d070102c677a1dbf5254d",
+      "headRepository": "bwesterb/dilithium-certificates",
+      "headRefName": "bas/35",
+      "headRefOid": "59649789cb1982c59edd2c606c1bfa7b0af8acbc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
