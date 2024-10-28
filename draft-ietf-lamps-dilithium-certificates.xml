@@ -347,10 +347,10 @@ t9y3z1H4TQ7Wh7lerrHFM8BvDZcCPZKnCCWDe1m6bLfU5WsKh8IDhiro8xW6WSXo
       <t>An example of an ML-DSA-44 private key for the seed 0001…1e1f is:</t>
      <!-- examples/ML-DSA-44.priv -->
       <artwork>
------BEGIN ML-DSA-44 PRIVATE KEY-----
+-----BEGIN PRIVATE KEY-----
 MDICAQAwCwYJYIZIAWUDBAMRBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
 HB0eHw==
------END ML-DSA-44 PRIVATE KEY-----
+-----END PRIVATE KEY-----
       </artwork>
         <!-- <sourcecode type="asn.1" markers="false">
   DilithiumPrivateKey ::= SEQUENCE {
