@@ -31,7 +31,7 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://lamps-
-   wg.github.io/kyber-certificates/#go.draft-ietf-lamps-kyber-
+   wg.github.io/kyber-certificates/#go.draft-ietf-lamps-dilithium-
    certificates.html.  Status information for this document may be found
    at https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-
    certificates/.
@@ -43,7 +43,7 @@ About This Document
    https://www.ietf.org/mailman/listinfo/spasm/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/lamps-wg/kyber-certificates.
+   https://github.com/lamps-wg/dilithium-certificates.
 
 Status of This Memo
 
