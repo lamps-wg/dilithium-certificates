@@ -47,7 +47,7 @@ func example(name string) {
 
 	// https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration
 	alg := pkix.AlgorithmIdentifier{
-		Algorithm: asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, oid},
+		Algorithm: asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, 3, oid},
 	}
 
 	apk := subjectPublicKeyInfo{
@@ -94,7 +94,7 @@ func example(name string) {
 	defer f2.Close()
 
 	if err = pem.Encode(f2, &pem.Block{
-		Type:  fmt.Sprintf("%s PRIVATE KEY", name),
+		Type:  "PRIVATE KEY",
 		Bytes: pask,
 	}); err != nil {
 		panic(err)
