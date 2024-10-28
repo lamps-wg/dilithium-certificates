@@ -1,0 +1,45 @@
+PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
+  internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
+  id-mod-pkix1-PQ-algorithms(X) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+-- EXPORTS ALL;
+
+IMPORTS
+
+-- FROM RFC 5912
+
+PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
+  FROM AlgorithmInformation-2009
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58) }
+
+--
+-- Public Key (pk-) Algorithms
+--
+PublicKeys PUBLIC-KEY ::= {
+  -- This expands PublicKeys from RFC 5912
+  pk-MLDSATBD |
+  pk-TBD-TBD,
+  ...
+}
+
+-- The hashAlgorithm is mda-shake256
+-- The XOF seed rho is 32 bytes
+-- The vector t1 is 320*k bytes
+-- These are encoded as a single string
+
+pk-MLDSA PUBLIC-KEY ::= {
+  IDENTIFIER id-MLDSA
+  -- KEY no ASN.1 wrapping --
+  PARAMS ARE absent
+  CERT-KEY-USAGE { nonRepudiation, digitalSignature,
+                  keyCertSign, cRLSign }
+  --- PRIVATE-KEY no ASN.1 wrapping --
+}
+
+END
