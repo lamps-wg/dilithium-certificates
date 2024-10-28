@@ -581,7 +581,7 @@ The following is an example of a ML-DSA-44 private key with hex seed `000102…1
 The following is an example of a ML-DSA-65 private key with hex seed `000102…1e1f`:
 
 ~~~
-{::include ./example/ML-DSA-65.priv}
+{::include ./examples/ML-DSA-65.priv}
 ~~~
 
 ~~~
