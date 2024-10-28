@@ -1,6 +1,8 @@
-# Internet X.509 Public Key Infrastructure: Algorithm Identifiers for Dilithium
+# Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA
 
-This is the working area for the IETF [LAMPS Working Group](https://datatracker.ietf.org/wg/lamps/documents/) Internet-Draft, "Internet X.509 Public Key Infrastructure: Algorithm Identifiers for Dilithium".
+This is the working area for the IETF [LAMPS Working Group](https://datatracker.ietf.org/wg/lamps/documents/) Internet-Draft, "Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA".
+
+NOTE: This I-D previously referred to Dilithium. The I-D has been updated to refer to [FIPS-204](https://csrc.nist.gov/pubs/fips/204/final). The string "dilithium" in the filename is just an artifact of the I-Ds name when it was created before ML-DSA was assigned.
 
 * [Editor's Copy](https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates)
@@ -15,16 +17,3 @@ See the
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
-
-
-## Command Line Usage
-
-Formatted text and HTML versions of the draft can be built using `make`.
-
-```sh
-$ make
-```
-
-Command line usage requires that you have the necessary software installed.  See
-[the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
-
