@@ -327,7 +327,7 @@ ML-DSA public keys in certificates and CRLs. Conforming client
 implementations that process ML-DSA public keys when processing
 certificates and CRLs MUST recognize the corresponding OIDs.
 
-{{exmamples}} contains example ML-DSA private keys encoded using the
+{{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{?RFC7468}}.
 
 # Key Usage Bits
