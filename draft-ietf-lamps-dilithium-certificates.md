@@ -624,7 +624,7 @@ The following is the ML-KEM-44 public key corresponding to the private
 key in the previous section.
 
 ~~~
-{::include ./example/ML-DSA-44.pub}
+{::include ./examples/ML-DSA-44.pub}
 ~~~
 
 ~~~
