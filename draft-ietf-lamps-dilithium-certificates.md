@@ -632,7 +632,7 @@ key in the previous section.
 4    10:   SEQUENCE {
 6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.17'
        :     }
-16 1313:   BIT STRING        
+16 1313:   BIT STRING
              00 d7 b2 b4 72 54 aa e0 db 45 e7 93 0d 4a 98 d2
              c9 7d 8f 13 97 d1 78 9d af a1 70 24 b3 16 e9 be
              c9 4f c9 94 6d 42 f1 9b 79 a7 41 3b ba a3 3e 71
