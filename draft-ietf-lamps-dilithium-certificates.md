@@ -287,45 +287,21 @@ SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
 ~~~
   SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
       algorithm        AlgorithmIdentifier {PUBLIC-KEY, {IOSet}},
-      subjectPublicKey BIT STRING }
+      subjectPublicKey BIT STRING
+  }
 ~~~
 
-The fields in SubjectPublicKeyInfo have the following meanings:
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
 
-* algorithm is the algorithm identifier and parameters for the public
-key (see above).
+The fields in SubjectPublicKeyInfo have the following meaning:
 
-* subjectPublicKey contains the byte stream of the public key.  The
-algorithms defined in this document always encode the public key as TODO.
+* algorithm is the algorithm identifier and parameters for the
+  public key (see above).
 
-The ML-DSA public key MUST be encoded using the ASN.1 type
-MLDSAPublicKey:
-
-~~~
-  MLDSAPublicKey ::= OCTET STRING
-~~~
-
-where MLDSAPublicKey is a ML-DSA public key as specified by FIPS 204.
-Sizes for the three security levels are specified are given in
-{{ML-DSAParameters}}. These parameters MUST be encoded as a single
-OCTET STRING.
-
-The id-ML-DSA identifier defined in {{oids}} MUST be used as the
-algorithm field in the SubjectPublicKeyInfo sequence {{RFC5280}} to
-identify a ML-DSA public key.
-
-The ML-DSA public key (a concatenation of rho and t1 that is an OCTET
-STRING) is mapped to a subjectPublicKey (a value of type BIT STRING) as
-follows: the most significant bit of the OCTET STRING value becomes
-the most significant bit of the BIT STRING value, and so on; the least
-significant bit of the OCTET STRING becomes the least significant
-bit of the BIT STRING.
-
-Conforming CA implementations MUST specify the X.509 public key
-algorithm explicitly by using the OIDs specified in {{oids}} when using
-ML-DSA public keys in certificates and CRLs. Conforming client
-implementations that process ML-DSA public keys when processing
-certificates and CRLs MUST recognize the corresponding OIDs.
+* subjectPublicKey contains the byte stream of the public key.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{?RFC7468}}.
@@ -360,36 +336,51 @@ present:
 Requirements about the keyUsage extension bits defined in {{RFC5280}}
 still apply.
 
-# ML-DSA Private Keys
+#  ML-DSA Private Keys
+
+An ML-DSA private key is encoded by storing its 32-octet seed in
+the privateKey field as follows.
+
+{{FIPS204}} specifies two formats for an ML-DSA private key: a 32-octet
+seed (xi) and an (expanded) private key. The expanded private key (and public key)
+is computed from the seed using `ML-DSA.KeyGen_internal(xi)` (algorithm 6).
+
+"Asymmetric Key Packages" {{!RFC5958}} describes how to encode a private
+key in a structure that both identifies what algorithm the private key
+is for and allows for the public key and additional attributes about the
+key to be included as well. For illustration, the ASN.1 structure
+OneAsymmetricKey is replicated below.
+
+~~~
+  OneAsymmetricKey ::= SEQUENCE {
+    version                  Version,
+    privateKeyAlgorithm      SEQUENCE {
+    algorithm                PUBLIC-KEY.&id({PublicKeySet}),
+    parameters               PUBLIC-KEY.&Params({PublicKeySet}
+                               {@privateKeyAlgorithm.algorithm})
+                                  OPTIONAL}
+    privateKey               OCTET STRING (CONTAINING
+                               PUBLIC-KEY.&PrivateKey({PublicKeySet}
+                                 {@privateKeyAlgorithm.algorithm})),
+    attributes           [0] Attributes OPTIONAL,
+    ...,
+    [[2: publicKey       [1] BIT STRING (CONTAINING
+                               PUBLIC-KEY.&Params({PublicKeySet}
+                                 {@privateKeyAlgorithm.algorithm})
+                                 OPTIONAL,
+    ...
+  }
+~~~
 
 <aside markdown="block">
-EDNOTE: This section is still under construction as we discuss the best
-way to formulate the private key with the wider working group.
+  NOTE: The above syntax is from {{RFC5958}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}.
 </aside>
 
-An ML-DSA private key is encoded by storing its 32-byte seed in the
-privateKey field as an OCTET STRING. FIPS 204 specifies two formats for
-an ML-DSA private key: a 32-byte seed and an (expanded) private key. The
-expanded private key (and public key) is computed from the seed using
-ML-DSA.KeyGen_internal (algorithm 6).
-
-The ASN.1 encoding for a ML-DSA private key is as follows:
-
-~~~
-   OneAsymmetricKey ::= SEQUENCE {
-      version Version,
-      privateKeyAlgorithm PrivateKeyAlgorithmIdentifier,
-      privateKey PrivateKey,
-      attributes [0] IMPLICIT Attributes OPTIONAL,
-      ...,
-      [[2: publicKey [1] IMPLICIT PublicKey OPTIONAL ]],
-      ...
-   }
-
-   PrivateKey ::= OCTET STRING
-
-   PublicKey ::= BIT STRING
-~~~
+When used in a OneAsymmetricKey type, the privateKey OCTET STRING contains
+the raw octet string encoding of the 64-octet seed. The publicKey field
+SHOULD be omitted because the public key can be computed as noted earlier
+in this section.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
