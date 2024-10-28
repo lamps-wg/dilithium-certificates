@@ -94,7 +94,7 @@ func example(name string) {
 	defer f2.Close()
 
 	if err = pem.Encode(f2, &pem.Block{
-		Type:  fmt.Sprintf("%s PRIVATE KEY", name),
+		Type:  fmt.Sprintf("PRIVATE KEY", name),
 		Bytes: pask,
 	}); err != nil {
 		panic(err)
