@@ -23,8 +23,8 @@ venue:
   type: "Working Group"
   mail: "spasm@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/spasm/"
-  github: "lamps-wg/kyber-certificates"
-  latest: "https://lamps-wg.github.io/kyber-certificates/#go.draft-ietf-lamps-kyber-certificates.html"
+  github: "lamps-wg/dilithium-certificates"
+  latest: "https://lamps-wg.github.io/kyber-certificates/#go.draft-ietf-lamps-dilithium-certificates.html"
 
 author:
  -
