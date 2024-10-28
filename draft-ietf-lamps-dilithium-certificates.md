@@ -1037,7 +1037,7 @@ key in the previous section.
        :   }
 ~~~
 
-## Example Certificate {#example-Certificate}
+## Example Certificate {#example-certificate}
 
 TODO: Add an example
 
