@@ -24,7 +24,7 @@ venue:
   mail: "spasm@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/spasm/"
   github: "lamps-wg/dilithium-certificates"
-  latest: "https://lamps-wg.github.io/kyber-certificates/#go.draft-ietf-lamps-dilithium-certificates.html"
+  latest: "https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.html"
 
 author:
  -
