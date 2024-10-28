@@ -391,7 +391,7 @@ The ASN.1 encoding for a ML-DSA private key is as follows:
    PublicKey ::= BIT STRING
 ~~~
 
-{{exmamples}} contains example ML-DSA private keys encoded using the
+{{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
 
 # IANA Considerations
