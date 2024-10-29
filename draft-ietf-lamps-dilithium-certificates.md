@@ -336,7 +336,7 @@ present:
 Requirements about the keyUsage extension bits defined in {{RFC5280}}
 still apply.
 
-#  ML-DSA Private Keys
+#  Private Key Format
 
 An ML-DSA private key is encoded by storing its 32-octet seed in
 the privateKey field as follows.
