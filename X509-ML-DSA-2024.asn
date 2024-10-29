@@ -11,8 +11,6 @@ BEGIN
 
 IMPORTS
 
--- FROM RFC 5912
-
 PUBLIC-KEY, SIGNATURE-ALGORITHM
   FROM AlgorithmInformation-2009 -- From [RFC5912]
     { iso(1) identified-organization(3) dod(6) internet(1)
