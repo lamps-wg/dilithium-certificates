@@ -378,7 +378,7 @@ OneAsymmetricKey is replicated below.
 </aside>
 
 When used in a OneAsymmetricKey type, the privateKey OCTET STRING contains
-the raw octet string encoding of the 64-octet seed. The publicKey field
+the raw octet string encoding of the 32-octet seed. The publicKey field
 SHOULD be omitted because the public key can be computed as noted earlier
 in this section.
 
