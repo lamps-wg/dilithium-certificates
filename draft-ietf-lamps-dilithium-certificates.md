@@ -396,10 +396,12 @@ textual encoding defined in {{RFC7468}}.
 
 # IANA Considerations
 
-IANA is requested to register the id-mod-pkix1-PQ-algorithms OID for the
-ASN.1 module identifier found in {{asn1}} in the "SMI Security for PKIX
-Module Identifier" registry.
-
+For the ASN.1 module in {asn1}, IANA is requested to assign an object
+identifier (OID) for the module identifier (TBD1) with a Description
+of "id-mod-x509-ml-dsa-2024". The OID for the module should be
+allocated in the "SMI Security for PKIX Module Identifier" registry
+(1.3.6.1.5.5.7.0).
+  
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
@@ -489,7 +491,13 @@ single OCTET STRING.
 
 This appendix includes the ASN.1 module {{X680}} for the ML-DSA.  Note that
 as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
-{{X690}}. This module imports objects from {{RFC5912}}.
+{{X690}}. This module imports objects from {{RFC5912}} and
+{{!I-D.salter-lamps-cms-ml-dsa}}.
+
+<aside markdown="block">
+RFC EDITOR: Please replace TBD2 with the value assigned to the ASN.1 moodule
+in {{I-D.salter-lamps-cms-ml-dsa}}.
+</aside>
 
 ~~~
 <CODE BEGINS>
