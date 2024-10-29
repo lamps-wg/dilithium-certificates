@@ -401,7 +401,6 @@ identifier (OID) for the module identifier (TBD1) with a Description
 of "id-mod-x509-ml-dsa-2024". The OID for the module should be
 allocated in the "SMI Security for PKIX Module Identifier" registry
 (1.3.6.1.5.5.7.0).
-  
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
