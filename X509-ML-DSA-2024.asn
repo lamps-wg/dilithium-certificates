@@ -1,6 +1,7 @@
-PKIX1-PQ-Algorithms { iso(1) identified-organization(3) dod(6)
+X509-ML-DSA-2024
+{ iso(1) identified-organization(3) dod(6)
   internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
-  id-mod-pkix1-PQ-algorithms(X) }
+  id-mod-x509-ml-dsa-2024(TBD1) }
 
 DEFINITIONS IMPLICIT TAGS ::=
 
@@ -12,34 +13,35 @@ IMPORTS
 
 -- FROM RFC 5912
 
-PUBLIC-KEY, SIGNATURE-ALGORITHM, DIGEST-ALGORITHM, SMIME-CAPS
-  FROM AlgorithmInformation-2009
+PUBLIC-KEY, SIGNATURE-ALGORITHM
+  FROM AlgorithmInformation-2009 -- From [RFC5912]
     { iso(1) identified-organization(3) dod(6) internet(1)
       security(5) mechanisms(5) pkix(7) id-mod(0)
       id-mod-algorithmInformation-02(58) }
 
+sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87,
+pk-ml-dsa-44, pk-ml-dsa-65, pk-ml-dsa-87
+  FROM ML-DSA-Module-2024 -- From [I-D.salter-lamps-cms-ml-dsa]
+     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD2) } ;
+
 --
--- Public Key (pk-) Algorithms
+-- Expand SignatureAlgorithms from RFC 5912
+--
+SignatureAlgorithms SIGNATURE-ALGORITHM ::= {
+  sa-ml-dsa-44 |
+  sa-ml-dsa-65 |
+  sa-ml-dsa-87,
+  ... }
+
+--
+-- Expand SignatureAlgorithms from RFC 5912
 --
 PublicKeys PUBLIC-KEY ::= {
-  -- This expands PublicKeys from RFC 5912
-  pk-MLDSATBD |
-  pk-TBD-TBD,
+  pk-ml-dsa-44 |
+  pk-ml-dsa-65 |
+  pk-ml-dsa-87,
   ...
-}
-
--- The hashAlgorithm is mda-shake256
--- The XOF seed rho is 32 bytes
--- The vector t1 is 320*k bytes
--- These are encoded as a single string
-
-pk-MLDSA PUBLIC-KEY ::= {
-  IDENTIFIER id-MLDSA
-  -- KEY no ASN.1 wrapping --
-  PARAMS ARE absent
-  CERT-KEY-USAGE { nonRepudiation, digitalSignature,
-                  keyCertSign, cRLSign }
-  --- PRIVATE-KEY no ASN.1 wrapping --
 }
 
 END
