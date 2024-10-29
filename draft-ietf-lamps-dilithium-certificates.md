@@ -495,8 +495,7 @@ as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 {{!I-D.salter-lamps-cms-ml-dsa}}.
 
 <aside markdown="block">
-RFC EDITOR: Please replace TBD2 with the value assigned to the ASN.1 moodule
-in {{I-D.salter-lamps-cms-ml-dsa}}.
+RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.salter-lamps-cms-ml-dsa}}. Also please replace {{I-D.salter-lamps-cms-ml-dsa}} in the module with a reference to the published RFC.
 </aside>
 
 ~~~
