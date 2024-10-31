@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-29T00:55:10.538557+00:00",
+  "timestamp": "2024-10-31T00:54:38.705719+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1904,7 +1904,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-28T17:50:23Z",
-      "updatedAt": "2024-10-28T18:00:59Z",
+      "updatedAt": "2024-10-29T13:06:01Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "45a6b32b077f2e376e616f0433f63451973ed477",
@@ -2018,6 +2018,26 @@
               "body": "```suggestion\r\n  latest: \"https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.html\"\r\n```",
               "createdAt": "2024-10-28T17:58:52Z",
               "updatedAt": "2024-10-28T17:59:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6PKMiy",
+          "commit": {
+            "abbreviatedOid": "90a1f71"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-29T13:06:01Z",
+          "updatedAt": "2024-10-29T13:06:01Z",
+          "comments": [
+            {
+              "originalPosition": 336,
+              "body": "We can use an include directive now.",
+              "createdAt": "2024-10-29T13:06:01Z",
+              "updatedAt": "2024-10-29T13:06:01Z"
             }
           ]
         }
@@ -2303,50 +2323,95 @@
       "id": "PR_kwDOIEpj4c6AJhqq",
       "title": "Section 4 and Section 6 rewrite",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/43",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jakemas",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "To address comments regarding the use of OCTET vs BIT STRING for private/public key encoding, I am modifying the draft to be more consistent with [draft-ietf-lamps-kyber-certificates](https://datatracker.ietf.org/doc/draft-ietf-lamps-kyber-certificates/) and [draft-ietf-lamps-x509-slhdsa](https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-slhdsa/).\r\n\r\n",
       "createdAt": "2024-10-28T19:27:47Z",
-      "updatedAt": "2024-10-28T19:27:47Z",
+      "updatedAt": "2024-10-29T20:45:51Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "183aeaa321dc4ce7844a483871c04c31dd04068b",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "encodingrewrite",
-      "headRefOid": "4c145eb4ffc4d0eeb6bf3187d1c9757527ebde94",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "dc20d492de4e6dbe39b8ef37da10e44fd8068890",
+      "closedAt": "2024-10-29T20:45:51Z",
+      "mergedAt": "2024-10-29T20:45:51Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "05efb174039ef1787fd52469f1604e55c665db43"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6PFQVu",
+          "commit": {
+            "abbreviatedOid": "4c145eb"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-29T01:24:27Z",
+          "updatedAt": "2024-10-29T01:24:27Z",
+          "comments": [
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\nthe raw octet string encoding of the 32-octet seed. The publicKey field\r\n```",
+              "createdAt": "2024-10-29T01:24:27Z",
+              "updatedAt": "2024-10-29T01:24:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6PFQaI",
+          "commit": {
+            "abbreviatedOid": "4c145eb"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-29T01:24:51Z",
+          "updatedAt": "2024-10-29T01:24:52Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\r\n#  Private Key Format\r\n```",
+              "createdAt": "2024-10-29T01:24:51Z",
+              "updatedAt": "2024-10-29T01:24:52Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 44,
       "id": "PR_kwDOIEpj4c6ALCnj",
       "title": "Update ASN.1 Module",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/44",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Based on [X509-SLHDSA-2024.asn](https://github.com/lamps-wg/x509-slhdsa/blob/main/X509-SLHDSA-2024.asn).",
       "createdAt": "2024-10-29T00:25:05Z",
-      "updatedAt": "2024-10-29T00:54:27Z",
+      "updatedAt": "2024-10-29T20:46:32Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "183aeaa321dc4ce7844a483871c04c31dd04068b",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-asn1-module",
-      "headRefOid": "b7d5aa94dacff9660a194dc1c0dcbc6ce95ee6e2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "45eac5e1de43cf178d9bcbe69b893c7fba407b16",
+      "closedAt": "2024-10-29T20:46:32Z",
+      "mergedAt": "2024-10-29T20:46:32Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "7723cb81fd802db8d39e89b6cb171d177d4dbabe"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2366,6 +2431,26 @@
               "body": "```suggestion\r\nRFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.salter-lamps-cms-ml-dsa}}. Also please replace {{I-D.salter-lamps-cms-ml-dsa}} in the module with a reference to the published RFC.\r\n```",
               "createdAt": "2024-10-29T00:51:32Z",
               "updatedAt": "2024-10-29T00:51:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6PFLG5",
+          "commit": {
+            "abbreviatedOid": "b7d5aa9"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-29T00:58:03Z",
+          "updatedAt": "2024-10-29T00:58:04Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n\r\n```",
+              "createdAt": "2024-10-29T00:58:04Z",
+              "updatedAt": "2024-10-29T00:58:04Z"
             }
           ]
         }
