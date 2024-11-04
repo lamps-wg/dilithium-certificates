@@ -7,8 +7,7 @@ NOTE: This I-D previously referred to Dilithium. The I-D has been updated to ref
 * [Editor's Copy](https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates)
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates)
-* [Compare Editor's Copy to Working Group Draft](https://www.ietf.org/rfcdiff?url1=draft-ietf-lamps-dilithium-certificates&url2=https://lamps-wg.github.io/dilithium-certificates/draft-ietf-lamps-dilithium-certificates.txt)
-
+* [Compare Editor's Copy to Working Group Draft](https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.diff)
 
 ## Contributing
 
