@@ -17,17 +17,17 @@ Signature Algorithm (ML-DSA) in Internet X.509 certificates and
 certificate revocation lists.  The conventions for the associated
 signatures, subject public keys, and private key are also described. 
     " name="description">
-<meta content="xml2rfc 3.23.2" name="generator">
+<meta content="xml2rfc 3.24.0" name="generator">
 <meta content="ML-DSA Certificate X.509 PKIX" name="keyword">
 <meta content="draft-ietf-lamps-dilithium-certificates-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.23.2
+  xml2rfc 3.24.0
     Python 3.12.7
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
-    lxml 4.9.4
+    lxml 5.3.0
     platformdirs 4.3.6
     pycountry 22.3.5
     PyYAML 6.0.1
@@ -1085,11 +1085,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ML-DSA in Certificates</td>
-<td class="right">October 2024</td>
+<td class="right">November 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 2 May 2025</td>
+<td class="center">Expires 8 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1102,12 +1102,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-10-29" class="published">29 October 2024</time>
+<time datetime="2024-11-04" class="published">4 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-02">2 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-08">8 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1174,7 +1174,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1331,15 +1331,15 @@ algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pi
 <p id="section-2-6">The OIDs are:<a href="#section-2-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2-7">
 <pre>
-   id-ML-DSA-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
 
-   id-ML-DSA-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
 
-   id-ML-DSA-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 </pre><a href="#section-2-7" class="pilcrow">¶</a>
@@ -1407,10 +1407,10 @@ encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA <span class="bcp14">MUST</span>
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
-<p id="section-3-9">When the id-ML-DSA identifier appears in the algorithm field as an
+<p id="section-3-9">When the id-ml-dsa identifier appears in the algorithm field as an
 AlgorithmIdentifier, the encoding <span class="bcp14">MUST</span> omit the parameters field. That
 is, the AlgorithmIdentifier <span class="bcp14">SHALL</span> be a SEQUENCE of one component, the
-OID id-ML-DSA.<a href="#section-3-9" class="pilcrow">¶</a></p>
+OID id-ml-dsa.<a href="#section-3-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ML-DSA-PubblicKey">
@@ -1453,7 +1453,7 @@ textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468<
       </h2>
 <p id="section-5-1">The intended application for the key is indicated in the keyUsage
 certificate extension; see <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the
-keyUsage extension is present in a certificate that indicates id-ML-DSA
+keyUsage extension is present in a certificate that indicates id-ml-dsa
 in the SubjectPublicKeyInfo, then the at least one of following <span class="bcp14">MUST</span> be
 present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
@@ -1465,7 +1465,7 @@ present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
 <p id="section-5-3">If the keyUsage extension is present in a certificate that indicates
-id-ML-DSA in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
+id-ml-dsa in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
 present:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
