@@ -196,15 +196,15 @@ algorithm identifier in the algorithm field.
 The OIDs are:
 
 ~~~
-   id-ML-DSA-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
 
-   id-ML-DSA-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
 
-   id-ML-DSA-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
             country(16) us(840) organization(1) gov(101) csor(3)
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 ~~~
@@ -273,10 +273,10 @@ implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified {{oids}}.
 
-When the id-ML-DSA identifier appears in the algorithm field as an
+When the id-ml-dsa identifier appears in the algorithm field as an
 AlgorithmIdentifier, the encoding MUST omit the parameters field. That
 is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the
-OID id-ML-DSA.
+OID id-ml-dsa.
 
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PubblicKey}
@@ -310,7 +310,7 @@ textual encoding defined in {{?RFC7468}}.
 
 The intended application for the key is indicated in the keyUsage
 certificate extension; see {{Section 4.2.1.3 of RFC5280}}. If the
-keyUsage extension is present in a certificate that indicates id-ML-DSA
+keyUsage extension is present in a certificate that indicates id-ml-dsa
 in the SubjectPublicKeyInfo, then the at least one of following MUST be
 present:
 
@@ -322,7 +322,7 @@ present:
 ~~~
 
 If the keyUsage extension is present in a certificate that indicates
-id-ML-DSA in the SubjectPublicKeyInfo, then the following MUST NOT be
+id-ml-dsa in the SubjectPublicKeyInfo, then the following MUST NOT be
 present:
 
 ~~~
