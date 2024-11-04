@@ -121,7 +121,7 @@
 	      The private key format is also specified.</t>
       <t><xref target="FIPS204" format="default"></xref> defines two versions of ML-DSA, the pure and the 
 	      pre-digest version. Only the former is specified for use in this document. 
-	      The size of the X.509 content signed in most certificates is small enought to not pose a 
+	      The size of the X.509 content signed in most certificates is small enough to not pose a 
 	      challenge with pure ML-DSA. For CRLs, CRL signing does not occur too frequently for ML-DSA 
 	      performance to be significant concern. Even then, CRL sharding is available to limit the 
 	      CRL lists to a size that does not affect ML-DSA performance. </t>
