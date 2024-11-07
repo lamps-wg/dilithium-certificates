@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T00:52:46.689494+00:00",
+  "timestamp": "2024-11-07T00:52:58.936430+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -260,15 +260,15 @@
       "id": "I_kwDOIEpj4c5Uvgu3",
       "title": "Remove Public Key from the Private Key Structure",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "From John \r\n\r\n> I know there have also been suggestions about including a smaller value that could help in recomputing the public key from the private key.   I guess that could be an optional attribute (the [0] tag in OneAsymmetricKey) if someone decides that is better rather than including an entire public key.   I actually prefer to NOT include the public key in the private key, we already have large enough PQ keys, but some application uses might need it I guess.  \r\n",
       "createdAt": "2022-10-25T02:27:18Z",
-      "updatedAt": "2022-11-23T18:47:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-05T09:51:59Z",
+      "closedAt": "2024-11-05T09:51:59Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -339,6 +339,13 @@
           "body": "I like the seed idea too because it simplifies the private key. But I don\u2019t like that it basically requires keygen+sign every time you want to sign which is different to what we have traditionally been doing. Plus the side-channel concern Markku brought up. For now, let\u2019s keep the Dilithium PrivateKey in the structure, and we can consider keeping only the seed if there is a shift and keygen+sign for a seed becomes common. \r\n",
           "createdAt": "2022-11-23T18:46:32Z",
           "updatedAt": "2022-11-23T18:46:32Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closed via #43.",
+          "createdAt": "2024-11-05T09:51:59Z",
+          "updatedAt": "2024-11-05T09:51:59Z"
         }
       ]
     },
@@ -2546,6 +2553,61 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOIEpj4c6A8qAV",
+      "title": "Mention pure ML-DSA's prehashing support",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/47",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "as discussed in the working group meeting 121 on Tuesday.\r\n\r\ncc @csosto-pk ",
+      "createdAt": "2024-11-05T15:42:18Z",
+      "updatedAt": "2024-11-06T08:17:09Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "alg7l6",
+      "headRefOid": "52c788179169228f172d9d72d287d1f4eb08cb73",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I dislike this option more than HashML-DSA. Breaking up the signature has implication to its security analysis. \r\n\r\nI responded to the list with my counterpoints to Sophie's points (it does not seem to have appeared in the list yet). I am not convinced that taking mu out of the signature is more secure than HashML-DSA. And even if it was, it means SLH-DSA would need to something else, which means less alignment. \r\n\r\nAnyway, if the WG concludes that taking mu is preferred than HashML-DSA, then I can live with it. In a sense it solves my problem. But I will try to make arguments against it. \r\n\r\nWe also need to confirm that NIST will certify external mu SigGen and SigVer because that broke with ECDSA SigVer recently. ",
+          "createdAt": "2024-11-06T04:46:10Z",
+          "updatedAt": "2024-11-06T04:46:34Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> We also need to confirm that NIST will certify external mu SigGen and SigVer because that broke with ECDSA SigVer recently.\r\n\r\nDang confirmed, pointing to the comment on line 6 of algorithm 7. Deb confirmed too for CNSA 2.\r\n\r\n",
+          "createdAt": "2024-11-06T08:17:08Z",
+          "updatedAt": "2024-11-06T08:17:08Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6QAwpK",
+          "commit": {
+            "abbreviatedOid": "52c7881"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-05T16:21:25Z",
+          "updatedAt": "2024-11-05T16:21:25Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
