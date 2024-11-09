@@ -1,0 +1,2575 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA</title>
+<meta content="Jake Massimo" name="author">
+<meta content="Panos Kampanakis" name="author">
+<meta content="Sean Turner" name="author">
+<meta content="Bas Westerbaan" name="author">
+<meta content="
+       Digital signatures are used within X.509 certificates, Certificate
+Revocation Lists (CRLs), and to sign messages. This document describes
+the conventions for using FIPS 204, the Module-Lattice-Based Digital
+Signature Algorithm (ML-DSA) in Internet X.509 certificates and
+certificate revocation lists.  The conventions for the associated
+signatures, subject public keys, and private key are also described. 
+    " name="description">
+<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="ML-DSA Certificate X.509 PKIX" name="keyword">
+<meta content="draft-ietf-lamps-dilithium-certificates-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.24.0
+    Python 3.12.7
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.4
+    lxml 5.3.0
+    platformdirs 4.3.6
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.32.3
+    setuptools 70.3.0
+    wcwidth 0.2.13
+-->
+<link href="draft-ietf-lamps-dilithium-certificates.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+  }
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">ML-DSA in Certificates</td>
+<td class="right">November 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Massimo, et al.</td>
+<td class="center">Expires 13 May 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">LAMPS WG</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-11-09" class="published">9 November 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-05-13">13 May 2025</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">J. Massimo</div>
+<div class="org">AWS</div>
+</div>
+<div class="author">
+      <div class="author-name">P. Kampanakis</div>
+<div class="org">AWS</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Turner</div>
+<div class="org">sn3rd</div>
+</div>
+<div class="author">
+      <div class="author-name">B. E. Westerbaan</div>
+<div class="org">Cloudflare</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">Digital signatures are used within X.509 certificates, Certificate
+Revocation Lists (CRLs), and to sign messages. This document describes
+the conventions for using FIPS 204, the Module-Lattice-Based Digital
+Signature Algorithm (ML-DSA) in Internet X.509 certificates and
+certificate revocation lists.  The conventions for the associated
+signatures, subject public keys, and private key are also described.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.html">https://lamps-wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-certificates.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/">https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Limited Additional Mechanisms for PKIX and SMIME (lamps) Working Group mailing list (<span><a href="mailto:spasm@ietf.org">mailto:spasm@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/spasm/">https://mailarchive.ietf.org/arch/browse/spasm/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/spasm/">https://www.ietf.org/mailman/listinfo/spasm/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/lamps-wg/dilithium-certificates">https://github.com/lamps-wg/dilithium-certificates</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 13 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-requirements-language" class="internal xref">Requirements Language</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-identifiers" class="internal xref">Identifiers</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-ml-dsa-signatures-in-pkix" class="internal xref">ML-DSA Signatures in PKIX</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-ml-dsa-public-keys-in-pkix" class="internal xref">ML-DSA Public Keys in PKIX</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-key-usage-bits" class="internal xref">Key Usage Bits</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-private-key-format" class="internal xref">Private Key Format</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-pre-hashed-mode-extarnalmu-" class="internal xref">Pre-hashed mode (ExtarnalMu-ML-DSA)</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-security-strengths" class="internal xref">Security Strengths</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-example-private-key" class="internal xref">Example Private Key</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-example-public-key" class="internal xref">Example Public Key</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-example-certificate" class="internal xref">Example Certificate</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
+quantum-resistant digital signature scheme standardized by the US
+National Institute of Standards and Technology (NIST) PQC project
+<span>[<a href="#NIST-PQC" class="cite xref">NIST-PQC</a>]</span> in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. This document
+specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX)
+certificates and Certificate Revocation Lists (CRLs) at three security
+levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<div id="requirements-language">
+<section id="section-1.1">
+        <h3 id="name-requirements-language">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-requirements-language" class="section-name selfRef">Requirements Language</a>
+        </h3>
+<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="oids">
+<section id="section-2">
+      <h2 id="name-identifiers">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifiers" class="section-name selfRef">Identifiers</a>
+      </h2>
+<p id="section-2-1">The AlgorithmIdentifier type, which is included herein for convenience,
+is defined as follows:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2-2">
+<pre>
+    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
+      SEQUENCE {
+        algorithm   ALGORITHM-TYPE.id({AlgorithmSet}),
+        parameters  ALGORITHM-TYPE.
+                      Params({AlgorithmSet}{@algorithm}) OPTIONAL
+     }
+</pre><a href="#section-2-2" class="pilcrow">¶</a>
+</div>
+<aside id="section-2-3">
+        <p id="section-2-3.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with
+the 2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1
+syntax.<a href="#section-2-3.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-2-4">The fields in AlgorithmIdentifier have the following meanings:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-5.1">
+          <p id="section-2-5.1.1">algorithm identifies the cryptographic algorithm with an object
+identifier.<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-5.2">
+          <p id="section-2-5.2.1">parameters, which are optional, are the associated parameters for the
+algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-6">The OIDs are:<a href="#section-2-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-2-7">
+<pre>
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+            country(16) us(840) organization(1) gov(101) csor(3)
+            nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
+
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+            country(16) us(840) organization(1) gov(101) csor(3)
+            nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
+
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+            country(16) us(840) organization(1) gov(101) csor(3)
+            nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
+</pre><a href="#section-2-7" class="pilcrow">¶</a>
+</div>
+<p id="section-2-8">The contents of the parameters component for each algorithm <span class="bcp14">MUST</span> be
+absent.<a href="#section-2-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ml-dsa-signatures-in-pkix">
+<section id="section-3">
+      <h2 id="name-ml-dsa-signatures-in-pkix">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-ml-dsa-signatures-in-pkix" class="section-name selfRef">ML-DSA Signatures in PKIX</a>
+      </h2>
+<p id="section-3-1">ML-DSA is a digital signature scheme built upon the
+Fiat-Shamir-with-aborts framework <span>[<a href="#Fiat-Shamir" class="cite xref">Fiat-Shamir</a>]</span>. The security is based
+upon the hardness of lattice problems over module lattices <span>[<a href="#Dilithium" class="cite xref">Dilithium</a>]</span>.
+ML-DSA provides three parameter sets for the NIST PQC security categories
+2, 3 and 5.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Signatures are used in a number of different ASN.1 structures. As shown
+in the ASN.1 representation from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below, in an X.509
+certificate, a signature is encoded with an algorithm identifier in the
+signatureAlgorithm attribute and a signatureValue attribute that contains
+the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-3">
+<pre>
+  Certificate  ::=  SIGNED{ TBSCertificate }
+
+  SIGNED{ToBeSigned} ::= SEQUENCE {
+     toBeSigned           ToBeSigned,
+     algorithmIdentifier  SEQUENCE {
+         algorithm        SIGNATURE-ALGORITHM.
+                            &amp;id({SignatureAlgorithms}),
+         parameters       SIGNATURE-ALGORITHM.
+                            &amp;Params({SignatureAlgorithms}
+                              {@algorithmIdentifier.algorithm})
+                                OPTIONAL
+     },
+     signature BIT STRING (CONTAINING SIGNATURE-ALGORITHM.&amp;Value(
+                              {SignatureAlgorithms}
+                              {@algorithmIdentifier.algorithm}))
+  }
+</pre><a href="#section-3-3" class="pilcrow">¶</a>
+</div>
+<p id="section-3-4">Signatures are also used in the CRL list ASN.1 representation from
+<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below. In a X.509 CRL, a signature is encoded with an
+algorithm identifier in the signatureAlgorithm attribute and a
+signatureValue attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-5">
+<pre>
+   CertificateList  ::=  SIGNED{ TBSCertList }
+</pre><a href="#section-3-5" class="pilcrow">¶</a>
+</div>
+<p id="section-3-6">The identifiers defined in <a href="#oids" class="auto internal xref">Section 2</a> can be used as the
+AlgorithmIdentifier in the signatureAlgorithm field in the sequence
+Certificate/CertificateList and the signature field in the sequence
+TBSCertificate/TBSCertList in certificates and CRLs, respectively,
+<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The parameters of these signature algorithms <span class="bcp14">MUST</span> be
+absent, as explained in <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-7">The signatureValue field contains the corresponding ML-DSA signature
+computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
+<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">Conforming Certification Authority (CA) implementations <span class="bcp14">MUST</span> specify
+the algorithms explicitly by using the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when
+encoding ML-DSA signatures in certificates and CRLs. Conforming client
+implementations that process certificates and CRLs using ML-DSA <span class="bcp14">MUST</span>
+recognize the corresponding OIDs. Encoding rules for ML-DSA signature
+values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
+<p id="section-3-9">When the id-ml-dsa identifier appears in the algorithm field as an
+AlgorithmIdentifier, the encoding <span class="bcp14">MUST</span> omit the parameters field. That
+is, the AlgorithmIdentifier <span class="bcp14">SHALL</span> be a SEQUENCE of one component, the
+OID id-ml-dsa.<a href="#section-3-9" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ML-DSA-PubblicKey">
+<section id="section-4">
+      <h2 id="name-ml-dsa-public-keys-in-pkix">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ml-dsa-public-keys-in-pkix" class="section-name selfRef">ML-DSA Public Keys in PKIX</a>
+      </h2>
+<p id="section-4-1">In the X.509 certificate, the subjectPublicKeyInfo field has the
+SubjectPublicKeyInfo type, which has the following ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4-2">
+<pre>
+  SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
+      algorithm        AlgorithmIdentifier {PUBLIC-KEY, {IOSet}},
+      subjectPublicKey BIT STRING
+  }
+</pre><a href="#section-4-2" class="pilcrow">¶</a>
+</div>
+<aside id="section-4-3">
+        <p id="section-4-3.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the
+  2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-4-3.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-4-4">The fields in SubjectPublicKeyInfo have the following meaning:<a href="#section-4-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-5.1">
+          <p id="section-4-5.1.1">algorithm is the algorithm identifier and parameters for the
+public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-5.2">
+          <p id="section-4-5.2.1">subjectPublicKey contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-6"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA private keys encoded using the
+textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="key-usage-bits">
+<section id="section-5">
+      <h2 id="name-key-usage-bits">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-key-usage-bits" class="section-name selfRef">Key Usage Bits</a>
+      </h2>
+<p id="section-5-1">The intended application for the key is indicated in the keyUsage
+certificate extension; see <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the
+keyUsage extension is present in a certificate that indicates id-ml-dsa
+in the SubjectPublicKeyInfo, then the at least one of following <span class="bcp14">MUST</span> be
+present:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5-2">
+<pre>
+  digitalSignature; or
+  nonRepudiation; or
+  keyCertSign; or
+  cRLSign.
+</pre><a href="#section-5-2" class="pilcrow">¶</a>
+</div>
+<p id="section-5-3">If the keyUsage extension is present in a certificate that indicates
+id-ml-dsa in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
+present:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5-4">
+<pre>
+   keyEncipherment; or
+   dataEncipherment; or
+   keyAgreement; or
+   encipherOnly; or
+   decipherOnly.
+</pre><a href="#section-5-4" class="pilcrow">¶</a>
+</div>
+<p id="section-5-5">Requirements about the keyUsage extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>
+still apply.<a href="#section-5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="private-key-format">
+<section id="section-6">
+      <h2 id="name-private-key-format">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-private-key-format" class="section-name selfRef">Private Key Format</a>
+      </h2>
+<p id="section-6-1">An ML-DSA private key is encoded by storing its 32-octet seed in
+the privateKey field as follows.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> specifies two formats for an ML-DSA private key: a 32-octet
+seed (xi) and an (expanded) private key. The expanded private key (and public key)
+is computed from the seed using <code>ML-DSA.KeyGen_internal(xi)</code> (algorithm 6).<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">"Asymmetric Key Packages" <span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> describes how to encode a private
+key in a structure that both identifies what algorithm the private key
+is for and allows for the public key and additional attributes about the
+key to be included as well. For illustration, the ASN.1 structure
+OneAsymmetricKey is replicated below.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6-4">
+<pre>
+  OneAsymmetricKey ::= SEQUENCE {
+    version                  Version,
+    privateKeyAlgorithm      SEQUENCE {
+    algorithm                PUBLIC-KEY.&amp;id({PublicKeySet}),
+    parameters               PUBLIC-KEY.&amp;Params({PublicKeySet}
+                               {@privateKeyAlgorithm.algorithm})
+                                  OPTIONAL}
+    privateKey               OCTET STRING (CONTAINING
+                               PUBLIC-KEY.&amp;PrivateKey({PublicKeySet}
+                                 {@privateKeyAlgorithm.algorithm})),
+    attributes           [0] Attributes OPTIONAL,
+    ...,
+    [[2: publicKey       [1] BIT STRING (CONTAINING
+                               PUBLIC-KEY.&amp;Params({PublicKeySet}
+                                 {@privateKeyAlgorithm.algorithm})
+                                 OPTIONAL,
+    ...
+  }
+</pre><a href="#section-6-4" class="pilcrow">¶</a>
+</div>
+<aside id="section-6-5">
+        <p id="section-6-5.1">NOTE: The above syntax is from <span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> and is compatible with the
+  2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-6-5.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-6-6">When used in a OneAsymmetricKey type, the privateKey OCTET STRING contains
+the raw octet string encoding of the 32-octet seed. The publicKey field
+<span class="bcp14">SHOULD</span> be omitted because the public key can be computed as noted earlier
+in this section.<a href="#section-6-6" class="pilcrow">¶</a></p>
+<p id="section-6-7"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA private keys encoded using the
+textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-6-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="pre-hashed-mode-extarnalmu-ml-dsa">
+<section id="section-7">
+      <h2 id="name-pre-hashed-mode-extarnalmu-">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-pre-hashed-mode-extarnalmu-" class="section-name selfRef">Pre-hashed mode (ExtarnalMu-ML-DSA)</a>
+      </h2>
+<p id="section-7-1">Many applications will require a "pre-hashed" mode of ML-DSA whereby a message digest can be pre-computed outside of the cryptographic module and then only a small fixed-width hash value is passed to the crypto module.
+Many applications and protocols include message digesting, but there exist some that do not. Examples of this can be found even within <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>; for example certificate and certificate revocation list (CRL) data structures do not include message digesting and therefore become problematic when producing large CRLs or when signing a high volume of certificates containing large public keys. Such situations require pre-hashing to be performed by the signature primitive.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">This section presents the "ExternalMu-ML-DSA" signature mode which provides an interface for performing pre-hashed signatures in a way which is both compliant with <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and which produces signatures values which are indistinguishable from signatures produced by ML-DSA.Sign() and are therefore compatible with the normal ML-DSA.Verify() and are identified by the same Object Identifiers as for ML-DSA. A ML-DSA key and certificate <span class="bcp14">MAY</span> be used with either ML-DSA or ExternalMu-ML-DSA interchangeably. Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA and therefore might require explicit support from hardware or software cryptographic modules.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Note that the signing mode defined here is different from HashML-DSA defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> section 5.4. This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and identified by <code>id-hash-ml-dsa-44-with-sha512</code>, <code>id-hash-ml-dsa-65-with-sha512</code>, and <code>id-hash-ml-dsa-87-with-sha512</code> <span class="bcp14">MUST NOT</span> be be used in X.509 and related PKIX protocols.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">The procedures below present modified versions of Algorithm 2 and Algorithm 7 in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. Note that all functions and notation used in <a href="#fig-externalmu-ml-dsa-external" class="auto internal xref">Figure 1</a> and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 2</a> are defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">External operations that are to be performed outside of the cryptographic module.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<span id="name-external-steps-of-externalm"></span><div id="fig-externalmu-ml-dsa-external">
+<figure id="figure-1">
+        <div class="alignLeft art-text artwork" id="section-7-6.1">
+<pre>
+ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+
+  if |ctx| &gt; 255 then
+    return error  # return an error indication if the context string is
+                  # too long
+  end if
+
+  M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
+                                                        || ctx) || M
+  mu = H(BytesToBits(pk.tr) || M', 64)
+  return mu
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-external-steps-of-externalm" class="selfRef">External steps of ExternalMu-ML-DSA</a>
+        </figcaption></figure>
+</div>
+<p id="section-7-7">Internal operations that are to be performed inside of the cryptographic module.<a href="#section-7-7" class="pilcrow">¶</a></p>
+<span id="name-internal-steps-of-externalm"></span><div id="fig-externalmu-ml-dsa-internal">
+<figure id="figure-2">
+        <div class="alignLeft art-text artwork" id="section-7-8.1">
+<pre>
+ExternalMu-ML-DSA.Sign(sk, mu):
+
+  rnd = rand(32)  # for the optional deterministic variant,
+                  # substitute rnd = 0x0 * 32
+  if rnd = NULL then
+    return error  # return an error indication if random bit
+                  # generation failed
+  end if
+
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  return sigma
+
+
+ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
+   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-internal-steps-of-externalm" class="selfRef">Internal steps of ExternalMu-ML-DSA</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">For the ASN.1 module in {asn1}, IANA is requested to assign an object
+identifier (OID) for the module identifier (TBD1) with a Description
+of "id-mod-x509-ml-dsa-2024". The OID for the module should be
+allocated in the "SMI Security for PKIX Module Identifier" registry
+(1.3.6.1.5.5.7.0).<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-9">
+      <h2 id="name-security-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-9-1">The Security Considerations section of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> applies to this
+specification as well.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">The digital signature scheme defined within this document are modeled
+under strongly existentially unforgeable under chosen message attack
+(SUF-CMA). For the purpose of estimating security strength, it has
+been assumed that the attacker has access to signatures for no more
+than 2^{64} chosen messages.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<aside id="section-9-3">
+        <p id="section-9-3.1">EDNOTE: Discuss deterministic vs randomized signing and the impact on
+security.<a href="#section-9-3.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-9-4">ML-DSA offers both deterministic and randomized signing. By default
+ML-DSA signatures are non-deterministic. The private random seed (rho')
+for the signature is pseudorandomly derived from the signer’s private
+key, the message, and a 256-bit string, rnd - where rnd should be
+generated by an approved RBG. In the deterministic version, rng is
+instead a 256-bit constant string. The source of randomness in the
+randomized mode has been "hedged" against sources of poor entropy, by
+including the signers private key and message into the derivation. The
+primary purpose of rnd is to facilitate countermeasures to side-channel
+attacks and fault attacks on deterministic signatures.<a href="#section-9-4" class="pilcrow">¶</a></p>
+<aside id="section-9-5">
+        <p id="section-9-5.1">EDNOTE: Discuss side-channels for ML-DSA.<a href="#section-9-5.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-9-6">In the design of ML-DSA, care has been taken to make side-channel
+resilience easier to achieve. For instance, ML-DSA does not depend
+on Gaussian sampling. Implementations must still take great care
+not to leak information via varius side channels. While deliberate
+design decisions such as these can help to deliver a greater ease
+of secure implementation - particularly against side-channel
+attacks - it does not necessarily provide resistance to more
+powerful attacks such as differential power analysis. Some amount
+of side-channel leakage has been demonstrated in parts of the
+signing algorithm (specifically the bit-unpacking function), from
+which a demonstration of key recovery has been made over a large
+sample of signatures. Masking countermeasures exist for
+ML-DSA, but come with a performance overhead.<a href="#section-9-6" class="pilcrow">¶</a></p>
+<p id="section-9-7">A fundamental security property also associated with digital
+signatures is non-repudiation. Non-repudiation refers to the
+assurance that the owner of a signature key pair that was
+capable of generating an existing signature corresponding to
+certain data cannot convincingly deny having signed the data.
+The digital signature scheme ML-DSA possess three security
+properties beyond unforgeability, that are associated with
+non-repudiation. These are exclusive ownership, message-bound
+signatures, and non-resignability. These properties are based
+tightly on the assumed collision resistance of the hash
+function used (in this case SHAKE-256).<a href="#section-9-7" class="pilcrow">¶</a></p>
+<p id="section-9-8">Exclusive ownership is a property in which a signature sigma
+uniquely determines the public key and message for which it
+is valid. Message-bound signatures is the property that a
+valid signature uniquely determines the message for which it
+is valid, but not necessarily the public key.
+Non-resignability is the property in which one cannot produce
+a valid signature under another key given a signature sigma
+for some unknown message m. These properties are not provided
+by classical signature schemes such as DSA or ECDSA, and have
+led to a variety of attacks such as Duplicate-Signature Key
+Selection (DSKS) attacks , and attacks on
+the protocols for secure routing. A full
+discussion of these properties in ML-DSA can be found at
+<span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.<a href="#section-9-8" class="pilcrow">¶</a></p>
+<p id="section-9-9">These properties are dependent, in part, on unambiguous public
+key serialization. It for this reason the public key structure
+defined in <a href="#ML-DSA-PubblicKey" class="auto internal xref">Section 4</a> is intentionally encoded as a
+single OCTET STRING.<a href="#section-9-9" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-10">
+      <h2 id="name-references">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="FIPS204">[FIPS204]</dt>
+        <dd>
+<span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"Module-Lattice-based Digital Signature Standard"</span>, <span class="seriesInfo">FIPS PUB 204</span>, <time datetime="2023-08" class="refDate">August 2023</time>, <span>&lt;<a href="https://csrc.nist.gov/projects/post-quantum-cryptography">https://csrc.nist.gov/projects/post-quantum-cryptography</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.salter-lamps-cms-ml-dsa">[I-D.salter-lamps-cms-ml-dsa]</dt>
+        <dd>
+<span class="refAuthor">S, B.</span>, <span class="refAuthor">R, A.</span>, and <span class="refAuthor">D. Van Geest</span>, <span class="refTitle">"Use of the ML-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-salter-lamps-cms-ml-dsa-00</span>, <time datetime="2024-10-14" class="refDate">14 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-salter-lamps-cms-ml-dsa-00">https://datatracker.ietf.org/doc/html/draft-salter-lamps-cms-ml-dsa-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5280">[RFC5280]</dt>
+        <dd>
+<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5912">[RFC5912]</dt>
+        <dd>
+<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Schaad</span>, <span class="refTitle">"New ASN.1 Modules for the Public Key Infrastructure Using X.509 (PKIX)"</span>, <span class="seriesInfo">RFC 5912</span>, <span class="seriesInfo">DOI 10.17487/RFC5912</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5912">https://www.rfc-editor.org/rfc/rfc5912</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5958">[RFC5958]</dt>
+        <dd>
+<span class="refAuthor">Turner, S.</span>, <span class="refTitle">"Asymmetric Key Packages"</span>, <span class="seriesInfo">RFC 5958</span>, <span class="seriesInfo">DOI 10.17487/RFC5958</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5958">https://www.rfc-editor.org/rfc/rfc5958</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X680">[X680]</dt>
+        <dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology -- Abstract Syntax Notation One (ASN.1): Specification of basic notation"</span>, <span class="seriesInfo">ITU-T Recommendation X.680</span>, <span class="seriesInfo">ISO/IEC 8824-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="X690">[X690]</dt>
+      <dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology -- Abstract Syntax Notation One (ASN.1): ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"</span>, <span class="seriesInfo">ITU-T Recommendation X.690</span>, <span class="seriesInfo">ISO/IEC 8825-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.690">https://www.itu.int/rec/T-REC-X.690</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="CDFFJ21">[CDFFJ21]</dt>
+        <dd>
+<span class="refAuthor">Cremers, C.</span>, <span class="refAuthor">Düzlü, S.</span>, <span class="refAuthor">Fiedler, R.</span>, <span class="refAuthor">Fischlin, M.</span>, and <span class="refAuthor">C. Janson</span>, <span class="refTitle">"BUFFing signature schemes beyond unforgeability and the case of post-quantum signatures"</span>, <span class="seriesInfo">In Proceedings of the 42nd IEEE Symposium on Security and Privacy </span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://eprint.iacr.org/2020/1525.pdf">https://eprint.iacr.org/2020/1525.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Dilithium">[Dilithium]</dt>
+        <dd>
+<span class="refAuthor">Bai, S.</span>, <span class="refAuthor">Ducas, L.</span>, <span class="refAuthor">Lepoint, T.</span>, <span class="refAuthor">Lyubashevsky, V.</span>, <span class="refAuthor">Schwabe, P.</span>, <span class="refAuthor">Seiler, G.</span>, and <span class="refAuthor">D. Stehlé</span>, <span class="refTitle">"CRYSTALS-Dilithium Algorithm Specifications and Supporting Documentation"</span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf">https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Fiat-Shamir">[Fiat-Shamir]</dt>
+        <dd>
+<span class="refAuthor">Lyubashevsky, V.</span>, <span class="refTitle">"Fiat-Shamir with aborts: Applications to lattice and factoring-based signatures"</span>, <span class="seriesInfo">International Conference on the Theory and Application of Cryptology and Information Security </span>, <time datetime="2009" class="refDate">2009</time>, <span>&lt;<a href="https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf">https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST-PQC">[NIST-PQC]</dt>
+        <dd>
+<span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"Post-Quantum Cryptography Project"</span>, <time datetime="2016-12-20" class="refDate">20 December 2016</time>, <span>&lt;<a href="https://csrc.nist.gov/Projects/post-quantum-cryptography">https://csrc.nist.gov/Projects/post-quantum-cryptography</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7468">[RFC7468]</dt>
+      <dd>
+<span class="refAuthor">Josefsson, S.</span> and <span class="refAuthor">S. Leonard</span>, <span class="refTitle">"Textual Encodings of PKIX, PKCS, and CMS Structures"</span>, <span class="seriesInfo">RFC 7468</span>, <span class="seriesInfo">DOI 10.17487/RFC7468</span>, <time datetime="2015-04" class="refDate">April 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7468">https://www.rfc-editor.org/rfc/rfc7468</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="asn1">
+<section id="appendix-A">
+      <h2 id="name-asn1-module">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-asn1-module" class="section-name selfRef">ASN.1 Module</a>
+      </h2>
+<p id="appendix-A-1">This appendix includes the ASN.1 module <span>[<a href="#X680" class="cite xref">X680</a>]</span> for the ML-DSA.  Note that
+as per <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, certificates use the Distinguished Encoding Rules; see
+<span>[<a href="#X690" class="cite xref">X690</a>]</span>. This module imports objects from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and
+<span>[<a href="#I-D.salter-lamps-cms-ml-dsa" class="cite xref">I-D.salter-lamps-cms-ml-dsa</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<aside id="appendix-A-2">
+        <p id="appendix-A-2.1">RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of <span>[<a href="#I-D.salter-lamps-cms-ml-dsa" class="cite xref">I-D.salter-lamps-cms-ml-dsa</a>]</span>. Also please replace <span>[<a href="#I-D.salter-lamps-cms-ml-dsa" class="cite xref">I-D.salter-lamps-cms-ml-dsa</a>]</span> in the module with a reference to the published RFC.<a href="#appendix-A-2.1" class="pilcrow">¶</a></p>
+</aside>
+<div class="sourcecode" id="appendix-A-3">
+<pre>&lt;CODE BEGINS&gt;
+X509-ML-DSA-2024
+{ iso(1) identified-organization(3) dod(6)
+  internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
+  id-mod-x509-ml-dsa-2024(TBD1) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+-- EXPORTS ALL;
+
+IMPORTS
+
+PUBLIC-KEY, SIGNATURE-ALGORITHM
+  FROM AlgorithmInformation-2009 -- From [RFC5912]
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-algorithmInformation-02(58) }
+
+sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87,
+pk-ml-dsa-44, pk-ml-dsa-65, pk-ml-dsa-87
+  FROM ML-DSA-Module-2024 -- From [I-D.salter-lamps-cms-ml-dsa]
+     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD2) } ;
+
+--
+-- Expand SignatureAlgorithms from RFC 5912
+--
+SignatureAlgorithms SIGNATURE-ALGORITHM ::= {
+  sa-ml-dsa-44 |
+  sa-ml-dsa-65 |
+  sa-ml-dsa-87,
+  ... }
+
+--
+-- Expand SignatureAlgorithms from RFC 5912
+--
+PublicKeys PUBLIC-KEY ::= {
+  pk-ml-dsa-44 |
+  pk-ml-dsa-65 |
+  pk-ml-dsa-87,
+  ...
+}
+
+END
+
+&lt;CODE ENDS&gt;</pre><a href="#appendix-A-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="security-strengths">
+<section id="appendix-B">
+      <h2 id="name-security-strengths">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-security-strengths" class="section-name selfRef">Security Strengths</a>
+      </h2>
+<p id="appendix-B-1">Instead of defining the strength of a quantum algorithm
+in a traditional manner using the imprecise notion of bits
+of security, NIST has instead elected to define security
+levels by picking a reference scheme, which NIST expects
+to offer notable levels of resistance to both quantum and
+classical attack. To wit, an algorithm that achieves NIST PQC
+security level 1 must require computational resources to
+break the relevant security property, which are greater than
+those required for a brute-force key search on AES-128.
+Levels 3 and 5 use AES-192 and AES-256 as reference respectively.
+Levels 2 and 4 use collision search for SHA-256 and SHA-384
+as reference.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">The parameter sets defined for NIST security levels 2, 3 and 5
+are listed in the Figure 1, along with the resulting signature
+size, public key, and private key sizes in bytes.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<span id="name-ml-dsa-parameters"></span><div id="ML-DSAParameters">
+<figure id="figure-3">
+        <div class="alignLeft art-text artwork" id="appendix-B-3.1">
+<pre>
+|=======+=======+=====+========+========+========|
+| Level | (k,l) | eta |  Sig.  | Public | Private|
+|       |       |     |  (B)   | Key(B) | Key(B) |
+|=======+=======+=====+========+========+========|
+|   2   | (4,4) |  2  |  2420  |  1312  |  32    |
+|   3   | (6,5) |  4  |  3309  |  1952  |  32    |
+|   5   | (8,7) |  2  |  4627  |  2592  |  32    |
+|=======+=======+=====+========+========+========|
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-ml-dsa-parameters" class="selfRef">ML-DSA Parameters</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="examples">
+<section id="appendix-C">
+      <h2 id="name-examples">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
+      </h2>
+<p id="appendix-C-1">This appendix contains examples of ML-DSA public keys, private keys and certificates.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<div id="example-private">
+<section id="appendix-C.1">
+        <h3 id="name-example-private-key">
+<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-example-private-key" class="section-name selfRef">Example Private Key</a>
+        </h3>
+<p id="appendix-C.1-1">The following is an example of a ML-DSA-44 private key with hex seed <code>000102…1e1f</code>:<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.1-2">
+<pre>
+-----BEGIN PRIVATE KEY-----
+MDICAQAwCwYJYIZIAWUDBAMRBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
+HB0eHw==
+-----END PRIVATE KEY-----
+</pre><a href="#appendix-C.1-2" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-C.1-3">
+<pre>
+0  49: SEQUENCE {
+2   1:   INTEGER 0
+5  10:   SEQUENCE {
+7   8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.17'
+     :     }
+17 32:   OCTET STRING
+           00 01 02 03 04 05 06 07-08 09 0a 0b 0c 0d 0e 0f
+           10 11 12 13 14 15 16 17-18 19 1a 1b 1c 1d 1e 1f
+     :   }
+</pre><a href="#appendix-C.1-3" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.1-4">The following is an example of a ML-DSA-65 private key with hex seed <code>000102…1e1f</code>:<a href="#appendix-C.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.1-5">
+<pre>
+-----BEGIN PRIVATE KEY-----
+MDICAQAwCwYJYIZIAWUDBAMSBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
+HB0eHw==
+-----END PRIVATE KEY-----
+</pre><a href="#appendix-C.1-5" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-C.1-6">
+<pre>
+0  49: SEQUENCE {
+2   1:   INTEGER 0
+5  10:   SEQUENCE {
+7   8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.18'
+     :     }
+17 32:   OCTET STRING
+           00 01 02 03 04 05 06 07-08 09 0a 0b 0c 0d 0e 0f
+           10 11 12 13 14 15 16 17-18 19 1a 1b 1c 1d 1e 1f
+     :   }
+</pre><a href="#appendix-C.1-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.1-7">The following is an example of a ML-DSA-87 private key with hex seed <code>000102…1e1f</code>:<a href="#appendix-C.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.1-8">
+<pre>
+-----BEGIN PRIVATE KEY-----
+MDICAQAwCwYJYIZIAWUDBAMTBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
+HB0eHw==
+-----END PRIVATE KEY-----
+</pre><a href="#appendix-C.1-8" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-C.1-9">
+<pre>
+0  49: SEQUENCE {
+2   1:   INTEGER 0
+5  10:   SEQUENCE {
+7   8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.19'
+     :     }
+17 32:   OCTET STRING
+           00 01 02 03 04 05 06 07-08 09 0a 0b 0c 0d 0e 0f
+           10 11 12 13 14 15 16 17-18 19 1a 1b 1c 1d 1e 1f
+     : }
+</pre><a href="#appendix-C.1-9" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.1-10">NOTE: The private key is the seed and all three examples keys use the
+same seed; therefore, the private above are the same except for the OID
+used to represent the ML-DSA algorithm's security strength.<a href="#appendix-C.1-10" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="example-public">
+<section id="appendix-C.2">
+        <h3 id="name-example-public-key">
+<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-example-public-key" class="section-name selfRef">Example Public Key</a>
+        </h3>
+<p id="appendix-C.2-1">The following is the ML-KEM-44 public key corresponding to the private
+key in the previous section.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.2-2">
+<pre>
+-----BEGIN PUBLIC KEY-----
+MIIFMjALBglghkgBZQMEAxEDggUhANeytHJUquDbReeTDUqY0sl9jxOX0Xidr6Fw
+JLMW6b7JT8mUbULxm3mnQTu6oz5xSctC7VEVaTrAQfrLmIretf4OHYYxGEmVtZLD
+l9IpTi4U+QqkFLo4JomaxD9MzKy8JumoMrlRGNXLQzy++WYLABOOCBf2HnYsonTD
+atVU6yKqwRYuSrAay6HjjE79j4C2WzM9D3LlXf5xzpweu5iJ58VhBsD9c4A6Kuz+
+r97XqjyyztpU0SvYzTanjPl1lDtHq9JeiArEUuV0LtHo0agq+oblkMdYwVrk0oQN
+kryhpQkPQElll/yn2LlRPxob2m6VCqqY3kZ1B9Sk9aTwWZIWWCw1cvYu2okFqzWB
+ZwxKAnd6M+DKcpX9j0/20aCjp2g9ZfX19/xg2gI+gmxfkhRMAvfRuhB1mHVT6pNn
+/NdtmQt/qZzUWv24g21D5Fn1GH3wWEeXCaAepoNZNfpwRgmQzT3BukAbqUurHd5B
+rGerMxncrKBgSNTE7vJ+4TqcF9BTj0MPLWQtwkFWYN54h32NirxyUjl4wELkKF9D
+GYRsRBJiQpdoRMEOVWuiFbWnGeWdDGsqltOYWQcf3MLN51JKe+2uVOhbMY6FTo/i
+svPt+slxkSgnCq/R5QRMOk/a/Z/zH5B4S46ORZYUSg2vWGUR09mWK56pWvGXtOX8
+YPKx7RXeOlvvX4m9x52RBR2bKBbnT6VFMe/cHL501EiFf0drzVjyHAtlOzt2pOB2
+plWaMCcYVVzGP3SFmqurkl8COGHKjND3utsocfZ9VTJtdFETWtRfShumkRj7ssij
+DuyTku8/l3Bmya3VxxDMZHsVFNIX2VjHAXw+kP0gwE5nS5BIbpNwoxoAHTL0c5ee
+SQZ0nn5Hf6C3RQj4pfI3gxK4PCW9OIygsP/3R4uvQrcWZ+2qyXxGsSlkPlhuWwVa
+DCEZRtTzbmdb7Vhg+gQqMV2YJhZNapI3w1pfv0lUkKW9TfJIuVxKrneEtgVnMWas
+QkW1tLCCoJ6TI+YvIHjFt2eDRG3v1zatOjcC1JsImESQCmGDM5e8RBmzDXqXoLOH
+wZEUdMTUG1PjKpd6y28Op122W7OeWecB52lX3vby1EVZwxp3EitSBOO1whnxaIsU
+7QvAuAGz5ugtzUPpwOn0F0TNmBW9G8iCDYuxI/BPrNGxtoXdWisbjbvz7ZM2cPCV
+oYC08ZLQixC4+rvfzCskUY4y7qCl4MkEyoRHgAg/OwzS0Li2r2e8NVuUlAJdx7Cn
+j6gOOi2/61EyiFHWB4GY6Uk2Ua54fsAlH5Irow6fUd9iptcnhM890gU5MXbfoySl
+Er2Ulwo23TSlFKhnkfDrNvAUWwmrZGUbSgMTsplhGiocSIkWJ1mHaKMRQGC6RENI
+bfUVIqHOiLMJhcIW+ObtF43VZ7MEoNTK+6iCooNC8XqaomrljbYwCD0sNY/fVmw/
+XWKkKFZ7yeqM6VyqDzVHSwv6jzOaJQq0388gg76O77wQVeGP4VNw7ssmBWbYP/Br
+IRquxDyim1TM0A+IFaJGXvC0ZRXMfkHzEk8J7/9zkwmrWLKaFFmgC85QOOk4yWeP
+cusOTuX9quZtn4Vz/Jf8QrSVn0v4th14Qz6GsDNdbpGRxNi/SHs5BcEIz9asJLDO
+t9y3z1H4TQ7Wh7lerrHFM8BvDZcCPZKnCCWDe1m6bLfU5WsKh8IDhiro8xW6WSXo
+7e+meTaaIgJ2YVHxapZfn4Hs52zAcLVYaeTbl4TPBcgwsyQsgxI=
+-----END PUBLIC KEY-----
+</pre><a href="#appendix-C.2-2" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-C.2-3">
+<pre>
+0  1329: SEQUENCE {
+4    10:   SEQUENCE {
+6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.17'
+       :     }
+16 1313:   BIT STRING
+             00 d7 b2 b4 72 54 aa e0 db 45 e7 93 0d 4a 98 d2
+             c9 7d 8f 13 97 d1 78 9d af a1 70 24 b3 16 e9 be
+             c9 4f c9 94 6d 42 f1 9b 79 a7 41 3b ba a3 3e 71
+             49 cb 42 ed 51 15 69 3a c0 41 fa cb 98 8a de b5
+             fe 0e 1d 86 31 18 49 95 b5 92 c3 97 d2 29 4e 2e
+             14 f9 0a a4 14 ba 38 26 89 9a c4 3f 4c cc ac bc
+             26 e9 a8 32 b9 51 18 d5 cb 43 3c be f9 66 0b 00
+             13 8e 08 17 f6 1e 76 2c a2 74 c3 6a d5 54 eb 22
+             aa c1 16 2e 4a b0 1a cb a1 e3 8c 4e fd 8f 80 b6
+             5b 33 3d 0f 72 e5 5d fe 71 ce 9c 1e bb 98 89 e7
+             c5 61 06 c0 fd 73 80 3a 2a ec fe af de d7 aa 3c
+             b2 ce da 54 d1 2b d8 cd 36 a7 8c f9 75 94 3b 47
+             ab d2 5e 88 0a c4 52 e5 74 2e d1 e8 d1 a8 2a fa
+             86 e5 90 c7 58 c1 5a e4 d2 84 0d 92 bc a1 a5 09
+             0f 40 49 65 97 fc a7 d8 b9 51 3f 1a 1b da 6e 95
+             0a aa 98 de 46 75 07 d4 a4 f5 a4 f0 59 92 16 58
+             2c 35 72 f6 2e da 89 05 ab 35 81 67 0c 4a 02 77
+             7a 33 e0 ca 72 95 fd 8f 4f f6 d1 a0 a3 a7 68 3d
+             65 f5 f5 f7 fc 60 da 02 3e 82 6c 5f 92 14 4c 02
+             f7 d1 ba 10 75 98 75 53 ea 93 67 fc d7 6d 99 0b
+             7f a9 9c d4 5a fd b8 83 6d 43 e4 59 f5 18 7d f0
+             58 47 97 09 a0 1e a6 83 59 35 fa 70 46 09 90 cd
+             3d c1 ba 40 1b a9 4b ab 1d de 41 ac 67 ab 33 19
+             dc ac a0 60 48 d4 c4 ee f2 7e e1 3a 9c 17 d0 53
+             8f 43 0f 2d 64 2d c2 41 56 60 de 78 87 7d 8d 8a
+             bc 72 52 39 78 c0 42 e4 28 5f 43 19 84 6c 44 12
+             62 42 97 68 44 c1 0e 55 6b a2 15 b5 a7 19 e5 9d
+             0c 6b 2a 96 d3 98 59 07 1f dc c2 cd e7 52 4a 7b
+             ed ae 54 e8 5b 31 8e 85 4e 8f e2 b2 f3 ed fa c9
+             71 91 28 27 0a af d1 e5 04 4c 3a 4f da fd 9f f3
+             1f 90 78 4b 8e 8e 45 96 14 4a 0d af 58 65 11 d3
+             d9 96 2b 9e a9 5a f1 97 b4 e5 fc 60 f2 b1 ed 15
+             de 3a 5b ef 5f 89 bd c7 9d 91 05 1d 9b 28 16 e7
+             4f a5 45 31 ef dc 1c be 74 d4 48 85 7f 47 6b cd
+             58 f2 1c 0b 65 3b 3b 76 a4 e0 76 a6 55 9a 30 27
+             18 55 5c c6 3f 74 85 9a ab ab 92 5f 02 38 61 ca
+             8c d0 f7 ba db 28 71 f6 7d 55 32 6d 74 51 13 5a
+             d4 5f 4a 1b a6 91 18 fb b2 c8 a3 0e ec 93 92 ef
+             3f 97 70 66 c9 ad d5 c7 10 cc 64 7b 15 14 d2 17
+             d9 58 c7 01 7c 3e 90 fd 20 c0 4e 67 4b 90 48 6e
+             93 70 a3 1a 00 1d 32 f4 73 97 9e 49 06 74 9e 7e
+             47 7f a0 b7 45 08 f8 a5 f2 37 83 12 b8 3c 25 bd
+             38 8c a0 b0 ff f7 47 8b af 42 b7 16 67 ed aa c9
+             7c 46 b1 29 64 3e 58 6e 5b 05 5a 0c 21 19 46 d4
+             f3 6e 67 5b ed 58 60 fa 04 2a 31 5d 98 26 16 4d
+             6a 92 37 c3 5a 5f bf 49 54 90 a5 bd 4d f2 48 b9
+             5c 4a ae 77 84 b6 05 67 31 66 ac 42 45 b5 b4 b0
+             82 a0 9e 93 23 e6 2f 20 78 c5 b7 67 83 44 6d ef
+             d7 36 ad 3a 37 02 d4 9b 08 98 44 90 0a 61 83 33
+             97 bc 44 19 b3 0d 7a 97 a0 b3 87 c1 91 14 74 c4
+             d4 1b 53 e3 2a 97 7a cb 6f 0e a7 5d b6 5b b3 9e
+             59 e7 01 e7 69 57 de f6 f2 d4 45 59 c3 1a 77 12
+             2b 52 04 e3 b5 c2 19 f1 68 8b 14 ed 0b c0 b8 01
+             b3 e6 e8 2d cd 43 e9 c0 e9 f4 17 44 cd 98 15 bd
+             1b c8 82 0d 8b b1 23 f0 4f ac d1 b1 b6 85 dd 5a
+             2b 1b 8d bb f3 ed 93 36 70 f0 95 a1 80 b4 f1 92
+             d0 8b 10 b8 fa bb df cc 2b 24 51 8e 32 ee a0 a5
+             e0 c9 04 ca 84 47 80 08 3f 3b 0c d2 d0 b8 b6 af
+             67 bc 35 5b 94 94 02 5d c7 b0 a7 8f a8 0e 3a 2d
+             bf eb 51 32 88 51 d6 07 81 98 e9 49 36 51 ae 78
+             7e c0 25 1f 92 2b a3 0e 9f 51 df 62 a6 d7 27 84
+             cf 3d d2 05 39 31 76 df a3 24 a5 12 bd 94 97 0a
+             36 dd 34 a5 14 a8 67 91 f0 eb 36 f0 14 5b 09 ab
+             64 65 1b 4a 03 13 b2 99 61 1a 2a 1c 48 89 16 27
+             59 87 68 a3 11 40 60 ba 44 43 48 6d f5 15 22 a1
+             ce 88 b3 09 85 c2 16 f8 e6 ed 17 8d d5 67 b3 04
+             a0 d4 ca fb a8 82 a2 83 42 f1 7a 9a a2 6a e5 8d
+             b6 30 08 3d 2c 35 8f df 56 6c 3f 5d 62 a4 28 56
+             7b c9 ea 8c e9 5c aa 0f 35 47 4b 0b fa 8f 33 9a
+             25 0a b4 df cf 20 83 be 8e ef bc 10 55 e1 8f e1
+             53 70 ee cb 26 05 66 d8 3f f0 6b 21 1a ae c4 3c
+             a2 9b 54 cc d0 0f 88 15 a2 46 5e f0 b4 65 15 cc
+             7e 41 f3 12 4f 09 ef ff 73 93 09 ab 58 b2 9a 14
+             59 a0 0b ce 50 38 e9 38 c9 67 8f 72 eb 0e 4e e5
+             fd aa e6 6d 9f 85 73 fc 97 fc 42 b4 95 9f 4b f8
+             b6 1d 78 43 3e 86 b0 33 5d 6e 91 91 c4 d8 bf 48
+             7b 39 05 c1 08 cf d6 ac 24 b0 ce b7 dc b7 cf 51
+             f8 4d 0e d6 87 b9 5e ae b1 c5 33 c0 6f 0d 97 02
+             3d 92 a7 08 25 83 7b 59 ba 6c b7 d4 e5 6b 0a 87
+             c2 03 86 2a e8 f3 15 ba 59 25 e8 ed ef a6 79 36
+             9a 22 02 76 61 51 f1 6a 96 5f 9f 81 ec e7 6c c0
+             70 b5 58 69 e4 db 97 84 cf 05 c8 30 b3 24 2c 83
+             12
+       :   }
+</pre><a href="#appendix-C.2-3" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.2-4">The following is the ML-KEM-65 public key corresponding to the private
+key in the previous section.<a href="#appendix-C.2-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.2-5">
+<pre>
+-----BEGIN PUBLIC KEY-----
+MIIHsjALBglghkgBZQMEAxIDggehAEhoPZGXjjHrPd24sEc0gtK4il9iWUn9j1il
+YeaWvUwn0Fs427Lt8B5mTv2Bvh6ok2iM5oqi1RxZWPi7xutOie5n0sAyCVTVchLK
+xyKf8dbq8DkovVFRH42I2EdzbH3icw1ZeOVBBxMWCXiGdxG/VTmgv8TDUMK+Vyuv
+DuLi+xbM/qCAKNmaxJrrt1k33c4RHNq2L/886ouiIz0eVvvFxaHnJt5j+t0q8Bax
+GRd/o9lxotkncXP85VtndFrwt8IdWX2+uT5qMvNBxJpai+noJQiNHyqkUVXWyK4V
+Nn5OsAO4/feFEHGUlzn5//CQI+r0UQTSqEpFkG7tRnGkTcKNJ5h7tV32np6FYfYa
+gKcmmVA4Zf7Zt+5yqOF6GcQIFE9LKa/vcDHDpthXFhC0LJ9CEkWojxl+FoErAxFZ
+tluWh+Wz6TTFIlrpinm6c9Kzmdc1EO/60Z5TuEUPC6j84QEv2Y0mCnSqqhP64kmg
+BrHDT1uguILyY3giL7NvIoPCQ/D/618btBSgpw1V49QKVrbLyIrh8Dt7KILZje6i
+jhRcne39jq8c7y7ZSosFD4lk9G0eoNDCpD4N2mGCrb9PbtF1tnQiV4Wb8i86QX7P
+H52JMXteU51YevFrnhMT4EUU/6ZLqLP/K4Mh+IEcs/sCLI9kTnCkuAovv+5gSrtz
+eQkeqObFx038AoNma0DAeThwAoIEoTa/XalWjreY00kDi9sMEeA0ReeEfLUGnHXP
+KKxgHHeZ2VghDdvLIm5Rr++fHeR7Bzhz1tP5dFa+3ghQgudKKYss1I9LMJMVXzZs
+j6YBxq+FjfoywISRsqKYh/kDNZSaXW7apnmIKjqV1r9tlwoiH0udPYy/OEr4GqyV
+4rMpTgR4msg3J6XcBFWflq9B2KBTUW/u7rxSdG62qygZ4JEIcQ2DXwEfpjBlhyrT
+NNXN/7KyMQUH6S/Jk64xfal/TzCc2vD2ftmdkCFVdgg4SflTskbX/ts/22dnmFCl
+rUBOZBR/t89Pau3dBa+0uDSWjR/ogBSWDc5dlCI2Um4SpHjWnl++aXAxCzCMBoRQ
+GM/HsqtDChOmsax7sCzMuz2RGsLxEGhhP74Cm/3OAs9c04lQ7XLIOUTt+8dWFa+H
++GTAUfPFVFbFQShjpAwG0dq1Yr3/BXG408ORe70wCIC7pemYI5uV+pG31kFtTzmL
+OtvNMJg+01krTZ731CNv0A9Q2YqlOiNaxBcnIPd9lhcmcpgM/o/3pacCeD7cK6Mb
+IlkBWhEvx/RoqcL5RkA5AC0w72eLTLeYvBFiFr96mnwYugO3tY/QdRXTEVBJ02FL
+56B+dEMAdQ3x0sWHUziQWer8PXhczdMcB2SL7cA6XDuK1G0GTVnBPVc3Ryn8TilT
+YuKlGRIEUwQovBUir6KP9f4WVeMEylvIwnrQ4MajndTfKJVsFLOMyTaCzv5AK71e
+gtKcRk5E6103tI/FaN/gzG6OFrrqBeUTVZDxkpTnPoNnsCFtu4FQMLneVZE/CAOc
+QjUcWeVRXdWvjgiaFeYl6Pbe5jk4bEZJfXomMoh3TeWBp96WKbQbRCQUH5ePuDMS
+CO/ew8bg3jm8VwY/Pc1sRwNzwIiR6inLx8xtZIO4iJCDrOhqp7UbHCz+birRjZfO
+NvvFbqQvrpfmp6wRSGRHjDZt8eux57EakJhQT9WXW98fSdxwACtjwXOanSY/utQH
+P2qfbCuK9LTDMqEDoM/6Xe6y0GLKPCFf02ACa+fFFk9KRCTvdJSIBNZvRkh3Msgg
+LHlUeGR7TqcdYnwIYCTMo1SkHwh3s48Zs3dK0glcjaU7Bp4hx2ri0gB+FnGe1ACA
+0zT32lLp9aWZBDnK8IOpW4M/Aq0QoIwabQ8mDAByhb1KL0dwOlrvRlKH0lOxisIl
+FDFiEP9WaBSxD4eik9bxmdPDlZmQ0MEmi09Q1fn877vyN70MKLgBgtZll0HxTxC/
+uyG7oSq2IKojlvVsBoa06pAXmQIkIWsv6K12xKkUju+ahqNjWmqne8Hc+2+6Wad9
+/am3Uw3AyoZIyNlzc44Burjwi0kF6EqkZBvWAkEM2XUgJl8vIx8rNeFesvoE0r2U
+1ad6uvHg4WEBCpkAh/W0bqmIsrwFEv2g+pI9rdbEXFMB0JSDZzJltasuEPS6Ug9r
+utVkpcPV4nvbCA99IOEylqMYGVTDnGSclD6+F99cH3quCo/hJsR3WFpdTWSKDQCL
+avXozTG+aakpbU8/0l7YbyIeS5P2X1kplnUzYkuSNXUMMHB1ULWFNtEJpxMcWlu+
+SlcVVnwSU0rsdmB2Huu5+uKJHHdFibgOVmrVV93vc2cZa3In6phw7wnd/seda5MZ
+poebUgXXa/erpazzOvtZ0X/FTmg4PWvloI6bZtpT3N4Ai7KUuFgr0TLNzEmVn9vC
+HlJyGIDIrQNSx58DpDu9hMTN/cbFKQBeHnzZo0mnFoo1Vpul3qgYlo1akUZr1uZO
+IL9iQXGYr8ToHCjdd+1AKCMjmLUvvehryE9HW5AWcQziqrwRoGtNuskB7BbPNlyj
+8tU4E5SKaToPk+ecRspdWm3KPSjKUK0YvRP8pVBZ3ZsYX3n5xHGWpOgbIQS8RgoF
+HgLy6ERP
+-----END PUBLIC KEY-----
+</pre><a href="#appendix-C.2-5" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-C.2-6">
+<pre>
+0  1969: SEQUENCE {
+4    10:   SEQUENCE {
+6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.18'
+       :     }
+16 1953:   BIT STRING
+             00 48 68 3d 91 97 8e 31 eb 3d dd b8 b0 47 34 82
+             d2 b8 8a 5f 62 59 49 fd 8f 58 a5 61 e6 96 bd 4c
+             27 d0 5b 38 db b2 ed f0 1e 66 4e fd 81 be 1e a8
+             93 68 8c e6 8a a2 d5 1c 59 58 f8 bb c6 eb 4e 89
+             ee 67 d2 c0 32 09 54 d5 72 12 ca c7 22 9f f1 d6
+             ea f0 39 28 bd 51 51 1f 8d 88 d8 47 73 6c 7d e2
+             73 0d 59 78 e5 41 07 13 16 09 78 86 77 11 bf 55
+             39 a0 bf c4 c3 50 c2 be 57 2b af 0e e2 e2 fb 16
+             cc fe a0 80 28 d9 9a c4 9a eb b7 59 37 dd ce 11
+             1c da b6 2f ff 3c ea 8b a2 23 3d 1e 56 fb c5 c5
+             a1 e7 26 de 63 fa dd 2a f0 16 b1 19 17 7f a3 d9
+             71 a2 d9 27 71 73 fc e5 5b 67 74 5a f0 b7 c2 1d
+             59 7d be b9 3e 6a 32 f3 41 c4 9a 5a 8b e9 e8 25
+             08 8d 1f 2a a4 51 55 d6 c8 ae 15 36 7e 4e b0 03
+             b8 fd f7 85 10 71 94 97 39 f9 ff f0 90 23 ea f4
+             51 04 d2 a8 4a 45 90 6e ed 46 71 a4 4d c2 8d 27
+             98 7b b5 5d f6 9e 9e 85 61 f6 1a 80 a7 26 99 50
+             38 65 fe d9 b7 ee 72 a8 e1 7a 19 c4 08 14 4f 4b
+             29 af ef 70 31 c3 a6 d8 57 16 10 b4 2c 9f 42 12
+             45 a8 8f 19 7e 16 81 2b 03 11 59 b6 5b 96 87 e5
+             b3 e9 34 c5 22 5a e9 8a 79 ba 73 d2 b3 99 d7 35
+             10 ef fa d1 9e 53 b8 45 0f 0b a8 fc e1 01 2f d9
+             8d 26 0a 74 aa aa 13 fa e2 49 a0 06 b1 c3 4f 5b
+             a0 b8 82 f2 63 78 22 2f b3 6f 22 83 c2 43 f0 ff
+             eb 5f 1b b4 14 a0 a7 0d 55 e3 d4 0a 56 b6 cb c8
+             8a e1 f0 3b 7b 28 82 d9 8d ee a2 8e 14 5c 9d ed
+             fd 8e af 1c ef 2e d9 4a 8b 05 0f 89 64 f4 6d 1e
+             a0 d0 c2 a4 3e 0d da 61 82 ad bf 4f 6e d1 75 b6
+             74 22 57 85 9b f2 2f 3a 41 7e cf 1f 9d 89 31 7b
+             5e 53 9d 58 7a f1 6b 9e 13 13 e0 45 14 ff a6 4b
+             a8 b3 ff 2b 83 21 f8 81 1c b3 fb 02 2c 8f 64 4e
+             70 a4 b8 0a 2f bf ee 60 4a bb 73 79 09 1e a8 e6
+             c5 c7 4d fc 02 83 66 6b 40 c0 79 38 70 02 82 04
+             a1 36 bf 5d a9 56 8e b7 98 d3 49 03 8b db 0c 11
+             e0 34 45 e7 84 7c b5 06 9c 75 cf 28 ac 60 1c 77
+             99 d9 58 21 0d db cb 22 6e 51 af ef 9f 1d e4 7b
+             07 38 73 d6 d3 f9 74 56 be de 08 50 82 e7 4a 29
+             8b 2c d4 8f 4b 30 93 15 5f 36 6c 8f a6 01 c6 af
+             85 8d fa 32 c0 84 91 b2 a2 98 87 f9 03 35 94 9a
+             5d 6e da a6 79 88 2a 3a 95 d6 bf 6d 97 0a 22 1f
+             4b 9d 3d 8c bf 38 4a f8 1a ac 95 e2 b3 29 4e 04
+             78 9a c8 37 27 a5 dc 04 55 9f 96 af 41 d8 a0 53
+             51 6f ee ee bc 52 74 6e b6 ab 28 19 e0 91 08 71
+             0d 83 5f 01 1f a6 30 65 87 2a d3 34 d5 cd ff b2
+             b2 31 05 07 e9 2f c9 93 ae 31 7d a9 7f 4f 30 9c
+             da f0 f6 7e d9 9d 90 21 55 76 08 38 49 f9 53 b2
+             46 d7 fe db 3f db 67 67 98 50 a5 ad 40 4e 64 14
+             7f b7 cf 4f 6a ed dd 05 af b4 b8 34 96 8d 1f e8
+             80 14 96 0d ce 5d 94 22 36 52 6e 12 a4 78 d6 9e
+             5f be 69 70 31 0b 30 8c 06 84 50 18 cf c7 b2 ab
+             43 0a 13 a6 b1 ac 7b b0 2c cc bb 3d 91 1a c2 f1
+             10 68 61 3f be 02 9b fd ce 02 cf 5c d3 89 50 ed
+             72 c8 39 44 ed fb c7 56 15 af 87 f8 64 c0 51 f3
+             c5 54 56 c5 41 28 63 a4 0c 06 d1 da b5 62 bd ff
+             05 71 b8 d3 c3 91 7b bd 30 08 80 bb a5 e9 98 23
+             9b 95 fa 91 b7 d6 41 6d 4f 39 8b 3a db cd 30 98
+             3e d3 59 2b 4d 9e f7 d4 23 6f d0 0f 50 d9 8a a5
+             3a 23 5a c4 17 27 20 f7 7d 96 17 26 72 98 0c fe
+             8f f7 a5 a7 02 78 3e dc 2b a3 1b 22 59 01 5a 11
+             2f c7 f4 68 a9 c2 f9 46 40 39 00 2d 30 ef 67 8b
+             4c b7 98 bc 11 62 16 bf 7a 9a 7c 18 ba 03 b7 b5
+             8f d0 75 15 d3 11 50 49 d3 61 4b e7 a0 7e 74 43
+             00 75 0d f1 d2 c5 87 53 38 90 59 ea fc 3d 78 5c
+             cd d3 1c 07 64 8b ed c0 3a 5c 3b 8a d4 6d 06 4d
+             59 c1 3d 57 37 47 29 fc 4e 29 53 62 e2 a5 19 12
+             04 53 04 28 bc 15 22 af a2 8f f5 fe 16 55 e3 04
+             ca 5b c8 c2 7a d0 e0 c6 a3 9d d4 df 28 95 6c 14
+             b3 8c c9 36 82 ce fe 40 2b bd 5e 82 d2 9c 46 4e
+             44 eb 5d 37 b4 8f c5 68 df e0 cc 6e 8e 16 ba ea
+             05 e5 13 55 90 f1 92 94 e7 3e 83 67 b0 21 6d bb
+             81 50 30 b9 de 55 91 3f 08 03 9c 42 35 1c 59 e5
+             51 5d d5 af 8e 08 9a 15 e6 25 e8 f6 de e6 39 38
+             6c 46 49 7d 7a 26 32 88 77 4d e5 81 a7 de 96 29
+             b4 1b 44 24 14 1f 97 8f b8 33 12 08 ef de c3 c6
+             e0 de 39 bc 57 06 3f 3d cd 6c 47 03 73 c0 88 91
+             ea 29 cb c7 cc 6d 64 83 b8 88 90 83 ac e8 6a a7
+             b5 1b 1c 2c fe 6e 2a d1 8d 97 ce 36 fb c5 6e a4
+             2f ae 97 e6 a7 ac 11 48 64 47 8c 36 6d f1 eb b1
+             e7 b1 1a 90 98 50 4f d5 97 5b df 1f 49 dc 70 00
+             2b 63 c1 73 9a 9d 26 3f ba d4 07 3f 6a 9f 6c 2b
+             8a f4 b4 c3 32 a1 03 a0 cf fa 5d ee b2 d0 62 ca
+             3c 21 5f d3 60 02 6b e7 c5 16 4f 4a 44 24 ef 74
+             94 88 04 d6 6f 46 48 77 32 c8 20 2c 79 54 78 64
+             7b 4e a7 1d 62 7c 08 60 24 cc a3 54 a4 1f 08 77
+             b3 8f 19 b3 77 4a d2 09 5c 8d a5 3b 06 9e 21 c7
+             6a e2 d2 00 7e 16 71 9e d4 00 80 d3 34 f7 da 52
+             e9 f5 a5 99 04 39 ca f0 83 a9 5b 83 3f 02 ad 10
+             a0 8c 1a 6d 0f 26 0c 00 72 85 bd 4a 2f 47 70 3a
+             5a ef 46 52 87 d2 53 b1 8a c2 25 14 31 62 10 ff
+             56 68 14 b1 0f 87 a2 93 d6 f1 99 d3 c3 95 99 90
+             d0 c1 26 8b 4f 50 d5 f9 fc ef bb f2 37 bd 0c 28
+             b8 01 82 d6 65 97 41 f1 4f 10 bf bb 21 bb a1 2a
+             b6 20 aa 23 96 f5 6c 06 86 b4 ea 90 17 99 02 24
+             21 6b 2f e8 ad 76 c4 a9 14 8e ef 9a 86 a3 63 5a
+             6a a7 7b c1 dc fb 6f ba 59 a7 7d fd a9 b7 53 0d
+             c0 ca 86 48 c8 d9 73 73 8e 01 ba b8 f0 8b 49 05
+             e8 4a a4 64 1b d6 02 41 0c d9 75 20 26 5f 2f 23
+             1f 2b 35 e1 5e b2 fa 04 d2 bd 94 d5 a7 7a ba f1
+             e0 e1 61 01 0a 99 00 87 f5 b4 6e a9 88 b2 bc 05
+             12 fd a0 fa 92 3d ad d6 c4 5c 53 01 d0 94 83 67
+             32 65 b5 ab 2e 10 f4 ba 52 0f 6b ba d5 64 a5 c3
+             d5 e2 7b db 08 0f 7d 20 e1 32 96 a3 18 19 54 c3
+             9c 64 9c 94 3e be 17 df 5c 1f 7a ae 0a 8f e1 26
+             c4 77 58 5a 5d 4d 64 8a 0d 00 8b 6a f5 e8 cd 31
+             be 69 a9 29 6d 4f 3f d2 5e d8 6f 22 1e 4b 93 f6
+             5f 59 29 96 75 33 62 4b 92 35 75 0c 30 70 75 50
+             b5 85 36 d1 09 a7 13 1c 5a 5b be 4a 57 15 56 7c
+             12 53 4a ec 76 60 76 1e eb b9 fa e2 89 1c 77 45
+             89 b8 0e 56 6a d5 57 dd ef 73 67 19 6b 72 27 ea
+             98 70 ef 09 dd fe c7 9d 6b 93 19 a6 87 9b 52 05
+             d7 6b f7 ab a5 ac f3 3a fb 59 d1 7f c5 4e 68 38
+             3d 6b e5 a0 8e 9b 66 da 53 dc de 00 8b b2 94 b8
+             58 2b d1 32 cd cc 49 95 9f db c2 1e 52 72 18 80
+             c8 ad 03 52 c7 9f 03 a4 3b bd 84 c4 cd fd c6 c5
+             29 00 5e 1e 7c d9 a3 49 a7 16 8a 35 56 9b a5 de
+             a8 18 96 8d 5a 91 46 6b d6 e6 4e 20 bf 62 41 71
+             98 af c4 e8 1c 28 dd 77 ed 40 28 23 23 98 b5 2f
+             bd e8 6b c8 4f 47 5b 90 16 71 0c e2 aa bc 11 a0
+             6b 4d ba c9 01 ec 16 cf 36 5c a3 f2 d5 38 13 94
+             8a 69 3a 0f 93 e7 9c 46 ca 5d 5a 6d ca 3d 28 ca
+             50 ad 18 bd 13 fc a5 50 59 dd 9b 18 5f 79 f9 c4
+             71 96 a4 e8 1b 21 04 bc 46 0a 05 1e 02 f2 e8 44
+             4f
+       :   }
+</pre><a href="#appendix-C.2-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.2-7">The following is the ML-KEM-87 public key corresponding to the private
+key in the previous section.<a href="#appendix-C.2-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.2-8">
+<pre>
+-----BEGIN PUBLIC KEY-----
+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
+5VvgYiIvi6kKl0BzMmsxISrs4KNKYA==
+-----END PUBLIC KEY-----
+</pre><a href="#appendix-C.2-8" class="pilcrow">¶</a>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-C.2-9">
+<pre>
+0  2609: SEQUENCE {
+4    10:   SEQUENCE {
+6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.18'
+       :     }
+16 2593:   BIT STRING
+             00 97 92 bc ec 2f 24 30 68 6a 82 fc cf 3c 2f 5f
+             f6 65 e7 71 d7 ab 41 b9 02 58 cf a7 e9 0e c9 71
+             24 a7 3b 32 3b 9b a2 1a b6 4d 76 7c 43 3f 5a 52
+             1e ff e1 8f 86 e4 6a 18 89 52 c4 46 7e 04 8b 72
+             9e 7f c4 d1 15 e7 e4 8d a1 89 6d 5f e1 19 b1 0d
+             cd de f6 2c b3 07 95 40 74 b4 23 36 e5 28 36 de
+             61 da 94 1f 8d 37 ea 68 ac 81 06 fa be 19 07 06
+             79 af 60 08 53 71 20 f7 07 93 b8 ea 9c c0 e6 e7
+             b7 b4 c9 a5 c7 42 1c 60 f2 44 51 ba 1e 93 3d b1
+             a2 ee 16 c7 95 59 f2 1b 3d 1b 83 05 85 0a a4 2a
+             fb b1 3f 1f 4d 5b 9f 48 35 f9 d8 7d fc eb 16 2d
+             0e f4 a7 fd c4 cb a1 74 3c d1 c8 7b b4 96 7d a1
+             6c c8 76 4b 65 69 df 8e e5 bd cb ff e9 a4 e0 57
+             48 e6 fd f2 25 af 9e 4e eb 77 73 b6 2e 8f 85 f9
+             b5 6b 54 89 45 55 18 44 fb d8 98 06 a4 ac 36 9b
+             ed 2d 25 61 00 f6 88 a6 ad 5e 0a 70 98 26 dc 44
+             49 e9 1e 23 c5 50 6e 64 23 61 ef 5a 31 37 12 f7
+             9b c4 b3 18 68 61 ca 85 a4 ba b1 7e 7f 94 3d 1b
+             8a 33 3a a3 ae 7c e1 6b 44 0d 60 18 f9 e0 4d af
+             57 25 c7 f1 a9 3f ad 1a 5a 27 b6 78 95 bd 24 9a
+             a9 16 85 de 20 af 32 c8 b7 e2 68 c7 f9 68 77 d0
+             c8 50 01 13 5a 4f 0a 8f 1b 82 64 fa 6e be 5a 34
+             9d 8a ec ad 1a 16 29 9c cf 2f d9 c7 b8 5b ac e2
+             ce d3 aa 12 76 ba 61 ee 78 ed 7e 5c a5 b6 7c dd
+             45 8a 93 54 03 0e 6a bb ba bf 56 a0 a2 31 6f ec
+             9d ba 83 b5 1d 42 fd 31 67 f1 e0 f9 08 55 d5 c6
+             65 09 b2 10 26 5d c1 e5 4e c4 4b 43 ba 7c f9 ae
+             f1 18 b4 4d 80 91 2c e7 51 66 a6 65 1e 11 6c eb
+             e4 92 29 a7 06 2c 09 93 1f 71 ab d2 29 3f 76 f7
+             ef c3 21 5b a9 78 00 03 7e 58 e4 70 bd bb b4 3c
+             1b 04 39 ea f7 9c 54 d9 3b 44 aa c9 ef e9 fb e1
+             51 87 4c fb 2a 64 cb ee 28 cc 4c 0f e7 77 5e 5d
+             87 0f 1c 02 e5 b2 e3 c5 00 4c 99 5f 24 c9 b7 79
+             cb 75 3a 27 7d 0e 71 fd 42 5e b6 bc 2c a5 6c e1
+             29 db 51 f7 07 40 f3 1e 63 97 6b 50 c7 31 2e 97
+             97 d7 8c 5b 1a c2 4a 5f a3 47 cc 91 6e 0a 83 f5
+             c3 b6 75 cd 30 b8 1e 3f a1 0b 93 44 4e 07 39 75
+             71 cc e9 8b 28 da 51 db 90 56 bc 72 8c 5b 0b 11
+             81 e2 fb d3 87 b4 c7 9a b1 a5 fe fe ce 37 16 7a
+             f7 72 dd ad 14 eb 4c 39 82 da 5a 59 d0 e9 eb 17
+             3e c6 31 50 91 17 00 27 a3 ab 5e f6 aa 12 9c b8
+             58 57 27 b9 35 8a 28 50 1d 71 3a 72 f3 f1 db 31
+             71 42 86 f9 b6 40 80 13 af 06 04 5d 75 59 2f c0
+             b7 dd 47 c7 3e d9 c7 5b 11 e9 d7 c6 9f 7c ad fc
+             32 80 a9 06 2c 52 73 c4 3b e1 c3 4f 87 44 88 64
+             ce a7 b5 c9 7d 6d 32 f5 9b d5 f2 53 84 65 3b b5
+             c4 fa a4 5b ea 8b 89 40 28 43 e6 45 b6 b9 26 9e
+             2b d9 88 dd ac b0 33 32 8f fb 06 04 50 f7 df 08
+             00 53 e6 96 9b 25 1e 87 5e ce c3 2c fc 59 28 40
+             d6 9a b6 9a 75 e0 6b 37 9c 53 5d 95 26 6b 08 2f
+             4f 09 c9 31 62 b3 3b 0d 9f 73 07 a4 ea aa 52 10
+             44 37 fe d6 6f 8e e3 ea bb d4 5d 67 b2 5a 81 33
+             f4 96 46 8b 52 ba ff db fa d9 3e ef 1a 98 18 b5
+             e4 2e c7 22 78 8a 3d 8d 35 29 fc 77 7d 2b a5 70
+             80 1d fa e0 1e c8 83 02 83 7c 1f b9 e0 35 57 27
+             64 5e e1 04 6c 3f 91 5f 6a e8 2d ad 4f b6 b0 35
+             6a 46 51 8f fc 83 41 55 c3 b4 fe 6d af a6 cc 8a
+             5c cf 53 c7 3a 08 49 d8 d4 4f 7d cf 72 75 4e 70
+             e1 b7 df b4 47 bb 4e f4 9d 1a 71 8f 61 71 bb ce
+             20 09 50 e0 ce 92 61 06 b1 51 a3 e8 71 d5 ce 49
+             73 1b d6 65 0a 9b 0c a9 72 da 1c 5f 13 6d 44 82
+             0e a6 38 3c 08 f3 b3 84 cf 23 38 e7 89 c5 13 f6
+             18 cc 56 94 a6 f0 ce e1 04 51 1e 1e d7 c5 f2 3a
+             1e bf d8 a0 db 84 24 55 32 40 15 6d bf 62 28 31
+             b0 c6 43 d1 c5 51 b6 f3 f7 a9 8d 29 b8 5c 2d e0
+             5a 65 fa 61 5e ee 16 49 5b d9 07 37 67 21 15 b5
+             3e 91 c5 d9 00 28 cf 3f 1a 93 95 3a 15 3d e5 3b
+             44 08 4e 9c cf f6 b7 36 69 39 26 da ef eb b2 d7
+             7a a5 ad 68 9b 92 f3 16 86 66 9d f1 6d 17 15 cc
+             58 f7 a2 cf b7 2d d1 a5 1e 92 f8 25 99 3a 74 02
+             2b e7 e9 eb 60 54 65 44 57 09 4d 14 92 8f 20 21
+             5e 7b 22 2a c5 6b 51 ad be c8 d8 bd b6 98 39 79
+             a7 e3 a2 1b 44 b5 d1 51 8c a9 7d 0b 51 95 f5 1e
+             d6 a2 43 50 c8 97 47 e1 ed ea 51 b4 48 e3 e9 14
+             70 54 ce 92 78 73 c9 0d b3 94 d8 68 88 e0 7d ff
+             17 75 93 d6 f7 9e 15 23 02 20 4a eb 03 be 23 86
+             af 3e 24 07 8b d0 28 b1 68 9f 5e 14 7c 9f 45 2c
+             8c eb 02 ec 59 cc 9d b6 3a 03 57 6c ee af e9 82
+             39 02 38 97 da 02 36 63 0a 53 c0 de 7f 43 5a 19
+             86 97 92 fa b3 6e 7b 9e 63 57 60 f0 90 69 e6 43
+             2e 70 00 35 ac 2a 02 87 9f ff 0a 1e 1b ec 52 20
+             47 19 3d 94 eb 5d f1 ef d5 3e ea 11 44 ca 78 94
+             08 52 f5 ec 97 27 90 4b 36 6e de 4f 5e 2d 33 1f
+             ad 5f c2 82 ea 2c 47 e9 23 14 27 71 c3 dd 75 a8
+             73 57 48 7d ef 99 e5 f1 8e 9d 9e d6 23 c1 75 d0
+             28 88 c5 1f 82 c0 7a 80 d5 47 16 b3 c3 c2 bd be
+             2e 9f 0a 9b ba ae be b4 d5 29 36 87 64 06 f5 c0
+             0e 8e 4b bd 0a 5e c0 57 97 e6 20 7c 5a b6 c8 8f
+             1a 68 84 21 bd 05 a1 14 f4 d7 de 2a c2 41 fa 0e
+             8b ed ff 47 f7 62 dd cb ea a9 10 04 f8 d3 1e 85
+             09 5c 81 05 49 94 ad 38 26 e3 44 ba 96 04 08 10
+             fc 0b 2a d1 de 48 cf ad e0 02 c6 2e 5a 49 a0 73
+             1a b3 83 44 bc 16 36 df 16 bf 60 7d 56 85 5e 56
+             d6 84 00 3c 71 8e 4b ad 9e 5a 09 99 79 fc dd ee
+             b1 c4 a7 77 6c d3 7a 34 17 cb 0e 18 4e 29 ef 9b
+             c0 e8 74 75 ba 66 3b e0 9e 00 ab 56 2e b7 c0 f7
+             16 5f 96 9a 9b 42 41 41 98 cc f1 bf f2 a2 c8 d6
+             89 a4 14 ec e7 66 29 27 66 56 89 e9 4d b9 61 eb
+             ae c5 61 5c bc 1a 78 95 c6 85 1a c9 61 43 2f f1
+             11 8d 46 07 d3 2e f9 dc 73 2d 51 33 3b e4 b4 d0
+             e3 0d de a7 84 ec a8 be 47 e7 41 be 9c 19 63 1d
+             c4 70 a5 2e f4 dc 13 a4 f3 63 3f d4 34 d7 87 c1
+             70 97 7b 41 7d f5 98 e1 d0 dd e5 06 bb 71 d6 f0
+             bc 17 ec 70 e3 b0 3c dc 19 65 cb 36 99 3f 63 3b
+             04 72 e5 0d 09 23 ac 6c 66 fd f1 d3 e6 45 9c c1
+             21 f0 f5 f9 4d 09 e9 db cf 5d 69 0e 23 23 38 38
+             a0 ba cb 7c 63 8d 1b 26 50 a4 30 8c d1 71 b6 85
+             51 26 d1 da 67 2a 6e d8 5a 8d 78 c2 86 fb 56 f4
+             ab 3d 21 49 75 28 04 5c 63 26 2c 8a 42 af 2f 98
+             02 c5 3b 7b b8 be 28 e7 8f e0 b5 ce 45 fb b7 a1
+             af 1a 3b 28 a8 d9 4b 78 90 e3 c8 82 e3 9b c9 8e
+             9f 0a d7 60 25 bf 0d d2 f0 02 98 e7 14 1a 22 6b
+             3d 7c ee 41 4f 60 4d 1e 0b a5 4d 11 d5 fe 58 bc
+             ce a6 ad 77 ad 2e 8c 1c aa cf 32 45 90 14 b7 b9
+             10 01 b1 ef a8 ad 17 2a 52 3f b8 e3 65 b5 77 12
+             1b f9 fd 88 a2 c6 0c 21 e8 21 d7 b6 ac b4 7a 5a
+             99 5e 40 ca ce d5 c2 23 b8 fe 6d e5 e1 8e 9d 2e
+             58 93 ae fe bb 7a ae 7f f1 a1 46 26 0e 2f 11 0e
+             93 95 28 21 3a 00 25 a3 8e c7 9a ab c8 61 b2 5e
+             bc 50 9a 46 74 c1 32 aa ac b7 e0 14 6f 14 ef d1
+             1c fc af 4c aa 4f 77 5a 71 6c e3 25 e0 a4 35 a4
+             d3 49 d7 20 bc f1 37 45 0a fc 45 04 6f c1 a1 f8
+             3a 9d 32 97 77 a7 08 4e 4a ad ae 71 22 ce 97 00
+             59 30 52 8e b3 c7 f7 f1 12 9b 37 28 87 a3 71 15
+             5a 3b a2 01 a2 5c bf 1d cb 64 e7 cd ee 09 2c 31
+             41 fb 55 50 fe 3d 0d d8 2e 87 0e 57 8b 2b 46 50
+             08 18 11 3b 8f 65 69 77 3c 67 73 85 b6 9a 42 b7
+             7d cb a7 ac ff d9 5f d4 45 2e 23 aa a1 d3 7e 1d
+             a2 15 1e a6 58 d4 0a 35 96 b2 7a c9 f8 12 9d c6
+             cf 06 43 77 26 24 b5 9f 4f 46 12 30 df 47 1c a2
+             60 87 c3 94 2d 5c 66 87 df 60 82 83 59 35 a3 f8
+             7c b7 62 b0 c3 b1 d0 dd a4 a6 53 39 65 be f1 b7
+             b8 29 2e 25 4c 01 4d 09 0f ed 85 7c 44 c1 83 9c
+             69 4c 0a 64 e3 fa d9 0a 11 f5 34 72 2b 6e e1 57
+             4f 2e 14 9d 55 d7 44 de 48 87 02 4e 08 51 14 31
+             c0 62 75 0e 16 c7 4a b9 f3 24 2f 2d b3 ff b1 2a
+             8d 61 07 fa a2 29 d6 f6 37 3b 07 f3 6d 39 32 b3
+             bd b0 4c 19 dd 64 ea dd 7f 93 c3 c5 64 c3 58 a1
+             c8 1d cf 1c 9c 31 e5 b0 65 68 f9 75 44 c1 7d c1
+             56 98 c5 cb 38 98 3a 9a fc 42 78 3f aa 77 3a 52
+             c9 d8 26 06 90 be 9e 31 56 aa 5b c1 50 9d ea 3f
+             69 58 76 95 cd 6f f1 72 ba 83 e6 a6 d8 a7 d6 bb
+             eb bb cd a3 67 27 31 98 3f 89 bc 58 31 dc 37 c3
+             f3 c5 c5 6f ac c6 97 f3 cb 20 bd 5d ba db d7 02
+             e5 48 44 ac 2f 62 69 01 fe 15 9d b9 3d fd 47 73
+             d8 fe 73 56 2b 84 6c 1f c8 56 d1 80 27 62 84 0e
+             bc 72 d7 98 8b de 75 cb ca 70 d3 19 d3 2c e0 cc
+             02 53 bb 2a d4 55 72 3e e0 c7 f4 73 6c e6 e6 66
+             5c 5a ca 32 a4 81 c5 38 39 bc 25 91 67 b0 13 d0
+             42 33 95 ee b9 aa ae e3 20 61 49 a7 d5 50 d6 7f
+             c5 fd fe 4a 8a 5c 35 d2 51 0b 66 43 79 ab 8f 72
+             85 5a 2a f4 7a bc e2 a6 32 04 8e af 89 e5 cb 4a
+             88 de bc 53 a5 95 10 3a cc e4 f1 cf f1 8a cf f0
+             7a fe 1e b5 71 6a a1 e4 0b 63 13 4c 3a 3a e9 57
+             9f a8 7f 51 5b e0 93 c2 d2 9d b6 d6 b6 5c 93 66
+             1e 00 63 6b 59 27 04 d0 93 cc 67 16 c2 34 2e b1
+             85 3d 48 c8 5c 63 ac 8a 28 54 46 2c 7b 77 e7 e3
+             bd 1e ac 5b ca 28 ff aa 00 b5 d3 49 f8 a5 47 ad
+             87 5b 96 a8 c2 b2 91 0c 93 01 30 9a 3f 91 38 a5
+             69 31 11 f5 5b 3c 00 9c a9 47 c3 9d fc 82 d9 8e
+             b1 ca a4 a9 cb e8 85 f7 86 fa 86 e5 5b e0 62 22
+             2f 8b a9 0a 97 40 73 32 6b 31 21 2a ec e0 a3 4a
+             60
+       :   }
+</pre><a href="#appendix-C.2-9" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="example-certificate">
+<section id="appendix-C.3">
+        <h3 id="name-example-certificate">
+<a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-example-certificate" class="section-name selfRef">Example Certificate</a>
+        </h3>
+<p id="appendix-C.3-1">TODO: Add an example<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-2">TODO: Add pretty print<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-D">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-D-1">We would like to thank ... for their
+insightful comments.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-E">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jake Massimo</span></div>
+<div dir="auto" class="left"><span class="org">AWS</span></div>
+<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jakemas@amazon.com" class="email">jakemas@amazon.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Panos Kampanakis</span></div>
+<div dir="auto" class="left"><span class="org">AWS</span></div>
+<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:kpanos@amazon.com" class="email">kpanos@amazon.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Sean Turner</span></div>
+<div dir="auto" class="left"><span class="org">sn3rd</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:sean@sn3rd.com" class="email">sean@sn3rd.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Bas Westerbaan</span></div>
+<div dir="auto" class="left"><span class="org">Cloudflare</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bas@cloudflare.com" class="email">bas@cloudflare.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
