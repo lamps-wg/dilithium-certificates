@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-07T00:52:58.936430+00:00",
+  "timestamp": "2024-11-10T00:56:18.049731+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -2566,7 +2566,7 @@
       "labels": [],
       "body": "as discussed in the working group meeting 121 on Tuesday.\r\n\r\ncc @csosto-pk ",
       "createdAt": "2024-11-05T15:42:18Z",
-      "updatedAt": "2024-11-06T08:17:09Z",
+      "updatedAt": "2024-11-09T16:37:35Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
@@ -2606,6 +2606,225 @@
           "createdAt": "2024-11-05T16:21:25Z",
           "updatedAt": "2024-11-05T16:21:25Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Qkcvl",
+          "commit": {
+            "abbreviatedOid": "52c7881"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-09T16:37:35Z",
+          "updatedAt": "2024-11-09T16:37:35Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Nit. Maybe use function instead of module. I would refrain from using the word module. We don't need FIPS nomenclature in this doc. We just explain this can be done. If both modules will be FIPS or one, or none, we don't really care in this spec.  ",
+              "createdAt": "2024-11-09T16:37:35Z",
+              "updatedAt": "2024-11-09T16:37:35Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOIEpj4c6BZPnT",
+      "title": "Adding ExternalMu-ML-DSA",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/48",
+      "state": "OPEN",
+      "author": "ounsworth",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Adds the real pre-hash mode and forbids the FIPS 204 HashML-DSA section 5.4 mode.",
+      "createdAt": "2024-11-09T10:48:30Z",
+      "updatedAt": "2024-11-10T00:24:42Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "mikeo_externalmu",
+      "headRefOid": "919472c4b24f6ab580da1c9f466c8bdbb5446037",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for this. Left some nits. Please rebase on https://github.com/lamps-wg/dilithium-certificates/pull/47/files",
+          "createdAt": "2024-11-09T14:32:12Z",
+          "updatedAt": "2024-11-09T14:32:12Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6Qj04m",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "frumioj",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Editorial comments from quick review of commit - thanks for doing the work!",
+          "createdAt": "2024-11-09T13:00:33Z",
+          "updatedAt": "2024-11-09T13:10:54Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "\"are to be\" -> \"may\" or even \"MAY\"?",
+              "createdAt": "2024-11-09T13:00:33Z",
+              "updatedAt": "2024-11-09T13:10:54Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "MUST NOT \"be be\" -> MUST NOT \"be\"",
+              "createdAt": "2024-11-09T13:01:12Z",
+              "updatedAt": "2024-11-09T13:10:54Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "More specific references than 'Algorithm 2' and 'Algorithm 7'? e.g.\r\n\r\n[Algorithm 2](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.204.pdf#algorithm.2) ML-DSA.Sign(\ud835\udc60\ud835\udc58, \ud835\udc40, \ud835\udc50\ud835\udc61\ud835\udc65) and [Algorithm7](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.204.pdf#algorithm.7) ML-DSA.Sign_internal(\ud835\udc60\ud835\udc58, \ud835\udc40 \u2032, \ud835\udc5f\ud835\udc5b\ud835\udc51)  in [FIPS204] \r\n\r\n(or similar)",
+              "createdAt": "2024-11-09T13:08:32Z",
+              "updatedAt": "2024-11-09T13:10:54Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "\"are to be} -> \"may\" or \"MAY\"?",
+              "createdAt": "2024-11-09T13:09:04Z",
+              "updatedAt": "2024-11-09T13:10:54Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "\"produces signatures values\" -> \"produces signature values\"",
+              "createdAt": "2024-11-09T13:10:22Z",
+              "updatedAt": "2024-11-09T13:10:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6QkOXb",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-09T14:29:46Z",
+          "updatedAt": "2024-11-09T14:29:46Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "\"signature mode\" is a bit confusing. Maybe \"flow\"?",
+              "createdAt": "2024-11-09T14:29:46Z",
+              "updatedAt": "2024-11-09T14:29:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6QkOfB",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-09T14:30:36Z",
+          "updatedAt": "2024-11-09T14:30:37Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Technically the procedures are not modified.",
+              "createdAt": "2024-11-09T14:30:36Z",
+              "updatedAt": "2024-11-09T14:30:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6QkOlx",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-09T14:31:08Z",
+          "updatedAt": "2024-11-09T14:31:08Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "There could be two modules. Signing is spread over two modules.",
+              "createdAt": "2024-11-09T14:31:08Z",
+              "updatedAt": "2024-11-09T14:31:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6QkcyN",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-09T16:39:05Z",
+          "updatedAt": "2024-11-09T16:39:06Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Nit. \r\n> compliant with [FIPS204]\r\n\r\nNo need for FIPS nomenclature. Say \r\n\r\n> specified by [FIPS204]",
+              "createdAt": "2024-11-09T16:39:05Z",
+              "updatedAt": "2024-11-09T16:39:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Qk9rk",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "darrentjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-10T00:21:55Z",
+          "updatedAt": "2024-11-10T00:21:55Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "Should there be a check to ensure mu is a 64-byte value or did you intentionally leave that out because you don't want to restrict that?",
+              "createdAt": "2024-11-10T00:21:55Z",
+              "updatedAt": "2024-11-10T00:21:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Qk9vr",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "darrentjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-10T00:24:42Z",
+          "updatedAt": "2024-11-10T00:24:42Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "You say that you present ExternalMu-ML-DSA, and that ExternalMu-ML-DSA really produce signatures that are indistinguishable from signatures produced by ML-DSA.Sign(). Before I go off on a tangent for no reason, are you referring to the function ExternalMu-ML-DSA defined below? or the combination of the two functions defined below?\r\nIf the former, then I disagree.  as ML-DSA.Sign() defines specific encoding of the message M but ExternalMu-ML-DSA simply takes a byte array called mu and processes it.\r\nBut if you mean the latter, then it makes sense.",
+              "createdAt": "2024-11-10T00:24:42Z",
+              "updatedAt": "2024-11-10T00:30:18Z"
+            }
+          ]
         }
       ]
     }
