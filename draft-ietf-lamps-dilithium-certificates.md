@@ -565,12 +565,12 @@ The following is an example of a ML-DSA-44 private key with hex seed `000102…1
 ~~~
 
 ~~~
-0  49: SEQUENCE {
+0  50: SEQUENCE {
 2   1:   INTEGER 0
-5  10:   SEQUENCE {
-7   8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.17'
+5  11:   SEQUENCE {
+7   9:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.3.17'
      :     }
-17 32:   OCTET STRING
+18 32:   OCTET STRING
            00 01 02 03 04 05 06 07-08 09 0a 0b 0c 0d 0e 0f
            10 11 12 13 14 15 16 17-18 19 1a 1b 1c 1d 1e 1f
      :   }
@@ -583,12 +583,12 @@ The following is an example of a ML-DSA-65 private key with hex seed `000102…1
 ~~~
 
 ~~~
-0  49: SEQUENCE {
+0  50: SEQUENCE {
 2   1:   INTEGER 0
-5  10:   SEQUENCE {
-7   8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.18'
+5  11:   SEQUENCE {
+7   9:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.3.18'
      :     }
-17 32:   OCTET STRING
+18 32:   OCTET STRING
            00 01 02 03 04 05 06 07-08 09 0a 0b 0c 0d 0e 0f
            10 11 12 13 14 15 16 17-18 19 1a 1b 1c 1d 1e 1f
      :   }
@@ -601,12 +601,12 @@ The following is an example of a ML-DSA-87 private key with hex seed `000102…1
 ~~~
 
 ~~~
-0  49: SEQUENCE {
+0  50: SEQUENCE {
 2   1:   INTEGER 0
-5  10:   SEQUENCE {
-7   8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.19'
+5  11:   SEQUENCE {
+7   9:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.3.19'
      :     }
-17 32:   OCTET STRING
+18 32:   OCTET STRING
            00 01 02 03 04 05 06 07-08 09 0a 0b 0c 0d 0e 0f
            10 11 12 13 14 15 16 17-18 19 1a 1b 1c 1d 1e 1f
      : }
@@ -626,11 +626,11 @@ key in the previous section.
 ~~~
 
 ~~~
-0  1329: SEQUENCE {
-4    10:   SEQUENCE {
-6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.17'
+0  1330: SEQUENCE {
+4    11:   SEQUENCE {
+6     9:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.3.17'
        :     }
-16 1313:   BIT STRING
+17 1313:   BIT STRING
              00 d7 b2 b4 72 54 aa e0 db 45 e7 93 0d 4a 98 d2
              c9 7d 8f 13 97 d1 78 9d af a1 70 24 b3 16 e9 be
              c9 4f c9 94 6d 42 f1 9b 79 a7 41 3b ba a3 3e 71
@@ -725,11 +725,11 @@ key in the previous section.
 ~~~
 
 ~~~
-0  1969: SEQUENCE {
-4    10:   SEQUENCE {
-6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.18'
+0  1970: SEQUENCE {
+4    11:   SEQUENCE {
+6     9:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.3.18'
        :     }
-16 1953:   BIT STRING
+17 1953:   BIT STRING
              00 48 68 3d 91 97 8e 31 eb 3d dd b8 b0 47 34 82
              d2 b8 8a 5f 62 59 49 fd 8f 58 a5 61 e6 96 bd 4c
              27 d0 5b 38 db b2 ed f0 1e 66 4e fd 81 be 1e a8
@@ -864,11 +864,11 @@ key in the previous section.
 ~~~
 
 ~~~
-0  2609: SEQUENCE {
-4    10:   SEQUENCE {
-6     8:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.18'
+0  2610: SEQUENCE {
+4    11:   SEQUENCE {
+6     9:     OBJECT IDENTIFIER '2.16.840.1.101.3.4.3.19'
        :     }
-16 2593:   BIT STRING
+17 2593:   BIT STRING
              00 97 92 bc ec 2f 24 30 68 6a 82 fc cf 3c 2f 5f
              f6 65 e7 71 d7 ab 41 b9 02 58 cf a7 e9 0e c9 71
              24 a7 3b 32 3b 9b a2 1a b6 4d 76 7c 43 3f 5a 52
