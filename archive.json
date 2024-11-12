@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-10T00:56:18.049731+00:00",
+  "timestamp": "2024-11-12T00:52:18.807921+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -2827,6 +2827,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOIEpj4c6BjoU2",
+      "title": "fix ASN.1 decoding after OID fix",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/49",
+      "state": "OPEN",
+      "author": "tomato42",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "the PR #36 fixed the binary files, but it didn't fix the ASN.1 decoding (also the ML-DSA-87 public key still had the last element of the OID wrong)",
+      "createdAt": "2024-11-11T20:58:59Z",
+      "updatedAt": "2024-11-11T20:58:59Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
+      "headRepository": "tomato42/dilithium-certificates",
+      "headRefName": "ans.1-dec-fix",
+      "headRefOid": "01746fe415be30782fc757a9e07013ffd3acdb0c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
