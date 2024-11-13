@@ -110,6 +110,15 @@ Table of Contents
    Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-
    44, ML-DSA-65, and ML-DSA-87.
 
+   [FIPS204] defines two variants of ML-DSA: a pure and a prehash
+   variant.  Only the former is specified in this document.  The pure
+   variant of ML-DSA supports the typical prehash flow: one
+   cryptographic module can compute the hash _mu_ on line 6 of algorithm
+   7 of [FIPS204] and pass it to a second module to finish the
+   signature.  The first module only needs access to the full message
+   and the public key, whereas the second module only needs access to
+   hash _mu_ and the private key.
+
 1.1.  Requirements Language
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",

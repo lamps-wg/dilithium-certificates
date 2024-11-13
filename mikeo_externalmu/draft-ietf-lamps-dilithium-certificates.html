@@ -1288,6 +1288,14 @@ National Institute of Standards and Technology (NIST) PQC project
 specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX)
 certificates and Certificate Revocation Lists (CRLs) at three security
 levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines two variants of ML-DSA: a pure and a prehash variant.
+Only the former is specified in this document.
+The pure variant of ML-DSA supports the typical prehash flow:
+one cryptographic module can compute the hash <em>mu</em>
+on line 6 of algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and pass it to a second module
+to finish the signature. The first module only needs access to the full
+message and the public key, whereas the second module only needs access
+to hash <em>mu</em> and the private key.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="requirements-language">
 <section id="section-1.1">
         <h3 id="name-requirements-language">
