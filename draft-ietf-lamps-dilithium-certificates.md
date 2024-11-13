@@ -388,7 +388,7 @@ textual encoding defined in {{RFC7468}}.
 # Pre-hashed mode (ExternalMu-ML-DSA)
 
 
-Many applications will require a "pre-hashed" mode of ML-DSA whereby a message digest can be pre-computed outside of the cryptographic module and then only a small fixed-width hash value is passed to the crypto module.
+Many applications will require a "pre-hashed" mode of ML-DSA whereby the signature generation process can be separated into a pre-hash step and a core signature step in order to ease operational requirements around large or inconsistently-sized payloads.
 Many applications and protocols include message digesting, but there exist some that do not. Examples of this can be found even within [RFC5280]; for example certificate and certificate revocation list (CRL) data structures do not include message digesting and therefore become problematic when producing large CRLs or when signing a high volume of certificates containing large public keys. Such situations require pre-hashing to be performed by the signature primitive.
 
 
