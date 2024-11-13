@@ -319,16 +319,16 @@ Table of Contents
 7.  Pre-hashed mode (ExternalMu-ML-DSA)
 
    Many applications will require a "pre-hashed" mode of ML-DSA whereby
-   a message digest can be pre-computed outside of the cryptographic
-   module and then only a small fixed-width hash value is passed to the
-   crypto module.  Many applications and protocols include message
-   digesting, but there exist some that do not.  Examples of this can be
-   found even within [RFC5280]; for example certificate and certificate
-   revocation list (CRL) data structures do not include message
-   digesting and therefore become problematic when producing large CRLs
-   or when signing a high volume of certificates containing large public
-   keys.  Such situations require pre-hashing to be performed by the
-   signature primitive.
+   the signature generation process can be separated into a pre-hash
+   step and a core signature step in order to ease operational
+   requirements around large or inconsistently-sized payloads.  Many
+   applications and protocols include message digesting, but there exist
+   some that do not.  Examples of this can be found even within
+   [RFC5280]; for example certificate and certificate revocation list
+   (CRL) data structures do not include message digesting and therefore
+   become problematic when producing large CRLs or when signing a high
+   volume of certificates containing large public keys.  Such situations
+   require pre-hashing to be performed by the signature primitive.
 
    This section presents the "ExternalMu-ML-DSA" processing flow which
    is composed of a new pre-hashing step ExternalMu-ML-DSA.Prehash()
