@@ -385,20 +385,20 @@ in this section.
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
 
-# Pre-hashed mode (ExtarnalMu-ML-DSA)
+# Pre-hashed mode (ExternalMu-ML-DSA)
 
 
 Many applications will require a "pre-hashed" mode of ML-DSA whereby a message digest can be pre-computed outside of the cryptographic module and then only a small fixed-width hash value is passed to the crypto module.
 Many applications and protocols include message digesting, but there exist some that do not. Examples of this can be found even within [RFC5280]; for example certificate and certificate revocation list (CRL) data structures do not include message digesting and therefore become problematic when producing large CRLs or when signing a high volume of certificates containing large public keys. Such situations require pre-hashing to be performed by the signature primitive.
 
 
-This section presents the "ExternalMu-ML-DSA" signature mode which provides an interface for performing pre-hashed signatures in a way which is both compliant with [FIPS204] and which produces signatures values which are indistinguishable from signatures produced by ML-DSA.Sign() and are therefore compatible with the normal ML-DSA.Verify() and are identified by the same Object Identifiers as for ML-DSA. A ML-DSA key and certificate MAY be used with either ML-DSA or ExternalMu-ML-DSA interchangeably. Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA and therefore might require explicit support from hardware or software cryptographic modules.
+This section presents the "ExternalMu-ML-DSA" processing flow which is composed of a new pre-hashing step `ExternalMu-ML-DSA.Prehash()` followed by alternate versions of `Sign()` (originally defined in [FIPS204] Algorithm 2) and `Sign_internal()` (originally defined in [FIPS204] Algorithm 7) which together provide an interface for performing pre-hashed signatures as specified in [FIPS204], which produces signature values which are indistinguishable from signatures produced by ML-DSA.Sign() and are therefore compatible with the normal ML-DSA.Verify() and are identified by the same Object Identifiers as for ML-DSA. A ML-DSA key and certificate MAY be used with either ML-DSA or ExternalMu-ML-DSA interchangeably. Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA and therefore might require explicit support from hardware or software cryptographic modules.
 
-Note that the signing mode defined here is different from HashML-DSA defined in [FIPS204] section 5.4. This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be be used in X.509 and related PKIX protocols.
+Note that the signing mode defined here is different from HashML-DSA defined in [FIPS204] section 5.4. This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.
 
-The procedures below present modified versions of Algorithm 2 and Algorithm 7 in [FIPS204]. Note that all functions and notation used in {{fig-externalmu-ml-dsa-external}} and {{fig-externalmu-ml-dsa-internal}} are defined in [FIPS204].
+All functions and notation used in {{fig-externalmu-ml-dsa-external}} and {{fig-externalmu-ml-dsa-internal}} are defined in [FIPS204].
 
-External operations that are to be performed outside of the cryptographic module.
+External operations:
 
 ~~~
 ExternalMu-ML-DSA.Prehash(pk, M, ctx):
@@ -417,10 +417,15 @@ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 
 
 
-Internal operations that are to be performed inside of the cryptographic module.
+Internal operations:
 
 ~~~
 ExternalMu-ML-DSA.Sign(sk, mu):
+
+  if |mu| != 512 then
+    return error  # return an error indication if the input mu is not
+                  # 64 bytes (512 bits).
+  end if
 
   rnd = rand(32)  # for the optional deterministic variant,
                   # substitute rnd = 0x0 * 32
