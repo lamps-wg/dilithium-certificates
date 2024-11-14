@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 8 May 2025                                            S. Turner
+Expires: 18 May 2025                                           S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                         4 November 2024
+                                                        14 November 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2025.
+   This Internet-Draft will expire on 18 May 2025.
 
 Copyright Notice
 
@@ -85,11 +85,12 @@ Table of Contents
    4.  ML-DSA Public Keys in PKIX
    5.  Key Usage Bits
    6.  Private Key Format
-   7.  IANA Considerations
-   8.  Security Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   7.  Pre-hashed mode (ExternalMu-ML-DSA)
+   8.  IANA Considerations
+   9.  Security Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Security Strengths
    Appendix C.  Examples
@@ -108,6 +109,15 @@ Table of Contents
    DSA in Public Key Infrastructure X.509 (PKIX) certificates and
    Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-
    44, ML-DSA-65, and ML-DSA-87.
+
+   [FIPS204] defines two variants of ML-DSA: a pure and a prehash
+   variant.  Only the former is specified in this document.  The pure
+   variant of ML-DSA supports the typical prehash flow: one
+   cryptographic module can compute the hash _mu_ on line 6 of algorithm
+   7 of [FIPS204] and pass it to a second module to finish the
+   signature.  The first module only needs access to the full message
+   and the public key, whereas the second module only needs access to
+   hash _mu_ and the private key.
 
 1.1.  Requirements Language
 
@@ -315,7 +325,87 @@ Table of Contents
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
 
-7.  IANA Considerations
+7.  Pre-hashed mode (ExternalMu-ML-DSA)
+
+   Many applications will require a "pre-hashed" mode of ML-DSA whereby
+   the signature generation process can be separated into a pre-hash
+   step and a core signature step in order to ease operational
+   requirements around large or inconsistently-sized payloads.  Many
+   applications and protocols include message digesting, but there exist
+   some that do not.  Examples of this can be found even within
+   [RFC5280]; for example certificate and certificate revocation list
+   (CRL) data structures do not include message digesting and therefore
+   become problematic when producing large CRLs or when signing a high
+   volume of certificates containing large public keys.  Such situations
+   require pre-hashing to be performed by the signature primitive.
+
+   This section presents the "ExternalMu-ML-DSA" processing flow which
+   is composed of a new pre-hashing step ExternalMu-ML-DSA.Prehash()
+   followed by alternate versions of Sign() (originally defined in
+   [FIPS204] Algorithm 2) and Sign_internal() (originally defined in
+   [FIPS204] Algorithm 7) which together provide an interface for
+   performing pre-hashed signatures as specified in [FIPS204], which
+   produces signature values which are indistinguishable from signatures
+   produced by ML-DSA.Sign() and are therefore compatible with the
+   normal ML-DSA.Verify() and are identified by the same Object
+   Identifiers as for ML-DSA.  A ML-DSA key and certificate MAY be used
+   with either ML-DSA or ExternalMu-ML-DSA interchangeably.  Note that
+   ExternalMu-ML-DSA describes a different signature API from ML-DSA and
+   therefore might require explicit support from hardware or software
+   cryptographic modules.
+
+   Note that the signing mode defined here is different from HashML-DSA
+   defined in [FIPS204] section 5.4.  This specification uses
+   exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus
+   HashML-DSA as defined in [FIPS204] and identified by id-hash-ml-dsa-
+   44-with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
+   with-sha512 MUST NOT be used in X.509 and related PKIX protocols.
+
+   All functions and notation used in Figure 1 and Figure 2 are defined
+   in [FIPS204].
+
+   External operations:
+
+ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+
+   if |ctx| > 255 then
+     return error  # return an error indication if the context string is
+                   # too long
+   end if
+
+   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
+                                                         || ctx) || M
+   mu = H(BytesToBits(pk.tr) || M', 64)
+   return mu
+
+             Figure 1: External steps of ExternalMu-ML-DSA
+
+   Internal operations:
+
+   ExternalMu-ML-DSA.Sign(sk, mu):
+
+     if |mu| != 512 then
+       return error  # return an error indication if the input mu is not
+                     # 64 bytes (512 bits).
+     end if
+
+     rnd = rand(32)  # for the optional deterministic variant,
+                     # substitute rnd = 0x0 * 32
+     if rnd = NULL then
+       return error  # return an error indication if random bit
+                     # generation failed
+     end if
+
+     sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+     return sigma
+
+
+   ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
+      ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+
+               Figure 2: Internal steps of ExternalMu-ML-DSA
+
+8.  IANA Considerations
 
    For the ASN.1 module in {asn1}, IANA is requested to assign an object
    identifier (OID) for the module identifier (TBD1) with a Description
@@ -323,7 +413,7 @@ Table of Contents
    allocated in the "SMI Security for PKIX Module Identifier" registry
    (1.3.6.1.5.5.7.0).
 
-8.  Security Considerations
+9.  Security Considerations
 
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
@@ -393,9 +483,9 @@ Table of Contents
    serialization.  It for this reason the public key structure defined
    in Section 4 is intentionally encoded as a single OCTET STRING.
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [FIPS204]  National Institute of Standards and Technology (NIST),
               "Module-Lattice-based Digital Signature Standard", FIPS
@@ -446,7 +536,7 @@ Table of Contents
               Recommendation X.690, ISO/IEC 8825-1:2021, February 2021,
               <https://www.itu.int/rec/T-REC-X.690>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [CDFFJ21]  Cremers, C., Düzlü, S., Fiedler, R., Fischlin, M., and C.
               Janson, "BUFFing signature schemes beyond unforgeability
@@ -566,7 +656,7 @@ Appendix B.  Security Strengths
    |   5   | (8,7) |  2  |  4627  |  2592  |  32    |
    |=======+=======+=====+========+========+========|
 
-                        Figure 1: ML-DSA Parameters
+                        Figure 3: ML-DSA Parameters
 
 Appendix C.  Examples
 
