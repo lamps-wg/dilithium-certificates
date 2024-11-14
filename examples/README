@@ -1,0 +1,11 @@
+To regenerate the ML-DSA private and public keys in *.priv and *.pub run
+
+    go run generate.go
+
+The prettified versions are created with
+
+    ./pretty
+
+Requires der-ascii:
+
+    go install github.com/google/der-ascii/cmd/...@latest
