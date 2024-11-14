@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-12T00:52:18.807921+00:00",
+  "timestamp": "2024-11-14T00:53:25.088327+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -2641,13 +2641,13 @@
       "labels": [],
       "body": "Adds the real pre-hash mode and forbids the FIPS 204 HashML-DSA section 5.4 mode.",
       "createdAt": "2024-11-09T10:48:30Z",
-      "updatedAt": "2024-11-10T00:24:42Z",
+      "updatedAt": "2024-11-13T16:39:54Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "mikeo_externalmu",
-      "headRefOid": "919472c4b24f6ab580da1c9f466c8bdbb5446037",
+      "headRefOid": "62acac2b3a5cb07326c16947982113544b351ce1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2659,6 +2659,20 @@
           "body": "Thanks for this. Left some nits. Please rebase on https://github.com/lamps-wg/dilithium-certificates/pull/47/files",
           "createdAt": "2024-11-09T14:32:12Z",
           "updatedAt": "2024-11-09T14:32:12Z"
+        },
+        {
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "body": "Thank you all for the quick review! I have incorporated all feedback, including rebasing on top of #47 \r\n\r\n@bwesterb I think this is ready to merge. I'll let you press the big green button.",
+          "createdAt": "2024-11-13T16:34:03Z",
+          "updatedAt": "2024-11-13T16:34:03Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Great. I'll probably merge first thing tomorrow.\r\n@seanturner, please have a look. ",
+          "createdAt": "2024-11-13T16:39:52Z",
+          "updatedAt": "2024-11-13T16:39:52Z"
         }
       ],
       "reviews": [
@@ -2825,6 +2839,126 @@
               "updatedAt": "2024-11-10T00:30:18Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6QvkHX",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-12T00:59:02Z",
+          "updatedAt": "2024-11-12T00:59:02Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n# Pre-hashed mode (ExternalMu-ML-DSA)\r\n```",
+              "createdAt": "2024-11-12T00:59:02Z",
+              "updatedAt": "2024-11-12T00:59:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6RD56o",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T16:08:25Z",
+          "updatedAt": "2024-11-13T16:08:26Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "Fair point. Tricky. What exactly does \"MAY\" mean here? Does that mean \"This RFC allows you to __\", or \"FIPS allows you to ___\"?\r\n\r\nI think I'll just change it to \"Internal operations:\" and remove the back half of the sentence.",
+              "createdAt": "2024-11-13T16:08:26Z",
+              "updatedAt": "2024-11-13T16:08:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6RD7Cl",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T16:09:46Z",
+          "updatedAt": "2024-11-13T16:09:46Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Yeah, I mean this entire flow. I'll re-phrase that.",
+              "createdAt": "2024-11-13T16:09:46Z",
+              "updatedAt": "2024-11-13T16:09:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6RD_s2",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T16:16:23Z",
+          "updatedAt": "2024-11-13T16:16:24Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Agreed. I used the word \"alternate versions of\" above, and then removed this sentence.",
+              "createdAt": "2024-11-13T16:16:24Z",
+              "updatedAt": "2024-11-13T16:16:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6REATY",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T16:17:22Z",
+          "updatedAt": "2024-11-13T16:17:22Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Agreed. The concept of \"a cryptographic module\" is a bit fuzzy here. I removed this sentence.",
+              "createdAt": "2024-11-13T16:17:22Z",
+              "updatedAt": "2024-11-13T16:17:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6REDOg",
+          "commit": {
+            "abbreviatedOid": "919472c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T16:22:02Z",
+          "updatedAt": "2024-11-13T16:22:03Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "Good suggestion!\r\nIf it's not 64 bytes, then your pre-hash step is messed up, but it's a check that we can do here, so might as well.",
+              "createdAt": "2024-11-13T16:22:03Z",
+              "updatedAt": "2024-11-13T16:22:03Z"
+            }
+          ]
         }
       ]
     },
@@ -2840,7 +2974,7 @@
       "labels": [],
       "body": "the PR #36 fixed the binary files, but it didn't fix the ASN.1 decoding (also the ML-DSA-87 public key still had the last element of the OID wrong)",
       "createdAt": "2024-11-11T20:58:59Z",
-      "updatedAt": "2024-11-11T20:58:59Z",
+      "updatedAt": "2024-11-13T10:58:58Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
@@ -2851,7 +2985,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for this. @seanturner could you check? We should really just automate this.",
+          "createdAt": "2024-11-13T10:58:57Z",
+          "updatedAt": "2024-11-13T10:58:57Z"
+        }
+      ],
       "reviews": []
     }
   ]
