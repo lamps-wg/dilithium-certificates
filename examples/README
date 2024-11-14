@@ -9,3 +9,9 @@ The prettified versions are created with
 Requires der-ascii:
 
     go install github.com/google/der-ascii/cmd/...@latest
+
+The certificates are generated with a ad-hoc modified fork of Go:
+
+    https://github.com/bwesterb/go/commit/40def371fd600d0bdad1b43537b1a6c06e114280
+
+Yeah, it's not pretty.
