@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 18 May 2025                                           S. Turner
+Expires: 19 May 2025                                           S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                        14 November 2024
+                                                        15 November 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 May 2025.
+   This Internet-Draft will expire on 19 May 2025.
 
 Copyright Notice
 
@@ -129,8 +129,7 @@ Table of Contents
 
 2.  Identifiers
 
-   The AlgorithmIdentifier type, which is included herein for
-   convenience, is defined as follows:
+   The AlgorithmIdentifier type is defined in [RFC5912] as follows:
 
     AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
       SEQUENCE {
