@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-14T00:53:25.088327+00:00",
+  "timestamp": "2024-11-17T00:59:37.674243+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -592,7 +592,7 @@
       "comments": [
         {
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "The correct answer is probably to use the empty string. One good reason for this is backwards-compatibility with signature primitives that do not have ctx params (ie if we want to use the same context string across all signature schemes, then this is the only option), and even compatibility with crypto libraries that offer ML-DSA but no not have a `.Sign()` interface that accepts a ctx parameter.\r\n\r\nEmpty string is already the default in FIPS 204, so in theory nothing needs to be said in draft-dilithium-certificates, but it would probably be polite to put in a sentence.",
           "createdAt": "2024-10-01T13:27:30Z",
           "updatedAt": "2024-10-01T13:28:14Z"
@@ -2559,24 +2559,26 @@
       "id": "PR_kwDOIEpj4c6A8qAV",
       "title": "Mention pure ML-DSA's prehashing support",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "as discussed in the working group meeting 121 on Tuesday.\r\n\r\ncc @csosto-pk ",
       "createdAt": "2024-11-05T15:42:18Z",
-      "updatedAt": "2024-11-09T16:37:35Z",
+      "updatedAt": "2024-11-14T12:31:05Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "alg7l6",
       "headRefOid": "52c788179169228f172d9d72d287d1f4eb08cb73",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-14T12:31:05Z",
+      "mergedAt": "2024-11-14T12:31:05Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "52c788179169228f172d9d72d287d1f4eb08cb73"
+      },
       "comments": [
         {
           "author": "csosto-pk",
@@ -2634,24 +2636,26 @@
       "id": "PR_kwDOIEpj4c6BZPnT",
       "title": "Adding ExternalMu-ML-DSA",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ounsworth",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Adds the real pre-hash mode and forbids the FIPS 204 HashML-DSA section 5.4 mode.",
       "createdAt": "2024-11-09T10:48:30Z",
-      "updatedAt": "2024-11-13T16:39:54Z",
+      "updatedAt": "2024-11-14T12:52:33Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "mikeo_externalmu",
       "headRefOid": "62acac2b3a5cb07326c16947982113544b351ce1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-14T12:31:03Z",
+      "mergedAt": "2024-11-14T12:31:03Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "c9825b274212d73e61fb0c821ef159fbe206f5a9"
+      },
       "comments": [
         {
           "author": "bwesterb",
@@ -2662,7 +2666,7 @@
         },
         {
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Thank you all for the quick review! I have incorporated all feedback, including rebasing on top of #47 \r\n\r\n@bwesterb I think this is ready to merge. I'll let you press the big green button.",
           "createdAt": "2024-11-13T16:34:03Z",
           "updatedAt": "2024-11-13T16:34:03Z"
@@ -2673,6 +2677,13 @@
           "body": "Great. I'll probably merge first thing tomorrow.\r\n@seanturner, please have a look. ",
           "createdAt": "2024-11-13T16:39:52Z",
           "updatedAt": "2024-11-13T16:39:52Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed a spec bug (tr is not part of the public key), and some editing: https://github.com/lamps-wg/dilithium-certificates/pull/50",
+          "createdAt": "2024-11-14T12:52:30Z",
+          "updatedAt": "2024-11-14T12:52:30Z"
         }
       ],
       "reviews": [
@@ -2866,7 +2877,7 @@
             "abbreviatedOid": "919472c"
           },
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-13T16:08:25Z",
@@ -2886,7 +2897,7 @@
             "abbreviatedOid": "919472c"
           },
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-13T16:09:46Z",
@@ -2906,7 +2917,7 @@
             "abbreviatedOid": "919472c"
           },
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-13T16:16:23Z",
@@ -2926,7 +2937,7 @@
             "abbreviatedOid": "919472c"
           },
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-13T16:17:22Z",
@@ -2946,7 +2957,7 @@
             "abbreviatedOid": "919472c"
           },
           "author": "ounsworth",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-13T16:22:02Z",
@@ -2967,24 +2978,26 @@
       "id": "PR_kwDOIEpj4c6BjoU2",
       "title": "fix ASN.1 decoding after OID fix",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/49",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tomato42",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "the PR #36 fixed the binary files, but it didn't fix the ASN.1 decoding (also the ML-DSA-87 public key still had the last element of the OID wrong)",
       "createdAt": "2024-11-11T20:58:59Z",
-      "updatedAt": "2024-11-13T10:58:58Z",
+      "updatedAt": "2024-11-14T13:52:09Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "3c97682adaf7626777066823f7792c8510595072",
       "headRepository": "tomato42/dilithium-certificates",
       "headRefName": "ans.1-dec-fix",
       "headRefOid": "01746fe415be30782fc757a9e07013ffd3acdb0c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-14T12:52:50Z",
+      "mergedAt": "2024-11-14T12:52:50Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "fae1038b28cab107741f80cff3cbf93eaca34f56"
+      },
       "comments": [
         {
           "author": "bwesterb",
@@ -2995,6 +3008,177 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOIEpj4c6B6u8v",
+      "title": "Tighten up prehash section and fix spec bug",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/50",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-14T12:50:46Z",
+      "updatedAt": "2024-11-15T18:37:47Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "c9825b274212d73e61fb0c821ef159fbe206f5a9",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/tighten-prehash",
+      "headRefOid": "14db0c74ed743a9567490eaab100c60db675a970",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6RZddU",
+          "commit": {
+            "abbreviatedOid": "14db0c7"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T18:37:47Z",
+          "updatedAt": "2024-11-15T18:37:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOIEpj4c6B6-_M",
+      "title": "Add example certificate and autogenerate pretty versions",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/51",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-14T13:24:08Z",
+      "updatedAt": "2024-11-15T18:36:59Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "fae1038b28cab107741f80cff3cbf93eaca34f56",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/crt-and-autopretty",
+      "headRefOid": "59f2a70df3be2e0977b5e117234820d8df9fba65",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6RZbjs",
+          "commit": {
+            "abbreviatedOid": "59f2a70"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T18:32:26Z",
+          "updatedAt": "2024-11-15T18:36:59Z",
+          "comments": [
+            {
+              "originalPosition": 111,
+              "body": "There seems to be a compatibility issue here with `der2ascii`:\r\n```\r\nSyntax error: line 111: encoding/hex: invalid byte: U+000A\r\n```",
+              "createdAt": "2024-11-15T18:32:26Z",
+              "updatedAt": "2024-11-15T18:36:59Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "Was able to successfully generate this cert from PEM, extract the public key, and verify in AWS-LC. See `kMLDSA65Cert` in the gtest `TestMLDSA65`.\r\n\r\nAdded to AWS-LC:\r\n\r\nhttps://github.com/aws/aws-lc/pull/1963/commits/c71bbac49160038ba8262b9f1996b43e197410ba#diff-e8a50b868e2b0f2f27afa3c9b1fbc844dce0cac6883ea9615882149e16eb4e35 ",
+              "createdAt": "2024-11-15T18:36:48Z",
+              "updatedAt": "2024-11-15T18:36:59Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOIEpj4c6CBNgu",
+      "title": "Preempt comment from Deb on repetitive text",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/52",
+      "state": "MERGED",
+      "author": "danvangeest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-15T08:47:45Z",
+      "updatedAt": "2024-11-15T13:07:19Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "fae1038b28cab107741f80cff3cbf93eaca34f56",
+      "headRepository": "danvangeest/dilithium-certificates",
+      "headRefName": "dvg/preempt_Deb_comment",
+      "headRefOid": "cbc68878845cfd6a3de1eb88e36e4c5e5828741d",
+      "closedAt": "2024-11-15T13:07:19Z",
+      "mergedAt": "2024-11-15T13:07:19Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "5683122a16aa7c60b6ecd5baff76ead58342b86b"
+      },
+      "comments": [
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "With this change, it suggests that we define that type here instead of citing the definition.",
+          "createdAt": "2024-11-15T10:39:50Z",
+          "updatedAt": "2024-11-15T10:39:50Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Line 191 says \"NOTE: The above syntax is from {{!RFC5912}}...\" although that is still not explicit without following the reference.\r\n\r\nLine 191 could be changed to \"... The above definition if from...\", or line 179 could be changed to \"The AlgorithmIdentifier type is defined in {{!RFC5912}} as follows:\"",
+          "createdAt": "2024-11-15T12:24:41Z",
+          "updatedAt": "2024-11-15T12:24:41Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Perfect.",
+          "createdAt": "2024-11-15T12:53:49Z",
+          "updatedAt": "2024-11-15T12:53:49Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Perfect.\r\n\r\nYou didn't express a preference for either of the options I proposed so I picked one :)",
+          "createdAt": "2024-11-15T12:57:05Z",
+          "updatedAt": "2024-11-15T12:57:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6RWJJZ",
+          "commit": {
+            "abbreviatedOid": "ff02d53"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T12:56:34Z",
+          "updatedAt": "2024-11-15T12:56:34Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nThe AlgorithmIdentifier type is defined in {{!RFC5912}} as follows:\r\n```",
+              "createdAt": "2024-11-15T12:56:34Z",
+              "updatedAt": "2024-11-15T12:56:34Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
