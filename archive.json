@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-17T00:59:37.674243+00:00",
+  "timestamp": "2024-11-19T00:56:26.076960+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -3061,7 +3061,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-14T13:24:08Z",
-      "updatedAt": "2024-11-15T18:36:59Z",
+      "updatedAt": "2024-11-17T14:15:11Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "fae1038b28cab107741f80cff3cbf93eaca34f56",
@@ -3097,6 +3097,26 @@
               "body": "Was able to successfully generate this cert from PEM, extract the public key, and verify in AWS-LC. See `kMLDSA65Cert` in the gtest `TestMLDSA65`.\r\n\r\nAdded to AWS-LC:\r\n\r\nhttps://github.com/aws/aws-lc/pull/1963/commits/c71bbac49160038ba8262b9f1996b43e197410ba#diff-e8a50b868e2b0f2f27afa3c9b1fbc844dce0cac6883ea9615882149e16eb4e35 ",
               "createdAt": "2024-11-15T18:36:48Z",
               "updatedAt": "2024-11-15T18:36:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Rf1Wl",
+          "commit": {
+            "abbreviatedOid": "59f2a70"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-17T14:15:11Z",
+          "updatedAt": "2024-11-17T14:15:11Z",
+          "comments": [
+            {
+              "originalPosition": 111,
+              "body": "It's because the long lines are wrapped using `fold`. Check out `examples/pretty`.",
+              "createdAt": "2024-11-17T14:15:11Z",
+              "updatedAt": "2024-11-17T14:15:12Z"
             }
           ]
         }
