@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T00:56:26.076960+00:00",
+  "timestamp": "2024-11-21T00:55:59.421655+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -691,6 +691,22 @@
           "updatedAt": "2024-10-25T08:33:57Z"
         }
       ]
+    },
+    {
+      "number": 53,
+      "id": "I_kwDOIEpj4c6fUX-Z",
+      "title": "ASN.1 size constraints on public key and private key types",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/53",
+      "state": "OPEN",
+      "author": "ounsworth",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See: https://mailarchive.ietf.org/arch/msg/spasm/G45YcgPnTwvqmOJwX6IxLzYA-LI/",
+      "createdAt": "2024-11-19T17:16:24Z",
+      "updatedAt": "2024-11-19T17:16:24Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
