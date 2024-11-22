@@ -561,7 +561,7 @@ Table of Contents
    concerns by virtue of having keys and signatures that are
    indistinguishable from ML-DSA (ie ML-DSA and ExternalMu-ML-DSA are
    mathematically equivalent algorithms).  The difference between ML-DSA
-   and ExternalMu-ML-DSA is mererly an internal implementation detail of
+   and ExternalMu-ML-DSA is merely an internal implementation detail of
    the signer and has no impact on the verifier or network protocol.
 
 10.  References
