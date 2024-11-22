@@ -403,6 +403,8 @@ Many applications and protocols include message digesting, but there exist some 
 This section presents the "ExternalMu-ML-DSA" processing flow which is composed of a new pre-hashing step `ExternalMu-ML-DSA.Prehash()` followed by alternate versions of `Sign()` (originally defined in [FIPS204] Algorithm 2) and `Sign_internal()` (originally defined in [FIPS204] Algorithm 7) which together provide an interface for performing pre-hashed signatures as specified in [FIPS204], which produces signature values which are indistinguishable from signatures produced by ML-DSA.Sign() and are therefore compatible with the normal ML-DSA.Verify() and are identified by the same Object Identifiers as for ML-DSA. A ML-DSA key and certificate MAY be used with either ML-DSA or ExternalMu-ML-DSA interchangeably. Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA and therefore might require explicit support from hardware or software cryptographic modules.
 
 Note that the signing mode defined here is different from HashML-DSA defined in [FIPS204] section 5.4. This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.
+See {{sec-disallow-hash}} for additional discussion of why HashML-DSA is disallowed.
+
 
 All functions and notation used in {{fig-externalmu-ml-dsa-external}} and {{fig-externalmu-ml-dsa-internal}} are defined in [FIPS204].
 
@@ -450,6 +452,12 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
    ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
 ~~~
 {: #fig-externalmu-ml-dsa-internal title="Internal steps of ExternalMu-ML-DSA"}
+
+There are some implementation considerations and security specific to the ExternalMu mode that are worth discussion.
+
+An additional implementation consideration imposed by ExternalMu-ML-DSA is the requirement to provide the public key, or its prehash, to the `ExternalMu-DL-DSA.Prehash()` routine. This is different from conventional pre-hashing which only requires the message and the hash function as input. This may impose additional implementation burden in order for the client that is performing the pre-hash to first obtain the public key prior to invoking the pre-hash routine. Implementions are RECOMMENDED to expose interfaces for both ML-DSA and ExternalMu-ML-DSA so that applications can manage themselves the tradeoff between ExternalMu pre-hashing when they have the public key available, and pure ML-DSA which requires streaming the entire message into the cryptographic module.
+
+Security-wise, during the signing operation of pure (or "one-step") ML-DSA, the cryptographic module extracts the public key hash `tr` from the secret key object, and thus there is no possibility of mismatch between `tr` and `sk`. In ExternalMu-ML-DSA, the public key or its hash needs to be provided to the `Prehash()` routine indpedendly of the secret key, and while the exact mechanism by which it is delivered will be implementation-specific, it does open a windown for mismatches between `tr` and `sk`. First, this will produce a signature which will fail to verify under the intended public key since a compliant `Verify()` routine will independently compute `tr` from the public key. Second, a malicious or tricked signer could potentially produce a signature which validates under a different public key, which weakens the implicit security assumptions of the ML-DSA algorithm. Implementors SHOULD to pay careful attention to how the public key or its hash is delivered to the `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing this data. Note that HashML-DSA also weakens this security assumption even further by omiting the public key entirely from the message representative hash, and so in this regard, ExternalMu-ML-DSA is still superior to HashML-DSA.
 
 # IANA Considerations
 
@@ -541,6 +549,14 @@ key serialization. It for this reason the public key structure
 defined in {{ML-DSA-PubblicKey}} is intentionally encoded as a
 single OCTET STRING.
 
+
+## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
+
+The HashML-DSA mode defined in section 5.4 of [FIPS204] MUST NOT be used within X.509 either as a public key type nor as a signature algorithm. This is done for both security and implementation reasons.
+
+The security reason for disallowing HashML-DSA is that the design of the ML-DSA algorithm provides enhanced resistance against signature collision attacks, compared with conventional RSA or ECDSA signature algorithms. Specifically, ML-DSA binds the hash of the public key `tr` to the message to-be-signed prior to hashing, as described in line 6 of Algorithm 7 of [FIPS204]. In practice, this provides binding to the indended verification public key, preventing some attacks that would otherwise allow a signature to be successfully verified against a non-intended public key. Also, this binding means that in the case of the discovery of a collision attack against SHA-3, an attacker would have to perform a public-key-specific collision search in order to find message pairs such that `H(tr || m1) = H(tr || m2)` since a simple hash collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of these enhanced security properties and therefore is a weaker signature algorithm.
+
+The implentation reason for disallowing HashML-DSA stems from the fact that ML-DSA and HashML-DSA are incompatible algorithms that require different `Verify()` routines. This forwards to the protocol the complexity of informing the client whether to use `ML-DSA.Verify()` or `HashML-DSA.Verify()`, which itself introduces some risk of cross-protocol forgery attacks in some contexts. Additionally, since the same object identifiers (OIDs) are used to identify the ML-DSA public keys and ML-DSA signature algorithms, an implementation would need to commit a given public key to be either of type `ML-DSA` or `HashML-DSA` at the time of certificate creation. This is anticipated to cause operational issues in contexts where the operator does not know at key generation time whether the key will need to produce pure or pre-hashed signatures. ExternalMu-ML-DSA avoids all of these operational concerns by virtue of having keys and signatures that are indistinguishable from ML-DSA (ie ML-DSA and ExternalMu-ML-DSA are mathematically equivalent algorithms). The difference between ML-DSA and ExternalMu-ML-DSA is merely an internal implementation detail of the signer and has no impact on the verifier or network protocol.
 
 --- back
 
