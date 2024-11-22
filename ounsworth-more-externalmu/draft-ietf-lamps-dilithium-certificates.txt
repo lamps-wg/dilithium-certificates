@@ -435,12 +435,14 @@ Table of Contents
    compliant Verify() routine will independently compute tr from the
    public key.  Second, a malicious or tricked signer could potentially
    produce a signature which validates under a different public key,
-   which violates an implicit security assumption of the ML-DSA
-   algorithm.  Note however that HashML-DSA equally violates this
-   security assumption, and in this regard, ExternalMu-ML-DSA is still
-   superior to HashML-DSA.  Implementors SHOULD to pay careful attention
-   to how the public key or its hash is delivered to the ExternalMu-ML-
-   DSA.Prahash() routine, and from where they are sourcing this data.
+   which weakens the implicit security assumptions of the ML-DSA
+   algorithm.  Implementors SHOULD to pay careful attention to how the
+   public key or its hash is delivered to the ExternalMu-ML-
+   DSA.Prehash() routine, and from where they are sourcing this data.
+   Note that HashML-DSA also weakens this security assumption even
+   further by omiting the public key entirely from the message
+   representative hash, and so in this regard, ExternalMu-ML-DSA is
+   still superior to HashML-DSA.
 
 8.  IANA Considerations
 
@@ -560,7 +562,7 @@ Table of Contents
    indistinguishable from ML-DSA (ie ML-DSA and ExternalMu-ML-DSA are
    mathematically equivalent algorithms).  The difference between ML-DSA
    and ExternalMu-ML-DSA is mererly an internal implementation detail of
-   the signer and has no impact on the verifier.
+   the signer and has no impact on the verifier or network protocol.
 
 10.  References
 
