@@ -360,6 +360,8 @@ Table of Contents
    HashML-DSA as defined in [FIPS204] and identified by id-hash-ml-dsa-
    44-with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
    with-sha512 MUST NOT be used in X.509 and related PKIX protocols.
+   See Section 9.1 for additional discussion of why HashML-DSA is
+   disallowed.
 
    All functions and notation used in Figure 1 and Figure 2 are defined
    in [FIPS204].
@@ -439,9 +441,6 @@ Table of Contents
    superior to HashML-DSA.  Implementors SHOULD to pay careful attention
    to how the public key or its hash is delivered to the ExternalMu-ML-
    DSA.Prahash() routine, and from where they are sourcing this data.
-
-   See Section 9.1 for additional discussion of why HashML-DSA is
-   disallowed.
 
 8.  IANA Considerations
 
