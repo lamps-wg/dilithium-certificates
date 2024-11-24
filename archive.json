@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T00:55:59.421655+00:00",
+  "timestamp": "2024-11-24T01:00:46.059584+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -704,9 +704,17 @@
       "labels": [],
       "body": "See: https://mailarchive.ietf.org/arch/msg/spasm/G45YcgPnTwvqmOJwX6IxLzYA-LI/",
       "createdAt": "2024-11-19T17:16:24Z",
-      "updatedAt": "2024-11-19T17:16:24Z",
+      "updatedAt": "2024-11-21T14:56:35Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Since this draft relies on the cms-ml-dsa draft for ASN.1, you probably want to follow this instead: https://github.com/lamps-wg/cms-ml-dsa/issues/10",
+          "createdAt": "2024-11-21T14:56:34Z",
+          "updatedAt": "2024-11-21T14:56:34Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3037,7 +3045,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-14T12:50:46Z",
-      "updatedAt": "2024-11-15T18:37:47Z",
+      "updatedAt": "2024-11-21T01:25:15Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "c9825b274212d73e61fb0c821ef159fbe206f5a9",
@@ -3062,6 +3070,38 @@
           "createdAt": "2024-11-15T18:37:47Z",
           "updatedAt": "2024-11-15T18:37:47Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6SCG91",
+          "commit": {
+            "abbreviatedOid": "14db0c7"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "PR is an improvement. Could be merged as-is, but I left some suggestions.",
+          "createdAt": "2024-11-21T01:18:21Z",
+          "updatedAt": "2024-11-21T01:25:15Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "CRLs do tend to be large (up to 1 mb), but very rarely would you sign a lot of them at the same time. Typically a CA will only issue 1 CRL per day. That's why I also had the example of issuing a large number of certificates containing large public keys.",
+              "createdAt": "2024-11-21T01:18:21Z",
+              "updatedAt": "2024-11-21T01:25:15Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "Suggest:\r\n\r\nTogether these are functionally equivalent to `ML-DSA.Sign()` from [FIPS204] in that they create exactly the same signatures as regular pure ML-DSA, which can be verified by the regular `ML-DSA.Verify()`. ",
+              "createdAt": "2024-11-21T01:23:17Z",
+              "updatedAt": "2024-11-21T01:25:15Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "Suggest:\r\n\r\n... public keys identified by these OIDs MUST NOT be used within X.509 certificates, and the signature algorithms identified by these OIDs MUST NOT be used within X.509 and related PKIX protocols.",
+              "createdAt": "2024-11-21T01:24:18Z",
+              "updatedAt": "2024-11-21T01:25:15Z"
+            }
+          ]
         }
       ]
     },
@@ -3211,6 +3251,73 @@
               "body": "```suggestion\r\nThe AlgorithmIdentifier type is defined in {{!RFC5912}} as follows:\r\n```",
               "createdAt": "2024-11-15T12:56:34Z",
               "updatedAt": "2024-11-15T12:56:34Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOIEpj4c6C2hTT",
+      "title": "More discussion of ExternalMu",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/54",
+      "state": "OPEN",
+      "author": "ounsworth",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I added some more implementation and security considerations as well as the rationale for disallowing HashML-DSA, which I feel needs to be stated clearly (this comes from recent IETF and pqc-forum mail list discussions).",
+      "createdAt": "2024-11-22T18:02:54Z",
+      "updatedAt": "2024-11-22T21:05:20Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "5683122a16aa7c60b6ecd5baff76ead58342b86b",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "ounsworth-more-externalmu",
+      "headRefOid": "b09d19ba8b5de4c8590d8b2890e66e9d5643b240",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6SXR34",
+          "commit": {
+            "abbreviatedOid": "aff485b"
+          },
+          "author": "johngray-dev",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-22T20:27:26Z",
+          "updatedAt": "2024-11-22T20:27:27Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "typo..   `ExternalMu-ML-DSA.Prahash()'  should be prehash.\r\n\r\nHow does HashML-DSA equally violate the security assumption?   It doesn't require the public key, only a Hash algorithm.",
+              "createdAt": "2024-11-22T20:27:26Z",
+              "updatedAt": "2024-11-22T20:27:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6SXSl4",
+          "commit": {
+            "abbreviatedOid": "aff485b"
+          },
+          "author": "johngray-dev",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-22T20:29:22Z",
+          "updatedAt": "2024-11-22T20:29:22Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "Great comment!",
+              "createdAt": "2024-11-22T20:29:22Z",
+              "updatedAt": "2024-11-22T20:29:22Z"
             }
           ]
         }
