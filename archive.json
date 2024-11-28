@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-26T00:56:55.386086+00:00",
+  "timestamp": "2024-11-28T00:57:36.933827+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -3268,7 +3268,7 @@
       "labels": [],
       "body": "I added some more implementation and security considerations as well as the rationale for disallowing HashML-DSA, which I feel needs to be stated clearly (this comes from recent IETF and pqc-forum mail list discussions).",
       "createdAt": "2024-11-22T18:02:54Z",
-      "updatedAt": "2024-11-22T21:05:20Z",
+      "updatedAt": "2024-11-27T15:45:15Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5683122a16aa7c60b6ecd5baff76ead58342b86b",
@@ -3318,6 +3318,26 @@
               "body": "Great comment!",
               "createdAt": "2024-11-22T20:29:22Z",
               "updatedAt": "2024-11-22T20:29:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6S8wwv",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "johngray-dev",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-27T15:45:15Z",
+          "updatedAt": "2024-11-27T15:45:15Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "ExternalMu-DL-DSA.Prehash()  - typo\r\n\r\n- language typos... Check over.",
+              "createdAt": "2024-11-27T15:45:15Z",
+              "updatedAt": "2024-11-27T15:45:15Z"
             }
           ]
         }
