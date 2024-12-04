@@ -400,9 +400,10 @@ process can be separated into a pre-hash step and a core signature
 step in order to ease operational requirements around large or
 inconsistently-sized payloads. This can be performed at the
 protocol layer, but not all protocols support it.
-An example in [RFC5280] is the certificate revocation list
+Examples in [RFC5280] are certifiacte and certificate revocation list
 (CRL) data structures, that do not include message digesting before signing.
-This makes signing large volumes of large CRLs challenging.
+This can make signing large CRLs or a high volume of certificates
+with large public keys challenging.
 
 As mentioned in the introduction, pure ML-DSA signing itself
 supports a prehashing flow by splitting the operation over two
@@ -410,9 +411,12 @@ modules. In this section we make this "ExternalMu-ML-DSA"
 more explicit.
 
 There are two steps. First an `ExternalMu-ML-DSA.Prehash()`
-followed by `ExternalMu-ML-DSA.Sign()`. Together these operate
-as `ML-DSA.Sign()` from [FIPS204] and thus create exactly the same
-signatures as regular pure ML-DSA.
+followed by `ExternalMu-ML-DSA.Sign()`. Together these are functionally
+equivalent to `ML-DSA.Sign()` from [FIPS204] in that they
+create exactly the same
+signatures as regular pure ML-DSA, which can be verified by the
+unmodified `ML-DSA.Verify()`.
+
 An ML-DSA key and certificate MAY be used with either ML-DSA
 or ExternalMu-ML-DSA interchangeably.
 Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA
@@ -421,8 +425,8 @@ software cryptographic modules.
 
 Note that the signing mode defined here is different from HashML-DSA
 defined in [FIPS204] section 5.4. This specification uses exclusively
-ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as
-defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`,
+ExternalMu-ML-DSA for pre-hashed use cases, and thus public
+keys identified by `id-hash-ml-dsa-44-with-sha512`,
 `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512`
 MUST NOT be used in X.509 and related PKIX protocols.
 
