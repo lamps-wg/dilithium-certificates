@@ -412,10 +412,9 @@ more explicit.
 
 There are two steps. First an `ExternalMu-ML-DSA.Prehash()`
 followed by `ExternalMu-ML-DSA.Sign()`. Together these are functionally
-equivalent to `ML-DSA.Sign()` from [FIPS204] in that they
-create exactly the same
-signatures as regular pure ML-DSA, which can be verified by the
-unmodified `ML-DSA.Verify()`.
+equivalent to `ML-DSA.Sign()` from [FIPS204] in that they create
+exactly the same signatures as regular pure ML-DSA, which can be
+verified by the unmodified `ML-DSA.Verify()`.
 
 An ML-DSA key and certificate MAY be used with either ML-DSA
 or ExternalMu-ML-DSA interchangeably.
