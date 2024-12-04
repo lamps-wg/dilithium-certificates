@@ -400,7 +400,7 @@ process can be separated into a pre-hash step and a core signature
 step in order to ease operational requirements around large or
 inconsistently-sized payloads. This can be performed at the
 protocol layer, but not all protocols support it.
-Examples in [RFC5280] are certifiacte and certificate revocation list
+Examples in [RFC5280] are certificate and certificate revocation list
 (CRL) data structures, that do not include message digesting before signing.
 This can make signing large CRLs or a high volume of certificates
 with large public keys challenging.
