@@ -331,7 +331,7 @@ Table of Contents
    step in order to ease operational requirements around large or
    inconsistently-sized payloads.  This can be performed at the protocol
    layer, but not all protocols support it.  Examples in [RFC5280] are
-   certifiacte and certificate revocation list (CRL) data structures,
+   certificate and certificate revocation list (CRL) data structures,
    that do not include message digesting before signing.  This can make
    signing large CRLs or a high volume of certificates with large public
    keys challenging.
