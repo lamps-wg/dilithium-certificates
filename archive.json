@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-03T00:58:49.054633+00:00",
+  "timestamp": "2024-12-05T00:58:54.204670+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1523,21 +1523,21 @@
       "id": "PR_kwDOIEpj4c59iWdT",
       "title": "Added mention of pure ML-DSA and text about CRLs.",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/31",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Added text to mention pure ML-DSA.\r\n\r\nAlso added text while pure ML-DSA is fine for X.509 and CRLs.\r\n\r\n@bwesterb , @seanturner please check.",
       "createdAt": "2024-10-03T18:26:32Z",
-      "updatedAt": "2024-11-04T02:06:56Z",
+      "updatedAt": "2024-12-04T11:09:52Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
       "headRepository": "csosto-pk/dilithium-certificates",
       "headRefName": "main",
       "headRefOid": "2fff34b31b64fbd74355a74defb47901fd394349",
-      "closedAt": null,
+      "closedAt": "2024-12-04T11:09:52Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1555,6 +1555,13 @@
           "body": "Give me a little time. \r\n\r\nI think we will need HashML-DSA support in our draft although I was against it all along. I recently found out that some HSMs are very much against large MB or even KB size messages. \r\n\r\nI am trying to confirm with other vendors to make sure this is not unique to the things I am hearing here and there we will have to tweak the text. ",
           "createdAt": "2024-10-28T15:21:10Z",
           "updatedAt": "2024-10-28T15:21:38Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this old PR.",
+          "createdAt": "2024-12-04T11:09:52Z",
+          "updatedAt": "2024-12-04T11:09:52Z"
         }
       ],
       "reviews": [
@@ -3038,24 +3045,26 @@
       "id": "PR_kwDOIEpj4c6B6u8v",
       "title": "Tighten up prehash section and fix spec bug",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-14T12:50:46Z",
-      "updatedAt": "2024-11-21T01:25:15Z",
+      "updatedAt": "2024-12-04T11:23:12Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "c9825b274212d73e61fb0c821ef159fbe206f5a9",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "bas/tighten-prehash",
       "headRefOid": "14db0c74ed743a9567490eaab100c60db675a970",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-04T11:08:53Z",
+      "mergedAt": "2024-12-04T11:08:53Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "5d7e57e104a21566d26ab5e95a276d4afa5dd70f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3102,6 +3111,86 @@
               "updatedAt": "2024-11-21T01:25:15Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6TtdPC",
+          "commit": {
+            "abbreviatedOid": "14db0c7"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T11:07:01Z",
+          "updatedAt": "2024-12-04T11:07:02Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "Will tweak in separate PR.",
+              "createdAt": "2024-12-04T11:07:02Z",
+              "updatedAt": "2024-12-04T11:07:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Ttd9Z",
+          "commit": {
+            "abbreviatedOid": "14db0c7"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T11:07:34Z",
+          "updatedAt": "2024-12-04T11:07:34Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "Will tweak in separate PR.",
+              "createdAt": "2024-12-04T11:07:34Z",
+              "updatedAt": "2024-12-04T11:07:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Ttfpb",
+          "commit": {
+            "abbreviatedOid": "14db0c7"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T11:08:41Z",
+          "updatedAt": "2024-12-04T11:08:41Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "Will tweak in separate PR.",
+              "createdAt": "2024-12-04T11:08:41Z",
+              "updatedAt": "2024-12-04T11:08:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Ttp6T",
+          "commit": {
+            "abbreviatedOid": "14db0c7"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T11:23:12Z",
+          "updatedAt": "2024-12-04T11:23:12Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "https://github.com/lamps-wg/dilithium-certificates/pull/55",
+              "createdAt": "2024-12-04T11:23:12Z",
+              "updatedAt": "2024-12-04T11:23:12Z"
+            }
+          ]
         }
       ]
     },
@@ -3110,24 +3199,26 @@
       "id": "PR_kwDOIEpj4c6B6-_M",
       "title": "Add example certificate and autogenerate pretty versions",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-14T13:24:08Z",
-      "updatedAt": "2024-11-17T14:15:11Z",
+      "updatedAt": "2024-12-04T11:09:21Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "fae1038b28cab107741f80cff3cbf93eaca34f56",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "bas/crt-and-autopretty",
       "headRefOid": "59f2a70df3be2e0977b5e117234820d8df9fba65",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-04T11:09:21Z",
+      "mergedAt": "2024-12-04T11:09:21Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "50fddc7fa3811139ad8feceb16fcd48e41f56bd3"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3173,6 +3264,26 @@
               "body": "It's because the long lines are wrapped using `fold`. Check out `examples/pretty`.",
               "createdAt": "2024-11-17T14:15:11Z",
               "updatedAt": "2024-11-17T14:15:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6TtgXH",
+          "commit": {
+            "abbreviatedOid": "59f2a70"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T11:09:14Z",
+          "updatedAt": "2024-12-04T11:09:15Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Great, thanks for testing!",
+              "createdAt": "2024-12-04T11:09:14Z",
+              "updatedAt": "2024-12-04T11:09:15Z"
             }
           ]
         }
@@ -3268,7 +3379,7 @@
       "labels": [],
       "body": "I added some more implementation and security considerations as well as the rationale for disallowing HashML-DSA, which I feel needs to be stated clearly (this comes from recent IETF and pqc-forum mail list discussions).",
       "createdAt": "2024-11-22T18:02:54Z",
-      "updatedAt": "2024-11-27T15:45:15Z",
+      "updatedAt": "2024-12-03T17:11:26Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5683122a16aa7c60b6ecd5baff76ead58342b86b",
@@ -3338,6 +3449,99 @@
               "body": "ExternalMu-DL-DSA.Prehash()  - typo\r\n\r\n- language typos... Check over.",
               "createdAt": "2024-11-27T15:45:15Z",
               "updatedAt": "2024-11-27T15:45:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6TmJSI",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-03T16:44:34Z",
+          "updatedAt": "2024-12-03T17:11:26Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "I think the entire ExternalMu-ML-DSA section should be an appendix rather than a core part of the document.\r\n\r\nIn fact, I think the entire ExternalMu-ML-DSA section shouldn't contain any normative language.  It is an implementation detail which does not affect interoperability.  It's not even a \"mode\" of signing, it IS pure ML-DSA.Sign, just split across two functions.\r\n\r\nThe point of the ExternalMu-ML-DSA section should be \"If you want to perform the hashing step locally and send a digest to an HSM, FIPS 204 allows you to do that and here's explicitly how it can be done.\"",
+              "createdAt": "2024-12-03T16:44:34Z",
+              "updatedAt": "2024-12-03T17:11:26Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "I strongly disagree with \"Implementations are RECOMMENDED to expose interfaces for both ML-DSA and ExternalMu-ML-DSA so that applications blah blah blah\".  ExternalMu-ML-DSA is only needed if you need to send the message representative to an HSM/smartcard/non-local-whatever.  If you're writing an implementation for an HSM/smartcard/non-local-whatever then sure, implement ExternalMu-ML-DSA, but you shouldn't even need to expose ExternalMu-ML-DSA to the application, that's only something that your HSM/smartcard/non-local-whatever driver needs to know about.",
+              "createdAt": "2024-12-03T17:11:20Z",
+              "updatedAt": "2024-12-03T17:11:26Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOIEpj4c6EBYTT",
+      "title": "Suggestions by Mike on PR #50",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/55",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-04T11:23:04Z",
+      "updatedAt": "2024-12-04T16:50:21Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "50fddc7fa3811139ad8feceb16fcd48e41f56bd3",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/mike",
+      "headRefOid": "6c99cca9fb099358e92fbfd9ad2a5a2f0c239ff4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6TxShU",
+          "commit": {
+            "abbreviatedOid": "e74f1c5"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T15:51:11Z",
+          "updatedAt": "2024-12-04T15:51:11Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nExamples in [RFC5280] are certificate and certificate revocation list\r\n```",
+              "createdAt": "2024-12-04T15:51:11Z",
+              "updatedAt": "2024-12-04T15:51:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6TxTBS",
+          "commit": {
+            "abbreviatedOid": "e74f1c5"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-04T15:51:57Z",
+          "updatedAt": "2024-12-04T15:51:57Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nfollowed by `ExternalMu-ML-DSA.Sign()`. Together these are functionally\r\nequivalent to `ML-DSA.Sign()` from [FIPS204] in that they create\r\nexactly the same signatures as regular pure ML-DSA, which can be\r\nverified by the unmodified `ML-DSA.Verify()`.\r\n```",
+              "createdAt": "2024-12-04T15:51:57Z",
+              "updatedAt": "2024-12-04T15:51:57Z"
             }
           ]
         }
