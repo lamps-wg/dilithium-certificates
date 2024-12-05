@@ -521,7 +521,7 @@ EDNOTE: Discuss side-channels for ML-DSA.
 In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
 on Gaussian sampling. Implementations must still take great care
-not to leak information via varius side channels. While deliberate
+not to leak information via various side channels. While deliberate
 design decisions such as these can help to deliver a greater ease
 of secure implementation - particularly against side-channel
 attacks - it does not necessarily provide resistance to more
