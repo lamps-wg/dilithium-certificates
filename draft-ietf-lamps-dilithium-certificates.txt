@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 7 June 2025                                           S. Turner
+Expires: 8 June 2025                                           S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                         4 December 2024
+                                                         5 December 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 June 2025.
+   This Internet-Draft will expire on 8 June 2025.
 
 Copyright Notice
 
@@ -438,7 +438,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    In the design of ML-DSA, care has been taken to make side-channel
    resilience easier to achieve.  For instance, ML-DSA does not depend
    on Gaussian sampling.  Implementations must still take great care not
-   to leak information via varius side channels.  While deliberate
+   to leak information via various side channels.  While deliberate
    design decisions such as these can help to deliver a greater ease of
    secure implementation - particularly against side-channel attacks -
    it does not necessarily provide resistance to more powerful attacks
