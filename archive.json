@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-05T00:58:54.204670+00:00",
+  "timestamp": "2024-12-08T01:03:09.672224+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -3544,6 +3544,48 @@
               "updatedAt": "2024-12-04T15:51:57Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOIEpj4c6EJc2h",
+      "title": "Fix nits",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/56",
+      "state": "MERGED",
+      "author": "loganaden",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "varius -> various",
+      "createdAt": "2024-12-05T08:38:51Z",
+      "updatedAt": "2024-12-05T16:54:15Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "50fddc7fa3811139ad8feceb16fcd48e41f56bd3",
+      "headRepository": "cyberstormdotmu/dilithium-certificates",
+      "headRefName": "main",
+      "headRefOid": "aef6a41b610d4d73acf0a12b01f3c2ade3be4bdb",
+      "closedAt": "2024-12-05T09:27:54Z",
+      "mergedAt": "2024-12-05T09:27:54Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "21b18a015893eaf1e9fcf605158685f8ad9ae50a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6T9WgD",
+          "commit": {
+            "abbreviatedOid": "aef6a41"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "Looks good. ",
+          "createdAt": "2024-12-05T16:54:15Z",
+          "updatedAt": "2024-12-05T16:54:15Z",
+          "comments": []
         }
       ]
     }
