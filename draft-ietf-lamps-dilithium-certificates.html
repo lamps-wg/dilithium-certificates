@@ -542,7 +542,11 @@ figcaption, caption {
   }
   pre, svg {
     display: inline-block;
-    overflow-x: auto;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
   }
   pre {
     max-width: 100%;
@@ -1052,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 8 June 2025</td>
+<td class="center">Expires 14 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-05" class="published">5 December 2024</time>
+<time datetime="2024-12-11" class="published">11 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-08">8 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-14">14 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1137,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1515,34 +1519,36 @@ process can be separated into a pre-hash step and a core signature
 step in order to ease operational requirements around large or
 inconsistently-sized payloads. This can be performed at the
 protocol layer, but not all protocols support it.
-An example in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> is the certificate revocation list
+Examples in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> are certificate and certificate revocation list
 (CRL) data structures, that do not include message digesting before signing.
-This makes signing large volumes of large CRLs challenging.<a href="#section-7-1" class="pilcrow">¶</a></p>
+This can make signing large CRLs or a high volume of certificates
+with large public keys challenging.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">As mentioned in the introduction, pure ML-DSA signing itself
 supports a prehashing flow by splitting the operation over two
 modules. In this section we make this "ExternalMu-ML-DSA"
 more explicit.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">There are two steps. First an <code>ExternalMu-ML-DSA.Prehash()</code>
-followed by <code>ExternalMu-ML-DSA.Sign()</code>. Together these operate
-as <code>ML-DSA.Sign()</code> from <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and thus create exactly the same
-signatures as regular pure ML-DSA.
-An ML-DSA key and certificate <span class="bcp14">MAY</span> be used with either ML-DSA
+followed by <code>ExternalMu-ML-DSA.Sign()</code>. Together these are functionally
+equivalent to <code>ML-DSA.Sign()</code> from <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> in that they create
+exactly the same signatures as regular pure ML-DSA, which can be
+verified by the unmodified <code>ML-DSA.Verify()</code>.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">An ML-DSA key and certificate <span class="bcp14">MAY</span> be used with either ML-DSA
 or ExternalMu-ML-DSA interchangeably.
 Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA
 and therefore might require explicit support from hardware or
-software cryptographic modules.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">Note that the signing mode defined here is different from HashML-DSA
+software cryptographic modules.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">Note that the signing mode defined here is different from HashML-DSA
 defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> section 5.4. This specification uses exclusively
-ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as
-defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and identified by <code>id-hash-ml-dsa-44-with-sha512</code>,
+ExternalMu-ML-DSA for pre-hashed use cases, and thus public
+keys identified by <code>id-hash-ml-dsa-44-with-sha512</code>,
 <code>id-hash-ml-dsa-65-with-sha512</code>, and <code>id-hash-ml-dsa-87-with-sha512</code>
-        <span class="bcp14">MUST NOT</span> be used in X.509 and related PKIX protocols.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<p id="section-7-5">All functions and notation used in <a href="#fig-externalmu-ml-dsa-external" class="auto internal xref">Figure 1</a>
-and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 2</a> are defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.<a href="#section-7-5" class="pilcrow">¶</a></p>
-<p id="section-7-6">External operations:<a href="#section-7-6" class="pilcrow">¶</a></p>
+        <span class="bcp14">MUST NOT</span> be used in X.509 and related PKIX protocols.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-6">All functions and notation used in <a href="#fig-externalmu-ml-dsa-external" class="auto internal xref">Figure 1</a>
+and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 2</a> are defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.<a href="#section-7-6" class="pilcrow">¶</a></p>
+<p id="section-7-7">External operations:<a href="#section-7-7" class="pilcrow">¶</a></p>
 <span id="name-external-steps-of-externalm"></span><div id="fig-externalmu-ml-dsa-external">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-7-7.1">
+        <div class="alignLeft art-text artwork" id="section-7-8.1">
 <pre>
 ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 
@@ -1561,10 +1567,10 @@ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 <a href="#name-external-steps-of-externalm" class="selfRef">External steps of ExternalMu-ML-DSA</a>
         </figcaption></figure>
 </div>
-<p id="section-7-8">Internal operations:<a href="#section-7-8" class="pilcrow">¶</a></p>
+<p id="section-7-9">Internal operations:<a href="#section-7-9" class="pilcrow">¶</a></p>
 <span id="name-internal-steps-of-externalm"></span><div id="fig-externalmu-ml-dsa-internal">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="section-7-9.1">
+        <div class="alignLeft art-text artwork" id="section-7-10.1">
 <pre>
 ExternalMu-ML-DSA.Sign(sk, mu):
 
