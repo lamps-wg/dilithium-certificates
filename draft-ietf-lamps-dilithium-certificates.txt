@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 14 June 2025                                          S. Turner
+Expires: 15 June 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                        11 December 2024
+                                                        12 December 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 June 2025.
+   This Internet-Draft will expire on 15 June 2025.
 
 Copyright Notice
 
@@ -490,13 +490,13 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
               PUB 204, August 2023, <https://csrc.nist.gov/projects/
               post-quantum-cryptography>.
 
-   [I-D.salter-lamps-cms-ml-dsa]
+   [I-D.ietf-lamps-cms-ml-dsa]
               S, B., R, A., and D. Van Geest, "Use of the ML-DSA
               Signature Algorithm in the Cryptographic Message Syntax
-              (CMS)", Work in Progress, Internet-Draft, draft-salter-
-              lamps-cms-ml-dsa-00, 14 October 2024,
-              <https://datatracker.ietf.org/doc/html/draft-salter-lamps-
-              cms-ml-dsa-00>.
+              (CMS)", Work in Progress, Internet-Draft, draft-ietf-
+              lamps-cms-ml-dsa-01, 22 November 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
+              cms-ml-dsa-01>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -572,12 +572,12 @@ Appendix A.  ASN.1 Module
    This appendix includes the ASN.1 module [X680] for the ML-DSA.  Note
    that as per [RFC5280], certificates use the Distinguished Encoding
    Rules; see [X690].  This module imports objects from [RFC5912] and
-   [I-D.salter-lamps-cms-ml-dsa].
+   [I-D.ietf-lamps-cms-ml-dsa].
 
       |  RFC EDITOR: Please replace TBD2 with the value assigned by IANA
-      |  during the publication of [I-D.salter-lamps-cms-ml-dsa].  Also
-      |  please replace [I-D.salter-lamps-cms-ml-dsa] in the module with
-      |  a reference to the published RFC.
+      |  during the publication of [I-D.ietf-lamps-cms-ml-dsa].  Also
+      |  please replace [I-D.ietf-lamps-cms-ml-dsa] in the module with a
+      |  reference to the published RFC.
 
    <CODE BEGINS>
    X509-ML-DSA-2024
@@ -601,7 +601,7 @@ Appendix A.  ASN.1 Module
 
    sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87,
    pk-ml-dsa-44, pk-ml-dsa-65, pk-ml-dsa-87
-     FROM ML-DSA-Module-2024 -- From [I-D.salter-lamps-cms-ml-dsa]
+     FROM ML-DSA-Module-2024 -- From [I-D.ietf-lamps-cms-ml-dsa]
         { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
           id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD2) } ;
 
