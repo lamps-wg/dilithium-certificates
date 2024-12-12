@@ -249,7 +249,7 @@ Table of Contents
 
    *  subjectPublicKey contains the byte stream of the public key.
 
-   Appendix C contains example ML-DSA private keys encoded using the
+   Appendix C contains example ML-DSA public keys encoded using the
    textual encoding defined in [RFC7468].
 
 5.  Key Usage Bits
