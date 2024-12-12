@@ -444,7 +444,7 @@ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 
   if |ctx| > 255 then
     return error  # return an error indication if the context string is
-                  # not too long
+                  # too long
   end if
 
   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
