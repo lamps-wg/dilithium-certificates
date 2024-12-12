@@ -578,7 +578,7 @@ as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 {{!I-D.ietf-lamps-cms-ml-dsa}}.
 
 <aside markdown="block">
-RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.lamps-cms-ml-dsa}}. Also please replace {{I-D.lamps-cms-ml-dsa}} in the module with a reference to the published RFC.
+RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.ietf-lamps-cms-ml-dsa}}. Also please replace {{I-D.ietf-lamps-cms-ml-dsa}} in the module with a reference to the published RFC.
 </aside>
 
 ~~~
