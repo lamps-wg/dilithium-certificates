@@ -218,7 +218,8 @@ The OIDs are:
 ~~~
 
 The contents of the parameters component for each algorithm MUST be
-absent.
+absent. The ctx value used in the ML-DSA Signing and Verification 
+{{FIPS204}} is the empty string 
 
 # ML-DSA Signatures in PKIX
 
@@ -437,9 +438,9 @@ External operations:
 ~~~
 ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 
-  if |ctx| > 255 then
+  if |ctx| > 0 then
     return error  # return an error indication if the context string is
-                  # too long
+                  # not the empty string
   end if
 
   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
