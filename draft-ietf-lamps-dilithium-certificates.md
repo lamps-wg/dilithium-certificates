@@ -442,9 +442,9 @@ External operations:
 ~~~
 ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 
-  if |ctx| > 0 then
+  if |ctx| > 255 then
     return error  # return an error indication if the context string is
-                  # not the empty string
+                  # not too long
   end if
 
   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
