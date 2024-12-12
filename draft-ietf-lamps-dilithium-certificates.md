@@ -500,10 +500,10 @@ than 2^{64} chosen messages.
 and how that does not apply to PQ like Dilithium. And how committing to a
 message is additional security. Reference NIST discussion from Peiker and
 Makku.-->
-<aside markdown="block">
+<!--<aside markdown="block">
 EDNOTE: Discuss deterministic vs randomized signing and the impact on
 security.
-</aside>
+</aside>-->
 
 ML-DSA offers both deterministic and randomized signing. By default
 ML-DSA signatures are non-deterministic. The private random seed (rho')
@@ -516,9 +516,9 @@ including the signers private key and message into the derivation. The
 primary purpose of rnd is to facilitate countermeasures to side-channel
 attacks and fault attacks on deterministic signatures.
 
-<aside markdown="block">
+<!--<aside markdown="block">
 EDNOTE: Discuss side-channels for ML-DSA.
-</aside>
+</aside>-->
 
 
 In the design of ML-DSA, care has been taken to make side-channel
