@@ -422,9 +422,6 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    been assumed that the attacker has access to signatures for no more
    than 2^{64} chosen messages.
 
-      |  EDNOTE: Discuss deterministic vs randomized signing and the
-      |  impact on security.
-
    ML-DSA offers both deterministic and randomized signing.  By default
    ML-DSA signatures are non-deterministic.  The private random seed
    (rho') for the signature is pseudorandomly derived from the signer’s
@@ -436,8 +433,6 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    into the derivation.  The primary purpose of rnd is to facilitate
    countermeasures to side-channel attacks and fault attacks on
    deterministic signatures.
-
-      |  EDNOTE: Discuss side-channels for ML-DSA.
 
    In the design of ML-DSA, care has been taken to make side-channel
    resilience easier to achieve.  For instance, ML-DSA does not depend
