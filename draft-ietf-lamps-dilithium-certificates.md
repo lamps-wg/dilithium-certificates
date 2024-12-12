@@ -218,8 +218,9 @@ The OIDs are:
 ~~~
 
 The contents of the parameters component for each algorithm MUST be
-absent. The ctx value used in the ML-DSA Signing and Verification 
-{{FIPS204}} is the empty string 
+absent. The ctx value used in the ML-DSA signing and verification 
+{{FIPS204}} of ML-DSA signatures defined in this specification 
+(X.509 certificates, CRLs) is the empty string 
 
 # ML-DSA Signatures in PKIX
 
@@ -428,7 +429,10 @@ defined in [FIPS204] section 5.4. This specification uses exclusively
 ExternalMu-ML-DSA for pre-hashed use cases, and thus public
 keys identified by `id-hash-ml-dsa-44-with-sha512`,
 `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512`
-MUST NOT be used in X.509 and related PKIX protocols.
+MUST NOT be used in X.509 and related PKIX protocols with the 
+exception of the Public Key in end-entity X.509 certifacates. 
+Such public keys could be used beyond PKIX use-cases and thus 
+could need HashML-DSA. 
 
 All functions and notation used in {{fig-externalmu-ml-dsa-external}}
 and {{fig-externalmu-ml-dsa-internal}} are defined in [FIPS204].
