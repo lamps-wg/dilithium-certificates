@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-10T00:59:55.967519+00:00",
+  "timestamp": "2024-12-12T00:58:21.920751+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -66,7 +66,7 @@
       ],
       "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [x] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
       "createdAt": "2022-09-06T13:18:10Z",
-      "updatedAt": "2023-02-03T00:31:28Z",
+      "updatedAt": "2024-12-11T13:49:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -82,6 +82,13 @@
           "body": "I agree with you Panos. I've mentioned in the EDNOTE on page 1 that this is concerning Dilithium 3.1 2021-02-08, but I am reluctant to go into more details of differing historic versions and I can see this being confusing to the reader once the NIST process itself has complete.",
           "createdAt": "2022-10-25T16:40:05Z",
           "updatedAt": "2022-10-25T16:40:05Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this has all been addressed or has become irrelevant now.",
+          "createdAt": "2024-12-11T13:49:00Z",
+          "updatedAt": "2024-12-11T13:49:16Z"
         }
       ]
     },
@@ -177,7 +184,7 @@
       "labels": [],
       "body": "Address discussion in https://mailarchive.ietf.org/arch/msg/spasm/pDD40rIFpdN7SijRp_2WgihRbxA/ about bit or octet string according to consensus",
       "createdAt": "2022-08-09T18:12:30Z",
-      "updatedAt": "2024-10-03T18:00:35Z",
+      "updatedAt": "2024-12-11T13:44:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -221,6 +228,13 @@
           "body": "Our text still has \r\n\r\n> MLDSAPublicKey ::= OCTET STRING \r\n\r\nhttps://datatracker.ietf.org/doc/html/draft-ietf-lamps-kyber-certificates has it much simpler \r\n\r\n> -- KEY no ASN.1 wrapping --\r\n\r\nDid we ever address the draft to follow the whole discussion about octer vs bit string and the extra encoding for octet or not? \r\n\r\n@jakemas ?",
           "createdAt": "2024-10-03T18:00:34Z",
           "updatedAt": "2024-10-03T18:00:34Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is this resolved?",
+          "createdAt": "2024-12-11T13:44:53Z",
+          "updatedAt": "2024-12-11T13:44:53Z"
         }
       ]
     },
@@ -236,7 +250,7 @@
       "labels": [],
       "body": "Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).",
       "createdAt": "2022-10-25T02:25:26Z",
-      "updatedAt": "2024-09-25T11:56:39Z",
+      "updatedAt": "2024-12-11T13:51:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -252,6 +266,13 @@
           "body": "Agreed, I think it's fine to allow for deterministic signing.",
           "createdAt": "2024-09-25T11:56:38Z",
           "updatedAt": "2024-09-25T11:56:38Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "At the moment we leave it somewhat implicit, and I think that is fine.",
+          "createdAt": "2024-12-11T13:51:25Z",
+          "updatedAt": "2024-12-11T13:51:25Z"
         }
       ]
     },
@@ -516,15 +537,15 @@
       "id": "I_kwDOIEpj4c6Qlu9y",
       "title": "Pre-hashing discussion in Security Considerations",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dcooper16",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The Security Considerations section of the draft says:\r\n\r\n> However, due to the fact that ML-DSA signatures may require the signing procedure to be repeated several times for a signature to be produced, ML-DSA implementations can make use of pre-hashing the message to prevent rehashing with each attempt.\r\n\r\nThis is not correct. It is true that the signing procedure may need to be repeated several times, but the message is only hashed once.\r\n\r\nThe signing algorithm can be found in Algorithm 2 of https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.ipd.pdf. The message is only used once (on line 6) to create a message representative (\u03bc \u2190 H(_tr_ || _M_, 512)). Starting on line 11, a loop is run until a signature is successfully created. But, within this loop the message representative \u03bc is used rather than _M_. So, pre-hashing is not needed to prevent the message from being rehashed with each attempt.\r\n\r\nWhere ML-DSA differs from the traditional hash-then-sign paradigm is that the message is hashed as \u03bc \u2190 H(_tr_ || _M_, 512), where _tr_ is the hash of the public key, rather than just as \u03bc \u2190 H(_M_, 512).",
       "createdAt": "2024-07-23T18:07:09Z",
-      "updatedAt": "2024-10-04T16:18:41Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-11T13:42:00Z",
+      "closedAt": "2024-12-11T13:42:00Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -587,7 +608,7 @@
       "labels": [],
       "body": "Mike asks [which context string](https://mailarchive.ietf.org/arch/msg/spasm/voUR5EXhtd9fvZL1pYRpTvnDTLs/) to use. At the moment we don't set any.\r\n\r\nThis question is not specific to ML-DSA. Context strings have been discussed in general in [this LAMPS thread](https://mailarchive.ietf.org/arch/msg/spasm/XH_VtuiYt4YWxuDS3dHsR70aQF0/).",
       "createdAt": "2024-10-01T10:58:43Z",
-      "updatedAt": "2024-10-04T16:12:44Z",
+      "updatedAt": "2024-12-11T19:36:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -617,6 +638,34 @@
           "body": "I vote for empty string. It does not add anything in the X.509 context. \r\n\r\nIf folks insist, a simple context like the ASCII characters of \"X.509 ML-DSA\" would suffice imo. ",
           "createdAt": "2024-10-04T16:12:42Z",
           "updatedAt": "2024-10-04T16:12:42Z"
+        },
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "After thinking a bit more, here is a more refined opinion:\r\n\r\nWhat should be in draft-ietf-lamps-dilithium-certificates-05 is a statement that ML-DSA signatures produced by CA certificates (basicConstraints.cA=true) MUST use ctx=\u201d\u201d, while signatures produced by end entity certificates MAY use any ctx value as appropriate for its application context.\r\n\r\nThe rationale here is that LAMPS owns the \"protocol\" that is X.509 Certificates and CRLs, but we do not own arbitrary things that an X.509 cert can sign, so we can and should be prescriptive about the former, but not about the latter.\r\n\r\nAlternatively, maybe it makes sense to set ctx=\u201drfc5280certificate\u201d, ctx=\u201drfc5280csr\u201d, ctx=\u201drfc5280crl\u201d, etc to prevent type confusion attacks. I don\u2019t have a strong preference, but we should be prescriptive one way or another.",
+          "createdAt": "2024-12-11T17:32:48Z",
+          "updatedAt": "2024-12-11T17:37:31Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "Sorry for hitting the list before seeing this.\r\n\r\nFor some context regarding JOSE / COSE.\r\n\r\nThe both already have their own application layer context constructions, so I don't plan to expose ctx directly in the specifications, unless there is clear justification for doing it the same way as this draft.\r\n\r\nFWIW, I am in favor of \"empty string\".",
+          "createdAt": "2024-12-11T17:47:38Z",
+          "updatedAt": "2024-12-11T17:47:38Z"
+        },
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> For some context regarding JOSE / COSE.\r\n> \r\n> The both already have their own application layer context constructions, so I don't plan to expose ctx directly in the specifications, unless there is clear justification for doing it the same way as this draft.\r\n> \r\n> FWIW, I am in favor of \"empty string\".\r\n\r\nOrie,\r\n\r\nAnother thought. CMS is actually the closer parallel between COSE and \u201cLAMPS-things\u201d.\r\n\r\nhttps://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-ml-dsa-01\r\n\r\nIt says:\r\n\r\nML-DSA has a context string input that can be used to ensure that different signatures are generated for different application contexts. When using ML-DSA as described in this document, the context string is not used. \r\n\r\nSo ctx=\u201d\u201d everywhere within CMS, mainly because it already has plenty of context binding at the application layer.\r\n",
+          "createdAt": "2024-12-11T18:42:03Z",
+          "updatedAt": "2024-12-11T18:42:03Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Context had some value when HashML-DSA was going to be used. I think, now that HashML-DSA is becoming irrelevant there is no point in using ctx. Empty string makes sense to me. ",
+          "createdAt": "2024-12-11T19:36:45Z",
+          "updatedAt": "2024-12-11T19:36:45Z"
         }
       ]
     },
@@ -625,15 +674,15 @@
       "id": "I_kwDOIEpj4c6Y3fuq",
       "title": "No mention of pure ML-DSA?",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Why did we remove all mentions of pure ML-DSA? \r\n\r\nIs the draft supposed to be using pure and pre-hash?\r\n\r\n@jakemas ",
       "createdAt": "2024-10-03T18:08:41Z",
-      "updatedAt": "2024-10-03T18:27:15Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-11T13:41:51Z",
+      "closedAt": "2024-12-11T13:41:51Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -1881,7 +1930,7 @@
             "abbreviatedOid": "5659c0e"
           },
           "author": "dconnolly",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-10-28T02:30:52Z",
@@ -2888,7 +2937,7 @@
             "abbreviatedOid": "919472c"
           },
           "author": "dconnolly",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-11-12T00:59:02Z",
@@ -3485,24 +3534,26 @@
       "id": "PR_kwDOIEpj4c6EBYTT",
       "title": "Suggestions by Mike on PR #50",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/55",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-12-04T11:23:04Z",
-      "updatedAt": "2024-12-04T16:50:21Z",
+      "updatedAt": "2024-12-11T13:40:42Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "50fddc7fa3811139ad8feceb16fcd48e41f56bd3",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "bas/mike",
       "headRefOid": "6c99cca9fb099358e92fbfd9ad2a5a2f0c239ff4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-11T13:40:42Z",
+      "mergedAt": "2024-12-11T13:40:42Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "21cb170f24b8b066e47a685416caaa35f96bd855"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3511,7 +3562,7 @@
             "abbreviatedOid": "e74f1c5"
           },
           "author": "dconnolly",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-04T15:51:11Z",
@@ -3531,7 +3582,7 @@
             "abbreviatedOid": "e74f1c5"
           },
           "author": "dconnolly",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-12-04T15:51:57Z",
