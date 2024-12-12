@@ -575,7 +575,7 @@ single OCTET STRING.
 This appendix includes the ASN.1 module {{X680}} for the ML-DSA.  Note that
 as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 {{X690}}. This module imports objects from {{RFC5912}} and
-{{!I-D.lamps-cms-ml-dsa}}.
+{{!I-D.ietf-lamps-cms-ml-dsa}}.
 
 <aside markdown="block">
 RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.lamps-cms-ml-dsa}}. Also please replace {{I-D.lamps-cms-ml-dsa}} in the module with a reference to the published RFC.
