@@ -311,7 +311,7 @@ The fields in SubjectPublicKeyInfo have the following meaning:
 
 * subjectPublicKey contains the byte stream of the public key.
 
-{{examples}} contains example ML-DSA private keys encoded using the
+{{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
 
 # Key Usage Bits
