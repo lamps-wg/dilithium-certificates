@@ -431,8 +431,7 @@ keys identified by `id-hash-ml-dsa-44-with-sha512`,
 `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512`
 MUST NOT be used in X.509 and related PKIX protocols with the
 exception of the Public Key in end-entity X.509 certifacates.
-Such public keys could be used beyond PKIX use-cases and thus
-could need HashML-DSA.
+Such public keys could be used beyond PKIX.
 
 All functions and notation used in {{fig-externalmu-ml-dsa-external}}
 and {{fig-externalmu-ml-dsa-internal}} are defined in [FIPS204].
