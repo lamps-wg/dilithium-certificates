@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-12T00:58:21.920751+00:00",
+  "timestamp": "2024-12-15T01:03:14.643954+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -55,7 +55,7 @@
       "id": "I_kwDOIEpj4c5SqJ6k",
       "title": "Misc Comments from Markku 9/6/2022",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -64,10 +64,10 @@
       "labels": [
         "bug"
       ],
-      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [x] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [ ] The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
+      "body": "- [x] The new title should be something like \"Algorithms and Identifiers for CRYSTALS-DILITHIUM in the Internet X.509 Public Key Infrastructure.\u201d \r\n- [x] The document should more clearly identify the version of Dilithium: 3.1. If there are more versions, those would have different identifiers. There has been compatibility-breaking changes after the version submitted as a Finalist to Round 3, which is still on the NIST website (we've had customers try to match our implementation with those v3.0 KATs, requiring explanations). The changes from 3.0 to 3.1 include a security fix (at Level 5), so compatibility with the latest version is important. See Vadim Lyubashevsky's explanation, February 8, 2021: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/BjfjRMIdnhM/m/W7kkVOFDBAAJ  Note that there were several other internal changes in from 3.0. to 3.1 apart from the hash lengths.\r\n- [ ] A note about the signing process would be helpful; Dilithium 3.1 computes a signature for mu = H2( H1(pk) | M ), where H1 is SHAKE-256 truncated to 32 bytes -- a hash of the public key, also denoted \"tr\" -- and H2 is SHAKE-256 truncated to 64 bytes. The number designation of SHAKE of course indicates security level, not the output length, as SHAKE is an XOF. \r\n- [x] I suggest the document also includes signature sizes for (detached) signatures: 2420, 3293, and 4595 bytes. Currently, only public and private key sizes are reported in Appendix B of the I-D. \r\n- [x] ~~The secret key lengths in Appendix B match with v3.1 (v3.0 has 16 bytes longer private keys), but do not account for ASN.1 encoding of the SEQUENCE in Section 5 of the same I-D. Even section 5 itself does not seem to account for this as it reports \"the size necessary to hold all private key elements.\" There is a de facto key transport encoding for secret keys, defined by the algorithm designers and used in KAT tests, that doesn't have ASN.1 encoding of individual components. It can be simply taken as an OCTET STRING, just like the public key in this I-D. The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.~~ Addressed in https://github.com/lamps-wg/dilithium-certificates/pull/61\r\n- [x] ~~Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).~~ Created [new issue](https://github.com/lamps-wg/dilithium-certificates/issues/6) for this.\r\n",
       "createdAt": "2022-09-06T13:18:10Z",
-      "updatedAt": "2024-12-11T13:49:16Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-12T15:39:21Z",
+      "closedAt": "2024-12-12T15:39:21Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -89,6 +89,20 @@
           "body": "I think this has all been addressed or has become irrelevant now.",
           "createdAt": "2024-12-11T13:49:00Z",
           "updatedAt": "2024-12-11T13:49:16Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The \r\n> The lengths in Appendix B match that encoding, not the completely new encoding in Section 5.\r\n\r\nseems to not have been addressed. I am not sure it is worth it though. MAybe we can just add a parenthesis in \r\n> The parameter sets defined for NIST security levels 2, 3 and 5 are listed in the Figure 1, along with the resulting signature size, public key, and private key sizes in bytes.\r\n\r\nto say \r\n> the ASN.1 encoding defined in this document is not in these sizes)\r\n\r\n?\r\n",
+          "createdAt": "2024-12-12T04:05:53Z",
+          "updatedAt": "2024-12-12T04:05:53Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "All addressed, closing. ",
+          "createdAt": "2024-12-12T15:39:21Z",
+          "updatedAt": "2024-12-12T15:39:21Z"
         }
       ]
     },
@@ -97,7 +111,7 @@
       "id": "I_kwDOIEpj4c5SqJ-U",
       "title": "Add Dilithium-2 paragraph in Security Considerations",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -106,8 +120,8 @@
       ],
       "body": "Dilithium-2 offers a CoreSVP hardness of ~118 bits of security which is a little lower than it should. The Kyber submission refines the CoreSVP cost by using sieving cost simulations and claims that the gate and memory cost is ~2^150 and ~2^90 approximately which they argue is better than AES. I think it would be worth to call out the CoreSVP hardness and the refined estimate for Dilithium-2 in the Sec Considerations section. ",
       "createdAt": "2022-08-18T02:14:49Z",
-      "updatedAt": "2022-10-25T02:30:31Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-12T15:08:33Z",
+      "closedAt": "2024-12-12T15:08:32Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -115,6 +129,27 @@
           "body": "Depending on what gets standardized, this will be of value in the end. In the end, there will only be one Dilithium algorithm, the one specified by NIST with or without the Dilithium-2 parameter. ",
           "createdAt": "2022-10-25T02:30:31Z",
           "updatedAt": "2022-10-25T02:30:31Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "What does the team think about adding a small paragraph about ML-DSA-44 and its <2^128 theoretical security?",
+          "createdAt": "2024-12-12T04:01:32Z",
+          "updatedAt": "2024-12-12T04:01:32Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "AFAIK there is no demonstration that ML-DSA-44 doesn't reach NIST PQC security level 2 in practice, let alone 1. Security estimates will continue to evolve: practical attacker models will be more refined, and cryptanalysis will continue to improve. I do not think the static security considerations section of an RFC is the best place to speculate on that. It might be helpful to note to the reader that they might want to check out the latest understanding of ML-DSA's security, as it's likely more volatile than that of say SLH-DSA.",
+          "createdAt": "2024-12-12T12:29:35Z",
+          "updatedAt": "2024-12-12T12:29:35Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I can live with that. \r\nClosing. ",
+          "createdAt": "2024-12-12T15:08:32Z",
+          "updatedAt": "2024-12-12T15:08:32Z"
         }
       ]
     },
@@ -177,15 +212,15 @@
       "id": "I_kwDOIEpj4c5SqKEL",
       "title": "public key as octet string",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Address discussion in https://mailarchive.ietf.org/arch/msg/spasm/pDD40rIFpdN7SijRp_2WgihRbxA/ about bit or octet string according to consensus",
       "createdAt": "2022-08-09T18:12:30Z",
-      "updatedAt": "2024-12-11T13:44:54Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-12T16:58:06Z",
+      "closedAt": "2024-12-12T16:58:05Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -235,6 +270,20 @@
           "body": "Is this resolved?",
           "createdAt": "2024-12-11T13:44:53Z",
           "updatedAt": "2024-12-11T13:44:53Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think. \r\n\r\n@jakemas confirm?",
+          "createdAt": "2024-12-12T03:45:10Z",
+          "updatedAt": "2024-12-12T03:45:10Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes",
+          "createdAt": "2024-12-12T16:58:05Z",
+          "updatedAt": "2024-12-12T16:58:05Z"
         }
       ]
     },
@@ -243,15 +292,15 @@
       "id": "I_kwDOIEpj4c5UvgUX",
       "title": "Deterministic or randomized Signing? (from Markku)",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Section 5 states \"The randomized version can be invoked by leaving K as EMPTY.\" Private key formats are determined by application requirements and should not be used as \"APIs\" to affect functionality as suggested. Side-channel secure implementations will only use this type of plaintext ASN.1 encoding for backup/transport (never actively) and are likely to always perform randomized signing. Some other implementations (perhaps without trustworthy RNGs) may always perform deterministic signing; this does not break the interoperability of signatures. The explanation for the \"tr\" field in that private key format is not accurate (see above).",
       "createdAt": "2022-10-25T02:25:26Z",
-      "updatedAt": "2024-12-11T13:51:26Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-12T16:59:38Z",
+      "closedAt": "2024-12-12T16:59:38Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -273,6 +322,20 @@
           "body": "At the moment we leave it somewhat implicit, and I think that is fine.",
           "createdAt": "2024-12-11T13:51:25Z",
           "updatedAt": "2024-12-11T13:51:25Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Indeed, from the current text \r\n\r\n>EDNOTE: Discuss deterministic vs randomized signing and the impact on security.\r\n> ML-DSA offers both deterministic and randomized signing. By default ML-DSA signatures are non-deterministic. The private random seed (rho') for the signature is pseudorandomly derived from the signer\u2019s private key, the message, and a 256-bit string, rnd - where rnd should be generated by an approved RBG. In the deterministic version, rng is instead a 256-bit constant string. The source of randomness in the randomized mode has been \"hedged\" against sources of poor entropy, by including the signers private key and message into the derivation. The primary purpose of rnd is to facilitate countermeasures to side-channel attacks and fault attacks on deterministic signatures.\r\n\r\nI cannot fix the old sentence that said talked about randomized\r\n\r\n> The randomized version can be invoked by leaving K as EMPTY\r\n\r\nI think it is fine as we have it. \r\n\r\nOK to close this one. \r\n",
+          "createdAt": "2024-12-12T03:54:28Z",
+          "updatedAt": "2024-12-12T03:54:50Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agree on this!",
+          "createdAt": "2024-12-12T16:59:38Z",
+          "updatedAt": "2024-12-12T16:59:38Z"
         }
       ]
     },
@@ -406,7 +469,7 @@
       "labels": [],
       "body": "From https://mailarchive.ietf.org/arch/msg/spasm/mHLRo-X8U7ZAF5BRjPEPA8lHQtk/ \r\n\r\n> Should this document also talk about Dilithium signatures in OCSP?  I realize that was not done when RFC 3279 and RFC 5480 were written.\r\n> Russ",
       "createdAt": "2023-02-16T16:53:43Z",
-      "updatedAt": "2024-10-03T17:52:00Z",
+      "updatedAt": "2024-12-12T03:58:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -436,6 +499,13 @@
           "body": "ACK, I am OK not referencing OCSP in ours. ",
           "createdAt": "2024-10-03T17:51:58Z",
           "updatedAt": "2024-10-03T17:51:58Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Looking at old drafts, they did not reference OCSP in these documents. We did not do it in RFC8692 recently either.\r\n\r\nThe identifiers could be used in OCSP, but I think we don't need to mention OCSP. \r\n\r\nWill close this unless there are objections. ",
+          "createdAt": "2024-12-12T03:57:59Z",
+          "updatedAt": "2024-12-12T03:57:59Z"
         }
       ]
     },
@@ -608,7 +678,7 @@
       "labels": [],
       "body": "Mike asks [which context string](https://mailarchive.ietf.org/arch/msg/spasm/voUR5EXhtd9fvZL1pYRpTvnDTLs/) to use. At the moment we don't set any.\r\n\r\nThis question is not specific to ML-DSA. Context strings have been discussed in general in [this LAMPS thread](https://mailarchive.ietf.org/arch/msg/spasm/XH_VtuiYt4YWxuDS3dHsR70aQF0/).",
       "createdAt": "2024-10-01T10:58:43Z",
-      "updatedAt": "2024-12-11T19:36:46Z",
+      "updatedAt": "2024-12-12T15:49:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -666,6 +736,55 @@
           "body": "Context had some value when HashML-DSA was going to be used. I think, now that HashML-DSA is becoming irrelevant there is no point in using ctx. Empty string makes sense to me. ",
           "createdAt": "2024-12-11T19:36:45Z",
           "updatedAt": "2024-12-11T19:36:45Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Need to close this one, I think we converged to empty ctx. ",
+          "createdAt": "2024-12-12T03:55:32Z",
+          "updatedAt": "2024-12-12T03:55:32Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Context had some value when HashML-DSA was going to be used.\r\n\r\n@csosto-pk can you expand on this?  Does it also apply to HashSLH-DSA? HashSLH-DSA is being defined for public keys in end-entity certificates, so x509-slhdsa doesn't really have any say about how the context would be use there, but I'm curious why you say the context had some use with HashML-DSA.",
+          "createdAt": "2024-12-12T10:24:21Z",
+          "updatedAt": "2024-12-12T10:24:21Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Need to close this one, I think we converged to empty ctx.\r\n\r\nWe might still want to add some words to that effect to the I-D.",
+          "createdAt": "2024-12-12T11:51:03Z",
+          "updatedAt": "2024-12-12T12:35:41Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > Need to close this one, I think we converged to empty ctx.\r\n> \r\n> We might still want to add some words to that effect to the I-D.\r\n\r\n@bwesterb , please check https://github.com/lamps-wg/dilithium-certificates/pull/62 ",
+          "createdAt": "2024-12-12T15:23:44Z",
+          "updatedAt": "2024-12-12T15:35:39Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > Context had some value when HashML-DSA was going to be used.\r\n> \r\n> @csosto-pk can you expand on this? Does it also apply to HashSLH-DSA? HashSLH-DSA is being defined for public keys in end-entity certificates, so x509-slhdsa doesn't really have any say about how the context would be use there, but I'm curious why you say the context had some use with HashML-DSA.\r\n\r\nHi @danvangeest \r\n\r\nIndeed about HashML-DSA, you can't control the ctx. You can only control it for PureXX-DSA. \r\n\r\nI meant that ctx did not exist in Dilithium. It was introduced for the M' calculation when NIST added the HashML-DSA option. I think the idea for ctx and domain separation came from Markku when discussing the EUF-CMA property of the newly introduced HashML-DSA and PureML-DSA. I am fuzzy on the details. Now that we will basically not be using HashML-DSA, I don't think we should care about the option. \r\n\r\nI think Sophie had made a few good points against the necessity of ctx in ML-DSA as well, but there are too many things to track and I forget the details. \r\n\r\nI don't have any strong feelings about ctx in SLH-DSA. Given that you will need Pure and Hash there (you can't do external my like ML-DSA), maybe you want to use ctx as `PR-PKIX` and `DG-PKIX` and call it a day. Or maybe you can use empty string for the Pure and specify `HashSL-DSA-PKIX` only for the external generation of M' in the HashSLH-DSA. I really don't have strong feelings, but it seems to me of HashXX-DSA is really used, adding the context makes sense.",
+          "createdAt": "2024-12-12T15:35:23Z",
+          "updatedAt": "2024-12-12T15:35:23Z"
+        },
+        {
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@csosto-pk, M` is already constructed differently depending if you're using Hash*-DSA or (pure) *-DSA.  So the context won't add any additional differentiation between pure and Hash signatures.  The value in using the context is if you're signing different content types with the same key and signature algorithm.  Then using different contexts for different content types avoids a potential issue if there are encoding collisions between the content types.\r\n\r\nGiven that everything that is signed by a CA key is ASN.1 encoded, there shouldn't be any encoding collisions for this draft.",
+          "createdAt": "2024-12-12T15:45:59Z",
+          "updatedAt": "2024-12-12T15:45:59Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "ACK, you are right. The OID is in the M' of HashXX-DSA already. Fine by me if you also use empty everywhere. ",
+          "createdAt": "2024-12-12T15:47:45Z",
+          "updatedAt": "2024-12-12T15:49:05Z"
         }
       ]
     },
@@ -764,6 +883,22 @@
           "updatedAt": "2024-11-21T14:56:34Z"
         }
       ]
+    },
+    {
+      "number": 59,
+      "id": "I_kwDOIEpj4c6jENn-",
+      "title": "ASN.1 module",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/59",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It's a bit bare bones. Is it sufficient?",
+      "createdAt": "2024-12-12T12:39:50Z",
+      "updatedAt": "2024-12-12T12:39:50Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -3636,6 +3771,495 @@
           "body": "Looks good. ",
           "createdAt": "2024-12-05T16:54:15Z",
           "updatedAt": "2024-12-05T16:54:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOIEpj4c6E80uA",
+      "title": "Ref update",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/57",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Now refer to I-D.lamps-cms-ml-dsa.",
+      "createdAt": "2024-12-12T03:22:25Z",
+      "updatedAt": "2024-12-12T14:28:20Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "21cb170f24b8b066e47a685416caaa35f96bd855",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-ref-update",
+      "headRefOid": "60b97e1413a294803342bb1a4a601db961f0c250",
+      "closedAt": "2024-12-12T14:28:20Z",
+      "mergedAt": "2024-12-12T14:28:20Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "e41816f2a5858fde8da71c9fd3daa4aad127a568"
+      },
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Good catch about the module!",
+          "createdAt": "2024-12-12T14:26:47Z",
+          "updatedAt": "2024-12-12T14:26:47Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6U9K7E",
+          "commit": {
+            "abbreviatedOid": "61892b2"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Please update the reference in the ASN.1 module as well.",
+          "createdAt": "2024-12-12T11:24:58Z",
+          "updatedAt": "2024-12-12T11:26:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n{{!I-D.ietf-lamps-cms-ml-dsa}}.\r\n```",
+              "createdAt": "2024-12-12T11:24:58Z",
+              "updatedAt": "2024-12-12T11:26:53Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nRFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.ietf-lamps-cms-ml-dsa}}. Also please replace {{I-D.ietf-lamps-cms-ml-dsa}} in the module with a reference to the published RFC.\r\n```",
+              "createdAt": "2024-12-12T11:25:13Z",
+              "updatedAt": "2024-12-12T11:26:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6U9kYC",
+          "commit": {
+            "abbreviatedOid": "76c7723"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-12T11:51:52Z",
+          "updatedAt": "2024-12-12T11:51:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VACTC",
+          "commit": {
+            "abbreviatedOid": "cbbbf16"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T14:27:22Z",
+          "updatedAt": "2024-12-12T14:27:22Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n  FROM ML-DSA-Module-2024 -- From [I-D.ietf-lamps-cms-ml-dsa]\r\n```",
+              "createdAt": "2024-12-12T14:27:22Z",
+              "updatedAt": "2024-12-12T14:27:22Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOIEpj4c6E9ADy",
+      "title": "Refer to public key examples",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/58",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Refer to public key examples from public key section.",
+      "createdAt": "2024-12-12T03:51:15Z",
+      "updatedAt": "2024-12-12T14:28:43Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "21cb170f24b8b066e47a685416caaa35f96bd855",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-pub-examples",
+      "headRefOid": "bef862f29bc1f37cc5061bb0b868004fae23d5da",
+      "closedAt": "2024-12-12T14:28:42Z",
+      "mergedAt": "2024-12-12T14:28:42Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "e4838fc7ac7a3d76113b3a1d3e6289301ab7e4fb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6U-OWF",
+          "commit": {
+            "abbreviatedOid": "bef862f"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-12T12:33:49Z",
+          "updatedAt": "2024-12-12T12:33:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOIEpj4c6FBtwS",
+      "title": "Remove two TODOs",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/60",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-12T14:22:02Z",
+      "updatedAt": "2024-12-12T14:29:14Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "21cb170f24b8b066e47a685416caaa35f96bd855",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/ednotes",
+      "headRefOid": "8d38509e6fdc4f6a3b7e314255fc90a258b40eb0",
+      "closedAt": "2024-12-12T14:29:14Z",
+      "mergedAt": "2024-12-12T14:29:14Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6VADbx",
+          "commit": {
+            "abbreviatedOid": "8d38509"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-12T14:29:07Z",
+          "updatedAt": "2024-12-12T14:29:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "id": "PR_kwDOIEpj4c6FB0C0",
+      "title": "Clarify meaning of sizes in table",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/61",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Cf #1\r\nCC @csosto-pk",
+      "createdAt": "2024-12-12T14:33:39Z",
+      "updatedAt": "2024-12-12T15:38:03Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/issue-1",
+      "headRefOid": "136ca93f3e74cf0fa459824a3698a8b9aad6eddb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6VA42_",
+          "commit": {
+            "abbreviatedOid": "136ca93"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-12T15:38:03Z",
+          "updatedAt": "2024-12-12T15:38:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOIEpj4c6FCQxk",
+      "title": "Allow for HashML-DSA only in the pub key of EE certs and define ctx",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/62",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- ctx = empty string\r\n- Prescribe PureML-DSA OIDS only except for the public key of EE certs which could be used beyond PKIX for use-cases we are not aware of. ",
+      "createdAt": "2024-12-12T15:23:29Z",
+      "updatedAt": "2024-12-13T16:48:09Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-2",
+      "headRefOid": "faaa288b0fa43fb72a1747c40a50da137e4973e9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This sets the context string to the empty string for all use cases. That's too broad. We should only dictate that in the case the key is used to sign a certificate, CRL, etc.",
+          "createdAt": "2024-12-12T15:48:51Z",
+          "updatedAt": "2024-12-12T15:48:51Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> This sets the context string to the empty string for all use cases. That's too broad. We should only dictate that in the case the key is used to sign a certificate, CRL, etc.\r\n\r\n@bwesterb , check again please. I made a slight change in another `MUST NOT` also. ",
+          "createdAt": "2024-12-12T16:00:03Z",
+          "updatedAt": "2024-12-12T16:00:03Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good to me!",
+          "createdAt": "2024-12-12T18:12:07Z",
+          "updatedAt": "2024-12-12T18:12:07Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> The proposed normative change on use of prehashing OIDs in EE certs should at least be highlighted in the title/description of the PR, and preferably mentioned on the list.\r\n\r\nDone",
+          "createdAt": "2024-12-13T16:48:08Z",
+          "updatedAt": "2024-12-13T16:48:08Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6VBGvR",
+          "commit": {
+            "abbreviatedOid": "122cca1"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T15:58:55Z",
+          "updatedAt": "2024-12-12T15:58:56Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Empty string only for PKIX stuff, not everything. ",
+              "createdAt": "2024-12-12T15:58:55Z",
+              "updatedAt": "2024-12-12T15:58:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VBG5N",
+          "commit": {
+            "abbreviatedOid": "122cca1"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T15:59:10Z",
+          "updatedAt": "2024-12-12T15:59:11Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "I am not married to it. We could remove it.\r\n\r\nThe point here is that the PK in the leaf cert may be used for Secure Boot or any other use-case we are not aware of. HashML-DSA could be used there. Certs have many uses we are not aware of.",
+              "createdAt": "2024-12-12T15:59:10Z",
+              "updatedAt": "2024-12-12T15:59:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VBIBV",
+          "commit": {
+            "abbreviatedOid": "122cca1"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T16:01:00Z",
+          "updatedAt": "2024-12-12T16:01:00Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "These two lines should not be modified as these comments are still useful in case we want to do \"prehashing\" in a use case where context string is allowed.",
+              "createdAt": "2024-12-12T16:01:00Z",
+              "updatedAt": "2024-12-12T16:01:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VBu4u",
+          "commit": {
+            "abbreviatedOid": "122cca1"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T16:58:25Z",
+          "updatedAt": "2024-12-12T16:58:26Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Done",
+              "createdAt": "2024-12-12T16:58:25Z",
+              "updatedAt": "2024-12-12T16:58:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VB1Ri",
+          "commit": {
+            "abbreviatedOid": "8110287"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T17:06:41Z",
+          "updatedAt": "2024-12-12T17:06:41Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "There's a trailing whitespace at the end of line 435 that the linter is not happy with!",
+              "createdAt": "2024-12-12T17:06:41Z",
+              "updatedAt": "2024-12-12T17:06:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VCeP5",
+          "commit": {
+            "abbreviatedOid": "122cca1"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T18:12:03Z",
+          "updatedAt": "2024-12-12T18:12:03Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Fixed.",
+              "createdAt": "2024-12-12T18:12:03Z",
+              "updatedAt": "2024-12-12T18:12:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VH7vo",
+          "commit": {
+            "abbreviatedOid": "a283ef1"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T09:57:12Z",
+          "updatedAt": "2024-12-13T09:57:13Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "I'd leave it at\r\n\r\n> [...] Public Key in end-entity X.509 certificates, which has use beyond PKIX.",
+              "createdAt": "2024-12-13T09:57:13Z",
+              "updatedAt": "2024-12-13T09:57:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VH8ml",
+          "commit": {
+            "abbreviatedOid": "a283ef1"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "The proposed normative change on use of prehashing OIDs in EE certs should at least be highlighted in the title/description of the PR, and preferably mentioned on the list.",
+          "createdAt": "2024-12-13T09:58:54Z",
+          "updatedAt": "2024-12-13T09:58:54Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VLGxP",
+          "commit": {
+            "abbreviatedOid": "a283ef1"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T16:47:54Z",
+          "updatedAt": "2024-12-13T16:47:54Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Done",
+              "createdAt": "2024-12-13T16:47:54Z",
+              "updatedAt": "2024-12-13T16:47:54Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOIEpj4c6FH2xS",
+      "title": "Just some suggestions",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/63",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-12-13T09:37:39Z",
+      "updatedAt": "2024-12-13T09:53:06Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
+      "headRepository": "danvangeest/dilithium-certificates",
+      "headRefName": "dvg/just_some_suggestions",
+      "headRefOid": "78514611d5ebcb5587ea71ca0bcd4626e888c9f4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6VH5rt",
+          "commit": {
+            "abbreviatedOid": "7851461"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks.",
+          "createdAt": "2024-12-13T09:53:06Z",
+          "updatedAt": "2024-12-13T09:53:06Z",
           "comments": []
         }
       ]
