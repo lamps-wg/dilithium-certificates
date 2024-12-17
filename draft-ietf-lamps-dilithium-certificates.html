@@ -1325,7 +1325,9 @@ algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pi
 </pre><a href="#section-2-7" class="pilcrow">¶</a>
 </div>
 <p id="section-2-8">The contents of the parameters component for each algorithm <span class="bcp14">MUST</span> be
-absent.<a href="#section-2-8" class="pilcrow">¶</a></p>
+absent. The ctx value used in the ML-DSA signing and verification
+<span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> of ML-DSA signatures defined in this specification
+(X.509 certificates, CRLs) is the empty string.<a href="#section-2-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ml-dsa-signatures-in-pkix">
@@ -1542,7 +1544,9 @@ defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> secti
 ExternalMu-ML-DSA for pre-hashed use cases, and thus public
 keys identified by <code>id-hash-ml-dsa-44-with-sha512</code>,
 <code>id-hash-ml-dsa-65-with-sha512</code>, and <code>id-hash-ml-dsa-87-with-sha512</code>
-        <span class="bcp14">MUST NOT</span> be used in X.509 and related PKIX protocols.<a href="#section-7-5" class="pilcrow">¶</a></p>
+        <span class="bcp14">MUST NOT</span> be used in X.509 and related PKIX protocols with the
+exception of the Public Key in end-entity X.509 certifacates.
+Such public keys could be used beyond PKIX.<a href="#section-7-5" class="pilcrow">¶</a></p>
 <p id="section-7-6">All functions and notation used in <a href="#fig-externalmu-ml-dsa-external" class="auto internal xref">Figure 1</a>
 and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 2</a> are defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.<a href="#section-7-6" class="pilcrow">¶</a></p>
 <p id="section-7-7">External operations:<a href="#section-7-7" class="pilcrow">¶</a></p>

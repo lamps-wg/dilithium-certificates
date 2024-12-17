@@ -165,7 +165,9 @@ Table of Contents
                nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 
    The contents of the parameters component for each algorithm MUST be
-   absent.
+   absent.  The ctx value used in the ML-DSA signing and verification
+   [FIPS204] of ML-DSA signatures defined in this specification (X.509
+   certificates, CRLs) is the empty string.
 
 3.  ML-DSA Signatures in PKIX
 
@@ -357,7 +359,9 @@ Table of Contents
    exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus
    public keys identified by id-hash-ml-dsa-44-with-sha512, id-hash-ml-
    dsa-65-with-sha512, and id-hash-ml-dsa-87-with-sha512 MUST NOT be
-   used in X.509 and related PKIX protocols.
+   used in X.509 and related PKIX protocols with the exception of the
+   Public Key in end-entity X.509 certifacates.  Such public keys could
+   be used beyond PKIX.
 
    All functions and notation used in Figure 1 and Figure 2 are defined
    in [FIPS204].
