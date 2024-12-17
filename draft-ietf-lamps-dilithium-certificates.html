@@ -1263,6 +1263,8 @@ on line 6 of algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204<
 to finish the signature. The first module only needs access to the full
 message and the public key, whereas the second module only needs access
 to hash <em>mu</em> and the private key.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
+Dilithium are not compatible.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="requirements-language">
 <section id="section-1.1">
         <h3 id="name-requirements-language">
@@ -1389,10 +1391,10 @@ encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA <span class="bcp14">MUST</span>
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
-<p id="section-3-9">When the id-ml-dsa identifier appears in the algorithm field as an
+<p id="section-3-9">When an id-ml-dsa-* identifier appears in the algorithm field as an
 AlgorithmIdentifier, the encoding <span class="bcp14">MUST</span> omit the parameters field. That
 is, the AlgorithmIdentifier <span class="bcp14">SHALL</span> be a SEQUENCE of one component, the
-OID id-ml-dsa.<a href="#section-3-9" class="pilcrow">¶</a></p>
+OID id-ml-dsa-*.<a href="#section-3-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ML-DSA-PubblicKey">
@@ -1424,8 +1426,10 @@ public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
           <p id="section-4-5.2.1">subjectPublicKey contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-6"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
-textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-6">An ML-DSA public key is encoded in an X.509 certificate's SubjectPublicKeyInfo
+type as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-ml-dsa-01#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span>.<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-7"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
+textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="key-usage-bits">
@@ -1435,7 +1439,7 @@ textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468<
       </h2>
 <p id="section-5-1">The intended application for the key is indicated in the keyUsage
 certificate extension; see <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the
-keyUsage extension is present in a certificate that indicates id-ml-dsa
+keyUsage extension is present in a certificate that indicates id-ml-dsa-*
 in the SubjectPublicKeyInfo, then the at least one of following <span class="bcp14">MUST</span> be
 present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
@@ -1447,7 +1451,7 @@ present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
 <p id="section-5-3">If the keyUsage extension is present in a certificate that indicates
-id-ml-dsa in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
+id-ml-dsa-* in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
 present:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
@@ -1609,7 +1613,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">For the ASN.1 module in {asn1}, IANA is requested to assign an object
+<p id="section-8-1">For the ASN.1 module in <a href="#asn1" class="auto internal xref">Appendix A</a>, IANA is requested to assign an object
 identifier (OID) for the module identifier (TBD1) with a Description
 of "id-mod-x509-ml-dsa-2024". The OID for the module should be
 allocated in the "SMI Security for PKIX Module Identifier" registry
