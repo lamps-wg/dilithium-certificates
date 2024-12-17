@@ -220,7 +220,7 @@ The OIDs are:
 The contents of the parameters component for each algorithm MUST be
 absent. The ctx value used in the ML-DSA signing and verification 
 {{FIPS204}} of ML-DSA signatures defined in this specification 
-(X.509 certificates, CRLs) is the empty string 
+(X.509 certificates, CRLs) is the empty string.
 
 # ML-DSA Signatures in PKIX
 
