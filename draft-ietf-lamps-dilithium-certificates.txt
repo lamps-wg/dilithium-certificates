@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 15 June 2025                                          S. Turner
+Expires: 20 June 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                        12 December 2024
+                                                        17 December 2024
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 June 2025.
+   This Internet-Draft will expire on 20 June 2025.
 
 Copyright Notice
 
@@ -638,7 +638,10 @@ Appendix B.  Security Strengths
 
    The parameter sets defined for NIST security levels 2, 3 and 5 are
    listed in the Figure 1, along with the resulting signature size,
-   public key, and private key sizes in bytes.
+   public key, and private key sizes in bytes.  Note that these are the
+   sizes of the plain private and public keys; and not the sizes of the
+   resultant OneAsymmetricKey and SubjectPublicKeyInfo objects in which
+   they are wrapped.
 
    |=======+=======+=====+========+========+========|
    | Level | (k,l) | eta |  Sig.  | Public | Private|
