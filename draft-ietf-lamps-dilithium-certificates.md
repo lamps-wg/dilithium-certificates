@@ -169,6 +169,9 @@ to finish the signature. The first module only needs access to the full
 message and the public key, whereas the second module only needs access
 to hash *mu* and the private key.
 
+Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
+Dilithium are not compatible.
+
 ## Requirements Language
 
 {::boilerplate bcp14-tagged}
@@ -283,10 +286,10 @@ implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified {{oids}}.
 
-When the id-ml-dsa identifier appears in the algorithm field as an
+When an id-ml-dsa-* identifier appears in the algorithm field as an
 AlgorithmIdentifier, the encoding MUST omit the parameters field. That
 is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the
-OID id-ml-dsa.
+OID id-ml-dsa-*.
 
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PubblicKey}
@@ -313,6 +316,9 @@ The fields in SubjectPublicKeyInfo have the following meaning:
 
 * subjectPublicKey contains the byte stream of the public key.
 
+An ML-DSA public key is encoded in an X.509 certificate's SubjectPublicKeyInfo
+type as described in {{Section 3 of I-D.ietf-lamps-cms-ml-dsa}}.
+
 {{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
 
@@ -320,7 +326,7 @@ textual encoding defined in {{?RFC7468}}.
 
 The intended application for the key is indicated in the keyUsage
 certificate extension; see {{Section 4.2.1.3 of RFC5280}}. If the
-keyUsage extension is present in a certificate that indicates id-ml-dsa
+keyUsage extension is present in a certificate that indicates id-ml-dsa-*
 in the SubjectPublicKeyInfo, then the at least one of following MUST be
 present:
 
@@ -332,7 +338,7 @@ present:
 ~~~
 
 If the keyUsage extension is present in a certificate that indicates
-id-ml-dsa in the SubjectPublicKeyInfo, then the following MUST NOT be
+id-ml-dsa-* in the SubjectPublicKeyInfo, then the following MUST NOT be
 present:
 
 ~~~
@@ -483,7 +489,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
 
 # IANA Considerations
 
-For the ASN.1 module in {asn1}, IANA is requested to assign an object
+For the ASN.1 module in {{asn1}}, IANA is requested to assign an object
 identifier (OID) for the module identifier (TBD1) with a Description
 of "id-mod-x509-ml-dsa-2024". The OID for the module should be
 allocated in the "SMI Security for PKIX Module Identifier" registry
