@@ -605,6 +605,10 @@ as reference.
 The parameter sets defined for NIST security levels 2, 3 and 5
 are listed in the Figure 1, along with the resulting signature
 size, public key, and private key sizes in bytes.
+Note that these are the sizes of
+    the plain private and public keys; and
+    not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
+        objects in which they are wrapped.
 
 <!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
 <!-- [JM] we can consider the usefulness of this table/domain parameter discussion here, since we do not want to include the parameter selection in the document -->
