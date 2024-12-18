@@ -737,7 +737,7 @@ and therefore might require explicit support from hardware or
 software cryptographic modules.
 
 Note that the signing mode defined here is different from HashML-DSA
-defined in {{Section 5.4 of FIPS204}}. This specification uses exclusively
+defined in Section 5.4 of {{FIPS204}}. This specification uses exclusively
 ExternalMu-ML-DSA for pre-hashed use cases. See {{sec-disallow-hash}} for
 additional discussion of why HashML-DSA is disallowed in PKIX.
 
