@@ -493,7 +493,7 @@ single OCTET STRING.
 
 ## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
 
-The HashML-DSA mode defined in {{Section 5.4 of FIPS204}} MUST NOT be
+The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
 used by CAs generating certificates or CRLs, CAs and RAs enrolling
 Subcribers, OCSP responders responding; in other words, public keys
 identified by `id-hash-ml-dsa-44-with-sha512`,
