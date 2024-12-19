@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-17T00:58:49.564763+00:00",
+  "timestamp": "2024-12-19T00:57:03.893190+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -462,15 +462,15 @@
       "id": "I_kwDOIEpj4c5ep5hf",
       "title": "Add reference to OCSP? ",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "From https://mailarchive.ietf.org/arch/msg/spasm/mHLRo-X8U7ZAF5BRjPEPA8lHQtk/ \r\n\r\n> Should this document also talk about Dilithium signatures in OCSP?  I realize that was not done when RFC 3279 and RFC 5480 were written.\r\n> Russ",
       "createdAt": "2023-02-16T16:53:43Z",
-      "updatedAt": "2024-12-12T03:58:00Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-17T16:21:50Z",
+      "closedAt": "2024-12-17T16:21:50Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -865,15 +865,15 @@
       "id": "I_kwDOIEpj4c6fUX-Z",
       "title": "ASN.1 size constraints on public key and private key types",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/53",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ounsworth",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "See: https://mailarchive.ietf.org/arch/msg/spasm/G45YcgPnTwvqmOJwX6IxLzYA-LI/",
       "createdAt": "2024-11-19T17:16:24Z",
-      "updatedAt": "2024-11-21T14:56:35Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-17T16:18:37Z",
+      "closedAt": "2024-12-17T16:18:36Z",
       "comments": [
         {
           "author": "danvangeest",
@@ -881,6 +881,13 @@
           "body": "Since this draft relies on the cms-ml-dsa draft for ASN.1, you probably want to follow this instead: https://github.com/lamps-wg/cms-ml-dsa/issues/10",
           "createdAt": "2024-11-21T14:56:34Z",
           "updatedAt": "2024-11-21T14:56:34Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Addressed via #64.",
+          "createdAt": "2024-12-17T16:18:36Z",
+          "updatedAt": "2024-12-17T16:18:36Z"
         }
       ]
     },
@@ -889,16 +896,24 @@
       "id": "I_kwDOIEpj4c6jENn-",
       "title": "ASN.1 module",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It's a bit bare bones. Is it sufficient?",
       "createdAt": "2024-12-12T12:39:50Z",
-      "updatedAt": "2024-12-12T12:39:50Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-12-17T17:24:43Z",
+      "closedAt": "2024-12-17T17:24:43Z",
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "It is very bare bones, but we import what we need from the CMS-ML-DSA [I-D](https://github.com/lamps-wg/cms-ml-dsa).  There are two modules because of the PKIX/SMIME WG split from long ago.",
+          "createdAt": "2024-12-17T16:20:12Z",
+          "updatedAt": "2024-12-17T16:20:12Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3563,7 +3578,7 @@
       "labels": [],
       "body": "I added some more implementation and security considerations as well as the rationale for disallowing HashML-DSA, which I feel needs to be stated clearly (this comes from recent IETF and pqc-forum mail list discussions).",
       "createdAt": "2024-11-22T18:02:54Z",
-      "updatedAt": "2024-12-03T17:11:26Z",
+      "updatedAt": "2024-12-18T15:59:16Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5683122a16aa7c60b6ecd5baff76ead58342b86b",
@@ -3574,7 +3589,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "See #65.",
+          "createdAt": "2024-12-18T15:34:24Z",
+          "updatedAt": "2024-12-18T15:34:24Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIEpj4c6SXR34",
@@ -3659,6 +3682,186 @@
               "body": "I strongly disagree with \"Implementations are RECOMMENDED to expose interfaces for both ML-DSA and ExternalMu-ML-DSA so that applications blah blah blah\".  ExternalMu-ML-DSA is only needed if you need to send the message representative to an HSM/smartcard/non-local-whatever.  If you're writing an implementation for an HSM/smartcard/non-local-whatever then sure, implement ExternalMu-ML-DSA, but you shouldn't even need to expose ExternalMu-ML-DSA to the application, that's only something that your HSM/smartcard/non-local-whatever driver needs to know about.",
               "createdAt": "2024-12-03T17:11:20Z",
               "updatedAt": "2024-12-03T17:11:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vp3LM",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T04:39:30Z",
+          "updatedAt": "2024-12-18T04:39:30Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I agree. I suggest to remove the normative language here. Good to point out that the entity that does the prehashing and requests for the signature has the public key beforehand\r\n\r\n> ExternalMu-ML-DSA requires the public key, or its prehash, as input to the pre-digesting function. This assumes the signer generating the pre-hash is in possession of the public key before signing and is different from conventional pre-hashing which only requires the message and the hash function as input and .\r\n\r\n",
+              "createdAt": "2024-12-18T04:39:30Z",
+              "updatedAt": "2024-12-18T04:39:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vp4IL",
+          "commit": {
+            "abbreviatedOid": "aff485b"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T04:42:25Z",
+          "updatedAt": "2024-12-18T04:42:25Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "I find this a little verbose and a little alarmist. The collision resistance of SHA-2 or SHAKE256 is fine. I think there is value in pointing out that HashML-DSA is a different signature than PureML-DSA which is not ideal. But ExternalMuML-DSA generates the same signature as Pure ML-DSA (same OID too), thus why we picked it. ",
+              "createdAt": "2024-12-18T04:42:25Z",
+              "updatedAt": "2024-12-18T04:42:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vp5-y",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T04:49:53Z",
+          "updatedAt": "2024-12-18T04:49:53Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "I agree. \r\n\r\nThe way the ExternalMu-ML-DSA section looks right now may create misconceptions that we are defining a tweak on ML-DSA, but we are just saying \"get the mu from outside of the signature\". ",
+              "createdAt": "2024-12-18T04:49:53Z",
+              "updatedAt": "2024-12-18T04:49:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VufvZ",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T14:24:57Z",
+          "updatedAt": "2024-12-18T14:24:58Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "@ounsworth which document is {{sec-disallow-hash}} in?",
+              "createdAt": "2024-12-18T14:24:58Z",
+              "updatedAt": "2024-12-18T14:24:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VuhPt",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T14:27:14Z",
+          "updatedAt": "2024-12-18T14:27:14Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "@johngray-dev Did you confirm there was a typo?",
+              "createdAt": "2024-12-18T14:27:14Z",
+              "updatedAt": "2024-12-18T14:27:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VujRO",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T14:30:21Z",
+          "updatedAt": "2024-12-18T14:30:21Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Never mind it's lower down.",
+              "createdAt": "2024-12-18T14:30:21Z",
+              "updatedAt": "2024-12-18T14:30:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vu5Bq",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T15:03:26Z",
+          "updatedAt": "2024-12-18T15:03:26Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I think this is getting resolved via Panos' re-write.",
+              "createdAt": "2024-12-18T15:03:26Z",
+              "updatedAt": "2024-12-18T15:03:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vvczz",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "russhousley",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T15:56:23Z",
+          "updatedAt": "2024-12-18T15:56:23Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I see no reason for this document to get into the API discussion.  Just drop the text altogether about \"... Implementations are RECOMMENDED to expose interfaces ...\"",
+              "createdAt": "2024-12-18T15:56:23Z",
+              "updatedAt": "2024-12-18T15:56:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VveqZ",
+          "commit": {
+            "abbreviatedOid": "b09d19b"
+          },
+          "author": "russhousley",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T15:59:15Z",
+          "updatedAt": "2024-12-18T15:59:16Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Whether the hash is computed internal to the ML-DSA or external is not important for interoperability.  The signature comes out the same.  So, I am not sure this deserves any discussion.",
+              "createdAt": "2024-12-18T15:59:15Z",
+              "updatedAt": "2024-12-18T15:59:16Z"
             }
           ]
         }
@@ -3960,24 +4163,26 @@
       "id": "PR_kwDOIEpj4c6FB0C0",
       "title": "Clarify meaning of sizes in table",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Cf #1\r\nCC @csosto-pk",
       "createdAt": "2024-12-12T14:33:39Z",
-      "updatedAt": "2024-12-12T15:38:03Z",
+      "updatedAt": "2024-12-17T15:29:36Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "bas/issue-1",
       "headRefOid": "136ca93f3e74cf0fa459824a3698a8b9aad6eddb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-17T15:29:36Z",
+      "mergedAt": "2024-12-17T15:29:36Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "f2cf5050c35c9fbaa3aec5a5d56716358d67f2f4"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4000,24 +4205,26 @@
       "id": "PR_kwDOIEpj4c6FCQxk",
       "title": "Allow for HashML-DSA only in the pub key of EE certs and define ctx",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/62",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "- ctx = empty string\r\n- Prescribe PureML-DSA OIDS only except for the public key of EE certs which could be used beyond PKIX for use-cases we are not aware of. ",
       "createdAt": "2024-12-12T15:23:29Z",
-      "updatedAt": "2024-12-13T16:48:09Z",
+      "updatedAt": "2024-12-17T15:36:16Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
       "headRepository": "csosto-pk/dilithium-certificates",
       "headRefName": "patch-2",
-      "headRefOid": "faaa288b0fa43fb72a1747c40a50da137e4973e9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8cd7f3488789d32d58385b764c63469e007bf456",
+      "closedAt": "2024-12-17T15:36:16Z",
+      "mergedAt": "2024-12-17T15:36:16Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "4fedd86baba4ff20981bce474b436e418e3e280e"
+      },
       "comments": [
         {
           "author": "bwesterb",
@@ -4221,6 +4428,46 @@
               "updatedAt": "2024-12-13T16:47:54Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vj5iT",
+          "commit": {
+            "abbreviatedOid": "faaa288"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-17T15:32:02Z",
+          "updatedAt": "2024-12-17T15:32:03Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n(X.509 certificates, CRLs) is the empty string.\r\n```",
+              "createdAt": "2024-12-17T15:32:02Z",
+              "updatedAt": "2024-12-17T15:32:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Vj7ia",
+          "commit": {
+            "abbreviatedOid": "3577bf7"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-17T15:35:07Z",
+          "updatedAt": "2024-12-17T15:35:07Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nabsent. The ctx value used in the ML-DSA signing and verification\r\n{{FIPS204}} of ML-DSA signatures defined in this specification\r\n```",
+              "createdAt": "2024-12-17T15:35:07Z",
+              "updatedAt": "2024-12-17T15:35:07Z"
+            }
+          ]
         }
       ]
     },
@@ -4229,24 +4476,26 @@
       "id": "PR_kwDOIEpj4c6FH2xS",
       "title": "Just some suggestions",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/63",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-12-13T09:37:39Z",
-      "updatedAt": "2024-12-13T09:53:06Z",
+      "updatedAt": "2024-12-17T15:37:59Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
       "headRepository": "danvangeest/dilithium-certificates",
       "headRefName": "dvg/just_some_suggestions",
       "headRefOid": "78514611d5ebcb5587ea71ca0bcd4626e888c9f4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-17T15:37:59Z",
+      "mergedAt": "2024-12-17T15:37:59Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "9fa821db54d7acda86bf616c3b9fe5e6c827634a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4261,6 +4510,115 @@
           "createdAt": "2024-12-13T09:53:06Z",
           "updatedAt": "2024-12-13T09:53:06Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "id": "PR_kwDOIEpj4c6FgI8z",
+      "title": "Import Keys",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/64",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add imports for ML-DSA-PrivateKey and ML-DSA-PublicKey.",
+      "createdAt": "2024-12-17T14:28:38Z",
+      "updatedAt": "2024-12-17T16:14:43Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-import-keys",
+      "headRefOid": "db1e3ae1a87a560c1cd540c75c0298418ee43ce8",
+      "closedAt": "2024-12-17T16:14:43Z",
+      "mergedAt": "2024-12-17T16:14:43Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6VjZR1",
+          "commit": {
+            "abbreviatedOid": "db1e3ae"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-17T14:46:47Z",
+          "updatedAt": "2024-12-17T14:46:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOIEpj4c6FqlPA",
+      "title": "ExternalMu Shuffle",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/65",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Moved \" Pre-hash Mode\" section to an Appendix.\r\n\r\nThere are editorial tweaks, but more importantly 2119 language is removed from the Appendix.  I want to call attention to the four (4) 2119 language changes:\r\n* reworked some of this into Security Considerations: This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.\r\n* Implementions are RECOMMENDED -> whole paragraph re-written.\r\n* An ML-DSA key and certificate [MAY->can] be used with either ML-DSA or ExternalMu-ML-DSA interchangeably.\r\n* Implementors [SHOULD->should] to pay careful attention to how the public key or its hash is delivered to the `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing this data.\r\n\r\nAlso, if this PR is adopted we can close #54.",
+      "createdAt": "2024-12-18T15:29:48Z",
+      "updatedAt": "2024-12-18T15:32:26Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-external_mu-shuffle",
+      "headRefOid": "ba84d8c57aeef8b856fcfaaef5549b0740f5e217",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6VvMJv",
+          "commit": {
+            "abbreviatedOid": "34d56ff"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T15:31:38Z",
+          "updatedAt": "2024-12-18T15:31:38Z",
+          "comments": [
+            {
+              "originalPosition": 99,
+              "body": "```suggestion\r\nThe HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be\r\n```",
+              "createdAt": "2024-12-18T15:31:38Z",
+              "updatedAt": "2024-12-18T15:31:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VvMiX",
+          "commit": {
+            "abbreviatedOid": "b1089d7"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T15:32:14Z",
+          "updatedAt": "2024-12-18T15:32:14Z",
+          "comments": [
+            {
+              "originalPosition": 180,
+              "body": "```suggestion\r\ndefined in Section 5.4 of {{FIPS204}}. This specification uses exclusively\r\n```",
+              "createdAt": "2024-12-18T15:32:14Z",
+              "updatedAt": "2024-12-18T15:32:15Z"
+            }
+          ]
         }
       ]
     }
