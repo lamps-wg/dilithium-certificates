@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-19T00:57:03.893190+00:00",
+  "timestamp": "2024-12-22T00:58:30.294507+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -671,15 +671,15 @@
       "id": "I_kwDOIEpj4c6YhXgY",
       "title": "Should we use the context string?",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Mike asks [which context string](https://mailarchive.ietf.org/arch/msg/spasm/voUR5EXhtd9fvZL1pYRpTvnDTLs/) to use. At the moment we don't set any.\r\n\r\nThis question is not specific to ML-DSA. Context strings have been discussed in general in [this LAMPS thread](https://mailarchive.ietf.org/arch/msg/spasm/XH_VtuiYt4YWxuDS3dHsR70aQF0/).",
       "createdAt": "2024-10-01T10:58:43Z",
-      "updatedAt": "2024-12-12T15:49:05Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-19T11:22:27Z",
+      "closedAt": "2024-12-19T11:22:27Z",
       "comments": [
         {
           "author": "ounsworth",
@@ -785,6 +785,13 @@
           "body": "ACK, you are right. The OID is in the M' of HashXX-DSA already. Fine by me if you also use empty everywhere. ",
           "createdAt": "2024-12-12T15:47:45Z",
           "updatedAt": "2024-12-12T15:49:05Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Ready to be closed @bwesterb. The change made it in. ",
+          "createdAt": "2024-12-19T04:23:16Z",
+          "updatedAt": "2024-12-19T04:23:44Z"
         }
       ]
     },
@@ -4567,7 +4574,7 @@
       "labels": [],
       "body": "Moved \" Pre-hash Mode\" section to an Appendix.\r\n\r\nThere are editorial tweaks, but more importantly 2119 language is removed from the Appendix.  I want to call attention to the four (4) 2119 language changes:\r\n* reworked some of this into Security Considerations: This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.\r\n* Implementions are RECOMMENDED -> whole paragraph re-written.\r\n* An ML-DSA key and certificate [MAY->can] be used with either ML-DSA or ExternalMu-ML-DSA interchangeably.\r\n* Implementors [SHOULD->should] to pay careful attention to how the public key or its hash is delivered to the `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing this data.\r\n\r\nAlso, if this PR is adopted we can close #54.",
       "createdAt": "2024-12-18T15:29:48Z",
-      "updatedAt": "2024-12-18T15:32:26Z",
+      "updatedAt": "2024-12-19T04:19:42Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8",
@@ -4617,6 +4624,56 @@
               "body": "```suggestion\r\ndefined in Section 5.4 of {{FIPS204}}. This specification uses exclusively\r\n```",
               "createdAt": "2024-12-18T15:32:14Z",
               "updatedAt": "2024-12-18T15:32:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6VzXDa",
+          "commit": {
+            "abbreviatedOid": "ba84d8c"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Good overall, but I proposed some improvements.",
+          "createdAt": "2024-12-19T04:07:43Z",
+          "updatedAt": "2024-12-19T04:19:42Z",
+          "comments": [
+            {
+              "originalPosition": 119,
+              "body": "\"unlikely discovery of a collision attack ...\"",
+              "createdAt": "2024-12-19T04:07:43Z",
+              "updatedAt": "2024-12-19T04:19:42Z"
+            },
+            {
+              "originalPosition": 121,
+              "body": "Remove \"simple\". Finding a collision on a good hash functions should not be considered simple. ",
+              "createdAt": "2024-12-19T04:08:22Z",
+              "updatedAt": "2024-12-19T04:19:42Z"
+            },
+            {
+              "originalPosition": 124,
+              "body": "Remove \"therefore is a weaker signature algorithm.\" In practice it is not weaker because SHA-3 does not have collisions. Better to not be too alarmist. ",
+              "createdAt": "2024-12-19T04:09:25Z",
+              "updatedAt": "2024-12-19T04:19:42Z"
+            },
+            {
+              "originalPosition": 131,
+              "body": "\"cross-protocol forgery attacks in some contexts\"? \r\nThe OID and the ctx in M' are preventing those. I suggest  to remove \r\n\" which itself introduces some risk of cross-protocol forgery attacks in some contexts\"",
+              "createdAt": "2024-12-19T04:10:39Z",
+              "updatedAt": "2024-12-19T04:19:42Z"
+            },
+            {
+              "originalPosition": 250,
+              "body": "Remove the mention to HashML-DSA, it is covered already in the Security Considerations.",
+              "createdAt": "2024-12-19T04:13:40Z",
+              "updatedAt": "2024-12-19T04:19:42Z"
+            },
+            {
+              "originalPosition": 247,
+              "body": "Remove \r\n> Second, a malicious or tricked signer could potentially produce a signature which validates under a different public key, which weakens the implicit security assumptions of the ML-DSA algorithm.\r\n\r\nAlarmist. You can fool the signer that generates tr to use a different public key, but then you would also need to fool the rest of the signing to use a different private key. It means you control the whole signature generation which means you can do anything. \r\n\r\nThe next sentence is fine though. tr should be generated with a public key we can trust regardless of how it is to exploit it. ",
+              "createdAt": "2024-12-19T04:19:22Z",
+              "updatedAt": "2024-12-19T04:20:49Z"
             }
           ]
         }
