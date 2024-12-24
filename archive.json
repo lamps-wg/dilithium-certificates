@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-22T00:58:30.294507+00:00",
+  "timestamp": "2024-12-24T00:53:59.560421+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -4671,9 +4671,9 @@
             },
             {
               "originalPosition": 247,
-              "body": "Remove \r\n> Second, a malicious or tricked signer could potentially produce a signature which validates under a different public key, which weakens the implicit security assumptions of the ML-DSA algorithm.\r\n\r\nAlarmist. You can fool the signer that generates tr to use a different public key, but then you would also need to fool the rest of the signing to use a different private key. It means you control the whole signature generation which means you can do anything. \r\n\r\nThe next sentence is fine though. tr should be generated with a public key we can trust regardless of how it is to exploit it. ",
+              "body": "Remove \r\n> Second, a malicious or tricked signer could potentially produce a signature which validates under a different public key, which weakens the implicit security assumptions of the ML-DSA algorithm.\r\n\r\nThis sentence sounds a little alarmist. I suggest to remove it. You can fool the signer that generates tr to use a different public key, but then you would also need to fool the rest of the signing to use a different private key. It means you control the whole signature generation which means you can do anything. \r\n\r\nThe next sentence is fine though. tr should be generated with a public key we can trust regardless of how it is to exploit it. ",
               "createdAt": "2024-12-19T04:19:22Z",
-              "updatedAt": "2024-12-19T04:20:49Z"
+              "updatedAt": "2024-12-23T16:56:44Z"
             }
           ]
         }
