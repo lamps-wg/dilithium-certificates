@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-02T00:53:25.766146+00:00",
+  "timestamp": "2025-01-05T00:58:34.387230+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -4574,7 +4574,7 @@
       "labels": [],
       "body": "Moved \" Pre-hash Mode\" section to an Appendix.\r\n\r\nThere are editorial tweaks, but more importantly 2119 language is removed from the Appendix.  I want to call attention to the four (4) 2119 language changes:\r\n* reworked some of this into Security Considerations: This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.\r\n* Implementions are RECOMMENDED -> whole paragraph re-written.\r\n* An ML-DSA key and certificate [MAY->can] be used with either ML-DSA or ExternalMu-ML-DSA interchangeably.\r\n* Implementors [SHOULD->should] to pay careful attention to how the public key or its hash is delivered to the `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing this data.\r\n\r\nAlso, if this PR is adopted we can close #54.",
       "createdAt": "2024-12-18T15:29:48Z",
-      "updatedAt": "2024-12-19T04:19:42Z",
+      "updatedAt": "2025-01-04T23:48:19Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8",
@@ -4674,6 +4674,78 @@
               "body": "Remove \r\n> Second, a malicious or tricked signer could potentially produce a signature which validates under a different public key, which weakens the implicit security assumptions of the ML-DSA algorithm.\r\n\r\nThis sentence sounds a little alarmist. I suggest to remove it. You can fool the signer that generates tr to use a different public key, but then you would also need to fool the rest of the signing to use a different private key. It means you control the whole signature generation which means you can do anything. \r\n\r\nThe next sentence is fine though. tr should be generated with a public key we can trust regardless of how it is to exploit it. ",
               "createdAt": "2024-12-19T04:19:22Z",
               "updatedAt": "2024-12-23T16:56:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6W2P1l",
+          "commit": {
+            "abbreviatedOid": "ba84d8c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-04T23:31:56Z",
+          "updatedAt": "2025-01-04T23:31:57Z",
+          "comments": [
+            {
+              "originalPosition": 121,
+              "body": "I didn't mean \"simple\" in the sense of \"easy\", but rather in the sense that it's not domain-separated by the public key.\r\n\r\nMaybe \"... since a direct hash collision `H(m1) = H(m2)` will not suffice.\" captures the idea better?",
+              "createdAt": "2025-01-04T23:31:56Z",
+              "updatedAt": "2025-01-04T23:31:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6W2P31",
+          "commit": {
+            "abbreviatedOid": "ba84d8c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-04T23:33:45Z",
+          "updatedAt": "2025-01-04T23:33:45Z",
+          "comments": [
+            {
+              "originalPosition": 124,
+              "body": "Is there a less alarmist wording that still captures the same idea?\r\n\r\nMaybe \"... and therefore weakens some of the security properties built in to the ML-DSA design\" ?",
+              "createdAt": "2025-01-04T23:33:45Z",
+              "updatedAt": "2025-01-04T23:33:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6W2P5C",
+          "commit": {
+            "abbreviatedOid": "ba84d8c"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I'm good with moving this to an appendix.\r\nI also like Panos' comments. Once those are resolved, I'm good with this being merged.",
+          "createdAt": "2025-01-04T23:34:34Z",
+          "updatedAt": "2025-01-04T23:48:19Z",
+          "comments": [
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\nThe implementation reason for disallowing HashML-DSA stems from the fact\r\n```\r\n\r\ntypo",
+              "createdAt": "2025-01-04T23:34:34Z",
+              "updatedAt": "2025-01-04T23:48:19Z"
+            },
+            {
+              "originalPosition": 131,
+              "body": "Agreed. The 0x00 | 0x01 domain separator in M' does a good job of preventing attacks here.",
+              "createdAt": "2025-01-04T23:36:13Z",
+              "updatedAt": "2025-01-04T23:48:19Z"
+            },
+            {
+              "originalPosition": 247,
+              "body": "I think there's something useful to be said about allowing `tr` to be manipulated outside the crypto module that holds the private key, but I don't feel strongly enough about it to keep it in. Feel free to remove.",
+              "createdAt": "2025-01-04T23:47:42Z",
+              "updatedAt": "2025-01-04T23:48:19Z"
             }
           ]
         }
