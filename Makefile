@@ -1,3 +1,24 @@
+DEPS_FILES := \
+	X509-ML-DSA-2024.asn \
+	./examples/ML-DSA-44.crt \
+	./examples/ML-DSA-44.crt.txt \
+	./examples/ML-DSA-44.priv \
+	./examples/ML-DSA-44.priv.txt \
+	./examples/ML-DSA-44.pub \
+	./examples/ML-DSA-44.pub.txt \
+	./examples/ML-DSA-65.crt \
+	./examples/ML-DSA-65.crt.txt \
+	./examples/ML-DSA-65.priv \
+	./examples/ML-DSA-65.priv.txt \
+	./examples/ML-DSA-65.pub \
+	./examples/ML-DSA-65.pub.txt \
+	./examples/ML-DSA-87.crt \
+	./examples/ML-DSA-87.crt.txt \
+	./examples/ML-DSA-87.priv \
+	./examples/ML-DSA-87.priv.txt \
+	./examples/ML-DSA-87.pub \
+	./examples/ML-DSA-87.pub.txt \
+
 LIBDIR := lib
 include $(LIBDIR)/main.mk
 
