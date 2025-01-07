@@ -800,10 +800,7 @@ key, and while the exact mechanism by which it is delivered will be
 implementation-specific, it does open a windown for mismatches between
 `tr` and `sk`. First, this will produce a signature which will fail to
 verify under the intended public key since a compliant `Verify()` routine
-will independently compute `tr` from the public key. Second, a malicious
-or tricked signer could potentially produce a signature which validates
-under a different public key, which weakens the implicit security
-assumptions of the ML-DSA algorithm. Implementors should pay careful
+will independently compute `tr` from the public key. Implementors should pay careful
 attention to how the public key or its hash is delivered to the
 `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing
 this data.
