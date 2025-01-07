@@ -512,8 +512,8 @@ to the message to-be-signed prior to hashing, as described in line 6 of
 Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
 indended verification public key, preventing some attacks that would
 otherwise allow a signature to be successfully verified against a
-non-intended public key. Also, this binding means that in the case of
-the discovery of a collision attack against SHA-3, an attacker would
+non-intended public key. Also, this binding means that in the unlikely
+discovery of a collision attack against SHA-3, an attacker would
 have to perform a public-key-specific collision search in order to find
 message pairs such that `H(tr || m1) = H(tr || m2)` since a simple hash
 collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
