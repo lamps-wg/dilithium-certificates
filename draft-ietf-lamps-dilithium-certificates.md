@@ -524,8 +524,7 @@ The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
 different `Verify()` routines. This forwards to the protocol the
 complexity of informing the client whether to use `ML-DSA.Verify()` or
-`HashML-DSA.Verify()`, which itself introduces some risk of
-cross-protocol forgery attacks in some contexts. Additionally, since
+`HashML-DSA.Verify()`. Additionally, since
 the same OIDs are used to identify the ML-DSA
 public keys and ML-DSA signature algorithms, an implementation would
 need to commit a given public key to be either of type `ML-DSA` or
