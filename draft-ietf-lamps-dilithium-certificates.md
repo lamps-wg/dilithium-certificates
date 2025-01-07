@@ -806,10 +806,7 @@ under a different public key, which weakens the implicit security
 assumptions of the ML-DSA algorithm. Implementors should pay careful
 attention to how the public key or its hash is delivered to the
 `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing
-this data. Note that HashML-DSA also weakens this security assumption even
-further by omiting the public key entirely from the message representative
-hash, and so in this regard, ExternalMu-ML-DSA is still superior to
-HashML-DSA.
+this data.
 
 # Acknowledgments
 {:numbered="false"}
