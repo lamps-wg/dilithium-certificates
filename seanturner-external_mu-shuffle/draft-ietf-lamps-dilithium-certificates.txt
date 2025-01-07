@@ -1418,10 +1418,6 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    algorithm.  Implementors should pay careful attention to how the
    public key or its hash is delivered to the ExternalMu-ML-
    DSA.Prehash() routine, and from where they are sourcing this data.
-   Note that HashML-DSA also weakens this security assumption even
-   further by omiting the public key entirely from the message
-   representative hash, and so in this regard, ExternalMu-ML-DSA is
-   still superior to HashML-DSA.
 
 Acknowledgments
 
