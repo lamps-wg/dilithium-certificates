@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 21 June 2025                                          S. Turner
+Expires: 11 July 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                        18 December 2024
+                                                          7 January 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,11 +60,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 June 2025.
+   This Internet-Draft will expire on 11 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -428,8 +428,8 @@ Table of Contents
    of Algorithm 7 of [FIPS204].  In practice, this provides binding to
    the indended verification public key, preventing some attacks that
    would otherwise allow a signature to be successfully verified against
-   a non-intended public key.  Also, this binding means that in the case
-   of the discovery of a collision attack against SHA-3, an attacker
+   a non-intended public key.  Also, this binding means that in the
+   unlikely discovery of a collision attack against SHA-3, an attacker
    would have to perform a public-key-specific collision search in order
    to find message pairs such that H(tr || m1) = H(tr || m2) since a
    simple hash collision H(m1) = H(m2) will not suffice.  HashML-DSA

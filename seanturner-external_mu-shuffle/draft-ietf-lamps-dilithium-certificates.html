@@ -26,7 +26,7 @@ signatures, subject public keys, and private key are also described.
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
+    Jinja2 3.1.5
     lxml 5.3.0
     platformdirs 4.3.6
     pycountry 24.6.1
@@ -1052,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ML-DSA in Certificates</td>
-<td class="right">December 2024</td>
+<td class="right">January 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 21 June 2025</td>
+<td class="center">Expires 11 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-18" class="published">18 December 2024</time>
+<time datetime="2025-01-07" class="published">7 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-21">21 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-11">11 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1150,7 +1150,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1618,8 +1618,8 @@ to the message to-be-signed prior to hashing, as described in line 6 of
 Algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. In practice, this provides binding to the
 indended verification public key, preventing some attacks that would
 otherwise allow a signature to be successfully verified against a
-non-intended public key. Also, this binding means that in the case of
-the discovery of a collision attack against SHA-3, an attacker would
+non-intended public key. Also, this binding means that in the unlikely
+discovery of a collision attack against SHA-3, an attacker would
 have to perform a public-key-specific collision search in order to find
 message pairs such that <code>H(tr || m1) = H(tr || m2)</code> since a simple hash
 collision <code>H(m1) = H(m2)</code> will not suffice. HashML-DSA removes both of
