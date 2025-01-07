@@ -520,7 +520,7 @@ collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
 these enhanced security properties and therefore is a weaker signature
 algorithm.
 
-The implentation reason for disallowing HashML-DSA stems from the fact
+The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
 different `Verify()` routines. This forwards to the protocol the
 complexity of informing the client whether to use `ML-DSA.Verify()` or
