@@ -515,7 +515,7 @@ otherwise allow a signature to be successfully verified against a
 non-intended public key. Also, this binding means that in the unlikely
 discovery of a collision attack against SHA-3, an attacker would
 have to perform a public-key-specific collision search in order to find
-message pairs such that `H(tr || m1) = H(tr || m2)` since a simple hash
+message pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash
 collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
 these enhanced security properties and therefore is a weaker signature
 algorithm.
