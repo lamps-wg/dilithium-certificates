@@ -431,7 +431,7 @@ ExternalMu-ML-DSA for pre-hashed use cases, and thus public
 keys identified by `id-hash-ml-dsa-44-with-sha512`,
 `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512`
 MUST NOT be used in X.509 and related PKIX protocols with the
-exception of the Public Key in end-entity X.509 certifacates.
+exception of the Public Key in end-entity X.509 certificates.
 Such public keys could be used beyond PKIX.
 
 All functions and notation used in {{fig-externalmu-ml-dsa-external}}
