@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 11 July 2025</td>
+<td class="center">Expires 12 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-07" class="published">7 January 2025</time>
+<time datetime="2025-01-08" class="published">8 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-11">11 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-12">12 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1262,6 +1262,7 @@ certificates and Certificate Revocation Lists (CRLs) at three security
 levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines two variants of ML-DSA: a pure and a prehash variant.
 Only the former is specified in this document.
+See <a href="#sec-disallow-hash" class="auto internal xref">Section 8.1</a> for the rationale.
 The pure variant of ML-DSA supports the typical prehash flow,
 see <a href="#prehash" class="auto internal xref">Appendix D</a>. In short: one cryptographic module can compute the hash <em>mu</em>
 on line 6 of algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and pass it to a second module
@@ -2671,10 +2672,7 @@ key, and while the exact mechanism by which it is delivered will be
 implementation-specific, it does open a windown for mismatches between
 <code>tr</code> and <code>sk</code>. First, this will produce a signature which will fail to
 verify under the intended public key since a compliant <code>Verify()</code> routine
-will independently compute <code>tr</code> from the public key. Second, a malicious
-or tricked signer could potentially produce a signature which validates
-under a different public key, which weakens the implicit security
-assumptions of the ML-DSA algorithm. Implementors should pay careful
+will independently compute <code>tr</code> from the public key. Implementors should pay careful
 attention to how the public key or its hash is delivered to the
 <code>ExternalMu-ML-DSA.Prehash()</code> routine, and from where they are sourcing
 this data.<a href="#appendix-D-12" class="pilcrow">¶</a></p>

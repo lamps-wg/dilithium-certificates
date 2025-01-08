@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 11 July 2025                                          S. Turner
+Expires: 12 July 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                          7 January 2025
+                                                          8 January 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2025.
+   This Internet-Draft will expire on 12 July 2025.
 
 Copyright Notice
 
@@ -112,13 +112,14 @@ Table of Contents
    44, ML-DSA-65, and ML-DSA-87.
 
    [FIPS204] defines two variants of ML-DSA: a pure and a prehash
-   variant.  Only the former is specified in this document.  The pure
-   variant of ML-DSA supports the typical prehash flow, see Appendix D.
-   In short: one cryptographic module can compute the hash _mu_ on line
-   6 of algorithm 7 of [FIPS204] and pass it to a second module to
-   finish the signature.  The first module only needs access to the full
-   message and the public key, whereas the second module only needs
-   access to hash _mu_ and the private key.
+   variant.  Only the former is specified in this document.  See
+   Section 8.1 for the rationale.  The pure variant of ML-DSA supports
+   the typical prehash flow, see Appendix D.  In short: one
+   cryptographic module can compute the hash _mu_ on line 6 of algorithm
+   7 of [FIPS204] and pass it to a second module to finish the
+   signature.  The first module only needs access to the full message
+   and the public key, whereas the second module only needs access to
+   hash _mu_ and the private key.
 
    Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
    Dilithium are not compatible.
@@ -1412,10 +1413,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    mismatches between tr and sk.  First, this will produce a signature
    which will fail to verify under the intended public key since a
    compliant Verify() routine will independently compute tr from the
-   public key.  Second, a malicious or tricked signer could potentially
-   produce a signature which validates under a different public key,
-   which weakens the implicit security assumptions of the ML-DSA
-   algorithm.  Implementors should pay careful attention to how the
+   public key.  Implementors should pay careful attention to how the
    public key or its hash is delivered to the ExternalMu-ML-
    DSA.Prehash() routine, and from where they are sourcing this data.
 
