@@ -273,7 +273,8 @@ AlgorithmIdentifier in the signatureAlgorithm field in the sequence
 Certificate/CertificateList and the signature field in the sequence
 TBSCertificate/TBSCertList in certificates and CRLs, respectively,
 {{RFC5280}}. The parameters of these signature algorithms MUST be
-absent, as explained in {{oids}}.
+absent, as explained in {{oids}}. That is, the AlgorithmIdentifier
+SHALL be a SEQUENCE of one component, the OID id-ml-dsa-*.
 
 The signatureValue field contains the corresponding ML-DSA signature
 computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
@@ -285,12 +286,6 @@ encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified {{oids}}.
-
-When an id-ml-dsa-* identifier appears in the algorithm field as an
-AlgorithmIdentifier, the encoding MUST omit the parameters field. That
-is, the AlgorithmIdentifier SHALL be a SEQUENCE of one component, the
-OID id-ml-dsa-*.
-
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PubblicKey}
 
