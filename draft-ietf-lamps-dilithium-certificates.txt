@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 11 July 2025                                          S. Turner
+Expires: 12 July 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                          7 January 2025
+                                                          8 January 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2025.
+   This Internet-Draft will expire on 12 July 2025.
 
 Copyright Notice
 
@@ -215,7 +215,8 @@ Table of Contents
    Certificate/CertificateList and the signature field in the sequence
    TBSCertificate/TBSCertList in certificates and CRLs, respectively,
    [RFC5280].  The parameters of these signature algorithms MUST be
-   absent, as explained in Section 2.
+   absent, as explained in Section 2.  That is, the AlgorithmIdentifier
+   SHALL be a SEQUENCE of one component, the OID id-ml-dsa-*.
 
    The signatureValue field contains the corresponding ML-DSA signature
    computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
@@ -227,11 +228,6 @@ Table of Contents
    client implementations that process certificates and CRLs using ML-
    DSA MUST recognize the corresponding OIDs.  Encoding rules for ML-DSA
    signature values are specified Section 2.
-
-   When an id-ml-dsa-* identifier appears in the algorithm field as an
-   AlgorithmIdentifier, the encoding MUST omit the parameters field.
-   That is, the AlgorithmIdentifier SHALL be a SEQUENCE of one
-   component, the OID id-ml-dsa-*.
 
 4.  ML-DSA Public Keys in PKIX
 
