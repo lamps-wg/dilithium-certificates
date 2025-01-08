@@ -263,7 +263,6 @@ Signatures are also used in the CRL list ASN.1 representation from
 algorithm identifier in the signatureAlgorithm attribute and a
 signatureValue attribute that contains the actual signature.
 
-
 ~~~
    CertificateList  ::=  SIGNED{ TBSCertList }
 ~~~
@@ -311,8 +310,44 @@ The fields in SubjectPublicKeyInfo have the following meaning:
 
 * subjectPublicKey contains the byte stream of the public key.
 
+{{!I-D.ietf-lamps-cms-ml-dsa}} defines the following public key
+identifiers for ML-DSA:
+
+~~~
+  pk-ml-dsa-44 PUBLIC-KEY ::= {
+    IDENTIFIER id-ml-dsa-44
+    -- KEY no ASN.1 wrapping --
+    CERT-KEY-USAGE
+      { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+    -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+  pk-ml-dsa-65 PUBLIC-KEY ::= {
+    IDENTIFIER id-ml-dsa-65
+    -- KEY no ASN.1 wrapping --
+    CERT-KEY-USAGE
+      { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+    -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+  pk-ml-dsa-87 PUBLIC-KEY ::= {
+    IDENTIFIER id-ml-dsa-87
+    -- KEY no ASN.1 wrapping --
+    CERT-KEY-USAGE
+      { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+    -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+  ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
+  ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+~~~
+
 An ML-DSA public key is encoded in an X.509 certificate's SubjectPublicKeyInfo
 type as described in {{Section 3 of I-D.ietf-lamps-cms-ml-dsa}}.
+
+{{Section 3 of I-D.ietf-lamps-cms-ml-dsa}} also defines the
+ML-DSA-Public and ML-DSA-PrivateKey for when the ML-DSA pubic key
+appears outside of a SubjectPublicKeyInfo type and for when the ML-DSA
+private key appears outside of an Asymmetric Key Package {{!RFC5958}},
+respectively.
 
 {{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
@@ -580,10 +615,13 @@ single OCTET STRING.
 This appendix includes the ASN.1 module {{X680}} for the ML-DSA.  Note that
 as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 {{X690}}. This module imports objects from {{RFC5912}} and
-{{!I-D.ietf-lamps-cms-ml-dsa}}.
+{{I-D.ietf-lamps-cms-ml-dsa}}.
 
 <aside markdown="block">
-RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of {{I-D.ietf-lamps-cms-ml-dsa}}. Also please replace {{I-D.ietf-lamps-cms-ml-dsa}} in the module with a reference to the published RFC.
+RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the
+publication of {{I-D.ietf-lamps-cms-ml-dsa}}. Also please replace
+{{I-D.ietf-lamps-cms-ml-dsa}} in the module with a reference to the
+published RFC.
 </aside>
 
 ~~~
