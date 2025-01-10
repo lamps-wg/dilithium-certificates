@@ -714,7 +714,7 @@ key in the previous section.
 ~~~
 
 ~~~
-{::include ./examples/ML-DSA-44.pub.txt}
+{::include ./examples/ML-DSA-65.pub.txt}
 ~~~
 
 The following is the ML-DSA-87 public key corresponding to the private
