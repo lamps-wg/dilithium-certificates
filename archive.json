@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T00:54:05.827710+00:00",
+  "timestamp": "2025-01-12T00:59:29.564158+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -934,7 +934,7 @@
       "labels": [],
       "body": "This is feedback from the PQC X.509 Hackathon team.\r\n\r\nThe current wording on HashML-DSA is:\r\n\r\n> with the exception of the Public Key in end-entity X.509 certifacates\r\n\r\n1. typo \"certifacates\"\r\n2. we should probably add \"... in end-entity X.509 certificates for signing non-X.509 protocol messages, ie HashML-DSA MUST NOT be used for signing CRLs or OCSP Responses.\"\r\n\r\n\r\nNote that within the Hackathon group, we did not have consensus about whether we should even allow HashML-DSA in EE certs at all -- some people were advocating for completely removing this exception clause. _**This needs to be discussed on-list**_, which may result in a longer description in the document.",
       "createdAt": "2025-01-07T18:39:26Z",
-      "updatedAt": "2025-01-08T21:26:10Z",
+      "updatedAt": "2025-01-10T19:54:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -957,6 +957,55 @@
           "body": "@csosto-pk \r\n\r\nGood point. Our concern was that the case of non-CAs issuing CRLs (ie delegated CRL signers) was not covered (ie left ambiguous). But I think you're right that this sentence covers it:\r\n\r\n> MUST NOT be used in X.509 certificates and CRLs and related PKIX protocols.\r\n\r\nIt's the first sentence that's confusing:\r\n\r\n> MUST NOT be used by CAs generating certificates or CRLs\r\n\r\nWhy does \"CA\" matter there? Why not shorten the whole paragraph and just say \"MUST NOT when signing X.509, CRL, OCSP, or other PKIX protocols\".",
           "createdAt": "2025-01-08T21:26:09Z",
           "updatedAt": "2025-01-08T21:26:09Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'd like to start by saying that this whole section even being in this document is a little weird.\r\n\r\nThis document's title, abstract, and introduction says that this is supposed to be about `ML-DSA`. It specifies or imports what is needed to put `ML-DSA` keys in a public key certificate and apply those signatures to public key certificates and CRLs. This draft says nothing about how to use `ML-DSA` with any other PKIX certificate type, of which there are three: Attribute, Qualified, & Proxy Anonymous Certificates. This draft also says nothing about other PKIX related protocols, and BTW there are a lot of them: `CMC`, `CMP`, `CRMF`, `DVCS`, `EST`, `OCSP`, `PKCS#10`, `SCVP`, `TSP`, & `TAMP`.  You will note that this draft imports the `sa-ml-dsa-*` and `pk-ml-dsa-*` definitions from `-cms-ml-dsa` and that I-D doesn't specify the corresponding `sa-hashml-dsa` and `pk-hashml-dsa-*\r\n\r\nThen, we got this section about `HashML-DSA`, which is a variant of `ML-DSA` that's also in FIPS 204, that says 'em don't use the `HashML-DSA` OIDs here, or here, or here.  Couldn't we just uplift all of the `HashML-DSA` stuff and put it in a draft called:\r\n\r\n    Internet X.509 Public Key Infrastructure: Algorithm Identifiers for\r\n    Pre-Hash ML-DSA\r\n\r\nto keep the one we really want to use separate?  \r\n\r\nOr, do we need to change the title, abstract, and into to be something like one of the following to note that we are also doing:\r\n\r\n    Internet X.509 Public Key Infrastructure: Algorithm Identifiers for\r\n    Pure ML-DSA & Pre-Hash ML-DSA\r\n\r\nor\r\n\r\n    Internet X.509 Public Key Infrastructure: Algorithm Identifiers for\r\n    FIPS 204\r\n\r\nor\r\n\r\n    Internet X.509 Public Key Infrastructure: Algorithm Identifiers for\r\n    the Module Lattice Based Signature Standard\r\n\r\nIf we are going to keep the pure and pre-hash in the same document, I think we should treat them the same and we should cut down the pre-hash text to just talk about public key certificates and CRLs. I.e., I'd be happy to drop CA from the 1st sentence and change generate to issuer (that's what 5280 calls it and there's even fields called that):\r\n\r\n    The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be\r\n    used by CAs generating certificates or CRLs.\r\n\r\nWe could also add the `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` identifiers OIDs if we want to get specific.",
+          "createdAt": "2025-01-09T04:42:47Z",
+          "updatedAt": "2025-01-09T04:42:47Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be used by CAs generating certificates or CRLs, CAs and RAs enrolling Subcribers, OCSP responders responding;\r\n\r\nIt was basically trying to say that everything in the cert chain \"MUST NOT\" use HashML-DSA, but it implied that the EE cert public key is still allowed to be HashML-DSA (the \"notable exception\" in the later sentence). If we say \"MUST NOT\" be used in any cert then it conflicts with the later sentence that talks about the \"notable exception\". \r\n\r\nMaybe still simplifying it to \r\n\r\n> The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be used; in other words, public keys identified by id-hash-ml-dsa-44-with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-with-sha512 MUST NOT be used in X.509 certificates and CRLs and related PKIX protocols. The notable exception is the public key in end-entity X.509 certificates; such public keys could be used beyond PKIX.\r\n\r\nstill conveys the message.\r\n",
+          "createdAt": "2025-01-09T04:56:00Z",
+          "updatedAt": "2025-01-09T04:56:00Z"
+        },
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "So, the problem identified by the hackathon team is that the current wording is ambiguous about whether HashML-DSA is allowed in delegated CRL or OCSP signing certificates. Ambiguity bad. Fix ambiguity please. The ambiguity is because conceptually those are part of the CA, but technically they are EEs: `basicConstraints:cA:false, KU:cRLSign`, or `basicConstraints:cA:false, EKU:id-kp-OCSPSigning`.\r\n\r\nI have a slight preference for \"MUST NOT\", but I would also be fine with \"MAY\" -- my real concern here is that one way or another the draft is clear and non-ambiguous about whether HashML-DSA is allowed in delegated CRL and OCSP signing certs. I feel like Sean's proposal is worse: it makes it more ambiguous than what's currently in the draft.",
+          "createdAt": "2025-01-09T13:35:54Z",
+          "updatedAt": "2025-01-09T14:07:05Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I had actually written something very similar to what @csosto-pk suggested before I mounted my late night soapbox. If I get off that box for a second, would this be clearer still:\r\n\r\n> The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be used; in other words, public keys identified by id-hash-ml-dsa-44-with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-with-sha512 MUST NOT be used in X.509 certificates and CRLs and related PKIX protocols. The notable exception is the public key in end-entity X.509 certificates, i.e., certificates that do not have a basic constraints extension with the CA boolean flag set to true; such public keys could be used beyond PKIX.\r\n\r\nHowever, to continue down the less ambiguous road we are going to need to specify 'sa-hash-ml-dsa-*` and `pk-hash-ml-dsa-*` somewhere because somebody can say \"great, where are OIDs and ASN.1 stuff for when I want to actually put that HashML-DSA public key in the EE cert and the signature on something other than a certificate.\"\r\n\r\nAnd then, I am back on my box, asking whether we should be clear that this I-D is about both Pure and Pre-Hash ML-DSA by changing the title, abstract, intro, and prose/ASN.1 to indicate this I-D also address pre-hash ML-DSA. If how to use Pre-Hash ML-DSA is not going in this I-D and is instead going to go in some other I-D, then all of the pre-hash ML-DSA prose in this I-D can go in that other I-D. I suspect having a third document is unappealing, but a PR to do the changes I am talking about I won't be able to get done until next week.",
+          "createdAt": "2025-01-09T16:07:09Z",
+          "updatedAt": "2025-01-09T16:07:09Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I consider delegated CRL or OCSP Signing certs as PKIX certs in this context. \r\n\r\nHow about \r\n\r\n> The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be used; in other words, **public keys identified by id-hash-ml-dsa-44-with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-with-sha512 MUST NOT** be in X.509 certificates used for CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS)**. The notable exception is the public key in end-entity X.509 certificates; such public keys **MAY** used beyond PKIX.\r\n\r\nIt is generic enough to clear the delegated CRL or OCSP signers, etc, right? ",
+          "createdAt": "2025-01-09T16:09:41Z",
+          "updatedAt": "2025-01-09T16:09:57Z"
+        },
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yup, new paragraph is clearer.\r\n\r\nWhat about changing\r\n\r\n> The notable exception is the public key in end-entity X.509 certificates\r\n\r\nto\r\n\r\n> The use of HashML-DSA public keys within end entity certificates is not prohibited, but conventions for doing so are outside the scope of this document.\r\n\r\nThen I think your title is still fine, and the first person who needs to make HashML-DSA certs will need to write their own I-D.",
+          "createdAt": "2025-01-09T17:34:18Z",
+          "updatedAt": "2025-01-09T17:35:47Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> The use of HashML-DSA public keys within end entity certificates is not prohibited, but conventions for doing so are outside the scope of this document.\r\n\r\nI am fine with that. ",
+          "createdAt": "2025-01-10T19:54:07Z",
+          "updatedAt": "2025-01-10T19:54:07Z"
         }
       ]
     },
