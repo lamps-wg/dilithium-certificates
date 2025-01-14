@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-12T00:59:29.564158+00:00",
+  "timestamp": "2025-01-14T00:51:50.149504+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -934,7 +934,7 @@
       "labels": [],
       "body": "This is feedback from the PQC X.509 Hackathon team.\r\n\r\nThe current wording on HashML-DSA is:\r\n\r\n> with the exception of the Public Key in end-entity X.509 certifacates\r\n\r\n1. typo \"certifacates\"\r\n2. we should probably add \"... in end-entity X.509 certificates for signing non-X.509 protocol messages, ie HashML-DSA MUST NOT be used for signing CRLs or OCSP Responses.\"\r\n\r\n\r\nNote that within the Hackathon group, we did not have consensus about whether we should even allow HashML-DSA in EE certs at all -- some people were advocating for completely removing this exception clause. _**This needs to be discussed on-list**_, which may result in a longer description in the document.",
       "createdAt": "2025-01-07T18:39:26Z",
-      "updatedAt": "2025-01-10T19:54:07Z",
+      "updatedAt": "2025-01-13T14:51:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -1006,6 +1006,13 @@
           "body": "> The use of HashML-DSA public keys within end entity certificates is not prohibited, but conventions for doing so are outside the scope of this document.\r\n\r\nI am fine with that. ",
           "createdAt": "2025-01-10T19:54:07Z",
           "updatedAt": "2025-01-10T19:54:07Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Revised #65 based on the above.\r\n\r\nNote that we could future proof this with the following:\r\n\r\n    id-hash-ml-dsa-*, where * is any hash algorithm, MUST NOT\r\n",
+          "createdAt": "2025-01-13T14:31:54Z",
+          "updatedAt": "2025-01-13T14:51:07Z"
         }
       ]
     },
@@ -4691,7 +4698,7 @@
       "labels": [],
       "body": "Moved \" Pre-hash Mode\" section to an Appendix.\r\n\r\nThere are editorial tweaks, but more importantly 2119 language is removed from the Appendix.  I want to call attention to the four (4) 2119 language changes:\r\n* reworked some of this into Security Considerations: This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.\r\n* Implementions are RECOMMENDED -> whole paragraph re-written.\r\n* An ML-DSA key and certificate [MAY->can] be used with either ML-DSA or ExternalMu-ML-DSA interchangeably.\r\n* Implementors [SHOULD->should] to pay careful attention to how the public key or its hash is delivered to the `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing this data.\r\n\r\nAlso, if this PR is adopted we can close #54.",
       "createdAt": "2024-12-18T15:29:48Z",
-      "updatedAt": "2025-01-08T14:38:51Z",
+      "updatedAt": "2025-01-13T15:24:39Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8",
@@ -4702,7 +4709,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@ounsworth @bwesterb @csosto-pk PTAL",
+          "createdAt": "2025-01-13T15:24:38Z",
+          "updatedAt": "2025-01-13T15:24:38Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIEpj4c6VvMJv",
@@ -5023,6 +5038,66 @@
               "body": "Also there is a hash that has to be specified in HashML-DSA.",
               "createdAt": "2025-01-08T14:38:51Z",
               "updatedAt": "2025-01-08T14:38:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6XzOl3",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-13T14:28:59Z",
+          "updatedAt": "2025-01-13T14:29:00Z",
+          "comments": [
+            {
+              "originalPosition": 114,
+              "body": "```suggestion\r\nThe HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be\r\nused; in other words, public keys identified by\r\n`id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and\r\n`id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for\r\nCRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS).\r\nThe use of HashML-DSA public keys within end entity certificates is not\r\nprohibited, but conventions for doing so are outside the scope of this\r\ndocument.\r\n```",
+              "createdAt": "2025-01-13T14:28:59Z",
+              "updatedAt": "2025-01-13T14:50:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6XzTtc",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-13T14:34:56Z",
+          "updatedAt": "2025-01-13T14:34:56Z",
+          "comments": [
+            {
+              "originalPosition": 138,
+              "body": "```suggestion\r\n`HashML-DSA.Verify()` along with the hash algorithm to use. Additionally, since\r\n```",
+              "createdAt": "2025-01-13T14:34:56Z",
+              "updatedAt": "2025-01-13T14:34:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6Xzk25",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-13T14:54:48Z",
+          "updatedAt": "2025-01-13T14:54:48Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "```suggestion\r\nnon-intended public key. Also, this unlikely, theoretical binding means that in the unlikely\r\ndiscovery of a collision attack against SHA-3, an attacker would\r\nhave to perform a public-key-specific collision search in order to find\r\nmessage pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash\r\ncollision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of\r\nthese enhanced security properties.\r\n```",
+              "createdAt": "2025-01-13T14:54:48Z",
+              "updatedAt": "2025-01-13T14:54:48Z"
             }
           ]
         }
