@@ -1429,10 +1429,45 @@ public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
           <p id="section-4-5.2.1">subjectPublicKey contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-6">An ML-DSA public key is encoded in an X.509 certificate's SubjectPublicKeyInfo
-type as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-ml-dsa-01#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span>.<a href="#section-4-6" class="pilcrow">¶</a></p>
-<p id="section-4-7"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
-textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<p id="section-4-6"><span>[<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span> defines the following public key
+identifiers for ML-DSA:<a href="#section-4-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4-7">
+<pre>
+  pk-ml-dsa-44 PUBLIC-KEY ::= {
+    IDENTIFIER id-ml-dsa-44
+    -- KEY no ASN.1 wrapping --
+    CERT-KEY-USAGE
+      { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+    -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+  pk-ml-dsa-65 PUBLIC-KEY ::= {
+    IDENTIFIER id-ml-dsa-65
+    -- KEY no ASN.1 wrapping --
+    CERT-KEY-USAGE
+      { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+    -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+  pk-ml-dsa-87 PUBLIC-KEY ::= {
+    IDENTIFIER id-ml-dsa-87
+    -- KEY no ASN.1 wrapping --
+    CERT-KEY-USAGE
+      { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+    -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+  ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
+  ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+</pre><a href="#section-4-7" class="pilcrow">¶</a>
+</div>
+<p id="section-4-8">An ML-DSA public key is encoded in an X.509 certificate's SubjectPublicKeyInfo
+type as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-ml-dsa-01#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span>.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-ml-dsa-01#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span> also defines the
+ML-DSA-Public and ML-DSA-PrivateKey for when the ML-DSA pubic key
+appears outside of a SubjectPublicKeyInfo type and for when the ML-DSA
+private key appears outside of an Asymmetric Key Package <span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span>,
+respectively.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<p id="section-4-10"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
+textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="key-usage-bits">
@@ -1734,7 +1769,10 @@ as per <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, certific
 <span>[<a href="#X690" class="cite xref">X690</a>]</span>. This module imports objects from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and
 <span>[<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <aside id="appendix-A-2">
-        <p id="appendix-A-2.1">RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the publication of <span>[<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span>. Also please replace <span>[<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span> in the module with a reference to the published RFC.<a href="#appendix-A-2.1" class="pilcrow">¶</a></p>
+        <p id="appendix-A-2.1">RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the
+publication of <span>[<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span>. Also please replace
+<span>[<a href="#I-D.ietf-lamps-cms-ml-dsa" class="cite xref">I-D.ietf-lamps-cms-ml-dsa</a>]</span> in the module with a reference to the
+published RFC.<a href="#appendix-A-2.1" class="pilcrow">¶</a></p>
 </aside>
 <div class="sourcecode" id="appendix-A-3">
 <pre>&lt;CODE BEGINS&gt;

@@ -252,9 +252,43 @@ Table of Contents
 
    *  subjectPublicKey contains the byte stream of the public key.
 
+   [I-D.ietf-lamps-cms-ml-dsa] defines the following public key
+   identifiers for ML-DSA:
+
+     pk-ml-dsa-44 PUBLIC-KEY ::= {
+       IDENTIFIER id-ml-dsa-44
+       -- KEY no ASN.1 wrapping --
+       CERT-KEY-USAGE
+         { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+       -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+     pk-ml-dsa-65 PUBLIC-KEY ::= {
+       IDENTIFIER id-ml-dsa-65
+       -- KEY no ASN.1 wrapping --
+       CERT-KEY-USAGE
+         { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+       -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+     pk-ml-dsa-87 PUBLIC-KEY ::= {
+       IDENTIFIER id-ml-dsa-87
+       -- KEY no ASN.1 wrapping --
+       CERT-KEY-USAGE
+         { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+       -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+     ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
+     ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+
    An ML-DSA public key is encoded in an X.509 certificate's
    SubjectPublicKeyInfo type as described in Section 3 of
    [I-D.ietf-lamps-cms-ml-dsa].
+
+   Section 3 of [I-D.ietf-lamps-cms-ml-dsa] also defines the ML-DSA-
+   Public and ML-DSA-PrivateKey for when the ML-DSA pubic key appears
+   outside of a SubjectPublicKeyInfo type and for when the ML-DSA
+   private key appears outside of an Asymmetric Key Package [RFC5958],
+   respectively.
 
    Appendix C contains example ML-DSA public keys encoded using the
    textual encoding defined in [RFC7468].
