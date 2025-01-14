@@ -503,22 +503,7 @@ The use of HashML-DSA public keys within end entity certificates is not
 prohibited, but conventions for doing so are outside the scope of this
 document.
 
-This restriction is for both security and implementation reasons.
-
-The security reason for disallowing HashML-DSA is that the design of the
-ML-DSA algorithm provides enhanced resistance against signature
-collision attacks, compared with conventional RSA or ECDSA signature
-algorithms. Specifically, ML-DSA binds the hash of the public key `tr`
-to the message to-be-signed prior to hashing, as described in line 6 of
-Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
-indended verification public key, preventing some attacks that would
-otherwise allow a signature to be successfully verified against a
-non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
-discovery of a collision attack against SHA-3, an attacker would
-have to perform a public-key-specific collision search in order to find
-message pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash
-collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
-these enhanced security properties.
+This restriction is for both implementation and security reasons.
 
 The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
@@ -537,6 +522,21 @@ indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
 mathematically equivalent algorithms). The difference between ML-DSA
 and ExternalMu-ML-DSA is merely an internal implementation detail of
 the signer and has no impact on the verifier or network protocol.
+
+The security reason for disallowing HashML-DSA is that the design of the
+ML-DSA algorithm provides enhanced resistance against signature
+collision attacks, compared with conventional RSA or ECDSA signature
+algorithms. Specifically, ML-DSA binds the hash of the public key `tr`
+to the message to-be-signed prior to hashing, as described in line 6 of
+Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
+indended verification public key, preventing some attacks that would
+otherwise allow a signature to be successfully verified against a
+non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
+discovery of a collision attack against SHA-3, an attacker would
+have to perform a public-key-specific collision search in order to find
+message pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash
+collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
+these enhanced security properties.
 
 --- back
 
