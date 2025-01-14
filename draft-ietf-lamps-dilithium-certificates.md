@@ -495,13 +495,13 @@ single OCTET STRING.
 ## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
 
 The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
-used by CAs generating certificates or CRLs, CAs and RAs enrolling
-Subcribers, OCSP responders responding; in other words, public keys
-identified by `id-hash-ml-dsa-44-with-sha512`,
-`id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512`
-MUST NOT be used in X.509 certificates and CRLs and related PKIX
-protocols. The notable exception is the public key in end-entity
-X.509 certificates; such public keys could be used beyond PKIX.
+used; in other words, public keys identified by
+`id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
+`id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
+CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS).
+The use of HashML-DSA public keys within end entity certificates is not
+prohibited, but conventions for doing so are outside the scope of this
+document.
 
 This restriction is for both security and implementation reasons.
 
@@ -513,19 +513,18 @@ to the message to-be-signed prior to hashing, as described in line 6 of
 Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
 indended verification public key, preventing some attacks that would
 otherwise allow a signature to be successfully verified against a
-non-intended public key. Also, this binding means that in the unlikely
+non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
 discovery of a collision attack against SHA-3, an attacker would
 have to perform a public-key-specific collision search in order to find
 message pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash
 collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
-these enhanced security properties and therefore is a weaker signature
-algorithm.
+these enhanced security properties.
 
 The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
 different `Verify()` routines. This forwards to the protocol the
 complexity of informing the client whether to use `ML-DSA.Verify()` or
-`HashML-DSA.Verify()`. Additionally, since
+`HashML-DSA.Verify()` along with the hash algorithm to use. Additionally, since
 the same OIDs are used to identify the ML-DSA
 public keys and ML-DSA signature algorithms, an implementation would
 need to commit a given public key to be either of type `ML-DSA` or
