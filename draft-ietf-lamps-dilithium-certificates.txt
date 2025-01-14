@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 14 July 2025                                          S. Turner
+Expires: 18 July 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                         10 January 2025
+                                                         14 January 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 July 2025.
+   This Internet-Draft will expire on 18 July 2025.
 
 Copyright Notice
 
@@ -85,18 +85,19 @@ Table of Contents
    4.  ML-DSA Public Keys in PKIX
    5.  Key Usage Bits
    6.  Private Key Format
-   7.  Pre-hashing (ExternalMu-ML-DSA)
-   8.  IANA Considerations
-   9.  Security Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   7.  IANA Considerations
+   8.  Security Considerations
+     8.1.  Rationale for disallowing HashML-DSA
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Security Strengths
    Appendix C.  Examples
      C.1.  Example Private Key
      C.2.  Example Public Key
      C.3.  Example Certificate
+   Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
    Acknowledgments
    Authors' Addresses
 
@@ -111,13 +112,14 @@ Table of Contents
    44, ML-DSA-65, and ML-DSA-87.
 
    [FIPS204] defines two variants of ML-DSA: a pure and a prehash
-   variant.  Only the former is specified in this document.  The pure
-   variant of ML-DSA supports the typical prehash flow, see Section 7.
-   In short: one cryptographic module can compute the hash _mu_ on line
-   6 of algorithm 7 of [FIPS204] and pass it to a second module to
-   finish the signature.  The first module only needs access to the full
-   message and the public key, whereas the second module only needs
-   access to hash _mu_ and the private key.
+   variant.  Only the former is specified in this document.  See
+   Section 8.1 for the rationale.  The pure variant of ML-DSA supports
+   the typical prehash flow, see Appendix D.  In short: one
+   cryptographic module can compute the hash _mu_ on line 6 of algorithm
+   7 of [FIPS204] and pass it to a second module to finish the
+   signature.  The first module only needs access to the full message
+   and the public key, whereas the second module only needs access to
+   hash _mu_ and the private key.
 
    Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
    Dilithium are not compatible.
@@ -329,88 +331,7 @@ Table of Contents
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
 
-7.  Pre-hashing (ExternalMu-ML-DSA)
-
-   Some applications require prehashing, where the signature generation
-   process can be separated into a pre-hash step and a core signature
-   step in order to ease operational requirements around large or
-   inconsistently-sized payloads.  This can be performed at the protocol
-   layer, but not all protocols support it.  Examples in [RFC5280] are
-   certificate and certificate revocation list (CRL) data structures,
-   that do not include message digesting before signing.  This can make
-   signing large CRLs or a high volume of certificates with large public
-   keys challenging.
-
-   As mentioned in the introduction, pure ML-DSA signing itself supports
-   a prehashing flow by splitting the operation over two modules.  In
-   this section we make this "ExternalMu-ML-DSA" more explicit.
-
-   There are two steps.  First an ExternalMu-ML-DSA.Prehash() followed
-   by ExternalMu-ML-DSA.Sign().  Together these are functionally
-   equivalent to ML-DSA.Sign() from [FIPS204] in that they create
-   exactly the same signatures as regular pure ML-DSA, which can be
-   verified by the unmodified ML-DSA.Verify().
-
-   An ML-DSA key and certificate MAY be used with either ML-DSA or
-   ExternalMu-ML-DSA interchangeably.  Note that ExternalMu-ML-DSA
-   describes a different signature API from ML-DSA and therefore might
-   require explicit support from hardware or software cryptographic
-   modules.
-
-   Note that the signing mode defined here is different from HashML-DSA
-   defined in [FIPS204] section 5.4.  This specification uses
-   exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus
-   public keys identified by id-hash-ml-dsa-44-with-sha512, id-hash-ml-
-   dsa-65-with-sha512, and id-hash-ml-dsa-87-with-sha512 MUST NOT be
-   used in X.509 and related PKIX protocols with the exception of the
-   Public Key in end-entity X.509 certifacates.  Such public keys could
-   be used beyond PKIX.
-
-   All functions and notation used in Figure 1 and Figure 2 are defined
-   in [FIPS204].
-
-   External operations:
-
- ExternalMu-ML-DSA.Prehash(pk, M, ctx):
-
-   if |ctx| > 255 then
-     return error  # return an error indication if the context string is
-                   # too long
-   end if
-
-   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
-                                                         || ctx) || M
-   mu = H(BytesToBits(H(pk, 64)) || M', 64)
-   return mu
-
-             Figure 1: External steps of ExternalMu-ML-DSA
-
-   Internal operations:
-
-ExternalMu-ML-DSA.Sign(sk, mu):
-
-  if |mu| != 512 then
-    return error  # return an error indication if the input mu is not
-                  # 64 bytes (512 bits).
-  end if
-
-  rnd = rand(32)  # for the optional deterministic variant,
-                  # set rnd to all zeroes
-  if rnd = NULL then
-    return error  # return an error indication if random bit
-                  # generation failed
-  end if
-
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
-  return sigma
-
-
-ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
-   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
-
-            Figure 2: Internal steps of ExternalMu-ML-DSA
-
-8.  IANA Considerations
+7.  IANA Considerations
 
    For the ASN.1 module in Appendix A, IANA is requested to assign an
    object identifier (OID) for the module identifier (TBD1) with a
@@ -418,7 +339,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    should be allocated in the "SMI Security for PKIX Module Identifier"
    registry (1.3.6.1.5.5.7.0).
 
-9.  Security Considerations
+8.  Security Considerations
 
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
@@ -483,9 +404,56 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    serialization.  It for this reason the public key structure defined
    in Section 4 is intentionally encoded as a single OCTET STRING.
 
-10.  References
+8.1.  Rationale for disallowing HashML-DSA
 
-10.1.  Normative References
+   The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be
+   used; in other words, public keys identified by id-hash-ml-dsa-44-
+   with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
+   with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP,
+   certificate issuance and related PKIX protocols (e.g.  TLS).  The use
+   of HashML-DSA public keys within end entity certificates is not
+   prohibited, but conventions for doing so are outside the scope of
+   this document.
+
+   This restriction is for both implementation and security reasons.
+
+   The implementation reason for disallowing HashML-DSA stems from the
+   fact that ML-DSA and HashML-DSA are incompatible algorithms that
+   require different Verify() routines.  This forwards to the protocol
+   the complexity of informing the client whether to use ML-DSA.Verify()
+   or HashML-DSA.Verify() along with the hash algorithm to use.
+   Additionally, since the same OIDs are used to identify the ML-DSA
+   public keys and ML-DSA signature algorithms, an implementation would
+   need to commit a given public key to be either of type ML-DSA or
+   HashML-DSA at the time of certificate creation.  This is anticipated
+   to cause operational issues in contexts where the operator does not
+   know at key generation time whether the key will need to produce pure
+   or pre-hashed signatures.  ExternalMu-ML-DSA avoids all of these
+   operational concerns by virtue of having keys and signatures that are
+   indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
+   mathematically equivalent algorithms).  The difference between ML-DSA
+   and ExternalMu-ML-DSA is merely an internal implementation detail of
+   the signer and has no impact on the verifier or network protocol.
+
+   The security reason for disallowing HashML-DSA is that the design of
+   the ML-DSA algorithm provides enhanced resistance against signature
+   collision attacks, compared with conventional RSA or ECDSA signature
+   algorithms.  Specifically, ML-DSA binds the hash of the public key tr
+   to the message to-be-signed prior to hashing, as described in line 6
+   of Algorithm 7 of [FIPS204].  In practice, this provides binding to
+   the indended verification public key, preventing some attacks that
+   would otherwise allow a signature to be successfully verified against
+   a non-intended public key.  Also, this unlikely, theoretical binding
+   means that in the unlikely discovery of a collision attack against
+   SHA-3, an attacker would have to perform a public-key-specific
+   collision search in order to find message pairs such that H(tr || m1)
+   = H(tr || m2) since a direct hash collision H(m1) = H(m2) will not
+   suffice.  HashML-DSA removes both of these enhanced security
+   properties.
+
+9.  References
+
+9.1.  Normative References
 
    [FIPS204]  National Institute of Standards and Technology (NIST),
               "Module-Lattice-based Digital Signature Standard", FIPS
@@ -536,7 +504,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
               Recommendation X.690, ISO/IEC 8825-1:2021, February 2021,
               <https://www.itu.int/rec/T-REC-X.690>.
 
-10.2.  Informative References
+9.2.  Informative References
 
    [CDFFJ21]  Cremers, C., Düzlü, S., Fiedler, R., Fischlin, M., and C.
               Janson, "BUFFing signature schemes beyond unforgeability
@@ -660,7 +628,7 @@ Appendix B.  Security Strengths
    |   5   | (8,7) |  2  |  4627  |  2592  |  32    |
    |=======+=======+=====+========+========+========|
 
-                        Figure 3: ML-DSA Parameters
+                        Figure 1: ML-DSA Parameters
 
 Appendix C.  Examples
 
@@ -1368,6 +1336,102 @@ C.3.  Example Certificate
    a1a1b2d76798e9ec2d8f0fe050710192932454654868a97a2a6bdc71a272c313
    a4d67778aa9b2b8c2c4d1ddf0000000000000000000000000000013213142` }
    }
+
+Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
+
+   Some applications require pre-hashing, where the signature generation
+   process can be separated into a pre-hash step and a core signature
+   step in order to ease operational requirements around large or
+   inconsistently-sized payloads.  Pre-hashing can be performed at the
+   protocol layer, but not all protocols support it.  Examples in
+   [RFC5280] are certificates and CRLs; these do not include message
+   digesting before signing.  This can make signing large CRLs or a high
+   volume of certificates with large public keys challenging.
+
+   As mentioned in the introduction, pure ML-DSA signing itself supports
+   a pre-hashing flow by splitting the operation over two modules.  In
+   this section, we make this "ExternalMu-ML-DSA" more explicit.
+
+   There are two steps.  First an ExternalMu-ML-DSA.Prehash() followed
+   by ExternalMu-ML-DSA.Sign().  Together these are functionally
+   equivalent to ML-DSA.Sign() from [FIPS204] in that used in sequence
+   they create exactly the same signatures as regular pure ML-DSA, which
+   can be verified by the unmodified ML-DSA.Verify().
+
+   An ML-DSA key and certificate can be used with either ML-DSA or
+   ExternalMu-ML-DSA interchangeably.  Note that ExternalMu-ML-DSA
+   describes a different signature API from ML-DSA and therefore might
+   require explicit support from hardware or software cryptographic
+   modules.
+
+   Note that the signing mode defined here is different from HashML-DSA
+   defined in Section 5.4 of [FIPS204].  This specification uses
+   exclusively ExternalMu-ML-DSA for pre-hashed use cases.  See
+   Section 8.1 for additional discussion of why HashML-DSA is disallowed
+   in PKIX.
+
+   All functions and notation used in Figure 2 and Figure 3 are defined
+   in [FIPS204].
+
+   External operations:
+
+ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+
+   if |ctx| > 255 then
+     return error  # return an error indication if the context string is
+                   # too long
+   end if
+
+   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
+                                                         || ctx) || M
+   mu = H(BytesToBits(H(pk, 64)) || M', 64)
+   return mu
+
+             Figure 2: External steps of ExternalMu-ML-DSA
+
+   Internal operations:
+
+ExternalMu-ML-DSA.Sign(sk, mu):
+
+  if |mu| != 512 then
+    return error  # return an error indication if the input mu is not
+                  # 64 bytes (512 bits).
+  end if
+
+  rnd = rand(32)  # for the optional deterministic variant,
+                  # set rnd to all zeroes
+  if rnd = NULL then
+    return error  # return an error indication if random bit
+                  # generation failed
+  end if
+
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  return sigma
+
+ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
+   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+
+            Figure 3: Internal steps of ExternalMu-ML-DSA
+
+   ExternalMu-ML-DSA requires the public key, or its prehash, as input
+   to the pre-digesting function.  This assumes the signer generating
+   the pre-hash is in possession of the public key before signing and is
+   different from conventional pre-hashing which only requires the
+   message and the hash function as input.
+
+   Security-wise, during the signing operation of pure (or "one-step")
+   ML-DSA, the cryptographic module extracts the public key hash tr from
+   the secret key object, and thus there is no possibility of mismatch
+   between tr and sk.  In ExternalMu-ML-DSA, the public key or its hash
+   needs to be provided to the Prehash() routine indpedendly of the
+   secret key, and while the exact mechanism by which it is delivered
+   will be implementation-specific, it does open a windown for
+   mismatches between tr and sk.  First, this will produce a signature
+   which will fail to verify under the intended public key since a
+   compliant Verify() routine will independently compute tr from the
+   public key.  Implementors should pay careful attention to how the
+   public key or its hash is delivered to the ExternalMu-ML-
+   DSA.Prehash() routine, and from where they are sourcing this data.
 
 Acknowledgments
 
