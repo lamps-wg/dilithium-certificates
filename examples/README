@@ -12,6 +12,6 @@ Requires der-ascii:
 
 The certificates are generated with a ad-hoc modified fork of Go:
 
-    https://github.com/bwesterb/go/commit/40def371fd600d0bdad1b43537b1a6c06e114280
+    https://github.com/bwesterb/go/commit/470898d2ec9ddfded176d7b4b075574a13110442
 
 Yeah, it's not pretty.
