@@ -311,8 +311,7 @@ The fields in SubjectPublicKeyInfo have the following meaning:
 
 * subjectPublicKey contains the byte stream of the public key.
 
-{{!I-D.ietf-lamps-cms-ml-dsa}} defines the following public key
-identifiers for ML-DSA:
+The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 
 ~~~
   pk-ml-dsa-44 PUBLIC-KEY ::= {
@@ -341,14 +340,22 @@ identifiers for ML-DSA:
   ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 ~~~
 
-An ML-DSA public key is encoded in an X.509 certificate's SubjectPublicKeyInfo
-type as described in {{Section 3 of I-D.ietf-lamps-cms-ml-dsa}}.
+Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
+encoding of an ML-DSA public key. When used in a SubjectPublicKeyInfo type,
+the subjectPublicKey BIT STRING contains the raw byte string encoding of the
+public key.
 
-{{Section 3 of I-D.ietf-lamps-cms-ml-dsa}} also defines the
-ML-DSA-Public and ML-DSA-PrivateKey for when the ML-DSA pubic key
-appears outside of a SubjectPublicKeyInfo type and for when the ML-DSA
-private key appears outside of an Asymmetric Key Package {{!RFC5958}},
-respectively.
+When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an
+environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by
+using the ML-DSA-PublicKey type.
+
+{{?RFC5958}} describes the Asymmetric Key Package's OneAsymmetricKey type for
+encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
+a OneAsymmetricKey, it follows the description in {{priv-key}}.
+
+When the ML-DSA private key appears outside of an Asymmetric Key Package in an
+environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by using
+the ML-DSA-PrivateKey type.
 
 {{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
@@ -383,7 +390,7 @@ present:
 Requirements about the keyUsage extension bits defined in {{RFC5280}}
 still apply.
 
-#  Private Key Format
+#  Private Key Format {#priv-key}
 
 An ML-DSA private key is encoded by storing its 32-octet seed in
 the privateKey field as follows.
@@ -574,15 +581,7 @@ these enhanced security properties.
 
 This appendix includes the ASN.1 module {{X680}} for the ML-DSA.  Note that
 as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
-{{X690}}. This module imports objects from {{RFC5912}} and
-{{I-D.ietf-lamps-cms-ml-dsa}}.
-
-<aside markdown="block">
-RFC EDITOR: Please replace TBD2 with the value assigned by IANA during the
-publication of {{I-D.ietf-lamps-cms-ml-dsa}}. Also please replace
-{{I-D.ietf-lamps-cms-ml-dsa}} in the module with a reference to the
-published RFC.
-</aside>
+{{X690}}. This module imports objects from {{RFC5912}}.
 
 ~~~
 <CODE BEGINS>
