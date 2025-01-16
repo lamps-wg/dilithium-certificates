@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-14T00:51:50.149504+00:00",
+  "timestamp": "2025-01-16T00:52:38.472738+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1021,15 +1021,15 @@
       "id": "I_kwDOIEpj4c6lcYQk",
       "title": "Need more prose to say where pk- are defined",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/71",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Need some more prose to refer to I-D.ietf-lamps-cms-ml-dsa for pk-* and ML-DSA-P*Key definitions found in the ASN.1 module.  ",
       "createdAt": "2025-01-08T15:27:02Z",
-      "updatedAt": "2025-01-08T15:27:02Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-14T14:45:19Z",
+      "closedAt": "2025-01-14T14:45:19Z",
       "comments": []
     }
   ],
@@ -3688,21 +3688,21 @@
       "id": "PR_kwDOIEpj4c6C2hTT",
       "title": "More discussion of ExternalMu",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ounsworth",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I added some more implementation and security considerations as well as the rationale for disallowing HashML-DSA, which I feel needs to be stated clearly (this comes from recent IETF and pqc-forum mail list discussions).",
       "createdAt": "2024-11-22T18:02:54Z",
-      "updatedAt": "2025-01-08T19:11:26Z",
+      "updatedAt": "2025-01-14T14:45:02Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5683122a16aa7c60b6ecd5baff76ead58342b86b",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "ounsworth-more-externalmu",
       "headRefOid": "b09d19ba8b5de4c8590d8b2890e66e9d5643b240",
-      "closedAt": null,
+      "closedAt": "2025-01-14T14:45:02Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -4691,24 +4691,26 @@
       "id": "PR_kwDOIEpj4c6FqlPA",
       "title": "ExternalMu Shuffle",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/65",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Moved \" Pre-hash Mode\" section to an Appendix.\r\n\r\nThere are editorial tweaks, but more importantly 2119 language is removed from the Appendix.  I want to call attention to the four (4) 2119 language changes:\r\n* reworked some of this into Security Considerations: This specification uses exclusively ExternalMu-ML-DSA for pre-hashed use cases, and thus HashML-DSA as defined in [FIPS204] and identified by `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and `id-hash-ml-dsa-87-with-sha512` MUST NOT be used in X.509 and related PKIX protocols.\r\n* Implementions are RECOMMENDED -> whole paragraph re-written.\r\n* An ML-DSA key and certificate [MAY->can] be used with either ML-DSA or ExternalMu-ML-DSA interchangeably.\r\n* Implementors [SHOULD->should] to pay careful attention to how the public key or its hash is delivered to the `ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing this data.\r\n\r\nAlso, if this PR is adopted we can close #54.",
       "createdAt": "2024-12-18T15:29:48Z",
-      "updatedAt": "2025-01-13T15:24:39Z",
+      "updatedAt": "2025-01-14T14:57:26Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-external_mu-shuffle",
-      "headRefOid": "c6023acb33d3c9a4a010783dec5e210613e26f5c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "cdc23cddba84853e2c38c1d607764b24ec162357",
+      "closedAt": "2025-01-14T14:45:01Z",
+      "mergedAt": "2025-01-14T14:45:01Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "bf24775a4d62a9073d57760bd535e48c9ce91f0a"
+      },
       "comments": [
         {
           "author": "seanturner",
@@ -4716,6 +4718,13 @@
           "body": "@ounsworth @bwesterb @csosto-pk PTAL",
           "createdAt": "2025-01-13T15:24:38Z",
           "updatedAt": "2025-01-13T15:24:38Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Apart from the comments I left just now, I'm ok with this change. It's still a bit wordy, but not too bad.",
+          "createdAt": "2025-01-14T13:39:43Z",
+          "updatedAt": "2025-01-14T13:40:09Z"
         }
       ],
       "reviews": [
@@ -5100,6 +5109,146 @@
               "updatedAt": "2025-01-13T14:54:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X6V78",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T02:59:30Z",
+          "updatedAt": "2025-01-14T02:59:30Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "Sorry, more rephrases\r\n\r\n> Also, this binding means that in the unlikely, theoretical discovery of a collision attack against SHA-3\r\n",
+              "createdAt": "2025-01-14T02:59:30Z",
+              "updatedAt": "2025-01-14T03:00:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X6Xco",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T03:01:03Z",
+          "updatedAt": "2025-01-14T03:01:04Z",
+          "comments": [
+            {
+              "originalPosition": 138,
+              "body": "Look good",
+              "createdAt": "2025-01-14T03:01:03Z",
+              "updatedAt": "2025-01-14T03:01:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X6YEi",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T03:01:37Z",
+          "updatedAt": "2025-01-14T03:01:38Z",
+          "comments": [
+            {
+              "originalPosition": 114,
+              "body": "Look good. ",
+              "createdAt": "2025-01-14T03:01:38Z",
+              "updatedAt": "2025-01-14T03:01:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X-aAH",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T13:36:00Z",
+          "updatedAt": "2025-01-14T13:36:01Z",
+          "comments": [
+            {
+              "originalPosition": 114,
+              "body": "This is a good improvement.",
+              "createdAt": "2025-01-14T13:36:01Z",
+              "updatedAt": "2025-01-14T13:36:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X-a-h",
+          "commit": {
+            "abbreviatedOid": "c6023ac"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T13:37:49Z",
+          "updatedAt": "2025-01-14T13:37:49Z",
+          "comments": [
+            {
+              "originalPosition": 124,
+              "body": "Concretely, can we move the security paragraph second?",
+              "createdAt": "2025-01-14T13:37:49Z",
+              "updatedAt": "2025-01-14T13:37:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X_C1R",
+          "commit": {
+            "abbreviatedOid": "ae6ed79"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T14:29:09Z",
+          "updatedAt": "2025-01-14T14:29:10Z",
+          "comments": [
+            {
+              "originalPosition": 149,
+              "body": "```suggestion\r\nThis restriction is for both implementation and security reasons.\r\n\r\nThe implementation reason for disallowing HashML-DSA stems from the fact\r\nthat ML-DSA and HashML-DSA are incompatible algorithms that require\r\ndifferent `Verify()` routines. This forwards to the protocol the\r\ncomplexity of informing the client whether to use `ML-DSA.Verify()` or\r\n`HashML-DSA.Verify()` along with the hash algorithm to use. Additionally, since\r\nthe same OIDs are used to identify the ML-DSA\r\npublic keys and ML-DSA signature algorithms, an implementation would\r\nneed to commit a given public key to be either of type `ML-DSA` or\r\n`HashML-DSA` at the time of certificate creation. This is anticipated\r\nto cause operational issues in contexts where the operator does not\r\nknow at key generation time whether the key will need to produce pure\r\nor pre-hashed signatures. ExternalMu-ML-DSA avoids all of these\r\noperational concerns by virtue of having keys and signatures that are\r\nindistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are\r\nmathematically equivalent algorithms). The difference between ML-DSA\r\nand ExternalMu-ML-DSA is merely an internal implementation detail of\r\nthe signer and has no impact on the verifier or network protocol.\r\n\r\nThe security reason for disallowing HashML-DSA is that the design of the\r\nML-DSA algorithm provides enhanced resistance against signature\r\ncollision attacks, compared with conventional RSA or ECDSA signature\r\nalgorithms. Specifically, ML-DSA binds the hash of the public key `tr`\r\nto the message to-be-signed prior to hashing, as described in line 6 of\r\nAlgorithm 7 of {{FIPS204}}. In practice, this provides binding to the\r\nindended verification public key, preventing some attacks that would\r\notherwise allow a signature to be successfully verified against a\r\nnon-intended public key. Also, this unlikely, theoretical binding means that in the unlikely\r\ndiscovery of a collision attack against SHA-3, an attacker would\r\nhave to perform a public-key-specific collision search in order to find\r\nmessage pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash\r\ncollision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of\r\nthese enhanced security properties.\r\n```",
+              "createdAt": "2025-01-14T14:29:09Z",
+              "updatedAt": "2025-01-14T14:29:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6X_ZQ1",
+          "commit": {
+            "abbreviatedOid": "ae6ed79"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-14T14:57:26Z",
+          "updatedAt": "2025-01-14T14:57:26Z",
+          "comments": [
+            {
+              "originalPosition": 149,
+              "body": "Perf.",
+              "createdAt": "2025-01-14T14:57:26Z",
+              "updatedAt": "2025-01-14T14:57:26Z"
+            }
+          ]
         }
       ]
     },
@@ -5282,24 +5431,26 @@
       "id": "PR_kwDOIEpj4c6HF3S1",
       "title": "Address #71",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/72",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #71",
       "createdAt": "2025-01-08T15:27:49Z",
-      "updatedAt": "2025-01-08T15:53:12Z",
+      "updatedAt": "2025-01-14T14:45:18Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "6447ff910756405e74491418459e3895d9a26104",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-71",
       "headRefOid": "d12a9c23036dcf5910251777a73c66d2b1f5758d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-14T14:45:18Z",
+      "mergedAt": "2025-01-14T14:45:18Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "b65edf3f8ad8162c4c24d079ea9c7cd3cd607616"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5313,6 +5464,56 @@
           "body": "",
           "createdAt": "2025-01-08T15:53:12Z",
           "updatedAt": "2025-01-08T15:53:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOIEpj4c6H1MiX",
+      "title": "cms-ml-dsa ask: Set digitalSignature bit in example certificate.",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/73",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This allows draft-ietf-lamps-cms-ml-dsa to reuse our example.",
+      "createdAt": "2025-01-15T10:59:47Z",
+      "updatedAt": "2025-01-15T17:40:35Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "b65edf3f8ad8162c4c24d079ea9c7cd3cd607616",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/cms-ask",
+      "headRefOid": "a7b062beef2cef8c8a433a8d32f6f5a571040d27",
+      "closedAt": "2025-01-15T17:40:35Z",
+      "mergedAt": "2025-01-15T17:40:35Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "38f4eecfa55428e992ea0b10f395dbae3f7b61ff"
+      },
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good to me!",
+          "createdAt": "2025-01-15T17:40:28Z",
+          "updatedAt": "2025-01-15T17:40:28Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6YIH2L",
+          "commit": {
+            "abbreviatedOid": "a7b062b"
+          },
+          "author": "danvangeest",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I can confirm that we can now validate our cms-ml-dsa examples with these certificates.",
+          "createdAt": "2025-01-15T11:12:10Z",
+          "updatedAt": "2025-01-15T11:12:10Z",
           "comments": []
         }
       ]
