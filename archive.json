@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-16T00:52:38.472738+00:00",
+  "timestamp": "2025-01-19T00:56:37.622162+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -5517,6 +5517,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 74,
+      "id": "PR_kwDOIEpj4c6H_G9c",
+      "title": "Bring ASN.1 and key encoding text over from cms-ml-dsa draft",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/74",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-16T10:37:28Z",
+      "updatedAt": "2025-01-16T10:37:28Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "38f4eecfa55428e992ea0b10f395dbae3f7b61ff",
+      "headRepository": "danvangeest/dilithium-certificates",
+      "headRefName": "dvg/full_ans1_and_key_encoding",
+      "headRefOid": "3adbfbb9c82b6954822794e6d37c612f9849d579",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
