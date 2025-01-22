@@ -761,10 +761,6 @@ previous section.
 The following is a self-signed certificate for the ML-DSA-87 public key in the
 previous section.
 
-<aside markdown="block">
-The following example certificates set the key usage to 
-</aside>
-
 ~~~
 {::include ./examples/ML-DSA-87.crt}
 ~~~
