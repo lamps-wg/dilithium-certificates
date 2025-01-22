@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 19 July 2025                                          S. Turner
+Expires: 26 July 2025                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                         15 January 2025
+                                                         22 January 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 July 2025.
+   This Internet-Draft will expire on 26 July 2025.
 
 Copyright Notice
 
@@ -252,8 +252,7 @@ Table of Contents
 
    *  subjectPublicKey contains the byte stream of the public key.
 
-   [I-D.ietf-lamps-cms-ml-dsa] defines the following public key
-   identifiers for ML-DSA:
+   The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 
      pk-ml-dsa-44 PUBLIC-KEY ::= {
        IDENTIFIER id-ml-dsa-44
@@ -280,15 +279,23 @@ Table of Contents
 
      ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 
-   An ML-DSA public key is encoded in an X.509 certificate's
-   SubjectPublicKeyInfo type as described in Section 3 of
-   [I-D.ietf-lamps-cms-ml-dsa].
+   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
+   encoding of an ML-DSA public key.  When used in a
+   SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
+   the raw byte string encoding of the public key.
 
-   Section 3 of [I-D.ietf-lamps-cms-ml-dsa] also defines the ML-DSA-
-   Public and ML-DSA-PrivateKey for when the ML-DSA pubic key appears
-   outside of a SubjectPublicKeyInfo type and for when the ML-DSA
-   private key appears outside of an Asymmetric Key Package [RFC5958],
-   respectively.
+   When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
+   type in an environment that uses ASN.1 encoding, it can be encoded as
+   an OCTET STRING by using the ML-DSA-PublicKey type.
+
+   [RFC5958] describes the Asymmetric Key Package's OneAsymmetricKey
+   type for encoding asymmetric keypairs.  When an ML-DSA private key or
+   keypair is encoded as a OneAsymmetricKey, it follows the description
+   in Section 6.
+
+   When the ML-DSA private key appears outside of an Asymmetric Key
+   Package in an environment that uses ASN.1 encoding, it can be encoded
+   as an OCTET STRING by using the ML-DSA-PrivateKey type.
 
    Appendix C contains example ML-DSA public keys encoded using the
    textual encoding defined in [RFC7468].
@@ -494,14 +501,6 @@ Table of Contents
               PUB 204, August 2023, <https://csrc.nist.gov/projects/
               post-quantum-cryptography>.
 
-   [I-D.ietf-lamps-cms-ml-dsa]
-              S, B., R, A., and D. Van Geest, "Use of the ML-DSA
-              Signature Algorithm in the Cryptographic Message Syntax
-              (CMS)", Work in Progress, Internet-Draft, draft-ietf-
-              lamps-cms-ml-dsa-01, 22 November 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              cms-ml-dsa-01>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -575,13 +574,7 @@ Appendix A.  ASN.1 Module
 
    This appendix includes the ASN.1 module [X680] for the ML-DSA.  Note
    that as per [RFC5280], certificates use the Distinguished Encoding
-   Rules; see [X690].  This module imports objects from [RFC5912] and
-   [I-D.ietf-lamps-cms-ml-dsa].
-
-      |  RFC EDITOR: Please replace TBD2 with the value assigned by IANA
-      |  during the publication of [I-D.ietf-lamps-cms-ml-dsa].  Also
-      |  please replace [I-D.ietf-lamps-cms-ml-dsa] in the module with a
-      |  reference to the published RFC.
+   Rules; see [X690].  This module imports objects from [RFC5912].
 
    <CODE BEGINS>
    X509-ML-DSA-2024
@@ -601,14 +594,71 @@ Appendix A.  ASN.1 Module
      FROM AlgorithmInformation-2009 -- From [RFC5912]
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) id-mod(0)
-         id-mod-algorithmInformation-02(58) }
+         id-mod-algorithmInformation-02(58) } ;
 
-   sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87,
-   pk-ml-dsa-44, pk-ml-dsa-65, pk-ml-dsa-87,
-   ML-DSA-PublicKey, ML-DSA-PrivateKey
-     FROM ML-DSA-Module-2024 -- From [I-D.ietf-lamps-cms-ml-dsa]
-        { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
-          id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD2) } ;
+   --
+   -- Object Identifiers
+   --
+
+   sigAlgs OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+       us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) 3 }
+
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { sigAlgs 17 }
+
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { sigAlgs 18 }
+
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
+
+   --
+   -- Signature Algorithm Identifiers
+   --
+
+   sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-44
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-44 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 } }
+
+   sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-65
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-65 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 } }
+
+   sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-87
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-87 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 } }
+
+   --
+   -- Public Keys
+   --
+
+   pk-ml-dsa-44 PUBLIC-KEY ::= {
+     IDENTIFIER id-ml-dsa-44
+     -- KEY no ASN.1 wrapping --
+     CERT-KEY-USAGE
+       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+     -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+   pk-ml-dsa-65 PUBLIC-KEY ::= {
+     IDENTIFIER id-ml-dsa-65
+     -- KEY no ASN.1 wrapping --
+     CERT-KEY-USAGE
+       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+     -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+   pk-ml-dsa-87 PUBLIC-KEY ::= {
+     IDENTIFIER id-ml-dsa-87
+     -- KEY no ASN.1 wrapping --
+     CERT-KEY-USAGE
+       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+     -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+   ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
+   ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 
    --
    -- Expand SignatureAlgorithms from RFC 5912
