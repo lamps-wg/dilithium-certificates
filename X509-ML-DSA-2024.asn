@@ -15,14 +15,71 @@ PUBLIC-KEY, SIGNATURE-ALGORITHM
   FROM AlgorithmInformation-2009 -- From [RFC5912]
     { iso(1) identified-organization(3) dod(6) internet(1)
       security(5) mechanisms(5) pkix(7) id-mod(0)
-      id-mod-algorithmInformation-02(58) }
+      id-mod-algorithmInformation-02(58) } ;
 
-sa-ml-dsa-44, sa-ml-dsa-65, sa-ml-dsa-87,
-pk-ml-dsa-44, pk-ml-dsa-65, pk-ml-dsa-87,
-ML-DSA-PublicKey, ML-DSA-PrivateKey
-  FROM ML-DSA-Module-2024 -- From [I-D.ietf-lamps-cms-ml-dsa]
-     { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
-       id-smime(16) id-mod(0) id-mod-ml-dsa-2024(TBD2) } ;
+--
+-- Object Identifiers
+--
+
+sigAlgs OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
+    us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) 3 }
+
+id-ml-dsa-44 OBJECT IDENTIFIER ::= { sigAlgs 17 }
+
+id-ml-dsa-65 OBJECT IDENTIFIER ::= { sigAlgs 18 }
+
+id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
+
+--
+-- Signature Algorithm Identifiers
+--
+
+sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
+  IDENTIFIER id-ml-dsa-44
+  PARAMS ARE absent
+  PUBLIC-KEYS { pk-ml-dsa-44 }
+  SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 } }
+
+sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
+  IDENTIFIER id-ml-dsa-65
+  PARAMS ARE absent
+  PUBLIC-KEYS { pk-ml-dsa-65 }
+  SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 } }
+
+sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
+  IDENTIFIER id-ml-dsa-87
+  PARAMS ARE absent
+  PUBLIC-KEYS { pk-ml-dsa-87 }
+  SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 } }
+
+--
+-- Public Keys
+--
+
+pk-ml-dsa-44 PUBLIC-KEY ::= {
+  IDENTIFIER id-ml-dsa-44
+  -- KEY no ASN.1 wrapping --
+  CERT-KEY-USAGE
+    { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+  -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+pk-ml-dsa-65 PUBLIC-KEY ::= {
+  IDENTIFIER id-ml-dsa-65
+  -- KEY no ASN.1 wrapping --
+  CERT-KEY-USAGE
+    { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+  -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+pk-ml-dsa-87 PUBLIC-KEY ::= {
+  IDENTIFIER id-ml-dsa-87
+  -- KEY no ASN.1 wrapping --
+  CERT-KEY-USAGE
+    { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+  -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
+ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
 
 --
 -- Expand SignatureAlgorithms from RFC 5912
