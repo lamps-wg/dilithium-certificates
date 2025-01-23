@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-21T00:52:31.722326+00:00",
+  "timestamp": "2025-01-23T00:52:52.727012+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -927,15 +927,15 @@
       "id": "I_kwDOIEpj4c6lUD3t",
       "title": "We need to clarify when HashML-DSA is allowed",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/66",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ounsworth",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This is feedback from the PQC X.509 Hackathon team.\r\n\r\nThe current wording on HashML-DSA is:\r\n\r\n> with the exception of the Public Key in end-entity X.509 certifacates\r\n\r\n1. typo \"certifacates\"\r\n2. we should probably add \"... in end-entity X.509 certificates for signing non-X.509 protocol messages, ie HashML-DSA MUST NOT be used for signing CRLs or OCSP Responses.\"\r\n\r\n\r\nNote that within the Hackathon group, we did not have consensus about whether we should even allow HashML-DSA in EE certs at all -- some people were advocating for completely removing this exception clause. _**This needs to be discussed on-list**_, which may result in a longer description in the document.",
       "createdAt": "2025-01-07T18:39:26Z",
-      "updatedAt": "2025-01-13T14:51:07Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-22T21:16:26Z",
+      "closedAt": "2025-01-22T21:16:26Z",
       "comments": [
         {
           "author": "csosto-pk",
@@ -1031,6 +1031,30 @@
       "updatedAt": "2025-01-14T14:45:19Z",
       "closedAt": "2025-01-14T14:45:19Z",
       "comments": []
+    },
+    {
+      "number": 76,
+      "id": "I_kwDOIEpj4c6nNngi",
+      "title": "Private Key Format",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/76",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See [mail thread](https://mailarchive.ietf.org/arch/msg/spasm/6iUmCadOg3PfGja7j26-MUXTUVk/).",
+      "createdAt": "2025-01-22T21:18:19Z",
+      "updatedAt": "2025-01-22T21:25:25Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "For posterity: see  #22 for past discussion.",
+          "createdAt": "2025-01-22T21:25:23Z",
+          "updatedAt": "2025-01-22T21:25:23Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1046,7 +1070,7 @@
       "labels": [],
       "body": "Make editor link point to the right repo.",
       "createdAt": "2022-10-18T08:50:50Z",
-      "updatedAt": "2022-10-18T14:37:38Z",
+      "updatedAt": "2025-01-22T21:05:52Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "1c17ee20c7c9c0ceb25fc4af13ecdf7264c9eef0",
@@ -1074,7 +1098,7 @@
       "labels": [],
       "body": "Not wed to this, but we should pick something.",
       "createdAt": "2023-02-03T15:53:03Z",
-      "updatedAt": "2023-02-03T20:58:27Z",
+      "updatedAt": "2025-01-22T21:05:53Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "7eee210facc674f61bb9696747b30b48a8a35dec",
@@ -1116,7 +1140,7 @@
       "labels": [],
       "body": "1st of two commits for this PR. This one addresses the ASN.1. Next one should address the removal of the DilithiumPrivateKey and DilithiumPublicKey fields.",
       "createdAt": "2023-03-29T05:43:34Z",
-      "updatedAt": "2023-03-29T18:51:45Z",
+      "updatedAt": "2025-01-22T21:05:54Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "52dbea5787354f76fff832ec254c6a7e36b30bcf",
@@ -1144,7 +1168,7 @@
       "labels": [],
       "body": "Just making some editorial nits: The \"A\" in ML-DSA is algorithm ;)",
       "createdAt": "2024-06-18T18:41:30Z",
-      "updatedAt": "2024-06-24T19:58:56Z",
+      "updatedAt": "2025-01-22T21:05:56Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "6a67d02bf1714c66b80d76a042033de7002401fb",
@@ -1172,7 +1196,7 @@
       "labels": [],
       "body": "Partially deals with #12; didn't incorporate the refs to PKCS#10, CMP, CMC, etc.\r\n\r\nSome alignment with ML-KEM I-D.\r\n\r\nEditorial suggestions; added a lot of newlines because in codeview it was much easier to read without always have to scroll right.",
       "createdAt": "2024-07-09T11:51:11Z",
-      "updatedAt": "2024-07-19T12:28:13Z",
+      "updatedAt": "2025-01-22T21:05:56Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "1afc70aec2338057fed7b5d49ebbf2ed4431ec39",
@@ -1350,7 +1374,7 @@
       "labels": [],
       "body": "Addresses #15.",
       "createdAt": "2024-07-09T12:45:38Z",
-      "updatedAt": "2024-07-18T20:07:07Z",
+      "updatedAt": "2025-01-22T21:05:15Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "4c0239dd76ea3dc1e9312aad0e58dfacc750bbbe",
@@ -1494,7 +1518,7 @@
       "labels": [],
       "body": "Addresses #17.",
       "createdAt": "2024-07-09T13:37:45Z",
-      "updatedAt": "2024-07-22T18:18:02Z",
+      "updatedAt": "2025-01-22T21:05:13Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "4c0239dd76ea3dc1e9312aad0e58dfacc750bbbe",
@@ -1579,7 +1603,7 @@
       "labels": [],
       "body": "Update archive.yml.",
       "createdAt": "2024-09-20T14:53:35Z",
-      "updatedAt": "2024-09-23T18:27:12Z",
+      "updatedAt": "2025-01-22T21:05:17Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "10697fcb7d67e1e79257e38d1fc66972a111cdb2",
@@ -2032,7 +2056,7 @@
       "labels": [],
       "body": "Moving examples & asn.1 to appendices. Also, moving acks to be last.",
       "createdAt": "2024-10-15T19:33:18Z",
-      "updatedAt": "2024-10-28T18:25:38Z",
+      "updatedAt": "2025-01-22T21:05:18Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e63e733341ae2fcac33ea741f084b4e92fbffe0a",
@@ -2176,7 +2200,7 @@
       "labels": [],
       "body": "Refer to ML-DSA not Dilithium.",
       "createdAt": "2024-10-28T02:08:33Z",
-      "updatedAt": "2024-10-28T02:31:59Z",
+      "updatedAt": "2025-01-22T21:05:20Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "d788252ff402eb029f1d070102c677a1dbf5254d",
@@ -2218,7 +2242,7 @@
       "labels": [],
       "body": "I think it's just supposed to be\r\n\r\n     ----BEGIN PRIVATE KEY----\r\n     ----END PRIVATE KEY----\r\n\r\nwithout the ML-DSA-XX.",
       "createdAt": "2024-10-28T02:56:35Z",
-      "updatedAt": "2024-10-28T13:01:01Z",
+      "updatedAt": "2025-01-22T21:05:21Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "e40cee9ed83abdf09027d74254f18b3ab274c381",
@@ -2278,7 +2302,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-28T17:50:23Z",
-      "updatedAt": "2024-10-29T13:06:01Z",
+      "updatedAt": "2025-01-22T21:05:21Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "45a6b32b077f2e376e616f0433f63451973ed477",
@@ -2455,7 +2479,7 @@
       "labels": [],
       "body": "Move ASN.1 and examples to appendices. Trim some text down.\r\n\r\nAdd ASN.1 as separate file.",
       "createdAt": "2024-10-28T18:07:23Z",
-      "updatedAt": "2024-10-28T18:25:18Z",
+      "updatedAt": "2025-01-22T21:05:22Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "940b40ee6eb96cdd58020faf6d2320990dd627a7",
@@ -2773,7 +2797,7 @@
       "labels": [],
       "body": "Based on [X509-SLHDSA-2024.asn](https://github.com/lamps-wg/x509-slhdsa/blob/main/X509-SLHDSA-2024.asn).",
       "createdAt": "2024-10-29T00:25:05Z",
-      "updatedAt": "2024-10-29T20:46:32Z",
+      "updatedAt": "2025-01-22T21:05:23Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "183aeaa321dc4ce7844a483871c04c31dd04068b",
@@ -2842,7 +2866,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-04T02:00:05Z",
-      "updatedAt": "2024-11-04T13:18:37Z",
+      "updatedAt": "2025-01-22T21:05:25Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "7723cb81fd802db8d39e89b6cb171d177d4dbabe",
@@ -2870,7 +2894,7 @@
       "labels": [],
       "body": "NIST uses id-ml-dsa, we should do the same.",
       "createdAt": "2024-11-04T13:42:36Z",
-      "updatedAt": "2024-11-04T17:29:41Z",
+      "updatedAt": "2025-01-22T21:05:26Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "a7a685791d2971951087b56d07fee62cfb1e7d3d",
@@ -4121,7 +4145,7 @@
       "labels": [],
       "body": "Now refer to I-D.lamps-cms-ml-dsa.",
       "createdAt": "2024-12-12T03:22:25Z",
-      "updatedAt": "2024-12-12T14:28:20Z",
+      "updatedAt": "2025-01-22T21:05:29Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "21cb170f24b8b066e47a685416caaa35f96bd855",
@@ -4217,7 +4241,7 @@
       "labels": [],
       "body": "Refer to public key examples from public key section.",
       "createdAt": "2024-12-12T03:51:15Z",
-      "updatedAt": "2024-12-12T14:28:43Z",
+      "updatedAt": "2025-01-22T21:05:27Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "21cb170f24b8b066e47a685416caaa35f96bd855",
@@ -4656,7 +4680,7 @@
       "labels": [],
       "body": "Add imports for ML-DSA-PrivateKey and ML-DSA-PublicKey.",
       "createdAt": "2024-12-17T14:28:38Z",
-      "updatedAt": "2024-12-17T16:14:43Z",
+      "updatedAt": "2025-01-22T21:05:30Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "be15c1424f3a7ce9bfbc9fbcb27a04514ed0d43c",
@@ -5264,7 +5288,7 @@
       "labels": [],
       "body": "Add file dependencies.",
       "createdAt": "2025-01-07T21:13:18Z",
-      "updatedAt": "2025-01-07T22:38:09Z",
+      "updatedAt": "2025-01-22T21:05:35Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "053b6293eaa52c239259b9a2d12b73b3b9985bf8",
@@ -5390,7 +5414,7 @@
       "labels": [],
       "body": "(partial) Closes #66.",
       "createdAt": "2025-01-08T14:36:54Z",
-      "updatedAt": "2025-01-08T14:46:49Z",
+      "updatedAt": "2025-01-22T21:05:37Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "6447ff910756405e74491418459e3895d9a26104",
@@ -5438,7 +5462,7 @@
       "labels": [],
       "body": "Closes #71",
       "createdAt": "2025-01-08T15:27:49Z",
-      "updatedAt": "2025-01-14T14:45:18Z",
+      "updatedAt": "2025-01-22T21:06:01Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "6447ff910756405e74491418459e3895d9a26104",
@@ -5523,26 +5547,122 @@
       "id": "PR_kwDOIEpj4c6H_G9c",
       "title": "Bring ASN.1 and key encoding text over from cms-ml-dsa draft",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/74",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-01-16T10:37:28Z",
-      "updatedAt": "2025-01-16T10:37:28Z",
+      "updatedAt": "2025-01-22T19:44:16Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "38f4eecfa55428e992ea0b10f395dbae3f7b61ff",
       "headRepository": "danvangeest/dilithium-certificates",
       "headRefName": "dvg/full_ans1_and_key_encoding",
       "headRefOid": "3adbfbb9c82b6954822794e6d37c612f9849d579",
+      "closedAt": "2025-01-22T19:44:16Z",
+      "mergedAt": "2025-01-22T19:44:16Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "d01b666b43136ab1cb0469e6358ff665f0d599b5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6ZD4dL",
+          "commit": {
+            "abbreviatedOid": "3adbfbb"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-22T18:06:59Z",
+          "updatedAt": "2025-01-22T18:06:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOIEpj4c6Irdh3",
+      "title": "KU warning",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/75",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Need to warn that example certificates set KUs for digitialSignature, keyCertSign, and cRLSign, but that might not be a great choice for production CAs.",
+      "createdAt": "2025-01-22T21:02:03Z",
+      "updatedAt": "2025-01-22T21:23:36Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "d01b666b43136ab1cb0469e6358ff665f0d599b5",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-ku-warning-1",
+      "headRefOid": "5f5d8f80e5ad882ceb07a6960dd26bbca652af50",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6ZFOJj",
+          "commit": {
+            "abbreviatedOid": "ab20144"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-22T21:08:06Z",
+          "updatedAt": "2025-01-22T21:08:07Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-01-22T21:08:06Z",
+              "updatedAt": "2025-01-22T21:08:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6ZFPRo",
+          "commit": {
+            "abbreviatedOid": "57dd217"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-22T21:10:18Z",
+          "updatedAt": "2025-01-22T21:10:18Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-01-22T21:10:18Z",
+              "updatedAt": "2025-01-22T21:10:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6ZFUWm",
+          "commit": {
+            "abbreviatedOid": "5f5d8f8"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-22T21:23:36Z",
+          "updatedAt": "2025-01-22T21:23:36Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
