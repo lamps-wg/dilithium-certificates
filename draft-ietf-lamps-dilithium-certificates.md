@@ -726,7 +726,15 @@ key in the previous section.
 ~~~
 
 
-## Example Certificate {#example-certificate}
+## Example Certificates {#example-certificates}
+
+<aside markdown="block">
+The example certificates in this section have key usage bits set to
+digitalSignature, keyCertSign, and cRLSign to lessen the number of
+examples, i.e., brevity. Certificate Policies (CPs) {{!RFC3647}}
+for production CAs should consider whether this combination is
+appropriate.
+</aside>
 
 The following is a self-signed certificate for the ML-DSA-44 public key in the
 previous section.
@@ -737,6 +745,28 @@ previous section.
 
 ~~~
 {::include ./examples/ML-DSA-44.crt.txt}
+~~~
+
+The following is a self-signed certificate for the ML-DSA-65 public key in the
+previous section.
+
+~~~
+{::include ./examples/ML-DSA-65.crt}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-65.crt.txt}
+~~~
+
+The following is a self-signed certificate for the ML-DSA-87 public key in the
+previous section.
+
+~~~
+{::include ./examples/ML-DSA-87.crt}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-87.crt.txt}
 ~~~
 
 # Pre-hashing (ExternalMu-ML-DSA) {#prehash}
