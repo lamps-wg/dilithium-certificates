@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-26T00:54:24.944130+00:00",
+  "timestamp": "2025-01-28T00:52:56.612523+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -5589,24 +5589,26 @@
       "id": "PR_kwDOIEpj4c6Irdh3",
       "title": "KU warning",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/75",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Need to warn that example certificates set KUs for digitialSignature, keyCertSign, and cRLSign, but that might not be a great choice for production CAs.",
       "createdAt": "2025-01-22T21:02:03Z",
-      "updatedAt": "2025-01-22T21:23:36Z",
+      "updatedAt": "2025-01-27T17:11:43Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "d01b666b43136ab1cb0469e6358ff665f0d599b5",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-ku-warning-1",
       "headRefOid": "5f5d8f80e5ad882ceb07a6960dd26bbca652af50",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-27T17:11:32Z",
+      "mergedAt": "2025-01-27T17:11:32Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "709c6fd6191fb529c3eb66e83d419618e4ecbaaf"
+      },
       "comments": [],
       "reviews": [
         {
