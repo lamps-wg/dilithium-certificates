@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-04T00:53:07.881781+00:00",
+  "timestamp": "2025-02-06T00:53:52.783228+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1044,7 +1044,7 @@
       "labels": [],
       "body": "See [mail thread](https://mailarchive.ietf.org/arch/msg/spasm/6iUmCadOg3PfGja7j26-MUXTUVk/).",
       "createdAt": "2025-01-22T21:18:19Z",
-      "updatedAt": "2025-01-22T21:25:25Z",
+      "updatedAt": "2025-02-05T03:54:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -1053,8 +1053,31 @@
           "body": "For posterity: see  #22 for past discussion.",
           "createdAt": "2025-01-22T21:25:23Z",
           "updatedAt": "2025-01-22T21:25:23Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "From djb\n\n>> This text appears in draft-ietf-lamps-kyber-certificates-08:\n>>    Many protocols only rely on the IND-CCA security of a KEM.  Some\n>>    (implicitly) require further binding properties, formalized in\n>>    [CDM23].  The private key format influences these binding properties.\n>>    Per [KEMMY24], ML-KEM is LEAK-BIND-K-PK-secure and LEAK-BIND-K-CT-\n>>    secure when using the expanded private key format, but not MAL-BIND-\n>>    K-CT nor MAL-BIND-K-PK.  Using the 64-byte seed format provides a\n>>    step up in binding security, additionally providing MAL-BIND-K-CT\n>>    security, but still not MAL-BIND-K-PK.  For more guidance, see\n>>    [I-D.sfluhrer-cfrg-ml-kem-security-considerations].\n>> This says why the seed is preferred.\n>\n> Does it? Seems to me that various recent messages are challenging this \n> as using the word \"secure\" in a way that hasn't been justified through \n> any actual attack scenarios---it's even contrary to well-established \n> practice regarding side channels. It's also puzzling to see the BIND \n> properties claimed to be important when the selected format isn't a \n> format that achieves _all_ of those properties (e.g., 32-byte seeds).\n\nFrom Viktor D.\n> FWIW, in the message that started this thread, I included a link to a tentative revision of the draft, in which that text was removed.\n>     https://vdukhovni.github.io/ml-kem-certificates/#section-7\n> I don't believe the original text is justified or necessary in a PKCS#8 format specification.  If there are protocols in which those concerns are relevant, the text would belong in the specifications of *those* protocols.\n\nThere is merit to these points. Should we refine or remove the claims about the security properties of SEED? I think Mike O. had suggested this text. What were the mains reasons for a seed other than those? Size and simplicity?\n",
+          "createdAt": "2025-02-05T03:54:13Z",
+          "updatedAt": "2025-02-05T03:54:13Z"
         }
       ]
+    },
+    {
+      "number": 77,
+      "id": "I_kwDOIEpj4c6ott7k",
+      "title": "Add implementation considerations section",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/77",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Carl Wallace:\n\n> I still think this draft should have an Implementation Considerations section a la the Kyber certificates draft to define the mods to the FIPS algorithms to support seed usage.\n",
+      "createdAt": "2025-02-04T15:12:50Z",
+      "updatedAt": "2025-02-04T15:15:27Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
