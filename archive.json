@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-09T00:56:39.524763+00:00",
+  "timestamp": "2025-02-11T00:53:37.539527+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1044,7 +1044,7 @@
       "labels": [],
       "body": "See [mail thread](https://mailarchive.ietf.org/arch/msg/spasm/6iUmCadOg3PfGja7j26-MUXTUVk/).",
       "createdAt": "2025-01-22T21:18:19Z",
-      "updatedAt": "2025-02-07T08:12:07Z",
+      "updatedAt": "2025-02-09T10:24:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -1067,6 +1067,13 @@
           "body": "The main reason (for me) is that seed is simpler. With expanded private key you need to align on which checks to perform, and that seems to have already diverged between implementations. Size is another nice benefit.\n\nWe should continue to mention LEAK-BIND-x security, as that has been an actual security concern (eg. Signal). My current understanding is that there is no real-world attack exploiting missing MAL-BIND-x security. I don't want to jump the gun here and say it's definitely not important though. But we can tweak the language to make MAL-BIND-x seem less threatening.",
           "createdAt": "2025-02-07T08:12:05Z",
           "updatedAt": "2025-02-07T08:12:05Z"
+        },
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "> The main reason (for me) is that seed is simpler. With expanded private key you need to align on which checks to perform, and that seems to have already diverged between implementations. Size is another nice benefit.\n> \n> We should continue to mention LEAK-BIND-x security, as that has been an actual security concern (eg. Signal). My current understanding is that there is no real-world attack exploiting missing MAL-BIND-x security. I don't want to jump the gun here and say it's definitely not important though. But we can tweak the language to make MAL-BIND-x seem less threatening.\n\nI still believe that the least misleadingly threatening mention of the `MAL-BIND-x` issues is to not mention them at all. At least for ML-KEM, to the extent they need to be mentioned, they're well covered in the already referenced [CFRG draft](https://datatracker.ietf.org/doc/html/draft-sfluhrer-cfrg-ml-kem-security-considerations-02)",
+          "createdAt": "2025-02-09T10:24:00Z",
+          "updatedAt": "2025-02-09T10:24:00Z"
         }
       ]
     },
