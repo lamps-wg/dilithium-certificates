@@ -458,11 +458,6 @@ under strongly existentially unforgeable under chosen message attack
 been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.
 
-<!--<aside markdown="block">
-EDNOTE: Discuss deterministic vs randomized signing and the impact on
-security.
-</aside>-->
-
 ML-DSA offers both deterministic and randomized signing. By default
 ML-DSA signatures are non-deterministic. The private random seed (rho')
 for the signature is pseudorandomly derived from the signer’s private
