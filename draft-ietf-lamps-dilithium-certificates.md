@@ -506,7 +506,7 @@ for some unknown message m. These properties are not provided
 by classical signature schemes such as DSA or ECDSA, and have
 led to a variety of attacks such as Duplicate-Signature Key
 Selection (DSKS) attacks, and attacks on
-the protocols for secure routing<!--[JCCS19]-->. A full
+the protocols for secure routing. A full
 discussion of these properties in ML-DSA can be found at
 {{CDFFJ21}}.
 
