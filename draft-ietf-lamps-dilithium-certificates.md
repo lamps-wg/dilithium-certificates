@@ -458,15 +458,6 @@ under strongly existentially unforgeable under chosen message attack
 been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.
 
-<!--TODO: Add discussion about digests in classical signatures hash-then-sign
-and how that does not apply to PQ like Dilithium. And how committing to a
-message is additional security. Reference NIST discussion from Peiker and
-Makku.-->
-<!--<aside markdown="block">
-EDNOTE: Discuss deterministic vs randomized signing and the impact on
-security.
-</aside>-->
-
 ML-DSA offers both deterministic and randomized signing. By default
 ML-DSA signatures are non-deterministic. The private random seed (rho')
 for the signature is pseudorandomly derived from the signer’s private
@@ -477,11 +468,6 @@ randomized mode has been "hedged" against sources of poor entropy, by
 including the signers private key and message into the derivation. The
 primary purpose of rnd is to facilitate countermeasures to side-channel
 attacks and fault attacks on deterministic signatures.
-
-<!--<aside markdown="block">
-EDNOTE: Discuss side-channels for ML-DSA.
-</aside>-->
-
 
 In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
@@ -495,7 +481,7 @@ of side-channel leakage has been demonstrated in parts of the
 signing algorithm (specifically the bit-unpacking function), from
 which a demonstration of key recovery has been made over a large
 sample of signatures. Masking countermeasures exist for
-ML-DSA<!--[MGTF19]-->, but come with a performance overhead.
+ML-DSA, but come with a performance overhead.
 
 A fundamental security property also associated with digital
 signatures is non-repudiation. Non-repudiation refers to the
@@ -519,8 +505,8 @@ a valid signature under another key given a signature sigma
 for some unknown message m. These properties are not provided
 by classical signature schemes such as DSA or ECDSA, and have
 led to a variety of attacks such as Duplicate-Signature Key
-Selection (DSKS) attacks <!--[BWM99, MS04]-->, and attacks on
-the protocols for secure routing<!--[JCCS19]-->. A full
+Selection (DSKS) attacks, and attacks on
+the protocols for secure routing. A full
 discussion of these properties in ML-DSA can be found at
 {{CDFFJ21}}.
 
@@ -612,32 +598,6 @@ Note that these are the sizes of
     not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
         objects in which they are wrapped.
 
-<!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
-<!-- [JM] we can consider the usefulness of this table/domain parameter discussion here, since we do not want to include the parameter selection in the document -->
-<!--<figure anchor="DilithiumParameters">
-          <artwork align="left" name="" type="" alt=""><![CDATA[
-|==========+=====+=========+=======+=====+========+========+========|
-| Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private|
-| Level    |     |         |       |     |        | Key(B) | Key(B) |
-|==========+=====+=========+=======+=====+========+========+========|
-| 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528 |
-| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000 |
-| 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864 |
-|==========+=====+=========+=======+=====+========+========+========|]]>
-</artwork>
-</figure>-->
-<!--<figure anchor="DilithiumParameters">
-<artwork align="left" name="" type="" alt=""><![CDATA[
-|=======+=========+=======+=====+========+======+========+==========|
-|Level  |    q    | (k,l) | eta | gamma1 |  Sig.  | Public | Private|
-|       |         |       |     |        |  (B)   | Key(B) | Key(B) |
-|=======+=========+=======+=====+========+======+========+==========|
-| 2     | 8380417 | (4,4) |  2  |  2^17  |  2420  |  1312  |  2528  |
-| 3     | 8380417 | (6,5) |  4  |  2^19  |  3293  |  1952  |  4000  |
-| 5     | 8380417 | (8,7) |  2  |  2^19  |  4595  |  2596  |  4864  |
-|=======+=========+=======+=====+========+======+========+==========|]]>
-</artwork>
-</figure>-->
 ~~~
 |=======+=======+=====+========+========+========|
 | Level | (k,l) | eta |  Sig.  | Public | Private|
