@@ -870,5 +870,16 @@ this data.
 # Acknowledgments
 {:numbered="false"}
 
-We would like to thank ... <!--Markuu, Peikert -->for their
-insightful comments.
+The authors wish to thank the following people for their contributions
+to this document: Dierdre Connolly, Viktor Dukhovni, Russ Housley,
+Alicja Kario, Mike Ounsworth, and Daniel Van Geest.
+
+In addition, we would like to thank those who contributed to the private
+key format discussion: Tony Arcieri, Bob Beck, Dmitry Belyavskiy, David
+Benjamin, Daniel Bernstein, Uri Blumenthal, Theo Buehler, Stephen Farrell,
+Jean-Pierre Fiset, Scott Fluhrer, Alex Gaynor, John Gray, Peter Gutmann,
+David Hook, Tim Hudson, Paul Kehrer, John Kemp, Watson Ladd, Adam Langley,
+John Mattsson, Damien Miller, Robert Relyea, Michael Richardson,
+Markku-Juhani O. Saarinen, Rich Salz, Roland Shoemaker, Sophie Schmieg,
+Simo Sorce, Michael St. Johns, Falko Strenzke, Filippo Valsorda, Loganaden
+Velvindron, Carl Wallace, and Wei-Jun Wang.
