@@ -598,7 +598,6 @@ Note that these are the sizes of
     not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
         objects in which they are wrapped.
 
-<!-- full table, see page 15 of https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf -->
 <!-- [JM] we can consider the usefulness of this table/domain parameter discussion here, since we do not want to include the parameter selection in the document -->
 <!--<figure anchor="DilithiumParameters">
           <artwork align="left" name="" type="" alt=""><![CDATA[
