@@ -598,7 +598,6 @@ Note that these are the sizes of
     not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
         objects in which they are wrapped.
 
-<!-- [JM] we can consider the usefulness of this table/domain parameter discussion here, since we do not want to include the parameter selection in the document -->
 <!--<figure anchor="DilithiumParameters">
           <artwork align="left" name="" type="" alt=""><![CDATA[
 |==========+=====+=========+=======+=====+========+========+========|
