@@ -598,18 +598,6 @@ Note that these are the sizes of
     not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
         objects in which they are wrapped.
 
-<!--<figure anchor="DilithiumParameters">
-<artwork align="left" name="" type="" alt=""><![CDATA[
-|=======+=========+=======+=====+========+======+========+==========|
-|Level  |    q    | (k,l) | eta | gamma1 |  Sig.  | Public | Private|
-|       |         |       |     |        |  (B)   | Key(B) | Key(B) |
-|=======+=========+=======+=====+========+======+========+==========|
-| 2     | 8380417 | (4,4) |  2  |  2^17  |  2420  |  1312  |  2528  |
-| 3     | 8380417 | (6,5) |  4  |  2^19  |  3293  |  1952  |  4000  |
-| 5     | 8380417 | (8,7) |  2  |  2^19  |  4595  |  2596  |  4864  |
-|=======+=========+=======+=====+========+======+========+==========|]]>
-</artwork>
-</figure>-->
 ~~~
 |=======+=======+=====+========+========+========|
 | Level | (k,l) | eta |  Sig.  | Public | Private|
