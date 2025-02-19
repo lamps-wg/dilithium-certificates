@@ -481,7 +481,7 @@ of side-channel leakage has been demonstrated in parts of the
 signing algorithm (specifically the bit-unpacking function), from
 which a demonstration of key recovery has been made over a large
 sample of signatures. Masking countermeasures exist for
-ML-DSA<!--[MGTF19]-->, but come with a performance overhead.
+ML-DSA, but come with a performance overhead.
 
 A fundamental security property also associated with digital
 signatures is non-repudiation. Non-repudiation refers to the
