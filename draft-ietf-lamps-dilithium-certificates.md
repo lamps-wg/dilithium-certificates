@@ -447,6 +447,24 @@ of "id-mod-x509-ml-dsa-2024". The OID for the module should be
 allocated in the "SMI Security for PKIX Module Identifier" registry
 (1.3.6.1.5.5.7.0).
 
+# Implementation Considerations
+
+An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
+for a keypair, or for the private key. In particular, generating the seed
+in one cryptographic module and then importing or exporting it into another
+cryptographic module is allowed. The internal key generation functions 
+of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi) 
+{{FIPS203}} can be accessed for this purpose.
+
+Note also that unlike other private key compression methods in other algorithms,
+expanding a private key from a seed is a one-way function, meaning that once a 
+full key is expanded from seed and the seed discarded, the seed cannot be 
+re-created even if the full expanded private key is available. For this reason 
+it is RECOMMENDED that implementations retain and export the seed, 
+even when also exporting the expanded key. ML-DSA seed extraction can be 
+implemented by including the random seed xi generated at line 1 of Algorithm 1
+ML-DSA.KeyGen in the returned output.
+
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
