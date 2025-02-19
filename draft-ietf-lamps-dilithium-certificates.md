@@ -469,11 +469,6 @@ including the signers private key and message into the derivation. The
 primary purpose of rnd is to facilitate countermeasures to side-channel
 attacks and fault attacks on deterministic signatures.
 
-<!--<aside markdown="block">
-EDNOTE: Discuss side-channels for ML-DSA.
-</aside>-->
-
-
 In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
 on Gaussian sampling. Implementations must still take great care
