@@ -599,18 +599,6 @@ Note that these are the sizes of
         objects in which they are wrapped.
 
 <!--<figure anchor="DilithiumParameters">
-          <artwork align="left" name="" type="" alt=""><![CDATA[
-|==========+=====+=========+=======+=====+========+========+========|
-| Security |  n  |    q    | (k,l) | eta | gamma1 | Public | Private|
-| Level    |     |         |       |     |        | Key(B) | Key(B) |
-|==========+=====+=========+=======+=====+========+========+========|
-| 2        | 256 | 8380417 | (4,4) |  2  |  2^17  |  1312  |   2528 |
-| 3        | 256 | 8380417 | (6,5) |  4  |  2^19  |  1952  |   4000 |
-| 5        | 256 | 8380417 | (8,7) |  2  |  2^19  |  2596  |   4864 |
-|==========+=====+=========+=======+=====+========+========+========|]]>
-</artwork>
-</figure>-->
-<!--<figure anchor="DilithiumParameters">
 <artwork align="left" name="" type="" alt=""><![CDATA[
 |=======+=========+=======+=====+========+======+========+==========|
 |Level  |    q    | (k,l) | eta | gamma1 |  Sig.  | Public | Private|
