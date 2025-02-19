@@ -454,7 +454,7 @@ for a keypair, or for the private key. In particular, generating the seed
 in one cryptographic module and then importing or exporting it into another
 cryptographic module is allowed. The internal key generation functions 
 of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi) 
-{{FIPS203}} can be accessed for this purpose.
+can be accessed for this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
 expanding a private key from a seed is a one-way function, meaning that once a 
