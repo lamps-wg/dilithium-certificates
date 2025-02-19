@@ -597,6 +597,7 @@ Note that these are the sizes of
     the plain private and public keys; and
     not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
         objects in which they are wrapped.
+        
 ~~~
 |=======+=======+=====+========+========+========|
 | Level | (k,l) | eta |  Sig.  | Public | Private|
