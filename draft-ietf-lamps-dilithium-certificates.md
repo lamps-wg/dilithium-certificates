@@ -458,10 +458,6 @@ under strongly existentially unforgeable under chosen message attack
 been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.
 
-<!--TODO: Add discussion about digests in classical signatures hash-then-sign
-and how that does not apply to PQ like Dilithium. And how committing to a
-message is additional security. Reference NIST discussion from Peiker and
-Makku.-->
 <!--<aside markdown="block">
 EDNOTE: Discuss deterministic vs randomized signing and the impact on
 security.
