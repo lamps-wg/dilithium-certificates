@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-18T00:53:40.252499+00:00",
+  "timestamp": "2025-02-20T00:54:30.961289+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1089,9 +1089,24 @@
       "labels": [],
       "body": "Carl Wallace:\n\n> I still think this draft should have an Implementation Considerations section a la the Kyber certificates draft to define the mods to the FIPS algorithms to support seed usage.\n",
       "createdAt": "2025-02-04T15:12:50Z",
-      "updatedAt": "2025-02-04T15:15:27Z",
+      "updatedAt": "2025-02-19T22:14:48Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Opened PR https://github.com/lamps-wg/dilithium-certificates/pull/81",
+          "createdAt": "2025-02-19T21:59:16Z",
+          "updatedAt": "2025-02-19T21:59:16Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Do you think it's worthwhile adding some implementation guidance on how to generate public key from private key? This functionality is often provided by reference implementations, but not in the case of ML-DSA (explicitly).\n\nThis is often an implementation requirement, but is perhaps not obvious to those without knowledge of the underlying lattice cryptography here. As an example of the guidance, see my implementation in aws-lc https://github.com/aws/aws-lc/pull/2142.\n\nThoughts on relevance, applicability, possibly appendix material?",
+          "createdAt": "2025-02-19T22:14:47Z",
+          "updatedAt": "2025-02-19T22:14:47Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -5702,6 +5717,226 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOIEpj4c6LxlB6",
+      "title": "Drop comments",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/78",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove commented out text.",
+      "createdAt": "2025-02-19T16:13:34Z",
+      "updatedAt": "2025-02-19T17:18:37Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "709c6fd6191fb529c3eb66e83d419618e4ecbaaf",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-drop-comments",
+      "headRefOid": "35dcad7b6c36581dd60b33d4238a2390c49e67eb",
+      "closedAt": "2025-02-19T17:18:37Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hmm, an issue on line 809? I can't spot why CI is failing.",
+          "createdAt": "2025-02-19T17:14:14Z",
+          "updatedAt": "2025-02-19T17:14:14Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closed via #80.",
+          "createdAt": "2025-02-19T17:18:37Z",
+          "updatedAt": "2025-02-19T17:18:37Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6cmqI1",
+          "commit": {
+            "abbreviatedOid": "35dcad7"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-19T16:34:53Z",
+          "updatedAt": "2025-02-19T17:01:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6cm57p",
+          "commit": {
+            "abbreviatedOid": "881c2ad"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-19T16:59:40Z",
+          "updatedAt": "2025-02-19T16:59:41Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\n        objects in which they are wrapped.\r\n        \r\n```",
+              "createdAt": "2025-02-19T16:59:40Z",
+              "updatedAt": "2025-02-19T16:59:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6cm7Qh",
+          "commit": {
+            "abbreviatedOid": "070de05"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-19T17:01:46Z",
+          "updatedAt": "2025-02-19T17:01:47Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "```suggestion\r\n\r\n```",
+              "createdAt": "2025-02-19T17:01:47Z",
+              "updatedAt": "2025-02-19T17:01:47Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOIEpj4c6LxvrA",
+      "title": "Add Acks",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/79",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adding acknowledgements and thanks.",
+      "createdAt": "2025-02-19T16:34:24Z",
+      "updatedAt": "2025-02-19T17:10:12Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "709c6fd6191fb529c3eb66e83d419618e4ecbaaf",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-add-acks",
+      "headRefOid": "f5a108814219018d27d569983ee7507e3308e4c4",
+      "closedAt": "2025-02-19T17:10:11Z",
+      "mergedAt": "2025-02-19T17:10:11Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "75bd5e07979cdca949636d88d4baf01d55461830"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6cmrSp",
+          "commit": {
+            "abbreviatedOid": "f5a1088"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-19T16:36:38Z",
+          "updatedAt": "2025-02-19T16:36:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOIEpj4c6Lx_Yk",
+      "title": "Drop comments (again)",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/80",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixing deletion issues.",
+      "createdAt": "2025-02-19T17:04:59Z",
+      "updatedAt": "2025-02-19T17:18:54Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "709c6fd6191fb529c3eb66e83d419618e4ecbaaf",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-drops-comments",
+      "headRefOid": "cec2da4d526b81b27e3d34df6ab40a30e36d158d",
+      "closedAt": "2025-02-19T17:18:54Z",
+      "mergedAt": "2025-02-19T17:18:54Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "6142a82a649e5233dd0963b453bb3e3bd3247f11"
+      },
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Sorry about this couldn't figure out which change was blowing up the other PR so I am redoing it.",
+          "createdAt": "2025-02-19T17:12:12Z",
+          "updatedAt": "2025-02-19T17:12:12Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah I couldn't spot it either, no worries!",
+          "createdAt": "2025-02-19T17:14:52Z",
+          "updatedAt": "2025-02-19T17:14:52Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6cnAoH",
+          "commit": {
+            "abbreviatedOid": "0642d66"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-19T17:10:40Z",
+          "updatedAt": "2025-02-19T17:10:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "id": "PR_kwDOIEpj4c6Lz35W",
+      "title": "added Implementation Considerations",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/81",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Addresses:\r\nIssue https://github.com/lamps-wg/dilithium-certificates/issues/77\r\n\r\n### Call-outs:\r\n\r\nAdded implementation considerations based upon similar draft in the Kyber spec (https://github.com/lamps-wg/kyber-certificates/blob/main/draft-ietf-lamps-kyber-certificates.md#implementation-considerations)\r\n\r\nI used the verbiage from NISTs FAQs at https://csrc.nist.gov/Projects/post-quantum-cryptography/faqs#Rdc7 as the original standard doesn't provide this update.",
+      "createdAt": "2025-02-19T21:59:00Z",
+      "updatedAt": "2025-02-19T22:09:08Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "6142a82a649e5233dd0963b453bb3e3bd3247f11",
+      "headRepository": "jakemas/dilithium-certificates",
+      "headRefName": "impl-consid",
+      "headRefOid": "3c9e251d9a8b62d4322a5c3f0af8e3ee5049bc02",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
