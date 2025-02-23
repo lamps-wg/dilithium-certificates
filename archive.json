@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-20T00:54:30.961289+00:00",
+  "timestamp": "2025-02-23T00:58:33.460717+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1082,15 +1082,15 @@
       "id": "I_kwDOIEpj4c6ott7k",
       "title": "Add implementation considerations section",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/77",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Carl Wallace:\n\n> I still think this draft should have an Implementation Considerations section a la the Kyber certificates draft to define the mods to the FIPS algorithms to support seed usage.\n",
       "createdAt": "2025-02-04T15:12:50Z",
-      "updatedAt": "2025-02-19T22:14:48Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-20T21:28:47Z",
+      "closedAt": "2025-02-20T21:28:03Z",
       "comments": [
         {
           "author": "jakemas",
@@ -1105,6 +1105,13 @@
           "body": "Do you think it's worthwhile adding some implementation guidance on how to generate public key from private key? This functionality is often provided by reference implementations, but not in the case of ML-DSA (explicitly).\n\nThis is often an implementation requirement, but is perhaps not obvious to those without knowledge of the underlying lattice cryptography here. As an example of the guidance, see my implementation in aws-lc https://github.com/aws/aws-lc/pull/2142.\n\nThoughts on relevance, applicability, possibly appendix material?",
           "createdAt": "2025-02-19T22:14:47Z",
           "updatedAt": "2025-02-19T22:14:47Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://github.com/lamps-wg/dilithium-certificates/pull/81",
+          "createdAt": "2025-02-20T21:28:46Z",
+          "updatedAt": "2025-02-20T21:28:46Z"
         }
       ]
     }
@@ -5917,26 +5924,42 @@
       "id": "PR_kwDOIEpj4c6Lz35W",
       "title": "added Implementation Considerations",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/81",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jakemas",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "### Addresses:\r\nIssue https://github.com/lamps-wg/dilithium-certificates/issues/77\r\n\r\n### Call-outs:\r\n\r\nAdded implementation considerations based upon similar draft in the Kyber spec (https://github.com/lamps-wg/kyber-certificates/blob/main/draft-ietf-lamps-kyber-certificates.md#implementation-considerations)\r\n\r\nI used the verbiage from NISTs FAQs at https://csrc.nist.gov/Projects/post-quantum-cryptography/faqs#Rdc7 as the original standard doesn't provide this update.",
       "createdAt": "2025-02-19T21:59:00Z",
-      "updatedAt": "2025-02-19T22:09:08Z",
+      "updatedAt": "2025-02-20T21:27:43Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "6142a82a649e5233dd0963b453bb3e3bd3247f11",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "impl-consid",
       "headRefOid": "3c9e251d9a8b62d4322a5c3f0af8e3ee5049bc02",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-20T21:27:43Z",
+      "mergedAt": "2025-02-20T21:27:43Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "0d412a853430352a277c7e5006282e335bc13ab5"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6cu0Cw",
+          "commit": {
+            "abbreviatedOid": "3c9e251"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-20T11:05:50Z",
+          "updatedAt": "2025-02-20T11:05:50Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
