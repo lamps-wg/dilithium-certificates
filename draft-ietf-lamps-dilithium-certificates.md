@@ -287,7 +287,7 @@ implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified {{oids}}.
 
-# ML-DSA Public Keys in PKIX {#ML-DSA-PubblicKey}
+# ML-DSA Public Keys in PKIX {#ML-DSA-PublicKey}
 
 In the X.509 certificate, the subjectPublicKeyInfo field has the
 SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
@@ -530,7 +530,7 @@ discussion of these properties in ML-DSA can be found at
 
 These properties are dependent, in part, on unambiguous public
 key serialization. It for this reason the public key structure
-defined in {{ML-DSA-PubblicKey}} is intentionally encoded as a
+defined in {{ML-DSA-PublicKey}} is intentionally encoded as a
 single OCTET STRING.
 
 ## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
