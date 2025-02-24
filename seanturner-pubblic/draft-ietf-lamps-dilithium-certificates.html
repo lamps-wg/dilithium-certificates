@@ -17,12 +17,12 @@ Signature Algorithm (ML-DSA) in Internet X.509 certificates and
 certificate revocation lists.  The conventions for the associated
 signatures, subject public keys, and private key are also described. 
     " name="description">
-<meta content="xml2rfc 3.25.0" name="generator">
+<meta content="xml2rfc 3.27.0" name="generator">
 <meta content="ML-DSA Certificate X.509 PKIX" name="keyword">
 <meta content="draft-ietf-lamps-dilithium-certificates-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.25.0
-    Python 3.12.8
+  xml2rfc 3.27.0
+    Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -443,7 +443,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -1052,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ML-DSA in Certificates</td>
-<td class="right">January 2025</td>
+<td class="right">February 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 26 July 2025</td>
+<td class="center">Expires 28 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-22" class="published">22 January 2025</time>
+<time datetime="2025-02-24" class="published">24 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-26">26 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-28">28 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1197,52 +1197,55 @@ signatures, subject public keys, and private key are also described.<a href="#se
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-rationale-for-disallowing-h" class="internal xref">Rationale for disallowing HashML-DSA</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-rationale-for-disallowing-h" class="internal xref">Rationale for disallowing HashML-DSA</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-security-strengths" class="internal xref">Security Strengths</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-example-private-key" class="internal xref">Example Private Key</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-example-public-key" class="internal xref">Example Public Key</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-example-certificates" class="internal xref">Example Certificates</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-security-strengths" class="internal xref">Security Strengths</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-pre-hashing-externalmu-ml-d" class="internal xref">Pre-hashing (ExternalMu-ML-DSA)</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-example-private-key" class="internal xref">Example Private Key</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-example-public-key" class="internal xref">Example Public Key</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-example-certificates" class="internal xref">Example Certificates</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-pre-hashing-externalmu-ml-d" class="internal xref">Pre-hashing (ExternalMu-ML-DSA)</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1262,7 +1265,7 @@ certificates and Certificate Revocation Lists (CRLs) at three security
 levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines two variants of ML-DSA: a pure and a prehash variant.
 Only the former is specified in this document.
-See <a href="#sec-disallow-hash" class="auto internal xref">Section 8.1</a> for the rationale.
+See <a href="#sec-disallow-hash" class="auto internal xref">Section 9.1</a> for the rationale.
 The pure variant of ML-DSA supports the typical prehash flow,
 see <a href="#prehash" class="auto internal xref">Appendix D</a>. In short: one cryptographic module can compute the hash <em>mu</em>
 on line 6 of algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and pass it to a second module
@@ -1400,7 +1403,7 @@ recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="ML-DSA-PubblicKey">
+<div id="ML-DSA-PublicKey">
 <section id="section-4">
       <h2 id="name-ml-dsa-public-keys-in-pkix">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ml-dsa-public-keys-in-pkix" class="section-name selfRef">ML-DSA Public Keys in PKIX</a>
@@ -1570,19 +1573,40 @@ allocated in the "SMI Security for PKIX Module Identifier" registry
 (1.3.6.1.5.5.7.0).<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-considerations">
+<div id="implementation-considerations">
 <section id="section-8">
-      <h2 id="name-security-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-implementation-consideratio">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
       </h2>
-<p id="section-8-1">The Security Considerations section of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> applies to this
-specification as well.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The digital signature scheme defined within this document are modeled
+<p id="section-8-1">An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
+for a keypair, or for the private key. In particular, generating the seed
+in one cryptographic module and then importing or exporting it into another
+cryptographic module is allowed. The internal key generation functions
+of ML-KEM.KeyGen_Internal(d, z) <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and ML-DSA.KeyGen_internal(xi)
+can be accessed for this purpose.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Note also that unlike other private key compression methods in other algorithms,
+expanding a private key from a seed is a one-way function, meaning that once a
+full key is expanded from seed and the seed discarded, the seed cannot be
+re-created even if the full expanded private key is available. For this reason
+it is <span class="bcp14">RECOMMENDED</span> that implementations retain and export the seed,
+even when also exporting the expanded key. ML-DSA seed extraction can be
+implemented by including the random seed xi generated at line 1 of Algorithm 1
+ML-DSA.KeyGen in the returned output.<a href="#section-8-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-9">
+      <h2 id="name-security-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-9-1">The Security Considerations section of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> applies to this
+specification as well.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">The digital signature scheme defined within this document are modeled
 under strongly existentially unforgeable under chosen message attack
 (SUF-CMA). For the purpose of estimating security strength, it has
 been assumed that the attacker has access to signatures for no more
-than 2^{64} chosen messages.<a href="#section-8-2" class="pilcrow">¶</a></p>
-<p id="section-8-3">ML-DSA offers both deterministic and randomized signing. By default
+than 2^{64} chosen messages.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">ML-DSA offers both deterministic and randomized signing. By default
 ML-DSA signatures are non-deterministic. The private random seed (rho')
 for the signature is pseudorandomly derived from the signer’s private
 key, the message, and a 256-bit string, rnd - where rnd should be
@@ -1591,8 +1615,8 @@ instead a 256-bit constant string. The source of randomness in the
 randomized mode has been "hedged" against sources of poor entropy, by
 including the signers private key and message into the derivation. The
 primary purpose of rnd is to facilitate countermeasures to side-channel
-attacks and fault attacks on deterministic signatures.<a href="#section-8-3" class="pilcrow">¶</a></p>
-<p id="section-8-4">In the design of ML-DSA, care has been taken to make side-channel
+attacks and fault attacks on deterministic signatures.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<p id="section-9-4">In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
 on Gaussian sampling. Implementations must still take great care
 not to leak information via various side channels. While deliberate
@@ -1604,8 +1628,8 @@ of side-channel leakage has been demonstrated in parts of the
 signing algorithm (specifically the bit-unpacking function), from
 which a demonstration of key recovery has been made over a large
 sample of signatures. Masking countermeasures exist for
-ML-DSA, but come with a performance overhead.<a href="#section-8-4" class="pilcrow">¶</a></p>
-<p id="section-8-5">A fundamental security property also associated with digital
+ML-DSA, but come with a performance overhead.<a href="#section-9-4" class="pilcrow">¶</a></p>
+<p id="section-9-5">A fundamental security property also associated with digital
 signatures is non-repudiation. Non-repudiation refers to the
 assurance that the owner of a signature key pair that was
 capable of generating an existing signature corresponding to
@@ -1615,8 +1639,8 @@ properties beyond unforgeability, that are associated with
 non-repudiation. These are exclusive ownership, message-bound
 signatures, and non-resignability. These properties are based
 tightly on the assumed collision resistance of the hash
-function used (in this case SHAKE-256).<a href="#section-8-5" class="pilcrow">¶</a></p>
-<p id="section-8-6">Exclusive ownership is a property in which a signature sigma
+function used (in this case SHAKE-256).<a href="#section-9-5" class="pilcrow">¶</a></p>
+<p id="section-9-6">Exclusive ownership is a property in which a signature sigma
 uniquely determines the public key and message for which it
 is valid. Message-bound signatures is the property that a
 valid signature uniquely determines the message for which it
@@ -1626,29 +1650,29 @@ a valid signature under another key given a signature sigma
 for some unknown message m. These properties are not provided
 by classical signature schemes such as DSA or ECDSA, and have
 led to a variety of attacks such as Duplicate-Signature Key
-Selection (DSKS) attacks , and attacks on
+Selection (DSKS) attacks, and attacks on
 the protocols for secure routing. A full
 discussion of these properties in ML-DSA can be found at
-<span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.<a href="#section-8-6" class="pilcrow">¶</a></p>
-<p id="section-8-7">These properties are dependent, in part, on unambiguous public
+<span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.<a href="#section-9-6" class="pilcrow">¶</a></p>
+<p id="section-9-7">These properties are dependent, in part, on unambiguous public
 key serialization. It for this reason the public key structure
-defined in <a href="#ML-DSA-PubblicKey" class="auto internal xref">Section 4</a> is intentionally encoded as a
-single OCTET STRING.<a href="#section-8-7" class="pilcrow">¶</a></p>
+defined in <a href="#ML-DSA-PublicKey" class="auto internal xref">Section 4</a> is intentionally encoded as a
+single OCTET STRING.<a href="#section-9-7" class="pilcrow">¶</a></p>
 <div id="sec-disallow-hash">
-<section id="section-8.1">
+<section id="section-9.1">
         <h3 id="name-rationale-for-disallowing-h">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-rationale-for-disallowing-h" class="section-name selfRef">Rationale for disallowing HashML-DSA</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-rationale-for-disallowing-h" class="section-name selfRef">Rationale for disallowing HashML-DSA</a>
         </h3>
-<p id="section-8.1-1">The HashML-DSA mode defined in Section 5.4 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> <span class="bcp14">MUST NOT</span> be
+<p id="section-9.1-1">The HashML-DSA mode defined in Section 5.4 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> <span class="bcp14">MUST NOT</span> be
 used; in other words, public keys identified by
 <code>id-hash-ml-dsa-44-with-sha512</code>, <code>id-hash-ml-dsa-65-with-sha512</code>, and
 <code>id-hash-ml-dsa-87-with-sha512</code> <span class="bcp14">MUST NOT</span> be in X.509 certificates used for
 CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS).
 The use of HashML-DSA public keys within end entity certificates is not
 prohibited, but conventions for doing so are outside the scope of this
-document.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">This restriction is for both implementation and security reasons.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">The implementation reason for disallowing HashML-DSA stems from the fact
+document.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-2">This restriction is for both implementation and security reasons.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
 different <code>Verify()</code> routines. This forwards to the protocol the
 complexity of informing the client whether to use <code>ML-DSA.Verify()</code> or
@@ -1664,8 +1688,8 @@ operational concerns by virtue of having keys and signatures that are
 indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
 mathematically equivalent algorithms). The difference between ML-DSA
 and ExternalMu-ML-DSA is merely an internal implementation detail of
-the signer and has no impact on the verifier or network protocol.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
-<p id="section-8.1-4">The security reason for disallowing HashML-DSA is that the design of the
+the signer and has no impact on the verifier or network protocol.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-4">The security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against signature
 collision attacks, compared with conventional RSA or ECDSA signature
 algorithms. Specifically, ML-DSA binds the hash of the public key <code>tr</code>
@@ -1678,20 +1702,20 @@ discovery of a collision attack against SHA-3, an attacker would
 have to perform a public-key-specific collision search in order to find
 message pairs such that <code>H(tr || m1) = H(tr || m2)</code> since a direct hash
 collision <code>H(m1) = H(m2)</code> will not suffice. HashML-DSA removes both of
-these enhanced security properties.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+these enhanced security properties.<a href="#section-9.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-9.1">
+<section id="section-10.1">
         <h3 id="name-normative-references">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="FIPS204">[FIPS204]</dt>
@@ -1734,9 +1758,9 @@ these enhanced security properties.<a href="#section-8.1-4" class="pilcrow">¶</
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-9.2">
+<section id="section-10.2">
         <h3 id="name-informative-references">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="CDFFJ21">[CDFFJ21]</dt>
@@ -3577,7 +3601,7 @@ and therefore might require explicit support from hardware or
 software cryptographic modules.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
 <p id="appendix-D-5">Note that the signing mode defined here is different from HashML-DSA
 defined in Section 5.4 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. This specification uses exclusively
-ExternalMu-ML-DSA for pre-hashed use cases. See <a href="#sec-disallow-hash" class="auto internal xref">Section 8.1</a> for
+ExternalMu-ML-DSA for pre-hashed use cases. See <a href="#sec-disallow-hash" class="auto internal xref">Section 9.1</a> for
 additional discussion of why HashML-DSA is disallowed in PKIX.<a href="#appendix-D-5" class="pilcrow">¶</a></p>
 <p id="appendix-D-6">All functions and notation used in <a href="#fig-externalmu-ml-dsa-external" class="auto internal xref">Figure 2</a>
 and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 3</a> are defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.<a href="#appendix-D-6" class="pilcrow">¶</a></p>
@@ -3658,8 +3682,18 @@ this data.<a href="#appendix-D-12" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-E-1">We would like to thank ... for their
-insightful comments.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+<p id="appendix-E-1">The authors wish to thank the following people for their contributions
+to this document: Dierdre Connolly, Viktor Dukhovni, Russ Housley,
+Alicja Kario, Mike Ounsworth, and Daniel Van Geest.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+<p id="appendix-E-2">In addition, we would like to thank those who contributed to the private
+key format discussion: Tony Arcieri, Bob Beck, Dmitry Belyavskiy, David
+Benjamin, Daniel Bernstein, Uri Blumenthal, Theo Buehler, Stephen Farrell,
+Jean-Pierre Fiset, Scott Fluhrer, Alex Gaynor, John Gray, Peter Gutmann,
+David Hook, Tim Hudson, Paul Kehrer, John Kemp, Watson Ladd, Adam Langley,
+John Mattsson, Damien Miller, Robert Relyea, Michael Richardson,
+Markku-Juhani O. Saarinen, Rich Salz, Roland Shoemaker, Sophie Schmieg,
+Simo Sorce, Michael St. Johns, Falko Strenzke, Filippo Valsorda, Loganaden
+Velvindron, Carl Wallace, and Wei-Jun Wang.<a href="#appendix-E-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">

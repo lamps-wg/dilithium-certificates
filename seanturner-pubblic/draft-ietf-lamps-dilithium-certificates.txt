@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 26 July 2025                                          S. Turner
+Expires: 28 August 2025                                        S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                         22 January 2025
+                                                        24 February 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2025.
+   This Internet-Draft will expire on 28 August 2025.
 
 Copyright Notice
 
@@ -86,11 +86,12 @@ Table of Contents
    5.  Key Usage Bits
    6.  Private Key Format
    7.  IANA Considerations
-   8.  Security Considerations
-     8.1.  Rationale for disallowing HashML-DSA
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   8.  Implementation Considerations
+   9.  Security Considerations
+     9.1.  Rationale for disallowing HashML-DSA
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Security Strengths
    Appendix C.  Examples
@@ -113,7 +114,7 @@ Table of Contents
 
    [FIPS204] defines two variants of ML-DSA: a pure and a prehash
    variant.  Only the former is specified in this document.  See
-   Section 8.1 for the rationale.  The pure variant of ML-DSA supports
+   Section 9.1 for the rationale.  The pure variant of ML-DSA supports
    the typical prehash flow, see Appendix D.  In short: one
    cryptographic module can compute the hash _mu_ on line 6 of algorithm
    7 of [FIPS204] and pass it to a second module to finish the
@@ -380,7 +381,27 @@ Table of Contents
    should be allocated in the "SMI Security for PKIX Module Identifier"
    registry (1.3.6.1.5.5.7.0).
 
-8.  Security Considerations
+8.  Implementation Considerations
+
+   An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative
+   format for a keypair, or for the private key.  In particular,
+   generating the seed in one cryptographic module and then importing or
+   exporting it into another cryptographic module is allowed.  The
+   internal key generation functions of ML-KEM.KeyGen_Internal(d, z)
+   [FIPS204] and ML-DSA.KeyGen_internal(xi) can be accessed for this
+   purpose.
+
+   Note also that unlike other private key compression methods in other
+   algorithms, expanding a private key from a seed is a one-way
+   function, meaning that once a full key is expanded from seed and the
+   seed discarded, the seed cannot be re-created even if the full
+   expanded private key is available.  For this reason it is RECOMMENDED
+   that implementations retain and export the seed, even when also
+   exporting the expanded key.  ML-DSA seed extraction can be
+   implemented by including the random seed xi generated at line 1 of
+   Algorithm 1 ML-DSA.KeyGen in the returned output.
+
+9.  Security Considerations
 
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
@@ -437,7 +458,7 @@ Table of Contents
    signature sigma for some unknown message m.  These properties are not
    provided by classical signature schemes such as DSA or ECDSA, and
    have led to a variety of attacks such as Duplicate-Signature Key
-   Selection (DSKS) attacks , and attacks on the protocols for secure
+   Selection (DSKS) attacks, and attacks on the protocols for secure
    routing.  A full discussion of these properties in ML-DSA can be
    found at [CDFFJ21].
 
@@ -445,13 +466,13 @@ Table of Contents
    serialization.  It for this reason the public key structure defined
    in Section 4 is intentionally encoded as a single OCTET STRING.
 
-8.1.  Rationale for disallowing HashML-DSA
+9.1.  Rationale for disallowing HashML-DSA
 
    The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be
    used; in other words, public keys identified by id-hash-ml-dsa-44-
    with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
    with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP,
-   certificate issuance and related PKIX protocols (e.g.  TLS).  The use
+   certificate issuance and related PKIX protocols (e.g. TLS).  The use
    of HashML-DSA public keys within end entity certificates is not
    prohibited, but conventions for doing so are outside the scope of
    this document.
@@ -492,9 +513,9 @@ Table of Contents
    suffice.  HashML-DSA removes both of these enhanced security
    properties.
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [FIPS204]  National Institute of Standards and Technology (NIST),
               "Module-Lattice-based Digital Signature Standard", FIPS
@@ -543,7 +564,7 @@ Table of Contents
               Recommendation X.690, ISO/IEC 8825-1:2021, February 2021,
               <https://www.itu.int/rec/T-REC-X.690>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [CDFFJ21]  Cremers, C., Düzlü, S., Fiedler, R., Fischlin, M., and C.
               Janson, "BUFFing signature schemes beyond unforgeability
@@ -2312,7 +2333,7 @@ Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
    Note that the signing mode defined here is different from HashML-DSA
    defined in Section 5.4 of [FIPS204].  This specification uses
    exclusively ExternalMu-ML-DSA for pre-hashed use cases.  See
-   Section 8.1 for additional discussion of why HashML-DSA is disallowed
+   Section 9.1 for additional discussion of why HashML-DSA is disallowed
    in PKIX.
 
    All functions and notation used in Figure 2 and Figure 3 are defined
@@ -2380,7 +2401,20 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
 
 Acknowledgments
 
-   We would like to thank ... for their insightful comments.
+   The authors wish to thank the following people for their
+   contributions to this document: Dierdre Connolly, Viktor Dukhovni,
+   Russ Housley, Alicja Kario, Mike Ounsworth, and Daniel Van Geest.
+
+   In addition, we would like to thank those who contributed to the
+   private key format discussion: Tony Arcieri, Bob Beck, Dmitry
+   Belyavskiy, David Benjamin, Daniel Bernstein, Uri Blumenthal, Theo
+   Buehler, Stephen Farrell, Jean-Pierre Fiset, Scott Fluhrer, Alex
+   Gaynor, John Gray, Peter Gutmann, David Hook, Tim Hudson, Paul
+   Kehrer, John Kemp, Watson Ladd, Adam Langley, John Mattsson, Damien
+   Miller, Robert Relyea, Michael Richardson, Markku-Juhani O.
+   Saarinen, Rich Salz, Roland Shoemaker, Sophie Schmieg, Simo Sorce,
+   Michael St. Johns, Falko Strenzke, Filippo Valsorda, Loganaden
+   Velvindron, Carl Wallace, and Wei-Jun Wang.
 
 Authors' Addresses
 
