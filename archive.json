@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-23T00:58:33.460717+00:00",
+  "timestamp": "2025-02-25T00:55:38.990500+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -5960,6 +5960,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 82,
+      "id": "PR_kwDOIEpj4c6MOG0R",
+      "title": "Fix Typo",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/82",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Pubblic -> Public",
+      "createdAt": "2025-02-24T01:57:07Z",
+      "updatedAt": "2025-02-24T18:18:46Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "0d412a853430352a277c7e5006282e335bc13ab5",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-pubblic",
+      "headRefOid": "729997071bbbe95319c992a5dea7266345c296dc",
+      "closedAt": "2025-02-24T18:18:45Z",
+      "mergedAt": "2025-02-24T18:18:45Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "c48fab342edd1662d2d01572cd47a08f9ab19700"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
