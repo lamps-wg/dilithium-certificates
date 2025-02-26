@@ -474,16 +474,19 @@ The CHOICE allows three representations of the private key:
 
 When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
 these three formats may be used, though the seed format is RECOMMENDED
-for storage efficiency. Implementations MUST be able to handle all three
-formats when parsing private keys.
+for storage efficiency.
 
 The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
 the appropriate OID as defined in Section 3. If present, the "publicKey"
 field will hold the encoded public key as defined in Section 5.
 
 NOTE: While the private key can be stored in multiple formats, the seed-only
-format is RECOMMENDED as it is the most compact representation and the
-expanded key can be deterministically derived from it.
+format is RECOMMENDED as it is the most compact representation. Both the
+expanded private key and the public key can be deterministically derived
+from the seed using ML-DSA.KeyGen_internal(xi). While the publicKey field
+and expandedKey format are technically redundant when using the seed-only
+format, they MAY be included to enable keypair consistency checks during
+import operations.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
