@@ -1,0 +1,2507 @@
+
+
+
+
+LAMPS WG                                                      J. Massimo
+Internet-Draft                                             P. Kampanakis
+Intended status: Standards Track                                     AWS
+Expires: 30 August 2025                                        S. Turner
+                                                                   sn3rd
+                                                        B. E. Westerbaan
+                                                              Cloudflare
+                                                        26 February 2025
+
+
+Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
+                                  DSA
+             draft-ietf-lamps-dilithium-certificates-latest
+
+Abstract
+
+   Digital signatures are used within X.509 certificates, Certificate
+   Revocation Lists (CRLs), and to sign messages.  This document
+   describes the conventions for using FIPS 204, the Module-Lattice-
+   Based Digital Signature Algorithm (ML-DSA) in Internet X.509
+   certificates and certificate revocation lists.  The conventions for
+   the associated signatures, subject public keys, and private key are
+   also described.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at https://lamps-
+   wg.github.io/dilithium-certificates/#go.draft-ietf-lamps-dilithium-
+   certificates.html.  Status information for this document may be found
+   at https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-
+   certificates/.
+
+   Discussion of this document takes place on the Limited Additional
+   Mechanisms for PKIX and SMIME (lamps) Working Group mailing list
+   (mailto:spasm@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/spasm/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/spasm/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/lamps-wg/dilithium-certificates.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 30 August 2025.
+
+Copyright Notice
+
+   Copyright (c) 2025 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+     1.1.  Requirements Language
+   2.  Identifiers
+   3.  ML-DSA Signatures in PKIX
+   4.  ML-DSA Public Keys in PKIX
+   5.  Key Usage Bits
+   6.  Private Key Format
+   7.  IANA Considerations
+   8.  Implementation Considerations
+   9.  Security Considerations
+     9.1.  Rationale for disallowing HashML-DSA
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
+   Appendix A.  ASN.1 Module
+   Appendix B.  Security Strengths
+   Appendix C.  Examples
+     C.1.  Example Private Key
+     C.2.  Example Public Key
+     C.3.  Example Certificates
+   Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
+   quantum-resistant digital signature scheme standardized by the US
+   National Institute of Standards and Technology (NIST) PQC project
+   [NIST-PQC] in [FIPS204].  This document specifies the use of the ML-
+   DSA in Public Key Infrastructure X.509 (PKIX) certificates and
+   Certificate Revocation Lists (CRLs) at three security levels: ML-DSA-
+   44, ML-DSA-65, and ML-DSA-87.
+
+   [FIPS204] defines two variants of ML-DSA: a pure and a prehash
+   variant.  Only the former is specified in this document.  See
+   Section 9.1 for the rationale.  The pure variant of ML-DSA supports
+   the typical prehash flow, see Appendix D.  In short: one
+   cryptographic module can compute the hash _mu_ on line 6 of algorithm
+   7 of [FIPS204] and pass it to a second module to finish the
+   signature.  The first module only needs access to the full message
+   and the public key, whereas the second module only needs access to
+   hash _mu_ and the private key.
+
+   Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
+   Dilithium are not compatible.
+
+1.1.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.  Identifiers
+
+   The AlgorithmIdentifier type is defined in [RFC5912] as follows:
+
+    AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
+      SEQUENCE {
+        algorithm   ALGORITHM-TYPE.id({AlgorithmSet}),
+        parameters  ALGORITHM-TYPE.
+                      Params({AlgorithmSet}{@algorithm}) OPTIONAL
+     }
+
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
+
+   The fields in AlgorithmIdentifier have the following meanings:
+
+   *  algorithm identifies the cryptographic algorithm with an object
+      identifier.
+
+   *  parameters, which are optional, are the associated parameters for
+      the algorithm identifier in the algorithm field.
+
+   The OIDs are:
+
+      id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-44(17) }
+
+      id-ml-dsa-65 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-65(18) }
+
+      id-ml-dsa-87 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+               country(16) us(840) organization(1) gov(101) csor(3)
+               nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
+
+   The contents of the parameters component for each algorithm MUST be
+   absent.  The ctx value used in the ML-DSA signing and verification
+   [FIPS204] of ML-DSA signatures defined in this specification (X.509
+   certificates, CRLs) is the empty string.
+
+3.  ML-DSA Signatures in PKIX
+
+   ML-DSA is a digital signature scheme built upon the Fiat-Shamir-with-
+   aborts framework [Fiat-Shamir].  The security is based upon the
+   hardness of lattice problems over module lattices [Dilithium].  ML-
+   DSA provides three parameter sets for the NIST PQC security
+   categories 2, 3 and 5.
+
+   Signatures are used in a number of different ASN.1 structures.  As
+   shown in the ASN.1 representation from [RFC5280] below, in an X.509
+   certificate, a signature is encoded with an algorithm identifier in
+   the signatureAlgorithm attribute and a signatureValue attribute that
+   contains the actual signature.
+
+     Certificate  ::=  SIGNED{ TBSCertificate }
+
+     SIGNED{ToBeSigned} ::= SEQUENCE {
+        toBeSigned           ToBeSigned,
+        algorithmIdentifier  SEQUENCE {
+            algorithm        SIGNATURE-ALGORITHM.
+                               &id({SignatureAlgorithms}),
+            parameters       SIGNATURE-ALGORITHM.
+                               &Params({SignatureAlgorithms}
+                                 {@algorithmIdentifier.algorithm})
+                                   OPTIONAL
+        },
+        signature BIT STRING (CONTAINING SIGNATURE-ALGORITHM.&Value(
+                                 {SignatureAlgorithms}
+                                 {@algorithmIdentifier.algorithm}))
+     }
+
+   Signatures are also used in the CRL list ASN.1 representation from
+   [RFC5280] below.  In a X.509 CRL, a signature is encoded with an
+   algorithm identifier in the signatureAlgorithm attribute and a
+   signatureValue attribute that contains the actual signature.
+
+      CertificateList  ::=  SIGNED{ TBSCertList }
+
+   The following SIGNATURE-ALGORITHM ASN.1 classes are for ML-DSA-44,
+   ML-DSA-65, and ML-DSA-87:
+
+     sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
+       IDENTIFIER id-ml-dsa-44
+       PARAMS ARE absent
+       PUBLIC-KEYS { pk-ml-dsa-44 }
+       SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 }
+       }
+
+     sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
+       IDENTIFIER id-ml-dsa-65
+       PARAMS ARE absent
+       PUBLIC-KEYS { pk-ml-dsa-65 }
+       SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 }
+       }
+
+     sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
+       IDENTIFIER id-ml-dsa-87
+       PARAMS ARE absent
+       PUBLIC-KEYS { pk-ml-dsa-87 }
+       SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 }
+       }
+
+   The identifiers defined in Section 2 can be used as the
+   AlgorithmIdentifier in the signatureAlgorithm field in the sequence
+   Certificate/CertificateList and the signature field in the sequence
+   TBSCertificate/TBSCertList in certificates and CRLs, respectively,
+   [RFC5280].  The parameters of these signature algorithms MUST be
+   absent, as explained in Section 2.  That is, the AlgorithmIdentifier
+   SHALL be a SEQUENCE of one component, the OID id-ml-dsa-*.
+
+   The signatureValue field contains the corresponding ML-DSA signature
+   computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
+   [RFC5280].
+
+   Conforming Certification Authority (CA) implementations MUST specify
+   the algorithms explicitly by using the OIDs specified in Section 2
+   when encoding ML-DSA signatures in certificates and CRLs.  Conforming
+   client implementations that process certificates and CRLs using ML-
+   DSA MUST recognize the corresponding OIDs.  Encoding rules for ML-DSA
+   signature values are specified Section 2.
+
+4.  ML-DSA Public Keys in PKIX
+
+   In the X.509 certificate, the subjectPublicKeyInfo field has the
+   SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
+
+     SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
+         algorithm        AlgorithmIdentifier {PUBLIC-KEY, {IOSet}},
+         subjectPublicKey BIT STRING
+     }
+
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
+
+   The fields in SubjectPublicKeyInfo have the following meaning:
+
+   *  algorithm is the algorithm identifier and parameters for the
+      public key (see above).
+
+   *  subjectPublicKey contains the byte stream of the public key.
+
+   The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
+
+     pk-ml-dsa-44 PUBLIC-KEY ::= {
+       IDENTIFIER id-ml-dsa-44
+       -- KEY no ASN.1 wrapping --
+       CERT-KEY-USAGE
+         { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+       -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+     pk-ml-dsa-65 PUBLIC-KEY ::= {
+       IDENTIFIER id-ml-dsa-65
+       -- KEY no ASN.1 wrapping --
+       CERT-KEY-USAGE
+         { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+       -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+     pk-ml-dsa-87 PUBLIC-KEY ::= {
+       IDENTIFIER id-ml-dsa-87
+       -- KEY no ASN.1 wrapping --
+       CERT-KEY-USAGE
+         { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
+       -- PRIVATE-KEY no ASN.1 wrapping -- }
+
+     ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+
+     ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+
+   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
+   encoding of an ML-DSA public key.  When used in a
+   SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
+   the raw byte string encoding of the public key.
+
+   When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
+   type in an environment that uses ASN.1 encoding, it can be encoded as
+   an OCTET STRING by using the ML-DSA-PublicKey type.
+
+   [RFC5958] describes the Asymmetric Key Package's OneAsymmetricKey
+   type for encoding asymmetric keypairs.  When an ML-DSA private key or
+   keypair is encoded as a OneAsymmetricKey, it follows the description
+   in Section 6.
+
+   When the ML-DSA private key appears outside of an Asymmetric Key
+   Package in an environment that uses ASN.1 encoding, it can be encoded
+   as an OCTET STRING by using the ML-DSA-PrivateKey type.
+
+   Appendix C contains example ML-DSA public keys encoded using the
+   textual encoding defined in [RFC7468].
+
+5.  Key Usage Bits
+
+   The intended application for the key is indicated in the keyUsage
+   certificate extension; see Section 4.2.1.3 of [RFC5280].  If the
+   keyUsage extension is present in a certificate that indicates id-ml-
+   dsa-* in the SubjectPublicKeyInfo, then the at least one of following
+   MUST be present:
+
+     digitalSignature; or
+     nonRepudiation; or
+     keyCertSign; or
+     cRLSign.
+
+   If the keyUsage extension is present in a certificate that indicates
+   id-ml-dsa-* in the SubjectPublicKeyInfo, then the following MUST NOT
+   be present:
+
+      keyEncipherment; or
+      dataEncipherment; or
+      keyAgreement; or
+      encipherOnly; or
+      decipherOnly.
+
+   Requirements about the keyUsage extension bits defined in [RFC5280]
+   still apply.
+
+6.  Private Key Format
+
+   An ML-DSA private key is encoded by storing its 32-octet seed in the
+   privateKey field as follows.
+
+   [FIPS204] specifies two formats for an ML-DSA private key: a 32-octet
+   seed (xi) and an (expanded) private key.  The expanded private key
+   (and public key) is computed from the seed using ML-
+   DSA.KeyGen_internal(xi) (algorithm 6).
+
+   "Asymmetric Key Packages" [RFC5958] describes how to encode a private
+   key in a structure that both identifies what algorithm the private
+   key is for and allows for the public key and additional attributes
+   about the key to be included as well.  For illustration, the ASN.1
+   structure OneAsymmetricKey is replicated below.
+
+     OneAsymmetricKey ::= SEQUENCE {
+       version                  Version,
+       privateKeyAlgorithm      SEQUENCE {
+       algorithm                PUBLIC-KEY.&id({PublicKeySet}),
+       parameters               PUBLIC-KEY.&Params({PublicKeySet}
+                                  {@privateKeyAlgorithm.algorithm})
+                                     OPTIONAL}
+       privateKey               OCTET STRING (CONTAINING
+                                  PUBLIC-KEY.&PrivateKey({PublicKeySet}
+                                    {@privateKeyAlgorithm.algorithm})),
+       attributes           [0] Attributes OPTIONAL,
+       ...,
+       [[2: publicKey       [1] BIT STRING (CONTAINING
+                                  PUBLIC-KEY.&Params({PublicKeySet}
+                                    {@privateKeyAlgorithm.algorithm})
+                                    OPTIONAL,
+       ...
+     }
+
+      |  NOTE: The above syntax is from [RFC5958] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].
+
+   When used in a OneAsymmetricKey type, the privateKey OCTET STRING
+   contains the raw octet string encoding of the 32-octet seed.  The
+   publicKey field SHOULD be omitted because the public key can be
+   computed as noted earlier in this section.
+
+   Appendix C contains example ML-DSA private keys encoded using the
+   textual encoding defined in [RFC7468].
+
+7.  IANA Considerations
+
+   For the ASN.1 module in Appendix A, IANA is requested to assign an
+   object identifier (OID) for the module identifier (TBD1) with a
+   Description of "id-mod-x509-ml-dsa-2024".  The OID for the module
+   should be allocated in the "SMI Security for PKIX Module Identifier"
+   registry (1.3.6.1.5.5.7.0).
+
+8.  Implementation Considerations
+
+   An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative
+   format for a keypair, or for the private key.  In particular,
+   generating the seed in one cryptographic module and then importing or
+   exporting it into another cryptographic module is allowed.  The
+   internal key generation functions of ML-KEM.KeyGen_Internal(d, z)
+   [FIPS204] and ML-DSA.KeyGen_internal(xi) can be accessed for this
+   purpose.
+
+   Note also that unlike other private key compression methods in other
+   algorithms, expanding a private key from a seed is a one-way
+   function, meaning that once a full key is expanded from seed and the
+   seed discarded, the seed cannot be re-created even if the full
+   expanded private key is available.  For this reason it is RECOMMENDED
+   that implementations retain and export the seed, even when also
+   exporting the expanded key.  ML-DSA seed extraction can be
+   implemented by including the random seed xi generated at line 1 of
+   Algorithm 1 ML-DSA.KeyGen in the returned output.
+
+9.  Security Considerations
+
+   The Security Considerations section of [RFC5280] applies to this
+   specification as well.
+
+   The digital signature scheme defined within this document are modeled
+   under strongly existentially unforgeable under chosen message attack
+   (SUF-CMA).  For the purpose of estimating security strength, it has
+   been assumed that the attacker has access to signatures for no more
+   than 2^{64} chosen messages.
+
+   ML-DSA offers both deterministic and randomized signing.  By default
+   ML-DSA signatures are non-deterministic.  The private random seed
+   (rho') for the signature is pseudorandomly derived from the signer’s
+   private key, the message, and a 256-bit string, rnd - where rnd
+   should be generated by an approved RBG.  In the deterministic
+   version, rng is instead a 256-bit constant string.  The source of
+   randomness in the randomized mode has been "hedged" against sources
+   of poor entropy, by including the signers private key and message
+   into the derivation.  The primary purpose of rnd is to facilitate
+   countermeasures to side-channel attacks and fault attacks on
+   deterministic signatures.
+
+   In the design of ML-DSA, care has been taken to make side-channel
+   resilience easier to achieve.  For instance, ML-DSA does not depend
+   on Gaussian sampling.  Implementations must still take great care not
+   to leak information via various side channels.  While deliberate
+   design decisions such as these can help to deliver a greater ease of
+   secure implementation - particularly against side-channel attacks -
+   it does not necessarily provide resistance to more powerful attacks
+   such as differential power analysis.  Some amount of side-channel
+   leakage has been demonstrated in parts of the signing algorithm
+   (specifically the bit-unpacking function), from which a demonstration
+   of key recovery has been made over a large sample of signatures.
+   Masking countermeasures exist for ML-DSA, but come with a performance
+   overhead.
+
+   A fundamental security property also associated with digital
+   signatures is non-repudiation.  Non-repudiation refers to the
+   assurance that the owner of a signature key pair that was capable of
+   generating an existing signature corresponding to certain data cannot
+   convincingly deny having signed the data.  The digital signature
+   scheme ML-DSA possess three security properties beyond
+   unforgeability, that are associated with non-repudiation.  These are
+   exclusive ownership, message-bound signatures, and non-resignability.
+   These properties are based tightly on the assumed collision
+   resistance of the hash function used (in this case SHAKE-256).
+
+   Exclusive ownership is a property in which a signature sigma uniquely
+   determines the public key and message for which it is valid.
+   Message-bound signatures is the property that a valid signature
+   uniquely determines the message for which it is valid, but not
+   necessarily the public key.  Non-resignability is the property in
+   which one cannot produce a valid signature under another key given a
+   signature sigma for some unknown message m.  These properties are not
+   provided by classical signature schemes such as DSA or ECDSA, and
+   have led to a variety of attacks such as Duplicate-Signature Key
+   Selection (DSKS) attacks, and attacks on the protocols for secure
+   routing.  A full discussion of these properties in ML-DSA can be
+   found at [CDFFJ21].
+
+   These properties are dependent, in part, on unambiguous public key
+   serialization.  It for this reason the public key structure defined
+   in Section 4 is intentionally encoded as a single OCTET STRING.
+
+9.1.  Rationale for disallowing HashML-DSA
+
+   The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be
+   used; in other words, public keys identified by id-hash-ml-dsa-44-
+   with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
+   with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP,
+   certificate issuance and related PKIX protocols (e.g. TLS).  The use
+   of HashML-DSA public keys within end entity certificates is not
+   prohibited, but conventions for doing so are outside the scope of
+   this document.
+
+   This restriction is for both implementation and security reasons.
+
+   The implementation reason for disallowing HashML-DSA stems from the
+   fact that ML-DSA and HashML-DSA are incompatible algorithms that
+   require different Verify() routines.  This forwards to the protocol
+   the complexity of informing the client whether to use ML-DSA.Verify()
+   or HashML-DSA.Verify() along with the hash algorithm to use.
+   Additionally, since the same OIDs are used to identify the ML-DSA
+   public keys and ML-DSA signature algorithms, an implementation would
+   need to commit a given public key to be either of type ML-DSA or
+   HashML-DSA at the time of certificate creation.  This is anticipated
+   to cause operational issues in contexts where the operator does not
+   know at key generation time whether the key will need to produce pure
+   or pre-hashed signatures.  ExternalMu-ML-DSA avoids all of these
+   operational concerns by virtue of having keys and signatures that are
+   indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
+   mathematically equivalent algorithms).  The difference between ML-DSA
+   and ExternalMu-ML-DSA is merely an internal implementation detail of
+   the signer and has no impact on the verifier or network protocol.
+
+   The security reason for disallowing HashML-DSA is that the design of
+   the ML-DSA algorithm provides enhanced resistance against signature
+   collision attacks, compared with conventional RSA or ECDSA signature
+   algorithms.  Specifically, ML-DSA binds the hash of the public key tr
+   to the message to-be-signed prior to hashing, as described in line 6
+   of Algorithm 7 of [FIPS204].  In practice, this provides binding to
+   the indended verification public key, preventing some attacks that
+   would otherwise allow a signature to be successfully verified against
+   a non-intended public key.  Also, this unlikely, theoretical binding
+   means that in the unlikely discovery of a collision attack against
+   SHA-3, an attacker would have to perform a public-key-specific
+   collision search in order to find message pairs such that H(tr || m1)
+   = H(tr || m2) since a direct hash collision H(m1) = H(m2) will not
+   suffice.  HashML-DSA removes both of these enhanced security
+   properties.
+
+10.  References
+
+10.1.  Normative References
+
+   [FIPS204]  National Institute of Standards and Technology (NIST),
+              "Module-Lattice-based Digital Signature Standard", FIPS
+              PUB 204, August 2023, <https://csrc.nist.gov/projects/
+              post-quantum-cryptography>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
+              Wu, "Internet X.509 Public Key Infrastructure Certificate
+              Policy and Certification Practices Framework", RFC 3647,
+              DOI 10.17487/RFC3647, November 2003,
+              <https://www.rfc-editor.org/rfc/rfc3647>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
+
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5912>.
+
+   [RFC5958]  Turner, S., "Asymmetric Key Packages", RFC 5958,
+              DOI 10.17487/RFC5958, August 2010,
+              <https://www.rfc-editor.org/rfc/rfc5958>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [X680]     ITU-T, "Information Technology -- Abstract Syntax Notation
+              One (ASN.1): Specification of basic notation", ITU-T
+              Recommendation X.680, ISO/IEC 8824-1:2021, February 2021,
+              <https://www.itu.int/rec/T-REC-X.680>.
+
+   [X690]     ITU-T, "Information Technology -- Abstract Syntax Notation
+              One (ASN.1): ASN.1 encoding rules: Specification of Basic
+              Encoding Rules (BER), Canonical Encoding Rules (CER) and
+              Distinguished Encoding Rules (DER)", ITU-T
+              Recommendation X.690, ISO/IEC 8825-1:2021, February 2021,
+              <https://www.itu.int/rec/T-REC-X.690>.
+
+10.2.  Informative References
+
+   [CDFFJ21]  Cremers, C., Düzlü, S., Fiedler, R., Fischlin, M., and C.
+              Janson, "BUFFing signature schemes beyond unforgeability
+              and the case of post-quantum signatures", In Proceedings
+              of the 42nd IEEE Symposium on Security and Privacy , 2021,
+              <https://eprint.iacr.org/2020/1525.pdf>.
+
+   [Dilithium]
+              Bai, S., Ducas, L., Lepoint, T., Lyubashevsky, V.,
+              Schwabe, P., Seiler, G., and D. Stehlé, "CRYSTALS-
+              Dilithium Algorithm Specifications and Supporting
+              Documentation", 2021, <https://pq-
+              crystals.org/dilithium/data/dilithium-specification-
+              round3-20210208.pdf>.
+
+   [Fiat-Shamir]
+              Lyubashevsky, V., "Fiat-Shamir with aborts: Applications
+              to lattice and factoring-based signatures", International
+              Conference on the Theory and Application of Cryptology and
+              Information Security , 2009,
+              <https://www.iacr.org/archive/
+              asiacrypt2009/59120596/59120596.pdf>.
+
+   [NIST-PQC] National Institute of Standards and Technology (NIST),
+              "Post-Quantum Cryptography Project", 20 December 2016,
+              <https://csrc.nist.gov/Projects/post-quantum-
+              cryptography>.
+
+   [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
+              PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,
+              April 2015, <https://www.rfc-editor.org/rfc/rfc7468>.
+
+Appendix A.  ASN.1 Module
+
+   This appendix includes the ASN.1 module [X680] for the ML-DSA.  Note
+   that as per [RFC5280], certificates use the Distinguished Encoding
+   Rules; see [X690].  This module imports objects from [RFC5912].
+
+   <CODE BEGINS>
+   X509-ML-DSA-2025
+   { iso(1) identified-organization(3) dod(6)
+     internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
+     id-mod-x509-ml-dsa-2025(TBD1) }
+
+   DEFINITIONS IMPLICIT TAGS ::= BEGIN
+
+   EXPORTS ALL;
+
+   IMPORTS
+
+    PUBLIC-KEY, SIGNATURE-ALGORITHM
+      FROM AlgorithmInformation-2009  -- [RFC 5912]
+        { iso(1) identified-organization(3) dod(6) internet(1)
+          security(5) mechanisms(5) pkix(7) id-mod(0)
+          id-mod-algorithmInformation-02(58) } ;
+
+   --
+   -- ML-DSA Identifiers
+   --
+
+   nistAlgorithms OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+     country(16) us(840) organization(1) gov(101) csor(3)
+     nistAlgorithms(4) }
+
+   sigAlgs OBJECT IDENTIFIER ::= { nistAlgorithms 3 }
+
+   id-ml-dsa-44 OBJECT IDENTIFIER ::= { sigAlgs 17 }
+
+   id-ml-dsa-65 OBJECT IDENTIFIER ::= { sigAlgs 18 }
+
+   id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
+
+   --
+   -- Public Key Algorithms
+   --
+
+   PublicKeys PUBLIC-KEY ::= {
+     -- This expands PublicKeys from [RFC 5912]
+     pk-ml-dsa-44 |
+     pk-ml-dsa-65 |
+     pk-ml-dsa-87,
+     ...
+   }
+
+   --
+   -- ML-DSA Public Keys
+   --
+
+   pk-ml-dsa-44 PUBLIC-KEY ::= {
+     IDENTIFIER id-ml-dsa-44
+     -- KEY no ASN.1 wrapping; 1312 octets --
+     PARAMS ARE absent
+     CERT-KEY-USAGE { digitalSignature, nonRepudiation,
+                      keyCertSign, cRLSign }
+     PRIVATE-KEY ML-DSA-44-PrivateKey
+     }
+
+   ML-DSA-44-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (2560)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (2560))
+         }
+     }
+
+   pk-ml-dsa-65 PUBLIC-KEY ::= {
+     IDENTIFIER id-ml-dsa-65
+     -- KEY no ASN.1 wrapping; 1952 octets --
+     PARAMS ARE absent
+     CERT-KEY-USAGE { digitalSignature, nonRepudiation,
+                      keyCertSign, cRLSign }
+     PRIVATE-KEY ML-DSA-65-PrivateKey
+     }
+
+   ML-DSA-65-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (4032)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (4032))
+         }
+     }
+
+   pk-ml-dsa-87 PUBLIC-KEY ::= {
+     IDENTIFIER id-ml-dsa-87
+     -- KEY no ASN.1 wrapping; 2592 octets --
+     PARAMS ARE absent
+     CERT-KEY-USAGE { digitalSignature, nonRepudiation,
+                       keyCertSign, cRLSign }
+     PRIVATE-KEY ML-DSA-87-PrivateKey
+     }
+
+   ML-DSA-87-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (4896)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (4896))
+         }
+     }
+
+   ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
+
+   ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
+
+   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2602))
+
+   --
+   -- Signature Algorithms
+   --
+
+   SignatureAlgorithms SIGNATURE-ALGORITHM ::= {
+     -- This expands SignatureAlgorithms from [RFC 5912]
+     sa-ml-dsa-44 |
+     sa-ml-dsa-65 |
+     sa-ml-dsa-87,
+     ... }
+
+   --
+   -- ML-DSA Signature Algorithm Identifiers
+   --
+
+   sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-44
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-44 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 }
+     }
+
+   sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-65
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-65 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 }
+     }
+
+   sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-87
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-87 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 }
+     }
+
+   END
+   <CODE ENDS>
+
+Appendix B.  Security Strengths
+
+   Instead of defining the strength of a quantum algorithm in a
+   traditional manner using the imprecise notion of bits of security,
+   NIST has instead elected to define security levels by picking a
+   reference scheme, which NIST expects to offer notable levels of
+   resistance to both quantum and classical attack.  To wit, an
+   algorithm that achieves NIST PQC security level 1 must require
+   computational resources to break the relevant security property,
+   which are greater than those required for a brute-force key search on
+   AES-128.  Levels 3 and 5 use AES-192 and AES-256 as reference
+   respectively.  Levels 2 and 4 use collision search for SHA-256 and
+   SHA-384 as reference.
+
+   The parameter sets defined for NIST security levels 2, 3 and 5 are
+   listed in the Figure 1, along with the resulting signature size,
+   public key, and private key sizes in bytes.  Note that these are the
+   sizes of the plain private and public keys; and not the sizes of the
+   resultant OneAsymmetricKey and SubjectPublicKeyInfo objects in which
+   they are wrapped.
+
+   |=======+=======+=====+========+========+========|
+   | Level | (k,l) | eta |  Sig.  | Public | Private|
+   |       |       |     |  (B)   | Key(B) | Key(B) |
+   |=======+=======+=====+========+========+========|
+   |   2   | (4,4) |  2  |  2420  |  1312  |  32    |
+   |   3   | (6,5) |  4  |  3309  |  1952  |  32    |
+   |   5   | (8,7) |  2  |  4627  |  2592  |  32    |
+   |=======+=======+=====+========+========+========|
+
+                        Figure 1: ML-DSA Parameters
+
+Appendix C.  Examples
+
+   This appendix contains examples of ML-DSA public keys, private keys
+   and certificates.
+
+C.1.  Example Private Key
+
+   The following is an example of a ML-DSA-44 private key with hex seed
+   000102…1e1f:
+
+   -----BEGIN PRIVATE KEY-----
+   MDICAQAwCwYJYIZIAWUDBAMRBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
+   HB0eHw==
+   -----END PRIVATE KEY-----
+
+   SEQUENCE {
+     INTEGER { 0 }
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.17 }
+     }
+     OCTET_STRING { `000102030405060708090a0b0c0d0e0f10111213141516
+   1718191a1b1c1d1e1f` }
+   }
+
+   The following is an example of a ML-DSA-65 private key with hex seed
+   000102…1e1f:
+
+   -----BEGIN PRIVATE KEY-----
+   MDICAQAwCwYJYIZIAWUDBAMSBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
+   HB0eHw==
+   -----END PRIVATE KEY-----
+
+   SEQUENCE {
+     INTEGER { 0 }
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.18 }
+     }
+     OCTET_STRING { `000102030405060708090a0b0c0d0e0f10111213141516
+   1718191a1b1c1d1e1f` }
+   }
+
+   The following is an example of a ML-DSA-87 private key with hex seed
+   000102…1e1f:
+
+   -----BEGIN PRIVATE KEY-----
+   MDICAQAwCwYJYIZIAWUDBAMTBCAAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRob
+   HB0eHw==
+   -----END PRIVATE KEY-----
+
+   SEQUENCE {
+     INTEGER { 0 }
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.19 }
+     }
+     OCTET_STRING { `000102030405060708090a0b0c0d0e0f10111213141516
+   1718191a1b1c1d1e1f` }
+   }
+
+   NOTE: The private key is the seed and all three examples keys use the
+   same seed; therefore, the private above are the same except for the
+   OID used to represent the ML-DSA algorithm's security strength.
+
+C.2.  Example Public Key
+
+   The following is the ML-DSA-44 public key corresponding to the
+   private key in the previous section.
+
+   -----BEGIN PUBLIC KEY-----
+   MIIFMjALBglghkgBZQMEAxEDggUhANeytHJUquDbReeTDUqY0sl9jxOX0Xidr6Fw
+   JLMW6b7JT8mUbULxm3mnQTu6oz5xSctC7VEVaTrAQfrLmIretf4OHYYxGEmVtZLD
+   l9IpTi4U+QqkFLo4JomaxD9MzKy8JumoMrlRGNXLQzy++WYLABOOCBf2HnYsonTD
+   atVU6yKqwRYuSrAay6HjjE79j4C2WzM9D3LlXf5xzpweu5iJ58VhBsD9c4A6Kuz+
+   r97XqjyyztpU0SvYzTanjPl1lDtHq9JeiArEUuV0LtHo0agq+oblkMdYwVrk0oQN
+   kryhpQkPQElll/yn2LlRPxob2m6VCqqY3kZ1B9Sk9aTwWZIWWCw1cvYu2okFqzWB
+   ZwxKAnd6M+DKcpX9j0/20aCjp2g9ZfX19/xg2gI+gmxfkhRMAvfRuhB1mHVT6pNn
+   /NdtmQt/qZzUWv24g21D5Fn1GH3wWEeXCaAepoNZNfpwRgmQzT3BukAbqUurHd5B
+   rGerMxncrKBgSNTE7vJ+4TqcF9BTj0MPLWQtwkFWYN54h32NirxyUjl4wELkKF9D
+   GYRsRBJiQpdoRMEOVWuiFbWnGeWdDGsqltOYWQcf3MLN51JKe+2uVOhbMY6FTo/i
+   svPt+slxkSgnCq/R5QRMOk/a/Z/zH5B4S46ORZYUSg2vWGUR09mWK56pWvGXtOX8
+   YPKx7RXeOlvvX4m9x52RBR2bKBbnT6VFMe/cHL501EiFf0drzVjyHAtlOzt2pOB2
+   plWaMCcYVVzGP3SFmqurkl8COGHKjND3utsocfZ9VTJtdFETWtRfShumkRj7ssij
+   DuyTku8/l3Bmya3VxxDMZHsVFNIX2VjHAXw+kP0gwE5nS5BIbpNwoxoAHTL0c5ee
+   SQZ0nn5Hf6C3RQj4pfI3gxK4PCW9OIygsP/3R4uvQrcWZ+2qyXxGsSlkPlhuWwVa
+   DCEZRtTzbmdb7Vhg+gQqMV2YJhZNapI3w1pfv0lUkKW9TfJIuVxKrneEtgVnMWas
+   QkW1tLCCoJ6TI+YvIHjFt2eDRG3v1zatOjcC1JsImESQCmGDM5e8RBmzDXqXoLOH
+   wZEUdMTUG1PjKpd6y28Op122W7OeWecB52lX3vby1EVZwxp3EitSBOO1whnxaIsU
+   7QvAuAGz5ugtzUPpwOn0F0TNmBW9G8iCDYuxI/BPrNGxtoXdWisbjbvz7ZM2cPCV
+   oYC08ZLQixC4+rvfzCskUY4y7qCl4MkEyoRHgAg/OwzS0Li2r2e8NVuUlAJdx7Cn
+   j6gOOi2/61EyiFHWB4GY6Uk2Ua54fsAlH5Irow6fUd9iptcnhM890gU5MXbfoySl
+   Er2Ulwo23TSlFKhnkfDrNvAUWwmrZGUbSgMTsplhGiocSIkWJ1mHaKMRQGC6RENI
+   bfUVIqHOiLMJhcIW+ObtF43VZ7MEoNTK+6iCooNC8XqaomrljbYwCD0sNY/fVmw/
+   XWKkKFZ7yeqM6VyqDzVHSwv6jzOaJQq0388gg76O77wQVeGP4VNw7ssmBWbYP/Br
+   IRquxDyim1TM0A+IFaJGXvC0ZRXMfkHzEk8J7/9zkwmrWLKaFFmgC85QOOk4yWeP
+   cusOTuX9quZtn4Vz/Jf8QrSVn0v4th14Qz6GsDNdbpGRxNi/SHs5BcEIz9asJLDO
+   t9y3z1H4TQ7Wh7lerrHFM8BvDZcCPZKnCCWDe1m6bLfU5WsKh8IDhiro8xW6WSXo
+   7e+meTaaIgJ2YVHxapZfn4Hs52zAcLVYaeTbl4TPBcgwsyQsgxI=
+   -----END PUBLIC KEY-----
+
+   SEQUENCE {
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.17 }
+     }
+     BIT_STRING { `00` `d7b2b47254aae0db45e7930d4a98d2c97d8f1397d17
+   89dafa17024b316e9bec94fc9946d42f19b79a7413bbaa33e7149cb42ed51156
+   93ac041facb988adeb5fe0e1d8631184995b592c397d2294e2e14f90aa414ba3
+   826899ac43f4cccacbc26e9a832b95118d5cb433cbef9660b00138e0817f61e7
+   62ca274c36ad554eb22aac1162e4ab01acba1e38c4efd8f80b65b333d0f72e55
+   dfe71ce9c1ebb9889e7c56106c0fd73803a2aecfeafded7aa3cb2ceda54d12bd
+   8cd36a78cf975943b47abd25e880ac452e5742ed1e8d1a82afa86e590c758c15
+   ae4d2840d92bca1a5090f40496597fca7d8b9513f1a1bda6e950aaa98de46750
+   7d4a4f5a4f0599216582c3572f62eda8905ab3581670c4a02777a33e0ca7295f
+   d8f4ff6d1a0a3a7683d65f5f5f7fc60da023e826c5f92144c02f7d1ba1075987
+   553ea9367fcd76d990b7fa99cd45afdb8836d43e459f5187df058479709a01ea
+   6835935fa70460990cd3dc1ba401ba94bab1dde41ac67ab3319dcaca06048d4c
+   4eef27ee13a9c17d0538f430f2d642dc2415660de78877d8d8abc72523978c04
+   2e4285f4319846c44126242976844c10e556ba215b5a719e59d0c6b2a96d3985
+   9071fdcc2cde7524a7bedae54e85b318e854e8fe2b2f3edfac9719128270aafd
+   1e5044c3a4fdafd9ff31f90784b8e8e4596144a0daf586511d3d9962b9ea95af
+   197b4e5fc60f2b1ed15de3a5bef5f89bdc79d91051d9b2816e74fa54531efdc1
+   cbe74d448857f476bcd58f21c0b653b3b76a4e076a6559a302718555cc63f748
+   59aabab925f023861ca8cd0f7badb2871f67d55326d7451135ad45f4a1ba6911
+   8fbb2c8a30eec9392ef3f977066c9add5c710cc647b1514d217d958c7017c3e9
+   0fd20c04e674b90486e9370a31a001d32f473979e4906749e7e477fa0b74508f
+   8a5f2378312b83c25bd388ca0b0fff7478baf42b71667edaac97c46b129643e5
+   86e5b055a0c211946d4f36e675bed5860fa042a315d9826164d6a9237c35a5fb
+   f495490a5bd4df248b95c4aae7784b605673166ac4245b5b4b082a09e9323e62
+   f2078c5b76783446defd736ad3a3702d49b089844900a61833397bc4419b30d7
+   a97a0b387c1911474c4d41b53e32a977acb6f0ea75db65bb39e59e701e76957d
+   ef6f2d44559c31a77122b5204e3b5c219f1688b14ed0bc0b801b3e6e82dcd43e
+   9c0e9f41744cd9815bd1bc8820d8bb123f04facd1b1b685dd5a2b1b8dbbf3ed9
+   33670f095a180b4f192d08b10b8fabbdfcc2b24518e32eea0a5e0c904ca84478
+   0083f3b0cd2d0b8b6af67bc355b9494025dc7b0a78fa80e3a2dbfeb51328851d
+   6078198e9493651ae787ec0251f922ba30e9f51df62a6d72784cf3dd20539317
+   6dfa324a512bd94970a36dd34a514a86791f0eb36f0145b09ab64651b4a0313b
+   299611a2a1c48891627598768a3114060ba4443486df51522a1ce88b30985c21
+   6f8e6ed178dd567b304a0d4cafba882a28342f17a9aa26ae58db630083d2c358
+   fdf566c3f5d62a428567bc9ea8ce95caa0f35474b0bfa8f339a250ab4dfcf208
+   3be8eefbc1055e18fe15370eecb260566d83ff06b211aaec43ca29b54ccd00f8
+   815a2465ef0b46515cc7e41f3124f09efff739309ab58b29a1459a00bce5038e
+   938c9678f72eb0e4ee5fdaae66d9f8573fc97fc42b4959f4bf8b61d78433e86b
+   0335d6e9191c4d8bf487b3905c108cfd6ac24b0ceb7dcb7cf51f84d0ed687b95
+   eaeb1c533c06f0d97023d92a70825837b59ba6cb7d4e56b0a87c203862ae8f31
+   5ba5925e8edefa679369a2202766151f16a965f9f81ece76cc070b55869e4db9
+   784cf05c830b3242c8312` }
+   }
+
+   The following is the ML-DSA-65 public key corresponding to the
+   private key in the previous section.
+
+   -----BEGIN PUBLIC KEY-----
+   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
+   HgLy6ERP
+   -----END PUBLIC KEY-----
+
+   SEQUENCE {
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.18 }
+     }
+     BIT_STRING { `00` `48683d91978e31eb3dddb8b0473482d2b88a5f62594
+   9fd8f58a561e696bd4c27d05b38dbb2edf01e664efd81be1ea893688ce68aa2d
+   51c5958f8bbc6eb4e89ee67d2c0320954d57212cac7229ff1d6eaf03928bd515
+   11f8d88d847736c7de2730d5978e5410713160978867711bf5539a0bfc4c350c
+   2be572baf0ee2e2fb16ccfea08028d99ac49aebb75937ddce111cdab62fff3ce
+   a8ba2233d1e56fbc5c5a1e726de63fadd2af016b119177fa3d971a2d9277173f
+   ce55b67745af0b7c21d597dbeb93e6a32f341c49a5a8be9e825088d1f2aa4515
+   5d6c8ae15367e4eb003b8fdf7851071949739f9fff09023eaf45104d2a84a459
+   06eed4671a44dc28d27987bb55df69e9e8561f61a80a72699503865fed9b7ee7
+   2a8e17a19c408144f4b29afef7031c3a6d8571610b42c9f421245a88f197e168
+   12b031159b65b9687e5b3e934c5225ae98a79ba73d2b399d73510effad19e53b
+   8450f0ba8fce1012fd98d260a74aaaa13fae249a006b1c34f5ba0b882f263782
+   22fb36f2283c243f0ffeb5f1bb414a0a70d55e3d40a56b6cbc88ae1f03b7b288
+   2d98deea28e145c9dedfd8eaf1cef2ed94a8b050f8964f46d1ea0d0c2a43e0dd
+   a6182adbf4f6ed175b6742257859bf22f3a417ecf1f9d89317b5e539d587af16
+   b9e1313e04514ffa64ba8b3ff2b8321f8811cb3fb022c8f644e70a4b80a2fbfe
+   e604abb7379091ea8e6c5c74dfc0283666b40c0793870028204a136bf5da9568
+   eb798d349038bdb0c11e03445e7847cb5069c75cf28ac601c7799d958210ddbc
+   b226e51afef9f1de47b073873d6d3f97456bede085082e74a298b2cd48f4b309
+   3155f366c8fa601c6af858dfa32c08491b2a29887f90335949a5d6edaa679882
+   a3a95d6bf6d970a221f4b9d3d8cbf384af81aac95e2b3294e04789ac83727a5d
+   c04559f96af41d8a053516feeeebc52746eb6ab2819e09108710d835f011fa63
+   065872ad334d5cdffb2b2310507e92fc993ae317da97f4f309cdaf0f67ed99d9
+   0215576083849f953b246d7fedb3fdb67679850a5ad404e64147fb7cf4f6aedd
+   d05afb4b834968d1fe88014960dce5d942236526e12a478d69e5fbe6970310b3
+   08c06845018cfc7b2ab430a13a6b1ac7bb02cccbb3d911ac2f11068613fbe029
+   bfdce02cf5cd38950ed72c83944edfbc75615af87f864c051f3c55456c541286
+   3a40c06d1dab562bdff0571b8d3c3917bbd300880bba5e998239b95fa91b7d64
+   16d4f398b3adbcd30983ed3592b4d9ef7d4236fd00f50d98aa53a235ac417272
+   0f77d96172672980cfe8ff7a5a702783edc2ba31b2259015a112fc7f468a9c2f
+   9464039002d30ef678b4cb798bc116216bf7a9a7c18ba03b7b58fd07515d3115
+   049d3614be7a07e744300750df1d2c58753389059eafc3d785ccdd31c07648be
+   dc03a5c3b8ad46d064d59c13d57374729fc4e295362e2a5191204530428bc152
+   2afa28ff5fe1655e304ca5bc8c27ad0e0c6a39dd4df28956c14b38cc93682cef
+   e402bbd5e82d29c464e44eb5d37b48fc568dfe0cc6e8e16baea05e5135590f19
+   294e73e8367b0216dbb815030b9de55913f08039c42351c59e5515dd5af8e089
+   a15e625e8f6dee639386c46497d7a263288774de581a7de9629b41b4424141f9
+   78fb8331208efdec3c6e0de39bc57063f3dcd6c470373c08891ea29cbc7cc6d6
+   483b8889083ace86aa7b51b1c2cfe6e2ad18d97ce36fbc56ea42fae97e6a7ac1
+   14864478c366df1ebb1e7b11a9098504fd5975bdf1f49dc70002b63c1739a9d2
+   63fbad4073f6a9f6c2b8af4b4c332a103a0cffa5deeb2d062ca3c215fd360026
+   be7c5164f4a4424ef74948804d66f46487732c8202c795478647b4ea71d627c0
+   86024cca354a41f0877b38f19b3774ad2095c8da53b069e21c76ae2d2007e167
+   19ed40080d334f7da52e9f5a5990439caf083a95b833f02ad10a08c1a6d0f260
+   c007285bd4a2f47703a5aef465287d253b18ac22514316210ff566814b10f87a
+   293d6f199d3c3959990d0c1268b4f50d5f9fcefbbf237bd0c28b80182d665974
+   1f14f10bfbb21bba12ab620aa2396f56c0686b4ea9017990224216b2fe8ad76c
+   4a9148eef9a86a3635a6aa77bc1dcfb6fba59a77dfda9b7530dc0ca8648c8d97
+   3738e01bab8f08b4905e84aa4641bd602410cd97520265f2f231f2b35e15eb2f
+   a04d2bd94d5a77abaf1e0e161010a990087f5b46ea988b2bc0512fda0fa923da
+   dd6c45c5301d09483673265b5ab2e10f4ba520f6bbad564a5c3d5e27bdb080f7
+   d20e13296a3181954c39c649c943ebe17df5c1f7aae0a8fe126c477585a5d4d6
+   48a0d008b6af5e8cd31be69a9296d4f3fd25ed86f221e4b93f65f59299675336
+   24b9235750c30707550b58536d109a7131c5a5bbe4a5715567c12534aec76607
+   61eebb9fae2891c774589b80e566ad557ddef7367196b7227ea9870ef09ddfec
+   79d6b9319a6879b5205d76bf7aba5acf33afb59d17fc54e68383d6be5a08e9b6
+   6da53dcde008bb294b8582bd132cdcc49959fdbc21e52721880c8ad0352c79f0
+   3a43bbd84c4cdfdc6c529005e1e7cd9a349a7168a35569ba5dea818968d5a914
+   66bd6e64e20bf62417198afc4e81c28dd77ed4028232398b52fbde86bc84f475
+   b9016710ce2aabc11a06b4dbac901ec16cf365ca3f2d53813948a693a0f93e79
+   c46ca5d5a6dca3d28ca50ad18bd13fca55059dd9b185f79f9c47196a4e81b210
+   4bc460a051e02f2e8444f` }
+   }
+
+   The following is the ML-DSA-87 public key corresponding to the
+   private key in the previous section.
+
+   -----BEGIN PUBLIC KEY-----
+   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
+   5VvgYiIvi6kKl0BzMmsxISrs4KNKYA==
+   -----END PUBLIC KEY-----
+
+   SEQUENCE {
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.19 }
+     }
+     BIT_STRING { `00` `9792bcec2f2430686a82fccf3c2f5ff665e771d7ab4
+   1b90258cfa7e90ec97124a73b323b9ba21ab64d767c433f5a521effe18f86e46
+   a188952c4467e048b729e7fc4d115e7e48da1896d5fe119b10dcddef62cb3079
+   54074b42336e52836de61da941f8d37ea68ac8106fabe19070679af600853712
+   0f70793b8ea9cc0e6e7b7b4c9a5c7421c60f24451ba1e933db1a2ee16c79559f
+   21b3d1b8305850aa42afbb13f1f4d5b9f4835f9d87dfceb162d0ef4a7fdc4cba
+   1743cd1c87bb4967da16cc8764b6569df8ee5bdcbffe9a4e05748e6fdf225af9
+   e4eeb7773b62e8f85f9b56b548945551844fbd89806a4ac369bed2d256100f68
+   8a6ad5e0a709826dc4449e91e23c5506e642361ef5a313712f79bc4b3186861c
+   a85a4bab17e7f943d1b8a333aa3ae7ce16b440d6018f9e04daf5725c7f1a93fa
+   d1a5a27b67895bd249aa91685de20af32c8b7e268c7f96877d0c85001135a4f0
+   a8f1b8264fa6ebe5a349d8aecad1a16299ccf2fd9c7b85bace2ced3aa1276ba6
+   1ee78ed7e5ca5b67cdd458a9354030e6abbbabf56a0a2316fec9dba83b51d42f
+   d3167f1e0f90855d5c66509b210265dc1e54ec44b43ba7cf9aef118b44d80912
+   ce75166a6651e116cebe49229a7062c09931f71abd2293f76f7efc3215ba9780
+   0037e58e470bdbbb43c1b0439eaf79c54d93b44aac9efe9fbe151874cfb2a64c
+   bee28cc4c0fe7775e5d870f1c02e5b2e3c5004c995f24c9b779cb753a277d0e7
+   1fd425eb6bc2ca56ce129db51f70740f31e63976b50c7312e9797d78c5b1ac24
+   a5fa347cc916e0a83f5c3b675cd30b81e3fa10b93444e07397571cce98b28da5
+   1db9056bc728c5b0b1181e2fbd387b4c79ab1a5fefece37167af772ddad14eb4
+   c3982da5a59d0e9eb173ec6315091170027a3ab5ef6aa129cb8585727b9358a2
+   8501d713a72f3f1db31714286f9b6408013af06045d75592fc0b7dd47c73ed9c
+   75b11e9d7c69f7cadfc3280a9062c5273c43be1c34f87448864cea7b5c97d6d3
+   2f59bd5f25384653bb5c4faa45bea8b89402843e645b6b9269e2bd988ddacb03
+   3328ffb060450f7df080053e6969b251e875ecec32cfc592840d69ab69a75e06
+   b379c535d95266b082f4f09c93162b33b0d9f7307a4eaaa52104437fed66f8ee
+   3eabbd45d67b25a8133f496468b52baffdbfad93eef1a9818b5e42ec722788a3
+   d8d3529fc777d2ba570801dfae01ec88302837c1fb9e0355727645ee1046c3f9
+   15f6ae82dad4fb6b0356a46518ffc834155c3b4fe6dafa6cc8a5ccf53c73a084
+   9d8d44f7dcf72754e70e1b7dfb447bb4ef49d1a718f6171bbce200950e0ce926
+   106b151a3e871d5ce49731bd6650a9b0ca972da1c5f136d44820ea6383c08f3b
+   384cf2338e789c513f618cc5694a6f0cee104511e1ed7c5f23a1ebfd8a0db842
+   4553240156dbf622831b0c643d1c551b6f3f7a98d29b85c2de05a65fa615eee1
+   6495bd90737672115b53e91c5d90028cf3f1a93953a153de53b44084e9ccff6b
+   736693926daefebb2d77aa5ad689b92f31686669df16d1715cc58f7a2cfb72dd
+   1a51e92f825993a74022be7e9eb6054654457094d14928f20215e7b222ac56b5
+   1adbec8d8bdb6983979a7e3a21b44b5d1518ca97d0b5195f51ed6a24350c8974
+   7e1edea51b448e3e9147054ce927873c90db394d86888e07dff177593d6f79e1
+   52302204aeb03be2386af3e24078bd028b1689f5e147c9f452c8ceb02ec59cc9
+   db63a03576ceeafe98239023897da0236630a53c0de7f435a19869792fab36e7
+   b9e635760f09069e6432e700035ac2a02879fff0a1e1bec522047193d94eb5df
+   1efd53eea1144ca78940852f5ec9727904b366ede4f5e2d331fad5fc282ea2c4
+   7e923142771c3dd75a87357487def99e5f18e9d9ed623c175d02888c51f82c07
+   a80d54716b3c3c2bdbe2e9f0a9bbaaebeb4d52936876406f5c00e8e4bbd0a5ec
+   05797e6207c5ab6c88f1a688421bd05a114f4d7de2ac241fa0e8bedff47f762d
+   dcbeaa91004f8d31e85095c81054994ad3826e344ba96040810fc0b2ad1de48c
+   fade002c62e5a49a0731ab38344bc1636df16bf607d56855e56d684003c718e4
+   bad9e5a099979fcddeeb1c4a7776cd37a3417cb0e184e29ef9bc0e87475ba663
+   be09e00ab562eb7c0f7165f969a9b42414198ccf1bff2a2c8d689a414ece7662
+   927665689e94db961ebaec5615cbc1a7895c6851ac961432ff1118d4607d32ef
+   9dc732d51333be4b4d0e30ddea784eca8be47e741be9c19631dc470a52ef4dc1
+   3a4f3633fd434d787c170977b417df598e1d0dde506bb71d6f0bc17ec70e3b03
+   cdc1965cb36993f633b0472e50d0923ac6c66fdf1d3e6459cc121f0f5f94d09e
+   9dbcf5d690e23233838a0bacb7c638d1b2650a4308cd171b6855126d1da672a6
+   ed85a8d78c286fb56f4ab3d21497528045c63262c8a42af2f9802c53b7bb8be2
+   8e78fe0b5ce45fbb7a1af1a3b28a8d94b7890e3c882e39bc98e9f0ad76025bf0
+   dd2f00298e7141a226b3d7cee414f604d1e0ba54d11d5fe58bccea6ad77ad2e8
+   c1caacf32459014b7b91001b1efa8ad172a523fb8e365b577121bf9fd88a2c60
+   c21e821d7b6acb47a5a995e40caced5c223b8fe6de5e18e9d2e5893aefebb7aa
+   e7ff1a146260e2f110e939528213a0025a38ec79aabc861b25ebc509a4674c13
+   2aaacb7e0146f14efd11cfcaf4caa4f775a716ce325e0a435a4d349d720bcf13
+   7450afc45046fc1a1f83a9d329777a7084e4aadae7122ce97005930528eb3c7f
+   7f1129b372887a371155a3ba201a25cbf1dcb64e7cdee092c3141fb5550fe3d0
+   dd82e870e578b2b46500818113b8f6569773c677385b69a42b77dcba7acffd95
+   fd4452e23aaa1d37e1da2151ea658d40a3596b27ac9f8129dc6cf0643772624b
+   59f4f461230df471ca26087c3942d5c6687df6082835935a3f87cb762b0c3b1d
+   0dda4a6533965bef1b7b8292e254c014d090fed857c44c1839c694c0a64e3fad
+   90a11f534722b6ee1574f2e149d55d744de4887024e08511431c062750e16c74
+   ab9f3242f2db3ffb12a8d6107faa229d6f6373b07f36d3932b3bdb04c19dd64e
+   add7f93c3c564c358a1c81dcf1c9c31e5b06568f97544c17dc15698c5cb38983
+   a9afc42783faa773a52c9d8260690be9e3156aa5bc1509dea3f69587695cd6ff
+   172ba83e6a6d8a7d6bbebbbcda3672731983f89bc5831dc37c3f3c5c56facc69
+   7f3cb20bd5dbadbd702e54844ac2f626901fe159db93dfd4773d8fe73562b846
+   c1fc856d1802762840ebc72d7988bde75cbca70d319d32ce0cc0253bb2ad4557
+   23ee0c7f4736ce6e6665c5aca32a481c53839bc259167b013d0423395eeb9aaa
+   ee3206149a7d550d67fc5fdfe4a8a5c35d2510b664379ab8f72855a2af47abce
+   2a632048eaf89e5cb4a88debc53a595103acce4f1cff18acff07afe1eb5716aa
+   1e40b63134c3a3ae9579fa87f515be093c2d29db6d6b65c93661e00636b59270
+   4d093cc6716c2342eb1853d48c85c63ac8a2854462c7b77e7e3bd1eac5bca28f
+   faa00b5d349f8a547ad875b96a8c2b2910c9301309a3f9138a5693111f55b3c0
+   09ca947c39dfc82d98eb1caa4a9cbe885f786fa86e55be062222f8ba90a97407
+   3326b31212aece0a34a60` }
+   }
+
+C.3.  Example Certificates
+
+      |  The example certificates in this section have key usage bits
+      |  set to digitalSignature, keyCertSign, and cRLSign to lessen the
+      |  number of examples, i.e., brevity.  Certificate Policies (CPs)
+      |  [RFC3647] for production CAs should consider whether this
+      |  combination is appropriate.
+
+   The following is a self-signed certificate for the ML-DSA-44 public
+   key in the previous section.
+
+   -----BEGIN CERTIFICATE-----
+   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
+   AAAAABcmOEM=
+   -----END CERTIFICATE-----
+
+   SEQUENCE {
+     SEQUENCE {
+       [0] {
+         INTEGER { 2 }
+       }
+       INTEGER { `159ffe6f22fd5cc42c524df6fd5e28d0de38f34e` }
+       SEQUENCE {
+         OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.17 }
+       }
+       SEQUENCE {
+         SET {
+           SEQUENCE {
+             # organizationName
+             OBJECT_IDENTIFIER { 2.5.4.10 }
+             PrintableString { "IETF" }
+           }
+         }
+         SET {
+           SEQUENCE {
+             # commonName
+             OBJECT_IDENTIFIER { 2.5.4.3 }
+             PrintableString { "LAMPS WG" }
+           }
+         }
+       }
+       SEQUENCE {
+         UTCTime { "200203043210Z" }
+         UTCTime { "400129043210Z" }
+       }
+       SEQUENCE {
+         SET {
+           SEQUENCE {
+             # organizationName
+             OBJECT_IDENTIFIER { 2.5.4.10 }
+             PrintableString { "IETF" }
+           }
+         }
+         SET {
+           SEQUENCE {
+             # commonName
+             OBJECT_IDENTIFIER { 2.5.4.3 }
+             PrintableString { "LAMPS WG" }
+           }
+         }
+       }
+       SEQUENCE {
+         SEQUENCE {
+           OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.17 }
+         }
+         BIT_STRING { `00` `d7b2b47254aae0db45e7930d4a98d2c97d8f139
+   7d1789dafa17024b316e9bec94fc9946d42f19b79a7413bbaa33e7149cb42ed5
+   115693ac041facb988adeb5fe0e1d8631184995b592c397d2294e2e14f90aa41
+   4ba3826899ac43f4cccacbc26e9a832b95118d5cb433cbef9660b00138e0817f
+   61e762ca274c36ad554eb22aac1162e4ab01acba1e38c4efd8f80b65b333d0f7
+   2e55dfe71ce9c1ebb9889e7c56106c0fd73803a2aecfeafded7aa3cb2ceda54d
+   12bd8cd36a78cf975943b47abd25e880ac452e5742ed1e8d1a82afa86e590c75
+   8c15ae4d2840d92bca1a5090f40496597fca7d8b9513f1a1bda6e950aaa98de4
+   67507d4a4f5a4f0599216582c3572f62eda8905ab3581670c4a02777a33e0ca7
+   295fd8f4ff6d1a0a3a7683d65f5f5f7fc60da023e826c5f92144c02f7d1ba107
+   5987553ea9367fcd76d990b7fa99cd45afdb8836d43e459f5187df058479709a
+   01ea6835935fa70460990cd3dc1ba401ba94bab1dde41ac67ab3319dcaca0604
+   8d4c4eef27ee13a9c17d0538f430f2d642dc2415660de78877d8d8abc7252397
+   8c042e4285f4319846c44126242976844c10e556ba215b5a719e59d0c6b2a96d
+   39859071fdcc2cde7524a7bedae54e85b318e854e8fe2b2f3edfac9719128270
+   aafd1e5044c3a4fdafd9ff31f90784b8e8e4596144a0daf586511d3d9962b9ea
+   95af197b4e5fc60f2b1ed15de3a5bef5f89bdc79d91051d9b2816e74fa54531e
+   fdc1cbe74d448857f476bcd58f21c0b653b3b76a4e076a6559a302718555cc63
+   f74859aabab925f023861ca8cd0f7badb2871f67d55326d7451135ad45f4a1ba
+   69118fbb2c8a30eec9392ef3f977066c9add5c710cc647b1514d217d958c7017
+   c3e90fd20c04e674b90486e9370a31a001d32f473979e4906749e7e477fa0b74
+   508f8a5f2378312b83c25bd388ca0b0fff7478baf42b71667edaac97c46b1296
+   43e586e5b055a0c211946d4f36e675bed5860fa042a315d9826164d6a9237c35
+   a5fbf495490a5bd4df248b95c4aae7784b605673166ac4245b5b4b082a09e932
+   3e62f2078c5b76783446defd736ad3a3702d49b089844900a61833397bc4419b
+   30d7a97a0b387c1911474c4d41b53e32a977acb6f0ea75db65bb39e59e701e76
+   957def6f2d44559c31a77122b5204e3b5c219f1688b14ed0bc0b801b3e6e82dc
+   d43e9c0e9f41744cd9815bd1bc8820d8bb123f04facd1b1b685dd5a2b1b8dbbf
+   3ed933670f095a180b4f192d08b10b8fabbdfcc2b24518e32eea0a5e0c904ca8
+   44780083f3b0cd2d0b8b6af67bc355b9494025dc7b0a78fa80e3a2dbfeb51328
+   851d6078198e9493651ae787ec0251f922ba30e9f51df62a6d72784cf3dd2053
+   93176dfa324a512bd94970a36dd34a514a86791f0eb36f0145b09ab64651b4a0
+   313b299611a2a1c48891627598768a3114060ba4443486df51522a1ce88b3098
+   5c216f8e6ed178dd567b304a0d4cafba882a28342f17a9aa26ae58db630083d2
+   c358fdf566c3f5d62a428567bc9ea8ce95caa0f35474b0bfa8f339a250ab4dfc
+   f2083be8eefbc1055e18fe15370eecb260566d83ff06b211aaec43ca29b54ccd
+   00f8815a2465ef0b46515cc7e41f3124f09efff739309ab58b29a1459a00bce5
+   038e938c9678f72eb0e4ee5fdaae66d9f8573fc97fc42b4959f4bf8b61d78433
+   e86b0335d6e9191c4d8bf487b3905c108cfd6ac24b0ceb7dcb7cf51f84d0ed68
+   7b95eaeb1c533c06f0d97023d92a70825837b59ba6cb7d4e56b0a87c203862ae
+   8f315ba5925e8edefa679369a2202766151f16a965f9f81ece76cc070b55869e
+   4db9784cf05c830b3242c8312` }
+       }
+       [3] {
+         SEQUENCE {
+           SEQUENCE {
+             # keyUsage
+             OBJECT_IDENTIFIER { 2.5.29.15 }
+             BOOLEAN { TRUE }
+             OCTET_STRING {
+               BIT_STRING { b`1000011` }
+             }
+           }
+           SEQUENCE {
+             # basicConstraints
+             OBJECT_IDENTIFIER { 2.5.29.19 }
+             BOOLEAN { TRUE }
+             OCTET_STRING {
+               SEQUENCE {
+                 BOOLEAN { TRUE }
+               }
+             }
+           }
+           SEQUENCE {
+             # subjectKeyIdentifier
+             OBJECT_IDENTIFIER { 2.5.29.14 }
+             OCTET_STRING {
+               OCTET_STRING { `329a07b1fabb48f52a309f11a1898f848e23
+   22ff` }
+             }
+           }
+         }
+       }
+     }
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.17 }
+     }
+     BIT_STRING { `00` `67a8951fc308e12f6867611fdc254bf4bcb514f7f5f
+   2fdeb72fa8e1a030061677b84cd275597d83154195966b141670cb0e88113460
+   d978a1a7a3895c11ca41995775c09d64ddeb47bc87c4e8bf1c9327fc4afd5c37
+   86553e17d629b0f27142765481432b5e7ccd0ba61e51cad3dd8f95938c235ebe
+   ceeaf8b16ae3366f300c5358ec7be9eb23a1ea1a3da58686704f0483f968a6e4
+   b1f89670a0134b36a18d6c727dc9b027b12794793a48c7ab66edf57ac1811391
+   4c00d0a11b65a652f47771337bf743666fca95bcbd39121ae0750bec55ad5a8c
+   bce98e538ae523947d6929976330fca3fc95c01d1403b49e5cba81812f43650d
+   d01310934279ecd07ccab34c2ca30a7d3dd5092e1630e1423cc9fac43a1b4db0
+   e3d970f0aa66d404ae87b04b4cf72ecfb67eacba4d8cd8e65baeeb47afa11cc2
+   b8ef8992288667b8edef54a9e2767b632e1498735b28c6f60f08b5969e5e26dd
+   7ca396b9e5cc3e12a1e73623602328d64a08ef4a29af35711cc870d26373bb1b
+   9eb2effe12973544c44a7e2cdf203244f53b37a6d523237d89f06f6f5534ed63
+   113c8f00eff7fdcd509a2d8c7cef29bd3fb186a4c8c362b3d442939a29076ee3
+   2716b8fae5100d81a07215cdb1c79bddfbdc14f52e37318d1e526db84d160fb8
+   da1c06dbce15955cdc2d6fd78a2a5a58df239ce366c6d90b32e8bd47fc1fd130
+   9e86294c0c3b51ce77e6dfb6f6722e68f4c3ff2eb4c346931506e743bb021998
+   b80f43f6e3d3c9fe54777c0f65800e947f9043290e14b01b63f8e26c30138094
+   2866c74b4a902ce491c0c950544cf0c6938eacb32eb30266ce82c4d0a36c511e
+   a8ff7c409549a3a8264ca983d8c6d5e035f244243a775758aac992b58844b711
+   0d3f87c9bba19dd8a8d2ab1294e0555ec4995a548dc56cce35a05dc48aca7555
+   b1641dde3d197fcdf35d12f09aaf3e6a72775cd18249a21e70edac6710db6a21
+   e1c0561192dd0119133640cfff20f3187978516bfd6cbe66ce1071b1246f4ba9
+   37df901b3ed35069eebdfff65459fb9b777ae9298a7a49ac24f4020795de5dee
+   8dbcf20a241b6e814368f4b8fa42af8be892d9e1e38ae4bf5a47cfd46a398e4b
+   3186471e24534fb139860b25c63f2dbf85a53d86488c83dff09ae20a9bf83145
+   f20187f0e822bd475998d3b967011964eed8db9778054efcc6ccb69074bba996
+   624b4741c5710362de9d4f8de4b10f6db1e9f8098f4024593ea073893cb1fe7b
+   959c50fefc401b3cacdea8c2a17135ba9df90ab7f31de339a2d6f856c71edcfb
+   00e5a3d73201fbec4b4a79b9728ad70cda0b898121574f60d959b408c108af1a
+   b0aa47dff372609f3186c063c572cb89089f2a218ea402cb072fcbc895a6a384
+   78ce402d5082c3e0572c2322cc20996ca968da35d7b2edbc0623be6165090120
+   5f10271155b539f81d006db8d7b67a4edeef677e6dac9c789be55001574eeea8
+   797f7f52e4bb021b98e2088dcc8d6934e80dc165d1c714449b0bcfaf325ab596
+   7b7307ec2937b3492425bf63b8abbd3ed97da1d15b5483fa64cf71a49c4d3b4b
+   78200d1f509206f2c104bfe3696e3c80036db00a5e11da05a5ff4da0ffb99567
+   f81399e6ca969b111b6c7b6fce549e6b4d89d459381ea9166e9bb3072089db94
+   ae0d1afe5f29fce190e77adba643494191cdaba3ead9297c3c606332b74697f1
+   9c09c4be2a341fd6145129ae856c3abbbc1bb8b05e0b7840ff164414a9da44e5
+   4146cd4c5de0c4e4ecb2591412b4e7bdc450d06a4ad3a0d1406f306e381ec291
+   f2c3b3bc49f8b7e048c0ce2734830b48a79d35fcc5a62a9454800a30f4b3eb7a
+   268bab64c12100d712151bf5f12163bed029e8abf1ca6e7b7b1286a733f532da
+   e511091aab0fffcfd4464ee5663888f9859b44ba765360ffff434f12af1fc6bc
+   cdb5a71947149dc7689dff24d6ba6b63e6cc23140e32934b6e9da765b4332011
+   8b8a811f89c3d1b7ff21530e77a91cae3557ac7c784ff8263500bc82560030d6
+   c6e74eee817fc2c63402752e59ef43916d3d83c21686436e9034dda6c974f210
+   8b174eaa1f73121c9add500cecd8618b302bedad72b62f793bd0f70ba8c5e16c
+   f4abeddd51196816d019517d1e25fb62c9f79d9232fdf1ceec604f8dda5f7145
+   541c5793b9c5ae1589588a49a6e6174614ea012933a192b3b084725b465bb1a2
+   2ccb4b60cf3ca142f7683a8267fb6b0a8dc0b3a5f63ab60443f6c7ee70e9b5b0
+   67adfdc33960f88961e8b6a8a31e61cbc0096888f06346637ecece196291b95e
+   3b8c579df27010e631eba3634c766a933d7f4e20811946bb87e97f7e7bade957
+   e4c52d72676af91ac771ec351f36411e2b2cc8327611037cf0df4e3b947a87ef
+   5e2b57955b137c981105af76d6251cc14cdb3f430ed6b9f514404ce7a69bb000
+   d5f62c7e876b57f40f262e6a3e6be91ed0af7c8b5b74b160f3c661d735799d5f
+   b47685135c5551f69a09444f5f01295f539a8227d271e4849fbc8906cf57e67e
+   a5e150df5f13b0b412f97b21840b82e4d71739d1bec5ef9e58b047d52dfe0f39
+   26d5d48a4bb81764e10813070436e8bfaa75dbc90ffb6ecb0604a1338206f347
+   25c689fcb1687acb444b533d4c4da9846192825c03d9cc9a1685bcdd367b3f41
+   3b2334ff3096ebc146d7646fac3856b9ba18ed815d8ea941404f7280eeca6021
+   7c017d4f1467f3ad0e41e31c4ff351b14f59ffc9d19f3dca6c0b8c4d8b10eaa6
+   e3b8b4c3c1f17d0786f86140d0476db3f3097308d2f3830165192235db185fdd
+   e8d19708c664927fd75529e2911e8114bf73e2e2d8e52f42bf49c62f17188744
+   2596354fca15a730c97f70b6f60a40456483017ac59f49606479ea17279b782d
+   6e0d6f2bff01ad626236102e77f8594e179005707fb72f339b6737abab0ae8af
+   850c380f81e5c40c539bc3bf52c57162f3bc91cc5c97c21cbe67552ba45c231a
+   c2bf836de2a3ae4b1e1b4517d20a546d0cb4bc7207d4ada0783db1ca5dd327c8
+   c268a3b16ff1eef8a7e4bed382b21d3b4c0f9c9d357558747beecbd470c12bcc
+   75d63859bcf94a2621700b3b51220dba6edfc8044512e40bce1e32144142329c
+   76695c045b268a5b7771f2287f2a6e84c4622058c891ed34cb618475056c6460
+   3f2d7d4720ba83e1d1050c3408d8b3ef086e6a7b6f074df5aca73b2a2bde0844
+   44b39be566769223373913cab3c8d3ac8cbf168719a8f052d2d6091789386fee
+   5e1b306d7ec4be2558caa091e2fcc32c355702e971a3f3ac1da421317f3160e2
+   d7a27b71ed2342065bbf104070c3942494a5257607798a0afb6c3c6cbd9eaf1f
+   2ff070d233637454762767b839294a6d612282f3e3f496d939ba0b6bbd2dae5e
+   beeef101f232d6e97c2c4dff3f40000000000000000000000000017263843` }
+   }
+
+   The following is a self-signed certificate for the ML-DSA-65 public
+   key in the previous section.
+
+   -----BEGIN CERTIFICATE-----
+   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
+   IA==
+   -----END CERTIFICATE-----
+
+   SEQUENCE {
+     SEQUENCE {
+       [0] {
+         INTEGER { 2 }
+       }
+       INTEGER { `159ffe6f22fd5cc42c524df6fd5e28d0de38f34e` }
+       SEQUENCE {
+         OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.18 }
+       }
+       SEQUENCE {
+         SET {
+           SEQUENCE {
+             # organizationName
+             OBJECT_IDENTIFIER { 2.5.4.10 }
+             PrintableString { "IETF" }
+           }
+         }
+         SET {
+           SEQUENCE {
+             # commonName
+             OBJECT_IDENTIFIER { 2.5.4.3 }
+             PrintableString { "LAMPS WG" }
+           }
+         }
+       }
+       SEQUENCE {
+         UTCTime { "200203043210Z" }
+         UTCTime { "400129043210Z" }
+       }
+       SEQUENCE {
+         SET {
+           SEQUENCE {
+             # organizationName
+             OBJECT_IDENTIFIER { 2.5.4.10 }
+             PrintableString { "IETF" }
+           }
+         }
+         SET {
+           SEQUENCE {
+             # commonName
+             OBJECT_IDENTIFIER { 2.5.4.3 }
+             PrintableString { "LAMPS WG" }
+           }
+         }
+       }
+       SEQUENCE {
+         SEQUENCE {
+           OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.18 }
+         }
+         BIT_STRING { `00` `48683d91978e31eb3dddb8b0473482d2b88a5f6
+   25949fd8f58a561e696bd4c27d05b38dbb2edf01e664efd81be1ea893688ce68
+   aa2d51c5958f8bbc6eb4e89ee67d2c0320954d57212cac7229ff1d6eaf03928b
+   d51511f8d88d847736c7de2730d5978e5410713160978867711bf5539a0bfc4c
+   350c2be572baf0ee2e2fb16ccfea08028d99ac49aebb75937ddce111cdab62ff
+   f3cea8ba2233d1e56fbc5c5a1e726de63fadd2af016b119177fa3d971a2d9277
+   173fce55b67745af0b7c21d597dbeb93e6a32f341c49a5a8be9e825088d1f2aa
+   45155d6c8ae15367e4eb003b8fdf7851071949739f9fff09023eaf45104d2a84
+   a45906eed4671a44dc28d27987bb55df69e9e8561f61a80a72699503865fed9b
+   7ee72a8e17a19c408144f4b29afef7031c3a6d8571610b42c9f421245a88f197
+   e16812b031159b65b9687e5b3e934c5225ae98a79ba73d2b399d73510effad19
+   e53b8450f0ba8fce1012fd98d260a74aaaa13fae249a006b1c34f5ba0b882f26
+   378222fb36f2283c243f0ffeb5f1bb414a0a70d55e3d40a56b6cbc88ae1f03b7
+   b2882d98deea28e145c9dedfd8eaf1cef2ed94a8b050f8964f46d1ea0d0c2a43
+   e0dda6182adbf4f6ed175b6742257859bf22f3a417ecf1f9d89317b5e539d587
+   af16b9e1313e04514ffa64ba8b3ff2b8321f8811cb3fb022c8f644e70a4b80a2
+   fbfee604abb7379091ea8e6c5c74dfc0283666b40c0793870028204a136bf5da
+   9568eb798d349038bdb0c11e03445e7847cb5069c75cf28ac601c7799d958210
+   ddbcb226e51afef9f1de47b073873d6d3f97456bede085082e74a298b2cd48f4
+   b3093155f366c8fa601c6af858dfa32c08491b2a29887f90335949a5d6edaa67
+   9882a3a95d6bf6d970a221f4b9d3d8cbf384af81aac95e2b3294e04789ac8372
+   7a5dc04559f96af41d8a053516feeeebc52746eb6ab2819e09108710d835f011
+   fa63065872ad334d5cdffb2b2310507e92fc993ae317da97f4f309cdaf0f67ed
+   99d90215576083849f953b246d7fedb3fdb67679850a5ad404e64147fb7cf4f6
+   aeddd05afb4b834968d1fe88014960dce5d942236526e12a478d69e5fbe69703
+   10b308c06845018cfc7b2ab430a13a6b1ac7bb02cccbb3d911ac2f11068613fb
+   e029bfdce02cf5cd38950ed72c83944edfbc75615af87f864c051f3c55456c54
+   12863a40c06d1dab562bdff0571b8d3c3917bbd300880bba5e998239b95fa91b
+   7d6416d4f398b3adbcd30983ed3592b4d9ef7d4236fd00f50d98aa53a235ac41
+   72720f77d96172672980cfe8ff7a5a702783edc2ba31b2259015a112fc7f468a
+   9c2f9464039002d30ef678b4cb798bc116216bf7a9a7c18ba03b7b58fd07515d
+   3115049d3614be7a07e744300750df1d2c58753389059eafc3d785ccdd31c076
+   48bedc03a5c3b8ad46d064d59c13d57374729fc4e295362e2a5191204530428b
+   c1522afa28ff5fe1655e304ca5bc8c27ad0e0c6a39dd4df28956c14b38cc9368
+   2cefe402bbd5e82d29c464e44eb5d37b48fc568dfe0cc6e8e16baea05e513559
+   0f19294e73e8367b0216dbb815030b9de55913f08039c42351c59e5515dd5af8
+   e089a15e625e8f6dee639386c46497d7a263288774de581a7de9629b41b44241
+   41f978fb8331208efdec3c6e0de39bc57063f3dcd6c470373c08891ea29cbc7c
+   c6d6483b8889083ace86aa7b51b1c2cfe6e2ad18d97ce36fbc56ea42fae97e6a
+   7ac114864478c366df1ebb1e7b11a9098504fd5975bdf1f49dc70002b63c1739
+   a9d263fbad4073f6a9f6c2b8af4b4c332a103a0cffa5deeb2d062ca3c215fd36
+   0026be7c5164f4a4424ef74948804d66f46487732c8202c795478647b4ea71d6
+   27c086024cca354a41f0877b38f19b3774ad2095c8da53b069e21c76ae2d2007
+   e16719ed40080d334f7da52e9f5a5990439caf083a95b833f02ad10a08c1a6d0
+   f260c007285bd4a2f47703a5aef465287d253b18ac22514316210ff566814b10
+   f87a293d6f199d3c3959990d0c1268b4f50d5f9fcefbbf237bd0c28b80182d66
+   59741f14f10bfbb21bba12ab620aa2396f56c0686b4ea9017990224216b2fe8a
+   d76c4a9148eef9a86a3635a6aa77bc1dcfb6fba59a77dfda9b7530dc0ca8648c
+   8d973738e01bab8f08b4905e84aa4641bd602410cd97520265f2f231f2b35e15
+   eb2fa04d2bd94d5a77abaf1e0e161010a990087f5b46ea988b2bc0512fda0fa9
+   23dadd6c45c5301d09483673265b5ab2e10f4ba520f6bbad564a5c3d5e27bdb0
+   80f7d20e13296a3181954c39c649c943ebe17df5c1f7aae0a8fe126c477585a5
+   d4d648a0d008b6af5e8cd31be69a9296d4f3fd25ed86f221e4b93f65f5929967
+   533624b9235750c30707550b58536d109a7131c5a5bbe4a5715567c12534aec7
+   660761eebb9fae2891c774589b80e566ad557ddef7367196b7227ea9870ef09d
+   dfec79d6b9319a6879b5205d76bf7aba5acf33afb59d17fc54e68383d6be5a08
+   e9b66da53dcde008bb294b8582bd132cdcc49959fdbc21e52721880c8ad0352c
+   79f03a43bbd84c4cdfdc6c529005e1e7cd9a349a7168a35569ba5dea818968d5
+   a91466bd6e64e20bf62417198afc4e81c28dd77ed4028232398b52fbde86bc84
+   f475b9016710ce2aabc11a06b4dbac901ec16cf365ca3f2d53813948a693a0f9
+   3e79c46ca5d5a6dca3d28ca50ad18bd13fca55059dd9b185f79f9c47196a4e81
+   b2104bc460a051e02f2e8444f` }
+       }
+       [3] {
+         SEQUENCE {
+           SEQUENCE {
+             # keyUsage
+             OBJECT_IDENTIFIER { 2.5.29.15 }
+             BOOLEAN { TRUE }
+             OCTET_STRING {
+               BIT_STRING { b`1000011` }
+             }
+           }
+           SEQUENCE {
+             # basicConstraints
+             OBJECT_IDENTIFIER { 2.5.29.19 }
+             BOOLEAN { TRUE }
+             OCTET_STRING {
+               SEQUENCE {
+                 BOOLEAN { TRUE }
+               }
+             }
+           }
+           SEQUENCE {
+             # subjectKeyIdentifier
+             OBJECT_IDENTIFIER { 2.5.29.14 }
+             OCTET_STRING {
+               OCTET_STRING { `1b0563e3cd3346149c8c9ebcf23b0a4e5a90
+   0eea` }
+             }
+           }
+         }
+       }
+     }
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.18 }
+     }
+     BIT_STRING { `00` `11816868a90c66934bdbb1d19c53a6a5dc30535ff6d
+   cc8669b24284ae9310e9a57c7918702b5fa49c633be475d5492d9d7eea391426
+   819a9269ab594f434942b4dfcbba5a83dccd353be7af6efdd6609721e8ee7391
+   400b447e5783d34aa6cddf18dadffb0cae0a3c899fe0ff63be605a9336e52ee3
+   5ebb2ee2fbb64cdaa5ce4cb361e849c7aceedc1ef4409d2f7c108bb618dd05ea
+   63437dda0396c0809a08303777514270b4375e60ff9639feaa46adc269812282
+   afe17c16f9b189ba312ea563c2020e31ef7b4e5bda282e1021247991977f1485
+   d30fed220ca13e8471e8fbc8bb2b95235e1ae37b6d48fcc04ea00baa803a9d48
+   9f720afe46958c78d40131326573a127317c41f87d30abf65f566c7b8b181380
+   e9bc908cdc1efaceeb24246f2ac3e21397b1837b79a6c9bee648a454cfcb17c6
+   f24c01525ffc56ba79865f33f45d5f254dc9f1b39485a5e64eb1d4fa033ca0d5
+   6b9d41d8b9f70ba499218ae7d55afb97b47b26caf666f4dea790e0830a427052
+   8a7dd5dd0f75ed9d04738a71bd8bd6559f2b2e0de379edf67b6576be2cd0b89e
+   21bd570c533e78998ca6febf99bd67a3b5bd9285dffa3cc8adb798f67306bd05
+   bea295765c0f07118c89da2685ac09fd6dcc8efc2142b323d172127bb0ee857d
+   2148484c3a6a40f785308ca9268f624e131dea4a062ef7fcf74a7325571192d7
+   1534f5c0fbfe3da711138ae03e57e959efba94eb6c656f001be16accb135020f
+   3b1e3e56d719933c2d11ff8ee59ec43e1d55847cc1adb75902b96a9f03d3a440
+   dc8ae6880b90a7f5281605e887b9032dafc3a70a64e9474a60329f0b2482acee
+   3ce180a8451d6e89a749bba52c7fd7badf187d1d20347e6adafcc0ea5afb1f0e
+   8da423221f7489dfef524f5c034b5292f4737a80f87cab6569b3aec4ce0f019c
+   4b09db0d90b7559f1525e536dc066522cb6557196e4e8846cbe0e44d7d7a033b
+   528ce673adb5add644394e7a9f6e17c960cfde8549ac2cbdfe6ee630f7ac228e
+   7e49ad286721bd4187fc9a3a9c9146d2f3ecf5c455f8b3e6890776e4f8009b24
+   14b61272548cc3e2dafbd0eb49d4f9eb8e2f1441062ccc912862594a00b0cff5
+   1a4ece336594d2674d3ecad654d8a1e05d0b2ecc610650c16bfefe2a4f57f57a
+   af31a4cff91254d99eabd17873ff440e0d21f569e7e6d80602826bff7d4223f1
+   242c305c67adba1c6ab09573405b24b30fad09bbd523ec573642a87c0c13e68b
+   0cc95313a32a8f8b91f1f7a295380af2672571480b40b0ac8c033fc53d81dd11
+   95512c785b6d6ad0560fcb82fd342c8a31f14e83cfb70a1982839bba5d82a771
+   21e5b72a0413c5d50e010a83138dcb986e0983e90e8d3ceca7b500683a06be96
+   4e60c6c275ce233c9034c10995a39968208a52a8ad7ee77e0ef003dfe6f393a5
+   93c2c8fb38c5047aaa39341531311fde593251066553f7b7fee929c695df9406
+   58958ba57f4b139e4d640c3bd96329df6531aafcb93fd6cb2bc1c9409ebc7cc4
+   01ee5888b31eccf4bc870ee5bb85d185efb7b83e49b17f39e3354a3abada3a1d
+   6dd2c64797174d3beeb9ea1b4aa3874ee4e6c66eaa75b569af5b0e5511c5f6df
+   7caa4a7374be3fbfd25f6551f4bb60e62b0901ed6ddb3e80b94bf1986906175c
+   65dfc72f07ee4a105dbe3c11466360946e65285f46d71a80c4bafd648ba8a0f2
+   831bd2160f74510d2b9770108970f875150e095590e0c5cdaf9eb682f62912ee
+   205d9eb7056cc0128d3be81cdba8e63e366aa71af1d4adc575b8597f6035dd4b
+   77e22d2c0d866818b510afa67fe7fedfbc42e3ac59fc183f916c53f476071794
+   b0c59ef3b336592d22b2909774ce250875e60c819e18a3abf4f12539d7fd994b
+   3031416e1367a8fcf18241b2e5fc6ab8aa88228e4c5fa51dabd22bb463b1a37e
+   31cbc9d0a47a459c3d88178ef676a37af9584f51f164f29fbd541559fca199eb
+   cea32a3766140fd3bcce46ea17a973a2772a505a9636452fa0ed653e1da17278
+   5cd901b60510b3391226e1d7a6a912d3ce5e09432964e22cd754eb0b344f9ca6
+   1cd82b0192edab7d3c4614244c2151effc989e56dc321f4c0297b467cfda3451
+   14de36e64c5051646617eed7ea24c1e06006955ba236bb6ec8c7f6dcb0b0cdf8
+   ad61c0ad50987233a7168001e4a1e9f3aaec30dc9b56a112ec4c657fe657b480
+   f1af0b42f60c9342937ae7b11f0e81fa14a2a4b51178a6cc2184b0612daa3092
+   e423e4c53fb9d8e0abcf19a2a22086c50c731344a1fd8d2d81fab52255a0ea08
+   c656eeb67c0de1068c66136f4767ad3d08b66551ca94328b7e8fc94c9b02bdfd
+   472ed70dd40e2707573a1abfaab2fc20c40e857806015583dd519570901a4071
+   e010cf27544371b6e0e5eb64bbd739f4dc42a8f36c7717b3069d87c368715285
+   bd54091c480b648fac0027f221f7d6c993977083fb91dd101bf7c73798f9dfd3
+   28bdb3d77f7948e31034d1305a7276b7263092e79175ce0ed44a26229f6f9b68
+   2366257a9c09ea69a73ceef7733a31b1daed212d67d1fbbeed7cbd8ff6af4101
+   ddbcc824c089e8be39c823046d28a22b08f6ac405d114c920349b44b287b4164
+   dfb6b3dcc04f3a8f635a23e529f18a9ff9fcfd87001e47f9cf7d088b02bf05e9
+   d82c93c57d609d5d6dcec573840a63f32a6b7efa23878e901e36218953c381be
+   38479fca0607138d6fe5e6be036ecce912e97b5c3e3b796f36d00451579f18aa
+   6d6e45f6a3df820dbc237f7b7100c8e32b06c38eb4f9e85fee54aa7c215484a1
+   0d924a4f7141767920729e2dd52cb99dc395ac714937132e249a2a2ebcb939a2
+   955d7c9aeec9195bb99313a9385745932a77189cc04a27659686cd60459b8305
+   1519b7a1727d35aa7ed5080833abaa1d5481c11dbbacfee987988ff7713d2f89
+   6befcc545cf95b12af2c076bbfe65baf4be8c8bb4d518e4d54fa12012cc2fab8
+   e98d4c75fc454023c906acf9b390deb86f8a4d9b3dac9b2f3584858b83a416a2
+   3b29fb696b591dde6146666ba1ba3759c5419e75affa96e39f76ca96e32112d9
+   d72383ad38fe5354019428fd24d9e69be4f4611d1bddce0ed99f80d972d037ef
+   0fa9c70aff4c285701ad9ec949f186bc6ff07bbd16b17ca26091cb25bcb381e6
+   73e595835e955d09756c4d1628ad42b5150a41a88d0811dae946117334441881
+   58c2463544c028430c12baa7891b7c9a3d3edecd8483a84641015afa8f747380
+   db1fd0c324fea5433ce03a83f0fdf43201e83f6085415281a8bfd51be8e5e695
+   b3b07d5fb734faa2bc1f4ceeb1818315de5fafd6feed6f63d19a39e1b1aee2e0
+   16fbbbe1ee9abc8ea386f8bddb324b61f1bffb66c2df924602b65a8fd957ce2f
+   cab0586cce14b5fa93d6a734581de48a79d9ee4abd178d08748ab87a7bcebce4
+   fd6c95cd4f3564b2581c2bf83f7447c52b501cc75aaa7ab1b4f117817f4e4561
+   766b0f267fd5db5daac7ae41ce9328708beb45edd2f15433cc44424a9b5cbf8e
+   a7d26893f568fd1eb38412745e4210185aee88b1cb4d1e8ea1b1e73dc7a06ea6
+   68800e1944dbfda4d0a4f47c3a60b371c3faaea111c12e9297e4f39ca8ba9db6
+   eb8d17320ceffd4e733c1b5023dd3d1f894f61da15c94270f7bee4702391fc4e
+   44432b8f34e02326cca1ffa6701697d5263a5ff4eba3f3e20d17117fe383cc0f
+   287be733277a41b4ae779635b303aa727a5eae186454dfa626a4e44ae8e316be
+   c431d914b06d522b405e4d54bd9526fa8aeedb2dadab3a16bd97fccf235169ed
+   6887a80367396c60725dd0247564bf1aa28c322b4a16254b66dc9fcc582fa7b5
+   3cdc5f242ab111f0c91e6910c180e2a9166992e309d99e7eb983c2b57ebee9ba
+   48ae62c141917147f62014b945e6de6bb4769d2f70c28ce5b2bd3d2d3a1bd07d
+   aa1e3a88e049aad8ae6e46cef0a5134485d4f3ec9ffaac158d2cf1fa63a553b0
+   b94f84dea8b9f55e8b559078344627f31f2a4ec772799f99f9decb6e7b0f8abb
+   d2154fabfd95024cff11cddd9e8c7f1a906a147a979782a5171ddaa2f3a8ef82
+   84ddb3cbc7520ec4dce1a3047e26cbde1568dc7a3bc1c8121b58eb3ab65f5f08
+   911bf05213bd74b21466a60d0200b99fff0d42bc51aa2898d11c49f5439bb5e7
+   f962536c34da1798be2d5ef27d7ac30d4cc151e5b1cb9455b97697c77764c2cc
+   064ac513de1abb8a435e0a1665dfbdc9b0d7cb55ed85cd4e2b4fb416fee68b22
+   2485fc1811bdd5e8a9c4dcadc4afeaa15aafbdf8f2b527f8062d170bf235138c
+   50e3a5304ef19028b4ed447c9e837bc6fa05f9ada44ad8dcba2170c98f4b1c60
+   4efdabcdd301cb965c7ea62740f4e0475bfeeb7eda7e712f954375efeb5e5ce7
+   b5b0984f0c5ae016c99988f040288a5730de9275dd323c6c57412ec373a49b70
+   88429edb88fa3bd74f32e64789965e87129c7bb164f7ee634ea23e0015d9bbf7
+   0cc4250865ea928ea380697e3d5eb5315001c53a137c1ec950fd44e8bb5ad481
+   1f810584539f81f81ad421c3f031dbc0376c6be761223f663910a9edd1143e3b
+   79422e668a696a4306057c21c8f9aa7a558b2b869cd6af780f8bc104351b1b4d
+   411659ecccfe7f811f852798599063b486672787b83bc537374d200000000000
+   00000000000000000000000000000000000060d0f131c20` }
+   }
+
+   The following is a self-signed certificate for the ML-DSA-87 public
+   key in the previous section.
+
+   -----BEGIN CERTIFICATE-----
+   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
+   -----END CERTIFICATE-----
+
+   SEQUENCE {
+     SEQUENCE {
+       [0] {
+         INTEGER { 2 }
+       }
+       INTEGER { `159ffe6f22fd5cc42c524df6fd5e28d0de38f34e` }
+       SEQUENCE {
+         OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.19 }
+       }
+       SEQUENCE {
+         SET {
+           SEQUENCE {
+             # organizationName
+             OBJECT_IDENTIFIER { 2.5.4.10 }
+             PrintableString { "IETF" }
+           }
+         }
+         SET {
+           SEQUENCE {
+             # commonName
+             OBJECT_IDENTIFIER { 2.5.4.3 }
+             PrintableString { "LAMPS WG" }
+           }
+         }
+       }
+       SEQUENCE {
+         UTCTime { "200203043210Z" }
+         UTCTime { "400129043210Z" }
+       }
+       SEQUENCE {
+         SET {
+           SEQUENCE {
+             # organizationName
+             OBJECT_IDENTIFIER { 2.5.4.10 }
+             PrintableString { "IETF" }
+           }
+         }
+         SET {
+           SEQUENCE {
+             # commonName
+             OBJECT_IDENTIFIER { 2.5.4.3 }
+             PrintableString { "LAMPS WG" }
+           }
+         }
+       }
+       SEQUENCE {
+         SEQUENCE {
+           OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.19 }
+         }
+         BIT_STRING { `00` `9792bcec2f2430686a82fccf3c2f5ff665e771d
+   7ab41b90258cfa7e90ec97124a73b323b9ba21ab64d767c433f5a521effe18f8
+   6e46a188952c4467e048b729e7fc4d115e7e48da1896d5fe119b10dcddef62cb
+   307954074b42336e52836de61da941f8d37ea68ac8106fabe19070679af60085
+   37120f70793b8ea9cc0e6e7b7b4c9a5c7421c60f24451ba1e933db1a2ee16c79
+   559f21b3d1b8305850aa42afbb13f1f4d5b9f4835f9d87dfceb162d0ef4a7fdc
+   4cba1743cd1c87bb4967da16cc8764b6569df8ee5bdcbffe9a4e05748e6fdf22
+   5af9e4eeb7773b62e8f85f9b56b548945551844fbd89806a4ac369bed2d25610
+   0f688a6ad5e0a709826dc4449e91e23c5506e642361ef5a313712f79bc4b3186
+   861ca85a4bab17e7f943d1b8a333aa3ae7ce16b440d6018f9e04daf5725c7f1a
+   93fad1a5a27b67895bd249aa91685de20af32c8b7e268c7f96877d0c85001135
+   a4f0a8f1b8264fa6ebe5a349d8aecad1a16299ccf2fd9c7b85bace2ced3aa127
+   6ba61ee78ed7e5ca5b67cdd458a9354030e6abbbabf56a0a2316fec9dba83b51
+   d42fd3167f1e0f90855d5c66509b210265dc1e54ec44b43ba7cf9aef118b44d8
+   0912ce75166a6651e116cebe49229a7062c09931f71abd2293f76f7efc3215ba
+   97800037e58e470bdbbb43c1b0439eaf79c54d93b44aac9efe9fbe151874cfb2
+   a64cbee28cc4c0fe7775e5d870f1c02e5b2e3c5004c995f24c9b779cb753a277
+   d0e71fd425eb6bc2ca56ce129db51f70740f31e63976b50c7312e9797d78c5b1
+   ac24a5fa347cc916e0a83f5c3b675cd30b81e3fa10b93444e07397571cce98b2
+   8da51db9056bc728c5b0b1181e2fbd387b4c79ab1a5fefece37167af772ddad1
+   4eb4c3982da5a59d0e9eb173ec6315091170027a3ab5ef6aa129cb8585727b93
+   58a28501d713a72f3f1db31714286f9b6408013af06045d75592fc0b7dd47c73
+   ed9c75b11e9d7c69f7cadfc3280a9062c5273c43be1c34f87448864cea7b5c97
+   d6d32f59bd5f25384653bb5c4faa45bea8b89402843e645b6b9269e2bd988dda
+   cb033328ffb060450f7df080053e6969b251e875ecec32cfc592840d69ab69a7
+   5e06b379c535d95266b082f4f09c93162b33b0d9f7307a4eaaa52104437fed66
+   f8ee3eabbd45d67b25a8133f496468b52baffdbfad93eef1a9818b5e42ec7227
+   88a3d8d3529fc777d2ba570801dfae01ec88302837c1fb9e0355727645ee1046
+   c3f915f6ae82dad4fb6b0356a46518ffc834155c3b4fe6dafa6cc8a5ccf53c73
+   a0849d8d44f7dcf72754e70e1b7dfb447bb4ef49d1a718f6171bbce200950e0c
+   e926106b151a3e871d5ce49731bd6650a9b0ca972da1c5f136d44820ea6383c0
+   8f3b384cf2338e789c513f618cc5694a6f0cee104511e1ed7c5f23a1ebfd8a0d
+   b8424553240156dbf622831b0c643d1c551b6f3f7a98d29b85c2de05a65fa615
+   eee16495bd90737672115b53e91c5d90028cf3f1a93953a153de53b44084e9cc
+   ff6b736693926daefebb2d77aa5ad689b92f31686669df16d1715cc58f7a2cfb
+   72dd1a51e92f825993a74022be7e9eb6054654457094d14928f20215e7b222ac
+   56b51adbec8d8bdb6983979a7e3a21b44b5d1518ca97d0b5195f51ed6a24350c
+   89747e1edea51b448e3e9147054ce927873c90db394d86888e07dff177593d6f
+   79e152302204aeb03be2386af3e24078bd028b1689f5e147c9f452c8ceb02ec5
+   9cc9db63a03576ceeafe98239023897da0236630a53c0de7f435a19869792fab
+   36e7b9e635760f09069e6432e700035ac2a02879fff0a1e1bec522047193d94e
+   b5df1efd53eea1144ca78940852f5ec9727904b366ede4f5e2d331fad5fc282e
+   a2c47e923142771c3dd75a87357487def99e5f18e9d9ed623c175d02888c51f8
+   2c07a80d54716b3c3c2bdbe2e9f0a9bbaaebeb4d52936876406f5c00e8e4bbd0
+   a5ec05797e6207c5ab6c88f1a688421bd05a114f4d7de2ac241fa0e8bedff47f
+   762ddcbeaa91004f8d31e85095c81054994ad3826e344ba96040810fc0b2ad1d
+   e48cfade002c62e5a49a0731ab38344bc1636df16bf607d56855e56d684003c7
+   18e4bad9e5a099979fcddeeb1c4a7776cd37a3417cb0e184e29ef9bc0e87475b
+   a663be09e00ab562eb7c0f7165f969a9b42414198ccf1bff2a2c8d689a414ece
+   7662927665689e94db961ebaec5615cbc1a7895c6851ac961432ff1118d4607d
+   32ef9dc732d51333be4b4d0e30ddea784eca8be47e741be9c19631dc470a52ef
+   4dc13a4f3633fd434d787c170977b417df598e1d0dde506bb71d6f0bc17ec70e
+   3b03cdc1965cb36993f633b0472e50d0923ac6c66fdf1d3e6459cc121f0f5f94
+   d09e9dbcf5d690e23233838a0bacb7c638d1b2650a4308cd171b6855126d1da6
+   72a6ed85a8d78c286fb56f4ab3d21497528045c63262c8a42af2f9802c53b7bb
+   8be28e78fe0b5ce45fbb7a1af1a3b28a8d94b7890e3c882e39bc98e9f0ad7602
+   5bf0dd2f00298e7141a226b3d7cee414f604d1e0ba54d11d5fe58bccea6ad77a
+   d2e8c1caacf32459014b7b91001b1efa8ad172a523fb8e365b577121bf9fd88a
+   2c60c21e821d7b6acb47a5a995e40caced5c223b8fe6de5e18e9d2e5893aefeb
+   b7aae7ff1a146260e2f110e939528213a0025a38ec79aabc861b25ebc509a467
+   4c132aaacb7e0146f14efd11cfcaf4caa4f775a716ce325e0a435a4d349d720b
+   cf137450afc45046fc1a1f83a9d329777a7084e4aadae7122ce97005930528eb
+   3c7f7f1129b372887a371155a3ba201a25cbf1dcb64e7cdee092c3141fb5550f
+   e3d0dd82e870e578b2b46500818113b8f6569773c677385b69a42b77dcba7acf
+   fd95fd4452e23aaa1d37e1da2151ea658d40a3596b27ac9f8129dc6cf0643772
+   624b59f4f461230df471ca26087c3942d5c6687df6082835935a3f87cb762b0c
+   3b1d0dda4a6533965bef1b7b8292e254c014d090fed857c44c1839c694c0a64e
+   3fad90a11f534722b6ee1574f2e149d55d744de4887024e08511431c062750e1
+   6c74ab9f3242f2db3ffb12a8d6107faa229d6f6373b07f36d3932b3bdb04c19d
+   d64eadd7f93c3c564c358a1c81dcf1c9c31e5b06568f97544c17dc15698c5cb3
+   8983a9afc42783faa773a52c9d8260690be9e3156aa5bc1509dea3f69587695c
+   d6ff172ba83e6a6d8a7d6bbebbbcda3672731983f89bc5831dc37c3f3c5c56fa
+   cc697f3cb20bd5dbadbd702e54844ac2f626901fe159db93dfd4773d8fe73562
+   b846c1fc856d1802762840ebc72d7988bde75cbca70d319d32ce0cc0253bb2ad
+   455723ee0c7f4736ce6e6665c5aca32a481c53839bc259167b013d0423395eeb
+   9aaaee3206149a7d550d67fc5fdfe4a8a5c35d2510b664379ab8f72855a2af47
+   abce2a632048eaf89e5cb4a88debc53a595103acce4f1cff18acff07afe1eb57
+   16aa1e40b63134c3a3ae9579fa87f515be093c2d29db6d6b65c93661e00636b5
+   92704d093cc6716c2342eb1853d48c85c63ac8a2854462c7b77e7e3bd1eac5bc
+   a28ffaa00b5d349f8a547ad875b96a8c2b2910c9301309a3f9138a5693111f55
+   b3c009ca947c39dfc82d98eb1caa4a9cbe885f786fa86e55be062222f8ba90a9
+   74073326b31212aece0a34a60` }
+       }
+       [3] {
+         SEQUENCE {
+           SEQUENCE {
+             # keyUsage
+             OBJECT_IDENTIFIER { 2.5.29.15 }
+             BOOLEAN { TRUE }
+             OCTET_STRING {
+               BIT_STRING { b`1000011` }
+             }
+           }
+           SEQUENCE {
+             # basicConstraints
+             OBJECT_IDENTIFIER { 2.5.29.19 }
+             BOOLEAN { TRUE }
+             OCTET_STRING {
+               SEQUENCE {
+                 BOOLEAN { TRUE }
+               }
+             }
+           }
+           SEQUENCE {
+             # subjectKeyIdentifier
+             OBJECT_IDENTIFIER { 2.5.29.14 }
+             OCTET_STRING {
+               OCTET_STRING { `89886750b57c24db3fc012e61ede59753337
+   374f` }
+             }
+           }
+         }
+       }
+     }
+     SEQUENCE {
+       OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.3.19 }
+     }
+     BIT_STRING { `00` `08783d565efc7b97440f8bd9818b466be538dbccedb
+   136447d27a778dc9f7c7cf32d14755b30f1308498d98b3ace3e679d7f13588f1
+   5f83d863d4ebb97bb81c3c9ab58bedb91f3b3d200756d9315ecf53eb00d181e0
+   490ec070e65b310c0a3a5be17a76fda4c66c7686ce22934245f77c127b281783
+   4b9481217c480c3a07b844fd9bcf52d78db7aef831cdb3a8ec8e01858ce9d5a3
+   0c932d2a67dd2e4daf035a61d01b9b44723d3071b38a5a948fb4a4037d6374c5
+   f66bf0117b96ff7db5a216d8c88e4fc0184aa726a64b476dc306a0e8960d2f4b
+   be65614181a51ff7ddbc14e47087af78483bb2f056124ecf1922fb6841380a6c
+   47ad6587ff3550f9c614d228a6f56d35aee7f196baae2bc81c455c7f8f02b122
+   5237899d54f911c7709bb6f3c2d815d486ef374c4da207099dc1fcff3f559e7c
+   52f5ac60a44301341982a0a7e6280908a94c849d16b36f09850a8166d387a693
+   d5da458b68fdde23e122bf39ee376b5eb050dd1fcafa22a2b2333753d60a8992
+   abb62022092aee589f9b0781c0ae29f321399fab03695f84f3829c281790779f
+   17d1cd5a2779e6d054da71664fc92d6190c30c9b71f647b1345be9ac2d3fbc6f
+   5ad1aed1ab821b47f40c1216e963f3bd0f53c8edeeaf8232bcbbf3d23fcbf028
+   c846f684abc33eb3944e20612ceb26078a4bf7611e60040b7adf2e3eae62fefd
+   be0ce0a3042d4e2c16d21cc2143c9d5c435fd52365a06be66a97e000b800fe36
+   dc500ed784505547564baaaf1d4311bc8ffd69f42d6a4429ed9e23f3a0240d63
+   ce6c3892b006bdac98cb95ce640579a28ed1cb1ef30af161b3dad97c4bda5885
+   ba948d2ee630dc89054ab5344ad3ea90c481615f87c143531999e92c36b234ad
+   f6088e68f7c03ce4c8eea80a0130b243d0e3df5fd56d3e6f4dab123c92de69fd
+   222b9f7593f01191cfd846ffb0db9039811e8ca42d8df203269c314d7f4c7b9d
+   7c02e28d29a918c336e2654c69d52f3cfd90e12166cf5536b067f9fd69412e9f
+   2e6e181f5487dc77be348161b3f1fdc1d200c2d13a891c43adbe49e451f921a4
+   7ab1652fda27ca52c8c5248e338a27decde60940996070d067323507d6f1f4b2
+   85911997ab02a656c1f9f3b7c9fb043f811883fef3c05fb5a1703ce56776ee6f
+   29b63d47e79f3ccc2837d545292c42b42024fd8e1e88ced0c0d21030c09bc1fa
+   3bf780ccc18586c5ab7d26a97c27348c1581f9aeeb0d76daaceb77e49b99bc49
+   cce62aadf1b960fe19dee294903af71254b5ed84321884b72d99d5705513de38
+   7177995b03ebc0cbaea2469aed8399c3f0ea39b55f7148674ca8f9712de90111
+   4d9c953d36bee526bb538604fab444c66901000989be4162b4cf4077b098acc9
+   f5f0cfbeaaf59697f99fdaea2f00506040e864f2f0ad5a09f6b036ee57767f22
+   57fa951e180d3f95d7e86ddfeb5443afccd463df976b73820d1b149f0df386e9
+   e36bd1f95221504506b6b73cfb4fb596d8197547e990ac8dd9b03acd14287d6b
+   1c027b681ee07890c7d0fab9fea576a9841d960c9b765d5186116764ec0418d8
+   873536cbbd0c3b508090c5c83f12546886c4d25aedd1dab099f46bdabe19b835
+   be941d29b57c1e0eb1d741d25fed21eb8be9fdc4ad4f1f591e7a6b68b69bfb72
+   d073141ead59e30e24837bb6255a5f757861912f7d1d7d2f5bd246414aa15118
+   0eed0139a809600757eab4be86b95682823ddbfc99e1775df25453006882e277
+   3f03e4c7613d8171161209520a263aed750775ce28eafe3f771ecf06596cb1ef
+   4bf1eb971fa54e81b1789a933ad0f0f6690d506afdde0d77aaec966de82ebd7b
+   4bc3e5b1020dfdfd6b28d24684ffb4f2c73805fb3c3da662aa7202b8466cc46a
+   df81bbdc2703bc8d34db95f50e463d14ed5432bc3afd6de8f2e13a5fa01de0f8
+   91bcb3877c1900c5052bb1aade3613709832a3dda73994c85e3ce6ed54ccf318
+   3c1fbe861627e33475e00cdffbc456a9a39842ef0bdfe6ae6569fd4b395a59dd
+   7d59918f5678e40ffda91c5e46e8f7eed11537c76070f8d6c2173133c3a9839f
+   d59989a83c980f74814db7ebf56fe8f291a97a9e81ccc1fca049c1cdc46ecfe0
+   5097efe3229495cc5caae2a06317c81626200a0ab3568358a7bf69288342de5e
+   867f80111a78ec8f128702929eed1a8669f6653d08debcb637ab4293f36c7f97
+   bdd8a70f3c4558e24dfa2afc3ab6c7ec97637d0b6176351f45fb06ca37dade13
+   eeb2715ec8f945c6bfd97762586c3b1acba792af955e59348b71b2b594a608c6
+   7b9f89228f2c46accb8d0cedfe090b908776f22edc10dfd36647b01776c9a508
+   9f5003fadbed280eadc4cb6dca5813fff1153b0c8703b15880d8a7b38f058cc1
+   fc5bf5c450e7de8b721c7ad632adbebb02c5864bba9f3a685842c206879bbcb8
+   4d00dcb7fe9bbf2069792d38d12ff7180c013406d381d7c51fd06c9be308c50b
+   472bc49059d116a92be0690ef14ab43d1c20c76dedf76ffe79e3a346d89b8f38
+   43a87d8787c09d59c59f4cddf45c7ab1942fc738c0fe9ced0fc5b5597e328157
+   288d305ee13a054558e91184cc688226e3aba1d47459211fc6ddea1a2823d11f
+   e21cf97003eb261f115f27fd863d7c19b81a6f120b8460bee9af2176c5eecaf7
+   75b8558e6e03a96d4d59c54b79abefe72234bf20c28aa16c554533bdf04d8913
+   8cc2db43f34e1eff36528e3d30facb2823fbe23e71a08357fc7b01dd1aa35abd
+   7e5333557e33d03329cbc3ac7012e0c699db25505c3ca198a4b270d1b9e61c77
+   82d4aefad06bffbdd30bc03163bec99b439840289b2e26ec106dab49fc8054af
+   74b8e1160ba4a2f5b992de20ac9153d65b0fd6df5b8c5dfa5e62c5dc174a97dc
+   94ebeae4f27f101c2515f1b10021feec182d54502198e6c6c026549883de8531
+   4e01f2c6719724fd87dba13cb6820c54645b2b8ad8ce2d14ecf38385380fd77e
+   d1cf987af0ab39b0ab4806d55890cc99d9e1528351a33edd1a438113d2af1c6a
+   4ae0c19a87d2cd38136cf32df268b4e2e71da897fe2fe1c3bcdbe87b4d4d2cf9
+   122aec6dea01b6c6ece4a45e5d63fa0e5beb9612d3289ed1d5515eff83f51216
+   62a4e1ea69c577a58f9a2d4d86f4bd5aca6db61c4b29f2f5278e0db04b4110f2
+   662b5368f21aa957c822f0a0303ec9f56fe9030f302d16b2c4bf621ed91ab393
+   645b8f9c7907c40ece541c8a0ff34cefcb813bf187b270af0fe4346694be4b1a
+   46bf806df744faa488d9d7112e9c541e27316b9bbe7ef0d15afe06fe821e4b5f
+   140124ee215da5ce9a11d865bf83017cdfab6b4014e31f9da293078ddf7c5125
+   4e2da95f19a508d01dc8f846b1652d4de57a7251e6393240ed14303e395fb188
+   079345e0fb853f876cc1edb4290e2684cc35311e8602c71a57bd3a6c9a804591
+   727be34f6fab723f48a196febc6f0f9b34f344fd9706790a3e63d1a989cbcfdf
+   30f8eb71fcb024635adec568fe9d39a194c8cd2fbbf6a131390dc311e9c5381b
+   5542466b3c60a8eeb621e6e653b8b52fd5dd3f8d0f3fe3f0ea948b0c7862de25
+   e064c2947359fa25bd58a35e5ce33677646d0874150b72522ec6241d19d06db0
+   380cd0ea8be776e7cf7ca0d1bd59c5584fece0db84d1a767a162029d682e4063
+   7d7c378c847ae185e2d6dffe4e15d55bafd0d35fc8d7ff56fe5fa7cbc2ee1833
+   7184dc62f5e50dec5cda90629d6c81a9fedab2579019cd49dd76bf997f543bc2
+   35941a70107925ff095153ec610772c5fd524c80c228d80e781e864e295d20c6
+   896f502887b18ed2307e8eeaea56e2649639349652f509528e4b80ea477d7a6a
+   453807b26361b1eca6fcec4e06c504166742c12f8a44a359fef2727d34f47201
+   f75a7055629b28397e575e4cc9de39adc08f42410b5232f8f2e7b86fdf3e1ebb
+   e734b7acba49d308a6151c1352de2e20b1fed060d5e6fb58d6f23b2847dc53b6
+   7519b92dba604e448f3990570f09bd65f685545a02462cd24c72f2f7989cbe87
+   b0c52da52eea1770aaecf7d568d0b1bf1aed3ca8f58f332299e391b4413b6c6f
+   eba11d43262177a2a446ce5afc59c48288781cf9167fe5a1bf42629c6d094c65
+   37abdea5af4b4a3a7f1e8a3e8cff1026ddefc29bae39e75249364a953ec52231
+   bb5813a80b3af25efca43800a74c4664632f6dc189cc2cd95478b594fc578ea3
+   a15840e92822b7166c8611d464af2e8d1baa5bcaf1c1649589a7eb16b889b54e
+   0b7ced0ba25a51e34f4d0f152fbe69e1f43682d81a5de05f89628b1b5ef10032
+   7e4b4fb3a02385762b4ab1e721da7ff61733c41d7071e819ec44c03311474330
+   e97a6c0248d1dd99419feb83980f2422a9e7c9065469c4103d76bdb7b8524c4e
+   21914095fe25eea171d88dce27d96f7649a717d9415ba05138b6a26a685fb768
+   f75564884fa38cc9bade16b94db62d1f9da3ce294f3e917301855676a7ee7b3f
+   77bd07cfb8b53de30082bbacdf34f19e1db5aaff7a3188ef408c6a9c906b42b4
+   1193003d273a5a69b0ca5844bbbcb8c7812330aa3f93e155b8681f9edfba2ddb
+   b011cae933e72b34d1117d26d665b195322dca63429bde4183c02255ccf0c595
+   873d25c4c73db307d3165e2c0be0a6016c8785a4e83d581ec3eb0f59ed7a3832
+   3d9772fdf36818aed3b485c38203fb1b019fbe0ada9099543291f106f6d2d057
+   8c53734d101938945284ce689a35b3ff93fe2d40e07e31310e55d21c09cbd0db
+   44a64ea3f16ed2ddc243ef5d6e5ceb4b0a81dc0564ab21e9d81cbc16c5683bad
+   d91125d8b4d551f3091be2115ea121b21438033786c5b76bfc8c0e0721d0fbd7
+   090541d3bdb8e99cb029a135e2ed1f6c490572e625ebce83c7fa02df21d16b0f
+   b93db803cf65ebfb1380b1ba584717b6cb65fe6236adb3613d4a2b0443254dec
+   83c9679ad84e2609cd475f2d9cb98a06fdfdcc73a88be0fac78c6a42e351b698
+   bdc31172568deaec20964d5bc529612d580ba0a7bbcb425bffe1bf3ef1a40eb7
+   504d046ba213e00a0714d11950e94b0e249e3ee6e0b6cdb4ea32b4024011a68e
+   51160a133b25f99034273255916a92ea3a94fb2bcfafcc0a2e9e9dc2f8c3195d
+   d0ee7c704b8bcd5d8960f2bd2160f7fd304c107d27b3b0984f50deb813a467b0
+   73e6347149a1cf4b5332289d635d5d23c2730b30368a5ce3cceba6155347f0df
+   21f611044505bce3806bd8edba86324637c6a9210830b636602a83527b41eee6
+   0f2d2df4c7c6a571ee8514848a47beb0a7203f8e4b91e4fa67ea3022fe9d9f94
+   14884016e66fe48536167e12f0dc550e801004c11a86c5b798e26ca9b1f25841
+   624ad2327137908dd23ba5f65eeb107b8bf1e4f45218e44f15e75dae8df9e78b
+   edf5e65cb12278f1524d4597c037d40aa1222ad514046393d5f7e29759e61087
+   bf1f1d3907d2d2b6f21bb8a1a7098c533a897cbcb8891b56a1bc65ab8625bab6
+   6f36e2afc6eb084cdb2159be5437e5c437a738ef80ada9eb1d08b173d22a3a6e
+   4eae6b29b329a93c2dc6b47993606e7ecff40431831e83aa7c64a09e7eb291b1
+   a9f671c14ff8517251b0419b517095b97fd7010ac59063be3652d27414262ecd
+   c2f9b91a8a46fa583bb4588365c4942dd8243268fc9f5fa3343cbe17fc3539d2
+   4341d582e0a463539412e793507e4be487ebf9cc7e26476bf5e68eec99e6280f
+   eeaecf057f2d36000890dab50bb7f859b209857d67830e06a66b535ca763bac9
+   79b9eed31e2b9b3095ab64ab961c57f6a6660cb172aedeb3d85bc9bf3b9fa8fc
+   4673de2813d138ef85e0d456e501e59dbade75add36acf197baf472f6351f23e
+   780214dbc6947aabb673e033d61aa61f9a87285f8afbc5bf879c91bea9692fa9
+   33f7010116f028b32de397100350f5808e1761a61f08361a2dc8c3cf0faaf111
+   cf44fdfd1088e428866be3a58b5f638c5c762fb2790ade914be0cf612b6b3bde
+   c6b88accf6d1b3d78c410c05ae5117ca1025d32cc03a016f330236018d6579cd
+   0b9930b317a2ecaa2b41491b826a7d259226ff83bc3bc67660a4c5c0620f33ba
+   c03196a4517ae45f33ef01ca53b54ccc96b72d68e57ce9489fb7dea6fb8dc88f
+   8f2bd532bd7d1a9bb476f5bc4dc824cd24742e549bfddd6ae89095fb20739a65
+   7c98ed3e1b323cb0d3232c58e6a7cc3ca1d32ece1a10e05e2252e36cb65d4d14
+   1ff24618465b6651297cd34d38f61c62f31fb8e970c30653225eed4ad93a9340
+   2d67beed1e6c368aee7bdf4ca85e54eb2b17bbda501d0d096f5cb4e47575f0fa
+   8c60f8ed3bf2766de6374342014c5d8c72a9a9d981ce6c7069f75f843fb97819
+   d104a584f12b1a3b480b9fd774052b698259368ea5bb7af675809421fa3ac6e9
+   feebe427a13ece5e96fe85cd382b2e10607ab911877ad07e74a200621d3cc2d9
+   02dca836e92b8ae754b483a8a91b80a0b0c113c48b0f1253c599bb9cf01bdca0
+   5112c6378a1b2de49053c507c82b5e11b6e91abb2d5e90000000000000000000
+   0000000000000000000000000000000000000000000040c12151d1e252c` }
+   }
+
+Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
+
+   Some applications require pre-hashing, where the signature generation
+   process can be separated into a pre-hash step and a core signature
+   step in order to ease operational requirements around large or
+   inconsistently-sized payloads.  Pre-hashing can be performed at the
+   protocol layer, but not all protocols support it.  Examples in
+   [RFC5280] are certificates and CRLs; these do not include message
+   digesting before signing.  This can make signing large CRLs or a high
+   volume of certificates with large public keys challenging.
+
+   As mentioned in the introduction, pure ML-DSA signing itself supports
+   a pre-hashing flow by splitting the operation over two modules.  In
+   this section, we make this "ExternalMu-ML-DSA" more explicit.
+
+   There are two steps.  First an ExternalMu-ML-DSA.Prehash() followed
+   by ExternalMu-ML-DSA.Sign().  Together these are functionally
+   equivalent to ML-DSA.Sign() from [FIPS204] in that used in sequence
+   they create exactly the same signatures as regular pure ML-DSA, which
+   can be verified by the unmodified ML-DSA.Verify().
+
+   An ML-DSA key and certificate can be used with either ML-DSA or
+   ExternalMu-ML-DSA interchangeably.  Note that ExternalMu-ML-DSA
+   describes a different signature API from ML-DSA and therefore might
+   require explicit support from hardware or software cryptographic
+   modules.
+
+   Note that the signing mode defined here is different from HashML-DSA
+   defined in Section 5.4 of [FIPS204].  This specification uses
+   exclusively ExternalMu-ML-DSA for pre-hashed use cases.  See
+   Section 9.1 for additional discussion of why HashML-DSA is disallowed
+   in PKIX.
+
+   All functions and notation used in Figure 2 and Figure 3 are defined
+   in [FIPS204].
+
+   External operations:
+
+ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+
+   if |ctx| > 255 then
+     return error  # return an error indication if the context string is
+                   # too long
+   end if
+
+   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
+                                                         || ctx) || M
+   mu = H(BytesToBits(H(pk, 64)) || M', 64)
+   return mu
+
+             Figure 2: External steps of ExternalMu-ML-DSA
+
+   Internal operations:
+
+ExternalMu-ML-DSA.Sign(sk, mu):
+
+  if |mu| != 512 then
+    return error  # return an error indication if the input mu is not
+                  # 64 bytes (512 bits).
+  end if
+
+  rnd = rand(32)  # for the optional deterministic variant,
+                  # set rnd to all zeroes
+  if rnd = NULL then
+    return error  # return an error indication if random bit
+                  # generation failed
+  end if
+
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  return sigma
+
+ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
+   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+
+            Figure 3: Internal steps of ExternalMu-ML-DSA
+
+   ExternalMu-ML-DSA requires the public key, or its prehash, as input
+   to the pre-digesting function.  This assumes the signer generating
+   the pre-hash is in possession of the public key before signing and is
+   different from conventional pre-hashing which only requires the
+   message and the hash function as input.
+
+   Security-wise, during the signing operation of pure (or "one-step")
+   ML-DSA, the cryptographic module extracts the public key hash tr from
+   the secret key object, and thus there is no possibility of mismatch
+   between tr and sk.  In ExternalMu-ML-DSA, the public key or its hash
+   needs to be provided to the Prehash() routine indpedendly of the
+   secret key, and while the exact mechanism by which it is delivered
+   will be implementation-specific, it does open a windown for
+   mismatches between tr and sk.  First, this will produce a signature
+   which will fail to verify under the intended public key since a
+   compliant Verify() routine will independently compute tr from the
+   public key.  Implementors should pay careful attention to how the
+   public key or its hash is delivered to the ExternalMu-ML-
+   DSA.Prehash() routine, and from where they are sourcing this data.
+
+Acknowledgments
+
+   The authors wish to thank the following people for their
+   contributions to this document: Dierdre Connolly, Viktor Dukhovni,
+   Russ Housley, Alicja Kario, Mike Ounsworth, and Daniel Van Geest.
+
+   In addition, we would like to thank those who contributed to the
+   private key format discussion: Tony Arcieri, Bob Beck, Dmitry
+   Belyavskiy, David Benjamin, Daniel Bernstein, Uri Blumenthal, Theo
+   Buehler, Stephen Farrell, Jean-Pierre Fiset, Scott Fluhrer, Alex
+   Gaynor, John Gray, Peter Gutmann, David Hook, Tim Hudson, Paul
+   Kehrer, John Kemp, Watson Ladd, Adam Langley, John Mattsson, Damien
+   Miller, Robert Relyea, Michael Richardson, Markku-Juhani O.
+   Saarinen, Rich Salz, Roland Shoemaker, Sophie Schmieg, Simo Sorce,
+   Michael St. Johns, Falko Strenzke, Filippo Valsorda, Loganaden
+   Velvindron, Carl Wallace, and Wei-Jun Wang.
+
+Authors' Addresses
+
+   Jake Massimo
+   AWS
+   United States of America
+   Email: jakemas@amazon.com
+
+
+   Panos Kampanakis
+   AWS
+   United States of America
+   Email: kpanos@amazon.com
+
+
+   Sean Turner
+   sn3rd
+   Email: sean@sn3rd.com
+
+
+   Bas Westerbaan
+   Cloudflare
+   Email: bas@cloudflare.com
