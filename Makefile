@@ -1,5 +1,5 @@
 DEPS_FILES := \
-	X509-ML-DSA-2024.asn \
+	X509-ML-DSA-2025.asn \
 	./examples/ML-DSA-44.crt \
 	./examples/ML-DSA-44.crt.txt \
 	./examples/ML-DSA-44.priv \
