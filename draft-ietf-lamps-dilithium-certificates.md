@@ -589,7 +589,7 @@ as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 
 ~~~
 <CODE BEGINS>
-{::include X509-ML-DSA-2024.asn}
+{::include X509-ML-DSA-2025.asn}
 <CODE ENDS>
 ~~~
 
