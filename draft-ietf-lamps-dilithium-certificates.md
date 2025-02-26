@@ -442,8 +442,8 @@ ML-DSA-44-PrivateKey ::= CHOICE {
   both SEQUENCE {
       seed OCTET STRING (SIZE (32)),
       expandedKey OCTET STRING (SIZE (2560))
+      }
   }
-}
 
 ML-DSA-65-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
