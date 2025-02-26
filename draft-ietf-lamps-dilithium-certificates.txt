@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 28 August 2025                                        S. Turner
+Expires: 30 August 2025                                        S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                        24 February 2025
+                                                        26 February 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2025.
+   This Internet-Draft will expire on 30 August 2025.
 
 Copyright Notice
 
@@ -604,31 +604,32 @@ Appendix A.  ASN.1 Module
    Rules; see [X690].  This module imports objects from [RFC5912].
 
    <CODE BEGINS>
-   X509-ML-DSA-2024
+   X509-ML-DSA-2025
    { iso(1) identified-organization(3) dod(6)
      internet(1) security(5) mechanisms(5) pkix(7) id-mod(0)
-     id-mod-x509-ml-dsa-2024(TBD1) }
+     id-mod-x509-ml-dsa-2025(TBD1) }
 
-   DEFINITIONS IMPLICIT TAGS ::=
+   DEFINITIONS IMPLICIT TAGS ::= BEGIN
 
-   BEGIN
-
-   -- EXPORTS ALL;
+   EXPORTS ALL;
 
    IMPORTS
 
-   PUBLIC-KEY, SIGNATURE-ALGORITHM
-     FROM AlgorithmInformation-2009 -- From [RFC5912]
-       { iso(1) identified-organization(3) dod(6) internet(1)
-         security(5) mechanisms(5) pkix(7) id-mod(0)
-         id-mod-algorithmInformation-02(58) } ;
+    PUBLIC-KEY, SIGNATURE-ALGORITHM
+      FROM AlgorithmInformation-2009  -- [RFC 5912]
+        { iso(1) identified-organization(3) dod(6) internet(1)
+          security(5) mechanisms(5) pkix(7) id-mod(0)
+          id-mod-algorithmInformation-02(58) } ;
 
    --
-   -- Object Identifiers
+   -- ML-DSA Identifiers
    --
 
-   sigAlgs OBJECT IDENTIFIER ::= { joint-iso-itu-t(2) country(16)
-       us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) 3 }
+   nistAlgorithms OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
+     country(16) us(840) organization(1) gov(101) csor(3)
+     nistAlgorithms(4) }
+
+   sigAlgs OBJECT IDENTIFIER ::= { nistAlgorithms 3 }
 
    id-ml-dsa-44 OBJECT IDENTIFIER ::= { sigAlgs 17 }
 
@@ -637,74 +638,116 @@ Appendix A.  ASN.1 Module
    id-ml-dsa-87 OBJECT IDENTIFIER ::= { sigAlgs 19 }
 
    --
-   -- Signature Algorithm Identifiers
+   -- Public Key Algorithms
    --
 
-   sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
-     IDENTIFIER id-ml-dsa-44
-     PARAMS ARE absent
-     PUBLIC-KEYS { pk-ml-dsa-44 }
-     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 } }
-
-   sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
-     IDENTIFIER id-ml-dsa-65
-     PARAMS ARE absent
-     PUBLIC-KEYS { pk-ml-dsa-65 }
-     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 } }
-
-   sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
-     IDENTIFIER id-ml-dsa-87
-     PARAMS ARE absent
-     PUBLIC-KEYS { pk-ml-dsa-87 }
-     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 } }
+   PublicKeys PUBLIC-KEY ::= {
+     -- This expands PublicKeys from [RFC 5912]
+     pk-ml-dsa-44 |
+     pk-ml-dsa-65 |
+     pk-ml-dsa-87,
+     ...
+   }
 
    --
-   -- Public Keys
+   -- ML-DSA Public Keys
    --
 
    pk-ml-dsa-44 PUBLIC-KEY ::= {
      IDENTIFIER id-ml-dsa-44
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
+     -- KEY no ASN.1 wrapping; 1312 octets --
+     PARAMS ARE absent
+     CERT-KEY-USAGE { digitalSignature, nonRepudiation,
+                      keyCertSign, cRLSign }
+     PRIVATE-KEY ML-DSA-44-PrivateKey
+     }
+
+   ML-DSA-44-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (2560)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (2560))
+         }
+     }
 
    pk-ml-dsa-65 PUBLIC-KEY ::= {
      IDENTIFIER id-ml-dsa-65
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
+     -- KEY no ASN.1 wrapping; 1952 octets --
+     PARAMS ARE absent
+     CERT-KEY-USAGE { digitalSignature, nonRepudiation,
+                      keyCertSign, cRLSign }
+     PRIVATE-KEY ML-DSA-65-PrivateKey
+     }
+
+   ML-DSA-65-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (4032)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (4032))
+         }
+     }
 
    pk-ml-dsa-87 PUBLIC-KEY ::= {
      IDENTIFIER id-ml-dsa-87
-     -- KEY no ASN.1 wrapping --
-     CERT-KEY-USAGE
-       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-     -- PRIVATE-KEY no ASN.1 wrapping -- }
+     -- KEY no ASN.1 wrapping; 2592 octets --
+     PARAMS ARE absent
+     CERT-KEY-USAGE { digitalSignature, nonRepudiation,
+                       keyCertSign, cRLSign }
+     PRIVATE-KEY ML-DSA-87-PrivateKey
+     }
 
-   ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+   ML-DSA-87-PrivateKey ::= CHOICE {
+     seed [0] OCTET STRING (SIZE (32)),
+     expandedKey OCTET STRING (SIZE (4896)),
+     both SEQUENCE {
+         seed OCTET STRING (SIZE (32)),
+         expandedKey OCTET STRING (SIZE (4896))
+         }
+     }
 
-   ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+   ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
+
+   ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
+
+   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2602))
 
    --
-   -- Expand SignatureAlgorithms from RFC 5912
+   -- Signature Algorithms
    --
+
    SignatureAlgorithms SIGNATURE-ALGORITHM ::= {
+     -- This expands SignatureAlgorithms from [RFC 5912]
      sa-ml-dsa-44 |
      sa-ml-dsa-65 |
      sa-ml-dsa-87,
      ... }
 
    --
-   -- Expand SignatureAlgorithms from RFC 5912
+   -- ML-DSA Signature Algorithm Identifiers
    --
-   PublicKeys PUBLIC-KEY ::= {
-     pk-ml-dsa-44 |
-     pk-ml-dsa-65 |
-     pk-ml-dsa-87,
-     ...
-   }
+
+   sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-44
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-44 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 }
+     }
+
+   sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-65
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-65 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 }
+     }
+
+   sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
+     IDENTIFIER id-ml-dsa-87
+     PARAMS ARE absent
+     PUBLIC-KEYS { pk-ml-dsa-87 }
+     SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 }
+     }
 
    END
    <CODE ENDS>
