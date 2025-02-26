@@ -392,9 +392,6 @@ still apply.
 
 #  Private Key Format {#priv-key}
 
-An ML-DSA private key is encoded by storing its 32-octet seed in
-the privateKey field as follows.
-
 {{FIPS204}} specifies two formats for an ML-DSA private key: a 32-octet
 seed (xi) and an (expanded) private key. The expanded private key (and public key)
 is computed from the seed using `ML-DSA.KeyGen_internal(xi)` (algorithm 6).
@@ -431,10 +428,62 @@ OneAsymmetricKey is replicated below.
   2021 ASN.1 syntax {{X680}}.
 </aside>
 
-When used in a OneAsymmetricKey type, the privateKey OCTET STRING contains
-the raw octet string encoding of the 32-octet seed. The publicKey field
-SHOULD be omitted because the public key can be computed as noted earlier
-in this section.
+PrivateKey ::= OCTET STRING
+
+PublicKey ::= BIT STRING
+
+For the ML-DSA variants defined in this document, the private key can be
+represented in multiple formats. The ASN.1 type ML-DSA-PrivateKey is defined
+to hold these representations:
+
+ML-DSA-44-PrivateKey ::= CHOICE {
+  seed [0] OCTET STRING (SIZE (32)),
+  expandedKey OCTET STRING (SIZE (2560)),
+  both SEQUENCE {
+      seed OCTET STRING (SIZE (32)),
+      expandedKey OCTET STRING (SIZE (2560))
+  }
+}
+
+ML-DSA-65-PrivateKey ::= CHOICE {
+  seed [0] OCTET STRING (SIZE (32)),
+  expandedKey OCTET STRING (SIZE (4032)),
+  both SEQUENCE {
+      seed OCTET STRING (SIZE (32)),
+      expandedKey OCTET STRING (SIZE (4032))
+      }
+  }
+
+ML-DSA-87-PrivateKey ::= CHOICE {
+  seed [0] OCTET STRING (SIZE (32)),
+  expandedKey OCTET STRING (SIZE (4896)),
+  both SEQUENCE {
+      seed OCTET STRING (SIZE (32)),
+      expandedKey OCTET STRING (SIZE (4896))
+      }
+  }
+
+The CHOICE allows three representations of the private key:
+1. The seed format (tag [0]) contains just the 32-byte seed value (xi)
+   from which both the expanded private key and public key can be derived
+   using ML-DSA.KeyGen_internal(xi).
+2. The expandedKey format contains the full expanded private key that was
+   derived from the seed.
+3. The both format contains both the seed and expanded key, allowing for
+   validation that the expanded key was correctly derived from the seed.
+
+When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
+these three formats may be used, though the seed format is RECOMMENDED
+for storage efficiency. Implementations MUST be able to handle all three
+formats when parsing private keys.
+
+The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
+the appropriate OID as defined in Section 3. If present, the "publicKey"
+field will hold the encoded public key as defined in Section 5.
+
+NOTE: While the private key can be stored in multiple formats, the seed-only
+format is RECOMMENDED as it is the most compact representation and the
+expanded key can be deterministically derived from it.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
