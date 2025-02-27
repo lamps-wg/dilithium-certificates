@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T00:55:38.990500+00:00",
+  "timestamp": "2025-02-27T00:55:25.169024+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1044,7 +1044,7 @@
       "labels": [],
       "body": "See [mail thread](https://mailarchive.ietf.org/arch/msg/spasm/6iUmCadOg3PfGja7j26-MUXTUVk/).",
       "createdAt": "2025-01-22T21:18:19Z",
-      "updatedAt": "2025-02-09T10:24:02Z",
+      "updatedAt": "2025-02-26T23:26:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -1074,6 +1074,20 @@
           "body": "> The main reason (for me) is that seed is simpler. With expanded private key you need to align on which checks to perform, and that seems to have already diverged between implementations. Size is another nice benefit.\n> \n> We should continue to mention LEAK-BIND-x security, as that has been an actual security concern (eg. Signal). My current understanding is that there is no real-world attack exploiting missing MAL-BIND-x security. I don't want to jump the gun here and say it's definitely not important though. But we can tweak the language to make MAL-BIND-x seem less threatening.\n\nI still believe that the least misleadingly threatening mention of the `MAL-BIND-x` issues is to not mention them at all. At least for ML-KEM, to the extent they need to be mentioned, they're well covered in the already referenced [CFRG draft](https://datatracker.ietf.org/doc/html/draft-sfluhrer-cfrg-ml-kem-security-considerations-02)",
           "createdAt": "2025-02-09T10:24:00Z",
           "updatedAt": "2025-02-09T10:24:00Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "To do:\n\n- [ ] Update .asn file - See #83\n- [ ] Update ASN.1 in text\n- [ ] Add text to for ML-DSA-*-PublicKey and ML-DSA-*-PrivateKey\n- [ ] Add text for seed/expanded consistency checking\n- [ ] Update IANA Consideration - See #84\n- [ ] Update private key examples",
+          "createdAt": "2025-02-26T18:08:49Z",
+          "updatedAt": "2025-02-26T18:56:18Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Added text for ML-DSA private key: https://github.com/lamps-wg/dilithium-certificates/pull/87",
+          "createdAt": "2025-02-26T23:26:05Z",
+          "updatedAt": "2025-02-26T23:26:05Z"
         }
       ]
     },
@@ -1114,6 +1128,22 @@
           "updatedAt": "2025-02-20T21:28:46Z"
         }
       ]
+    },
+    {
+      "number": 85,
+      "id": "I_kwDOIEpj4c6r0G3d",
+      "title": "Need some text for sa-ml-dsa-*",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/85",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We got ASN.1 for sa-ml-dsa-44, sa-ml-dsa-65, and sa-ml-dsa-87, but no text. Will slap the ASN.1 and an intro text in \"ML-DSA Signatures in PKIX\" section.",
+      "createdAt": "2025-02-26T19:08:56Z",
+      "updatedAt": "2025-02-26T19:08:56Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -5986,6 +6016,171 @@
       "mergeCommit": {
         "oid": "c48fab342edd1662d2d01572cd47a08f9ab19700"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 83,
+      "id": "PR_kwDOIEpj4c6MsEnN",
+      "title": "Update ASN.1 Module",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/83",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updating ASN.1 module.",
+      "createdAt": "2025-02-26T18:11:36Z",
+      "updatedAt": "2025-02-26T18:48:36Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "c48fab342edd1662d2d01572cd47a08f9ab19700",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-asn-module",
+      "headRefOid": "c357b73094c682427ea5af7df90e442b71f53ee8",
+      "closedAt": "2025-02-26T18:48:36Z",
+      "mergedAt": "2025-02-26T18:48:36Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "79332c3fc4a4eb7ee03062901e3e16a024d6aded"
+      },
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "is CI failing just because the file name changed to 2025, and it's checking against the tip of main?",
+          "createdAt": "2025-02-26T18:44:56Z",
+          "updatedAt": "2025-02-26T18:44:56Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think so. I will go ahead and merge and we'll see if it goes away. Crossing my fingers.",
+          "createdAt": "2025-02-26T18:46:45Z",
+          "updatedAt": "2025-02-26T18:46:45Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6drsUR",
+          "commit": {
+            "abbreviatedOid": "c357b73"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-26T18:30:34Z",
+          "updatedAt": "2025-02-26T18:30:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOIEpj4c6MsXpg",
+      "title": "Update IANA Considerations",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/84",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Update reference to module name.",
+      "createdAt": "2025-02-26T18:55:38Z",
+      "updatedAt": "2025-02-26T19:02:00Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "c4d6e222814b0751a31c97a48406524f3f9a75d7",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-iana-considerations",
+      "headRefOid": "3bb9f7139e264225f3dda0682317a0a7087f68d4",
+      "closedAt": "2025-02-26T19:02:00Z",
+      "mergedAt": "2025-02-26T19:01:59Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6dsG3Q",
+          "commit": {
+            "abbreviatedOid": "3bb9f71"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-26T19:01:55Z",
+          "updatedAt": "2025-02-26T19:01:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 86,
+      "id": "PR_kwDOIEpj4c6MshsF",
+      "title": "sa-ml-dsa-*",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/86",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Put text in the main body for sa-ml-dsa-44, sa-ml-dsa-65, and sa-ml-dsa-87.\r\n\r\nCloses #85.",
+      "createdAt": "2025-02-26T19:13:37Z",
+      "updatedAt": "2025-02-26T19:23:46Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-sa-ml-dsa",
+      "headRefOid": "7cdbfb0782247808a912630e4bc10a0fd333130c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6dsU_3",
+          "commit": {
+            "abbreviatedOid": "7cdbfb0"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-26T19:23:46Z",
+          "updatedAt": "2025-02-26T19:23:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 87,
+      "id": "PR_kwDOIEpj4c6MuFiQ",
+      "title": "ML-DSA private key details",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/87",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A first pass as describing the private key format.",
+      "createdAt": "2025-02-26T23:23:39Z",
+      "updatedAt": "2025-02-26T23:37:58Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
+      "headRepository": "jakemas/dilithium-certificates",
+      "headRefName": "priv-key",
+      "headRefOid": "9b0f03feb5cc808af55e9c15e08756dd16688ebf",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
