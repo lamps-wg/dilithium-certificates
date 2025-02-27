@@ -105,48 +105,48 @@ func example(name string) {
 	formats := []string{"seed", "expanded", "both"}
 	for _, format := range formats {
 		ask, err := generatePrivateKey(format, alg, seed[:], expandedKey)
-            if err != nil {
-                panic(err)
-            }
-
-			papk, err := asn1.Marshal(apk)
-            if err != nil {
-                panic(err)
-            }
-
-            pask, err := asn1.Marshal(ask)
-            if err != nil {
-                panic(err)
-            }
-
-            // Write public key
-            f, err := os.Create(fmt.Sprintf("%s.pub", name))
-            if err != nil {
-                panic(err)
-            }
-            defer f.Close()
-
-            if err = pem.Encode(f, &pem.Block{
-                Type:  "PUBLIC KEY",
-                Bytes: papk,
-            }); err != nil {
-                panic(err)
-            }
-
-            // Write private key with format indication
-            f2, err := os.Create(fmt.Sprintf("%s-%s.priv", name, format))
-            if err != nil {
-                panic(err)
-            }
-            defer f2.Close()
-
-            if err = pem.Encode(f2, &pem.Block{
-                Type:  "PRIVATE KEY",
-                Bytes: pask,
-            }); err != nil {
-                panic(err)
-            }
+        if err != nil {
+            panic(err)
         }
+
+        papk, err := asn1.Marshal(apk)
+        if err != nil {
+            panic(err)
+        }
+
+        pask, err := asn1.Marshal(ask)
+        if err != nil {
+            panic(err)
+        }
+
+        // Write public key
+        f, err := os.Create(fmt.Sprintf("%s.pub", name))
+        if err != nil {
+            panic(err)
+        }
+        defer f.Close()
+
+        if err = pem.Encode(f, &pem.Block{
+            Type:  "PUBLIC KEY",
+            Bytes: papk,
+        }); err != nil {
+            panic(err)
+        }
+
+        // Write private key with format indication
+        f2, err := os.Create(fmt.Sprintf("%s-%s.priv", name, format))
+        if err != nil {
+            panic(err)
+        }
+        defer f2.Close()
+
+        if err = pem.Encode(f2, &pem.Block{
+            Type:  "PRIVATE KEY",
+            Bytes: pask,
+        }); err != nil {
+            panic(err)
+        }
+    }
 }
 
 func main() {
