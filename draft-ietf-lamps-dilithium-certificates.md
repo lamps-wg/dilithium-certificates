@@ -335,13 +335,13 @@ The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
     PRIVATE-KEY ML-DSA-87-PrivateKey }  -- defined in Section 6
 
-
   ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
 
   ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
 
   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
 
+~~~
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a SubjectPublicKeyInfo type,
@@ -439,6 +439,7 @@ For the ML-DSA variants defined in this document, the private key can be
 represented in multiple formats. The ASN.1 type ML-DSA-PrivateKey is defined
 to hold these representations:
 
+~~~
 ML-DSA-44-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (2560)),
@@ -447,7 +448,9 @@ ML-DSA-44-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (2560))
       }
   }
+~~~
 
+~~~
 ML-DSA-65-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4032)),
@@ -456,7 +459,9 @@ ML-DSA-65-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (4032))
       }
   }
+~~~
 
+~~~
 ML-DSA-87-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4896)),
@@ -465,13 +470,17 @@ ML-DSA-87-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (4896))
       }
   }
+~~~
 
 The CHOICE allows three representations of the private key:
+
 1. The seed format (tag [0]) contains just the 32-byte seed value (xi)
    from which both the expanded private key and public key can be derived
    using ML-DSA.KeyGen_internal(xi).
+
 2. The expandedKey format contains the full expanded private key that was
    derived from the seed.
+
 3. The both format contains both the seed and expanded key, allowing for
    validation that the expanded key was correctly derived from the seed.
 
