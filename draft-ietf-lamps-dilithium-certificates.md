@@ -287,7 +287,7 @@ implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified {{oids}}.
 
-# ML-DSA Public Keys in PKIX {#ML-DSA-PubblicKey}
+# ML-DSA Public Keys in PKIX {#ML-DSA-PublicKey}
 
 In the X.509 certificate, the subjectPublicKeyInfo field has the
 SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
@@ -498,7 +498,7 @@ textual encoding defined in {{RFC7468}}.
 
 For the ASN.1 module in {{asn1}}, IANA is requested to assign an object
 identifier (OID) for the module identifier (TBD1) with a Description
-of "id-mod-x509-ml-dsa-2024". The OID for the module should be
+of "id-mod-x509-ml-dsa-2025". The OID for the module should be
 allocated in the "SMI Security for PKIX Module Identifier" registry
 (1.3.6.1.5.5.7.0).
 
@@ -508,7 +508,7 @@ An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
 for a keypair, or for the private key. In particular, generating the seed
 in one cryptographic module and then importing or exporting it into another
 cryptographic module is allowed. The internal key generation functions
-of ML-KEM.KeyGen_Internal(d, z) and ML-DSA.KeyGen_internal(xi) {{FIPS204}}
+of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi)
 can be accessed for this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
@@ -585,7 +585,7 @@ discussion of these properties in ML-DSA can be found at
 
 These properties are dependent, in part, on unambiguous public
 key serialization. It for this reason the public key structure
-defined in {{ML-DSA-PubblicKey}} is intentionally encoded as a
+defined in {{ML-DSA-PublicKey}} is intentionally encoded as a
 single OCTET STRING.
 
 ## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
@@ -644,7 +644,7 @@ as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 
 ~~~
 <CODE BEGINS>
-{::include X509-ML-DSA-2024.asn}
+{::include X509-ML-DSA-2025.asn}
 <CODE ENDS>
 ~~~
 
