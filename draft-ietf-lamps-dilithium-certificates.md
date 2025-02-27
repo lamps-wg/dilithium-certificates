@@ -689,39 +689,148 @@ This appendix contains examples of ML-DSA public keys, private keys and certific
 
 ## Example Private Key {#example-private}
 
-The following is an example of a ML-DSA-44 private key with hex seed `000102…1e1f`:
+The following examples show ML-DSA private keys in different formats, all derived from the same seed `000102…1e1f`. For each security level, we show the seed-only format (using explicit tag [0]), the expanded format, and both formats together.
 
-~~~
-{::include ./examples/ML-DSA-44.priv}
-~~~
+### ML-DSA-44 Private Key Examples
 
+#### Seed Format
 ~~~
-{::include ./examples/ML-DSA-44.priv.txt}
-~~~
-
-The following is an example of a ML-DSA-65 private key with hex seed `000102…1e1f`:
-
-~~~
-{::include ./examples/ML-DSA-65.priv}
+{::include ./examples/ML-DSA-44-seed.priv}
 ~~~
 
 ~~~
-{::include ./examples/ML-DSA-65.priv.txt}
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.17
+  privateKey OCTET STRING (34 byte)
+    [0] (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
 ~~~
 
-The following is an example of a ML-DSA-87 private key with hex seed `000102…1e1f`:
-
+#### Expanded Format
 ~~~
-{::include ./examples/ML-DSA-87.priv}
-~~~
-
-~~~
-{::include ./examples/ML-DSA-87.priv.txt}
+{::include ./examples/ML-DSA-44-expanded.priv}
 ~~~
 
-NOTE: The private key is the seed and all three examples keys use the
-same seed; therefore, the private above are the same except for the OID
-used to represent the ML-DSA algorithm's security strength.
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.17
+  privateKey OCTET STRING (2560 byte)
+    OCTET STRING (2560 byte) [expanded key bytes]
+~~~
+
+#### Both Format
+~~~
+{::include ./examples/ML-DSA-44-both.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.17
+  privateKey OCTET STRING
+    SEQUENCE (2 elem)
+      seed OCTET STRING (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+      expandedKey OCTET STRING (2560 byte) [expanded key bytes]
+~~~
+
+### ML-DSA-65 Private Key Examples
+
+#### Seed Format
+~~~
+{::include ./examples/ML-DSA-65-seed.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.18
+  privateKey OCTET STRING (34 byte)
+    [0] (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+~~~
+
+#### Expanded Format
+~~~
+{::include ./examples/ML-DSA-65-expanded.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.18
+  privateKey OCTET STRING (4032 byte)
+    OCTET STRING (4032 byte) [expanded key bytes]
+~~~
+
+#### Both Format
+~~~
+{::include ./examples/ML-DSA-65-both.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.18
+  privateKey OCTET STRING
+    SEQUENCE (2 elem)
+      seed OCTET STRING (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+      expandedKey OCTET STRING (4032 byte) [expanded key bytes]
+~~~
+
+### ML-DSA-87 Private Key Examples
+
+#### Seed Format
+~~~
+{::include ./examples/ML-DSA-87-seed.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.19
+  privateKey OCTET STRING (34 byte)
+    [0] (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+~~~
+
+#### Expanded Format
+~~~
+{::include ./examples/ML-DSA-87-expanded.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.19
+  privateKey OCTET STRING (4896 byte)
+    OCTET STRING (4896 byte) [expanded key bytes]
+~~~
+
+#### Both Format
+~~~
+{::include ./examples/ML-DSA-87-both.priv}
+~~~
+
+~~~
+PrivateKeyInfo SEQUENCE (3 elem)
+  version Version INTEGER 0
+  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
+    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.19
+  privateKey OCTET STRING
+    SEQUENCE (2 elem)
+      seed OCTET STRING (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+      expandedKey OCTET STRING (4896 byte) [expanded key bytes]
+~~~
+
+NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is RECOMMENDED for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.
+
 
 ## Example Public Key {#example-public}
 
