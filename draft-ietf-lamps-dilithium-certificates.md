@@ -319,26 +319,29 @@ The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
     -- KEY no ASN.1 wrapping --
     CERT-KEY-USAGE
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-    -- PRIVATE-KEY no ASN.1 wrapping -- }
+    PRIVATE-KEY ML-DSA-44-PrivateKey }  -- defined in Section 6
 
   pk-ml-dsa-65 PUBLIC-KEY ::= {
     IDENTIFIER id-ml-dsa-65
     -- KEY no ASN.1 wrapping --
     CERT-KEY-USAGE
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-    -- PRIVATE-KEY no ASN.1 wrapping -- }
+    PRIVATE-KEY ML-DSA-65-PrivateKey }  -- defined in Section 6
 
   pk-ml-dsa-87 PUBLIC-KEY ::= {
     IDENTIFIER id-ml-dsa-87
     -- KEY no ASN.1 wrapping --
     CERT-KEY-USAGE
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-    -- PRIVATE-KEY no ASN.1 wrapping -- }
+    PRIVATE-KEY ML-DSA-87-PrivateKey }  -- defined in Section 6
 
-  ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
 
-  ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
-~~~
+  ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
+
+  ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
+
+  ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a SubjectPublicKeyInfo type,
