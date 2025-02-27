@@ -433,8 +433,6 @@ OneAsymmetricKey is replicated below.
 
 PrivateKey ::= OCTET STRING
 
-PublicKey ::= BIT STRING
-
 For the ML-DSA variants defined in this document, the private key can be
 represented in multiple formats. The ASN.1 type ML-DSA-PrivateKey is defined
 to hold these representations:
