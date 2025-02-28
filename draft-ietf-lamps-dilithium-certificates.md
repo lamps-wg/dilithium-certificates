@@ -476,11 +476,10 @@ ML-DSA.KeyGen in the returned output.
 
 # Pairwise Consistency Testing
 
-This section specifies RECOMMENDED pairwise consistency testing
-procedures for ML-DSA implementations as defined in {{FIPS204}}.
-These procedures align with the Implementation Guidance for {{FIPS140}}
-and the Cryptographic Module Validation Program Section
-10.3.A. The tests help verify correct implementation of key
+This section specifies pairwise consistency testing procedures for ML-DSA
+implementations as defined in {{FIPS204}}. These procedures align with the
+Implementation Guidance for {{FIPS140}} and the Cryptographic Module Validation
+Program Section 10.3.A. The tests help verify correct implementation of key
 generation, signing, and verification operations.
 
 ## Pairwise Consistency Test Requirements
@@ -495,6 +494,15 @@ and provided expanded key material, when both are present.
 corresponding public key.
 4. The implementation MUST NOT use the key pair for certificate
 issuance if the verification fails.
+
+Certificate Authorities (CAs) that issue certificates containing ML-DSA public
+keys SHOULD perform appropriate validation of the public key prior to certificate
+issuance. This validation MAY include:
+
+1. The CA SHOULD verify that the public key conforms to the format specified in
+{{ML-DSA-PublicKey}}.
+2. The CA SHOULD verify that the size of the public key matches that described in
+{{ML-DSAParameters}} for the provided parameter set defined by the OID.
 
 ### Private Key Format Validation
 
