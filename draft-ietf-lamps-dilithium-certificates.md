@@ -60,6 +60,15 @@ normative:
     seriesinfo:
       ITU-T Recommendation: X.680
       ISO/IEC: 8824-1:2021
+  FIPS140:
+    target: https://csrc.nist.gov/publications/detail/fips/140/3/final
+    title: >
+      Security Requirements for Cryptographic Modules
+    author:
+    - org: National Institute of Standards and Technology (NIST)
+    date: 2019-03
+    seriesinfo:
+      "FIPS PUB": "140-3"
   X690:
     target: https://www.itu.int/rec/T-REC-X.690
     title: >
@@ -453,7 +462,7 @@ An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
 for a keypair, or for the private key. In particular, generating the seed
 in one cryptographic module and then importing or exporting it into another
 cryptographic module is allowed. The internal key generation functions
-of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi)
+of ML-KEM.KeyGen_Internal(d, z) and ML-DSA.KeyGen_internal(xi) {{FIPS204}}
 can be accessed for this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
@@ -464,6 +473,35 @@ it is RECOMMENDED that implementations retain and export the seed,
 even when also exporting the expanded key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
 ML-DSA.KeyGen in the returned output.
+
+# Pairwise Consistency Testing
+
+This section specifies RECOMMENDED pairwise consistency testing
+procedures for ML-DSA implementations as defined in {{FIPS204}}.
+These procedures align with the Implementation Guidance for {{FIPS140}}
+and the Cryptographic Module Validation Program Section
+10.3.A. The tests help verify correct implementation of key
+generation, signing, and verification operations.
+
+## Pairwise Consistency Test Requirements
+
+Implementations generating key pairs for use in certificates
+SHOULD verify these properties before accepting a key pair as valid:
+
+1. The implementation SHOULD verify consistency between seed-derived
+and provided expanded key material, when both are present.
+2. The implementation SHOULD sign a test message using the private key.
+3. The implementation SHOULD verify the resulting signature using the
+corresponding public key.
+4. The implementation MUST NOT use the key pair for certificate
+issuance if the verification fails.
+
+### Private Key Format Validation
+
+When a private key contains both a seed and expanded key material,
+if the expanded key material derived from the seed does not match
+the provided expanded key material, the implementation SHOULD reject
+the key pair.
 
 # Security Considerations
 
