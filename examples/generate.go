@@ -34,14 +34,59 @@ func generatePrivateKeyBytes(format string, seed []byte, expandedKey []byte) ([]
 				}
 				return asn1.Marshal(seedValue)
 			case "expanded":
-				return asn1.Marshal(expandedKey)
+				// Create nested OCTET STRING structure
+				innerOctetString := asn1.RawValue{
+                    Class:      asn1.ClassUniversal,
+                    Tag:       asn1.TagOctetString,
+                    Bytes:     expandedKey,
+                    IsCompound: false,
+				}
+				innerBytes, err := asn1.Marshal(innerOctetString)
+				if err != nil {
+                    return nil, err
+				}
+				// Wrap in outer OCTET STRING
+				outerOctetString := asn1.RawValue{
+					Class:      asn1.ClassUniversal,
+					Tag:       asn1.TagOctetString,
+					Bytes:     innerBytes,
+					IsCompound: true,
+				}
+				return asn1.Marshal(outerOctetString)
 			case "both":
+				// Create [0] OCTET STRING for seed
+				seedValue := asn1.RawValue{
+					Class:      asn1.ClassContextSpecific,
+					Tag:       0,
+					Bytes:     seed,
+					IsCompound: false,
+				}
+
+				// Create nested OCTET STRING for expanded key
+				innerOctetString := asn1.RawValue{
+					Class:      asn1.ClassUniversal,
+					Tag:       asn1.TagOctetString,
+					Bytes:     expandedKey,
+					IsCompound: false,
+				}
+				innerBytes, err := asn1.Marshal(innerOctetString)
+				if err != nil {
+					return nil, err
+				}
+				outerOctetString := asn1.RawValue{
+					Class:      asn1.ClassUniversal,
+					Tag:       asn1.TagOctetString,
+					Bytes:     innerBytes,
+					IsCompound: true,
+				}
+
+				// Create sequence containing both
 				sequence := struct {
-					Seed        []byte
-					ExpandedKey []byte
+					Seed        asn1.RawValue
+					ExpandedKey asn1.RawValue
 				}{
-					Seed:        seed,
-					ExpandedKey: expandedKey,
+					Seed:        seedValue,
+					ExpandedKey: outerOctetString,
 				}
 				return asn1.Marshal(sequence)
 			}
