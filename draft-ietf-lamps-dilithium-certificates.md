@@ -357,8 +357,9 @@ encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded a
 a OneAsymmetricKey, it follows the description in {{priv-key}}.
 
 When the ML-DSA private key appears outside of an Asymmetric Key Package in an
-environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by using
-the ML-DSA-PrivateKey type.
+environment that uses ASN.1 encoding, it can be encoded using one of the
+the ML-DSA-PrivateKey CHOICE formats defined in {{priv-key}}. The seed format
+is RECOMMENDED as it efficiently stores both the private and public key.
 
 {{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
@@ -431,11 +432,9 @@ OneAsymmetricKey is replicated below.
   2021 ASN.1 syntax {{X680}}.
 </aside>
 
-PrivateKey ::= OCTET STRING
-
-For the ML-DSA variants defined in this document, the private key can be
-represented in multiple formats. The ASN.1 type ML-DSA-PrivateKey is defined
-to hold these representations:
+For ML-DSA private keys, the privateKey field in OneAsymmetricKey contains one of
+the following CHOICE structures encoded as an OCTET STRING, depending on the
+security level:
 
 ~~~
 ML-DSA-44-PrivateKey ::= CHOICE {
@@ -472,7 +471,7 @@ ML-DSA-87-PrivateKey ::= CHOICE {
 
 The CHOICE allows three representations of the private key:
 
-1. The seed format (tag [0]) contains just the 32-byte seed value (xi)
+1. The seed format (tag `[0]`) contains just the 32-byte seed value (xi)
    from which both the expanded private key and public key can be derived
    using ML-DSA.KeyGen_internal(xi).
 
@@ -511,12 +510,13 @@ allocated in the "SMI Security for PKIX Module Identifier" registry
 
 # Implementation Considerations
 
-An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
-for a keypair, or for the private key. In particular, generating the seed
-in one cryptographic module and then importing or exporting it into another
-cryptographic module is allowed. The internal key generation functions
-of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi)
-can be accessed for this purpose.
+An ML-DSA.KeyGen seed (xi) represents the RECOMMENDED format for storing
+and transmitting ML-DSA private keys. This format is explicitly permitted
+by {{FIPS204}} as an acceptable representation of a keypair. In particular,
+generating the seed in one cryptographic module and then importing or
+exporting it into another cryptographic module is allowed. The internal
+key generation function ML-DSA.KeyGen_internal(xi) can be accessed for
+this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
 expanding a private key from a seed is a one-way function, meaning that once a
@@ -673,20 +673,20 @@ as reference.
 The parameter sets defined for NIST security levels 2, 3 and 5
 are listed in the Figure 1, along with the resulting signature
 size, public key, and private key sizes in bytes.
-Note that these are the sizes of
-    the plain private and public keys; and
-    not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
-        objects in which they are wrapped.
+Note that these are the sizes of the raw keys, not including
+ASN.1 encoding overhead from OneAsymmetricKey and SubjectPublicKeyInfo
+wrappers. Private key sizes are shown for both the seed format
+and expanded format.
 
 ~~~
-|=======+=======+=====+========+========+========|
-| Level | (k,l) | eta |  Sig.  | Public | Private|
-|       |       |     |  (B)   | Key(B) | Key(B) |
-|=======+=======+=====+========+========+========|
-|   2   | (4,4) |  2  |  2420  |  1312  |  32    |
-|   3   | (6,5) |  4  |  3309  |  1952  |  32    |
-|   5   | (8,7) |  2  |  4627  |  2592  |  32    |
-|=======+=======+=====+========+========+========|
+|=======+=======+=====+========+========+==========+==========|
+| Level | (k,l) | eta |  Sig.  | Public | Private  | Private  |
+|       |       |     |  (B)   | Key(B) | Seed(B)  | Expand(B)|
+|=======+=======+=====+========+========+==========+==========|
+|   2   | (4,4) |  2  |  2420  |  1312  |    32    |   2560   |
+|   3   | (6,5) |  4  |  3309  |  1952  |    32    |   4032   |
+|   5   | (8,7) |  2  |  4627  |  2592  |    32    |   4896   |
+|=======+=======+=====+========+========+==========+==========|
 ~~~
 {: #ML-DSAParameters title="ML-DSA Parameters"}
 
@@ -696,7 +696,10 @@ This appendix contains examples of ML-DSA public keys, private keys and certific
 
 ## Example Private Key {#example-private}
 
-The following examples show ML-DSA private keys in different formats, all derived from the same seed `000102…1e1f`. For each security level, we show the seed-only format (using explicit tag [0]), the expanded format, and both formats together.
+The following examples show ML-DSA private keys in different formats,
+all derived from the same seed `000102…1e1f`. For each security level,
+we show the seed-only format (using explicit tag `[0]`), the expanded
+format, and both formats together.
 
 ### ML-DSA-44 Private Key Examples
 
@@ -719,29 +722,9 @@ PrivateKeyInfo SEQUENCE (3 elem)
 {::include ./examples/ML-DSA-44-expanded.priv}
 ~~~
 
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.17
-  privateKey OCTET STRING (2560 byte)
-    OCTET STRING (2560 byte) [expanded key bytes]
-~~~
-
 #### Both Format
 ~~~
 {::include ./examples/ML-DSA-44-both.priv}
-~~~
-
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.17
-  privateKey OCTET STRING
-    SEQUENCE (2 elem)
-      seed OCTET STRING (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
-      expandedKey OCTET STRING (2560 byte) [expanded key bytes]
 ~~~
 
 ### ML-DSA-65 Private Key Examples
@@ -751,43 +734,14 @@ PrivateKeyInfo SEQUENCE (3 elem)
 {::include ./examples/ML-DSA-65-seed.priv}
 ~~~
 
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.18
-  privateKey OCTET STRING (34 byte)
-    [0] (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
-~~~
-
 #### Expanded Format
 ~~~
 {::include ./examples/ML-DSA-65-expanded.priv}
 ~~~
 
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.18
-  privateKey OCTET STRING (4032 byte)
-    OCTET STRING (4032 byte) [expanded key bytes]
-~~~
-
 #### Both Format
 ~~~
 {::include ./examples/ML-DSA-65-both.priv}
-~~~
-
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.18
-  privateKey OCTET STRING
-    SEQUENCE (2 elem)
-      seed OCTET STRING (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
-      expandedKey OCTET STRING (4032 byte) [expanded key bytes]
 ~~~
 
 ### ML-DSA-87 Private Key Examples
@@ -797,43 +751,14 @@ PrivateKeyInfo SEQUENCE (3 elem)
 {::include ./examples/ML-DSA-87-seed.priv}
 ~~~
 
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.19
-  privateKey OCTET STRING (34 byte)
-    [0] (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
-~~~
-
 #### Expanded Format
 ~~~
 {::include ./examples/ML-DSA-87-expanded.priv}
 ~~~
 
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.19
-  privateKey OCTET STRING (4896 byte)
-    OCTET STRING (4896 byte) [expanded key bytes]
-~~~
-
 #### Both Format
 ~~~
 {::include ./examples/ML-DSA-87-both.priv}
-~~~
-
-~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.19
-  privateKey OCTET STRING
-    SEQUENCE (2 elem)
-      seed OCTET STRING (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
-      expandedKey OCTET STRING (4896 byte) [expanded key bytes]
 ~~~
 
 NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is RECOMMENDED for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.
