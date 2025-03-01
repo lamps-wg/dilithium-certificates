@@ -433,8 +433,10 @@ OneAsymmetricKey is replicated below.
 </aside>
 
 For ML-DSA private keys, the privateKey field in OneAsymmetricKey contains one of
-the following CHOICE structures encoded as an OCTET STRING, depending on the
-security level:
+the following CHOICE structures encoded as an OCTET STRING. The seed format is a
+fixed 32 bytes for all security levels, while the expandedKey and both formats
+vary in size by security level:
+
 
 ~~~
 ML-DSA-44-PrivateKey ::= CHOICE {
