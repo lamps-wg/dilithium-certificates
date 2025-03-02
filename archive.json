@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-27T00:55:25.169024+00:00",
+  "timestamp": "2025-03-02T00:59:05.354130+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1044,7 +1044,7 @@
       "labels": [],
       "body": "See [mail thread](https://mailarchive.ietf.org/arch/msg/spasm/6iUmCadOg3PfGja7j26-MUXTUVk/).",
       "createdAt": "2025-01-22T21:18:19Z",
-      "updatedAt": "2025-02-26T23:26:07Z",
+      "updatedAt": "2025-02-28T07:22:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -1078,16 +1078,23 @@
         {
           "author": "seanturner",
           "authorAssociation": "CONTRIBUTOR",
-          "body": "To do:\n\n- [ ] Update .asn file - See #83\n- [ ] Update ASN.1 in text\n- [ ] Add text to for ML-DSA-*-PublicKey and ML-DSA-*-PrivateKey\n- [ ] Add text for seed/expanded consistency checking\n- [ ] Update IANA Consideration - See #84\n- [ ] Update private key examples",
+          "body": "To do:\n\n- [x] Update .asn file - See #83\n- [ ] Update ASN.1 in text\n- [x] Add text to for ML-DSA-*-PublicKey and ML-DSA-*-PrivateKey\n- [x] Add text for seed/expanded consistency checking\n- [ ] Update IANA Consideration - See #84\n- [x] Update private key examples",
           "createdAt": "2025-02-26T18:08:49Z",
-          "updatedAt": "2025-02-26T18:56:18Z"
+          "updatedAt": "2025-02-28T07:21:14Z"
         },
         {
           "author": "jakemas",
           "authorAssociation": "COLLABORATOR",
-          "body": "Added text for ML-DSA private key: https://github.com/lamps-wg/dilithium-certificates/pull/87",
+          "body": "Add text to for ML-DSA--PublicKey and ML-DSA--PrivateKey: https://github.com/lamps-wg/dilithium-certificates/pull/87\nUpdate private key examples: https://github.com/lamps-wg/dilithium-certificates/pull/87",
           "createdAt": "2025-02-26T23:26:05Z",
-          "updatedAt": "2025-02-26T23:26:05Z"
+          "updatedAt": "2025-02-28T07:22:06Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Add text for seed/expanded consistency checking: https://github.com/lamps-wg/dilithium-certificates/pull/88",
+          "createdAt": "2025-02-28T07:21:25Z",
+          "updatedAt": "2025-02-28T07:21:25Z"
         }
       ]
     },
@@ -1142,6 +1149,22 @@
       "body": "We got ASN.1 for sa-ml-dsa-44, sa-ml-dsa-65, and sa-ml-dsa-87, but no text. Will slap the ASN.1 and an intro text in \"ML-DSA Signatures in PKIX\" section.",
       "createdAt": "2025-02-26T19:08:56Z",
       "updatedAt": "2025-02-26T19:08:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 89,
+      "id": "I_kwDOIEpj4c6sCxWP",
+      "title": "second workflow down?",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/89",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I don't see it anymore, the push one. ",
+      "createdAt": "2025-02-28T07:20:51Z",
+      "updatedAt": "2025-02-28T07:20:51Z",
       "closedAt": null,
       "comments": []
     }
@@ -6168,21 +6191,210 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "A first pass as describing the private key format.",
+      "body": "## Changes to Support Multiple Private Key Formats\r\n\r\nThis PR updates the specification and examples to support three different private key formats as defined in the ASN.1 module:\r\n\r\n## Key Changes\r\n- updated public key section 4 to no longer describe private keys `ML-DSA-XX-PublicKey`\r\n- updated private key section 6 to provide description of `ML-DSA-XX-PrivateKey` e.g.\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed [0] OCTET STRING (SIZE (32)),\r\n  expandedKey OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n- updated `generate.go` source code for new examples (seed, expanded, both)\r\n- added new examples (and ASN.1 dump)\r\n\r\n## Examples\r\n\r\nEach security level (ML-DSA-44, ML-DSA-65, ML-DSA-87) now includes examples of all three formats, showing:\r\n- How the same seed produces different expanded keys\r\n- ASN.1 structure and encoding\r\n- Size differences between formats\r\n\r\n## Implementation Notes\r\n\r\nThe PR includes updates to the example generation code to support all formats and ensure consistent encoding across implementations.\r\n\r\n",
       "createdAt": "2025-02-26T23:23:39Z",
-      "updatedAt": "2025-02-26T23:37:58Z",
+      "updatedAt": "2025-03-01T19:56:39Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "priv-key",
-      "headRefOid": "9b0f03feb5cc808af55e9c15e08756dd16688ebf",
+      "headRefOid": "15df1ec702fdeda633bcf2bae3a1f619873e749d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "why is only 1 workflow running?",
+          "createdAt": "2025-02-27T08:38:51Z",
+          "updatedAt": "2025-02-27T08:38:51Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Should we tag the expandedKey rather than the seed?\r\n\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed OCTET STRING (SIZE (32)),\r\n  expandedKey [0] OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n\r\n~~It saves total seed encoding size, i.e. the compressed format.~~ I was hoping we'd also retain closer backwards compatibility with previous versions of the spec, but that isn't the case. We'll leave the tag on the seed.",
+          "createdAt": "2025-02-28T07:24:47Z",
+          "updatedAt": "2025-03-01T01:41:41Z"
+        },
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "> Should we tag the expandedKey rather than the seed?\r\n> \r\n> ```\r\n> ML-DSA-65-PrivateKey ::= CHOICE {\r\n>   seed OCTET STRING (SIZE (32)),\r\n>   expandedKey [0] OCTET STRING (SIZE (4032)),\r\n>   both SEQUENCE {\r\n>       seed OCTET STRING (SIZE (32)),\r\n>       expandedKey OCTET STRING (SIZE (4032))\r\n>       }\r\n>   }\r\n> ```\r\n> \r\n> It saves total seed encoding size, i.e. the compressed format.\r\n\r\nThe tags are **IMPLICIT**, which side has the tag has no impact on size. **ALL** it does is change the tag from `0x04` to `0x80`, the rest of the data is completely unchanged.\r\nSince having the expanded key be an OCTET STRING (rather than IMPLICIT OCTET STRING) interoperates with OQS, it is best to NOT switch the tags.\r\n\r\nIn summary, let's NOT make the switch.",
+          "createdAt": "2025-03-01T00:12:22Z",
+          "updatedAt": "2025-03-01T00:12:22Z"
+        },
+        {
+          "author": "dghgit",
+          "authorAssociation": "NONE",
+          "body": "There was a discussion early on about tagging the expanded key instead, but tagging the seed means it's compatible with what we were all shipping prior to IETF Dublin 2024 - Bouncy Castle was also using the expanded key as it was used in the earlier drafts. As Viktor points out, the tag's implicit, so no cost - the expanded-key and seed strings are both \"optimal\".\r\n\r\nSo, yes, tag the seed, no-one's had a great time with the private key encoding, but if we actually manage to emerge with something that's backwards compatible, at least we can finish this knowing some people are happy.",
+          "createdAt": "2025-03-01T01:17:32Z",
+          "updatedAt": "2025-03-01T01:17:32Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Should we tag the expandedKey rather than the seed?\r\n> > ```\r\n> > ML-DSA-65-PrivateKey ::= CHOICE {\r\n> >   seed OCTET STRING (SIZE (32)),\r\n> >   expandedKey [0] OCTET STRING (SIZE (4032)),\r\n> >   both SEQUENCE {\r\n> >       seed OCTET STRING (SIZE (32)),\r\n> >       expandedKey OCTET STRING (SIZE (4032))\r\n> >       }\r\n> >   }\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > It saves total seed encoding size, i.e. the compressed format.\r\n> \r\n> The tags are **IMPLICIT**, which side has the tag has no impact on size. **ALL** it does is change the tag from `0x04` to `0x80`, the rest of the data is completely unchanged. Since having the expanded key be an OCTET STRING (rather than IMPLICIT OCTET STRING) interoperates with OQS, it is best to NOT switch the tags.\r\n> \r\n> In summary, let's NOT make the switch.\r\n\r\nThank you! Came to this realisation myself today also - agreed. Keep it as it is.",
+          "createdAt": "2025-03-01T01:24:39Z",
+          "updatedAt": "2025-03-01T01:24:39Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">There was a discussion early on about tagging the expanded key instead, but tagging the seed means it's compatible with what we were all shipping prior to IETF Dublin 2024 - Bouncy Castle was also using the expanded key as it was used in the earlier drafts. As Viktor points out, the tag's implicit, so no cost - the expanded-key and seed strings are both \"optimal\".\r\n\r\nCompletely agree here, thank you for the confirmation -- you can see what I was thinking with trying to preserve backwards compatibility with previous versions of the draft here by moving the tag from the seed.\r\n\r\n",
+          "createdAt": "2025-03-01T01:38:09Z",
+          "updatedAt": "2025-03-01T01:38:09Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you both [dghgit](https://github.com/dghgit) and [vdukhovni](https://github.com/vdukhovni) for taking a look here! I wanted to get both your feedback on the proposed private key format.",
+          "createdAt": "2025-03-01T01:48:07Z",
+          "updatedAt": "2025-03-01T01:48:07Z"
+        },
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "> Thank you both [dghgit](https://github.com/dghgit) and [vdukhovni](https://github.com/vdukhovni) for taking a look here! I wanted to get both your feedback on the proposed private key format.\r\n\r\nMany thanks for the prompt fix. I have confirmed that the new files are identical to those I generate from the same seed for all three choices and all three parameter sets.",
+          "createdAt": "2025-03-01T02:12:08Z",
+          "updatedAt": "2025-03-01T02:12:08Z"
+        },
+        {
+          "author": "dghgit",
+          "authorAssociation": "NONE",
+          "body": "Yes, thanks, I can also confirm being able to parse the new files.",
+          "createdAt": "2025-03-01T03:28:59Z",
+          "updatedAt": "2025-03-01T03:28:59Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 88,
+      "id": "PR_kwDOIEpj4c6M5kSl",
+      "title": "Add Pairwise Consistency Testing section",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/88",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "### Addresses\r\nIssue: https://github.com/lamps-wg/dilithium-certificates/issues/76\r\n\r\n### Description:\r\nThis PR adds a new section specifying recommended pairwise consistency testing procedures for ML-DSA implementations. The changes include:\r\n\r\n- Added new section \"Pairwise Consistency Testing\" with recommendations for:\r\n  - Verifying consistency between seed-derived and provided expanded key material\r\n  - Test message signing and verification\r\n  - Requirements for rejecting inconsistent key pairs\r\n- Fixed citation formatting for FIPS204 reference to ML-DSA.KeyGen_internal\r\n- Aligned with FIPS 140-3 Implementation Guidance Section 10.3.A requirements\r\n- Added FIPS 140-3 reference needed for Implementation Guidance citations\r\n\r\nThe PCTs are a FIPS requirement, but are hidden away in 140-3, so I think it's nice to bring them to the attention here, combined with sanity checks on expanded seeds with provided expanded material. \r\n\r\nGiven this all requires key gen capability, I kept language around RECOMMENDED and SHOULD to keep options open to implementors who might just want to sign/verify. Mostly want to put the onus on key generators here, before first use.\r\n\r\nThese changes help ensure proper validation of ML-DSA key pairs during generation and import operations, which is particularly important for certificate issuance.\r\n\r\nThe PR also fixes a minor citation formatting issue where {{FIPS204}} was incorrectly placed in the middle rather than end of the referenced functions.\r\n\r\nRelated issues: None",
+      "createdAt": "2025-02-28T07:20:14Z",
+      "updatedAt": "2025-02-28T20:08:06Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
+      "headRepository": "jakemas/dilithium-certificates",
+      "headRefName": "PCT",
+      "headRefOid": "def88ec82eab0e26964913430cdc9edbf736eb9b",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6eC1my",
+          "commit": {
+            "abbreviatedOid": "1ae9f73"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-02-28T18:46:04Z",
+          "updatedAt": "2025-02-28T18:51:28Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "I suggest to remove normative \"RECOMMENDED\". You have a \"SHOULD\" below which I think is fine. ",
+              "createdAt": "2025-02-28T18:46:05Z",
+              "updatedAt": "2025-02-28T18:51:28Z"
+            },
+            {
+              "originalPosition": 41,
+              "body": "\"SHOULD\" CAs generally verify the ML-DSA public key before issuing the cert? ",
+              "createdAt": "2025-02-28T18:48:27Z",
+              "updatedAt": "2025-02-28T18:51:28Z"
+            },
+            {
+              "originalPosition": 43,
+              "body": "I agree with this, but let's see what normative work the WG converges to too. ",
+              "createdAt": "2025-02-28T18:49:03Z",
+              "updatedAt": "2025-02-28T18:51:28Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "ACK, but let's see what the list decides. There is intricate text being proposed right now. \r\n\r\n> When receiving a private key that contains both the seed and the expandedKey, the recipient SHOULD perform a seed consistency check to ensure that the sender properly generated the private key.\r\n> \r\n> If the check is done and the seed and the expandedKey are not consistent, the recipient MUST reject the private key as malformed.\r\n",
+              "createdAt": "2025-02-28T18:51:00Z",
+              "updatedAt": "2025-02-28T18:51:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6eDWo_",
+          "commit": {
+            "abbreviatedOid": "1ae9f73"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-28T20:05:34Z",
+          "updatedAt": "2025-02-28T20:05:35Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Thanks, removed in [def88ec](https://github.com/lamps-wg/dilithium-certificates/pull/88/commits/def88ec82eab0e26964913430cdc9edbf736eb9b).",
+              "createdAt": "2025-02-28T20:05:34Z",
+              "updatedAt": "2025-02-28T20:05:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6eDXIp",
+          "commit": {
+            "abbreviatedOid": "1ae9f73"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-28T20:06:51Z",
+          "updatedAt": "2025-02-28T20:06:51Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Yes, I added some text here to describe what they might like to do, it essentially falls in line exactly with FIPS 204 section 3.6 additional requirements. i.e., check the public key is of the correct size given the parameter set. [def88ec](https://github.com/lamps-wg/dilithium-certificates/pull/88/commits/def88ec82eab0e26964913430cdc9edbf736eb9b)",
+              "createdAt": "2025-02-28T20:06:51Z",
+              "updatedAt": "2025-02-28T20:06:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6eDXnL",
+          "commit": {
+            "abbreviatedOid": "1ae9f73"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-28T20:08:06Z",
+          "updatedAt": "2025-02-28T20:08:06Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "Perfect! This seems to read very similar to my proposal. ",
+              "createdAt": "2025-02-28T20:08:06Z",
+              "updatedAt": "2025-02-28T20:08:06Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
