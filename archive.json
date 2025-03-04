@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-02T00:59:05.354130+00:00",
+  "timestamp": "2025-03-04T00:56:22.671493+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -6193,7 +6193,7 @@
       "labels": [],
       "body": "## Changes to Support Multiple Private Key Formats\r\n\r\nThis PR updates the specification and examples to support three different private key formats as defined in the ASN.1 module:\r\n\r\n## Key Changes\r\n- updated public key section 4 to no longer describe private keys `ML-DSA-XX-PublicKey`\r\n- updated private key section 6 to provide description of `ML-DSA-XX-PrivateKey` e.g.\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed [0] OCTET STRING (SIZE (32)),\r\n  expandedKey OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n- updated `generate.go` source code for new examples (seed, expanded, both)\r\n- added new examples (and ASN.1 dump)\r\n\r\n## Examples\r\n\r\nEach security level (ML-DSA-44, ML-DSA-65, ML-DSA-87) now includes examples of all three formats, showing:\r\n- How the same seed produces different expanded keys\r\n- ASN.1 structure and encoding\r\n- Size differences between formats\r\n\r\n## Implementation Notes\r\n\r\nThe PR includes updates to the example generation code to support all formats and ensure consistent encoding across implementations.\r\n\r\n",
       "createdAt": "2025-02-26T23:23:39Z",
-      "updatedAt": "2025-03-01T19:56:39Z",
+      "updatedAt": "2025-03-02T03:53:20Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
@@ -6269,7 +6269,34 @@
           "updatedAt": "2025-03-01T03:28:59Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6eG9dr",
+          "commit": {
+            "abbreviatedOid": "15df1ec"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "My comments are largely editorial nits based on availability of private -> public key recovery in ML-DSA.",
+          "createdAt": "2025-03-02T03:45:52Z",
+          "updatedAt": "2025-03-02T03:53:20Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "While the ML-DSA private key does not contain a copy of the public key, the latter can be computed from the private key even in the absence of a seed. So the last sentence is misleading. It seems to suggest that the expanded key would require providing the public key separately, which is not the case.\r\n\r\nComputing the public key from the seed entails:\r\n\r\n1. Generating the private key s1 and s2 vectors and matrix from the seed.\r\n2. Computing the public key from the s1, s2 and the matrix.\r\n\r\nWhile with the expanded key, one need only compute the matrix in step 1.\r\n\r\nSo the \"public\" key is irrelevant here, or else the expanded key actually has an advantage!\r\nThe seed is of course more space efficient vs. the expanded key for representing the private key, and one may be more confident that `s1` and `s2` are validly generated, ... but I don't think the reason given for the preference holds up.",
+              "createdAt": "2025-03-02T03:45:53Z",
+              "updatedAt": "2025-03-02T03:53:20Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "Same issue here.  The first sentence is correct (more compact representation), but what follows again suggests that the public key can only be recovered from the seed, which is NOT the case. OpenSSL, for example, always recovers the public key from the private alone when importing ML-DSA private keys (if a public key is also supplied on import it is compared with the generated value and the pair reject if it does not match).",
+              "createdAt": "2025-03-02T03:49:21Z",
+              "updatedAt": "2025-03-02T03:53:20Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 88,
@@ -6283,7 +6310,7 @@
       "labels": [],
       "body": "### Addresses\r\nIssue: https://github.com/lamps-wg/dilithium-certificates/issues/76\r\n\r\n### Description:\r\nThis PR adds a new section specifying recommended pairwise consistency testing procedures for ML-DSA implementations. The changes include:\r\n\r\n- Added new section \"Pairwise Consistency Testing\" with recommendations for:\r\n  - Verifying consistency between seed-derived and provided expanded key material\r\n  - Test message signing and verification\r\n  - Requirements for rejecting inconsistent key pairs\r\n- Fixed citation formatting for FIPS204 reference to ML-DSA.KeyGen_internal\r\n- Aligned with FIPS 140-3 Implementation Guidance Section 10.3.A requirements\r\n- Added FIPS 140-3 reference needed for Implementation Guidance citations\r\n\r\nThe PCTs are a FIPS requirement, but are hidden away in 140-3, so I think it's nice to bring them to the attention here, combined with sanity checks on expanded seeds with provided expanded material. \r\n\r\nGiven this all requires key gen capability, I kept language around RECOMMENDED and SHOULD to keep options open to implementors who might just want to sign/verify. Mostly want to put the onus on key generators here, before first use.\r\n\r\nThese changes help ensure proper validation of ML-DSA key pairs during generation and import operations, which is particularly important for certificate issuance.\r\n\r\nThe PR also fixes a minor citation formatting issue where {{FIPS204}} was incorrectly placed in the middle rather than end of the referenced functions.\r\n\r\nRelated issues: None",
       "createdAt": "2025-02-28T07:20:14Z",
-      "updatedAt": "2025-02-28T20:08:06Z",
+      "updatedAt": "2025-03-02T02:02:09Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
@@ -6391,6 +6418,26 @@
               "body": "Perfect! This seems to read very similar to my proposal. ",
               "createdAt": "2025-02-28T20:08:06Z",
               "updatedAt": "2025-02-28T20:08:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6eG7Dn",
+          "commit": {
+            "abbreviatedOid": "1ae9f73"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-02T02:02:09Z",
+          "updatedAt": "2025-03-02T02:02:09Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "I'd like to suggest that the proposed text is not appropriate in the context of this document.\r\n\r\n1. This document specifies a serialisation format for public and private keys.\r\n    - It is not a replacement of or implementation guide for FIPS 204.\r\n2. In particular, key generation, when not part of seed-based key import is entirely out of scope here.\r\n3. It is also odd to see requirements here that apply to particular uses of the keys, e.g. by Certification Authorities [sic] (the proposal uses the informal term \"Certificate Authorities\").\r\n\r\nIf the goal is to recommend a consistency check when \"both\" the seed and the \"expanded\" key are present in the input, and perhaps require the input be rejected when they don't match, then this is what should be covered, without wading into unrelated implementation guidance for the algorithm generally.",
+              "createdAt": "2025-03-02T02:02:09Z",
+              "updatedAt": "2025-03-02T02:02:09Z"
             }
           ]
         }
