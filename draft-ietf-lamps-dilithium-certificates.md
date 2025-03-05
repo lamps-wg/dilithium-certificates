@@ -60,15 +60,6 @@ normative:
     seriesinfo:
       ITU-T Recommendation: X.680
       ISO/IEC: 8824-1:2021
-  FIPS140:
-    target: https://csrc.nist.gov/publications/detail/fips/140/3/final
-    title: >
-      Security Requirements for Cryptographic Modules
-    author:
-    - org: National Institute of Standards and Technology (NIST)
-    date: 2019-03
-    seriesinfo:
-      "FIPS PUB": "140-3"
   X690:
     target: https://www.itu.int/rec/T-REC-X.690
     title: >
@@ -476,40 +467,12 @@ ML-DSA.KeyGen in the returned output.
 
 # Pairwise Consistency Testing
 
-This section specifies pairwise consistency testing procedures for ML-DSA
-implementations as defined in {{FIPS204}}. These procedures align with the
-Implementation Guidance for {{FIPS140}} and the Cryptographic Module Validation
-Program Section 10.3.A. The tests help verify correct implementation of key
-generation, signing, and verification operations.
+When receiving a private key that contains both the seed and the
+expandedKey, the recipient SHOULD perform a seed consistency check to
+ensure that the sender properly generated the private key.
 
-## Pairwise Consistency Test Requirements
-
-Implementations generating key pairs for use in certificates
-SHOULD verify these properties before accepting a key pair as valid:
-
-1. The implementation SHOULD verify consistency between seed-derived
-and provided expanded key material, when both are present.
-2. The implementation SHOULD sign a test message using the private key.
-3. The implementation SHOULD verify the resulting signature using the
-corresponding public key.
-4. The implementation MUST NOT use the key pair for certificate
-issuance if the verification fails.
-
-Certificate Authorities (CAs) that issue certificates containing ML-DSA public
-keys SHOULD perform appropriate validation of the public key prior to certificate
-issuance. This validation MAY include:
-
-1. The CA SHOULD verify that the public key conforms to the format specified in
-{{ML-DSA-PublicKey}}.
-2. The CA SHOULD verify that the size of the public key matches that described in
-{{ML-DSAParameters}} for the provided parameter set defined by the OID.
-
-### Private Key Format Validation
-
-When a private key contains both a seed and expanded key material,
-if the expanded key material derived from the seed does not match
-the provided expanded key material, the implementation SHOULD reject
-the key pair.
+If the check is done and the seed and the expandedKey are not consistent,
+the recipient MUST/SHOULD reject the private key as malformed.
 
 # Security Considerations
 
