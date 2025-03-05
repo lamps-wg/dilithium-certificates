@@ -711,12 +711,7 @@ format, and both formats together.
 ~~~
 
 ~~~
-PrivateKeyInfo SEQUENCE (3 elem)
-  version Version INTEGER 0
-  privateKeyAlgorithm AlgorithmIdentifier SEQUENCE (1 elem)
-    algorithm OBJECT IDENTIFIER 2.16.840.1.101.3.4.3.17
-  privateKey OCTET STRING (34 byte)
-    [0] (32 byte) 000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+{::include ./examples/ML-DSA-44-seed.priv.txt}
 ~~~
 
 #### Expanded Format
@@ -724,9 +719,17 @@ PrivateKeyInfo SEQUENCE (3 elem)
 {::include ./examples/ML-DSA-44-expanded.priv}
 ~~~
 
+~~~
+{::include ./examples/ML-DSA-44-expanded.priv.txt}
+~~~
+
 #### Both Format
 ~~~
 {::include ./examples/ML-DSA-44-both.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-44-both.priv.txt}
 ~~~
 
 ### ML-DSA-65 Private Key Examples
@@ -736,14 +739,26 @@ PrivateKeyInfo SEQUENCE (3 elem)
 {::include ./examples/ML-DSA-65-seed.priv}
 ~~~
 
+~~~
+{::include ./examples/ML-DSA-65-seed.priv.txt}
+~~~
+
 #### Expanded Format
 ~~~
 {::include ./examples/ML-DSA-65-expanded.priv}
 ~~~
 
+~~~
+{::include ./examples/ML-DSA-65-expanded.priv.txt}
+~~~
+
 #### Both Format
 ~~~
 {::include ./examples/ML-DSA-65-both.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-65-both.priv.txt}
 ~~~
 
 ### ML-DSA-87 Private Key Examples
@@ -753,14 +768,26 @@ PrivateKeyInfo SEQUENCE (3 elem)
 {::include ./examples/ML-DSA-87-seed.priv}
 ~~~
 
+~~~
+{::include ./examples/ML-DSA-87-seed.priv.txt}
+~~~
+
 #### Expanded Format
 ~~~
 {::include ./examples/ML-DSA-87-expanded.priv}
 ~~~
 
+~~~
+{::include ./examples/ML-DSA-87-expanded.priv.txt}
+~~~
+
 #### Both Format
 ~~~
 {::include ./examples/ML-DSA-87-both.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-87-both.priv.txt}
 ~~~
 
 NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is RECOMMENDED for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.
