@@ -268,6 +268,32 @@ signatureValue attribute that contains the actual signature.
    CertificateList  ::=  SIGNED{ TBSCertList }
 ~~~
 
+The following SIGNATURE-ALGORITHM ASN.1 classes are for ML-DSA-44,
+ML-DSA-65, and ML-DSA-87:
+
+~~~
+  sa-ml-dsa-44 SIGNATURE-ALGORITHM ::= {
+    IDENTIFIER id-ml-dsa-44
+    PARAMS ARE absent
+    PUBLIC-KEYS { pk-ml-dsa-44 }
+    SMIME-CAPS { IDENTIFIED BY id-ml-dsa-44 }
+    }
+
+  sa-ml-dsa-65 SIGNATURE-ALGORITHM ::= {
+    IDENTIFIER id-ml-dsa-65
+    PARAMS ARE absent
+    PUBLIC-KEYS { pk-ml-dsa-65 }
+    SMIME-CAPS { IDENTIFIED BY id-ml-dsa-65 }
+    }
+
+  sa-ml-dsa-87 SIGNATURE-ALGORITHM ::= {
+    IDENTIFIER id-ml-dsa-87
+    PARAMS ARE absent
+    PUBLIC-KEYS { pk-ml-dsa-87 }
+    SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 }
+    }
+~~~
+
 The identifiers defined in {{oids}} can be used as the
 AlgorithmIdentifier in the signatureAlgorithm field in the sequence
 Certificate/CertificateList and the signature field in the sequence
