@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-04T00:56:22.671493+00:00",
+  "timestamp": "2025-03-06T00:56:21.976622+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1044,7 +1044,7 @@
       "labels": [],
       "body": "See [mail thread](https://mailarchive.ietf.org/arch/msg/spasm/6iUmCadOg3PfGja7j26-MUXTUVk/).",
       "createdAt": "2025-01-22T21:18:19Z",
-      "updatedAt": "2025-02-28T07:22:06Z",
+      "updatedAt": "2025-03-05T18:04:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -1078,9 +1078,9 @@
         {
           "author": "seanturner",
           "authorAssociation": "CONTRIBUTOR",
-          "body": "To do:\n\n- [x] Update .asn file - See #83\n- [ ] Update ASN.1 in text\n- [x] Add text to for ML-DSA-*-PublicKey and ML-DSA-*-PrivateKey\n- [x] Add text for seed/expanded consistency checking\n- [ ] Update IANA Consideration - See #84\n- [x] Update private key examples",
+          "body": "To do:\n\n- [x] Update .asn file - See #83\n- [ ] Update ASN.1 in text - See #87\n- [x] Add text to for ML-DSA-*-PublicKey and ML-DSA-*-PrivateKey - See #87\n- [x] Add text for seed/expanded consistency checking - See #88\n- [ ] Update IANA Consideration - See #84\n- [x] Update private key examples - See #87",
           "createdAt": "2025-02-26T18:08:49Z",
-          "updatedAt": "2025-02-28T07:21:14Z"
+          "updatedAt": "2025-03-05T18:04:25Z"
         },
         {
           "author": "jakemas",
@@ -1164,9 +1164,17 @@
       "labels": [],
       "body": "I don't see it anymore, the push one. ",
       "createdAt": "2025-02-28T07:20:51Z",
-      "updatedAt": "2025-02-28T07:20:51Z",
+      "updatedAt": "2025-03-05T17:21:32Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think it might only fire when we do a release?",
+          "createdAt": "2025-03-05T17:21:31Z",
+          "updatedAt": "2025-03-05T17:21:31Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6193,13 +6201,13 @@
       "labels": [],
       "body": "## Changes to Support Multiple Private Key Formats\r\n\r\nThis PR updates the specification and examples to support three different private key formats as defined in the ASN.1 module:\r\n\r\n## Key Changes\r\n- updated public key section 4 to no longer describe private keys `ML-DSA-XX-PublicKey`\r\n- updated private key section 6 to provide description of `ML-DSA-XX-PrivateKey` e.g.\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed [0] OCTET STRING (SIZE (32)),\r\n  expandedKey OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n- updated `generate.go` source code for new examples (seed, expanded, both)\r\n- added new examples (and ASN.1 dump)\r\n\r\n## Examples\r\n\r\nEach security level (ML-DSA-44, ML-DSA-65, ML-DSA-87) now includes examples of all three formats, showing:\r\n- How the same seed produces different expanded keys\r\n- ASN.1 structure and encoding\r\n- Size differences between formats\r\n\r\n## Implementation Notes\r\n\r\nThe PR includes updates to the example generation code to support all formats and ensure consistent encoding across implementations.\r\n\r\n",
       "createdAt": "2025-02-26T23:23:39Z",
-      "updatedAt": "2025-03-02T03:53:20Z",
+      "updatedAt": "2025-03-05T19:41:34Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "priv-key",
-      "headRefOid": "15df1ec702fdeda633bcf2bae3a1f619873e749d",
+      "headRefOid": "bfd904cacf458671948a1eecce7d89bff71359d8",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -6267,6 +6275,20 @@
           "body": "Yes, thanks, I can also confirm being able to parse the new files.",
           "createdAt": "2025-03-01T03:28:59Z",
           "updatedAt": "2025-03-01T03:28:59Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This one seems to loose the pretty print. Should we add those back in?",
+          "createdAt": "2025-03-05T18:02:05Z",
+          "updatedAt": "2025-03-05T18:02:05Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This one seems to loose the pretty print. Should we add those back in?\r\n\r\nThanks Sean! Great catch, updated `pretty` to generate these new pretty print examples, and updated make file.",
+          "createdAt": "2025-03-05T19:17:38Z",
+          "updatedAt": "2025-03-05T19:17:38Z"
         }
       ],
       "reviews": [
@@ -6295,6 +6317,86 @@
               "updatedAt": "2025-03-02T03:53:20Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6efci8",
+          "commit": {
+            "abbreviatedOid": "15df1ec"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-04T21:19:48Z",
+          "updatedAt": "2025-03-04T21:19:48Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "I agree with your comments, and understand exactly how the public key can be computed from the private. \r\n\r\nI don't see how this text seems to suggest that the expanded key would require providing the public key separately. It simply points out that the private key expands to both the public and private key, which is not true of other signature schemes -- so I feel important to point out. \r\n\r\n",
+              "createdAt": "2025-03-04T21:19:48Z",
+              "updatedAt": "2025-03-04T21:19:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6efgf8",
+          "commit": {
+            "abbreviatedOid": "15df1ec"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-04T21:24:20Z",
+          "updatedAt": "2025-03-04T21:24:20Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "Agree here also, similarly, AWS-LC does the same, we generate the public key based on the provided private key. Again, the sentence you interpret differently to me is simply pointing out that the seed _can_ provide both pub and priv, not that it can _only_ be recovered this way.\r\n\r\nI was actually going to propose a section in the draft that speaks to how to generate pk from sk, given that this isn't provided in the reference implementation. I mentioned that in this issue: https://github.com/lamps-wg/dilithium-certificates/issues/77. Perhaps such an inclusion can then be referred to in the text you point out here and above, to indicate that the pk can be constructed from the sk. I think that should help satisfy your remarks.",
+              "createdAt": "2025-03-04T21:24:20Z",
+              "updatedAt": "2025-03-04T21:25:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6eiK66",
+          "commit": {
+            "abbreviatedOid": "15df1ec"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-05T03:19:17Z",
+          "updatedAt": "2025-03-05T03:19:17Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Well, the text seems to say that the seed is recommended **because**:\r\n```\r\nit efficiently stores both the private and public key\r\n```\r\nBut this is NOT a reason to prefer the seed, because the expanded key also stores \"both the private and public key\". If the reason is just that it is smaller than than the expanded key, that should be reason. If the reason is about being sure that the private vectors are valid outputs of keygen, then that should be the reason, ... but avoiding the need to separately provide a public key is NOT a reason that the seed is preferred over `sk`.",
+              "createdAt": "2025-03-05T03:19:17Z",
+              "updatedAt": "2025-03-05T03:19:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6eiMgV",
+          "commit": {
+            "abbreviatedOid": "15df1ec"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-05T03:25:46Z",
+          "updatedAt": "2025-03-05T03:25:47Z",
+          "comments": [
+            {
+              "originalPosition": 129,
+              "body": "Well, just a subset (5\u20138) of the Algorithm 6 ML-DSA.KeyGen_internal(\ud835\udf09) steps, since the private vectors are generated, and then the public key just from those.",
+              "createdAt": "2025-03-05T03:25:46Z",
+              "updatedAt": "2025-03-05T03:26:49Z"
+            }
+          ]
         }
       ]
     },
@@ -6310,18 +6412,40 @@
       "labels": [],
       "body": "### Addresses\r\nIssue: https://github.com/lamps-wg/dilithium-certificates/issues/76\r\n\r\n### Description:\r\nThis PR adds a new section specifying recommended pairwise consistency testing procedures for ML-DSA implementations. The changes include:\r\n\r\n- Added new section \"Pairwise Consistency Testing\" with recommendations for:\r\n  - Verifying consistency between seed-derived and provided expanded key material\r\n  - Test message signing and verification\r\n  - Requirements for rejecting inconsistent key pairs\r\n- Fixed citation formatting for FIPS204 reference to ML-DSA.KeyGen_internal\r\n- Aligned with FIPS 140-3 Implementation Guidance Section 10.3.A requirements\r\n- Added FIPS 140-3 reference needed for Implementation Guidance citations\r\n\r\nThe PCTs are a FIPS requirement, but are hidden away in 140-3, so I think it's nice to bring them to the attention here, combined with sanity checks on expanded seeds with provided expanded material. \r\n\r\nGiven this all requires key gen capability, I kept language around RECOMMENDED and SHOULD to keep options open to implementors who might just want to sign/verify. Mostly want to put the onus on key generators here, before first use.\r\n\r\nThese changes help ensure proper validation of ML-DSA key pairs during generation and import operations, which is particularly important for certificate issuance.\r\n\r\nThe PR also fixes a minor citation formatting issue where {{FIPS204}} was incorrectly placed in the middle rather than end of the referenced functions.\r\n\r\nRelated issues: None",
       "createdAt": "2025-02-28T07:20:14Z",
-      "updatedAt": "2025-03-02T02:02:09Z",
+      "updatedAt": "2025-03-05T17:42:09Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "PCT",
-      "headRefOid": "def88ec82eab0e26964913430cdc9edbf736eb9b",
+      "headRefOid": "366434829e06cde196444e54ec8e807c72de6f7e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD: \r\n\r\n    When receiving a private key that contains both the seed and the\r\n    expandedKey, the recipient SHOULD perform a seed consistency check to\r\n    ensure that the sender properly generated the private key.  \r\n\r\n    If the check is done and the seed and the expandedKey are not consistent,\r\n    the recipient [MUST/SHOULD] reject the private key as malformed.\r\n",
+          "createdAt": "2025-03-05T01:46:03Z",
+          "updatedAt": "2025-03-05T01:46:03Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Hi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD:\r\n> \r\n> ```\r\n> When receiving a private key that contains both the seed and the\r\n> expandedKey, the recipient SHOULD perform a seed consistency check to\r\n> ensure that the sender properly generated the private key.  \r\n> \r\n> If the check is done and the seed and the expandedKey are not consistent,\r\n> the recipient [MUST/SHOULD] reject the private key as malformed.\r\n> ```\r\n\r\nThanks -- updated accordingly [3664348](https://github.com/lamps-wg/dilithium-certificates/pull/88/commits/366434829e06cde196444e54ec8e807c72de6f7e). I'll keep MUST/SHOULD until that decision is made.",
+          "createdAt": "2025-03-05T17:37:36Z",
+          "updatedAt": "2025-03-05T17:38:24Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you for the feedback here. I\u2019ve updated the PR to reflect the WG text.\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Tuesday, March 4, 2025 at 5:46\u202fPM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Author ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Add Pairwise Consistency Testing section (PR #88)\r\n\r\n\r\nHi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD:\r\n\r\nWhen receiving a private key that contains both the seed and the\r\n\r\nexpandedKey, the recipient SHOULD perform a seed consistency check to\r\n\r\nensure that the sender properly generated the private key.\r\n\r\n\r\n\r\nIf the check is done and the seed and the expandedKey are not consistent,\r\n\r\nthe recipient [MUST/SHOULD] reject the private key as malformed.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/88#issuecomment-2699514007>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONDS75KUMJBZNBMAZ332SZJPDAVCNFSM6AAAAABYBUIFI6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDMOJZGUYTIMBQG4>.\r\nYou are receiving this because you authored the thread.Message ID: ***@***.***>\r\n[Image removed by sender. seanturner]seanturner left a comment (lamps-wg/dilithium-certificates#88)<https://github.com/lamps-wg/dilithium-certificates/pull/88#issuecomment-2699514007>\r\n\r\nHi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD:\r\n\r\nWhen receiving a private key that contains both the seed and the\r\n\r\nexpandedKey, the recipient SHOULD perform a seed consistency check to\r\n\r\nensure that the sender properly generated the private key.\r\n\r\n\r\n\r\nIf the check is done and the seed and the expandedKey are not consistent,\r\n\r\nthe recipient [MUST/SHOULD] reject the private key as malformed.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/88#issuecomment-2699514007>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONDS75KUMJBZNBMAZ332SZJPDAVCNFSM6AAAAABYBUIFI6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDMOJZGUYTIMBQG4>.\r\nYou are receiving this because you authored the thread.Message ID: ***@***.***>\r\n",
+          "createdAt": "2025-03-05T17:42:08Z",
+          "updatedAt": "2025-03-05T17:42:08Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIEpj4c6eC1my",
@@ -6442,6 +6566,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 90,
+      "id": "PR_kwDOIEpj4c6NgYzQ",
+      "title": "Update workflow permissions",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/90",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add:\r\n\r\n    permissions:\r\n      contents: write",
+      "createdAt": "2025-03-05T17:16:43Z",
+      "updatedAt": "2025-03-05T17:27:36Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-workflow-permissions",
+      "headRefOid": "66ba8ab9201521f6fa836cf59b3085a0b26efcf1",
+      "closedAt": "2025-03-05T17:27:35Z",
+      "mergedAt": "2025-03-05T17:27:35Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "ec3ae0edf2ea7c555a8fe5aafcb4b356ee242315"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
