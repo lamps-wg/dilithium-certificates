@@ -2,20 +2,32 @@ DEPS_FILES := \
 	X509-ML-DSA-2025.asn \
 	./examples/ML-DSA-44.crt \
 	./examples/ML-DSA-44.crt.txt \
-	./examples/ML-DSA-44.priv \
-	./examples/ML-DSA-44.priv.txt \
+	./examples/ML-DSA-44-seed.priv \
+	./examples/ML-DSA-44-expanded.priv \
+	./examples/ML-DSA-44-both.priv \
+	./examples/ML-DSA-44-seed.priv.txt \
+	./examples/ML-DSA-44-expanded.priv.txt \
+	./examples/ML-DSA-44-both.priv.txt \
 	./examples/ML-DSA-44.pub \
 	./examples/ML-DSA-44.pub.txt \
 	./examples/ML-DSA-65.crt \
 	./examples/ML-DSA-65.crt.txt \
-	./examples/ML-DSA-65.priv \
-	./examples/ML-DSA-65.priv.txt \
+	./examples/ML-DSA-65-seed.priv \
+	./examples/ML-DSA-65-expanded.priv \
+	./examples/ML-DSA-65-both.priv \
+	./examples/ML-DSA-65-seed.priv.txt \
+	./examples/ML-DSA-65-expanded.priv.txt \
+	./examples/ML-DSA-65-both.priv.txt \
 	./examples/ML-DSA-65.pub \
 	./examples/ML-DSA-65.pub.txt \
 	./examples/ML-DSA-87.crt \
 	./examples/ML-DSA-87.crt.txt \
-	./examples/ML-DSA-87.priv \
-	./examples/ML-DSA-87.priv.txt \
+	./examples/ML-DSA-87-seed.priv \
+	./examples/ML-DSA-87-expanded.priv \
+	./examples/ML-DSA-87-both.priv \
+	./examples/ML-DSA-87-seed.priv.txt \
+	./examples/ML-DSA-87-expanded.priv.txt \
+	./examples/ML-DSA-87-both.priv.txt \
 	./examples/ML-DSA-87.pub \
 	./examples/ML-DSA-87.pub.txt \
 

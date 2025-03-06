@@ -1,6 +1,14 @@
 #!/bin/sh
 
-for i in ML-DSA-{44,65,87}.{priv,pub,crt}
+for i in ML-DSA-{44,65,87}.{pub,crt}
+do
+    der2ascii -pem -i $i -o $i.tmp
+    fold -w 64 $i.tmp > $i.txt
+    rm $i.tmp
+done
+
+# Process priv key files with -both, -expanded, and -seed suffixes
+for i in ML-DSA-{44,65,87}-{both,expanded,seed}.priv
 do
     der2ascii -pem -i $i -o $i.tmp
     fold -w 64 $i.tmp > $i.txt
