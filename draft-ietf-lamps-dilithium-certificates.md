@@ -472,7 +472,7 @@ expandedKey, the recipient SHOULD perform a seed consistency check to
 ensure that the sender properly generated the private key.
 
 If the check is done and the seed and the expandedKey are not consistent,
-the recipient MUST/SHOULD reject the private key as malformed.
+the recipient MUST reject the private key as malformed.
 
 # Security Considerations
 
