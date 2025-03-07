@@ -453,7 +453,7 @@ An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
 for a keypair, or for the private key. In particular, generating the seed
 in one cryptographic module and then importing or exporting it into another
 cryptographic module is allowed. The internal key generation functions
-of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi)
+of ML-KEM.KeyGen_Internal(d, z) and ML-DSA.KeyGen_internal(xi) {{FIPS204}}
 can be accessed for this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
@@ -464,6 +464,15 @@ it is RECOMMENDED that implementations retain and export the seed,
 even when also exporting the expanded key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
 ML-DSA.KeyGen in the returned output.
+
+# Pairwise Consistency Testing
+
+When receiving a private key that contains both the seed and the
+expandedKey, the recipient SHOULD perform a seed consistency check to
+ensure that the sender properly generated the private key.
+
+If the check is done and the seed and the expandedKey are not consistent,
+the recipient MUST reject the private key as malformed.
 
 # Security Considerations
 
