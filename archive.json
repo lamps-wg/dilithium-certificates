@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-06T00:56:21.976622+00:00",
+  "timestamp": "2025-03-09T00:49:00.895371+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1173,6 +1173,101 @@
           "body": "I think it might only fire when we do a release?",
           "createdAt": "2025-03-05T17:21:31Z",
           "updatedAt": "2025-03-05T17:21:31Z"
+        }
+      ]
+    },
+    {
+      "number": 91,
+      "id": "I_kwDOIEpj4c6sy6gv",
+      "title": "related PKIX protocols",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/91",
+      "state": "CLOSED",
+      "author": "ounsworth",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "About this sentence:\n\n> id-hash-ml-dsa-87-with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS). \n\nTLS is not a PKIX protocol. I feel like LAMPS RFCs should not be specifying what is and is not allowed in TLS.\n\nIf you want an e.g. for a \"related PKIX protocol\", I would suggest CMP, EST, CMS, S/MIME.",
+      "createdAt": "2025-03-06T01:19:02Z",
+      "updatedAt": "2025-03-06T02:54:37Z",
+      "closedAt": "2025-03-06T02:54:36Z",
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Replaced by #92 ",
+          "createdAt": "2025-03-06T02:54:36Z",
+          "updatedAt": "2025-03-06T02:54:36Z"
+        }
+      ]
+    },
+    {
+      "number": 92,
+      "id": "I_kwDOIEpj4c6szh5_",
+      "title": "Clarity on whether HashML-DSA is allowed in EE certs",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/92",
+      "state": "OPEN",
+      "author": "ounsworth",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As Tim Hudson points out on the LAMPS list:\nhttps://mailarchive.ietf.org/arch/msg/spasm/PkhCqdBcJHUbpYGaf46hTVK-Lcc/\n\nthe last sentence \"is not prohibited\" leaves wiggle-room if someone wanted to maliciously comply with this paragraph and argue that HashML-DSA could be used for CRLs and OCSP signing, as long as it's an end entity delegated signer.\n\n> 8.1.  Rationale for disallowing HashML-DSA\n\n>   The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be\n   used; in other words, public keys identified by id-hash-ml-dsa-44-\n   with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-\n   with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP,\n   certificate issuance and related PKIX protocols (e.g. TLS).  The use\n   of HashML-DSA public keys within end entity certificates is not\n   prohibited, but conventions for doing so are outside the scope of\n   this document.\n\nAlso, TLS is a pretty bad example of a \"related PKIX protocol\" since TLS has its own working group separate from PKIX / LAMPS.\n\nHow about this as an attempt to tighten up this paragraph?\n\n\n> The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be\n   used in X.509 certificates used with IETF protocols; in other words, public keys identified by id-hash-ml-dsa-44-\n   with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-\n   with-sha512 MUST NOT be in X.509 certificates used for signing certificates (CA certificates), CRLs, OCSP,\n   certificate issuance and related PKIX protocols (e.g. CMP, CMS, EST, CSR).\n\n\nOr maybe less-is-more?\n\n> The HashML-DSA mode defined in Section 5.4 of [FIPS204] and identified by the public key\n    and signature OIDs id-hash-ml-dsa-44-with-sha512, id-hash-ml-dsa-65-with-sha512, and\n    id-hash-ml-dsa-87-with-sha512 MUST NOT be used within X.509 certificates.",
+      "createdAt": "2025-03-06T02:53:26Z",
+      "updatedAt": "2025-03-06T16:56:56Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed about removing TLS, because https://datatracker.ietf.org/doc/html/draft-tls-westerbaan-mldsa will define what signatures are using in the ```CertificateVerify``` message. ",
+          "createdAt": "2025-03-06T15:54:39Z",
+          "updatedAt": "2025-03-06T15:54:39Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Previously some brought up CMP, CMS, EST, PKCS10 etc but we decided to shy away from calling out every other PKIX protocol, so I don't want to do that. I suggest we only remove TLS. \n\n>The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be used in X.509 certificates used with IETF protocols; in other words, public keys identified by id-hash-ml-dsa-44-with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87- with-sha512 MUST NOT be in X.509 certificates used for signing certificates (CA certificates), CRLs, OCSP, certificate issuance and related PKIX protocols ~(e.g. TLS)~. The use of HashML-DSA public keys within end entity certificates is not prohibited, but conventions for doing so are outside the scope of this document.\n\nIf the group is convinced that the non-normative \n>  The use of HashML-DSA public keys within end entity certificates is not prohibited, but conventions for doing so are outside the scope of this document.\n\nsomehow gives an out for using HashML-DSA in OCSP or other IETF protocols, then OK let's remove it and move the draft forward. It is not an important sentence to stress about. \n",
+          "createdAt": "2025-03-06T16:08:46Z",
+          "updatedAt": "2025-03-06T16:20:45Z"
+        },
+        {
+          "author": "t-j-h",
+          "authorAssociation": "NONE",
+          "body": "I would remove the last sentence as it detracts from the document itself and opens up questions and alternate interpretations.\nEither MUST NOT means MUST NOT or it doesn't. \n\nAnd the scope of the MUST NOT should be clear.\n\nPerhaps the list should be explicitly narrowed to the scope of the LAMPS working group as I think that is what is meant from the mailing list discussion. Wider scope requires other working groups to decide to do that independently.",
+          "createdAt": "2025-03-06T16:56:55Z",
+          "updatedAt": "2025-03-06T16:56:55Z"
+        }
+      ]
+    },
+    {
+      "number": 93,
+      "id": "I_kwDOIEpj4c6tF_84",
+      "title": "Public key derivation from private",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/93",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "jakemas"
+      ],
+      "labels": [],
+      "body": "Do you think it's worthwhile adding some implementation guidance on how to generate public key from private key? This functionality is often provided by reference implementations, but not in the case of ML-DSA (explicitly).\n\nThis is often an implementation requirement, but is perhaps not obvious to those without knowledge of the underlying lattice cryptography here. As an example of the guidance, see my implementation in aws-lc https://github.com/aws/aws-lc/pull/2142.\n\nThoughts on relevance, applicability, possibly appendix material?",
+      "createdAt": "2025-03-07T22:03:27Z",
+      "updatedAt": "2025-03-08T05:11:16Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Discussion C.F: https://github.com/lamps-wg/dilithium-certificates/pull/87#discussion_r1976535041",
+          "createdAt": "2025-03-07T22:03:53Z",
+          "updatedAt": "2025-03-07T22:03:53Z"
+        },
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "The textual description in that AWS PR says \"drop the low bits\", but that's somewhat misleading, the actual algorithm is Power2Round.\nAnd FWIW, see: https://github.com/aws/aws-lc/pull/2142/files#r1985988887",
+          "createdAt": "2025-03-08T05:11:15Z",
+          "updatedAt": "2025-03-08T05:11:15Z"
         }
       ]
     }
@@ -6199,15 +6294,15 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "## Changes to Support Multiple Private Key Formats\r\n\r\nThis PR updates the specification and examples to support three different private key formats as defined in the ASN.1 module:\r\n\r\n## Key Changes\r\n- updated public key section 4 to no longer describe private keys `ML-DSA-XX-PublicKey`\r\n- updated private key section 6 to provide description of `ML-DSA-XX-PrivateKey` e.g.\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed [0] OCTET STRING (SIZE (32)),\r\n  expandedKey OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n- updated `generate.go` source code for new examples (seed, expanded, both)\r\n- added new examples (and ASN.1 dump)\r\n\r\n## Examples\r\n\r\nEach security level (ML-DSA-44, ML-DSA-65, ML-DSA-87) now includes examples of all three formats, showing:\r\n- How the same seed produces different expanded keys\r\n- ASN.1 structure and encoding\r\n- Size differences between formats\r\n\r\n## Implementation Notes\r\n\r\nThe PR includes updates to the example generation code to support all formats and ensure consistent encoding across implementations.\r\n\r\n",
+      "body": "## Changes to Support Multiple Private Key Formats\r\n\r\nThis PR updates the specification and examples to support three different private key formats as defined in the ASN.1 module:\r\n\r\n## Key Changes\r\n- updated public key section 4 to no longer describe private keys `ML-DSA-XX-PublicKey`\r\n- updated private key section 6 to provide description of `ML-DSA-XX-PrivateKey` e.g.\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed [0] OCTET STRING (SIZE (32)),\r\n  expandedKey OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n- updated `generate.go` source code for new examples (seed, expanded, both)\r\n- added new examples (and ASN.1 pretty print)\r\n\r\n## Examples\r\n\r\nEach security level (ML-DSA-44, ML-DSA-65, ML-DSA-87) now includes examples of all three formats, showing:\r\n- How the same seed produces different expanded keys\r\n- ASN.1 structure and encoding\r\n\r\n## Implementation Notes\r\n\r\nThe PR includes updates to the example generation code to support all formats and ensure consistent encoding across implementations.\r\n\r\n",
       "createdAt": "2025-02-26T23:23:39Z",
-      "updatedAt": "2025-03-05T19:41:34Z",
+      "updatedAt": "2025-03-07T22:04:24Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "priv-key",
-      "headRefOid": "bfd904cacf458671948a1eecce7d89bff71359d8",
+      "headRefOid": "05e3534146776dc83d2e1bf30c3f16115d75f593",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -6289,6 +6384,20 @@
           "body": "> This one seems to loose the pretty print. Should we add those back in?\r\n\r\nThanks Sean! Great catch, updated `pretty` to generate these new pretty print examples, and updated make file.",
           "createdAt": "2025-03-05T19:17:38Z",
           "updatedAt": "2025-03-05T19:17:38Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@jakemas Are you going to add the section that describes how to generate pk from sk (mentioned in response to Viktor) into this PR or another?\r\n\r\nBTW - I checked all 9 PEM examples and they look right to me.",
+          "createdAt": "2025-03-07T20:47:01Z",
+          "updatedAt": "2025-03-07T20:47:01Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for the review! As the `pk` from `sk` section will be independent of this, and this is already a sizable PR, I will split into a new PR. I created https://github.com/lamps-wg/dilithium-certificates/issues/93 to track the `pk` from `sk` section.",
+          "createdAt": "2025-03-07T22:01:43Z",
+          "updatedAt": "2025-03-07T22:04:24Z"
         }
       ],
       "reviews": [
@@ -6412,13 +6521,13 @@
       "labels": [],
       "body": "### Addresses\r\nIssue: https://github.com/lamps-wg/dilithium-certificates/issues/76\r\n\r\n### Description:\r\nThis PR adds a new section specifying recommended pairwise consistency testing procedures for ML-DSA implementations. The changes include:\r\n\r\n- Added new section \"Pairwise Consistency Testing\" with recommendations for:\r\n  - Verifying consistency between seed-derived and provided expanded key material\r\n  - Test message signing and verification\r\n  - Requirements for rejecting inconsistent key pairs\r\n- Fixed citation formatting for FIPS204 reference to ML-DSA.KeyGen_internal\r\n- Aligned with FIPS 140-3 Implementation Guidance Section 10.3.A requirements\r\n- Added FIPS 140-3 reference needed for Implementation Guidance citations\r\n\r\nThe PCTs are a FIPS requirement, but are hidden away in 140-3, so I think it's nice to bring them to the attention here, combined with sanity checks on expanded seeds with provided expanded material. \r\n\r\nGiven this all requires key gen capability, I kept language around RECOMMENDED and SHOULD to keep options open to implementors who might just want to sign/verify. Mostly want to put the onus on key generators here, before first use.\r\n\r\nThese changes help ensure proper validation of ML-DSA key pairs during generation and import operations, which is particularly important for certificate issuance.\r\n\r\nThe PR also fixes a minor citation formatting issue where {{FIPS204}} was incorrectly placed in the middle rather than end of the referenced functions.\r\n\r\nRelated issues: None",
       "createdAt": "2025-02-28T07:20:14Z",
-      "updatedAt": "2025-03-05T17:42:09Z",
+      "updatedAt": "2025-03-07T18:25:40Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "PCT",
-      "headRefOid": "366434829e06cde196444e54ec8e807c72de6f7e",
+      "headRefOid": "9d98b700a8602748db6ad3c430503b339cce427c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -6437,13 +6546,6 @@
           "body": "> Hi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD:\r\n> \r\n> ```\r\n> When receiving a private key that contains both the seed and the\r\n> expandedKey, the recipient SHOULD perform a seed consistency check to\r\n> ensure that the sender properly generated the private key.  \r\n> \r\n> If the check is done and the seed and the expandedKey are not consistent,\r\n> the recipient [MUST/SHOULD] reject the private key as malformed.\r\n> ```\r\n\r\nThanks -- updated accordingly [3664348](https://github.com/lamps-wg/dilithium-certificates/pull/88/commits/366434829e06cde196444e54ec8e807c72de6f7e). I'll keep MUST/SHOULD until that decision is made.",
           "createdAt": "2025-03-05T17:37:36Z",
           "updatedAt": "2025-03-05T17:38:24Z"
-        },
-        {
-          "author": "jakemas",
-          "authorAssociation": "COLLABORATOR",
-          "body": "Thank you for the feedback here. I\u2019ve updated the PR to reflect the WG text.\r\n\r\nFrom: Sean Turner ***@***.***>\r\nReply-To: lamps-wg/dilithium-certificates ***@***.***>\r\nDate: Tuesday, March 4, 2025 at 5:46\u202fPM\r\nTo: lamps-wg/dilithium-certificates ***@***.***>\r\nCc: \"Massimo, Jake\" ***@***.***>, Author ***@***.***>\r\nSubject: Re: [lamps-wg/dilithium-certificates] Add Pairwise Consistency Testing section (PR #88)\r\n\r\n\r\nHi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD:\r\n\r\nWhen receiving a private key that contains both the seed and the\r\n\r\nexpandedKey, the recipient SHOULD perform a seed consistency check to\r\n\r\nensure that the sender properly generated the private key.\r\n\r\n\r\n\r\nIf the check is done and the seed and the expandedKey are not consistent,\r\n\r\nthe recipient [MUST/SHOULD] reject the private key as malformed.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/88#issuecomment-2699514007>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONDS75KUMJBZNBMAZ332SZJPDAVCNFSM6AAAAABYBUIFI6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDMOJZGUYTIMBQG4>.\r\nYou are receiving this because you authored the thread.Message ID: ***@***.***>\r\n[Image removed by sender. seanturner]seanturner left a comment (lamps-wg/dilithium-certificates#88)<https://github.com/lamps-wg/dilithium-certificates/pull/88#issuecomment-2699514007>\r\n\r\nHi! I think the WG has been discussing text that includes a lot less text and I thought the only left was whether the last 2119-requirements is a MUST or SHOULD:\r\n\r\nWhen receiving a private key that contains both the seed and the\r\n\r\nexpandedKey, the recipient SHOULD perform a seed consistency check to\r\n\r\nensure that the sender properly generated the private key.\r\n\r\n\r\n\r\nIf the check is done and the seed and the expandedKey are not consistent,\r\n\r\nthe recipient [MUST/SHOULD] reject the private key as malformed.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/lamps-wg/dilithium-certificates/pull/88#issuecomment-2699514007>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AQHHONDS75KUMJBZNBMAZ332SZJPDAVCNFSM6AAAAABYBUIFI6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDMOJZGUYTIMBQG4>.\r\nYou are receiving this because you authored the thread.Message ID: ***@***.***>\r\n",
-          "createdAt": "2025-03-05T17:42:08Z",
-          "updatedAt": "2025-03-05T17:42:08Z"
         }
       ],
       "reviews": [
@@ -6562,6 +6664,26 @@
               "body": "I'd like to suggest that the proposed text is not appropriate in the context of this document.\r\n\r\n1. This document specifies a serialisation format for public and private keys.\r\n    - It is not a replacement of or implementation guide for FIPS 204.\r\n2. In particular, key generation, when not part of seed-based key import is entirely out of scope here.\r\n3. It is also odd to see requirements here that apply to particular uses of the keys, e.g. by Certification Authorities [sic] (the proposal uses the informal term \"Certificate Authorities\").\r\n\r\nIf the goal is to recommend a consistency check when \"both\" the seed and the \"expanded\" key are present in the input, and perhaps require the input be rejected when they don't match, then this is what should be covered, without wading into unrelated implementation guidance for the algorithm generally.",
               "createdAt": "2025-03-02T02:02:09Z",
               "updatedAt": "2025-03-02T02:02:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6fBoxj",
+          "commit": {
+            "abbreviatedOid": "3664348"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-07T18:23:25Z",
+          "updatedAt": "2025-03-07T18:23:26Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nIf the check is done and the seed and the expandedKey are not consistent,\r\nthe recipient MUST reject the private key as malformed.\r\n```\r\n\r\nThis has been suggested on list and it appears to be holding.",
+              "createdAt": "2025-03-07T18:23:25Z",
+              "updatedAt": "2025-03-07T18:23:55Z"
             }
           ]
         }
