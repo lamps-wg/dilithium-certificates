@@ -345,25 +345,28 @@ The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
     -- KEY no ASN.1 wrapping --
     CERT-KEY-USAGE
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-    -- PRIVATE-KEY no ASN.1 wrapping -- }
+    PRIVATE-KEY ML-DSA-44-PrivateKey }  -- defined in Section 6
 
   pk-ml-dsa-65 PUBLIC-KEY ::= {
     IDENTIFIER id-ml-dsa-65
     -- KEY no ASN.1 wrapping --
     CERT-KEY-USAGE
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-    -- PRIVATE-KEY no ASN.1 wrapping -- }
+    PRIVATE-KEY ML-DSA-65-PrivateKey }  -- defined in Section 6
 
   pk-ml-dsa-87 PUBLIC-KEY ::= {
     IDENTIFIER id-ml-dsa-87
     -- KEY no ASN.1 wrapping --
     CERT-KEY-USAGE
       { digitalSignature, nonRepudiation, keyCertSign, cRLSign }
-    -- PRIVATE-KEY no ASN.1 wrapping -- }
+    PRIVATE-KEY ML-DSA-87-PrivateKey }  -- defined in Section 6
 
-  ML-DSA-PublicKey ::= OCTET STRING (SIZE (1312 | 1952 | 2592))
+  ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
 
-  ML-DSA-PrivateKey ::= OCTET STRING (SIZE (32))
+  ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
+
+  ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+
 ~~~
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
@@ -380,8 +383,9 @@ encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded a
 a OneAsymmetricKey, it follows the description in {{priv-key}}.
 
 When the ML-DSA private key appears outside of an Asymmetric Key Package in an
-environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by using
-the ML-DSA-PrivateKey type.
+environment that uses ASN.1 encoding, it can be encoded using one of the
+the ML-DSA-PrivateKey CHOICE formats defined in {{priv-key}}. The seed format
+is RECOMMENDED as it efficiently stores both the private and public key.
 
 {{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
@@ -417,9 +421,6 @@ Requirements about the keyUsage extension bits defined in {{RFC5280}}
 still apply.
 
 #  Private Key Format {#priv-key}
-
-An ML-DSA private key is encoded by storing its 32-octet seed in
-the privateKey field as follows.
 
 {{FIPS204}} specifies two formats for an ML-DSA private key: a 32-octet
 seed (xi) and an (expanded) private key. The expanded private key (and public key)
@@ -457,10 +458,72 @@ OneAsymmetricKey is replicated below.
   2021 ASN.1 syntax {{X680}}.
 </aside>
 
-When used in a OneAsymmetricKey type, the privateKey OCTET STRING contains
-the raw octet string encoding of the 32-octet seed. The publicKey field
-SHOULD be omitted because the public key can be computed as noted earlier
-in this section.
+For ML-DSA private keys, the privateKey field in OneAsymmetricKey contains one of
+the following CHOICE structures encoded as an OCTET STRING. The seed format is a
+fixed 32 bytes for all security levels, while the expandedKey and both formats
+vary in size by security level:
+
+
+~~~
+ML-DSA-44-PrivateKey ::= CHOICE {
+  seed [0] OCTET STRING (SIZE (32)),
+  expandedKey OCTET STRING (SIZE (2560)),
+  both SEQUENCE {
+      seed OCTET STRING (SIZE (32)),
+      expandedKey OCTET STRING (SIZE (2560))
+      }
+  }
+~~~
+
+~~~
+ML-DSA-65-PrivateKey ::= CHOICE {
+  seed [0] OCTET STRING (SIZE (32)),
+  expandedKey OCTET STRING (SIZE (4032)),
+  both SEQUENCE {
+      seed OCTET STRING (SIZE (32)),
+      expandedKey OCTET STRING (SIZE (4032))
+      }
+  }
+~~~
+
+~~~
+ML-DSA-87-PrivateKey ::= CHOICE {
+  seed [0] OCTET STRING (SIZE (32)),
+  expandedKey OCTET STRING (SIZE (4896)),
+  both SEQUENCE {
+      seed OCTET STRING (SIZE (32)),
+      expandedKey OCTET STRING (SIZE (4896))
+      }
+  }
+~~~
+
+The CHOICE allows three representations of the private key:
+
+1. The seed format (tag `[0]`) contains just the 32-byte seed value (xi)
+   from which both the expanded private key and public key can be derived
+   using ML-DSA.KeyGen_internal(xi).
+
+2. The expandedKey format contains the full expanded private key that was
+   derived from the seed.
+
+3. The both format contains both the seed and expanded key, allowing for
+   validation that the expanded key was correctly derived from the seed.
+
+When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
+these three formats may be used, though the seed format is RECOMMENDED
+for storage efficiency.
+
+The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
+the appropriate OID as defined in Section 3. If present, the "publicKey"
+field will hold the encoded public key as defined in Section 5.
+
+NOTE: While the private key can be stored in multiple formats, the seed-only
+format is RECOMMENDED as it is the most compact representation. Both the
+expanded private key and the public key can be deterministically derived
+from the seed using ML-DSA.KeyGen_internal(xi). While the publicKey field
+and expandedKey format are technically redundant when using the seed-only
+format, they MAY be included to enable keypair consistency checks during
+import operations.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
@@ -475,12 +538,13 @@ allocated in the "SMI Security for PKIX Module Identifier" registry
 
 # Implementation Considerations
 
-An ML-DSA.KeyGen seed (xi) is considered an acceptable alternative format
-for a keypair, or for the private key. In particular, generating the seed
-in one cryptographic module and then importing or exporting it into another
-cryptographic module is allowed. The internal key generation functions
-of ML-KEM.KeyGen_Internal(d, z) {{FIPS204}} and ML-DSA.KeyGen_internal(xi)
-can be accessed for this purpose.
+An ML-DSA.KeyGen seed (xi) represents the RECOMMENDED format for storing
+and transmitting ML-DSA private keys. This format is explicitly permitted
+by {{FIPS204}} as an acceptable representation of a keypair. In particular,
+generating the seed in one cryptographic module and then importing or
+exporting it into another cryptographic module is allowed. The internal
+key generation function ML-DSA.KeyGen_internal(xi) can be accessed for
+this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
 expanding a private key from a seed is a one-way function, meaning that once a
@@ -637,20 +701,20 @@ as reference.
 The parameter sets defined for NIST security levels 2, 3 and 5
 are listed in the Figure 1, along with the resulting signature
 size, public key, and private key sizes in bytes.
-Note that these are the sizes of
-    the plain private and public keys; and
-    not the sizes of the resultant OneAsymmetricKey and SubjectPublicKeyInfo
-        objects in which they are wrapped.
+Note that these are the sizes of the raw keys, not including
+ASN.1 encoding overhead from OneAsymmetricKey and SubjectPublicKeyInfo
+wrappers. Private key sizes are shown for both the seed format
+and expanded format.
 
 ~~~
-|=======+=======+=====+========+========+========|
-| Level | (k,l) | eta |  Sig.  | Public | Private|
-|       |       |     |  (B)   | Key(B) | Key(B) |
-|=======+=======+=====+========+========+========|
-|   2   | (4,4) |  2  |  2420  |  1312  |  32    |
-|   3   | (6,5) |  4  |  3309  |  1952  |  32    |
-|   5   | (8,7) |  2  |  4627  |  2592  |  32    |
-|=======+=======+=====+========+========+========|
+|=======+=======+=====+========+========+==========+==========|
+| Level | (k,l) | eta |  Sig.  | Public | Private  | Private  |
+|       |       |     |  (B)   | Key(B) | Seed(B)  | Expand(B)|
+|=======+=======+=====+========+========+==========+==========|
+|   2   | (4,4) |  2  |  2420  |  1312  |    32    |   2560   |
+|   3   | (6,5) |  4  |  3309  |  1952  |    32    |   4032   |
+|   5   | (8,7) |  2  |  4627  |  2592  |    32    |   4896   |
+|=======+=======+=====+========+========+==========+==========|
 ~~~
 {: #ML-DSAParameters title="ML-DSA Parameters"}
 
@@ -660,39 +724,101 @@ This appendix contains examples of ML-DSA public keys, private keys and certific
 
 ## Example Private Key {#example-private}
 
-The following is an example of a ML-DSA-44 private key with hex seed `000102…1e1f`:
+The following examples show ML-DSA private keys in different formats,
+all derived from the same seed `000102…1e1f`. For each security level,
+we show the seed-only format (using a context-specific `[0]` primitive
+tag with an implicit encoding of OCTET STRING), the expanded format,
+and both formats together.
 
-~~~
-{::include ./examples/ML-DSA-44.priv}
-~~~
+### ML-DSA-44 Private Key Examples
 
+#### Seed Format
 ~~~
-{::include ./examples/ML-DSA-44.priv.txt}
-~~~
-
-The following is an example of a ML-DSA-65 private key with hex seed `000102…1e1f`:
-
-~~~
-{::include ./examples/ML-DSA-65.priv}
+{::include ./examples/ML-DSA-44-seed.priv}
 ~~~
 
 ~~~
-{::include ./examples/ML-DSA-65.priv.txt}
+{::include ./examples/ML-DSA-44-seed.priv.txt}
 ~~~
 
-The following is an example of a ML-DSA-87 private key with hex seed `000102…1e1f`:
-
+#### Expanded Format
 ~~~
-{::include ./examples/ML-DSA-87.priv}
-~~~
-
-~~~
-{::include ./examples/ML-DSA-87.priv.txt}
+{::include ./examples/ML-DSA-44-expanded.priv}
 ~~~
 
-NOTE: The private key is the seed and all three examples keys use the
-same seed; therefore, the private above are the same except for the OID
-used to represent the ML-DSA algorithm's security strength.
+~~~
+{::include ./examples/ML-DSA-44-expanded.priv.txt}
+~~~
+
+#### Both Format
+~~~
+{::include ./examples/ML-DSA-44-both.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-44-both.priv.txt}
+~~~
+
+### ML-DSA-65 Private Key Examples
+
+#### Seed Format
+~~~
+{::include ./examples/ML-DSA-65-seed.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-65-seed.priv.txt}
+~~~
+
+#### Expanded Format
+~~~
+{::include ./examples/ML-DSA-65-expanded.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-65-expanded.priv.txt}
+~~~
+
+#### Both Format
+~~~
+{::include ./examples/ML-DSA-65-both.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-65-both.priv.txt}
+~~~
+
+### ML-DSA-87 Private Key Examples
+
+#### Seed Format
+~~~
+{::include ./examples/ML-DSA-87-seed.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-87-seed.priv.txt}
+~~~
+
+#### Expanded Format
+~~~
+{::include ./examples/ML-DSA-87-expanded.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-87-expanded.priv.txt}
+~~~
+
+#### Both Format
+~~~
+{::include ./examples/ML-DSA-87-both.priv}
+~~~
+
+~~~
+{::include ./examples/ML-DSA-87-both.priv.txt}
+~~~
+
+NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is RECOMMENDED for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.
+
 
 ## Example Public Key {#example-public}
 

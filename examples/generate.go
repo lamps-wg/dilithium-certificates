@@ -22,6 +22,49 @@ type mldsaPrivateKey struct {
 	PrivateKey []byte
 }
 
+func generatePrivateKeyBytes(format string, seed []byte, expandedKey []byte) ([]byte, error) {
+		switch format {
+			case "seed":
+				// Create [0] OCTET STRING structure
+				seedValue := asn1.RawValue{
+					Class:      asn1.ClassContextSpecific,
+					Tag:       0,
+					Bytes:     seed,
+					IsCompound: false,
+				}
+				return asn1.Marshal(seedValue)
+			case "expanded":
+				return asn1.Marshal(expandedKey)
+			case "both":
+				sequence := struct {
+					Seed        []byte
+					ExpandedKey []byte
+				}{
+					Seed:        seed,
+					ExpandedKey: expandedKey,
+				}
+				return asn1.Marshal(sequence)
+			}
+		return nil, fmt.Errorf("unknown format")
+}
+
+func generatePrivateKey(format string, alg pkix.AlgorithmIdentifier, seed []byte, expandedKey []byte) (mldsaPrivateKey, error) {
+		ask := mldsaPrivateKey{
+			Version:   0,
+			Algorithm: alg,
+        }
+
+        // Generate the inner CHOICE structure
+        innerBytes, err := generatePrivateKeyBytes(format, seed, expandedKey)
+        if err != nil {
+            return ask, err
+        }
+
+        // Set as the private key bytes
+        ask.PrivateKey = innerBytes
+        return ask, nil
+}
+
 func example(name string) {
 	scheme := schemes.ByName(name)
 	var seed [32]byte // 000102…1e1f
@@ -30,7 +73,8 @@ func example(name string) {
 		seed[i] = byte(i)
 	}
 
-	pk, _ := scheme.DeriveKey(seed[:])
+	pk, sk := scheme.DeriveKey(seed[:])
+	expandedKey, _ := sk.MarshalBinary()
 	var oid int
 	switch name {
 	case "ML-DSA-44":
@@ -58,47 +102,51 @@ func example(name string) {
 		},
 	}
 
-	ask := mldsaPrivateKey{
-		Version:    0,
-		Algorithm:  alg,
-		PrivateKey: seed[:],
-	}
+	formats := []string{"seed", "expanded", "both"}
+	for _, format := range formats {
+		ask, err := generatePrivateKey(format, alg, seed[:], expandedKey)
+        if err != nil {
+            panic(err)
+        }
 
-	papk, err := asn1.Marshal(apk)
-	if err != nil {
-		panic(err)
-	}
+        papk, err := asn1.Marshal(apk)
+        if err != nil {
+            panic(err)
+        }
 
-	pask, err := asn1.Marshal(ask)
-	if err != nil {
-		panic(err)
-	}
+        pask, err := asn1.Marshal(ask)
+        if err != nil {
+            panic(err)
+        }
 
-	f, err := os.Create(fmt.Sprintf("%s.pub", name))
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
+        // Write public key
+        f, err := os.Create(fmt.Sprintf("%s.pub", name))
+        if err != nil {
+            panic(err)
+        }
+        defer f.Close()
 
-	if err = pem.Encode(f, &pem.Block{
-		Type:  "PUBLIC KEY",
-		Bytes: papk,
-	}); err != nil {
-		panic(err)
-	}
+        if err = pem.Encode(f, &pem.Block{
+            Type:  "PUBLIC KEY",
+            Bytes: papk,
+        }); err != nil {
+            panic(err)
+        }
 
-	f2, err := os.Create(fmt.Sprintf("%s.priv", name))
-	if err != nil {
-		panic(err)
-	}
-	defer f2.Close()
+        // Write private key with format indication
+        f2, err := os.Create(fmt.Sprintf("%s-%s.priv", name, format))
+        if err != nil {
+            panic(err)
+        }
+        defer f2.Close()
 
-	if err = pem.Encode(f2, &pem.Block{
-		Type:  "PRIVATE KEY",
-		Bytes: pask,
-	}); err != nil {
-		panic(err)
-	}
+        if err = pem.Encode(f2, &pem.Block{
+            Type:  "PRIVATE KEY",
+            Bytes: pask,
+        }); err != nil {
+            panic(err)
+        }
+    }
 }
 
 func main() {
