@@ -87,11 +87,12 @@ Table of Contents
    6.  Private Key Format
    7.  IANA Considerations
    8.  Implementation Considerations
-   9.  Security Considerations
-     9.1.  Rationale for disallowing HashML-DSA
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   9.  Private Key Consistency Testing
+   10. Security Considerations
+     10.1.  Rationale for disallowing HashML-DSA
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Security Strengths
    Appendix C.  Examples
@@ -117,7 +118,7 @@ Table of Contents
 
    [FIPS204] defines two variants of ML-DSA: a pure and a prehash
    variant.  Only the former is specified in this document.  See
-   Section 9.1 for the rationale.  The pure variant of ML-DSA supports
+   Section 10.1 for the rationale.  The pure variant of ML-DSA supports
    the typical prehash flow, see Appendix D.  In short: one
    cryptographic module can compute the hash _mu_ on line 6 of algorithm
    7 of [FIPS204] and pass it to a second module to finish the
@@ -488,7 +489,16 @@ Table of Contents
    implemented by including the random seed xi generated at line 1 of
    Algorithm 1 ML-DSA.KeyGen in the returned output.
 
-9.  Security Considerations
+9.  Private Key Consistency Testing
+
+   When receiving a private key that contains both the seed and the
+   expandedKey, the recipient SHOULD perform a seed consistency check to
+   ensure that the sender properly generated the private key.
+
+   If the check is done and the seed and the expandedKey are not
+   consistent, the recipient MUST reject the private key as malformed.
+
+10.  Security Considerations
 
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
@@ -553,7 +563,7 @@ Table of Contents
    serialization.  It for this reason the public key structure defined
    in Section 4 is intentionally encoded as a single OCTET STRING.
 
-9.1.  Rationale for disallowing HashML-DSA
+10.1.  Rationale for disallowing HashML-DSA
 
    The HashML-DSA mode defined in Section 5.4 of [FIPS204] MUST NOT be
    used; in other words, public keys identified by id-hash-ml-dsa-44-
@@ -600,9 +610,9 @@ Table of Contents
    suffice.  HashML-DSA removes both of these enhanced security
    properties.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [FIPS204]  National Institute of Standards and Technology (NIST),
               "Module-Lattice-based Digital Signature Standard", FIPS
@@ -651,7 +661,7 @@ Table of Contents
               Recommendation X.690, ISO/IEC 8825-1:2021, February 2021,
               <https://www.itu.int/rec/T-REC-X.690>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [CDFFJ21]  Cremers, C., Düzlü, S., Fiedler, R., Fischlin, M., and C.
               Janson, "BUFFing signature schemes beyond unforgeability
@@ -3788,8 +3798,8 @@ Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
    Note that the signing mode defined here is different from HashML-DSA
    defined in Section 5.4 of [FIPS204].  This specification uses
    exclusively ExternalMu-ML-DSA for pre-hashed use cases.  See
-   Section 9.1 for additional discussion of why HashML-DSA is disallowed
-   in PKIX.
+   Section 10.1 for additional discussion of why HashML-DSA is
+   disallowed in PKIX.
 
    All functions and notation used in Figure 2 and Figure 3 are defined
    in [FIPS204].
