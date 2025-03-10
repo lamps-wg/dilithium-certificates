@@ -555,6 +555,15 @@ even when also exporting the expanded key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
 ML-DSA.KeyGen in the returned output.
 
+# Private Key Consistency Testing
+
+When receiving a private key that contains both the seed and the
+expandedKey, the recipient SHOULD perform a seed consistency check to
+ensure that the sender properly generated the private key.
+
+If the check is done and the seed and the expandedKey are not consistent,
+the recipient MUST reject the private key as malformed.
+
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
