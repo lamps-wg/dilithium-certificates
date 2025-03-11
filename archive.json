@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-09T00:49:00.895371+00:00",
+  "timestamp": "2025-03-11T00:57:00.090108+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1141,15 +1141,15 @@
       "id": "I_kwDOIEpj4c6r0G3d",
       "title": "Need some text for sa-ml-dsa-*",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/85",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "We got ASN.1 for sa-ml-dsa-44, sa-ml-dsa-65, and sa-ml-dsa-87, but no text. Will slap the ASN.1 and an intro text in \"ML-DSA Signatures in PKIX\" section.",
       "createdAt": "2025-02-26T19:08:56Z",
-      "updatedAt": "2025-02-26T19:08:56Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-10T15:56:14Z",
+      "closedAt": "2025-03-10T15:56:14Z",
       "comments": []
     },
     {
@@ -6249,24 +6249,26 @@
       "id": "PR_kwDOIEpj4c6MshsF",
       "title": "sa-ml-dsa-*",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/86",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Put text in the main body for sa-ml-dsa-44, sa-ml-dsa-65, and sa-ml-dsa-87.\r\n\r\nCloses #85.",
       "createdAt": "2025-02-26T19:13:37Z",
-      "updatedAt": "2025-02-26T19:23:46Z",
+      "updatedAt": "2025-03-10T15:56:13Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-sa-ml-dsa",
       "headRefOid": "7cdbfb0782247808a912630e4bc10a0fd333130c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-10T15:56:13Z",
+      "mergedAt": "2025-03-10T15:56:13Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "3c9599b1faf3a35d6f88c9be390a12b8d66ef22b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6289,24 +6291,26 @@
       "id": "PR_kwDOIEpj4c6MuFiQ",
       "title": "ML-DSA private key details",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/87",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jakemas",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Changes to Support Multiple Private Key Formats\r\n\r\nThis PR updates the specification and examples to support three different private key formats as defined in the ASN.1 module:\r\n\r\n## Key Changes\r\n- updated public key section 4 to no longer describe private keys `ML-DSA-XX-PublicKey`\r\n- updated private key section 6 to provide description of `ML-DSA-XX-PrivateKey` e.g.\r\n```\r\nML-DSA-65-PrivateKey ::= CHOICE {\r\n  seed [0] OCTET STRING (SIZE (32)),\r\n  expandedKey OCTET STRING (SIZE (4032)),\r\n  both SEQUENCE {\r\n      seed OCTET STRING (SIZE (32)),\r\n      expandedKey OCTET STRING (SIZE (4032))\r\n      }\r\n  }\r\n```\r\n- updated `generate.go` source code for new examples (seed, expanded, both)\r\n- added new examples (and ASN.1 pretty print)\r\n\r\n## Examples\r\n\r\nEach security level (ML-DSA-44, ML-DSA-65, ML-DSA-87) now includes examples of all three formats, showing:\r\n- How the same seed produces different expanded keys\r\n- ASN.1 structure and encoding\r\n\r\n## Implementation Notes\r\n\r\nThe PR includes updates to the example generation code to support all formats and ensure consistent encoding across implementations.\r\n\r\n",
       "createdAt": "2025-02-26T23:23:39Z",
-      "updatedAt": "2025-03-07T22:04:24Z",
+      "updatedAt": "2025-03-10T16:08:58Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "priv-key",
       "headRefOid": "05e3534146776dc83d2e1bf30c3f16115d75f593",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-10T16:08:58Z",
+      "mergedAt": "2025-03-10T16:08:58Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "acbce24a872c8f484dd6562bdb94218e28c62919"
+      },
       "comments": [
         {
           "author": "jakemas",
@@ -6506,6 +6510,19 @@
               "updatedAt": "2025-03-05T03:26:49Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6fO0zq",
+          "commit": {
+            "abbreviatedOid": "05e3534"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-10T15:48:21Z",
+          "updatedAt": "2025-03-10T15:48:21Z",
+          "comments": []
         }
       ]
     },
@@ -6514,24 +6531,26 @@
       "id": "PR_kwDOIEpj4c6M5kSl",
       "title": "Add Pairwise Consistency Testing section",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/88",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "jakemas",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "### Addresses\r\nIssue: https://github.com/lamps-wg/dilithium-certificates/issues/76\r\n\r\n### Description:\r\nThis PR adds a new section specifying recommended pairwise consistency testing procedures for ML-DSA implementations. The changes include:\r\n\r\n- Added new section \"Pairwise Consistency Testing\" with recommendations for:\r\n  - Verifying consistency between seed-derived and provided expanded key material\r\n  - Test message signing and verification\r\n  - Requirements for rejecting inconsistent key pairs\r\n- Fixed citation formatting for FIPS204 reference to ML-DSA.KeyGen_internal\r\n- Aligned with FIPS 140-3 Implementation Guidance Section 10.3.A requirements\r\n- Added FIPS 140-3 reference needed for Implementation Guidance citations\r\n\r\nThe PCTs are a FIPS requirement, but are hidden away in 140-3, so I think it's nice to bring them to the attention here, combined with sanity checks on expanded seeds with provided expanded material. \r\n\r\nGiven this all requires key gen capability, I kept language around RECOMMENDED and SHOULD to keep options open to implementors who might just want to sign/verify. Mostly want to put the onus on key generators here, before first use.\r\n\r\nThese changes help ensure proper validation of ML-DSA key pairs during generation and import operations, which is particularly important for certificate issuance.\r\n\r\nThe PR also fixes a minor citation formatting issue where {{FIPS204}} was incorrectly placed in the middle rather than end of the referenced functions.\r\n\r\nRelated issues: None",
       "createdAt": "2025-02-28T07:20:14Z",
-      "updatedAt": "2025-03-07T18:25:40Z",
+      "updatedAt": "2025-03-10T20:14:32Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
-      "baseRefOid": "0d0cdfe361a0aaa8c5f561222955cfa1dc2eecea",
+      "baseRefOid": "acbce24a872c8f484dd6562bdb94218e28c62919",
       "headRepository": "jakemas/dilithium-certificates",
       "headRefName": "PCT",
-      "headRefOid": "9d98b700a8602748db6ad3c430503b339cce427c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "96d0f9efba824e42eb620233cc2cdde87d07ad45",
+      "closedAt": "2025-03-10T20:14:31Z",
+      "mergedAt": "2025-03-10T20:14:31Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "a079dcc4fb1c597a378d7c8ff17d688a0dfe9762"
+      },
       "comments": [
         {
           "author": "seanturner",
@@ -6686,6 +6705,79 @@
               "updatedAt": "2025-03-07T18:23:55Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6fGp6J",
+          "commit": {
+            "abbreviatedOid": "9d98b70"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-09T05:49:12Z",
+          "updatedAt": "2025-03-09T05:49:22Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "Note this could be misleading, as NIST and the CMVP use the term PCT to refer only to checking the pairwise consistency of a private key with the corresponding public key. Applying it to \"pairwise consistency\" of two distinct representations of the private key is novel, and is not covered by the term PCT in FIPS.\r\n\r\nThe text is mostly fine, but perhaps a different heading (not \"Pairwise Consistency Testing\") would be more appropriate.\r\nHow about \"Private Key consistency testing\". (Two distinct private keys are not a \"key pair\" in the usual sense, though they are two keys).",
+              "createdAt": "2025-03-09T05:49:13Z",
+              "updatedAt": "2025-03-09T05:49:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6fO7g6",
+          "commit": {
+            "abbreviatedOid": "9d98b70"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-10T15:57:26Z",
+          "updatedAt": "2025-03-10T15:57:27Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n# Private Key Consistency Testing\r\n```",
+              "createdAt": "2025-03-10T15:57:26Z",
+              "updatedAt": "2025-03-10T15:57:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6fO7rA",
+          "commit": {
+            "abbreviatedOid": "9d98b70"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-10T15:57:38Z",
+          "updatedAt": "2025-03-10T15:57:39Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "I can get behind that.",
+              "createdAt": "2025-03-10T15:57:39Z",
+              "updatedAt": "2025-03-10T15:57:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6fPSpp",
+          "commit": {
+            "abbreviatedOid": "96d0f9e"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-10T16:30:53Z",
+          "updatedAt": "2025-03-10T16:30:53Z",
+          "comments": []
         }
       ]
     },
