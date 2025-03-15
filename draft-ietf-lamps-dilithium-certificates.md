@@ -739,6 +739,13 @@ we show the seed-only format (using a context-specific `[0]` primitive
 tag with an implicit encoding of OCTET STRING), the expanded format,
 and both formats together.
 
+NOTE: All examples use the same seed value, showing how the same seed
+produces different expanded keys for each security level. The seed-only
+format is the most compact representation and is RECOMMENDED for storage.
+The expanded format might be used in constrained environments where key
+expansion is not desired, and the both format allows for key validation
+during import.
+
 ### ML-DSA-44 Private Key Examples
 
 #### Seed Format
@@ -825,8 +832,6 @@ and both formats together.
 ~~~
 {::include ./examples/ML-DSA-87-both.priv.txt}
 ~~~
-
-NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is RECOMMENDED for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.
 
 
 ## Example Public Key {#example-public}
