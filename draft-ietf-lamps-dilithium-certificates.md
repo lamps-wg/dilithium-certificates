@@ -390,7 +390,7 @@ is RECOMMENDED as it efficiently stores both the private and public key.
 {{examples}} contains example ML-DSA public keys encoded using the
 textual encoding defined in {{?RFC7468}}.
 
-# Key Usage Bits
+# Key Usage Bits {#ku-bits}
 
 The intended application for the key is indicated in the keyUsage
 certificate extension; see {{Section 4.2.1.3 of RFC5280}}. If the
@@ -514,8 +514,8 @@ these three formats may be used, though the seed format is RECOMMENDED
 for storage efficiency.
 
 The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
-the appropriate OID as defined in Section 3. If present, the "publicKey"
-field will hold the encoded public key as defined in Section 5.
+the appropriate OID as defined in {{ML-DSA-PublicKey}}. If present, the "publicKey"
+field will hold the encoded public key as defined in {{ku-bits}}.
 
 NOTE: While the private key can be stored in multiple formats, the seed-only
 format is RECOMMENDED as it is the most compact representation. Both the
