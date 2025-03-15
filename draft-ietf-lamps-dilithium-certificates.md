@@ -514,8 +514,8 @@ these three formats may be used, though the seed format is RECOMMENDED
 for storage efficiency.
 
 The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
-the appropriate OID as defined in Section 3. If present, the "publicKey"
-field will hold the encoded public key as defined in Section 5.
+the appropriate OID as defined in {{oids}}. If present, the "publicKey"
+field will hold the encoded public key as defined in {{ML-DSA-PublicKey}}.
 
 NOTE: While the private key can be stored in multiple formats, the seed-only
 format is RECOMMENDED as it is the most compact representation. Both the
