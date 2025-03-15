@@ -376,7 +376,8 @@ public key.
 
 When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an
 environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by
-using the ML-DSA-PublicKey type.
+using the ML-DSA-44-PublicKey, ML-DSA-65-PublicKey, and ML-DSA-87-PublicKey types
+corresponding to the correct key size.
 
 {{?RFC5958}} describes the Asymmetric Key Package's OneAsymmetricKey type for
 encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
