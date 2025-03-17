@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 11 September 2025                                     S. Turner
+Expires: 18 September 2025                                     S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           10 March 2025
+                                                           17 March 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 September 2025.
+   This Internet-Draft will expire on 18 September 2025.
 
 Copyright Notice
 
@@ -338,7 +338,7 @@ Table of Contents
    The intended application for the key is indicated in the keyUsage
    certificate extension; see Section 4.2.1.3 of [RFC5280].  If the
    keyUsage extension is present in a certificate that indicates id-ml-
-   dsa-* in the SubjectPublicKeyInfo, then the at least one of following
+   dsa-* in the SubjectPublicKeyInfo, then at least one of following
    MUST be present:
 
      digitalSignature; or
