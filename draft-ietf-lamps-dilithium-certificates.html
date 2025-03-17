@@ -1788,10 +1788,7 @@ single OCTET STRING.<a href="#section-10-7" class="pilcrow">¶</a></p>
 used; in other words, public keys identified by
 <code>id-hash-ml-dsa-44-with-sha512</code>, <code>id-hash-ml-dsa-65-with-sha512</code>, and
 <code>id-hash-ml-dsa-87-with-sha512</code> <span class="bcp14">MUST NOT</span> be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS).
-The use of HashML-DSA public keys within end entity certificates is not
-prohibited, but conventions for doing so are outside the scope of this
-document.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+CRLs, OCSP, certificate issuance and related PKIX protocols.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">This restriction is for both implementation and security reasons.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.1-3">The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
