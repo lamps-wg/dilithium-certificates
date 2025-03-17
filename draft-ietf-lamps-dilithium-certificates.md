@@ -507,7 +507,9 @@ The CHOICE allows three representations of the private key:
    derived from the seed.
 
 3. The both format contains both the seed and expanded key, allowing for
-   validation that the expanded key was correctly derived from the seed.
+   for interoperability with a broad range of consumers, some that may
+   want to use and retain the seed, others that may only support expanded
+   keys.
 
 When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
 these three formats may be used, though the seed format is RECOMMENDED
