@@ -447,9 +447,9 @@ Table of Contents
    RECOMMENDED for storage efficiency.
 
    The "privateKeyAlgorithm" field uses the AlgorithmIdentifier
-   structure with the appropriate OID as defined in Section 3.  If
+   structure with the appropriate OID as defined in Section 2.  If
    present, the "publicKey" field will hold the encoded public key as
-   defined in Section 5.
+   defined in Section 4.
 
    NOTE: While the private key can be stored in multiple formats, the
    seed-only format is RECOMMENDED as it is the most compact
