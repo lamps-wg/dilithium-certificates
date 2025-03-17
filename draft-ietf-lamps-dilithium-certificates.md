@@ -639,10 +639,7 @@ The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
 used; in other words, public keys identified by
 `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
 `id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS).
-The use of HashML-DSA public keys within end entity certificates is not
-prohibited, but conventions for doing so are outside the scope of this
-document.
+CRLs, OCSP, certificate issuance and related PKIX protocols.
 
 This restriction is for both implementation and security reasons.
 
