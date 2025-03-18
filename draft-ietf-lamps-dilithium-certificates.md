@@ -507,7 +507,7 @@ The CHOICE allows three representations of the private key:
    derived from the seed.
 
 3. The both format contains both the seed and expanded key, allowing for
-   for interoperability with a broad range of consumers, some that may
+   for interoperability, some that may
    want to use and retain the seed, others that may only support expanded
    keys.
 
