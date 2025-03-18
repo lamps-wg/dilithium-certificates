@@ -508,7 +508,9 @@ The CHOICE allows three representations of the private key:
    derived from the seed.
 
 3. The both format contains both the seed and expanded key, allowing for
-   validation that the expanded key was correctly derived from the seed.
+   for interoperability, some that may
+   want to use and retain the seed, others that may only support expanded
+   keys.
 
 When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
 these three formats may be used, though the seed format is RECOMMENDED
@@ -737,6 +739,9 @@ we show the seed-only format (using a context-specific `[0]` primitive
 tag with an implicit encoding of OCTET STRING), the expanded format,
 and both formats together.
 
+NOTE: All examples use the same seed value, showing how the same seed
+produces different expanded keys for each security level.
+
 ### ML-DSA-44 Private Key Examples
 
 #### Seed Format
@@ -823,8 +828,6 @@ and both formats together.
 ~~~
 {::include ./examples/ML-DSA-87-both.priv.txt}
 ~~~
-
-NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is RECOMMENDED for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.
 
 
 ## Example Public Key {#example-public}
