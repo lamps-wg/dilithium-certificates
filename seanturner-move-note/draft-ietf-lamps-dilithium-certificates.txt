@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 18 September 2025                                     S. Turner
+Expires: 19 September 2025                                     S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           17 March 2025
+                                                           18 March 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 September 2025.
+   This Internet-Draft will expire on 19 September 2025.
 
 Copyright Notice
 
@@ -437,9 +437,8 @@ Table of Contents
        that was derived from the seed.
 
    3.  The both format contains both the seed and expanded key, allowing
-       for for interoperability with a broad range of consumers, some
-       that may want to use and retain the seed, others that may only
-       support expanded keys.
+       for for interoperability, some that may want to use and retain
+       the seed, others that may only support expanded keys.
 
    When encoding an ML-DSA private key in a OneAsymmetricKey object, any
    of these three formats may be used, though the seed format is
