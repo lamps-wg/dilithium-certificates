@@ -326,7 +326,7 @@ SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
 ~~~
 
 <aside markdown="block">
- NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
   2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
 </aside>
 
