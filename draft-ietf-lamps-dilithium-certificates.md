@@ -192,7 +192,7 @@ The AlgorithmIdentifier type is defined in {{!RFC5912}} as follows:
 ~~~
 
 <aside markdown="block">
- The above syntax is from {{!RFC5912}} and is compatible with
+NOTE: The above syntax is from {{!RFC5912}} and is compatible with
 the 2021 ASN.1 syntax {{X680}}. See {{!RFC5280}} for the 1988 ASN.1
 syntax.
 </aside>
