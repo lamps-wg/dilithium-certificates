@@ -192,7 +192,7 @@ The AlgorithmIdentifier type is defined in {{!RFC5912}} as follows:
 ~~~
 
 <aside markdown="block">
-NOTE: The above syntax is from {{!RFC5912}} and is compatible with
+ The above syntax is from {{!RFC5912}} and is compatible with
 the 2021 ASN.1 syntax {{X680}}. See {{!RFC5280}} for the 1988 ASN.1
 syntax.
 </aside>
@@ -326,7 +326,7 @@ SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
 ~~~
 
 <aside markdown="block">
-  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+   The above syntax is from {{RFC5912}} and is compatible with the
   2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
 </aside>
 
@@ -522,7 +522,8 @@ field will hold the encoded public key as defined in {{ML-DSA-PublicKey}}.
 NOTE: While the private key can be stored in multiple formats, the seed-only
 format is RECOMMENDED as it is the most compact representation. Both the
 expanded private key and the public key can be deterministically derived
-from the seed using ML-DSA.KeyGen_internal(xi). While the publicKey field
+from the seed using ML-DSA.KeyGen_internal(xi). Alternatively, the public
+key can be generated from the private key. While the publicKey field
 and expandedKey format are technically redundant when using the seed-only
 format, they MAY be included to enable keypair consistency checks during
 import operations.
