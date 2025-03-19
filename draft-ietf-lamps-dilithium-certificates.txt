@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 19 September 2025                                     S. Turner
+Expires: 20 September 2025                                     S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           18 March 2025
+                                                           19 March 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 September 2025.
+   This Internet-Draft will expire on 20 September 2025.
 
 Copyright Notice
 
@@ -455,10 +455,11 @@ Table of Contents
    seed-only format is RECOMMENDED as it is the most compact
    representation.  Both the expanded private key and the public key can
    be deterministically derived from the seed using ML-
-   DSA.KeyGen_internal(xi).  While the publicKey field and expandedKey
-   format are technically redundant when using the seed-only format,
-   they MAY be included to enable keypair consistency checks during
-   import operations.
+   DSA.KeyGen_internal(xi).  Alternatively, the public key can be
+   generated from the private key.  While the publicKey field and
+   expandedKey format are technically redundant when using the seed-only
+   format, they MAY be included to enable keypair consistency checks
+   during import operations.
 
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
