@@ -522,7 +522,8 @@ field will hold the encoded public key as defined in {{ML-DSA-PublicKey}}.
 NOTE: While the private key can be stored in multiple formats, the seed-only
 format is RECOMMENDED as it is the most compact representation. Both the
 expanded private key and the public key can be deterministically derived
-from the seed using ML-DSA.KeyGen_internal(xi). While the publicKey field
+from the seed using ML-DSA.KeyGen_internal(xi). Alternatively, the public
+key can be generated from the private key. While the publicKey field
 and expandedKey format are technically redundant when using the seed-only
 format, they MAY be included to enable keypair consistency checks during
 import operations.
