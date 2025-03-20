@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-18T00:57:04.971232+00:00",
+  "timestamp": "2025-03-20T00:56:30.832857+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1157,15 +1157,15 @@
       "id": "I_kwDOIEpj4c6sCxWP",
       "title": "second workflow down?",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/89",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jakemas",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I don't see it anymore, the push one. ",
       "createdAt": "2025-02-28T07:20:51Z",
-      "updatedAt": "2025-03-05T17:21:32Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-19T06:33:33Z",
+      "closedAt": "2025-03-19T06:33:32Z",
       "comments": [
         {
           "author": "seanturner",
@@ -1173,6 +1173,13 @@
           "body": "I think it might only fire when we do a release?",
           "createdAt": "2025-03-05T17:21:31Z",
           "updatedAt": "2025-03-05T17:21:31Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think it's back up working.",
+          "createdAt": "2025-03-19T06:33:32Z",
+          "updatedAt": "2025-03-19T06:33:32Z"
         }
       ]
     },
@@ -1250,7 +1257,7 @@
       "id": "I_kwDOIEpj4c6tF_84",
       "title": "Public key derivation from private",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/93",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "jakemas",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1259,8 +1266,8 @@
       "labels": [],
       "body": "Do you think it's worthwhile adding some implementation guidance on how to generate public key from private key? This functionality is often provided by reference implementations, but not in the case of ML-DSA (explicitly).\n\nThis is often an implementation requirement, but is perhaps not obvious to those without knowledge of the underlying lattice cryptography here. As an example of the guidance, see my implementation in aws-lc https://github.com/aws/aws-lc/pull/2142.\n\nThoughts on relevance, applicability, possibly appendix material?",
       "createdAt": "2025-03-07T22:03:27Z",
-      "updatedAt": "2025-03-17T11:08:22Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-19T06:33:14Z",
+      "closedAt": "2025-03-19T06:33:13Z",
       "comments": [
         {
           "author": "jakemas",
@@ -1296,8 +1303,116 @@
           "body": "So this PR came about as a result of a comment from Viktor about the following text:\n\n    NOTE: While the private key can be stored in multiple formats, the seed-only\n    format is RECOMMENDED as it is the most compact representation.\n    Both the expanded private key and the public key can\n    be deterministically derived from the seed using\n    ML-DSA.KeyGen_internal(xi).\n\nViktor's comment (see #87), copied here:\n\n     Same issue here. The first sentence is correct (more compact\n     representation), but what follows again suggests that the public\n     key can only be recovered from the seed, which is NOT the case.\n     OpenSSL, for example, always recovers the public key from the\n     private alone when importing ML-DSA private keys (if a public\n     key is also supplied on import it is compared with the generated\n     value and the pair reject if it does not match).\n\nMaybe a way to fix this is to tweak the text as follows:\n\n    NOTE: While the private key can be stored in multiple formats, the seed-only\n    format is RECOMMENDED as it is the most compact representation.\n    Both the expanded private key and the public key can be deterministically\n    derived from the seed using ML-DSA.KeyGen_internal(xi) or the public key can\n    be generated from the private key.",
           "createdAt": "2025-03-17T11:08:21Z",
           "updatedAt": "2025-03-17T11:08:21Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I like it. Small rephrase \n\n> NOTE: While the private key can be stored in multiple formats, the seed-only format is RECOMMENDED as it is the most compact representation. Both the expanded private key and the public key can be deterministically derived from the seed using ML-DSA.KeyGen_internal(xi). **Alternatively,** the public key can be generated from the private key.",
+          "createdAt": "2025-03-18T03:23:23Z",
+          "updatedAt": "2025-03-18T03:23:49Z"
+        },
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "Works for me, but, for the record, note, this does not carry over to ML-KEM in quite the same way, since the public key is simply embedded in the private key, though there is then a possibility they don't match, hence some motivation to perform a PCT.",
+          "createdAt": "2025-03-18T04:46:15Z",
+          "updatedAt": "2025-03-18T04:46:15Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "PTAL this [PR](https://github.com/lamps-wg/kyber-certificates/pulls).",
+          "createdAt": "2025-03-19T01:53:36Z",
+          "updatedAt": "2025-03-19T01:53:36Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "At IETF 122, the WG decided to not include text to explain how to go from a private to a public.",
+          "createdAt": "2025-03-19T06:33:13Z",
+          "updatedAt": "2025-03-19T06:33:13Z"
         }
       ]
+    },
+    {
+      "number": 102,
+      "id": "I_kwDOIEpj4c6ush-s",
+      "title": "Words about SHOULD (consistency check)",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/102",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "At IETF 122, Deb suggested that we add words to make sure the IESG won't put a discuss on our SHOULD; see [IESG Statement](https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/).",
+      "createdAt": "2025-03-19T08:37:47Z",
+      "updatedAt": "2025-03-19T08:37:47Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 104,
+      "id": "I_kwDOIEpj4c6utPKF",
+      "title": "Spell out \"seed consistency checks\"",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/104",
+      "state": "OPEN",
+      "author": "dennisjackson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In Section 9 (Private Key Consistency Testing) or in the Implementation Considerations, please can we spell out how to implement \"a seed consistency check\". E.g. \"The check consists of regenerating the expanded form from the seed via `ML-DSA.KeyGen_internal` and ensuring it is bytewise equal to the value presented in the private key\". \n\nIn Appendix C, can we add a negative example where these values do not match and which compliant implementations should reject? ",
+      "createdAt": "2025-03-19T09:35:44Z",
+      "updatedAt": "2025-03-19T11:17:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "If negative examples are wanted, I have three (ML-DSA-44):\n\n1. Seed vs. expanded mismatch\n2. ExpandedKey for which the recomputed public key hash $`tr`$ fails to match the private key\n3. ExpandedKey for which the recomputed public $`t_0`$ fails to match the private key ($`tr`$ matches)\n\nThe second and third would not be detected by implementations that don't regenerate the public key from the private key, or neglect to then check consistency of $`tr`$ or $`t_0`$.  Yes, I have not forgotten that we're not specifying how to regenerated public from private, but if some implementations do, and want to catch this type of mismatch, the examples *could* be useful. But I am by no means insisting. Use or ignore at your discretion.\n\n```\n-----BEGIN PRIVATE KEY-----\n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\n-----END PRIVATE KEY-----\n```\n\n```\n-----BEGIN PRIVATE KEY-----\n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\n-----END PRIVATE KEY-----\n```\n\n```\n-----BEGIN PRIVATE KEY-----\n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\n-----END PRIVATE KEY-----\n```\n",
+          "createdAt": "2025-03-19T11:16:59Z",
+          "updatedAt": "2025-03-19T11:16:59Z"
+        }
+      ]
+    },
+    {
+      "number": 105,
+      "id": "I_kwDOIEpj4c6utUP4",
+      "title": "Explain how to parse CHOICE correctly",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/105",
+      "state": "OPEN",
+      "author": "dennisjackson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In the mailing list discussion, a few folks expressed confusion about how to correctly parse the CHOICE representations. In Implementation Considerations, can we spell out that the tags determine which field is present and there's no need to use heuristics like length. e.g. \n\n\"When parsing the private key, the ASN.1 tag explicitly indicates which variant of CHOICE is present. Implementations should use this tag to parse the private key, rather than any other heuristic like length of the OCTET STRING.\" \n\n",
+      "createdAt": "2025-03-19T09:42:08Z",
+      "updatedAt": "2025-03-19T11:53:44Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "body": "If this is useful to note because some readers need a TL;DR shortcut around ASN.1, then perhaps be explicit about the tag values `0x80` for seed only, `0x04` for key only, and `0x30` for both.",
+          "createdAt": "2025-03-19T11:53:20Z",
+          "updatedAt": "2025-03-19T11:53:44Z"
+        }
+      ]
+    },
+    {
+      "number": 106,
+      "id": "I_kwDOIEpj4c6uuF_l",
+      "title": "Spell out parsing of expandedKey",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/106",
+      "state": "OPEN",
+      "author": "dennisjackson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The draft doesn't actually specify how to parse expandedKey. I guess algorithm 25 of FIPS 204 is the right reference to add, but what happens if the input is malformed? ",
+      "createdAt": "2025-03-19T10:47:02Z",
+      "updatedAt": "2025-03-19T10:47:02Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -6994,24 +7109,26 @@
       "id": "PR_kwDOIEpj4c6OwZjS",
       "title": "Move note",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/98",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "We should really move this note up to the beginning of the section.",
       "createdAt": "2025-03-15T05:40:53Z",
-      "updatedAt": "2025-03-17T14:57:00Z",
+      "updatedAt": "2025-03-18T05:55:42Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "a079dcc4fb1c597a378d7c8ff17d688a0dfe9762",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-move-note",
-      "headRefOid": "042da0831eb2ad2a39f5232cc068bc4135b9e6bb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7cb2a01ab0de6c04074bfaca23ab207b18c54a29",
+      "closedAt": "2025-03-18T05:06:46Z",
+      "mergedAt": "2025-03-18T05:06:46Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "31cdca558fff06169cad5ac0d1dba68a360c11c0"
+      },
       "comments": [
         {
           "author": "t-j-h",
@@ -7208,6 +7325,46 @@
               "updatedAt": "2025-03-17T14:57:00Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6gg1Na",
+          "commit": {
+            "abbreviatedOid": "042da08"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-18T05:00:27Z",
+          "updatedAt": "2025-03-18T05:00:28Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n   for interoperability, some that may\r\n```",
+              "createdAt": "2025-03-18T05:00:28Z",
+              "updatedAt": "2025-03-18T05:00:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6ghQa4",
+          "commit": {
+            "abbreviatedOid": "042da08"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-18T05:55:42Z",
+          "updatedAt": "2025-03-18T05:55:42Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "The result ended up a bit mangled grammatically. :-(",
+              "createdAt": "2025-03-18T05:55:42Z",
+              "updatedAt": "2025-03-18T05:55:42Z"
+            }
+          ]
         }
       ]
     },
@@ -7262,6 +7419,210 @@
           "body": "",
           "createdAt": "2025-03-16T11:43:58Z",
           "updatedAt": "2025-03-16T11:43:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 100,
+      "id": "PR_kwDOIEpj4c6PDDnJ",
+      "title": "Grammar tweaks",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/100",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-18T07:00:47Z",
+      "updatedAt": "2025-03-18T07:33:38Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "31cdca558fff06169cad5ac0d1dba68a360c11c0",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-grammar-tweak",
+      "headRefOid": "4d0ec62030cb1bc41327348a36a26baf97d31827",
+      "closedAt": "2025-03-18T07:33:38Z",
+      "mergedAt": "2025-03-18T07:33:38Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "d66c86fe66e8e7e6aa8173e2e8506405065fe49f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6gh42S",
+          "commit": {
+            "abbreviatedOid": "4d0ec62"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-18T07:06:57Z",
+          "updatedAt": "2025-03-18T07:06:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 101,
+      "id": "PR_kwDOIEpj4c6PMkjB",
+      "title": "Private Key Format text",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/101",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I hope this addresses #93.",
+      "createdAt": "2025-03-19T01:54:16Z",
+      "updatedAt": "2025-03-19T06:32:23Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "d66c86fe66e8e7e6aa8173e2e8506405065fe49f",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-key-text",
+      "headRefOid": "989efd6f19d8a27a439021208f802c1b539600b8",
+      "closedAt": "2025-03-19T06:32:23Z",
+      "mergedAt": "2025-03-19T06:32:23Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "5bb2ffad99bb56bc53b1275b9373a0e1607cc8a2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6gvF7h",
+          "commit": {
+            "abbreviatedOid": "8000044"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-19T01:54:29Z",
+          "updatedAt": "2025-03-19T01:54:30Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n NOTE: The above syntax is from {{!RFC5912}} and is compatible with\r\n```",
+              "createdAt": "2025-03-19T01:54:30Z",
+              "updatedAt": "2025-03-19T01:54:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6gvGGF",
+          "commit": {
+            "abbreviatedOid": "8000044"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-19T01:54:48Z",
+          "updatedAt": "2025-03-19T01:54:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nNOTE: The above syntax is from {{!RFC5912}} and is compatible with\r\n```",
+              "createdAt": "2025-03-19T01:54:48Z",
+              "updatedAt": "2025-03-19T01:54:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6gvGTL",
+          "commit": {
+            "abbreviatedOid": "74e7d8b"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-19T01:55:22Z",
+          "updatedAt": "2025-03-19T01:55:22Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n NOTE: The above syntax is from {{RFC5912}} and is compatible with the\r\n```",
+              "createdAt": "2025-03-19T01:55:22Z",
+              "updatedAt": "2025-03-19T01:55:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6gvN8A",
+          "commit": {
+            "abbreviatedOid": "1f55621"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-19T02:22:28Z",
+          "updatedAt": "2025-03-19T02:22:28Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n  NOTE: The above syntax is from {{RFC5912}} and is compatible with the\r\n```",
+              "createdAt": "2025-03-19T02:22:28Z",
+              "updatedAt": "2025-03-19T02:22:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6gwRVJ",
+          "commit": {
+            "abbreviatedOid": "989efd6"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-19T06:00:40Z",
+          "updatedAt": "2025-03-19T06:00:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 103,
+      "id": "PR_kwDOIEpj4c6POy09",
+      "title": "Add text to appease",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/103",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #102",
+      "createdAt": "2025-03-19T08:39:07Z",
+      "updatedAt": "2025-03-19T09:42:31Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "5bb2ffad99bb56bc53b1275b9373a0e1607cc8a2",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-more-words",
+      "headRefOid": "191962095d490b74458181c27ca132558aa644d8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6gy5wl",
+          "commit": {
+            "abbreviatedOid": "1919620"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-19T09:42:31Z",
+          "updatedAt": "2025-03-19T09:42:31Z",
           "comments": []
         }
       ]
