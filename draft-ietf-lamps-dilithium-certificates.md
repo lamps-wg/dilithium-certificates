@@ -567,6 +567,10 @@ ensure that the sender properly generated the private key.
 If the check is done and the seed and the expandedKey are not consistent,
 the recipient MUST reject the private key as malformed.
 
+The seed consistency check consists of regenerating the expanded form from
+the seed via ML-DSA.KeyGen_internal and ensuring it is bytewise equal to
+the value presented in the private key.
+
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
