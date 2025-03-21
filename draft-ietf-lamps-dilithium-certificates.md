@@ -562,9 +562,12 @@ implemented by including the random seed xi generated at line 1 of Algorithm 1
 
 When receiving a private key that contains both the seed and the
 expandedKey, the recipient SHOULD perform a seed consistency check to
-ensure that the sender properly generated the private key.
+ensure that the sender properly generated the private key. Recipients
+that do not perform this seed consistency check avoid keygen
+and compare operations, but are unable to ensure that the `seed` and
+`expandedKey` match.
 
-If the check is done and the seed and the expandedKey are not consistent,
+If the check is done and the seed and the `expandedKey` are not consistent,
 the recipient MUST reject the private key as malformed.
 
 # Security Considerations
