@@ -567,6 +567,9 @@ ensure that the sender properly generated the private key.
 If the check is done and the seed and the expandedKey are not consistent,
 the recipient MUST reject the private key as malformed.
 
+{{example-bad}} includes some examples of inconsistent sees and expanded private
+keys.
+
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
@@ -729,7 +732,8 @@ and expanded format.
 
 # Examples {#examples}
 
-This appendix contains examples of ML-DSA public keys, private keys and certificates.
+This appendix contains examples of ML-DSA private keys, public keys,
+certificates, and inconsistent seed and expanded private keys.
 
 ## Example Private Keys {#example-private}
 
@@ -908,6 +912,52 @@ previous section.
 ~~~
 {::include ./examples/ML-DSA-87.crt.txt}
 ~~~
+
+
+## Example Inconsistent Private Keys {#example-bad}
+
+<aside markdown="block">
+  WARNING: These private keys are pruposely bad do not use them in
+  production systmes.
+</aside>
+
+The following examples demonstrate inconsistent seed and expanded private keys.
+
+### ML-DSA Inconsistent Seed and Expanded Private Keys
+
+Three `ML-DSA-44-PrivateKey both CHOICE` examples of inconsistent seed and
+expanded private keys follow:
+
+1. The first is for inconsistent `seed` and `expandedKey`.
+
+2. The second is an `expandedkey` for which the recomputed public key
+   hash t(r) fails to match the private key.
+
+3. The third is an `expandedKey` for which the recomputed public t(0)
+   fails to match the private key, i.e., the two t(r) do not match.
+
+The second and third mismatches would not be detected by implementations
+that do not regenerate the public key from the private key, or neglect to
+then check consistency of t(r) or t(0).
+
+The following is the first example:
+
+~~~
+{::include ./examples/bad-ML-DSA-44-1.priv}
+~~~
+
+The following is the second example:
+
+~~~
+{::include ./examples/bad-ML-DSA-44-2.priv}
+~~~
+
+THe following is the third example:
+
+~~~
+{::include ./examples/bad-ML-DSA-44-3.priv}
+~~~
+
 
 # Pre-hashing (ExternalMu-ML-DSA) {#prehash}
 
