@@ -567,6 +567,9 @@ ensure that the sender properly generated the private key.
 If the check is done and the seed and the expandedKey are not consistent,
 the recipient MUST reject the private key as malformed.
 
+For interopability it is RECOMMENDED that no further checks
+are performed on the `expandedKey`.
+
 # Security Considerations
 
 The Security Considerations section of {{RFC5280}} applies to this
