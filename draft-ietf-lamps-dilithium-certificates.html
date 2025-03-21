@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 20 September 2025</td>
+<td class="center">Expires 22 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-19" class="published">19 March 2025</time>
+<time datetime="2025-03-21" class="published">21 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-20">20 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-22">22 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1306,7 +1306,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
       <h2 id="name-identifiers">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifiers" class="section-name selfRef">Identifiers</a>
       </h2>
-<p id="section-2-1">The AlgorithmIdentifier type is defined in <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> as follows:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">The <code>AlgorithmIdentifier</code> type is defined in <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> as follows:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2-2">
 <pre>
     AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
@@ -1325,11 +1325,11 @@ syntax.<a href="#section-2-3.1" class="pilcrow">¶</a></p>
 <p id="section-2-4">The fields in AlgorithmIdentifier have the following meanings:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">
-          <p id="section-2-5.1.1">algorithm identifies the cryptographic algorithm with an object
+          <p id="section-2-5.1.1"><code>algorithm</code> identifies the cryptographic algorithm with an object
 identifier.<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">parameters, which are optional, are the associated parameters for the
+          <p id="section-2-5.2.1"><code>parameters</code>, which are optional, are the associated parameters for the
 algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
@@ -1349,7 +1349,7 @@ algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pi
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 </pre><a href="#section-2-7" class="pilcrow">¶</a>
 </div>
-<p id="section-2-8">The contents of the parameters component for each algorithm <span class="bcp14">MUST</span> be
+<p id="section-2-8">The contents of the <code>parameters</code> component for each <code>algorithm</code> <span class="bcp14">MUST</span> be
 absent. The ctx value used in the ML-DSA signing and verification
 <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> of ML-DSA signatures defined in this specification
 (X.509 certificates, CRLs) is the empty string.<a href="#section-2-8" class="pilcrow">¶</a></p>
@@ -1368,7 +1368,7 @@ ML-DSA provides three parameter sets for the NIST PQC security categories
 <p id="section-3-2">Signatures are used in a number of different ASN.1 structures. As shown
 in the ASN.1 representation from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below, in an X.509
 certificate, a signature is encoded with an algorithm identifier in the
-signatureAlgorithm attribute and a signatureValue attribute that contains
+<code>signatureAlgorithm</code> attribute and a <code>signatureValue</code> attribute that contains
 the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-3">
 <pre>
@@ -1392,14 +1392,14 @@ the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
 </div>
 <p id="section-3-4">Signatures are also used in the CRL list ASN.1 representation from
 <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below. In a X.509 CRL, a signature is encoded with an
-algorithm identifier in the signatureAlgorithm attribute and a
-signatureValue attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
+algorithm identifier in the <code>signatureAlgorithm</code> attribute and a
+<code>signatureValue</code> attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-5">
 <pre>
    CertificateList  ::=  SIGNED{ TBSCertList }
 </pre><a href="#section-3-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3-6">The following SIGNATURE-ALGORITHM ASN.1 classes are for ML-DSA-44,
+<p id="section-3-6">The following <code>SIGNATURE-ALGORITHM</code> ASN.1 classes are for ML-DSA-44,
 ML-DSA-65, and ML-DSA-87:<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-7">
 <pre>
@@ -1426,15 +1426,15 @@ ML-DSA-65, and ML-DSA-87:<a href="#section-3-6" class="pilcrow">¶</a></p>
 </pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
 <p id="section-3-8">The identifiers defined in <a href="#oids" class="auto internal xref">Section 2</a> can be used as the
-AlgorithmIdentifier in the signatureAlgorithm field in the sequence
-Certificate/CertificateList and the signature field in the sequence
-TBSCertificate/TBSCertList in certificates and CRLs, respectively,
-<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The parameters of these signature algorithms <span class="bcp14">MUST</span> be
-absent, as explained in <a href="#oids" class="auto internal xref">Section 2</a>. That is, the AlgorithmIdentifier
-<span class="bcp14">SHALL</span> be a SEQUENCE of one component, the OID id-ml-dsa-*.<a href="#section-3-8" class="pilcrow">¶</a></p>
-<p id="section-3-9">The signatureValue field contains the corresponding ML-DSA signature
-computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
-<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-9" class="pilcrow">¶</a></p>
+<code>AlgorithmIdentifier</code> in the <code>signatureAlgorithm</code> field in the sequence
+<code>Certificate</code>/<code>CertificateList</code> and the <code>signature</code> field in the sequence
+<code>TBSCertificate</code>/<code>TBSCertList</code> in certificates and CRLs, respectively,
+<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The <code>parameters</code> of these signature algorithms <span class="bcp14">MUST</span> be
+absent, as explained in <a href="#oids" class="auto internal xref">Section 2</a>. That is, the <code>AlgorithmIdentifier</code>
+        <span class="bcp14">SHALL</span> be a <code>SEQUENCE</code> of one component, the OID id-ml-dsa-*.<a href="#section-3-8" class="pilcrow">¶</a></p>
+<p id="section-3-9">The <code>signatureValue</code> field contains the corresponding ML-DSA signature
+computed upon the ASN.1 DER encoded <code>tbsCertificate</code>/<code>tbsCertList</code>
+        <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-9" class="pilcrow">¶</a></p>
 <p id="section-3-10">Conforming Certification Authority (CA) implementations <span class="bcp14">MUST</span> specify
 the algorithms explicitly by using the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when
 encoding ML-DSA signatures in certificates and CRLs. Conforming client
@@ -1448,8 +1448,8 @@ values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a
       <h2 id="name-ml-dsa-public-keys-in-pkix">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ml-dsa-public-keys-in-pkix" class="section-name selfRef">ML-DSA Public Keys in PKIX</a>
       </h2>
-<p id="section-4-1">In the X.509 certificate, the subjectPublicKeyInfo field has the
-SubjectPublicKeyInfo type, which has the following ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">In the X.509 certificate, the <code>subjectPublicKeyInfo</code> field has the
+<code>SubjectPublicKeyInfo</code> type, which has the following ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-2">
 <pre>
   SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
@@ -1462,17 +1462,17 @@ SubjectPublicKeyInfo type, which has the following ASN.1 syntax:<a href="#sectio
         <p id="section-4-3.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the
   2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-4-3.1" class="pilcrow">¶</a></p>
 </aside>
-<p id="section-4-4">The fields in SubjectPublicKeyInfo have the following meaning:<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-4">The fields in <code>SubjectPublicKeyInfo</code> have the following meaning:<a href="#section-4-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-5.1">
-          <p id="section-4-5.1.1">algorithm is the algorithm identifier and parameters for the
+          <p id="section-4-5.1.1"><code>algorithm</code> is the algorithm identifier and parameters for the
 public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-5.2">
-          <p id="section-4-5.2.1">subjectPublicKey contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-5.2.1"><code>subjectPublicKey</code> contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-6">The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-6">The <code>PUBLIC-KEY</code> ASN.1 types for ML-DSA are defined here:<a href="#section-4-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-7">
 <pre>
   pk-ml-dsa-44 PUBLIC-KEY ::= {
@@ -1505,19 +1505,19 @@ public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </pre><a href="#section-4-7" class="pilcrow">¶</a>
 </div>
 <p id="section-4-8">Algorithm 22 in Section 7.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines the raw byte string
-encoding of an ML-DSA public key. When used in a SubjectPublicKeyInfo type,
-the subjectPublicKey BIT STRING contains the raw byte string encoding of the
+encoding of an ML-DSA public key. When used in a <code>SubjectPublicKeyInfo</code> type,
+the <code>subjectPublicKey BIT STRING</code> contains the raw byte string encoding of the
 public key.<a href="#section-4-8" class="pilcrow">¶</a></p>
-<p id="section-4-9">When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an
-environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by
-using the ML-DSA-44-PublicKey, ML-DSA-65-PublicKey, and ML-DSA-87-PublicKey types
+<p id="section-4-9">When an ML-DSA public key appears outside of a <code>SubjectPublicKeyInfo</code> type in an
+environment that uses ASN.1 encoding, it can be encoded as an <code>OCTET STRING</code> by
+using the <code>ML-DSA-44-PublicKey</code>, <code>ML-DSA-65-PublicKey</code>, and <code>ML-DSA-87-PublicKey</code> types
 corresponding to the correct key size.<a href="#section-4-9" class="pilcrow">¶</a></p>
-<p id="section-4-10"><span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> describes the Asymmetric Key Package's OneAsymmetricKey type for
+<p id="section-4-10"><span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> describes the Asymmetric Key Package's <code>OneAsymmetricKey</code> type for
 encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
-a OneAsymmetricKey, it follows the description in <a href="#priv-key" class="auto internal xref">Section 6</a>.<a href="#section-4-10" class="pilcrow">¶</a></p>
+a <code>OneAsymmetricKey</code>, it follows the description in <a href="#priv-key" class="auto internal xref">Section 6</a>.<a href="#section-4-10" class="pilcrow">¶</a></p>
 <p id="section-4-11">When the ML-DSA private key appears outside of an Asymmetric Key Package in an
 environment that uses ASN.1 encoding, it can be encoded using one of the
-the ML-DSA-PrivateKey CHOICE formats defined in <a href="#priv-key" class="auto internal xref">Section 6</a>. The seed format
+the <code>ML-DSA-PrivateKey CHOICE</code> formats defined in <a href="#priv-key" class="auto internal xref">Section 6</a>. The <code>seed</code> format
 is <span class="bcp14">RECOMMENDED</span> as it efficiently stores both the private and public key.<a href="#section-4-11" class="pilcrow">¶</a></p>
 <p id="section-4-12"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
 textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-12" class="pilcrow">¶</a></p>
@@ -1528,10 +1528,10 @@ textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468<
       <h2 id="name-key-usage-bits">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-key-usage-bits" class="section-name selfRef">Key Usage Bits</a>
       </h2>
-<p id="section-5-1">The intended application for the key is indicated in the keyUsage
+<p id="section-5-1">The intended application for the key is indicated in the <code>keyUsage</code>
 certificate extension; see <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the
-keyUsage extension is present in a certificate that indicates id-ml-dsa-*
-in the SubjectPublicKeyInfo, then at least one of following <span class="bcp14">MUST</span> be
+<code>keyUsage</code> extension is present in a certificate that indicates <code>id-ml-dsa-*</code>
+in the <code>SubjectPublicKeyInfo</code>, then at least one of following <span class="bcp14">MUST</span> be
 present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
 <pre>
@@ -1541,8 +1541,8 @@ present:<a href="#section-5-1" class="pilcrow">¶</a></p>
   cRLSign.
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3">If the keyUsage extension is present in a certificate that indicates
-id-ml-dsa-* in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
+<p id="section-5-3">If the <code>keyUsage</code> extension is present in a certificate that indicates
+<code>id-ml-dsa-*</code> in the <code>SubjectPublicKeyInfo</code>, then the following <span class="bcp14">MUST NOT</span> be
 present:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
@@ -1553,7 +1553,7 @@ present:<a href="#section-5-3" class="pilcrow">¶</a></p>
    decipherOnly.
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
-<p id="section-5-5">Requirements about the keyUsage extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>
+<p id="section-5-5">Requirements about the <code>keyUsage</code> extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>
 still apply.<a href="#section-5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1569,7 +1569,7 @@ is computed from the seed using <code>ML-DSA.KeyGen_internal(xi)</code> (algorit
 key in a structure that both identifies what algorithm the private key
 is for and allows for the public key and additional attributes about the
 key to be included as well. For illustration, the ASN.1 structure
-OneAsymmetricKey is replicated below.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<code>OneAsymmetricKey</code> is replicated below.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-3">
 <pre>
   OneAsymmetricKey ::= SEQUENCE {
@@ -1596,9 +1596,9 @@ OneAsymmetricKey is replicated below.<a href="#section-6-2" class="pilcrow">¶</
         <p id="section-6-4.1">NOTE: The above syntax is from <span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> and is compatible with the
   2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-6-4.1" class="pilcrow">¶</a></p>
 </aside>
-<p id="section-6-5">For ML-DSA private keys, the privateKey field in OneAsymmetricKey contains one of
-the following CHOICE structures encoded as an OCTET STRING. The seed format is a
-fixed 32 bytes for all security levels, while the expandedKey and both formats
+<p id="section-6-5">For ML-DSA private keys, the privateKey field in <code>OneAsymmetricKey</code> contains one of
+the following <code>CHOICE</code> structures encoded as an <code>OCTET STRING</code>. The <code>seed</code> format is a
+fixed 32 bytes for all security levels, while the <code>expandedKey</code> and <code>both</code> formats
 vary in size by security level:<a href="#section-6-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-6">
 <pre>
@@ -1636,35 +1636,35 @@ ML-DSA-87-PrivateKey ::= CHOICE {
   }
 </pre><a href="#section-6-8" class="pilcrow">¶</a>
 </div>
-<p id="section-6-9">The CHOICE allows three representations of the private key:<a href="#section-6-9" class="pilcrow">¶</a></p>
+<p id="section-6-9">The <code>CHOICE</code> allows three representations of the private key:<a href="#section-6-9" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-6-10">
 <li id="section-6-10.1">
-          <p id="section-6-10.1.1">The seed format (tag <code>[0]</code>) contains just the 32-byte seed value (xi)
+          <p id="section-6-10.1.1">The <code>seed</code> format (tag <code>[0]</code>) contains just the 32-byte seed value (xi)
 from which both the expanded private key and public key can be derived
-using ML-DSA.KeyGen_internal(xi).<a href="#section-6-10.1.1" class="pilcrow">¶</a></p>
+using <code>ML-DSA.KeyGen_internal(xi)</code>.<a href="#section-6-10.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-6-10.2">
-          <p id="section-6-10.2.1">The expandedKey format contains the expanded private key that was
+          <p id="section-6-10.2.1">The <code>expandedKey</code> format contains the expanded private key that was
 derived from the seed.<a href="#section-6-10.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-6-10.3">
-          <p id="section-6-10.3.1">The both format contains both the seed and expanded key, allowing for
+          <p id="section-6-10.3.1">The <code>both</code> format contains both the seed and expanded key, allowing for
 for interoperability; some may want to use and retain the seed and
 others may only support expanded keys.<a href="#section-6-10.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-6-11">When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
+<p id="section-6-11">When encoding an ML-DSA private key in a <code>OneAsymmetricKey</code> object, any of
 these three formats may be used, though the seed format is <span class="bcp14">RECOMMENDED</span>
 for storage efficiency.<a href="#section-6-11" class="pilcrow">¶</a></p>
-<p id="section-6-12">The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
-the appropriate OID as defined in <a href="#oids" class="auto internal xref">Section 2</a>. If present, the "publicKey"
+<p id="section-6-12">The <code>privateKeyAlgorithm</code> field uses the <code>AlgorithmIdentifier</code> structure with
+the appropriate OID as defined in <a href="#oids" class="auto internal xref">Section 2</a>. If present, the <code>publicKey</code>
 field will hold the encoded public key as defined in <a href="#ML-DSA-PublicKey" class="auto internal xref">Section 4</a>.<a href="#section-6-12" class="pilcrow">¶</a></p>
 <p id="section-6-13">NOTE: While the private key can be stored in multiple formats, the seed-only
 format is <span class="bcp14">RECOMMENDED</span> as it is the most compact representation. Both the
 expanded private key and the public key can be deterministically derived
-from the seed using ML-DSA.KeyGen_internal(xi). Alternatively, the public
-key can be generated from the private key. While the publicKey field
-and expandedKey format are technically redundant when using the seed-only
+from the seed using <code>ML-DSA.KeyGen_internal(xi)</code>. Alternatively, the public
+key can be generated from the private key. While the <code>publicKey</code> field
+and <code>expandedKey</code> format are technically redundant when using the seed-only
 format, they <span class="bcp14">MAY</span> be included to enable keypair consistency checks during
 import operations.<a href="#section-6-13" class="pilcrow">¶</a></p>
 <p id="section-6-14"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA private keys encoded using the
@@ -1688,12 +1688,12 @@ allocated in the "SMI Security for PKIX Module Identifier" registry
       <h2 id="name-implementation-consideratio">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
       </h2>
-<p id="section-8-1">An ML-DSA.KeyGen seed (xi) represents the <span class="bcp14">RECOMMENDED</span> format for storing
+<p id="section-8-1">An <code>ML-DSA.KeyGen seed (xi)</code> represents the <span class="bcp14">RECOMMENDED</span> format for storing
 and transmitting ML-DSA private keys. This format is explicitly permitted
 by <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> as an acceptable representation of a keypair. In particular,
 generating the seed in one cryptographic module and then importing or
 exporting it into another cryptographic module is allowed. The internal
-key generation function ML-DSA.KeyGen_internal(xi) can be accessed for
+key generation function <code>ML-DSA.KeyGen_internal(xi)</code> can be accessed for
 this purpose.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">Note also that unlike other private key compression methods in other algorithms,
 expanding a private key from a seed is a one-way function, meaning that once a
@@ -1702,7 +1702,7 @@ re-created even if the full expanded private key is available. For this reason
 it is <span class="bcp14">RECOMMENDED</span> that implementations retain and export the seed,
 even when also exporting the expanded key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
-ML-DSA.KeyGen in the returned output.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<code>ML-DSA.KeyGen</code> in the returned output.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="private-key-consistency-testing">
@@ -2127,8 +2127,8 @@ and expanded format.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-1">The following examples show ML-DSA private keys in different formats,
 all derived from the same seed <code>000102…1e1f</code>. For each security level,
 we show the seed-only format (using a context-specific <code>[0]</code> primitive
-tag with an implicit encoding of OCTET STRING), the expanded format,
-and both formats together.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+tag with an implicit encoding of <code>OCTET STRING</code>), the <code>expanded</code> format,
+and <code>both</code> formats together.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-2">NOTE: All examples use the same seed value, showing how the same seed
 produces different expanded keys for each security level.<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
 <div id="ml-dsa-44-private-key-examples">
@@ -3990,7 +3990,7 @@ faa00b5d349f8a547ad875b96a8c2b2910c9301309a3f9138a5693111f55b3c0
         </h3>
 <aside id="appendix-C.3-1">
           <p id="appendix-C.3-1.1">The example certificates in this section have key usage bits set to
-digitalSignature, keyCertSign, and cRLSign to lessen the number of
+<code>digitalSignature</code>, <code>keyCertSign</code>, and <code>cRLSign</code> to lessen the number of
 examples, i.e., brevity. Certificate Policies (CPs) <span>[<a href="#RFC3647" class="cite xref">RFC3647</a>]</span>
 for production CAs should consider whether this combination is
 appropriate.<a href="#appendix-C.3-1.1" class="pilcrow">¶</a></p>
