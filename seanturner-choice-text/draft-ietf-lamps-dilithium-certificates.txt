@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 21 September 2025                                     S. Turner
+Expires: 22 September 2025                                     S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           20 March 2025
+                                                           21 March 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 September 2025.
+   This Internet-Draft will expire on 22 September 2025.
 
 Copyright Notice
 
@@ -463,9 +463,9 @@ Table of Contents
 
    When parsing the private key, the ASN.1 tag explicitly indicates
    which variant of CHOICE is present.  Implementations should use tag
-   value 0x80 for seed only, 0x04 for key only, and 0x30 for both to
-   parse the private key, rather than any other heuristic like length of
-   the OCTET STRING.
+   UNIVERSAL IMPLICIT [0] (raw value 0x80) for seed, OCTET STRING (0x04)
+   for expandedKey, and SEQUENCE (0x30) for both to parse the private
+   key, rather than any other heuristic like length of the OCTET STRING.
 
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
