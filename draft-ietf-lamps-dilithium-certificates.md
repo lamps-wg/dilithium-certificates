@@ -529,9 +529,9 @@ format, they MAY be included to enable keypair consistency checks during
 import operations.
 
 When parsing the private key, the ASN.1 tag explicitly indicates which
-variant of CHOICE is present. Implementations should use tag value 0x80
-for seed only, 0x04 for key only, and 0x30 for both to parse the private
-key, rather than any other heuristic like length of the OCTET STRING.
+variant of `CHOICE` is present. Implementations should use tag `UNIVERSAL IMPLICIT [0]`
+(raw value `0x80`) for `seed`, `OCTET STRING` (`0x04`) for `expandedKey`, and
+`SEQUENCE` (`0x30`) for `both` to parse the private key, rather than any other heuristic like length of the `OCTET STRING`.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
