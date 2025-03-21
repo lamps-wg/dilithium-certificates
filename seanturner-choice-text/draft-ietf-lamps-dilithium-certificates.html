@@ -1670,7 +1670,8 @@ import operations.<a href="#section-6-13" class="pilcrow">¶</a></p>
 <p id="section-6-14">When parsing the private key, the ASN.1 tag explicitly indicates which
 variant of <code>CHOICE</code> is present. Implementations should use tag <code>UNIVERSAL IMPLICIT [0]</code>
 (raw value <code>0x80</code>) for <code>seed</code>, <code>OCTET STRING</code> (<code>0x04</code>) for <code>expandedKey</code>, and
-<code>SEQUENCE</code> (<code>0x30</code>) for <code>both</code> to parse the private key, rather than any other heuristic like length of the <code>OCTET STRING</code>.<a href="#section-6-14" class="pilcrow">¶</a></p>
+<code>SEQUENCE</code> (<code>0x30</code>) for <code>both</code> to parse the private key, rather than any
+other heuristic like length of the enclosing <code>OCTET STRING</code>.<a href="#section-6-14" class="pilcrow">¶</a></p>
 <p id="section-6-15"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA private keys encoded using the
 textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-6-15" class="pilcrow">¶</a></p>
 </section>
