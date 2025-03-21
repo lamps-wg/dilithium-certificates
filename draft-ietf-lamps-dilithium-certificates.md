@@ -731,7 +731,7 @@ and expanded format.
 
 This appendix contains examples of ML-DSA public keys, private keys and certificates.
 
-## Example Private Key {#example-private}
+## Example Private Keys {#example-private}
 
 The following examples show ML-DSA private keys in different formats,
 all derived from the same seed `000102…1e1f`. For each security level,
@@ -830,7 +830,7 @@ produces different expanded keys for each security level.
 ~~~
 
 
-## Example Public Key {#example-public}
+## Example Public Keys {#example-public}
 
 The following is the ML-DSA-44 public key corresponding to the private
 key in the previous section.
