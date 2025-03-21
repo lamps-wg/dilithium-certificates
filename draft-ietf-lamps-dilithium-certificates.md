@@ -180,7 +180,7 @@ Dilithium are not compatible.
 
 # Identifiers {#oids}
 
-The AlgorithmIdentifier type is defined in {{!RFC5912}} as follows:
+The `AlgorithmIdentifier` type is defined in {{!RFC5912}} as follows:
 
 ~~~
     AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
@@ -199,10 +199,10 @@ syntax.
 
 The fields in AlgorithmIdentifier have the following meanings:
 
-* algorithm identifies the cryptographic algorithm with an object
+* `algorithm` identifies the cryptographic algorithm with an object
 identifier.
 
-* parameters, which are optional, are the associated parameters for the
+* `parameters`, which are optional, are the associated parameters for the
 algorithm identifier in the algorithm field.
 
 The OIDs are:
@@ -221,7 +221,7 @@ The OIDs are:
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 ~~~
 
-The contents of the parameters component for each algorithm MUST be
+The contents of the `parameters` component for each `algorithm` MUST be
 absent. The ctx value used in the ML-DSA signing and verification
 {{FIPS204}} of ML-DSA signatures defined in this specification
 (X.509 certificates, CRLs) is the empty string.
@@ -237,7 +237,7 @@ ML-DSA provides three parameter sets for the NIST PQC security categories
 Signatures are used in a number of different ASN.1 structures. As shown
 in the ASN.1 representation from {{RFC5280}} below, in an X.509
 certificate, a signature is encoded with an algorithm identifier in the
-signatureAlgorithm attribute and a signatureValue attribute that contains
+`signatureAlgorithm` attribute and a `signatureValue` attribute that contains
 the actual signature.
 
 ~~~
@@ -261,14 +261,14 @@ the actual signature.
 
 Signatures are also used in the CRL list ASN.1 representation from
 {{RFC5280}} below. In a X.509 CRL, a signature is encoded with an
-algorithm identifier in the signatureAlgorithm attribute and a
-signatureValue attribute that contains the actual signature.
+algorithm identifier in the `signatureAlgorithm` attribute and a
+`signatureValue` attribute that contains the actual signature.
 
 ~~~
    CertificateList  ::=  SIGNED{ TBSCertList }
 ~~~
 
-The following SIGNATURE-ALGORITHM ASN.1 classes are for ML-DSA-44,
+The following `SIGNATURE-ALGORITHM` ASN.1 classes are for ML-DSA-44,
 ML-DSA-65, and ML-DSA-87:
 
 ~~~
@@ -295,15 +295,15 @@ ML-DSA-65, and ML-DSA-87:
 ~~~
 
 The identifiers defined in {{oids}} can be used as the
-AlgorithmIdentifier in the signatureAlgorithm field in the sequence
-Certificate/CertificateList and the signature field in the sequence
-TBSCertificate/TBSCertList in certificates and CRLs, respectively,
-{{RFC5280}}. The parameters of these signature algorithms MUST be
-absent, as explained in {{oids}}. That is, the AlgorithmIdentifier
-SHALL be a SEQUENCE of one component, the OID id-ml-dsa-*.
+`AlgorithmIdentifier` in the `signatureAlgorithm` field in the sequence
+`Certificate`/`CertificateList` and the `signature` field in the sequence
+`TBSCertificate`/`TBSCertList` in certificates and CRLs, respectively,
+{{RFC5280}}. The `parameters` of these signature algorithms MUST be
+absent, as explained in {{oids}}. That is, the `AlgorithmIdentifier`
+SHALL be a `SEQUENCE` of one component, the OID id-ml-dsa-*.
 
-The signatureValue field contains the corresponding ML-DSA signature
-computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
+The `signatureValue` field contains the corresponding ML-DSA signature
+computed upon the ASN.1 DER encoded `tbsCertificate`/`tbsCertList`
 {{RFC5280}}.
 
 Conforming Certification Authority (CA) implementations MUST specify
@@ -315,8 +315,8 @@ values are specified {{oids}}.
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PublicKey}
 
-In the X.509 certificate, the subjectPublicKeyInfo field has the
-SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
+In the X.509 certificate, the `subjectPublicKeyInfo` field has the
+`SubjectPublicKeyInfo` type, which has the following ASN.1 syntax:
 
 ~~~
   SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
@@ -330,14 +330,14 @@ SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
   2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
 </aside>
 
-The fields in SubjectPublicKeyInfo have the following meaning:
+The fields in `SubjectPublicKeyInfo` have the following meaning:
 
-* algorithm is the algorithm identifier and parameters for the
+* `algorithm` is the algorithm identifier and parameters for the
   public key (see above).
 
-* subjectPublicKey contains the byte stream of the public key.
+* `subjectPublicKey` contains the byte stream of the public key.
 
-The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
+The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
 ~~~
   pk-ml-dsa-44 PUBLIC-KEY ::= {
@@ -370,22 +370,22 @@ The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 ~~~
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
-encoding of an ML-DSA public key. When used in a SubjectPublicKeyInfo type,
-the subjectPublicKey BIT STRING contains the raw byte string encoding of the
+encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
+the `subjectPublicKey BIT STRING` contains the raw byte string encoding of the
 public key.
 
-When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an
-environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by
-using the ML-DSA-44-PublicKey, ML-DSA-65-PublicKey, and ML-DSA-87-PublicKey types
+When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an
+environment that uses ASN.1 encoding, it can be encoded as an `OCTET STRING` by
+using the `ML-DSA-44-PublicKey`, `ML-DSA-65-PublicKey`, and `ML-DSA-87-PublicKey` types
 corresponding to the correct key size.
 
-{{?RFC5958}} describes the Asymmetric Key Package's OneAsymmetricKey type for
+{{?RFC5958}} describes the Asymmetric Key Package's `OneAsymmetricKey` type for
 encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
-a OneAsymmetricKey, it follows the description in {{priv-key}}.
+a `OneAsymmetricKey`, it follows the description in {{priv-key}}.
 
 When the ML-DSA private key appears outside of an Asymmetric Key Package in an
 environment that uses ASN.1 encoding, it can be encoded using one of the
-the ML-DSA-PrivateKey CHOICE formats defined in {{priv-key}}. The seed format
+the `ML-DSA-PrivateKey CHOICE` formats defined in {{priv-key}}. The `seed` format
 is RECOMMENDED as it efficiently stores both the private and public key.
 
 {{examples}} contains example ML-DSA public keys encoded using the
@@ -393,10 +393,10 @@ textual encoding defined in {{?RFC7468}}.
 
 # Key Usage Bits
 
-The intended application for the key is indicated in the keyUsage
+The intended application for the key is indicated in the `keyUsage`
 certificate extension; see {{Section 4.2.1.3 of RFC5280}}. If the
-keyUsage extension is present in a certificate that indicates id-ml-dsa-*
-in the SubjectPublicKeyInfo, then at least one of following MUST be
+`keyUsage` extension is present in a certificate that indicates `id-ml-dsa-*`
+in the `SubjectPublicKeyInfo`, then at least one of following MUST be
 present:
 
 ~~~
@@ -406,8 +406,8 @@ present:
   cRLSign.
 ~~~
 
-If the keyUsage extension is present in a certificate that indicates
-id-ml-dsa-* in the SubjectPublicKeyInfo, then the following MUST NOT be
+If the `keyUsage` extension is present in a certificate that indicates
+`id-ml-dsa-*` in the `SubjectPublicKeyInfo`, then the following MUST NOT be
 present:
 
 ~~~
@@ -418,7 +418,7 @@ present:
    decipherOnly.
 ~~~
 
-Requirements about the keyUsage extension bits defined in {{RFC5280}}
+Requirements about the `keyUsage` extension bits defined in {{RFC5280}}
 still apply.
 
 #  Private Key Format {#priv-key}
@@ -431,7 +431,7 @@ is computed from the seed using `ML-DSA.KeyGen_internal(xi)` (algorithm 6).
 key in a structure that both identifies what algorithm the private key
 is for and allows for the public key and additional attributes about the
 key to be included as well. For illustration, the ASN.1 structure
-OneAsymmetricKey is replicated below.
+`OneAsymmetricKey` is replicated below.
 
 ~~~
   OneAsymmetricKey ::= SEQUENCE {
@@ -459,9 +459,9 @@ OneAsymmetricKey is replicated below.
   2021 ASN.1 syntax {{X680}}.
 </aside>
 
-For ML-DSA private keys, the privateKey field in OneAsymmetricKey contains one of
-the following CHOICE structures encoded as an OCTET STRING. The seed format is a
-fixed 32 bytes for all security levels, while the expandedKey and both formats
+For ML-DSA private keys, the privateKey field in `OneAsymmetricKey` contains one of
+the following `CHOICE` structures encoded as an `OCTET STRING`. The `seed` format is a
+fixed 32 bytes for all security levels, while the `expandedKey` and `both` formats
 vary in size by security level:
 
 
@@ -498,33 +498,33 @@ ML-DSA-87-PrivateKey ::= CHOICE {
   }
 ~~~
 
-The CHOICE allows three representations of the private key:
+The `CHOICE` allows three representations of the private key:
 
-1. The seed format (tag `[0]`) contains just the 32-byte seed value (xi)
+1. The `seed` format (tag `[0]`) contains just the 32-byte seed value (xi)
    from which both the expanded private key and public key can be derived
-   using ML-DSA.KeyGen_internal(xi).
+   using `ML-DSA.KeyGen_internal(xi)`.
 
-2. The expandedKey format contains the expanded private key that was
+2. The `expandedKey` format contains the expanded private key that was
    derived from the seed.
 
-3. The both format contains both the seed and expanded key, allowing for
+3. The `both` format contains both the seed and expanded key, allowing for
    for interoperability; some may want to use and retain the seed and
    others may only support expanded keys.
 
-When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
+When encoding an ML-DSA private key in a `OneAsymmetricKey` object, any of
 these three formats may be used, though the seed format is RECOMMENDED
 for storage efficiency.
 
-The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
-the appropriate OID as defined in {{oids}}. If present, the "publicKey"
+The `privateKeyAlgorithm` field uses the `AlgorithmIdentifier` structure with
+the appropriate OID as defined in {{oids}}. If present, the `publicKey`
 field will hold the encoded public key as defined in {{ML-DSA-PublicKey}}.
 
 NOTE: While the private key can be stored in multiple formats, the seed-only
 format is RECOMMENDED as it is the most compact representation. Both the
 expanded private key and the public key can be deterministically derived
-from the seed using ML-DSA.KeyGen_internal(xi). Alternatively, the public
-key can be generated from the private key. While the publicKey field
-and expandedKey format are technically redundant when using the seed-only
+from the seed using `ML-DSA.KeyGen_internal(xi)`. Alternatively, the public
+key can be generated from the private key. While the `publicKey` field
+and `expandedKey` format are technically redundant when using the seed-only
 format, they MAY be included to enable keypair consistency checks during
 import operations.
 
@@ -541,12 +541,12 @@ allocated in the "SMI Security for PKIX Module Identifier" registry
 
 # Implementation Considerations
 
-An ML-DSA.KeyGen seed (xi) represents the RECOMMENDED format for storing
+An `ML-DSA.KeyGen seed (xi)` represents the RECOMMENDED format for storing
 and transmitting ML-DSA private keys. This format is explicitly permitted
 by {{FIPS204}} as an acceptable representation of a keypair. In particular,
 generating the seed in one cryptographic module and then importing or
 exporting it into another cryptographic module is allowed. The internal
-key generation function ML-DSA.KeyGen_internal(xi) can be accessed for
+key generation function `ML-DSA.KeyGen_internal(xi)` can be accessed for
 this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
@@ -556,7 +556,7 @@ re-created even if the full expanded private key is available. For this reason
 it is RECOMMENDED that implementations retain and export the seed,
 even when also exporting the expanded key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
-ML-DSA.KeyGen in the returned output.
+`ML-DSA.KeyGen` in the returned output.
 
 # Private Key Consistency Testing
 
@@ -736,8 +736,8 @@ This appendix contains examples of ML-DSA public keys, private keys and certific
 The following examples show ML-DSA private keys in different formats,
 all derived from the same seed `000102…1e1f`. For each security level,
 we show the seed-only format (using a context-specific `[0]` primitive
-tag with an implicit encoding of OCTET STRING), the expanded format,
-and both formats together.
+tag with an implicit encoding of `OCTET STRING`), the `expanded` format,
+and `both` formats together.
 
 NOTE: All examples use the same seed value, showing how the same seed
 produces different expanded keys for each security level.
@@ -870,7 +870,7 @@ key in the previous section.
 
 <aside markdown="block">
 The example certificates in this section have key usage bits set to
-digitalSignature, keyCertSign, and cRLSign to lessen the number of
+`digitalSignature`, `keyCertSign`, and `cRLSign` to lessen the number of
 examples, i.e., brevity. Certificate Policies (CPs) {{!RFC3647}}
 for production CAs should consider whether this combination is
 appropriate.
