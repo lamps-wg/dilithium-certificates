@@ -507,9 +507,9 @@ The `CHOICE` allows three representations of the private key:
 2. The `expandedKey` format contains the expanded private key that was
    derived from the seed.
 
-3. The `both` format contains both the seed and expanded key, allowing for
+3. The `both` format contains both the seed and expanded private key, allowing for
    for interoperability; some may want to use and retain the seed and
-   others may only support expanded keys.
+   others may only support expanded private keys.
 
 When encoding an ML-DSA private key in a `OneAsymmetricKey` object, any of
 these three formats may be used, though the seed format is RECOMMENDED
@@ -554,7 +554,7 @@ expanding a private key from a seed is a one-way function, meaning that once a
 full key is expanded from seed and the seed discarded, the seed cannot be
 re-created even if the full expanded private key is available. For this reason
 it is RECOMMENDED that implementations retain and export the seed,
-even when also exporting the expanded key. ML-DSA seed extraction can be
+even when also exporting the expanded private key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
 `ML-DSA.KeyGen` in the returned output.
 
@@ -740,7 +740,7 @@ tag with an implicit encoding of `OCTET STRING`), the `expanded` format,
 and `both` formats together.
 
 NOTE: All examples use the same seed value, showing how the same seed
-produces different expanded keys for each security level.
+produces different expanded private keys for each security level.
 
 ### ML-DSA-44 Private Key Examples
 
