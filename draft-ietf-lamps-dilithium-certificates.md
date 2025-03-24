@@ -871,7 +871,7 @@ key in the previous section.
 <aside markdown="block">
 The example certificates in this section have key usage bits set to
 `digitalSignature`, `keyCertSign`, and `cRLSign` to lessen the number of
-examples, i.e., brevity. Certificate Policies (CPs) {{!RFC3647}}
+examples, i.e., brevity. Certificate Policies (CPs) {{?RFC3647}}
 for production CAs should consider whether this combination is
 appropriate.
 </aside>
