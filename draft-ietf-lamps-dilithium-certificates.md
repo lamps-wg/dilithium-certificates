@@ -955,7 +955,7 @@ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
                   # too long
   end if
 
-  M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
+  M' = BytesToBits(IntegerToBytes(0, 1) || IntegerToBytes(|ctx|, 1)
                                                         || ctx) || M
   mu = H(BytesToBits(H(pk, 64)) || M', 64)
   return mu
@@ -967,9 +967,9 @@ Internal operations:
 ~~~
 ExternalMu-ML-DSA.Sign(sk, mu):
 
-  if |mu| != 512 then
+  if |mu| != 64 then
     return error  # return an error indication if the input mu is not
-                  # 64 bytes (512 bits).
+                  # 64 bytes.
   end if
 
   rnd = rand(32)  # for the optional deterministic variant,
@@ -988,7 +988,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
 {: #fig-externalmu-ml-dsa-internal title="Internal steps of ExternalMu-ML-DSA"}
 
 ExternalMu-ML-DSA requires the public key, or its prehash, as input to
-the pre-digesting function. This assumes the signer generating the
+the `Prehash()` function. This assumes the signer generating the
 pre-hash is in possession of the public key before signing and is
 different from conventional pre-hashing which only requires the
 message and the hash function as input.
@@ -997,9 +997,9 @@ Security-wise, during the signing operation of pure (or "one-step")
 ML-DSA, the cryptographic module extracts the public key hash `tr` from
 the secret key object, and thus there is no possibility of mismatch
 between `tr` and `sk`. In ExternalMu-ML-DSA, the public key or its hash
-needs to be provided to the `Prehash()` routine indpedendly of the secret
+needs to be provided to the `Prehash()` routine independently of the secret
 key, and while the exact mechanism by which it is delivered will be
-implementation-specific, it does open a windown for mismatches between
+implementation-specific, it does open a window for mismatches between
 `tr` and `sk`. First, this will produce a signature which will fail to
 verify under the intended public key since a compliant `Verify()` routine
 will independently compute `tr` from the public key. Implementors should pay careful
