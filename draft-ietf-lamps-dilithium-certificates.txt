@@ -241,6 +241,10 @@ Table of Contents
        SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 }
        }
 
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
+
    The identifiers defined in Section 2 can be used as the
    AlgorithmIdentifier in the signatureAlgorithm field in the sequence
    Certificate/CertificateList and the signature field in the sequence
@@ -309,6 +313,10 @@ Table of Contents
      ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
 
      ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
 
    Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
    encoding of an ML-DSA public key.  When used in a
@@ -428,6 +436,10 @@ Table of Contents
          expandedKey OCTET STRING (SIZE (4896))
          }
      }
+
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
 
    The CHOICE allows three representations of the private key:
 
