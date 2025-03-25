@@ -3965,7 +3965,7 @@ C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
    EGOY93BgBuQum+HvidJcJy8RqVCVxYfXE3MihN6dvTxyF7BoniHY6w/2lmg=
    -----END PRIVATE KEY-----
 
-   THe following is the third example:
+   The following is the third example:
 
    -----BEGIN PRIVATE KEY-----
    MIIKGAIBADALBglghkgBZQMEAxEEggoEBIIKANeytHJUquDbReeTDUqY0sl9jxOX
