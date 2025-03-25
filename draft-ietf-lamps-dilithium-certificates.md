@@ -294,6 +294,11 @@ ML-DSA-65, and ML-DSA-87:
     }
 ~~~
 
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
+
 The identifiers defined in {{oids}} can be used as the
 `AlgorithmIdentifier` in the `signatureAlgorithm` field in the sequence
 `Certificate`/`CertificateList` and the `signature` field in the sequence
@@ -368,6 +373,11 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
 
 ~~~
+
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
@@ -475,9 +485,7 @@ ML-DSA-44-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (2560))
       }
   }
-~~~
 
-~~~
 ML-DSA-65-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4032)),
@@ -486,9 +494,7 @@ ML-DSA-65-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (4032))
       }
   }
-~~~
 
-~~~
 ML-DSA-87-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4896)),
@@ -498,6 +504,11 @@ ML-DSA-87-PrivateKey ::= CHOICE {
       }
   }
 ~~~
+
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
 
 The `CHOICE` allows three representations of the private key:
 
