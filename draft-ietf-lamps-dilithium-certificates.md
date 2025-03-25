@@ -1022,7 +1022,8 @@ ExternalMu-ML-DSA.Sign(sk, mu):
   sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
   return sigma
 
-ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
+ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
+   # ^ Note mu is passed as argument instead of M'
    ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
 ~~~
 {: #fig-externalmu-ml-dsa-internal title="Internal steps of ExternalMu-ML-DSA"}
