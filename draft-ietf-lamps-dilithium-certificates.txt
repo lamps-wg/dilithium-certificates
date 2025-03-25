@@ -926,6 +926,9 @@ C.1.  Example Private Keys
 
 C.1.1.  ML-DSA-44 Private Key Examples
 
+   Each of the examples includes the textual encoding [RFC7468] followed
+   by the so-called "pretty print"; the private keys are the same.
+
 C.1.1.1.  Seed Format
 
    -----BEGIN PRIVATE KEY-----
@@ -1248,6 +1251,9 @@ C.1.1.3.  Both Format
    }
 
 C.1.2.  ML-DSA-65 Private Key Examples
+
+   Each of the examples includes the textual encoding [RFC7468] followed
+   by the so-called "pretty print"; the private keys are the same.
 
 C.1.2.1.  Seed Format
 
@@ -1725,6 +1731,9 @@ C.1.2.3.  Both Format
    }
 
 C.1.3.  ML-DSA-87 Private Key Examples
+
+   Each of the examples includes the textual encoding [RFC7468] followed
+   by the so-called "pretty print"; the private keys are the same.
 
 C.1.3.1.  Seed Format
 
@@ -2294,7 +2303,9 @@ C.1.3.3.  Both Format
 C.2.  Example Public Keys
 
    The following is the ML-DSA-44 public key corresponding to the
-   private key in the previous section.
+   private key in the previous section.  The textual encoding [RFC7468]
+   is followed by the so-called "pretty print"; the public keys are the
+   same.
 
    -----BEGIN PUBLIC KEY-----
    MIIFMjALBglghkgBZQMEAxEDggUhANeytHJUquDbReeTDUqY0sl9jxOX0Xidr6Fw
@@ -2376,7 +2387,9 @@ C.2.  Example Public Keys
    }
 
    The following is the ML-DSA-65 public key corresponding to the
-   private key in the previous section.
+   private key in the previous section.  The textual encoding [RFC7468]
+   is followed by the so-called "pretty print"; the public keys are the
+   same.
 
    -----BEGIN PUBLIC KEY-----
    MIIHsjALBglghkgBZQMEAxIDggehAEhoPZGXjjHrPd24sEc0gtK4il9iWUn9j1il
@@ -2492,7 +2505,9 @@ C.2.  Example Public Keys
    }
 
    The following is the ML-DSA-87 public key corresponding to the
-   private key in the previous section.
+   private key in the previous section.  The textual encoding [RFC7468]
+   is followed by the so-called "pretty print"; the public keys are the
+   same.
 
    -----BEGIN PUBLIC KEY-----
    MIIKMjALBglghkgBZQMEAxMDggohAJeSvOwvJDBoaoL8zzwvX/Zl53HXq0G5AljP
@@ -2649,7 +2664,9 @@ C.3.  Example Certificates
       |  combination is appropriate.
 
    The following is a self-signed certificate for the ML-DSA-44 public
-   key in the previous section.
+   key in the previous section.  The textual encoding [RFC7468] is
+   followed by the so-called "pretty print"; the certificates are the
+   same.
 
    -----BEGIN CERTIFICATE-----
    MIIPlDCCBgqgAwIBAgIUFZ/+byL9XMQsUk32/V4o0N44804wCwYJYIZIAWUDBAMR
@@ -2943,7 +2960,9 @@ C.3.  Example Certificates
    }
 
    The following is a self-signed certificate for the ML-DSA-65 public
-   key in the previous section.
+   key in the previous section.  The textual encoding [RFC7468] is
+   followed by the so-called "pretty print"; the certificates are the
+   same.
 
    -----BEGIN CERTIFICATE-----
    MIIVjTCCCIqgAwIBAgIUFZ/+byL9XMQsUk32/V4o0N44804wCwYJYIZIAWUDBAMS
@@ -3317,7 +3336,9 @@ C.3.  Example Certificates
    }
 
    The following is a self-signed certificate for the ML-DSA-87 public
-   key in the previous section.
+   key in the previous section.  The textual encoding [RFC7468] is
+   followed by the so-called "pretty print"; the certificates are the
+   same.
 
    -----BEGIN CERTIFICATE-----
    MIIdMzCCCwqgAwIBAgIUFZ/+byL9XMQsUk32/V4o0N44804wCwYJYIZIAWUDBAMT
