@@ -933,8 +933,11 @@ expanded private keys follow:
 2. The second is an `expandedkey` for which the recomputed public key
    hash `tr` fails to match the private key.
 
-3. The third is an `expandedKey` for which the recomputed public t(0)
-   fails to match the private key, i.e., the two t(r) do not match.
+3. The third is an `expandedKey` for which the recomputed public `t_0`
+   fails to match the private key, i.e., the "low bits" of the `t` vector computed
+   as part of recovering the public key from the private do not match the
+   corresponding data in the private key. (Only the "high bits" `t_1` are
+   ultimately included in the public key).
 
 The second and third mismatches would not be detected by implementations
 that do not regenerate the public key from the private key, or neglect to
