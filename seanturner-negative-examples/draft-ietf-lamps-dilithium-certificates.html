@@ -5192,8 +5192,11 @@ expanded private keys follow:<a href="#appendix-C.4.1-1" class="pilcrow">¶</a><
 hash <code>tr</code> fails to match the private key.<a href="#appendix-C.4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li id="appendix-C.4.1-2.3">
-              <p id="appendix-C.4.1-2.3.1">The third is an <code>expandedKey</code> for which the recomputed public t(0)
-fails to match the private key, i.e., the two t(r) do not match.<a href="#appendix-C.4.1-2.3.1" class="pilcrow">¶</a></p>
+              <p id="appendix-C.4.1-2.3.1">The third is an <code>expandedKey</code> for which the recomputed public <code>t_0</code>
+fails to match the private key, i.e., the "low bits" of the <code>t</code> vector computed
+as part of recovering the public key from the private do not match the
+corresponding data in the private key. (Only the "high bits" <code>t_1</code> are
+ultimately included in the public key).<a href="#appendix-C.4.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
 <p id="appendix-C.4.1-3">The second and third mismatches would not be detected by implementations
