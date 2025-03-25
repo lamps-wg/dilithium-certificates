@@ -1718,6 +1718,9 @@ and compare operations, but are unable to ensure that the <code>seed</code> and
 <code>expandedKey</code> match.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <p id="section-9-2">If the check is done and the seed and the <code>expandedKey</code> are not consistent,
 the recipient <span class="bcp14">MUST</span> reject the private key as malformed.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">The seed consistency check consists of regenerating the expanded form from
+the seed via <code>ML-DSA.KeyGen_internal</code> and ensuring it is bytewise equal to
+the value presented in the private key.<a href="#section-9-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
