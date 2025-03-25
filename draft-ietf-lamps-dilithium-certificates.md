@@ -459,9 +459,10 @@ key to be included as well. For illustration, the ASN.1 structure
   2021 ASN.1 syntax {{X680}}.
 </aside>
 
-For ML-DSA private keys, the privateKey field in `OneAsymmetricKey` contains one of
-the following `CHOICE` structures encoded as an `OCTET STRING`. The `seed` format is a
-fixed 32 bytes for all security levels, while the `expandedKey` and `both` formats
+For ML-DSA private keys, the `privateKey` field in `OneAsymmetricKey` contains one of
+the following DER-encoded `CHOICE` structures. The `seed` format is a
+fixed 32 byte `OCTET STRING` (34 bytes total with the `0x8020` tag and
+length) for all security levels, while the `expandedKey` and `both` formats
 vary in size by security level:
 
 
