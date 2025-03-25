@@ -925,7 +925,7 @@ supports a pre-hashing flow by splitting the operation over two
 modules. In this section, we make this "ExternalMu-ML-DSA"
 more explicit.
 
-There are two steps. First an `ExternalMu-ML-DSA.Pure-Prehash()`
+There are two steps. First an `ExternalMu-ML-DSA.Prehash()`
 followed by `ExternalMu-ML-DSA.Sign()`. Together these are functionally
 equivalent to `ML-DSA.Sign()` from {{FIPS204}} in that used in sequence
 they create exactly the same signatures as regular pure ML-DSA, which
@@ -948,7 +948,7 @@ and {{fig-externalmu-ml-dsa-internal}} are defined in {{FIPS204}}.
 External operations:
 
 ~~~
-ExternalMu-ML-DSA.Pure-Prehash(pk, M):
+ExternalMu-ML-DSA.Prehash(pk, M):
 
   # Simplified flow for computing ML-DSA's mu based on Algorithm 2 and 7
   # of FIPS 204, with ctx being empty string.
@@ -985,7 +985,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
 {: #fig-externalmu-ml-dsa-internal title="Internal steps of ExternalMu-ML-DSA"}
 
 ExternalMu-ML-DSA requires the public key, or its prehash, as input to
-the `Pure-Prehash()` function. This assumes the signer generating the
+the `Prehash()` function. This assumes the signer generating the
 pre-hash is in possession of the public key before signing and is
 different from conventional pre-hashing which only requires the
 message and the hash function as input.
@@ -994,14 +994,14 @@ Security-wise, during the signing operation of pure (or "one-step")
 ML-DSA, the cryptographic module extracts the public key hash `tr` from
 the secret key object, and thus there is no possibility of mismatch
 between `tr` and `sk`. In ExternalMu-ML-DSA, the public key or its hash
-needs to be provided to the `Pure-Prehash()` routine independently of the secret
+needs to be provided to the `Prehash()` routine independently of the secret
 key, and while the exact mechanism by which it is delivered will be
 implementation-specific, it does open a window for mismatches between
 `tr` and `sk`. First, this will produce a signature which will fail to
 verify under the intended public key since a compliant `Verify()` routine
 will independently compute `tr` from the public key. Implementors should pay careful
 attention to how the public key or its hash is delivered to the
-`ExternalMu-ML-DSA.Pure-Prehash()` routine, and from where they are sourcing
+`ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing
 this data.
 
 # Acknowledgments
