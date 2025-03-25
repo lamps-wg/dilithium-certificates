@@ -3866,27 +3866,28 @@ Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
 
    Internal operations:
 
-ExternalMu-ML-DSA.Sign(sk, mu):
+   ExternalMu-ML-DSA.Sign(sk, mu):
 
-  if |mu| != 512 then
-    return error  # return an error indication if the input mu is not
-                  # 64 bytes (512 bits).
-  end if
+     if |mu| != 512 then
+       return error  # return an error indication if the input mu is not
+                     # 64 bytes (512 bits).
+     end if
 
-  rnd = rand(32)  # for the optional deterministic variant,
-                  # set rnd to all zeroes
-  if rnd = NULL then
-    return error  # return an error indication if random bit
-                  # generation failed
-  end if
+     rnd = rand(32)  # for the optional deterministic variant,
+                     # set rnd to all zeroes
+     if rnd = NULL then
+       return error  # return an error indication if random bit
+                     # generation failed
+     end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
-  return sigma
+     sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+     return sigma
 
-ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
-   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+   ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
+      # ^ Note mu is passed as argument instead of M'
+      ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
 
-            Figure 3: Internal steps of ExternalMu-ML-DSA
+               Figure 3: Internal steps of ExternalMu-ML-DSA
 
    ExternalMu-ML-DSA requires the public key, or its prehash, as input
    to the pre-digesting function.  This assumes the signer generating
