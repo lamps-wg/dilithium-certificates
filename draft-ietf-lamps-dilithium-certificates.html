@@ -1648,9 +1648,9 @@ using <code>ML-DSA.KeyGen_internal(xi)</code>.<a href="#section-6-10.1.1" class=
 derived from the seed.<a href="#section-6-10.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-6-10.3">
-          <p id="section-6-10.3.1">The <code>both</code> format contains both the seed and expanded key, allowing for
+          <p id="section-6-10.3.1">The <code>both</code> format contains both the seed and expanded private key, allowing for
 for interoperability; some may want to use and retain the seed and
-others may only support expanded keys.<a href="#section-6-10.3.1" class="pilcrow">¶</a></p>
+others may only support expanded private keys.<a href="#section-6-10.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <p id="section-6-11">When encoding an ML-DSA private key in a <code>OneAsymmetricKey</code> object, any of
@@ -1705,7 +1705,7 @@ expanding a private key from a seed is a one-way function, meaning that once a
 full key is expanded from seed and the seed discarded, the seed cannot be
 re-created even if the full expanded private key is available. For this reason
 it is <span class="bcp14">RECOMMENDED</span> that implementations retain and export the seed,
-even when also exporting the expanded key. ML-DSA seed extraction can be
+even when also exporting the expanded private key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
 <code>ML-DSA.KeyGen</code> in the returned output.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
@@ -2141,7 +2141,7 @@ we show the seed-only format (using a context-specific <code>[0]</code> primitiv
 tag with an implicit encoding of <code>OCTET STRING</code>), the <code>expanded</code> format,
 and <code>both</code> formats together.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-C.1-2">NOTE: All examples use the same seed value, showing how the same seed
-produces different expanded keys for each security level.<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
+produces different expanded private keys for each security level.<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
 <div id="ml-dsa-44-private-key-examples">
 <section id="appendix-C.1.1">
           <h4 id="name-ml-dsa-44-private-key-examp">
