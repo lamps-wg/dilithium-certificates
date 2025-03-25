@@ -931,7 +931,7 @@ expanded private keys follow:
 1. The first is for inconsistent `seed` and `expandedKey`.
 
 2. The second is an `expandedkey` for which the recomputed public key
-   hash t(r) fails to match the private key.
+   hash `tr` fails to match the private key.
 
 3. The third is an `expandedKey` for which the recomputed public t(0)
    fails to match the private key, i.e., the two t(r) do not match.
