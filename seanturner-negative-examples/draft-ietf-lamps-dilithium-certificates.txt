@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 22 September 2025                                     S. Turner
+Expires: 26 September 2025                                     S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           21 March 2025
+                                                           25 March 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 September 2025.
+   This Internet-Draft will expire on 26 September 2025.
 
 Copyright Notice
 
@@ -3785,7 +3785,7 @@ C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
    1.  The first is for inconsistent seed and expandedKey.
 
    2.  The second is an expandedkey for which the recomputed public key
-       hash t(r) fails to match the private key.
+       hash tr fails to match the private key.
 
    3.  The third is an expandedKey for which the recomputed public t(0)
        fails to match the private key, i.e., the two t(r) do not match.
