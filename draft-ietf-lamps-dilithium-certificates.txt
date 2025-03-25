@@ -651,12 +651,6 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
-              Wu, "Internet X.509 Public Key Infrastructure Certificate
-              Policy and Certification Practices Framework", RFC 3647,
-              DOI 10.17487/RFC3647, November 2003,
-              <https://www.rfc-editor.org/rfc/rfc3647>.
-
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -716,6 +710,12 @@ Table of Contents
               "Post-Quantum Cryptography Project", 20 December 2016,
               <https://csrc.nist.gov/Projects/post-quantum-
               cryptography>.
+
+   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
+              Wu, "Internet X.509 Public Key Infrastructure Certificate
+              Policy and Certification Practices Framework", RFC 3647,
+              DOI 10.17487/RFC3647, November 2003,
+              <https://www.rfc-editor.org/rfc/rfc3647>.
 
    [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
               PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,
