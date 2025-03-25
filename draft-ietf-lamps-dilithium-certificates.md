@@ -769,6 +769,9 @@ produces different expanded private keys for each security level.
 
 ### ML-DSA-44 Private Key Examples
 
+Each of the examples includes the textual encoding {{RFC7468}} followed by
+the so-called "pretty print"; the private keys are the same.
+
 #### Seed Format
 ~~~
 {::include ./examples/ML-DSA-44-seed.priv}
@@ -798,6 +801,9 @@ produces different expanded private keys for each security level.
 
 ### ML-DSA-65 Private Key Examples
 
+Each of the examples includes the textual encoding {{RFC7468}} followed by
+the so-called "pretty print"; the private keys are the same.
+
 #### Seed Format
 ~~~
 {::include ./examples/ML-DSA-65-seed.priv}
@@ -826,6 +832,9 @@ produces different expanded private keys for each security level.
 ~~~
 
 ### ML-DSA-87 Private Key Examples
+
+Each of the examples includes the textual encoding {{RFC7468}} followed by
+the so-called "pretty print"; the private keys are the same.
 
 #### Seed Format
 ~~~
@@ -858,7 +867,8 @@ produces different expanded private keys for each security level.
 ## Example Public Keys {#example-public}
 
 The following is the ML-DSA-44 public key corresponding to the private
-key in the previous section.
+key in the previous section. The textual encoding {{RFC7468}} is
+followed by the so-called "pretty print"; the public keys are the same.
 
 ~~~
 {::include ./examples/ML-DSA-44.pub}
@@ -869,7 +879,8 @@ key in the previous section.
 ~~~
 
 The following is the ML-DSA-65 public key corresponding to the private
-key in the previous section.
+key in the previous section.  The textual encoding {{RFC7468}} is
+followed by the so-called "pretty print"; the public keys are the same.
 
 ~~~
 {::include ./examples/ML-DSA-65.pub}
@@ -880,7 +891,8 @@ key in the previous section.
 ~~~
 
 The following is the ML-DSA-87 public key corresponding to the private
-key in the previous section.
+key in the previous section.  The textual encoding {{RFC7468}} is
+followed by the so-called "pretty print"; the public keys are the same.
 
 ~~~
 {::include ./examples/ML-DSA-87.pub}
@@ -902,7 +914,8 @@ appropriate.
 </aside>
 
 The following is a self-signed certificate for the ML-DSA-44 public key in the
-previous section.
+previous section. The textual encoding {{RFC7468}} is followed by the
+so-called "pretty print"; the certificates are the same.
 
 ~~~
 {::include ./examples/ML-DSA-44.crt}
@@ -913,7 +926,8 @@ previous section.
 ~~~
 
 The following is a self-signed certificate for the ML-DSA-65 public key in the
-previous section.
+previous section. The textual encoding {{RFC7468}} is followed by the
+so-called "pretty print"; the certificates are the same.
 
 ~~~
 {::include ./examples/ML-DSA-65.crt}
@@ -924,7 +938,8 @@ previous section.
 ~~~
 
 The following is a self-signed certificate for the ML-DSA-87 public key in the
-previous section.
+previous section. The textual encoding {{RFC7468}} is followed by the
+so-called "pretty print"; the certificates are the same.
 
 ~~~
 {::include ./examples/ML-DSA-87.crt}
