@@ -981,7 +981,7 @@ expanded private keys follow:
 
 The second and third mismatches would not be detected by implementations
 that do not regenerate the public key from the private key, or neglect to
-then check consistency of t(r) or t(0).
+then check consistency of tr or t_0.
 
 The following is the first example:
 
