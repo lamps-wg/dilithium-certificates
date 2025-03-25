@@ -995,7 +995,7 @@ The following is the second example:
 {::include ./examples/bad-ML-DSA-44-2.priv}
 ~~~
 
-THe following is the third example:
+The following is the third example:
 
 ~~~
 {::include ./examples/bad-ML-DSA-44-3.priv}
