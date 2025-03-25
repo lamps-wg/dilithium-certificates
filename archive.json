@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-23T01:01:26.936642+00:00",
+  "timestamp": "2025-03-25T00:58:01.285037+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -8243,6 +8243,132 @@
           "updatedAt": "2025-03-21T10:04:56Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 117,
+      "id": "PR_kwDOIEpj4c6P1PbP",
+      "title": "Removes non-ASCII character",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/117",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-24T09:03:11Z",
+      "updatedAt": "2025-03-24T09:06:24Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "ascii",
+      "headRefOid": "a2b1ab9f9b8188f56c5ea76e91f47c60594f0074",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "NONE",
+          "body": "Thanks for removing the smart quote.",
+          "createdAt": "2025-03-24T09:06:23Z",
+          "updatedAt": "2025-03-24T09:06:23Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 118,
+      "id": "PR_kwDOIEpj4c6P1ZUk",
+      "title": "Shorten a line",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/118",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-24T09:20:22Z",
+      "updatedAt": "2025-03-24T17:14:52Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "bas/shortenline",
+      "headRefOid": "64cc69c515e8ec1aac27968c25aefc006567dfc1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6hmL7Z",
+          "commit": {
+            "abbreviatedOid": "64cc69c"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-24T17:14:52Z",
+          "updatedAt": "2025-03-24T17:14:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 119,
+      "id": "PR_kwDOIEpj4c6P1f_P",
+      "title": "Make reference to RFC3647 informational",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/119",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-24T09:31:39Z",
+      "updatedAt": "2025-03-24T09:31:39Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "RFC3647inf",
+      "headRefOid": "2806a4083aed97ce0a947afc0e8e722ed0f76f78",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 120,
+      "id": "PR_kwDOIEpj4c6P6sEY",
+      "title": "Minor typo fixing / editorial suggestions for external-mu prehash section",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/120",
+      "state": "OPEN",
+      "author": "samuel-lee-msft",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Some minor suggestions\r\n\r\n+ Fix typos\r\n+ Rename `ExternalMu-ML-DSA.Prehash()` -> `ExternalMu-ML-DSA.Pure-Prehash()`, as `ExternalMu-ML-DSA.Sign()` could technically be used in conjunction with a pre-hash step for HashML-DSA\r\n+ Simplify definition of `ExternalMu-ML-DSA.Pure-Prehash` given the `ctx` input is defined to be empty string in this RFC",
+      "createdAt": "2025-03-24T18:30:56Z",
+      "updatedAt": "2025-03-24T18:30:56Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
+      "headRepository": "samuel-lee-msft/dilithium-certificates",
+      "headRefName": "samuellee-fix-typos-in-prehashing",
+      "headRefOid": "f7ed24e7043d4c36f16ee60dc40f84462513848c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
