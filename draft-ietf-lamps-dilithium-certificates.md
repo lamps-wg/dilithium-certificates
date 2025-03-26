@@ -592,7 +592,7 @@ The seed consistency check consists of regenerating the expanded form from
 the seed via `ML-DSA.KeyGen_internal` and ensuring it is bytewise equal to
 the value presented in the private key.
 
-{{example-bad}} includes some examples of inconsistent sees and expanded private
+{{example-bad}} includes some examples of inconsistent seeds and expanded private
 keys.
 
 # Security Considerations
