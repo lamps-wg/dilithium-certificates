@@ -3819,7 +3819,7 @@ C.3.  Example Certificates
 
 C.4.  Example Inconsistent Private Keys
 
-      |  WARNING: These private keys are pruposely bad do not use them
+      |  WARNING: These private keys are purposely bad do not use them
       |  in production systmes.
 
    The following examples demonstrate inconsistent seed and expanded
