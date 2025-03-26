@@ -957,7 +957,7 @@ so-called "pretty print"; the certificates are the same.
 ## Example Inconsistent Private Keys {#example-bad}
 
 <aside markdown="block">
-  WARNING: These private keys are pruposely bad do not use them in
+  WARNING: These private keys are purposely bad do not use them in
   production systmes.
 </aside>
 
