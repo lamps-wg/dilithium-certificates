@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 26 September 2025                                     S. Turner
+Expires: 27 September 2025                                     S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           25 March 2025
+                                                           26 March 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2025.
+   This Internet-Draft will expire on 27 September 2025.
 
 Copyright Notice
 
@@ -530,8 +530,8 @@ Table of Contents
    from the seed via ML-DSA.KeyGen_internal and ensuring it is bytewise
    equal to the value presented in the private key.
 
-   Appendix C.4 includes some examples of inconsistent sees and expanded
-   private keys.
+   Appendix C.4 includes some examples of inconsistent seeds and
+   expanded private keys.
 
 10.  Security Considerations
 
