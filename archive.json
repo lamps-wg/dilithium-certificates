@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T00:58:01.285037+00:00",
+  "timestamp": "2025-03-27T00:57:30.375718+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1339,15 +1339,15 @@
       "id": "I_kwDOIEpj4c6ush-s",
       "title": "Words about SHOULD (consistency check)",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/102",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "At IETF 122, Deb suggested that we add words to make sure the IESG won't put a discuss on our SHOULD; see [IESG Statement](https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/).",
       "createdAt": "2025-03-19T08:37:47Z",
-      "updatedAt": "2025-03-19T08:37:47Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-25T16:45:07Z",
+      "closedAt": "2025-03-25T16:45:07Z",
       "comments": []
     },
     {
@@ -1413,6 +1413,22 @@
       "body": "The draft doesn't actually specify how to parse expandedKey. I guess algorithm 25 of FIPS 204 is the right reference to add, but what happens if the input is malformed? ",
       "createdAt": "2025-03-19T10:47:02Z",
       "updatedAt": "2025-03-20T06:13:38Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 123,
+      "id": "I_kwDOIEpj4c6vs4Ze",
+      "title": "Clarification in Appendix D",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/123",
+      "state": "OPEN",
+      "author": "GiacomoPope",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I didn't want to make a PR on this as I'm not 100% sure I understand the language, so I'll make the issue instead.\n\nIn appendix D you have both \"external operations\" and \"internal operations\" -- my understanding is external ones are exposed by the API whilst internal ones.... are not!\n\nYou currently list `ExternalMu-ML-DSA.Prehash(pk, M, ctx)` as *external* with `ExternalMu-ML-DSA.Sign(sk, mu)` and `ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)` as *internal*. \n\nMy reading of this would be that `ExternalMu-ML-DSA.Sign(sk, mu)` should be an external operation in that it needs to be exposed at the API level, but maybe I am misunderstanding what internal/external means in this context",
+      "createdAt": "2025-03-25T21:13:05Z",
+      "updatedAt": "2025-03-25T21:13:05Z",
       "closedAt": null,
       "comments": []
     }
@@ -7594,24 +7610,26 @@
       "id": "PR_kwDOIEpj4c6POy09",
       "title": "Add text to appease",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/103",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #102",
       "createdAt": "2025-03-19T08:39:07Z",
-      "updatedAt": "2025-03-21T09:05:21Z",
+      "updatedAt": "2025-03-25T16:45:06Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5bb2ffad99bb56bc53b1275b9373a0e1607cc8a2",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-more-words",
       "headRefOid": "fe247626f6c5b95c6faf2702501064427975c5e2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T16:45:06Z",
+      "mergedAt": "2025-03-25T16:45:06Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "549dd1c4bc5d6d47a1289fbfe512834658cfb66d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7687,24 +7705,26 @@
       "id": "PR_kwDOIEpj4c6PZPxm",
       "title": "Spell out consistency checks",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/107",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "From Dennis; see #104.",
       "createdAt": "2025-03-20T05:04:48Z",
-      "updatedAt": "2025-03-21T06:08:21Z",
+      "updatedAt": "2025-03-25T16:47:06Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5bb2ffad99bb56bc53b1275b9373a0e1607cc8a2",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-seed-check-text",
       "headRefOid": "aee4695e5615190526e8b6fbcf2f4ef5cfabc018",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T16:47:06Z",
+      "mergedAt": "2025-03-25T16:47:06Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "22f872c0c50f2d065f87803a80921984726f6b8a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7760,24 +7780,26 @@
       "id": "PR_kwDOIEpj4c6PZRiq",
       "title": "Add privKey parsing text",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/108",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "From Dennis; see #105.\r\n\r\n@dennisjackson @vdukhovni PTAL.",
       "createdAt": "2025-03-20T05:09:41Z",
-      "updatedAt": "2025-03-21T06:34:59Z",
+      "updatedAt": "2025-03-25T16:47:31Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5bb2ffad99bb56bc53b1275b9373a0e1607cc8a2",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-choice-text",
       "headRefOid": "79cd6d852fb6d0031258eccb2f9ed40e5ea7e313",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T16:47:31Z",
+      "mergedAt": "2025-03-25T16:47:30Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "e4693be309bb55ad164a8ec2349511d4aa1875cf"
+      },
       "comments": [
         {
           "author": "vdukhovni",
@@ -7915,24 +7937,26 @@
       "id": "PR_kwDOIEpj4c6PkXSa",
       "title": "Be consistent: expanded private key",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/110",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Sometimes expanded key sometimes expanded private key. Went with the later.",
       "createdAt": "2025-03-21T06:39:00Z",
-      "updatedAt": "2025-03-21T09:03:59Z",
+      "updatedAt": "2025-03-25T16:48:47Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "cab83f15c662457baf7b3bc59726ddc5aa19127f",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-exprivkey-text",
       "headRefOid": "abcadd663fd250f9ee8eaae2c3dee4c841c0f9c5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T16:48:47Z",
+      "mergedAt": "2025-03-25T16:48:47Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "01aa34ecd65b6b1928ec9afc63c2fd4a51046bb0"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7955,26 +7979,49 @@
       "id": "PR_kwDOIEpj4c6Pkaqh",
       "title": "Fix description of CHOICE structure",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/111",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I removed the bit about `OCTET STRING` because only two of the choices are that the other is a `SEQUENCE`.",
       "createdAt": "2025-03-21T06:45:39Z",
-      "updatedAt": "2025-03-21T06:45:39Z",
+      "updatedAt": "2025-03-25T17:02:12Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "cab83f15c662457baf7b3bc59726ddc5aa19127f",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-choice-description",
-      "headRefOid": "2a952228251432a1cb07c7871bc36044643beef2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "e9200657a3d49a58d491ad1e0f5006f7984deddc",
+      "closedAt": "2025-03-25T17:02:12Z",
+      "mergedAt": "2025-03-25T17:02:12Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "63310270af5fc00089aadc56acd2de4f2ac1dc52"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6hzBwF",
+          "commit": {
+            "abbreviatedOid": "2a95222"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T16:55:34Z",
+          "updatedAt": "2025-03-25T16:55:34Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nthe following DER-encoded `CHOICE` structures. The `seed` format is a\r\nfixed 32 byte `OCTET STRING` (34 bytes total with the `0x8020` tag and\r\nlength) for all security levels, while the `expandedKey` and `both` formats\r\n```",
+              "createdAt": "2025-03-25T16:55:34Z",
+              "updatedAt": "2025-03-25T16:55:34Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 112,
@@ -8016,13 +8063,13 @@
       "labels": [],
       "body": "Includes Viktor's negative examples; see #104. Also, Closes #104.",
       "createdAt": "2025-03-21T08:43:15Z",
-      "updatedAt": "2025-03-21T10:06:58Z",
+      "updatedAt": "2025-03-26T15:14:27Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
-      "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
+      "baseRefOid": "d4d3895b3aa44fe0932a97301bf7a8394286c31e",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-negative-examples",
-      "headRefOid": "865e77baeec7276d4f0a0a85992726e121867ec0",
+      "headRefOid": "80f66db1b82e81f5ad811e1c221e15fc62115f39",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8115,6 +8162,118 @@
               "updatedAt": "2025-03-21T10:06:58Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6hzYfx",
+          "commit": {
+            "abbreviatedOid": "fb2fde6"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T17:27:30Z",
+          "updatedAt": "2025-03-25T17:27:30Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\nthen check consistency of tr or t_0.\r\n```",
+              "createdAt": "2025-03-25T17:27:30Z",
+              "updatedAt": "2025-03-25T17:27:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6hzY_e",
+          "commit": {
+            "abbreviatedOid": "522e79b"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T17:28:17Z",
+          "updatedAt": "2025-03-25T17:28:18Z",
+          "comments": [
+            {
+              "originalPosition": 74,
+              "body": "```suggestion\r\nThe following is the third example:\r\n```",
+              "createdAt": "2025-03-25T17:28:18Z",
+              "updatedAt": "2025-03-25T17:28:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6h3jKT",
+          "commit": {
+            "abbreviatedOid": "7ba53ba"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-03-26T01:43:23Z",
+          "updatedAt": "2025-03-26T01:59:00Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n{{example-bad}} includes some examples of inconsistent seeds and expanded private\r\n```",
+              "createdAt": "2025-03-26T01:43:23Z",
+              "updatedAt": "2025-03-26T01:59:00Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\n  WARNING: These private keys are purposely bad do not use them in\r\n```",
+              "createdAt": "2025-03-26T01:45:02Z",
+              "updatedAt": "2025-03-26T01:59:00Z"
+            },
+            {
+              "originalPosition": 45,
+              "body": "Only the first example includes `both` (`seed` and `expandedKey`). The second and third examples are `expandedKey`-only. The inconsistency is between the expanded private key and the corresponding public key that can be computed from it. Case \"2\" leads to a public key that fails to match the `tr` hash value in the private key. The private `s_1` and `s_2` vectors in case \"3\" imply a `t` vector whose private low bits do not match the `t_0` vector portion of the private key (its high bits `t_1` are the primary content of the public key).",
+              "createdAt": "2025-03-26T01:55:26Z",
+              "updatedAt": "2025-03-26T01:59:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6h3nQr",
+          "commit": {
+            "abbreviatedOid": "7ba53ba"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-26T02:01:57Z",
+          "updatedAt": "2025-03-26T02:01:57Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Perhaps here also worth noting that examples \"2\" and \"3\" don't include a seed, the inconsistency is entirely within the expanded key alone, by virtue of the public key, that can (and perhaps should on import) be computed from it, not matching corresponding data in the private key (the `tr` hash and/or the low bits vector `t_0`).",
+              "createdAt": "2025-03-26T02:01:57Z",
+              "updatedAt": "2025-03-26T02:01:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6h-9AF",
+          "commit": {
+            "abbreviatedOid": "b1913c6"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-26T15:14:15Z",
+          "updatedAt": "2025-03-26T15:14:16Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\nthen check consistency of `tr` or `t_0`.\r\n```",
+              "createdAt": "2025-03-26T15:14:15Z",
+              "updatedAt": "2025-03-26T15:14:16Z"
+            }
+          ]
         }
       ]
     },
@@ -8123,24 +8282,26 @@
       "id": "PR_kwDOIEpj4c6PlQm6",
       "title": "Add ASN.1 notes",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/114",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Adds notes about ASN.1.",
       "createdAt": "2025-03-21T08:52:51Z",
-      "updatedAt": "2025-03-21T10:06:14Z",
+      "updatedAt": "2025-03-25T17:03:10Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-asn1-notes",
       "headRefOid": "1cb9836f72646e6bcd2f5abe5a8406ea8b87a48f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T17:03:10Z",
+      "mergedAt": "2025-03-25T17:03:10Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "6e29a690b878efc86b8c4e9eccf4909fa85b3434"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8163,24 +8324,26 @@
       "id": "PR_kwDOIEpj4c6Pli4_",
       "title": "More explanation for examples",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/115",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Need to explain that the textual and pretty-print are the same.",
       "createdAt": "2025-03-21T09:27:27Z",
-      "updatedAt": "2025-03-21T10:06:48Z",
+      "updatedAt": "2025-03-25T17:05:18Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-example-text",
       "headRefOid": "eb19c727d2e37a0813027e573873d2d5637e6024",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T17:05:18Z",
+      "mergedAt": "2025-03-25T17:05:18Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "b8b62b556737acac259e7db1adb06d32a89de228"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8250,24 +8413,26 @@
       "id": "PR_kwDOIEpj4c6P1PbP",
       "title": "Removes non-ASCII character",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/117",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-24T09:03:11Z",
-      "updatedAt": "2025-03-24T09:06:24Z",
+      "updatedAt": "2025-03-25T17:06:03Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "ascii",
       "headRefOid": "a2b1ab9f9b8188f56c5ea76e91f47c60594f0074",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T17:06:03Z",
+      "mergedAt": "2025-03-25T17:06:03Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "46136e39bc9271ec0c9f5cadf032c17dc1574d4b"
+      },
       "comments": [
         {
           "author": "russhousley",
@@ -8284,24 +8449,26 @@
       "id": "PR_kwDOIEpj4c6P1ZUk",
       "title": "Shorten a line",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/118",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-24T09:20:22Z",
-      "updatedAt": "2025-03-24T17:14:52Z",
+      "updatedAt": "2025-03-25T17:06:34Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "bas/shortenline",
       "headRefOid": "64cc69c515e8ec1aac27968c25aefc006567dfc1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T17:06:34Z",
+      "mergedAt": "2025-03-25T17:06:34Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "1e9ce227cb840a7d5ccf495b6663c54514f878cf"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8324,24 +8491,26 @@
       "id": "PR_kwDOIEpj4c6P1f_P",
       "title": "Make reference to RFC3647 informational",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/119",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-24T09:31:39Z",
-      "updatedAt": "2025-03-24T09:31:39Z",
+      "updatedAt": "2025-03-25T17:07:15Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "RFC3647inf",
       "headRefOid": "2806a4083aed97ce0a947afc0e8e722ed0f76f78",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-25T17:07:14Z",
+      "mergedAt": "2025-03-25T17:07:14Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "d4d3895b3aa44fe0932a97301bf7a8394286c31e"
+      },
       "comments": [],
       "reviews": []
     },
@@ -8355,15 +8524,205 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
-      "body": "Some minor suggestions\r\n\r\n+ Fix typos\r\n+ Rename `ExternalMu-ML-DSA.Prehash()` -> `ExternalMu-ML-DSA.Pure-Prehash()`, as `ExternalMu-ML-DSA.Sign()` could technically be used in conjunction with a pre-hash step for HashML-DSA\r\n+ Simplify definition of `ExternalMu-ML-DSA.Pure-Prehash` given the `ctx` input is defined to be empty string in this RFC",
+      "body": "Some minor suggestions\r\n\r\n+ Fix typos\r\n+ Simplify definition of `ExternalMu-ML-DSA.Prehash` given the `ctx` input is defined to be empty string in this RFC",
       "createdAt": "2025-03-24T18:30:56Z",
-      "updatedAt": "2025-03-24T18:30:56Z",
+      "updatedAt": "2025-03-26T14:23:13Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "174db1bced8cbb50c20fdea2b0fdf980b98d1b54",
+      "headRepository": "samuel-lee-msft/dilithium-certificates",
+      "headRefName": "samuellee-fix-typos-in-prehashing",
+      "headRefOid": "d9599a743d585301e41ea528e6e50b2aea5954a9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I also understand the intention, and I think Samuel raises a good point.\r\n\r\nMy suggestion: `ExternalMu-ML-DSA.Prehash()` -> `ML-DSA.ComputeMu()`\r\n\r\nAlternatively, just leave it as-is because NIST took the nomenclature from this appendix and it is now in the NIST FAQ: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf\r\n",
+          "createdAt": "2025-03-25T09:26:11Z",
+          "updatedAt": "2025-03-25T09:26:11Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6hp6vK",
+          "commit": {
+            "abbreviatedOid": "f7ed24e"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T02:23:18Z",
+          "updatedAt": "2025-03-25T02:23:18Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I understand the intention, but I would rather we kept it as-is. ML-DSA is the name for pure in FIPS 204. If we were defining it for HashML-DSA we could call it that. ",
+              "createdAt": "2025-03-25T02:23:18Z",
+              "updatedAt": "2025-03-25T02:23:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6h2fsM",
+          "commit": {
+            "abbreviatedOid": "f7ed24e"
+          },
+          "author": "samuel-lee-msft",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T23:30:07Z",
+          "updatedAt": "2025-03-25T23:30:07Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Reverted this part",
+              "createdAt": "2025-03-25T23:30:07Z",
+              "updatedAt": "2025-03-25T23:30:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6h-Kwt",
+          "commit": {
+            "abbreviatedOid": "d9599a7"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I have no issues with these updated changes removing the `ctx`  and the other nit fixes. ",
+          "createdAt": "2025-03-26T14:22:43Z",
+          "updatedAt": "2025-03-26T14:23:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 121,
+      "id": "PR_kwDOIEpj4c6QAhvo",
+      "title": "Tweak to the presentation of external mu API",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/121",
+      "state": "OPEN",
+      "author": "ounsworth",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR is based on a hallway chat with @GiacomoPope.",
+      "createdAt": "2025-03-25T09:21:35Z",
+      "updatedAt": "2025-03-26T17:57:57Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
-      "headRepository": "samuel-lee-msft/dilithium-certificates",
-      "headRefName": "samuellee-fix-typos-in-prehashing",
-      "headRefOid": "f7ed24e7043d4c36f16ee60dc40f84462513848c",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "mikeo_externalmu_tweak",
+      "headRefOid": "ad1e0f06a11592148a6eb8670435ddcba342cc36",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6iBGHb",
+          "commit": {
+            "abbreviatedOid": "ad1e0f0"
+          },
+          "author": "samuel-lee-msft",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-26T17:57:56Z",
+          "updatedAt": "2025-03-26T17:57:57Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Would need to update this line to:\r\n`sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)`",
+              "createdAt": "2025-03-26T17:57:56Z",
+              "updatedAt": "2025-03-26T17:57:57Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 122,
+      "id": "PR_kwDOIEpj4c6QFUDV",
+      "title": "Drop Non-ASCII",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/122",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-25T17:21:57Z",
+      "updatedAt": "2025-03-25T17:41:23Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "d4d3895b3aa44fe0932a97301bf7a8394286c31e",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-non-ascii",
+      "headRefOid": "5358b3f0cc05be47a0edb8bc5822c16494324b38",
+      "closedAt": "2025-03-25T17:41:23Z",
+      "mergedAt": "2025-03-25T17:41:23Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "174db1bced8cbb50c20fdea2b0fdf980b98d1b54"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6hzgvk",
+          "commit": {
+            "abbreviatedOid": "5358b3f"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-25T17:38:53Z",
+          "updatedAt": "2025-03-25T17:38:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6hzhmR",
+          "commit": {
+            "abbreviatedOid": "5358b3f"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-25T17:40:14Z",
+          "updatedAt": "2025-03-25T17:40:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 124,
+      "id": "PR_kwDOIEpj4c6QPkrS",
+      "title": "indended->intended",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/124",
+      "state": "OPEN",
+      "author": "danvangeest",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-26T16:50:22Z",
+      "updatedAt": "2025-03-26T16:50:22Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "174db1bced8cbb50c20fdea2b0fdf980b98d1b54",
+      "headRepository": "danvangeest/dilithium-certificates",
+      "headRefName": "dvg/t_is_not_d",
+      "headRefOid": "32abed55ac401b5f8b56adbedcbd4c8fbcb7ae8f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
