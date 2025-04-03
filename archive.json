@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:06:26.921511+00:00",
+  "timestamp": "2025-04-03T00:58:17.315702+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1429,6 +1429,22 @@
       "body": "I didn't want to make a PR on this as I'm not 100% sure I understand the language, so I'll make the issue instead.\n\nIn appendix D you have both \"external operations\" and \"internal operations\" -- my understanding is external ones are exposed by the API whilst internal ones.... are not!\n\nYou currently list `ExternalMu-ML-DSA.Prehash(pk, M, ctx)` as *external* with `ExternalMu-ML-DSA.Sign(sk, mu)` and `ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)` as *internal*. \n\nMy reading of this would be that `ExternalMu-ML-DSA.Sign(sk, mu)` should be an external operation in that it needs to be exposed at the API level, but maybe I am misunderstanding what internal/external means in this context",
       "createdAt": "2025-03-25T21:13:05Z",
       "updatedAt": "2025-03-25T21:13:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 125,
+      "id": "I_kwDOIEpj4c6ws7uA",
+      "title": "Rationale for disallowing HashML-DSA",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/125",
+      "state": "OPEN",
+      "author": "dcooper16",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 10.1 says:\n\n> The security reason for disallowing HashML-DSA is that the design of the ML-DSA algorithm provides enhanced resistance against signature collision attacks, compared with conventional RSA or ECDSA signature algorithms. Specifically, ML-DSA binds the hash of the public key tr to the message to-be-signed prior to hashing, as described in line 6 of Algorithm 7 of [[FIPS204](https://lamps-wg.github.io/dilithium-certificates/draft-ietf-lamps-dilithium-certificates.html#FIPS204)]. In practice, this provides binding to the indended verification public key, preventing some attacks that would otherwise allow a signature to be successfully verified against a non-intended public key.\n\nCould someone please explain how HashML-DSA does not provide a binding to the intended verification public key? The difference between ML-DSA and HashML-DSA is:\n\n\u03bc \u2190 H(tr | 0 | len(ctx) | ctx | M)\nvs.\n\u03bc \u2190 H(tr | 1 | len(ctx) | ctx | OID_hash | hash(M))\n\nI understand the later claim about collision attacks requiring a targeted collision against SHAKE256 (with a 64-byte output) versus an untargeted attacker against the hash function used to compute the pre-hash. However, what security property is gained by binding the hash of the public key to the message _prior to hashing_?",
+      "createdAt": "2025-04-01T21:02:30Z",
+      "updatedAt": "2025-04-01T21:02:30Z",
       "closedAt": null,
       "comments": []
     }
@@ -8661,7 +8677,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-03-25T17:21:57Z",
-      "updatedAt": "2025-03-25T17:41:23Z",
+      "updatedAt": "2025-04-01T10:55:15Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "d4d3895b3aa44fe0932a97301bf7a8394286c31e",
