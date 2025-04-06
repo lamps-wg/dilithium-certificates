@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-03T00:58:17.315702+00:00",
+  "timestamp": "2025-04-06T01:01:53.148431+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1444,9 +1444,24 @@
       "labels": [],
       "body": "Section 10.1 says:\n\n> The security reason for disallowing HashML-DSA is that the design of the ML-DSA algorithm provides enhanced resistance against signature collision attacks, compared with conventional RSA or ECDSA signature algorithms. Specifically, ML-DSA binds the hash of the public key tr to the message to-be-signed prior to hashing, as described in line 6 of Algorithm 7 of [[FIPS204](https://lamps-wg.github.io/dilithium-certificates/draft-ietf-lamps-dilithium-certificates.html#FIPS204)]. In practice, this provides binding to the indended verification public key, preventing some attacks that would otherwise allow a signature to be successfully verified against a non-intended public key.\n\nCould someone please explain how HashML-DSA does not provide a binding to the intended verification public key? The difference between ML-DSA and HashML-DSA is:\n\n\u03bc \u2190 H(tr | 0 | len(ctx) | ctx | M)\nvs.\n\u03bc \u2190 H(tr | 1 | len(ctx) | ctx | OID_hash | hash(M))\n\nI understand the later claim about collision attacks requiring a targeted collision against SHAKE256 (with a 64-byte output) versus an untargeted attacker against the hash function used to compute the pre-hash. However, what security property is gained by binding the hash of the public key to the message _prior to hashing_?",
       "createdAt": "2025-04-01T21:02:30Z",
-      "updatedAt": "2025-04-01T21:02:30Z",
+      "updatedAt": "2025-04-04T19:41:26Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi David,\n\nThis text is basically saying that HashML-DSA binds a digest of the message to the public key whereas ML-DSA binds the message to the public key. In a sense it reiterates that if you pass the whole message you prevent the targeted collisions because the public key is bound to the mu calculation whereas HashML-DSA does not. The next paragraph says the same thing from another perspective. \n\nDo you want to propose a rephrase for the paragraph, if you think it is confusing?\n\n\n",
+          "createdAt": "2025-04-03T02:30:49Z",
+          "updatedAt": "2025-04-03T02:30:49Z"
+        },
+        {
+          "author": "dcooper16",
+          "authorAssociation": "NONE",
+          "body": "Currently the text that I quoted seems to be trying to say something different from the sentence that comes after it. The is supported by the last sentence in the paragraph, which says that \"HashML-DSA removes both of these enhanced security properties.\" The text I quoted seems to suggest that with HashML-DSA it might be easier to create a single signature that verifies with two different public keys, but I don't believe that is true.\n\nIf you really want to mention the collision resistance issue, then I would shorten the paragraph to clearly indicate that there is only one issue of concern:\n\n> The security reason for disallowing HashML-DSA is that the design of the ML-DSA algorithm provides enhanced resistance against signature collision attacks, compared with conventional RSA or ECDSA signature algorithms. Specifically, ML-DSA prepends the hash of the public key tr to the message to-be-signed prior to hashing, as described in line 6 of Algorithm 7 of [[FIPS204](https://lamps-wg.github.io/dilithium-certificates/draft-ietf-lamps-dilithium-certificates.html#FIPS204)]. This means that in the unlikely discovery of a collision attack against SHA-3, an attacker would have to perform a public-key-specific collision search in order to find message pairs such that H(tr || m1) = H(tr || m2) since a direct hash collision H(m1) = H(m2) will not suffice. HashML-DSA removes this enhanced security property.\n\nPersonally, however, I don't accept the idea that targeted collisions are significantly more difficult to find than untargeted collisions. With MD5, https://marc-stevens.nl/research/hashclash/rogue-ca/ was able to find targeted collisions, despite it being non-trivial to determine what the target would be. If the target is something long-lived, and publicly known, like a public key, then the need for the collision to be targeted would provide very limited protection.",
+          "createdAt": "2025-04-04T19:41:25Z",
+          "updatedAt": "2025-04-04T19:41:25Z"
+        }
+      ]
     }
   ],
   "pulls": [
