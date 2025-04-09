@@ -294,6 +294,11 @@ ML-DSA-65, and ML-DSA-87:
     }
 ~~~
 
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
+
 The identifiers defined in {{oids}} can be used as the
 `AlgorithmIdentifier` in the `signatureAlgorithm` field in the sequence
 `Certificate`/`CertificateList` and the `signature` field in the sequence
@@ -368,6 +373,11 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
 
 ~~~
+
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
@@ -459,9 +469,10 @@ key to be included as well. For illustration, the ASN.1 structure
   2021 ASN.1 syntax {{X680}}.
 </aside>
 
-For ML-DSA private keys, the privateKey field in `OneAsymmetricKey` contains one of
-the following `CHOICE` structures encoded as an `OCTET STRING`. The `seed` format is a
-fixed 32 bytes for all security levels, while the `expandedKey` and `both` formats
+For ML-DSA private keys, the `privateKey` field in `OneAsymmetricKey` contains one of
+the following DER-encoded `CHOICE` structures. The `seed` format is a
+fixed 32 byte `OCTET STRING` (34 bytes total with the `0x8020` tag and
+length) for all security levels, while the `expandedKey` and `both` formats
 vary in size by security level:
 
 
@@ -474,9 +485,7 @@ ML-DSA-44-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (2560))
       }
   }
-~~~
 
-~~~
 ML-DSA-65-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4032)),
@@ -485,9 +494,7 @@ ML-DSA-65-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (4032))
       }
   }
-~~~
 
-~~~
 ML-DSA-87-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4896)),
@@ -498,6 +505,11 @@ ML-DSA-87-PrivateKey ::= CHOICE {
   }
 ~~~
 
+<aside markdown="block">
+  NOTE: The above syntax is from {{RFC5912}} and is compatible with the
+  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+</aside>
+
 The `CHOICE` allows three representations of the private key:
 
 1. The `seed` format (tag `[0]`) contains just the 32-byte seed value (xi)
@@ -507,9 +519,9 @@ The `CHOICE` allows three representations of the private key:
 2. The `expandedKey` format contains the expanded private key that was
    derived from the seed.
 
-3. The `both` format contains both the seed and expanded key, allowing for
+3. The `both` format contains both the seed and expanded private key, allowing for
    for interoperability; some may want to use and retain the seed and
-   others may only support expanded keys.
+   others may only support expanded private keys.
 
 When encoding an ML-DSA private key in a `OneAsymmetricKey` object, any of
 these three formats may be used, though the seed format is RECOMMENDED
@@ -527,6 +539,12 @@ key can be generated from the private key. While the `publicKey` field
 and `expandedKey` format are technically redundant when using the seed-only
 format, they MAY be included to enable keypair consistency checks during
 import operations.
+
+When parsing the private key, the ASN.1 tag explicitly indicates which
+variant of `CHOICE` is present. Implementations should use tag `UNIVERSAL IMPLICIT [0]`
+(raw value `0x80`) for `seed`, `OCTET STRING` (`0x04`) for `expandedKey`, and
+`SEQUENCE` (`0x30`) for `both` to parse the private key, rather than any
+other heuristic like length of the enclosing `OCTET STRING`.
 
 {{examples}} contains example ML-DSA private keys encoded using the
 textual encoding defined in {{RFC7468}}.
@@ -554,7 +572,7 @@ expanding a private key from a seed is a one-way function, meaning that once a
 full key is expanded from seed and the seed discarded, the seed cannot be
 re-created even if the full expanded private key is available. For this reason
 it is RECOMMENDED that implementations retain and export the seed,
-even when also exporting the expanded key. ML-DSA seed extraction can be
+even when also exporting the expanded private key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
 `ML-DSA.KeyGen` in the returned output.
 
@@ -562,10 +580,17 @@ implemented by including the random seed xi generated at line 1 of Algorithm 1
 
 When receiving a private key that contains both the seed and the
 expandedKey, the recipient SHOULD perform a seed consistency check to
-ensure that the sender properly generated the private key.
+ensure that the sender properly generated the private key. Recipients
+that do not perform this seed consistency check avoid keygen
+and compare operations, but are unable to ensure that the `seed` and
+`expandedKey` match.
 
-If the check is done and the seed and the expandedKey are not consistent,
+If the check is done and the seed and the `expandedKey` are not consistent,
 the recipient MUST reject the private key as malformed.
+
+The seed consistency check consists of regenerating the expanded form from
+the seed via `ML-DSA.KeyGen_internal` and ensuring it is bytewise equal to
+the value presented in the private key.
 
 # Security Considerations
 
@@ -580,7 +605,7 @@ than 2^{64} chosen messages.
 
 ML-DSA offers both deterministic and randomized signing. By default
 ML-DSA signatures are non-deterministic. The private random seed (rho')
-for the signature is pseudorandomly derived from the signer’s private
+for the signature is pseudorandomly derived from the signer's private
 key, the message, and a 256-bit string, rnd - where rnd should be
 generated by an approved RBG. In the deterministic version, rng is
 instead a 256-bit constant string. The source of randomness in the
@@ -669,7 +694,7 @@ collision attacks, compared with conventional RSA or ECDSA signature
 algorithms. Specifically, ML-DSA binds the hash of the public key `tr`
 to the message to-be-signed prior to hashing, as described in line 6 of
 Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
-indended verification public key, preventing some attacks that would
+intended verification public key, preventing some attacks that would
 otherwise allow a signature to be successfully verified against a
 non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
 discovery of a collision attack against SHA-3, an attacker would
@@ -734,15 +759,18 @@ This appendix contains examples of ML-DSA public keys, private keys and certific
 ## Example Private Keys {#example-private}
 
 The following examples show ML-DSA private keys in different formats,
-all derived from the same seed `000102…1e1f`. For each security level,
+all derived from the same seed `000102...1e1f`. For each security level,
 we show the seed-only format (using a context-specific `[0]` primitive
 tag with an implicit encoding of `OCTET STRING`), the `expanded` format,
 and `both` formats together.
 
 NOTE: All examples use the same seed value, showing how the same seed
-produces different expanded keys for each security level.
+produces different expanded private keys for each security level.
 
 ### ML-DSA-44 Private Key Examples
+
+Each of the examples includes the textual encoding {{RFC7468}} followed by
+the so-called "pretty print"; the private keys are the same.
 
 #### Seed Format
 ~~~
@@ -773,6 +801,9 @@ produces different expanded keys for each security level.
 
 ### ML-DSA-65 Private Key Examples
 
+Each of the examples includes the textual encoding {{RFC7468}} followed by
+the so-called "pretty print"; the private keys are the same.
+
 #### Seed Format
 ~~~
 {::include ./examples/ML-DSA-65-seed.priv}
@@ -801,6 +832,9 @@ produces different expanded keys for each security level.
 ~~~
 
 ### ML-DSA-87 Private Key Examples
+
+Each of the examples includes the textual encoding {{RFC7468}} followed by
+the so-called "pretty print"; the private keys are the same.
 
 #### Seed Format
 ~~~
@@ -833,7 +867,8 @@ produces different expanded keys for each security level.
 ## Example Public Keys {#example-public}
 
 The following is the ML-DSA-44 public key corresponding to the private
-key in the previous section.
+key in the previous section. The textual encoding {{RFC7468}} is
+followed by the so-called "pretty print"; the public keys are the same.
 
 ~~~
 {::include ./examples/ML-DSA-44.pub}
@@ -844,7 +879,8 @@ key in the previous section.
 ~~~
 
 The following is the ML-DSA-65 public key corresponding to the private
-key in the previous section.
+key in the previous section.  The textual encoding {{RFC7468}} is
+followed by the so-called "pretty print"; the public keys are the same.
 
 ~~~
 {::include ./examples/ML-DSA-65.pub}
@@ -855,7 +891,8 @@ key in the previous section.
 ~~~
 
 The following is the ML-DSA-87 public key corresponding to the private
-key in the previous section.
+key in the previous section.  The textual encoding {{RFC7468}} is
+followed by the so-called "pretty print"; the public keys are the same.
 
 ~~~
 {::include ./examples/ML-DSA-87.pub}
@@ -871,13 +908,14 @@ key in the previous section.
 <aside markdown="block">
 The example certificates in this section have key usage bits set to
 `digitalSignature`, `keyCertSign`, and `cRLSign` to lessen the number of
-examples, i.e., brevity. Certificate Policies (CPs) {{!RFC3647}}
+examples, i.e., brevity. Certificate Policies (CPs) {{?RFC3647}}
 for production CAs should consider whether this combination is
 appropriate.
 </aside>
 
 The following is a self-signed certificate for the ML-DSA-44 public key in the
-previous section.
+previous section. The textual encoding {{RFC7468}} is followed by the
+so-called "pretty print"; the certificates are the same.
 
 ~~~
 {::include ./examples/ML-DSA-44.crt}
@@ -888,7 +926,8 @@ previous section.
 ~~~
 
 The following is a self-signed certificate for the ML-DSA-65 public key in the
-previous section.
+previous section. The textual encoding {{RFC7468}} is followed by the
+so-called "pretty print"; the certificates are the same.
 
 ~~~
 {::include ./examples/ML-DSA-65.crt}
@@ -899,7 +938,8 @@ previous section.
 ~~~
 
 The following is a self-signed certificate for the ML-DSA-87 public key in the
-previous section.
+previous section. The textual encoding {{RFC7468}} is followed by the
+so-called "pretty print"; the certificates are the same.
 
 ~~~
 {::include ./examples/ML-DSA-87.crt}
@@ -948,16 +988,13 @@ and {{fig-externalmu-ml-dsa-internal}} are defined in {{FIPS204}}.
 External operations:
 
 ~~~
-ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+ExternalMu-ML-DSA.Prehash(pk, M):
 
-  if |ctx| > 255 then
-    return error  # return an error indication if the context string is
-                  # too long
-  end if
+  # Simplified flow for computing ML-DSA's mu based on Algorithm 2 and 7
+  # of FIPS 204, with ctx being empty string.
+  # M is a bit-string, mu is byte-string.
 
-  M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
-                                                        || ctx) || M
-  mu = H(BytesToBits(H(pk, 64)) || M', 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2)) || M, 64)
   return mu
 ~~~
 {: #fig-externalmu-ml-dsa-external title="External steps of ExternalMu-ML-DSA"}
@@ -967,9 +1004,9 @@ Internal operations:
 ~~~
 ExternalMu-ML-DSA.Sign(sk, mu):
 
-  if |mu| != 512 then
+  if |mu| != 64 then
     return error  # return an error indication if the input mu is not
-                  # 64 bytes (512 bits).
+                  # 64 bytes.
   end if
 
   rnd = rand(32)  # for the optional deterministic variant,
@@ -997,7 +1034,7 @@ ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
 {: #fig-externalmu-ml-dsa-internal title="Internal steps of ExternalMu-ML-DSA"}
 
 ExternalMu-ML-DSA requires the public key, or its prehash, as input to
-the pre-digesting function. This assumes the signer generating the
+the `Prehash()` function. This assumes the signer generating the
 pre-hash is in possession of the public key before signing and is
 different from conventional pre-hashing which only requires the
 message and the hash function as input.
@@ -1006,9 +1043,9 @@ Security-wise, during the signing operation of pure (or "one-step")
 ML-DSA, the cryptographic module extracts the public key hash `tr` from
 the secret key object, and thus there is no possibility of mismatch
 between `tr` and `sk`. In ExternalMu-ML-DSA, the public key or its hash
-needs to be provided to the `Prehash()` routine indpedendly of the secret
+needs to be provided to the `Prehash()` routine independently of the secret
 key, and while the exact mechanism by which it is delivered will be
-implementation-specific, it does open a windown for mismatches between
+implementation-specific, it does open a window for mismatches between
 `tr` and `sk`. First, this will produce a signature which will fail to
 verify under the intended public key since a compliant `Verify()` routine
 will independently compute `tr` from the public key. Implementors should pay careful
