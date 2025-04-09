@@ -979,7 +979,7 @@ ExternalMu-ML-DSA.Sign(sk, mu):
                   # generation failed
   end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
 ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
