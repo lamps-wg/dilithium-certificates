@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 26 September 2025                                     S. Turner
+Expires: 11 October 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           25 March 2025
+                                                            9 April 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2025.
+   This Internet-Draft will expire on 11 October 2025.
 
 Copyright Notice
 
@@ -627,7 +627,7 @@ Table of Contents
    algorithms.  Specifically, ML-DSA binds the hash of the public key tr
    to the message to-be-signed prior to hashing, as described in line 6
    of Algorithm 7 of [FIPS204].  In practice, this provides binding to
-   the indended verification public key, preventing some attacks that
+   the intended verification public key, preventing some attacks that
    would otherwise allow a signature to be successfully verified against
    a non-intended public key.  Also, this unlikely, theoretical binding
    means that in the unlikely discovery of a collision attack against
