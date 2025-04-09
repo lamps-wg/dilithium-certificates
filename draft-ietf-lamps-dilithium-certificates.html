@@ -5258,12 +5258,20 @@ ExternalMu-ML-DSA.Sign(sk, mu):
                   # generation failed
   end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
-ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
-   # ^ Note mu is passed as argument instead of M'
-   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
+    # mu can be passed as an argument instead of M'
+    # defaulting isExternalMu to false means that
+    # this modified version of Sign_internal can be used
+    # in place of the original without interfering with
+    # functioning of pure ML-DSA mode.
+    # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
+  6: if (isExternalMu):
+       mu = M'
+     else:
+       mu = H(BytesToBits(tr) || M', 64)
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:

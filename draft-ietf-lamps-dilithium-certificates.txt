@@ -3863,28 +3863,36 @@ ExternalMu-ML-DSA.Prehash(pk, M):
 
    Internal operations:
 
-   ExternalMu-ML-DSA.Sign(sk, mu):
+ExternalMu-ML-DSA.Sign(sk, mu):
 
-     if |mu| != 64 then
-       return error  # return an error indication if the input mu is not
-                     # 64 bytes.
-     end if
+  if |mu| != 64 then
+    return error  # return an error indication if the input mu is not
+                  # 64 bytes.
+  end if
 
-     rnd = rand(32)  # for the optional deterministic variant,
-                     # set rnd to all zeroes
-     if rnd = NULL then
-       return error  # return an error indication if random bit
-                     # generation failed
-     end if
+  rnd = rand(32)  # for the optional deterministic variant,
+                  # set rnd to all zeroes
+  if rnd = NULL then
+    return error  # return an error indication if random bit
+                  # generation failed
+  end if
 
-     sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
-     return sigma
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
+  return sigma
 
-   ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd):
-      # ^ Note mu is passed as argument instead of M'
-      ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
+    # mu can be passed as an argument instead of M'
+    # defaulting isExternalMu to false means that
+    # this modified version of Sign_internal can be used
+    # in place of the original without interfering with
+    # functioning of pure ML-DSA mode.
+    # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
+  6: if (isExternalMu):
+       mu = M'
+     else:
+       mu = H(BytesToBits(tr) || M', 64)
 
-               Figure 3: Internal steps of ExternalMu-ML-DSA
+            Figure 3: Internal steps of ExternalMu-ML-DSA
 
    ExternalMu-ML-DSA requires the public key, or its prehash, as input
    to the Prehash() function.  This assumes the signer generating the
