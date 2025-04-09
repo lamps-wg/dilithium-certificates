@@ -694,7 +694,7 @@ collision attacks, compared with conventional RSA or ECDSA signature
 algorithms. Specifically, ML-DSA binds the hash of the public key `tr`
 to the message to-be-signed prior to hashing, as described in line 6 of
 Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
-indended verification public key, preventing some attacks that would
+intended verification public key, preventing some attacks that would
 otherwise allow a signature to be successfully verified against a
 non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
 discovery of a collision attack against SHA-3, an attacker would
