@@ -17,18 +17,18 @@ Signature Algorithm (ML-DSA) in Internet X.509 certificates and
 certificate revocation lists.  The conventions for the associated
 signatures, subject public keys, and private key are also described. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="ML-DSA Certificate X.509 PKIX" name="keyword">
 <meta content="draft-ietf-lamps-dilithium-certificates-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
+  xml2rfc 3.28.1
     Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1052,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ML-DSA in Certificates</td>
-<td class="right">March 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 27 September 2025</td>
+<td class="center">Expires 12 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-26" class="published">26 March 2025</time>
+<time datetime="2025-04-10" class="published">10 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-27">27 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-12">12 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -5211,25 +5211,20 @@ feebe427a13ece5e96fe85cd382b2e10607ab911877ad07e74a200621d3cc2d9
           <h4 id="name-ml-dsa-inconsistent-seed-an">
 <a href="#appendix-C.4.1" class="section-number selfRef">C.4.1. </a><a href="#name-ml-dsa-inconsistent-seed-an" class="section-name selfRef">ML-DSA Inconsistent Seed and Expanded Private Keys</a>
           </h4>
-<p id="appendix-C.4.1-1">Three <code>ML-DSA-44-PrivateKey both CHOICE</code> examples of inconsistent seed and
+<p id="appendix-C.4.1-1">Three <code>ML-DSA-44-PrivateKey</code> examples of inconsistent seed and
 expanded private keys follow:<a href="#appendix-C.4.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="appendix-C.4.1-2">
 <li id="appendix-C.4.1-2.1">
-              <p id="appendix-C.4.1-2.1.1">The first is for inconsistent <code>seed</code> and <code>expandedKey</code>.<a href="#appendix-C.4.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="appendix-C.4.1-2.1.1">The first <code>ML-DSA-PrivateKey</code> example includes the <code>both CHOICE</code> , i.e., both <code>seed</code> and <code>expandedKey</code> are included. The <code>seed</code> and <code>expanded</code> values can be checked for inconsistencies.<a href="#appendix-C.4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="appendix-C.4.1-2.2">
-              <p id="appendix-C.4.1-2.2.1">The second is an <code>expandedkey</code> for which the recomputed public key
-hash <code>tr</code> fails to match the private key.<a href="#appendix-C.4.1-2.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-C.4.1-2.2.1">The second <code>ML-DSA-PrivateKey</code> example includes only <code>expandedKey</code>.  The public key fails to match the <code>tr</code> hash value in the private key.<a href="#appendix-C.4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li id="appendix-C.4.1-2.3">
-              <p id="appendix-C.4.1-2.3.1">The third is an <code>expandedKey</code> for which the recomputed public <code>t_0</code>
-fails to match the private key, i.e., the "low bits" of the <code>t</code> vector computed
-as part of recovering the public key from the private do not match the
-corresponding data in the private key. (Only the "high bits" <code>t_1</code> are
-ultimately included in the public key).<a href="#appendix-C.4.1-2.3.1" class="pilcrow">¶</a></p>
+              <p id="appendix-C.4.1-2.3.1">The third <code>ML-DSA-PrivateKey</code> example also includes only <code>expandedKey</code>. The private <code>s_1</code> and <code>s_2</code> vectors imply a <code>t</code> vector whose private low bits do not match the <code>t_0</code> vector portion of the private key (its high bits <code>t_1</code> are the primary content of the public key).<a href="#appendix-C.4.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="appendix-C.4.1-3">The second and third mismatches would not be detected by implementations
+<p id="appendix-C.4.1-3">The second and third examples would not be detected by implementations
 that do not regenerate the public key from the private key, or neglect to
 then check consistency of <code>tr</code> or <code>t_0</code>.<a href="#appendix-C.4.1-3" class="pilcrow">¶</a></p>
 <p id="appendix-C.4.1-4">The following is the first example:<a href="#appendix-C.4.1-4" class="pilcrow">¶</a></p>
