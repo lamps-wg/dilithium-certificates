@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-08T00:58:21.838696+00:00",
+  "timestamp": "2025-04-10T00:58:35.409892+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -8108,7 +8108,7 @@
       "labels": [],
       "body": "Includes Viktor's negative examples; see #104. Also, Closes #104.",
       "createdAt": "2025-03-21T08:43:15Z",
-      "updatedAt": "2025-03-26T15:14:27Z",
+      "updatedAt": "2025-04-09T17:56:35Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "d4d3895b3aa44fe0932a97301bf7a8394286c31e",
@@ -8317,6 +8317,46 @@
               "body": "```suggestion\r\nthen check consistency of `tr` or `t_0`.\r\n```",
               "createdAt": "2025-03-26T15:14:15Z",
               "updatedAt": "2025-03-26T15:14:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6kKy6b",
+          "commit": {
+            "abbreviatedOid": "80f66db"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-09T17:56:15Z",
+          "updatedAt": "2025-04-09T17:56:16Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\nThree `ML-DSA-44-PrivateKey` examples of inconsistent seed and\r\nexpanded private keys follow:\r\n\r\n1. The first `ML-DSA-PrivateKey` example includes the `both CHOICE` , i.e., both `seed` and `expandedKey` are included. The `seed` and `expanded` values can be checked for inconsistencies.\r\n\r\n2. The second `ML-DSA-PrivateKey` example includes only `expandedKey`.  The public key fails to match the `tr` hash value in the private key.\r\n\r\n3. The third `ML-DSA-PrivateKey` example also includes only `expandedKey`. The private `s_1` and `s_2` vectors imply a `t` vector whose private low bits do not match the `t_0` vector portion of the private key (its high bits `t_1` are the primary content of the public key).\r\n\r\nThe second and third examples would not be detected by implementations\r\n```",
+              "createdAt": "2025-04-09T17:56:15Z",
+              "updatedAt": "2025-04-09T18:20:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6kKzFS",
+          "commit": {
+            "abbreviatedOid": "80f66db"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-09T17:56:34Z",
+          "updatedAt": "2025-04-09T17:56:35Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "@vdukhovni PTAL",
+              "createdAt": "2025-04-09T17:56:34Z",
+              "updatedAt": "2025-04-09T17:56:35Z"
             }
           ]
         }
@@ -8564,24 +8604,26 @@
       "id": "PR_kwDOIEpj4c6P6sEY",
       "title": "Minor typo fixing / editorial suggestions for external-mu prehash section",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/120",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "samuel-lee-msft",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Some minor suggestions\r\n\r\n+ Fix typos\r\n+ Simplify definition of `ExternalMu-ML-DSA.Prehash` given the `ctx` input is defined to be empty string in this RFC",
       "createdAt": "2025-03-24T18:30:56Z",
-      "updatedAt": "2025-03-26T14:23:13Z",
+      "updatedAt": "2025-04-09T17:05:50Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "174db1bced8cbb50c20fdea2b0fdf980b98d1b54",
       "headRepository": "samuel-lee-msft/dilithium-certificates",
       "headRefName": "samuellee-fix-typos-in-prehashing",
       "headRefOid": "d9599a743d585301e41ea528e6e50b2aea5954a9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-04-09T17:05:50Z",
+      "mergedAt": "2025-04-09T17:05:50Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "1a89c750f8ea4e4bf884af0d356cc61b7db39caf"
+      },
       "comments": [
         {
           "author": "ounsworth",
@@ -8618,7 +8660,7 @@
             "abbreviatedOid": "f7ed24e"
           },
           "author": "samuel-lee-msft",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-03-25T23:30:07Z",
@@ -8652,24 +8694,26 @@
       "id": "PR_kwDOIEpj4c6QAhvo",
       "title": "Tweak to the presentation of external mu API",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/121",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ounsworth",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This PR is based on a hallway chat with @GiacomoPope.",
       "createdAt": "2025-03-25T09:21:35Z",
-      "updatedAt": "2025-03-26T17:57:57Z",
+      "updatedAt": "2025-04-09T17:08:27Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
-      "baseRefOid": "9adc709e13335cd02542b38422de8e168020fd21",
+      "baseRefOid": "1a89c750f8ea4e4bf884af0d356cc61b7db39caf",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "mikeo_externalmu_tweak",
-      "headRefOid": "ad1e0f06a11592148a6eb8670435ddcba342cc36",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "aed6b3f98e20f125424f51386f7636d9fe512473",
+      "closedAt": "2025-04-09T17:08:27Z",
+      "mergedAt": "2025-04-09T17:08:26Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "ef92677b23b4cb3f3efde1c483c01d091d77b715"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8678,7 +8722,7 @@
             "abbreviatedOid": "ad1e0f0"
           },
           "author": "samuel-lee-msft",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-03-26T17:57:56Z",
@@ -8689,6 +8733,26 @@
               "body": "Would need to update this line to:\r\n`sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)`",
               "createdAt": "2025-03-26T17:57:56Z",
               "updatedAt": "2025-03-26T17:57:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6kKU9D",
+          "commit": {
+            "abbreviatedOid": "ad1e0f0"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-09T17:04:39Z",
+          "updatedAt": "2025-04-09T17:04:39Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "```suggestion\r\n  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)\r\n```",
+              "createdAt": "2025-04-09T17:04:39Z",
+              "updatedAt": "2025-04-09T17:04:40Z"
             }
           ]
         }
@@ -8754,24 +8818,26 @@
       "id": "PR_kwDOIEpj4c6QPkrS",
       "title": "indended->intended",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/124",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "danvangeest",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-26T16:50:22Z",
-      "updatedAt": "2025-03-28T12:28:55Z",
+      "updatedAt": "2025-04-09T17:05:26Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "174db1bced8cbb50c20fdea2b0fdf980b98d1b54",
       "headRepository": "danvangeest/dilithium-certificates",
       "headRefName": "dvg/t_is_not_d",
       "headRefOid": "32abed55ac401b5f8b56adbedcbd4c8fbcb7ae8f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-04-09T17:05:25Z",
+      "mergedAt": "2025-04-09T17:05:25Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "9f6f0247da91426fa3fc24a6037dddfaf8a76919"
+      },
       "comments": [],
       "reviews": [
         {
