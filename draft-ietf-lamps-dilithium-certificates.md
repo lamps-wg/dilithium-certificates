@@ -965,21 +965,16 @@ The following examples demonstrate inconsistent seed and expanded private keys.
 
 ### ML-DSA Inconsistent Seed and Expanded Private Keys
 
-Three `ML-DSA-44-PrivateKey both CHOICE` examples of inconsistent seed and
+Three `ML-DSA-44-PrivateKey` examples of inconsistent seed and
 expanded private keys follow:
 
-1. The first is for inconsistent `seed` and `expandedKey`.
+1. The first `ML-DSA-PrivateKey` example includes the `both CHOICE` , i.e., both `seed` and `expandedKey` are included. The `seed` and `expanded` values can be checked for inconsistencies.
 
-2. The second is an `expandedkey` for which the recomputed public key
-   hash `tr` fails to match the private key.
+2. The second `ML-DSA-PrivateKey` example includes only `expandedKey`.  The public key fails to match the `tr` hash value in the private key.
 
-3. The third is an `expandedKey` for which the recomputed public `t_0`
-   fails to match the private key, i.e., the "low bits" of the `t` vector computed
-   as part of recovering the public key from the private do not match the
-   corresponding data in the private key. (Only the "high bits" `t_1` are
-   ultimately included in the public key).
+3. The third `ML-DSA-PrivateKey` example also includes only `expandedKey`. The private `s_1` and `s_2` vectors imply a `t` vector whose private low bits do not match the `t_0` vector portion of the private key (its high bits `t_1` are the primary content of the public key).
 
-The second and third mismatches would not be detected by implementations
+The second and third examples would not be detected by implementations
 that do not regenerate the public key from the private key, or neglect to
 then check consistency of `tr` or `t_0`.
 
