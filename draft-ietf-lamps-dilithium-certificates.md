@@ -585,12 +585,15 @@ that do not perform this seed consistency check avoid keygen
 and compare operations, but are unable to ensure that the `seed` and
 `expandedKey` match.
 
-If the check is done and the seed and the `expandedKey` are not consistent,
+If the check is done and the `seed` and the `expandedKey` are not consistent,
 the recipient MUST reject the private key as malformed.
 
 The seed consistency check consists of regenerating the expanded form from
 the seed via `ML-DSA.KeyGen_internal` and ensuring it is bytewise equal to
 the value presented in the private key.
+
+{{example-bad}} includes some examples of inconsistent seeds and expanded private
+keys.
 
 # Security Considerations
 
@@ -754,7 +757,8 @@ and expanded format.
 
 # Examples {#examples}
 
-This appendix contains examples of ML-DSA public keys, private keys and certificates.
+This appendix contains examples of ML-DSA private keys, public keys,
+certificates, and inconsistent seed and expanded private keys.
 
 ## Example Private Keys {#example-private}
 
@@ -948,6 +952,50 @@ so-called "pretty print"; the certificates are the same.
 ~~~
 {::include ./examples/ML-DSA-87.crt.txt}
 ~~~
+
+
+## Example Inconsistent Private Keys {#example-bad}
+
+<aside markdown="block">
+  WARNING: These private keys are purposely bad do not use them in
+  production systmes.
+</aside>
+
+The following examples demonstrate inconsistent seed and expanded private keys.
+
+### ML-DSA Inconsistent Seed and Expanded Private Keys
+
+Three `ML-DSA-44-PrivateKey` examples of inconsistent seed and
+expanded private keys follow:
+
+1. The first `ML-DSA-PrivateKey` example includes the `both CHOICE` , i.e., both `seed` and `expandedKey` are included. The `seed` and `expanded` values can be checked for inconsistencies.
+
+2. The second `ML-DSA-PrivateKey` example includes only `expandedKey`.  The public key fails to match the `tr` hash value in the private key.
+
+3. The third `ML-DSA-PrivateKey` example also includes only `expandedKey`. The private `s_1` and `s_2` vectors imply a `t` vector whose private low bits do not match the `t_0` vector portion of the private key (its high bits `t_1` are the primary content of the public key).
+
+The second and third examples would not be detected by implementations
+that do not regenerate the public key from the private key, or neglect to
+then check consistency of `tr` or `t_0`.
+
+The following is the first example:
+
+~~~
+{::include ./examples/bad-ML-DSA-44-1.priv}
+~~~
+
+The following is the second example:
+
+~~~
+{::include ./examples/bad-ML-DSA-44-2.priv}
+~~~
+
+The following is the third example:
+
+~~~
+{::include ./examples/bad-ML-DSA-44-3.priv}
+~~~
+
 
 # Pre-hashing (ExternalMu-ML-DSA) {#prehash}
 

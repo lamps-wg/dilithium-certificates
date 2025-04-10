@@ -30,6 +30,9 @@ DEPS_FILES := \
 	./examples/ML-DSA-87-both.priv.txt \
 	./examples/ML-DSA-87.pub \
 	./examples/ML-DSA-87.pub.txt \
+        ./examples/bad-ML-DSA-44-1.priv \
+        ./examples/bad-ML-DSA-44-2.priv \
+        ./examples/bad-ML-DSA-44-3.priv \
 
 LIBDIR := lib
 include $(LIBDIR)/main.mk
