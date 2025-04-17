@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T02:28:01.546983+00:00",
+  "timestamp": "2025-04-17T00:59:13.719052+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1417,7 +1417,7 @@
       "id": "I_kwDOIEpj4c6uuF_l",
       "title": "Spell out parsing of expandedKey",
       "url": "https://github.com/lamps-wg/dilithium-certificates/issues/106",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dennisjackson",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1426,9 +1426,17 @@
       "labels": [],
       "body": "The draft doesn't actually specify how to parse expandedKey. I guess algorithm 25 of FIPS 204 is the right reference to add, but what happens if the input is malformed? ",
       "createdAt": "2025-03-19T10:47:02Z",
-      "updatedAt": "2025-03-20T06:13:38Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-04-15T12:53:18Z",
+      "closedAt": "2025-04-15T12:53:16Z",
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closing this one based on closed #106.",
+          "createdAt": "2025-04-15T12:53:17Z",
+          "updatedAt": "2025-04-15T12:53:17Z"
+        }
+      ]
     },
     {
       "number": 123,
