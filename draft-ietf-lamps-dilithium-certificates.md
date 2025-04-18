@@ -1105,7 +1105,7 @@ this data.
 {:numbered="false"}
 
 The authors wish to thank the following people for their contributions
-to this document: Corey Bonnel, Dierdre Connolly, Viktor Dukhovni, Russ Housley,
+to this document: Corey Bonnell, Dierdre Connolly, Viktor Dukhovni, Russ Housley,
 Alicja Kario, Mike Ounsworth, and Daniel Van Geest.
 
 In addition, we would like to thank those who contributed to the private
