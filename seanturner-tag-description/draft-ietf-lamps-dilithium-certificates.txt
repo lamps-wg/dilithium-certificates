@@ -4131,7 +4131,7 @@ ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
 Acknowledgments
 
    The authors wish to thank the following people for their
-   contributions to this document: Corey Bonnel, Dierdre Connolly,
+   contributions to this document: Corey Bonnell, Dierdre Connolly,
    Viktor Dukhovni, Russ Housley, Alicja Kario, Mike Ounsworth, and
    Daniel Van Geest.
 
