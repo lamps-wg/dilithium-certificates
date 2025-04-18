@@ -17,18 +17,18 @@ Signature Algorithm (ML-DSA) in Internet X.509 certificates and
 certificate revocation lists.  The conventions for the associated
 signatures, subject public keys, and private key are also described. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="ML-DSA Certificate X.509 PKIX" name="keyword">
 <meta content="draft-ietf-lamps-dilithium-certificates-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.28.1
+    Python 3.12.10
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.5
+    Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1052,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ML-DSA in Certificates</td>
-<td class="right">March 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Massimo, et al.</td>
-<td class="center">Expires 16 September 2025</td>
+<td class="center">Expires 20 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-dilithium-certificates-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-15" class="published">15 March 2025</time>
+<time datetime="2025-04-18" class="published">18 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-16">16 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-20">20 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1141,7 +1141,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1231,7 +1231,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
             <p id="section-toc.1-1.14.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1">
-                <p id="section-toc.1-1.14.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-example-private-key" class="internal xref">Example Private Key</a></p>
+                <p id="section-toc.1-1.14.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-example-private-keys" class="internal xref">Example Private Keys</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.1">
                     <p id="section-toc.1-1.14.2.1.2.1.1"><a href="#appendix-C.1.1" class="auto internal xref">C.1.1</a>.  <a href="#name-ml-dsa-44-private-key-examp" class="internal xref">ML-DSA-44 Private Key Examples</a></p>
@@ -1245,10 +1245,18 @@ signatures, subject public keys, and private key are also described.<a href="#se
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.2">
-                <p id="section-toc.1-1.14.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-example-public-key" class="internal xref">Example Public Key</a></p>
+                <p id="section-toc.1-1.14.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-example-public-keys" class="internal xref">Example Public Keys</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.3">
                 <p id="section-toc.1-1.14.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-example-certificates" class="internal xref">Example Certificates</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.4">
+                <p id="section-toc.1-1.14.2.4.1"><a href="#appendix-C.4" class="auto internal xref">C.4</a>.  <a href="#name-example-inconsistent-privat" class="internal xref">Example Inconsistent Private Keys</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.4.2.1">
+                    <p id="section-toc.1-1.14.2.4.2.1.1"><a href="#appendix-C.4.1" class="auto internal xref">C.4.1</a>.  <a href="#name-ml-dsa-inconsistent-seed-an" class="internal xref">ML-DSA Inconsistent Seed and Expanded Private Keys</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1306,7 +1314,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
       <h2 id="name-identifiers">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-identifiers" class="section-name selfRef">Identifiers</a>
       </h2>
-<p id="section-2-1">The AlgorithmIdentifier type is defined in <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> as follows:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">The <code>AlgorithmIdentifier</code> type is defined in <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> as follows:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-2-2">
 <pre>
     AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
@@ -1325,11 +1333,11 @@ syntax.<a href="#section-2-3.1" class="pilcrow">¶</a></p>
 <p id="section-2-4">The fields in AlgorithmIdentifier have the following meanings:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-5.1">
-          <p id="section-2-5.1.1">algorithm identifies the cryptographic algorithm with an object
+          <p id="section-2-5.1.1"><code>algorithm</code> identifies the cryptographic algorithm with an object
 identifier.<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-5.2">
-          <p id="section-2-5.2.1">parameters, which are optional, are the associated parameters for the
+          <p id="section-2-5.2.1"><code>parameters</code>, which are optional, are the associated parameters for the
 algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
@@ -1349,7 +1357,7 @@ algorithm identifier in the algorithm field.<a href="#section-2-5.2.1" class="pi
             nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 </pre><a href="#section-2-7" class="pilcrow">¶</a>
 </div>
-<p id="section-2-8">The contents of the parameters component for each algorithm <span class="bcp14">MUST</span> be
+<p id="section-2-8">The contents of the <code>parameters</code> component for each <code>algorithm</code> <span class="bcp14">MUST</span> be
 absent. The ctx value used in the ML-DSA signing and verification
 <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> of ML-DSA signatures defined in this specification
 (X.509 certificates, CRLs) is the empty string.<a href="#section-2-8" class="pilcrow">¶</a></p>
@@ -1368,7 +1376,7 @@ ML-DSA provides three parameter sets for the NIST PQC security categories
 <p id="section-3-2">Signatures are used in a number of different ASN.1 structures. As shown
 in the ASN.1 representation from <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below, in an X.509
 certificate, a signature is encoded with an algorithm identifier in the
-signatureAlgorithm attribute and a signatureValue attribute that contains
+<code>signatureAlgorithm</code> attribute and a <code>signatureValue</code> attribute that contains
 the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-3">
 <pre>
@@ -1392,14 +1400,14 @@ the actual signature.<a href="#section-3-2" class="pilcrow">¶</a></p>
 </div>
 <p id="section-3-4">Signatures are also used in the CRL list ASN.1 representation from
 <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> below. In a X.509 CRL, a signature is encoded with an
-algorithm identifier in the signatureAlgorithm attribute and a
-signatureValue attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
+algorithm identifier in the <code>signatureAlgorithm</code> attribute and a
+<code>signatureValue</code> attribute that contains the actual signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-5">
 <pre>
    CertificateList  ::=  SIGNED{ TBSCertList }
 </pre><a href="#section-3-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3-6">The following SIGNATURE-ALGORITHM ASN.1 classes are for ML-DSA-44,
+<p id="section-3-6">The following <code>SIGNATURE-ALGORITHM</code> ASN.1 classes are for ML-DSA-44,
 ML-DSA-65, and ML-DSA-87:<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-7">
 <pre>
@@ -1425,22 +1433,26 @@ ML-DSA-65, and ML-DSA-87:<a href="#section-3-6" class="pilcrow">¶</a></p>
     }
 </pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3-8">The identifiers defined in <a href="#oids" class="auto internal xref">Section 2</a> can be used as the
-AlgorithmIdentifier in the signatureAlgorithm field in the sequence
-Certificate/CertificateList and the signature field in the sequence
-TBSCertificate/TBSCertList in certificates and CRLs, respectively,
-<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The parameters of these signature algorithms <span class="bcp14">MUST</span> be
-absent, as explained in <a href="#oids" class="auto internal xref">Section 2</a>. That is, the AlgorithmIdentifier
-<span class="bcp14">SHALL</span> be a SEQUENCE of one component, the OID id-ml-dsa-*.<a href="#section-3-8" class="pilcrow">¶</a></p>
-<p id="section-3-9">The signatureValue field contains the corresponding ML-DSA signature
-computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
-<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-9" class="pilcrow">¶</a></p>
-<p id="section-3-10">Conforming Certification Authority (CA) implementations <span class="bcp14">MUST</span> specify
+<aside id="section-3-8">
+        <p id="section-3-8.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the
+  2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-3-8.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-3-9">The identifiers defined in <a href="#oids" class="auto internal xref">Section 2</a> can be used as the
+<code>AlgorithmIdentifier</code> in the <code>signatureAlgorithm</code> field in the sequence
+<code>Certificate</code>/<code>CertificateList</code> and the <code>signature</code> field in the sequence
+<code>TBSCertificate</code>/<code>TBSCertList</code> in certificates and CRLs, respectively,
+<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The <code>parameters</code> of these signature algorithms <span class="bcp14">MUST</span> be
+absent, as explained in <a href="#oids" class="auto internal xref">Section 2</a>. That is, the <code>AlgorithmIdentifier</code>
+        <span class="bcp14">SHALL</span> be a <code>SEQUENCE</code> of one component, the OID id-ml-dsa-*.<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-10">The <code>signatureValue</code> field contains the corresponding ML-DSA signature
+computed upon the ASN.1 DER encoded <code>tbsCertificate</code>/<code>tbsCertList</code>
+        <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-11">Conforming Certification Authority (CA) implementations <span class="bcp14">MUST</span> specify
 the algorithms explicitly by using the OIDs specified in <a href="#oids" class="auto internal xref">Section 2</a> when
 encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA <span class="bcp14">MUST</span>
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
-values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-10" class="pilcrow">¶</a></p>
+values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a href="#section-3-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ML-DSA-PublicKey">
@@ -1448,8 +1460,8 @@ values are specified <a href="#oids" class="auto internal xref">Section 2</a>.<a
       <h2 id="name-ml-dsa-public-keys-in-pkix">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ml-dsa-public-keys-in-pkix" class="section-name selfRef">ML-DSA Public Keys in PKIX</a>
       </h2>
-<p id="section-4-1">In the X.509 certificate, the subjectPublicKeyInfo field has the
-SubjectPublicKeyInfo type, which has the following ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">In the X.509 certificate, the <code>subjectPublicKeyInfo</code> field has the
+<code>SubjectPublicKeyInfo</code> type, which has the following ASN.1 syntax:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-2">
 <pre>
   SubjectPublicKeyInfo {PUBLIC-KEY: IOSet} ::= SEQUENCE {
@@ -1462,17 +1474,17 @@ SubjectPublicKeyInfo type, which has the following ASN.1 syntax:<a href="#sectio
         <p id="section-4-3.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the
   2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-4-3.1" class="pilcrow">¶</a></p>
 </aside>
-<p id="section-4-4">The fields in SubjectPublicKeyInfo have the following meaning:<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-4">The fields in <code>SubjectPublicKeyInfo</code> have the following meaning:<a href="#section-4-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-5.1">
-          <p id="section-4-5.1.1">algorithm is the algorithm identifier and parameters for the
+          <p id="section-4-5.1.1"><code>algorithm</code> is the algorithm identifier and parameters for the
 public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-5.2">
-          <p id="section-4-5.2.1">subjectPublicKey contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-5.2.1"><code>subjectPublicKey</code> contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-6">The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-6">The <code>PUBLIC-KEY</code> ASN.1 types for ML-DSA are defined here:<a href="#section-4-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-7">
 <pre>
   pk-ml-dsa-44 PUBLIC-KEY ::= {
@@ -1504,33 +1516,38 @@ public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 
 </pre><a href="#section-4-7" class="pilcrow">¶</a>
 </div>
-<p id="section-4-8">Algorithm 22 in Section 7.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines the raw byte string
-encoding of an ML-DSA public key. When used in a SubjectPublicKeyInfo type,
-the subjectPublicKey BIT STRING contains the raw byte string encoding of the
-public key.<a href="#section-4-8" class="pilcrow">¶</a></p>
-<p id="section-4-9">When an ML-DSA public key appears outside of a SubjectPublicKeyInfo type in an
-environment that uses ASN.1 encoding, it can be encoded as an OCTET STRING by
-using the ML-DSA-PublicKey type.<a href="#section-4-9" class="pilcrow">¶</a></p>
-<p id="section-4-10"><span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> describes the Asymmetric Key Package's OneAsymmetricKey type for
+<aside id="section-4-8">
+        <p id="section-4-8.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the
+  2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-4-8.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-4-9">Algorithm 22 in Section 7.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines the raw byte string
+encoding of an ML-DSA public key. When used in a <code>SubjectPublicKeyInfo</code> type,
+the <code>subjectPublicKey BIT STRING</code> contains the raw byte string encoding of the
+public key.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<p id="section-4-10">When an ML-DSA public key appears outside of a <code>SubjectPublicKeyInfo</code> type in an
+environment that uses ASN.1 encoding, it can be encoded as an <code>OCTET STRING</code> by
+using the <code>ML-DSA-44-PublicKey</code>, <code>ML-DSA-65-PublicKey</code>, and <code>ML-DSA-87-PublicKey</code> types
+corresponding to the correct key size.<a href="#section-4-10" class="pilcrow">¶</a></p>
+<p id="section-4-11"><span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> describes the Asymmetric Key Package's <code>OneAsymmetricKey</code> type for
 encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
-a OneAsymmetricKey, it follows the description in <a href="#priv-key" class="auto internal xref">Section 6</a>.<a href="#section-4-10" class="pilcrow">¶</a></p>
-<p id="section-4-11">When the ML-DSA private key appears outside of an Asymmetric Key Package in an
+a <code>OneAsymmetricKey</code>, it follows the description in <a href="#priv-key" class="auto internal xref">Section 6</a>.<a href="#section-4-11" class="pilcrow">¶</a></p>
+<p id="section-4-12">When the ML-DSA private key appears outside of an Asymmetric Key Package in an
 environment that uses ASN.1 encoding, it can be encoded using one of the
-the ML-DSA-PrivateKey CHOICE formats defined in <a href="#priv-key" class="auto internal xref">Section 6</a>. The seed format
-is <span class="bcp14">RECOMMENDED</span> as it efficiently stores both the private and public key.<a href="#section-4-11" class="pilcrow">¶</a></p>
-<p id="section-4-12"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
-textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-12" class="pilcrow">¶</a></p>
+the <code>ML-DSA-PrivateKey CHOICE</code> formats defined in <a href="#priv-key" class="auto internal xref">Section 6</a>. The <code>seed</code> format
+is <span class="bcp14">RECOMMENDED</span> as it efficiently stores both the private and public key.<a href="#section-4-12" class="pilcrow">¶</a></p>
+<p id="section-4-13"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA public keys encoded using the
+textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-4-13" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="ku-bits">
+<div id="key-usage-bits">
 <section id="section-5">
       <h2 id="name-key-usage-bits">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-key-usage-bits" class="section-name selfRef">Key Usage Bits</a>
       </h2>
-<p id="section-5-1">The intended application for the key is indicated in the keyUsage
+<p id="section-5-1">The intended application for the key is indicated in the <code>keyUsage</code>
 certificate extension; see <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.3" class="relref">Section 4.2.1.3</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. If the
-keyUsage extension is present in a certificate that indicates id-ml-dsa-*
-in the SubjectPublicKeyInfo, then the at least one of following <span class="bcp14">MUST</span> be
+<code>keyUsage</code> extension is present in a certificate that indicates <code>id-ml-dsa-*</code>
+in the <code>SubjectPublicKeyInfo</code>, then at least one of following <span class="bcp14">MUST</span> be
 present:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
 <pre>
@@ -1540,8 +1557,8 @@ present:<a href="#section-5-1" class="pilcrow">¶</a></p>
   cRLSign.
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3">If the keyUsage extension is present in a certificate that indicates
-id-ml-dsa-* in the SubjectPublicKeyInfo, then the following <span class="bcp14">MUST NOT</span> be
+<p id="section-5-3">If the <code>keyUsage</code> extension is present in a certificate that indicates
+<code>id-ml-dsa-*</code> in the <code>SubjectPublicKeyInfo</code>, then the following <span class="bcp14">MUST NOT</span> be
 present:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
@@ -1552,7 +1569,7 @@ present:<a href="#section-5-3" class="pilcrow">¶</a></p>
    decipherOnly.
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
-<p id="section-5-5">Requirements about the keyUsage extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>
+<p id="section-5-5">Requirements about the <code>keyUsage</code> extension bits defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>
 still apply.<a href="#section-5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1568,7 +1585,7 @@ is computed from the seed using <code>ML-DSA.KeyGen_internal(xi)</code> (algorit
 key in a structure that both identifies what algorithm the private key
 is for and allows for the public key and additional attributes about the
 key to be included as well. For illustration, the ASN.1 structure
-OneAsymmetricKey is replicated below.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<code>OneAsymmetricKey</code> is replicated below.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-3">
 <pre>
   OneAsymmetricKey ::= SEQUENCE {
@@ -1595,9 +1612,10 @@ OneAsymmetricKey is replicated below.<a href="#section-6-2" class="pilcrow">¶</
         <p id="section-6-4.1">NOTE: The above syntax is from <span>[<a href="#RFC5958" class="cite xref">RFC5958</a>]</span> and is compatible with the
   2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>.<a href="#section-6-4.1" class="pilcrow">¶</a></p>
 </aside>
-<p id="section-6-5">For ML-DSA private keys, the privateKey field in OneAsymmetricKey contains one of
-the following CHOICE structures encoded as an OCTET STRING. The seed format is a
-fixed 32 bytes for all security levels, while the expandedKey and both formats
+<p id="section-6-5">For ML-DSA private keys, the <code>privateKey</code> field in <code>OneAsymmetricKey</code> contains one of
+the following DER-encoded <code>CHOICE</code> structures. The <code>seed</code> format is a
+fixed 32 byte <code>OCTET STRING</code> (34 bytes total with the <code>0x8020</code> tag and
+length) for all security levels, while the <code>expandedKey</code> and <code>both</code> formats
 vary in size by security level:<a href="#section-6-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-6">
 <pre>
@@ -1609,10 +1627,7 @@ ML-DSA-44-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (2560))
       }
   }
-</pre><a href="#section-6-6" class="pilcrow">¶</a>
-</div>
-<div class="alignLeft art-text artwork" id="section-6-7">
-<pre>
+
 ML-DSA-65-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4032)),
@@ -1621,10 +1636,7 @@ ML-DSA-65-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (4032))
       }
   }
-</pre><a href="#section-6-7" class="pilcrow">¶</a>
-</div>
-<div class="alignLeft art-text artwork" id="section-6-8">
-<pre>
+
 ML-DSA-87-PrivateKey ::= CHOICE {
   seed [0] OCTET STRING (SIZE (32)),
   expandedKey OCTET STRING (SIZE (4896)),
@@ -1633,37 +1645,48 @@ ML-DSA-87-PrivateKey ::= CHOICE {
       expandedKey OCTET STRING (SIZE (4896))
       }
   }
-</pre><a href="#section-6-8" class="pilcrow">¶</a>
+</pre><a href="#section-6-6" class="pilcrow">¶</a>
 </div>
-<p id="section-6-9">The CHOICE allows three representations of the private key:<a href="#section-6-9" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6-10">
-<li id="section-6-10.1">
-          <p id="section-6-10.1.1">The seed format (tag <code>[0]</code>) contains just the 32-byte seed value (xi)
+<aside id="section-6-7">
+        <p id="section-6-7.1">NOTE: The above syntax is from <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span> and is compatible with the
+  2021 ASN.1 syntax <span>[<a href="#X680" class="cite xref">X680</a>]</span>. See <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> for the 1988 ASN.1 syntax.<a href="#section-6-7.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-6-8">The <code>CHOICE</code> allows three representations of the private key:<a href="#section-6-8" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6-9">
+<li id="section-6-9.1">
+          <p id="section-6-9.1.1">The <code>seed</code> format (tag <code>[0]</code>) contains just the 32-byte seed value (xi)
 from which both the expanded private key and public key can be derived
-using ML-DSA.KeyGen_internal(xi).<a href="#section-6-10.1.1" class="pilcrow">¶</a></p>
+using <code>ML-DSA.KeyGen_internal(xi)</code>.<a href="#section-6-9.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-6-10.2">
-          <p id="section-6-10.2.1">The expandedKey format contains the full expanded private key that was
-derived from the seed.<a href="#section-6-10.2.1" class="pilcrow">¶</a></p>
+        <li id="section-6-9.2">
+          <p id="section-6-9.2.1">The <code>expandedKey</code> format contains the expanded private key that was
+derived from the seed.<a href="#section-6-9.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-6-10.3">
-          <p id="section-6-10.3.1">The both format contains both the seed and expanded key, allowing for
-validation that the expanded key was correctly derived from the seed.<a href="#section-6-10.3.1" class="pilcrow">¶</a></p>
+        <li id="section-6-9.3">
+          <p id="section-6-9.3.1">The <code>both</code> format contains both the seed and expanded private key, allowing for
+for interoperability; some may want to use and retain the seed and
+others may only support expanded private keys.<a href="#section-6-9.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-6-11">When encoding an ML-DSA private key in a OneAsymmetricKey object, any of
+<p id="section-6-10">When encoding an ML-DSA private key in a <code>OneAsymmetricKey</code> object, any of
 these three formats may be used, though the seed format is <span class="bcp14">RECOMMENDED</span>
-for storage efficiency.<a href="#section-6-11" class="pilcrow">¶</a></p>
-<p id="section-6-12">The "privateKeyAlgorithm" field uses the AlgorithmIdentifier structure with
-the appropriate OID as defined in <a href="#ML-DSA-PublicKey" class="auto internal xref">Section 4</a>. If present, the "publicKey"
-field will hold the encoded public key as defined in <a href="#ku-bits" class="auto internal xref">Section 5</a>.<a href="#section-6-12" class="pilcrow">¶</a></p>
-<p id="section-6-13">NOTE: While the private key can be stored in multiple formats, the seed-only
+for storage efficiency.<a href="#section-6-10" class="pilcrow">¶</a></p>
+<p id="section-6-11">The <code>privateKeyAlgorithm</code> field uses the <code>AlgorithmIdentifier</code> structure with
+the appropriate OID as defined in <a href="#oids" class="auto internal xref">Section 2</a>. If present, the <code>publicKey</code>
+field will hold the encoded public key as defined in <a href="#ML-DSA-PublicKey" class="auto internal xref">Section 4</a>.<a href="#section-6-11" class="pilcrow">¶</a></p>
+<p id="section-6-12">NOTE: While the private key can be stored in multiple formats, the seed-only
 format is <span class="bcp14">RECOMMENDED</span> as it is the most compact representation. Both the
 expanded private key and the public key can be deterministically derived
-from the seed using ML-DSA.KeyGen_internal(xi). While the publicKey field
-and expandedKey format are technically redundant when using the seed-only
+from the seed using <code>ML-DSA.KeyGen_internal(xi)</code>. Alternatively, the public
+key can be generated from the private key. While the <code>publicKey</code> field
+and <code>expandedKey</code> format are technically redundant when using the seed-only
 format, they <span class="bcp14">MAY</span> be included to enable keypair consistency checks during
-import operations.<a href="#section-6-13" class="pilcrow">¶</a></p>
+import operations.<a href="#section-6-12" class="pilcrow">¶</a></p>
+<p id="section-6-13">When parsing the private key, the ASN.1 tag explicitly indicates which
+variant of <code>CHOICE</code> is present. Implementations should use the context-specific tag <code>IMPLICIT [0]</code>
+(raw value <code>0x80</code>) for <code>seed</code>, <code>OCTET STRING</code> (<code>0x04</code>) for <code>expandedKey</code>, and
+<code>SEQUENCE</code> (<code>0x30</code>) for <code>both</code> to parse the private key, rather than any
+other heuristic like length of the enclosing <code>OCTET STRING</code>.<a href="#section-6-13" class="pilcrow">¶</a></p>
 <p id="section-6-14"><a href="#examples" class="auto internal xref">Appendix C</a> contains example ML-DSA private keys encoded using the
 textual encoding defined in <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span>.<a href="#section-6-14" class="pilcrow">¶</a></p>
 </section>
@@ -1685,21 +1708,21 @@ allocated in the "SMI Security for PKIX Module Identifier" registry
       <h2 id="name-implementation-consideratio">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
       </h2>
-<p id="section-8-1">An ML-DSA.KeyGen seed (xi) represents the <span class="bcp14">RECOMMENDED</span> format for storing
+<p id="section-8-1">An <code>ML-DSA.KeyGen seed (xi)</code> represents the <span class="bcp14">RECOMMENDED</span> format for storing
 and transmitting ML-DSA private keys. This format is explicitly permitted
 by <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> as an acceptable representation of a keypair. In particular,
 generating the seed in one cryptographic module and then importing or
 exporting it into another cryptographic module is allowed. The internal
-key generation function ML-DSA.KeyGen_internal(xi) can be accessed for
+key generation function <code>ML-DSA.KeyGen_internal(xi)</code> can be accessed for
 this purpose.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">Note also that unlike other private key compression methods in other algorithms,
 expanding a private key from a seed is a one-way function, meaning that once a
 full key is expanded from seed and the seed discarded, the seed cannot be
 re-created even if the full expanded private key is available. For this reason
 it is <span class="bcp14">RECOMMENDED</span> that implementations retain and export the seed,
-even when also exporting the expanded key. ML-DSA seed extraction can be
+even when also exporting the expanded private key. ML-DSA seed extraction can be
 implemented by including the random seed xi generated at line 1 of Algorithm 1
-ML-DSA.KeyGen in the returned output.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<code>ML-DSA.KeyGen</code> in the returned output.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="private-key-consistency-testing">
@@ -1709,9 +1732,17 @@ ML-DSA.KeyGen in the returned output.<a href="#section-8-2" class="pilcrow">¶</
       </h2>
 <p id="section-9-1">When receiving a private key that contains both the seed and the
 expandedKey, the recipient <span class="bcp14">SHOULD</span> perform a seed consistency check to
-ensure that the sender properly generated the private key.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">If the check is done and the seed and the expandedKey are not consistent,
+ensure that the sender properly generated the private key. Recipients
+that do not perform this seed consistency check avoid keygen
+and compare operations, but are unable to ensure that the <code>seed</code> and
+<code>expandedKey</code> match.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">If the check is done and the <code>seed</code> and the <code>expandedKey</code> are not consistent,
 the recipient <span class="bcp14">MUST</span> reject the private key as malformed.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">The seed consistency check consists of regenerating the expanded form from
+the seed via <code>ML-DSA.KeyGen_internal</code> and ensuring it is bytewise equal to
+the value presented in the private key.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<p id="section-9-4"><a href="#example-bad" class="auto internal xref">Appendix C.4</a> includes some examples of inconsistent seeds and expanded private
+keys.<a href="#section-9-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1728,7 +1759,7 @@ been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <p id="section-10-3">ML-DSA offers both deterministic and randomized signing. By default
 ML-DSA signatures are non-deterministic. The private random seed (rho')
-for the signature is pseudorandomly derived from the signer’s private
+for the signature is pseudorandomly derived from the signer's private
 key, the message, and a 256-bit string, rnd - where rnd should be
 generated by an approved RBG. In the deterministic version, rng is
 instead a 256-bit constant string. The source of randomness in the
@@ -1787,10 +1818,7 @@ single OCTET STRING.<a href="#section-10-7" class="pilcrow">¶</a></p>
 used; in other words, public keys identified by
 <code>id-hash-ml-dsa-44-with-sha512</code>, <code>id-hash-ml-dsa-65-with-sha512</code>, and
 <code>id-hash-ml-dsa-87-with-sha512</code> <span class="bcp14">MUST NOT</span> be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols (e.g. TLS).
-The use of HashML-DSA public keys within end entity certificates is not
-prohibited, but conventions for doing so are outside the scope of this
-document.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+CRLs, OCSP, certificate issuance and related PKIX protocols.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">This restriction is for both implementation and security reasons.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.1-3">The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
@@ -1815,7 +1843,7 @@ collision attacks, compared with conventional RSA or ECDSA signature
 algorithms. Specifically, ML-DSA binds the hash of the public key <code>tr</code>
 to the message to-be-signed prior to hashing, as described in line 6 of
 Algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. In practice, this provides binding to the
-indended verification public key, preventing some attacks that would
+intended verification public key, preventing some attacks that would
 otherwise allow a signature to be successfully verified against a
 non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
 discovery of a collision attack against SHA-3, an attacker would
@@ -1845,10 +1873,6 @@ these enhanced security properties.<a href="#section-10.1-4" class="pilcrow">¶<
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC3647">[RFC3647]</dt>
-        <dd>
-<span class="refAuthor">Chokhani, S.</span>, <span class="refAuthor">Ford, W.</span>, <span class="refAuthor">Sabett, R.</span>, <span class="refAuthor">Merrill, C.</span>, and <span class="refAuthor">S. Wu</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Policy and Certification Practices Framework"</span>, <span class="seriesInfo">RFC 3647</span>, <span class="seriesInfo">DOI 10.17487/RFC3647</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3647">https://www.rfc-editor.org/rfc/rfc3647</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5280">[RFC5280]</dt>
         <dd>
@@ -1898,6 +1922,10 @@ these enhanced security properties.<a href="#section-10.1-4" class="pilcrow">¶<
 <dt id="NIST-PQC">[NIST-PQC]</dt>
         <dd>
 <span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"Post-Quantum Cryptography Project"</span>, <time datetime="2016-12-20" class="refDate">20 December 2016</time>, <span>&lt;<a href="https://csrc.nist.gov/Projects/post-quantum-cryptography">https://csrc.nist.gov/Projects/post-quantum-cryptography</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3647">[RFC3647]</dt>
+        <dd>
+<span class="refAuthor">Chokhani, S.</span>, <span class="refAuthor">Ford, W.</span>, <span class="refAuthor">Sabett, R.</span>, <span class="refAuthor">Merrill, C.</span>, and <span class="refAuthor">S. Wu</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Policy and Certification Practices Framework"</span>, <span class="seriesInfo">RFC 3647</span>, <span class="seriesInfo">DOI 10.17487/RFC3647</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3647">https://www.rfc-editor.org/rfc/rfc3647</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7468">[RFC7468]</dt>
       <dd>
@@ -2118,22 +2146,27 @@ and expanded format.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
       <h2 id="name-examples">
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
-<p id="appendix-C-1">This appendix contains examples of ML-DSA public keys, private keys and certificates.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">This appendix contains examples of ML-DSA private keys, public keys,
+certificates, and inconsistent seed and expanded private keys.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <div id="example-private">
 <section id="appendix-C.1">
-        <h3 id="name-example-private-key">
-<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-example-private-key" class="section-name selfRef">Example Private Key</a>
+        <h3 id="name-example-private-keys">
+<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-example-private-keys" class="section-name selfRef">Example Private Keys</a>
         </h3>
 <p id="appendix-C.1-1">The following examples show ML-DSA private keys in different formats,
-all derived from the same seed <code>000102…1e1f</code>. For each security level,
+all derived from the same seed <code>000102...1e1f</code>. For each security level,
 we show the seed-only format (using a context-specific <code>[0]</code> primitive
-tag with an implicit encoding of OCTET STRING), the expanded format,
-and both formats together.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+tag with an implicit encoding of <code>OCTET STRING</code>), the <code>expanded</code> format,
+and <code>both</code> formats together.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-2">NOTE: All examples use the same seed value, showing how the same seed
+produces different expanded private keys for each security level.<a href="#appendix-C.1-2" class="pilcrow">¶</a></p>
 <div id="ml-dsa-44-private-key-examples">
 <section id="appendix-C.1.1">
           <h4 id="name-ml-dsa-44-private-key-examp">
 <a href="#appendix-C.1.1" class="section-number selfRef">C.1.1. </a><a href="#name-ml-dsa-44-private-key-examp" class="section-name selfRef">ML-DSA-44 Private Key Examples</a>
           </h4>
+<p id="appendix-C.1.1-1">Each of the examples includes the textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> followed by
+the so-called "pretty print"; the private keys are the same.<a href="#appendix-C.1.1-1" class="pilcrow">¶</a></p>
 <div id="seed-format">
 <section id="appendix-C.1.1.1">
             <h5 id="name-seed-format">
@@ -2495,6 +2528,8 @@ a86be847baeb02c5b216c8cd88fea4df249b09e670a20703abac24b0a91abc4a
           <h4 id="name-ml-dsa-65-private-key-examp">
 <a href="#appendix-C.1.2" class="section-number selfRef">C.1.2. </a><a href="#name-ml-dsa-65-private-key-examp" class="section-name selfRef">ML-DSA-65 Private Key Examples</a>
           </h4>
+<p id="appendix-C.1.2-1">Each of the examples includes the textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> followed by
+the so-called "pretty print"; the private keys are the same.<a href="#appendix-C.1.2-1" class="pilcrow">¶</a></p>
 <div id="seed-format-1">
 <section id="appendix-C.1.2.1">
             <h5 id="name-seed-format-2">
@@ -3010,6 +3045,8 @@ ab3f43f924c2f466097ee8` }
           <h4 id="name-ml-dsa-87-private-key-examp">
 <a href="#appendix-C.1.3" class="section-number selfRef">C.1.3. </a><a href="#name-ml-dsa-87-private-key-examp" class="section-name selfRef">ML-DSA-87 Private Key Examples</a>
           </h4>
+<p id="appendix-C.1.3-1">Each of the examples includes the textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> followed by
+the so-called "pretty print"; the private keys are the same.<a href="#appendix-C.1.3-1" class="pilcrow">¶</a></p>
 <div id="seed-format-2">
 <section id="appendix-C.1.3.1">
             <h5 id="name-seed-format-3">
@@ -3606,7 +3643,6 @@ aa6d9d5a6eb99ae4ddf424` }
 }
 </pre><a href="#appendix-C.1.3.3-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.1.3.3-3">NOTE: All examples use the same seed value, showing how the same seed produces different expanded keys for each security level. The seed-only format is the most compact representation and is <span class="bcp14">RECOMMENDED</span> for storage. The expanded format might be used in constrained environments where key expansion is not desired, and the both format allows for key validation during import.<a href="#appendix-C.1.3.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3615,11 +3651,12 @@ aa6d9d5a6eb99ae4ddf424` }
 </div>
 <div id="example-public">
 <section id="appendix-C.2">
-        <h3 id="name-example-public-key">
-<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-example-public-key" class="section-name selfRef">Example Public Key</a>
+        <h3 id="name-example-public-keys">
+<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-example-public-keys" class="section-name selfRef">Example Public Keys</a>
         </h3>
 <p id="appendix-C.2-1">The following is the ML-DSA-44 public key corresponding to the private
-key in the previous section.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
+key in the previous section. The textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> is
+followed by the so-called "pretty print"; the public keys are the same.<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.2-2">
 <pre>
 -----BEGIN PUBLIC KEY-----
@@ -3706,7 +3743,8 @@ eaeb1c533c06f0d97023d92a70825837b59ba6cb7d4e56b0a87c203862ae8f31
 </pre><a href="#appendix-C.2-3" class="pilcrow">¶</a>
 </div>
 <p id="appendix-C.2-4">The following is the ML-DSA-65 public key corresponding to the private
-key in the previous section.<a href="#appendix-C.2-4" class="pilcrow">¶</a></p>
+key in the previous section.  The textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> is
+followed by the so-called "pretty print"; the public keys are the same.<a href="#appendix-C.2-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.2-5">
 <pre>
 -----BEGIN PUBLIC KEY-----
@@ -3827,7 +3865,8 @@ c46ca5d5a6dca3d28ca50ad18bd13fca55059dd9b185f79f9c47196a4e81b210
 </pre><a href="#appendix-C.2-6" class="pilcrow">¶</a>
 </div>
 <p id="appendix-C.2-7">The following is the ML-DSA-87 public key corresponding to the private
-key in the previous section.<a href="#appendix-C.2-7" class="pilcrow">¶</a></p>
+key in the previous section.  The textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> is
+followed by the so-called "pretty print"; the public keys are the same.<a href="#appendix-C.2-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.2-8">
 <pre>
 -----BEGIN PUBLIC KEY-----
@@ -3989,13 +4028,14 @@ faa00b5d349f8a547ad875b96a8c2b2910c9301309a3f9138a5693111f55b3c0
         </h3>
 <aside id="appendix-C.3-1">
           <p id="appendix-C.3-1.1">The example certificates in this section have key usage bits set to
-digitalSignature, keyCertSign, and cRLSign to lessen the number of
+<code>digitalSignature</code>, <code>keyCertSign</code>, and <code>cRLSign</code> to lessen the number of
 examples, i.e., brevity. Certificate Policies (CPs) <span>[<a href="#RFC3647" class="cite xref">RFC3647</a>]</span>
 for production CAs should consider whether this combination is
 appropriate.<a href="#appendix-C.3-1.1" class="pilcrow">¶</a></p>
 </aside>
 <p id="appendix-C.3-2">The following is a self-signed certificate for the ML-DSA-44 public key in the
-previous section.<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
+previous section. The textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> is followed by the
+so-called "pretty print"; the certificates are the same.<a href="#appendix-C.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.3-3">
 <pre>
 -----BEGIN CERTIFICATE-----
@@ -4294,7 +4334,8 @@ beeef101f232d6e97c2c4dff3f40000000000000000000000000017263843` }
 </pre><a href="#appendix-C.3-4" class="pilcrow">¶</a>
 </div>
 <p id="appendix-C.3-5">The following is a self-signed certificate for the ML-DSA-65 public key in the
-previous section.<a href="#appendix-C.3-5" class="pilcrow">¶</a></p>
+previous section. The textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> is followed by the
+so-called "pretty print"; the certificates are the same.<a href="#appendix-C.3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.3-6">
 <pre>
 -----BEGIN CERTIFICATE-----
@@ -4673,7 +4714,8 @@ b5b0984f0c5ae016c99988f040288a5730de9275dd323c6c57412ec373a49b70
 </pre><a href="#appendix-C.3-7" class="pilcrow">¶</a>
 </div>
 <p id="appendix-C.3-8">The following is a self-signed certificate for the ML-DSA-87 public key in the
-previous section.<a href="#appendix-C.3-8" class="pilcrow">¶</a></p>
+previous section. The textual encoding <span>[<a href="#RFC7468" class="cite xref">RFC7468</a>]</span> is followed by the
+so-called "pretty print"; the certificates are the same.<a href="#appendix-C.3-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.3-9">
 <pre>
 -----BEGIN CERTIFICATE-----
@@ -5154,6 +5196,225 @@ feebe427a13ece5e96fe85cd382b2e10607ab911877ad07e74a200621d3cc2d9
 </div>
 </section>
 </div>
+<div id="example-bad">
+<section id="appendix-C.4">
+        <h3 id="name-example-inconsistent-privat">
+<a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-example-inconsistent-privat" class="section-name selfRef">Example Inconsistent Private Keys</a>
+        </h3>
+<aside id="appendix-C.4-1">
+          <p id="appendix-C.4-1.1">WARNING: These private keys are purposely bad do not use them in
+  production systmes.<a href="#appendix-C.4-1.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="appendix-C.4-2">The following examples demonstrate inconsistent seed and expanded private keys.<a href="#appendix-C.4-2" class="pilcrow">¶</a></p>
+<div id="ml-dsa-inconsistent-seed-and-expanded-private-keys">
+<section id="appendix-C.4.1">
+          <h4 id="name-ml-dsa-inconsistent-seed-an">
+<a href="#appendix-C.4.1" class="section-number selfRef">C.4.1. </a><a href="#name-ml-dsa-inconsistent-seed-an" class="section-name selfRef">ML-DSA Inconsistent Seed and Expanded Private Keys</a>
+          </h4>
+<p id="appendix-C.4.1-1">Three <code>ML-DSA-44-PrivateKey</code> examples of inconsistent seed and
+expanded private keys follow:<a href="#appendix-C.4.1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="appendix-C.4.1-2">
+<li id="appendix-C.4.1-2.1">
+              <p id="appendix-C.4.1-2.1.1">The first <code>ML-DSA-PrivateKey</code> example includes the <code>both CHOICE</code> , i.e., both <code>seed</code> and <code>expandedKey</code> are included. The <code>seed</code> and <code>expanded</code> values can be checked for inconsistencies.<a href="#appendix-C.4.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="appendix-C.4.1-2.2">
+              <p id="appendix-C.4.1-2.2.1">The second <code>ML-DSA-PrivateKey</code> example includes only <code>expandedKey</code>.  The public key fails to match the <code>tr</code> hash value in the private key.<a href="#appendix-C.4.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="appendix-C.4.1-2.3">
+              <p id="appendix-C.4.1-2.3.1">The third <code>ML-DSA-PrivateKey</code> example also includes only <code>expandedKey</code>. The private <code>s_1</code> and <code>s_2</code> vectors imply a <code>t</code> vector whose private low bits do not match the <code>t_0</code> vector portion of the private key (its high bits <code>t_1</code> are the primary content of the public key).<a href="#appendix-C.4.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+<p id="appendix-C.4.1-3">The second and third examples would not be detected by implementations
+that do not regenerate the public key from the private key, or neglect to
+then check consistency of <code>tr</code> or <code>t_0</code>.<a href="#appendix-C.4.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-C.4.1-4">The following is the first example:<a href="#appendix-C.4.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.4.1-5">
+<pre>
+-----BEGIN PRIVATE KEY-----
+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
+-----END PRIVATE KEY-----
+</pre><a href="#appendix-C.4.1-5" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.4.1-6">The following is the second example:<a href="#appendix-C.4.1-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.4.1-7">
+<pre>
+-----BEGIN PRIVATE KEY-----
+MIIKGAIBADALBglghkgBZQMEAxEEggoEBIIKANeytHJUquDbReeTDUqY0sl9jxOX
+0Xidr6FwJLMW6b7JOc4Pf3f421ZE3No2a/5HNL2V9DX/mmE6pUqkHCxpTAQzmgex
++rtI9SownxGhiY+EjiMi/+Yj7IENs77jNoWFSogmnaMg1RIL/P6JoY4w9xFNg6pA
+SmRrbJlziYYNElIu4ABuI4SBkYZhmyYNEYZk1KYoIhhEgkAomBRhSKZhTEJIoZII
+wjgpUSRICKElwggxCMRxIBQJFINsGKeAhBBuycBwIrVkCLBhDAcEmBJEUYhpWQBG
+IpMgQQYuQrZMARZJFChMQahRgEYKURZRWgggAiJE3JhJ0TJR4TBl08CFkqhREqFk
+ADkiCUZiHMcM2Qht0AYmUkCFgEQwkQYsUMgJJMWEGpZtSpgsmQZtpEQyIKdkWjJu
+EbVwIJJhJBOOBIUsCkhyyKBR0wgqmSCAWCQgJAdOWRSIEKRkYMBt4LKNGxkJIDQi
+wCRBCUNxCiEgYaIBUiJSG4CAmjQAE5NN0zIpIhcKmJJpGhRRICchnMAgYqKBSBhp
+GoVNg0RpWyBBAxJCyxhGAakNDAIxg7AhWiJKyJIF2ZBpBDBqSwZK0rIBHEBAgUIy
+UjJyVKZAWhgQDDISksKAUhJiXIIoC7RsA0KNUxAMFAEO4TZSiIQkkQIKY0YmIAYp
+EcIo0CBIArNsojYJWoZIy7Rhi0ZixECCGokJEAJNJLJFIBIlJMkFiCiMycBNWUgi
+CiduwTRkTJBgW0RQgoZJQ4gEQ7KMYDCAoogthKRtjKYp0MaEQgZGiYhRAKmNAUmN
+5DgNpAaN05RxQrJsGoRhG6MoQrQoCKBxGsUx4KBMATdlJChiFCiQCRBh2UAiGzNg
+CQKS0CSBIAQISRhEoyItXIhEFJgIpEZhAZVkCzkKDJRQykBq0rIgwDgBgjCOE7kI
+kYCEFIgpwBiREjUNoCQi4gQG2cKFBCgSHMmJGAJy0kApwggS2AYqmZRxm7hoI4Qp
+GiKJFEUR3IJEUJZFDESEwLIEmqYFQ4YsRDJuiEQhIKhMmjBw47gtYyaIAyVJA0OM
+SKgJyhRyUzROEkMIG6cEWTAi2ZSA4jQigUISnDAqlDQmYQRFJCYoE0YJSjJtESgJ
+GLglYigRE0ENQbIRkIRMixISosaIycAwIgYG0hiOhIYwkERSEogx2SBxE8UoQwYO
+AzBgzKaEWCZSTIgBHvclYshf+kOs+kkhfysXLXu8FGIObZgKcaq73wxF6aIG7LFC
+P+4V3swXYBMAFJ2SI81ubG4fqOQfx8ZJOKtokF/T3NpQ2HCC59DXHRvJsrhMhVI8
+qP5srSlK34O+FbEI/3IdDMh7w906dZAYSw6EVmOpH8nhw8U6YdhnQgsE8JI1V1O8
+ZaBjaP1BKV/QmSQTLG+R9nlkwUJnSnJcNDkUxM7PWMB0vK9FWMl795EeB6ptCTjy
+7iuzwajFldY16ENC/eoB3CSyEa0vwoHPd+WREMerxUvwyG1IC5vidkcdydYDzumM
+/as+n8+3A3k1YFSepEUPp7M/uRacRLTSX7nEV/SXkc09oD6slglYE8EFEyzNpOY+
+SSKM0j2KHzeFbxQtk7kNsJ+Cr4kljGOquAR6gMA2yTV+ogRvjcY1TwxSlfNCu0F9
+PP6wsf0zYiwp4Uy72S4TY8ZevUUEt1EjKblnDjLhssZ6VOfxpV+Ln56gToyjpwXm
+KjxeY3N0r7eutt3qYSzeKPAaIC16pONHItJ90/m4mJTQGf1dTXEZ7+NyO7oQTLi7
+CYHgdN46/iANqq6tgmzEXyRNv0Ma+rNO+994JHTS/VcRj2RiFJNO2Zy6OwA+jWej
+g29vGfxBkQzlFj7jrpnrhNUU63YeY2hOpW+XkdLdSqxuYWi5SMgX91oiKssOjNwD
+zEr+j2cVfho2O3+u/58XK5iRNnfFod0IXp7kwiBSwa9YGTEWZz3NO/xfNLhV3MbH
+eIVknp5x9D1K6g9Lcsp+2gV4uhPTGmWNLQYKmmb/ae0b55l6L7HScj04+b+r4Y+O
+ezzakG5Om16ULI6uspYHDr/TZJR6lAzJeL7Wazd0nm1dzXvoxJREDiuEzs/vuYwL
+7fs8QeM1nSzXGX++cgxIqmxrZGXB7mPjVpwq3HREkTcLf3gm/gt3odGdZBAdAyuR
+gQa0LS73N0flYB/kulDyPt5SHwMagX0VKUpDci6DeHhLbbDPG6norpEdkgG5zpzD
+AZxvXCfLmNomFEtkIlp8kysw92Hnii1Zodi4PsY0Si9t1H52VwbQC/SnmmqSbDup
+HYEsjyx5erF5Zwnl0WhWd4KTUp8ChtAVw7U5lhlkKjM+nlk9bj9TU5lCCOnmozKF
+HX9lJSKpKLkX4n4tbUITff4uv6b7HGeybAJUUoaF9+vb4xWmjqotp2noqfQtPmAA
+fHEzCSaywAEtg+rU5P0e2HLM0ZciAdKwJ/NUWsLTDNeLwddA/sy8b8KgRGxuMOrF
+H1ppCYqi1EfyCFtOTkuSzMJpIdLeR4UYzQkM4meuotJ62lf9iLSXbYn7hDzcz0mn
+bKJnnmgBv6f7AxiW+1BilwS5kjk2u13ThTERIcrfsRmV5ZtzA0z2ftA6uBOGdkjQ
+JYKAh+lJqa/Ra5XXLZmx7coleqwTL/t6Bwmu1anA/wX7Dyu/KECe7XtfWAG+lkzt
+AZ4ct4UdOFHxApBnThn/sAizAcSs9kGiuxQhbh1pyr9Ste8idJaw8weZqFXRF/rT
+dEpvozUD6nmLUt3X7lQmYJ2/zT8ME7Fk1sBR9+1KEZcZpxLjiNMoQCCB/xNUtVTS
+wjev7TsVHEuo6fS964SZowZuJrvGnorwid7HFzHR3FKeqxfvc3RzTA/kdUlMg4Nr
+3TSgO5vImRRxYGG/uY7G5hw+1EOO3K8lJDxkcIa56nAYsNmooLAM7LAKveJJjWnC
+M2EBp3LL5PVxUj9RvQWILN81i4ScwUCqH68iQjoShRzg4z/UiXWklZ+lxf5BjJOQ
+gZGrbnQbd7/gLL1pjueVxGbWFWGeZEE4LG6sAYNO6atzzqgLviNceNqRvXm2+C+J
+l4XWhwDTk+Z1wiJNa3oa0hMgSVZ5ra7XAWe1CGZxOlMQnbe299gTBOzf2Dsxmx7y
+SDBrRa0p593Mhj2sVgSLXWnqF1AR92FMAKhqhjzeGHKokyh4uax+GsW9pJl7cgZP
+DNdfTIFOA03hGsuQE89+qSa05+qs4HDHuiGI760uQx4SI9Rd0FxNhAPC5FzuZBPs
+vnUn6HPkVcTmEKYYOarMC9VtJIPnjymLZqR46y9VjLr8qGvoR7rrAsWyFsjNiP6k
+3ySbCeZwogcDq6wksKkavEpWRmAUQroQvs/TCZOIAFHQf1agWpN556jmvv7j8i+q
+EGOY93BgBuQum+HvidJcJy8RqVCVxYfXE3MihN6dvTxyF7BoniHY6w/2lmg=
+-----END PRIVATE KEY-----
+</pre><a href="#appendix-C.4.1-7" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.4.1-8">The following is the third example:<a href="#appendix-C.4.1-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.4.1-9">
+<pre>
+-----BEGIN PRIVATE KEY-----
+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
+-----END PRIVATE KEY-----
+</pre><a href="#appendix-C.4.1-9" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="prehash">
@@ -5194,16 +5455,13 @@ and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 
 <figure id="figure-2">
         <div class="alignLeft art-text artwork" id="appendix-D-8.1">
 <pre>
-ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+ExternalMu-ML-DSA.Prehash(pk, M):
 
-  if |ctx| &gt; 255 then
-    return error  # return an error indication if the context string is
-                  # too long
-  end if
+  # Simplified flow for computing ML-DSA's mu based on Algorithm 2 and 7
+  # of FIPS 204, with ctx being empty string.
+  # M is a bit-string, mu is byte-string.
 
-  M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
-                                                        || ctx) || M
-  mu = H(BytesToBits(H(pk, 64)) || M', 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2)) || M, 64)
   return mu
 </pre>
 </div>
@@ -5218,9 +5476,9 @@ ExternalMu-ML-DSA.Prehash(pk, M, ctx):
 <pre>
 ExternalMu-ML-DSA.Sign(sk, mu):
 
-  if |mu| != 512 then
+  if |mu| != 64 then
     return error  # return an error indication if the input mu is not
-                  # 64 bytes (512 bits).
+                  # 64 bytes.
   end if
 
   rnd = rand(32)  # for the optional deterministic variant,
@@ -5230,11 +5488,20 @@ ExternalMu-ML-DSA.Sign(sk, mu):
                   # generation failed
   end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
-ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
-   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
+    # mu can be passed as an argument instead of M'
+    # defaulting isExternalMu to false means that
+    # this modified version of Sign_internal can be used
+    # in place of the original without interfering with
+    # functioning of pure ML-DSA mode.
+    # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
+  6: if (isExternalMu):
+       mu = M'
+     else:
+       mu = H(BytesToBits(tr) || M', 64)
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
@@ -5242,7 +5509,7 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
         </figcaption></figure>
 </div>
 <p id="appendix-D-11">ExternalMu-ML-DSA requires the public key, or its prehash, as input to
-the pre-digesting function. This assumes the signer generating the
+the <code>Prehash()</code> function. This assumes the signer generating the
 pre-hash is in possession of the public key before signing and is
 different from conventional pre-hashing which only requires the
 message and the hash function as input.<a href="#appendix-D-11" class="pilcrow">¶</a></p>
@@ -5250,9 +5517,9 @@ message and the hash function as input.<a href="#appendix-D-11" class="pilcrow">
 ML-DSA, the cryptographic module extracts the public key hash <code>tr</code> from
 the secret key object, and thus there is no possibility of mismatch
 between <code>tr</code> and <code>sk</code>. In ExternalMu-ML-DSA, the public key or its hash
-needs to be provided to the <code>Prehash()</code> routine indpedendly of the secret
+needs to be provided to the <code>Prehash()</code> routine independently of the secret
 key, and while the exact mechanism by which it is delivered will be
-implementation-specific, it does open a windown for mismatches between
+implementation-specific, it does open a window for mismatches between
 <code>tr</code> and <code>sk</code>. First, this will produce a signature which will fail to
 verify under the intended public key since a compliant <code>Verify()</code> routine
 will independently compute <code>tr</code> from the public key. Implementors should pay careful

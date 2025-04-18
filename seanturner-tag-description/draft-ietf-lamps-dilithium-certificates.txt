@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 19 September 2025                                     S. Turner
+Expires: 20 October 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           18 March 2025
+                                                           18 April 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 September 2025.
+   This Internet-Draft will expire on 20 October 2025.
 
 Copyright Notice
 
@@ -96,12 +96,14 @@ Table of Contents
    Appendix A.  ASN.1 Module
    Appendix B.  Security Strengths
    Appendix C.  Examples
-     C.1.  Example Private Key
+     C.1.  Example Private Keys
        C.1.1.  ML-DSA-44 Private Key Examples
        C.1.2.  ML-DSA-65 Private Key Examples
        C.1.3.  ML-DSA-87 Private Key Examples
-     C.2.  Example Public Key
+     C.2.  Example Public Keys
      C.3.  Example Certificates
+     C.4.  Example Inconsistent Private Keys
+       C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
    Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
    Acknowledgments
    Authors' Addresses
@@ -241,6 +243,10 @@ Table of Contents
        SMIME-CAPS { IDENTIFIED BY id-ml-dsa-87 }
        }
 
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
+
    The identifiers defined in Section 2 can be used as the
    AlgorithmIdentifier in the signatureAlgorithm field in the sequence
    Certificate/CertificateList and the signature field in the sequence
@@ -309,6 +315,10 @@ Table of Contents
      ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
 
      ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
+
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
 
    Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
    encoding of an ML-DSA public key.  When used in a
@@ -397,10 +407,10 @@ Table of Contents
       |  the 2021 ASN.1 syntax [X680].
 
    For ML-DSA private keys, the privateKey field in OneAsymmetricKey
-   contains one of the following CHOICE structures encoded as an OCTET
-   STRING.  The seed format is a fixed 32 bytes for all security levels,
-   while the expandedKey and both formats vary in size by security
-   level:
+   contains one of the following DER-encoded CHOICE structures.  The
+   seed format is a fixed 32 byte OCTET STRING (34 bytes total with the
+   0x8020 tag and length) for all security levels, while the expandedKey
+   and both formats vary in size by security level:
 
    ML-DSA-44-PrivateKey ::= CHOICE {
      seed [0] OCTET STRING (SIZE (32)),
@@ -429,6 +439,10 @@ Table of Contents
          }
      }
 
+      |  NOTE: The above syntax is from [RFC5912] and is compatible with
+      |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
+      |  syntax.
+
    The CHOICE allows three representations of the private key:
 
    1.  The seed format (tag [0]) contains just the 32-byte seed value
@@ -438,27 +452,36 @@ Table of Contents
    2.  The expandedKey format contains the expanded private key that was
        derived from the seed.
 
-   3.  The both format contains both the seed and expanded key, allowing
-       for for interoperability; some may want to use and retain the
-       seed and others may only support expanded keys.
+   3.  The both format contains both the seed and expanded private key,
+       allowing for for interoperability; some may want to use and
+       retain the seed and others may only support expanded private
+       keys.
 
    When encoding an ML-DSA private key in a OneAsymmetricKey object, any
    of these three formats may be used, though the seed format is
    RECOMMENDED for storage efficiency.
 
-   The "privateKeyAlgorithm" field uses the AlgorithmIdentifier
-   structure with the appropriate OID as defined in Section 2.  If
-   present, the "publicKey" field will hold the encoded public key as
-   defined in Section 4.
+   The privateKeyAlgorithm field uses the AlgorithmIdentifier structure
+   with the appropriate OID as defined in Section 2.  If present, the
+   publicKey field will hold the encoded public key as defined in
+   Section 4.
 
    NOTE: While the private key can be stored in multiple formats, the
    seed-only format is RECOMMENDED as it is the most compact
    representation.  Both the expanded private key and the public key can
    be deterministically derived from the seed using ML-
-   DSA.KeyGen_internal(xi).  While the publicKey field and expandedKey
-   format are technically redundant when using the seed-only format,
-   they MAY be included to enable keypair consistency checks during
-   import operations.
+   DSA.KeyGen_internal(xi).  Alternatively, the public key can be
+   generated from the private key.  While the publicKey field and
+   expandedKey format are technically redundant when using the seed-only
+   format, they MAY be included to enable keypair consistency checks
+   during import operations.
+
+   When parsing the private key, the ASN.1 tag explicitly indicates
+   which variant of CHOICE is present.  Implementations should use the
+   context-specific tag IMPLICIT [0] (raw value 0x80) for seed, OCTET
+   STRING (0x04) for expandedKey, and SEQUENCE (0x30) for both to parse
+   the private key, rather than any other heuristic like length of the
+   enclosing OCTET STRING.
 
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
@@ -487,7 +510,7 @@ Table of Contents
    seed discarded, the seed cannot be re-created even if the full
    expanded private key is available.  For this reason it is RECOMMENDED
    that implementations retain and export the seed, even when also
-   exporting the expanded key.  ML-DSA seed extraction can be
+   exporting the expanded private key.  ML-DSA seed extraction can be
    implemented by including the random seed xi generated at line 1 of
    Algorithm 1 ML-DSA.KeyGen in the returned output.
 
@@ -496,9 +519,19 @@ Table of Contents
    When receiving a private key that contains both the seed and the
    expandedKey, the recipient SHOULD perform a seed consistency check to
    ensure that the sender properly generated the private key.
+   Recipients that do not perform this seed consistency check avoid
+   keygen and compare operations, but are unable to ensure that the seed
+   and expandedKey match.
 
    If the check is done and the seed and the expandedKey are not
    consistent, the recipient MUST reject the private key as malformed.
+
+   The seed consistency check consists of regenerating the expanded form
+   from the seed via ML-DSA.KeyGen_internal and ensuring it is bytewise
+   equal to the value presented in the private key.
+
+   Appendix C.4 includes some examples of inconsistent seeds and
+   expanded private keys.
 
 10.  Security Considerations
 
@@ -513,7 +546,7 @@ Table of Contents
 
    ML-DSA offers both deterministic and randomized signing.  By default
    ML-DSA signatures are non-deterministic.  The private random seed
-   (rho') for the signature is pseudorandomly derived from the signer’s
+   (rho') for the signature is pseudorandomly derived from the signer's
    private key, the message, and a 256-bit string, rnd - where rnd
    should be generated by an approved RBG.  In the deterministic
    version, rng is instead a 256-bit constant string.  The source of
@@ -599,7 +632,7 @@ Table of Contents
    algorithms.  Specifically, ML-DSA binds the hash of the public key tr
    to the message to-be-signed prior to hashing, as described in line 6
    of Algorithm 7 of [FIPS204].  In practice, this provides binding to
-   the indended verification public key, preventing some attacks that
+   the intended verification public key, preventing some attacks that
    would otherwise allow a signature to be successfully verified against
    a non-intended public key.  Also, this unlikely, theoretical binding
    means that in the unlikely discovery of a collision attack against
@@ -622,12 +655,6 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
-              Wu, "Internet X.509 Public Key Infrastructure Certificate
-              Policy and Certification Practices Framework", RFC 3647,
-              DOI 10.17487/RFC3647, November 2003,
-              <https://www.rfc-editor.org/rfc/rfc3647>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -688,6 +715,12 @@ Table of Contents
               "Post-Quantum Cryptography Project", 20 December 2016,
               <https://csrc.nist.gov/Projects/post-quantum-
               cryptography>.
+
+   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
+              Wu, "Internet X.509 Public Key Infrastructure Certificate
+              Policy and Certification Practices Framework", RFC 3647,
+              DOI 10.17487/RFC3647, November 2003,
+              <https://www.rfc-editor.org/rfc/rfc3647>.
 
    [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
               PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,
@@ -882,21 +915,24 @@ Appendix B.  Security Strengths
 
 Appendix C.  Examples
 
-   This appendix contains examples of ML-DSA public keys, private keys
-   and certificates.
+   This appendix contains examples of ML-DSA private keys, public keys,
+   certificates, and inconsistent seed and expanded private keys.
 
-C.1.  Example Private Key
+C.1.  Example Private Keys
 
    The following examples show ML-DSA private keys in different formats,
-   all derived from the same seed 000102…1e1f.  For each security level,
-   we show the seed-only format (using a context-specific [0] primitive
-   tag with an implicit encoding of OCTET STRING), the expanded format,
-   and both formats together.
+   all derived from the same seed 000102...1e1f.  For each security
+   level, we show the seed-only format (using a context-specific [0]
+   primitive tag with an implicit encoding of OCTET STRING), the
+   expanded format, and both formats together.
 
    NOTE: All examples use the same seed value, showing how the same seed
-   produces different expanded keys for each security level.
+   produces different expanded private keys for each security level.
 
 C.1.1.  ML-DSA-44 Private Key Examples
+
+   Each of the examples includes the textual encoding [RFC7468] followed
+   by the so-called "pretty print"; the private keys are the same.
 
 C.1.1.1.  Seed Format
 
@@ -1220,6 +1256,9 @@ C.1.1.3.  Both Format
    }
 
 C.1.2.  ML-DSA-65 Private Key Examples
+
+   Each of the examples includes the textual encoding [RFC7468] followed
+   by the so-called "pretty print"; the private keys are the same.
 
 C.1.2.1.  Seed Format
 
@@ -1697,6 +1736,9 @@ C.1.2.3.  Both Format
    }
 
 C.1.3.  ML-DSA-87 Private Key Examples
+
+   Each of the examples includes the textual encoding [RFC7468] followed
+   by the so-called "pretty print"; the private keys are the same.
 
 C.1.3.1.  Seed Format
 
@@ -2263,10 +2305,12 @@ C.1.3.3.  Both Format
      }
    }
 
-C.2.  Example Public Key
+C.2.  Example Public Keys
 
    The following is the ML-DSA-44 public key corresponding to the
-   private key in the previous section.
+   private key in the previous section.  The textual encoding [RFC7468]
+   is followed by the so-called "pretty print"; the public keys are the
+   same.
 
    -----BEGIN PUBLIC KEY-----
    MIIFMjALBglghkgBZQMEAxEDggUhANeytHJUquDbReeTDUqY0sl9jxOX0Xidr6Fw
@@ -2348,7 +2392,9 @@ C.2.  Example Public Key
    }
 
    The following is the ML-DSA-65 public key corresponding to the
-   private key in the previous section.
+   private key in the previous section.  The textual encoding [RFC7468]
+   is followed by the so-called "pretty print"; the public keys are the
+   same.
 
    -----BEGIN PUBLIC KEY-----
    MIIHsjALBglghkgBZQMEAxIDggehAEhoPZGXjjHrPd24sEc0gtK4il9iWUn9j1il
@@ -2464,7 +2510,9 @@ C.2.  Example Public Key
    }
 
    The following is the ML-DSA-87 public key corresponding to the
-   private key in the previous section.
+   private key in the previous section.  The textual encoding [RFC7468]
+   is followed by the so-called "pretty print"; the public keys are the
+   same.
 
    -----BEGIN PUBLIC KEY-----
    MIIKMjALBglghkgBZQMEAxMDggohAJeSvOwvJDBoaoL8zzwvX/Zl53HXq0G5AljP
@@ -2621,7 +2669,9 @@ C.3.  Example Certificates
       |  combination is appropriate.
 
    The following is a self-signed certificate for the ML-DSA-44 public
-   key in the previous section.
+   key in the previous section.  The textual encoding [RFC7468] is
+   followed by the so-called "pretty print"; the certificates are the
+   same.
 
    -----BEGIN CERTIFICATE-----
    MIIPlDCCBgqgAwIBAgIUFZ/+byL9XMQsUk32/V4o0N44804wCwYJYIZIAWUDBAMR
@@ -2915,7 +2965,9 @@ C.3.  Example Certificates
    }
 
    The following is a self-signed certificate for the ML-DSA-65 public
-   key in the previous section.
+   key in the previous section.  The textual encoding [RFC7468] is
+   followed by the so-called "pretty print"; the certificates are the
+   same.
 
    -----BEGIN CERTIFICATE-----
    MIIVjTCCCIqgAwIBAgIUFZ/+byL9XMQsUk32/V4o0N44804wCwYJYIZIAWUDBAMS
@@ -3289,7 +3341,9 @@ C.3.  Example Certificates
    }
 
    The following is a self-signed certificate for the ML-DSA-87 public
-   key in the previous section.
+   key in the previous section.  The textual encoding [RFC7468] is
+   followed by the so-called "pretty print"; the certificates are the
+   same.
 
    -----BEGIN CERTIFICATE-----
    MIIdMzCCCwqgAwIBAgIUFZ/+byL9XMQsUk32/V4o0N44804wCwYJYIZIAWUDBAMT
@@ -3763,6 +3817,215 @@ C.3.  Example Certificates
    0000000000000000000000000000000000000000000040c12151d1e252c` }
    }
 
+C.4.  Example Inconsistent Private Keys
+
+      |  WARNING: These private keys are purposely bad do not use them
+      |  in production systmes.
+
+   The following examples demonstrate inconsistent seed and expanded
+   private keys.
+
+C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
+
+   Three ML-DSA-44-PrivateKey examples of inconsistent seed and expanded
+   private keys follow:
+
+   1.  The first ML-DSA-PrivateKey example includes the both CHOICE ,
+       i.e., both seed and expandedKey are included.  The seed and
+       expanded values can be checked for inconsistencies.
+
+   2.  The second ML-DSA-PrivateKey example includes only expandedKey.
+       The public key fails to match the tr hash value in the private
+       key.
+
+   3.  The third ML-DSA-PrivateKey example also includes only
+       expandedKey.  The private s_1 and s_2 vectors imply a t vector
+       whose private low bits do not match the t_0 vector portion of the
+       private key (its high bits t_1 are the primary content of the
+       public key).
+
+   The second and third examples would not be detected by
+   implementations that do not regenerate the public key from the
+   private key, or neglect to then check consistency of tr or t_0.
+
+   The following is the first example:
+
+   -----BEGIN PRIVATE KEY-----
+   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
+   -----END PRIVATE KEY-----
+
+   The following is the second example:
+
+   -----BEGIN PRIVATE KEY-----
+   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
+   -----END PRIVATE KEY-----
+
+   The following is the third example:
+
+   -----BEGIN PRIVATE KEY-----
+   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
+   -----END PRIVATE KEY-----
+
 Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
 
    Some applications require pre-hashing, where the signature generation
@@ -3801,27 +4064,24 @@ Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
 
    External operations:
 
- ExternalMu-ML-DSA.Prehash(pk, M, ctx):
+ExternalMu-ML-DSA.Prehash(pk, M):
 
-   if |ctx| > 255 then
-     return error  # return an error indication if the context string is
-                   # too long
-   end if
+  # Simplified flow for computing ML-DSA's mu based on Algorithm 2 and 7
+  # of FIPS 204, with ctx being empty string.
+  # M is a bit-string, mu is byte-string.
 
-   M' = BytesToBits(IntegerToBytes(0, 1) ∥ IntegerToBytes(|ctx|, 1)
-                                                         || ctx) || M
-   mu = H(BytesToBits(H(pk, 64)) || M', 64)
-   return mu
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2)) || M, 64)
+  return mu
 
-             Figure 2: External steps of ExternalMu-ML-DSA
+            Figure 2: External steps of ExternalMu-ML-DSA
 
    Internal operations:
 
 ExternalMu-ML-DSA.Sign(sk, mu):
 
-  if |mu| != 512 then
+  if |mu| != 64 then
     return error  # return an error indication if the input mu is not
-                  # 64 bytes (512 bits).
+                  # 64 bytes.
   end if
 
   rnd = rand(32)  # for the optional deterministic variant,
@@ -3831,17 +4091,26 @@ ExternalMu-ML-DSA.Sign(sk, mu):
                   # generation failed
   end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)
+  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
-ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead of M'
-   ... identical to FIPS 204 Algorithm 7, but with Line 6 removed.
+ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
+    # mu can be passed as an argument instead of M'
+    # defaulting isExternalMu to false means that
+    # this modified version of Sign_internal can be used
+    # in place of the original without interfering with
+    # functioning of pure ML-DSA mode.
+    # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
+  6: if (isExternalMu):
+       mu = M'
+     else:
+       mu = H(BytesToBits(tr) || M', 64)
 
             Figure 3: Internal steps of ExternalMu-ML-DSA
 
    ExternalMu-ML-DSA requires the public key, or its prehash, as input
-   to the pre-digesting function.  This assumes the signer generating
-   the pre-hash is in possession of the public key before signing and is
+   to the Prehash() function.  This assumes the signer generating the
+   pre-hash is in possession of the public key before signing and is
    different from conventional pre-hashing which only requires the
    message and the hash function as input.
 
@@ -3849,15 +4118,15 @@ ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd): # mu is passed as argument instead
    ML-DSA, the cryptographic module extracts the public key hash tr from
    the secret key object, and thus there is no possibility of mismatch
    between tr and sk.  In ExternalMu-ML-DSA, the public key or its hash
-   needs to be provided to the Prehash() routine indpedendly of the
+   needs to be provided to the Prehash() routine independently of the
    secret key, and while the exact mechanism by which it is delivered
-   will be implementation-specific, it does open a windown for
-   mismatches between tr and sk.  First, this will produce a signature
-   which will fail to verify under the intended public key since a
-   compliant Verify() routine will independently compute tr from the
-   public key.  Implementors should pay careful attention to how the
-   public key or its hash is delivered to the ExternalMu-ML-
-   DSA.Prehash() routine, and from where they are sourcing this data.
+   will be implementation-specific, it does open a window for mismatches
+   between tr and sk.  First, this will produce a signature which will
+   fail to verify under the intended public key since a compliant
+   Verify() routine will independently compute tr from the public key.
+   Implementors should pay careful attention to how the public key or
+   its hash is delivered to the ExternalMu-ML-DSA.Prehash() routine, and
+   from where they are sourcing this data.
 
 Acknowledgments
 
