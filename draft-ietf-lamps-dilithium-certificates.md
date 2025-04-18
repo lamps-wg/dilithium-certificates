@@ -541,7 +541,7 @@ format, they MAY be included to enable keypair consistency checks during
 import operations.
 
 When parsing the private key, the ASN.1 tag explicitly indicates which
-variant of `CHOICE` is present. Implementations should use tag `UNIVERSAL IMPLICIT [0]`
+variant of `CHOICE` is present. Implementations should use the context-specific tag `IMPLICIT [0]`
 (raw value `0x80`) for `seed`, `OCTET STRING` (`0x04`) for `expandedKey`, and
 `SEQUENCE` (`0x30`) for `both` to parse the private key, rather than any
 other heuristic like length of the enclosing `OCTET STRING`.
