@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 22 October 2025                                       S. Turner
+Expires: 23 October 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           20 April 2025
+                                                           21 April 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 October 2025.
+   This Internet-Draft will expire on 23 October 2025.
 
 Copyright Notice
 
@@ -477,11 +477,11 @@ Table of Contents
    during import operations.
 
    When parsing the private key, the ASN.1 tag explicitly indicates
-   which variant of CHOICE is present.  Implementations should use tag
-   UNIVERSAL IMPLICIT [0] (raw value 0x80) for seed, OCTET STRING (0x04)
-   for expandedKey, and SEQUENCE (0x30) for both to parse the private
-   key, rather than any other heuristic like length of the enclosing
-   OCTET STRING.
+   which variant of CHOICE is present.  Implementations should use the
+   context-specific tag IMPLICIT [0] (raw value 0x80) for seed, OCTET
+   STRING (0x04) for expandedKey, and SEQUENCE (0x30) for both to parse
+   the private key, rather than any other heuristic like length of the
+   enclosing OCTET STRING.
 
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
@@ -4131,8 +4131,9 @@ ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
 Acknowledgments
 
    The authors wish to thank the following people for their
-   contributions to this document: Deirdre Connolly, Viktor Dukhovni,
-   Russ Housley, Alicja Kario, Mike Ounsworth, and Daniel Van Geest.
+   contributions to this document: Corey Bonnell, Dierdre Connolly,
+   Viktor Dukhovni, Russ Housley, Alicja Kario, Mike Ounsworth, and
+   Daniel Van Geest.
 
    In addition, we would like to thank those who contributed to the
    private key format discussion: Tony Arcieri, Bob Beck, Dmitry
