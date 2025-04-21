@@ -1133,7 +1133,7 @@ Also, External Mu does not allow for optimization of "multiple signature" scheme
 where the same message digest is signed by multiple public keys unless this
 pre-hashing is done at the application layer.
 And finally, `ComputeMu()` requires SHAKE256 which may not be available
-in the component performing the pre-hash, particularly during the early years 
+in the component performing the pre-hash, particularly during the early years
 of ML-DSA adoption.
 
 
@@ -1143,7 +1143,7 @@ of ML-DSA adoption.
 Security-wise, during the signing operation of pure (or "one-step")
 ML-DSA, the cryptographic module extracts the public key hash `tr` from
 the secret key object, and thus there is no possibility of mismatch
-between `tr` and `sk`. 
+between `tr` and `sk`.
 
 In External Mu mode, the public key or its hash
 needs to be provided to the `ComupteMu()` routine independently of the secret
