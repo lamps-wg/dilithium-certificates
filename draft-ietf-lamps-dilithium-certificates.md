@@ -138,6 +138,12 @@ informative:
     author:
     - org: National Institute of Standards and Technology (NIST)
     date: 2016-12-20
+ FIPS204-ExternalMuFAQ:
+  title: FIPS 204 Section 6 FAQ
+  author:
+  - org: National Institute of Standards and Technology (NIST)
+  date:
+  target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
 
 --- abstract
 
@@ -164,7 +170,7 @@ levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
 Only the former is specified in this document.
 See {{sec-disallow-hash}} for the rationale.
 The pure variant of ML-DSA supports the typical prehash flow,
-see {{prehash}}. In short: one cryptographic module can compute the hash *mu*
+see {{externalmu}}. In short: one cryptographic module can compute the hash *mu*
 on line 6 of algorithm 7 of {{FIPS204}} and pass it to a second module
 to finish the signature. The first module only needs access to the full
 message and the public key, whereas the second module only needs access
@@ -684,12 +690,8 @@ need to commit a given public key to be either of type `ML-DSA` or
 `HashML-DSA` at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
 know at key generation time whether the key will need to produce pure
-or pre-hashed signatures. ExternalMu-ML-DSA avoids all of these
-operational concerns by virtue of having keys and signatures that are
-indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
-mathematically equivalent algorithms). The difference between ML-DSA
-and ExternalMu-ML-DSA is merely an internal implementation detail of
-the signer and has no impact on the verifier or network protocol.
+or pre-hashed signatures. The External Mu mode described in {{externalmu}}
+avoids all of these operational concerns.
 
 The security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against signature
@@ -997,60 +999,80 @@ The following is the third example:
 ~~~
 
 
-# Pre-hashing (ExternalMu-ML-DSA) {#prehash}
+# Pre-hashing via External Mu {#externalmu}
 
 Some applications require pre-hashing, where the signature generation
-process can be separated into a pre-hash step and a core signature
-step in order to ease operational requirements around large or
-inconsistently-sized payloads. Pre-hashing can be performed at the
-protocol layer, but not all protocols support it. Examples in
-{{RFC5280}} are certificates and CRLs; these do not include message
-digesting before signing. This can make signing large CRLs or a high
-volume of certificates with large public keys challenging.
+process can be separated into a pre-hash step requiring only the message,
+context value, and other public information, and a core signature
+step requiring the secret key in order to ease operational requirements around large or
+inconsistently-sized payloads.
 
-As mentioned in the introduction, pure ML-DSA signing itself
-supports a pre-hashing flow by splitting the operation over two
-modules. In this section, we make this "ExternalMu-ML-DSA"
-more explicit.
+Prehashing can be performed with the HashML-DSA algorithm defined in Section 5.4 of {{FIPS204}}
+however the HashML-DSA algorithm comes with a few disadvantages.
+First, there is a small performance disadvantage in that the pre-hashing step
+needs to be done in addition to the message digesting internal to `ML-DSA.Sign()`.
+Second and more importantly, ML-DSA and HashML-DSA require different `Verify()` routines.
+To address this problem, the NIST Computer Security Objects Register (CSOR)
+has assigned different Object Identifiers (OIDs) to ML-DSA and HashML-DSA.
+This can pose problematic for certain deployments, for example if the
+ML-DSA public is bound to either the ML-DSA or HashML-DSA OID at key generation
+time, for example in an X.509 certificate, then this prevents that key
+from being able to sometimes prehash and sometimes not depending on application need.
+It also poses a potential problem for applications that pin a public key without the OID
+and cannot reliably or securily communicate to the verifier whether to use
+`ML-DSA.Verify()` or `HashML-DSA.Verify()`.
+Worse, this may encourage impmelenters to treat the OIDs for `ML-DSA` and `HashML-DSA`
+as interchangeable, thus introducing further interoperability and security issues not
+discussed here.
+And finally, HashML-DSA reduces the binding and signature collision resistance
+security properties of ML-DSA. The ML-DSA algorithm concatenates both the
+hash of the public key and the `ctx` value to the raw message `M` before performing any
+message digesting. This means that any attempt to construct a signature collision,
+i.e. a pair of messages `M1` and `M2` that will both appear valid under the same signature,
+will need to construct those messages against a specific ML-DSA verification public key
+and `ctx` value. This is a meaningful security improvement in the design of ML-DSA
+compared to RSA and elliptic curve signature algorithms. HashML-DSA reverses these
+security features of ML-DSA by sticking in front a simple pre-hash such that a collision
+in the pre-hash automatically gives a collision in the signature.
 
-There are two steps. First an `ExternalMu-ML-DSA.Prehash()`
-followed by `ExternalMu-ML-DSA.Sign()`. Together these are functionally
-equivalent to `ML-DSA.Sign()` from {{FIPS204}} in that used in sequence
-they create exactly the same signatures as regular pure ML-DSA, which
-can be verified by the unmodified `ML-DSA.Verify()`.
+Fortunately, {{FIPS204}}, further strengthened and clarified by the accompanying FAQ {{FIPS204-ExternalMuFAQ}}
+provides another option for ML-DSA pre-hashing which is to perform the computation
+of the message digest µ (romanized as "mu") outside of `ML-DSA.Sign()` as a prehash step performed
+by a second cooperating cryptographic module which does not have access to the secret signig key,
+and which either directly invokes `ML-DSA.Sign()` in the cryptographic module which posesses the
+secret key, or which returns mu to the calling application.
 
-An ML-DSA key and certificate can be used with either ML-DSA
-or ExternalMu-ML-DSA interchangeably.
-Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA
-and therefore might require explicit support from hardware or
-software cryptographic modules.
+Implementations of ML-DSA using the External Mu pre-hashing mode requires the following
+algorithms, which are modified versions of the algorithms presented in {{FIPS204}}.
+The nomenclature used here has been modified from the NIST FAQ {{FIPS204-ExternalMuFAQ}}
+for clarity.
 
-Note that the signing mode defined here is different from HashML-DSA
-defined in Section 5.4 of {{FIPS204}}. This specification uses exclusively
-ExternalMu-ML-DSA for pre-hashed use cases. See {{sec-disallow-hash}} for
-additional discussion of why HashML-DSA is disallowed in PKIX.
 
-All functions and notation used in {{fig-externalmu-ml-dsa-external}}
-and {{fig-externalmu-ml-dsa-internal}} are defined in {{FIPS204}}.
-
-External operations:
+Pre-hash operation:
 
 ~~~
-ExternalMu-ML-DSA.Prehash(pk, M):
+ComputeMu(pk, M, ctx):
 
-  # Simplified flow for computing ML-DSA's mu based on Algorithm 2 and 7
-  # of FIPS 204, with ctx being empty string.
-  # M is a bit-string, mu is byte-string.
+  # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
+  # in the FIPS 204 FAQ.
+  # M is a bit-string, mu and ctx are byte-strings.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2)) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) ∥ ctx) || M, 64)
   return mu
 ~~~
-{: #fig-externalmu-ml-dsa-external title="External steps of ExternalMu-ML-DSA"}
+{: #fig-externalmu-ml-dsa-external title="ComputeMu prehash operation"}
 
-Internal operations:
+The functions `BytesToBits` and `IntegerToBytes` are defined in {{FIPS204}}.
+
+
+
+Sign operations:
 
 ~~~
-ExternalMu-ML-DSA.Sign(sk, mu):
+SignMu(sk, mu):
+
+  # Referred to as 'ExternalMu-ML-DSA.Sign(sk, mu)'
+  # in the FIPS 204 FAQ.
 
   if |mu| != 64 then
     return error  # return an error indication if the input mu is not
@@ -1064,10 +1086,11 @@ ExternalMu-ML-DSA.Sign(sk, mu):
                   # generation failed
   end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
+  sigma = SignMu_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
-ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
+
+ML-DSA.SignMu_internal(sk, M', rnd, isExternalMu=false):
     # mu can be passed as an argument instead of M'
     # defaulting isExternalMu to false means that
     # this modified version of Sign_internal can be used
@@ -1079,27 +1102,61 @@ ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
      else:
        mu = H(BytesToBits(tr) || M', 64)
 ~~~
-{: #fig-externalmu-ml-dsa-internal title="Internal steps of ExternalMu-ML-DSA"}
+{: #fig-externalmu-ml-dsa-internal title="The operations for signing mu"}
 
-ExternalMu-ML-DSA requires the public key, or its prehash, as input to
-the `Prehash()` function. This assumes the signer generating the
-pre-hash is in possession of the public key before signing and is
-different from conventional pre-hashing which only requires the
-message and the hash function as input.
+
+
+
+External Mu mode of ML-DSA has the following advantage and disadvantages.
+
+The main advantage is that External Mu mode is simply an alternate API for
+`ML-DSA.Sign()` rather than a separate algorithm.
+In other words, given an ML-DSA signature, it is indistiguishable
+whether it was generated by the regular "one-shot" `ML-DSA.Sign()` API
+or the two-step `ComputeMu()` and `SignMu()` API.
+There is no need to specify an External Mu `Verify()` routine because
+this is identical to the original `ML-DSA.Verify()`.
+This makes External Mu mode simply an internal optimization of the signer, and
+allows an ML-DSA key to sometimes be used with the "one-shot" `Sign()`
+API and sometimes the External Mu API without any of the interoperability
+or security concens that come with HashML-DSA and allows an ML-DSA certificate
+to be freely used with "one-shot" or External Mu signing APIs.
+
+
+The main disadvantage of External Mu mode are that it requires the
+pre-hash routine to have access to the hash of the signer's public key,
+which may not be available in some architectures, or the act of fetching it
+over the network may negate any performance improvements gained by pre-hashing.
+Failing to retreive the correct public key hash will result in signatures which
+cannot be verified.
+Also, External Mu does not allow for optimization of "multiple signature" schemes
+where the same message digest is signed by multiple public keys unless this
+pre-hashing is done at the application layer.
+And finally, `ComputeMu()` requires SHAKE256 which may not be available
+in the component performing the pre-hash, particularly during the early years 
+of ML-DSA adoption.
+
+
+
+## Security Considerations of External Mu
 
 Security-wise, during the signing operation of pure (or "one-step")
 ML-DSA, the cryptographic module extracts the public key hash `tr` from
 the secret key object, and thus there is no possibility of mismatch
-between `tr` and `sk`. In ExternalMu-ML-DSA, the public key or its hash
-needs to be provided to the `Prehash()` routine independently of the secret
+between `tr` and `sk`. 
+
+In External Mu mode, the public key or its hash
+needs to be provided to the `ComupteMu()` routine independently of the secret
 key, and while the exact mechanism by which it is delivered will be
 implementation-specific, it does open a window for mismatches between
-`tr` and `sk`. First, this will produce a signature which will fail to
+`tr` and `sk`. It is believed that at worst this will produce a signature which will fail to
 verify under the intended public key since a compliant `Verify()` routine
-will independently compute `tr` from the public key. Implementors should pay careful
-attention to how the public key or its hash is delivered to the
-`ExternalMu-ML-DSA.Prehash()` routine, and from where they are sourcing
-this data.
+will independently compute `tr` from the public key.
+This is not believed to be a security concern since `mu` is never used directly
+within `ML-DSA.Sign_internal()` (Algorithm 7 in {{FIPS204}}), but rather
+`mu` is further hashed with values unknown to an attacker on lines 7 and 15.
+Thus a signing oracle exposing `SignMu()` does not leak any bits of the secret
+key.
 
 # Acknowledgments
 {:numbered="false"}
