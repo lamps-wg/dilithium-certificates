@@ -138,12 +138,12 @@ informative:
     author:
     - org: National Institute of Standards and Technology (NIST)
     date: 2016-12-20
- FIPS204-ExternalMuFAQ:
-  title: FIPS 204 Section 6 FAQ
-  author:
-  - org: National Institute of Standards and Technology (NIST)
-  date:
-  target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
+  FIPS204-ExternalMuFAQ:
+    title: FIPS 204 Section 6 FAQ
+    author:
+    - org: National Institute of Standards and Technology (NIST)
+    date:
+    target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
 
 --- abstract
 
@@ -1003,28 +1003,29 @@ The following is the third example:
 
 Some applications require pre-hashing, where the signature generation
 process can be separated into a pre-hash step requiring only the message,
-context value, and other public information, and a core signature
+context value, other public information, and then a core signature
 step requiring the secret key in order to ease operational requirements around large or
 inconsistently-sized payloads.
 
 Prehashing can be performed with the HashML-DSA algorithm defined in Section 5.4 of {{FIPS204}}
 however the HashML-DSA algorithm comes with a few disadvantages.
-First, there is a small performance disadvantage in that the pre-hashing step
-needs to be done in addition to the message digesting internal to `ML-DSA.Sign()`.
-Second and more importantly, ML-DSA and HashML-DSA require different `Verify()` routines.
+First, ML-DSA and HashML-DSA require different `Verify()` routines.
 To address this problem, the NIST Computer Security Objects Register (CSOR)
 has assigned different Object Identifiers (OIDs) to ML-DSA and HashML-DSA.
 This can pose problematic for certain deployments, for example if the
 ML-DSA public is bound to either the ML-DSA or HashML-DSA OID at key generation
-time, for example in an X.509 certificate, then this prevents that key
-from being able to sometimes prehash and sometimes not depending on application need.
-It also poses a potential problem for applications that pin a public key without the OID
-and cannot reliably or securily communicate to the verifier whether to use
-`ML-DSA.Verify()` or `HashML-DSA.Verify()`.
+time, for example in an X.509 certificate, then this prevents context-dependant
+switching between producing ML-DSA and HashML-DSA signatures for example depending
+on the size of the message being signed or to optimize the backend implementation
+of the cryptographic module holding the private key.
+It also poses a potential problem for applications that pin a bare public key
+such that the verifier cannot reliably or securely know whether to use
+`ML-DSA.Verify()` or `HashML-DSA.Verify()`, for example when using a protocol
+where the signature algorithm is carried outside the protected content envelope.
 Worse, this may encourage impmelenters to treat the OIDs for `ML-DSA` and `HashML-DSA`
 as interchangeable, thus introducing further interoperability and security issues not
 discussed here.
-And finally, HashML-DSA reduces the binding and signature collision resistance
+And second, HashML-DSA reduces the binding and signature collision resistance
 security properties of ML-DSA. The ML-DSA algorithm concatenates both the
 hash of the public key and the `ctx` value to the raw message `M` before performing any
 message digesting. This means that any attempt to construct a signature collision,
