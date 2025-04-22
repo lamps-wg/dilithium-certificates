@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-20T01:03:50.567881+00:00",
+  "timestamp": "2025-04-22T00:59:39.319385+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1450,7 +1450,7 @@
       "labels": [],
       "body": "I didn't want to make a PR on this as I'm not 100% sure I understand the language, so I'll make the issue instead.\n\nIn appendix D you have both \"external operations\" and \"internal operations\" -- my understanding is external ones are exposed by the API whilst internal ones.... are not!\n\nYou currently list `ExternalMu-ML-DSA.Prehash(pk, M, ctx)` as *external* with `ExternalMu-ML-DSA.Sign(sk, mu)` and `ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)` as *internal*. \n\nMy reading of this would be that `ExternalMu-ML-DSA.Sign(sk, mu)` should be an external operation in that it needs to be exposed at the API level, but maybe I am misunderstanding what internal/external means in this context",
       "createdAt": "2025-03-25T21:13:05Z",
-      "updatedAt": "2025-04-10T13:19:13Z",
+      "updatedAt": "2025-04-21T02:10:31Z",
       "closedAt": null,
       "comments": [
         {
@@ -1459,6 +1459,13 @@
           "body": "@ounsworth PTAL",
           "createdAt": "2025-04-10T13:19:12Z",
           "updatedAt": "2025-04-10T13:19:12Z"
+        },
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yup, fair point. \"Internal\" / \"External\" is weird and confusing here. Thanks for the observation!\n\nI'll just change that to \"Pre-hash operations\" and \"Sign operations\".",
+          "createdAt": "2025-04-21T02:10:30Z",
+          "updatedAt": "2025-04-21T02:10:30Z"
         }
       ]
     },
@@ -8938,24 +8945,26 @@
       "id": "PR_kwDOIEpj4c6THsuf",
       "title": "Fix Tag description",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/126",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "seanturner",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Tag for `seed` is not UNIVERSAL.",
       "createdAt": "2025-04-18T13:04:09Z",
-      "updatedAt": "2025-04-18T21:30:49Z",
+      "updatedAt": "2025-04-21T14:40:22Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
-      "baseRefOid": "36c6d11a76ec03b2df6431d6db2a436c5030f7ff",
+      "baseRefOid": "2f51007e4bd6e3c5d5b2561f9a6f0245fea26140",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "seanturner-tag-description",
-      "headRefOid": "6b4028f43df2bbdb2aa0f1b55fb55363d75b3d30",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "76ab1a93c79ce6eba4c30106ab2adc23d853aa0d",
+      "closedAt": "2025-04-21T14:40:22Z",
+      "mergedAt": "2025-04-21T14:40:22Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "cc4a78d3b31c7caf8fc1c3b766062f833b034ec5"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8964,7 +8973,7 @@
             "abbreviatedOid": "1d4d943"
           },
           "author": "CBonnell",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-04-18T13:41:07Z",
@@ -8998,26 +9007,122 @@
       "id": "PR_kwDOIEpj4c6TM45D",
       "title": "Typo",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/127",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "dconnolly",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-04-19T14:57:28Z",
-      "updatedAt": "2025-04-19T14:57:28Z",
+      "updatedAt": "2025-04-20T20:24:38Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "36c6d11a76ec03b2df6431d6db2a436c5030f7ff",
       "headRepository": "dconnolly/dilithium-certificates",
       "headRefName": "patch-1",
       "headRefOid": "6b67798991192ed8d08cf40cf80aba144c782be3",
+      "closedAt": "2025-04-20T08:11:19Z",
+      "mergedAt": "2025-04-20T08:11:19Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "2f51007e4bd6e3c5d5b2561f9a6f0245fea26140"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 128,
+      "id": "PR_kwDOIEpj4c6TPsuX",
+      "title": "Major hair-cut to the External Mu section",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/128",
+      "state": "OPEN",
+      "author": "ounsworth",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #123 ",
+      "createdAt": "2025-04-21T02:15:20Z",
+      "updatedAt": "2025-04-21T18:28:30Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2f51007e4bd6e3c5d5b2561f9a6f0245fea26140",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "mikeo_appxD_tweaks",
+      "headRefOid": "54e8e4cec3f0e9dcc9b63b4ee548c19c20e9086a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This has the stupid build error:\r\n\r\n```\r\n*** YAML syntax error: (<unknown>): did not find expected key while parsing a block mapping at line 2 column 1\r\n```\r\n\r\nwhich I've encountered before, but Hannes has always fixed for me, so I don't know how to deal with it.",
+          "createdAt": "2025-04-21T02:44:34Z",
+          "updatedAt": "2025-04-21T02:44:34Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@bwesterb @csosto-pk PTAL when you get a chance.",
+          "createdAt": "2025-04-21T17:44:25Z",
+          "updatedAt": "2025-04-21T17:44:25Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6lzDn_",
+          "commit": {
+            "abbreviatedOid": "03f027d"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-21T15:38:56Z",
+          "updatedAt": "2025-04-21T15:38:56Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n  FIPS204-ExternalMuFAQ:\r\n    target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf\r\n    title: FIPS 204 Section 6 FAQ\r\n    author:\r\n    - org: National Institute of Standards and Technology (NIST)\r\n    date: 2025\r\n```",
+              "createdAt": "2025-04-21T15:38:56Z",
+              "updatedAt": "2025-04-21T15:38:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6l0UQp",
+          "commit": {
+            "abbreviatedOid": "54e8e4c"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "few editorial nits",
+          "createdAt": "2025-04-21T18:24:13Z",
+          "updatedAt": "2025-04-21T18:28:30Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "nit: consider dropping the \"and\" in \"and other public information,\"",
+              "createdAt": "2025-04-21T18:24:14Z",
+              "updatedAt": "2025-04-21T18:28:30Z"
+            },
+            {
+              "originalPosition": 89,
+              "body": "\"from being able to sometimes prehash and sometimes not depending on application need\" feels a little informal.",
+              "createdAt": "2025-04-21T18:25:30Z",
+              "updatedAt": "2025-04-21T18:28:30Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "nit: \"... the OID *that* cannot\" rather than \"and\"?",
+              "createdAt": "2025-04-21T18:26:39Z",
+              "updatedAt": "2025-04-21T18:28:30Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
