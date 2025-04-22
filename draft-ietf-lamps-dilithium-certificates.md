@@ -139,11 +139,11 @@ informative:
     - org: National Institute of Standards and Technology (NIST)
     date: 2016-12-20
   FIPS204-ExternalMuFAQ:
+    target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
     title: FIPS 204 Section 6 FAQ
     author:
     - org: National Institute of Standards and Technology (NIST)
-    date:
-    target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
+    date: 2025
 
 --- abstract
 
