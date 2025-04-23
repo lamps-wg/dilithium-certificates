@@ -316,7 +316,7 @@ the algorithms explicitly by using the OIDs specified in {{oids}} when
 encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
-values are specified {{oids}}.
+values are specified in {{oids}}.
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PublicKey}
 
