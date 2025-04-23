@@ -1087,10 +1087,10 @@ API and sometimes the External Mu API without any interoperability concens.
 The External Mu mode requires the `ComputeMu` routine to have access to the
 hash of the signer's public key, which may not be available in some architectures,
 or require fetching it. That may allow for mismatches between `tr` and `sk`.
-At worst this will produce a signature which will fail to verify under the intended
-public key since a compliant `Verify()` routine will independently compute `tr`
-from the public key. 
-This is not believed to be a security concern since `mu` is never used as-is
+At worst this will produce a signature which will fail to verify under the
+intended public key since a compliant `Verify()` routine will
+independently compute `tr` from the public key. This
+is not believed to be a security concern since `mu` is never used as-is
 within `ML-DSA.Sign_internal()` (Algorithm 7 in {{FIPS204}}), but rather
 it is hashed with values unknown to an attacker on lines 7 and 15.
 Thus a signing oracle exposing `SignMu()` does not leak any bits of the secret
