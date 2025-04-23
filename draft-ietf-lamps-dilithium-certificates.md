@@ -1085,17 +1085,17 @@ allows an ML-DSA key to sometimes be used with the "one-shot" `Sign()`
 API and sometimes the External Mu API without any interoperability concens.
 
 The External Mu mode requires the `ComputeMu` routine to have access to the
-hash of the signer's public key, which may not be available in some architectures,
+hash of the signer's public key which may not be available in some architectures,
 or require fetching it. That may allow for mismatches between `tr` and `sk`.
-At worst this will produce a signature which will fail to verify under the
+At worst, this will produce a signature which will fail to verify under the
 intended public key since a compliant `Verify()` routine will
-independently compute `tr` from the public key. This
+independently compute `tr` from the public key. That
 is not believed to be a security concern since `mu` is never used as-is
-within `ML-DSA.Sign_internal()` (Algorithm 7 in {{FIPS204}}), but rather
+within `ML-DSA.Sign_internal()` (Algorithm 7 in {{FIPS204}}). Rather,
 it is hashed with values unknown to an attacker on lines 7 and 15.
-Thus a signing oracle exposing `SignMu()` does not leak any bits of the secret
+Thus, a signing oracle exposing `SignMu()` does not leak any bits of the secret
 key. The External Mu mode also requires SHAKE256 to be available to the
-`ComputeMu` routine over the network may negate any performance improvements gained by pre-hashing.
+`ComputeMu` routine.
 
 # Acknowledgments
 {:numbered="false"}
