@@ -686,13 +686,6 @@ know whether the key will need to produce pure or pre-hashed signatures
 at key generation time. The External Mu mode described in {{externalmu}}
 avoids all of these operational concerns.
 
-ExternalMu-ML-DSA avoids all of these
-operational concerns by virtue of having keys and signatures that are
-indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
-mathematically equivalent algorithms). The difference between ML-DSA
-and ExternalMu-ML-DSA is merely an internal implementation detail of
-the signer and has no impact on the verifier or network protocol.
-
 The security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against signature
 collision attacks, compared with conventional RSA or ECDSA signature
