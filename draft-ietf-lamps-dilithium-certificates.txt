@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 23 October 2025                                       S. Turner
+Expires: 26 October 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           21 April 2025
+                                                           24 April 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 October 2025.
+   This Internet-Draft will expire on 26 October 2025.
 
 Copyright Notice
 
@@ -264,7 +264,7 @@ Table of Contents
    when encoding ML-DSA signatures in certificates and CRLs.  Conforming
    client implementations that process certificates and CRLs using ML-
    DSA MUST recognize the corresponding OIDs.  Encoding rules for ML-DSA
-   signature values are specified Section 2.
+   signature values are specified in Section 2.
 
 4.  ML-DSA Public Keys in PKIX
 
