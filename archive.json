@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-22T00:59:39.319385+00:00",
+  "timestamp": "2025-04-24T01:00:01.088335+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1450,7 +1450,7 @@
       "labels": [],
       "body": "I didn't want to make a PR on this as I'm not 100% sure I understand the language, so I'll make the issue instead.\n\nIn appendix D you have both \"external operations\" and \"internal operations\" -- my understanding is external ones are exposed by the API whilst internal ones.... are not!\n\nYou currently list `ExternalMu-ML-DSA.Prehash(pk, M, ctx)` as *external* with `ExternalMu-ML-DSA.Sign(sk, mu)` and `ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd)` as *internal*. \n\nMy reading of this would be that `ExternalMu-ML-DSA.Sign(sk, mu)` should be an external operation in that it needs to be exposed at the API level, but maybe I am misunderstanding what internal/external means in this context",
       "createdAt": "2025-03-25T21:13:05Z",
-      "updatedAt": "2025-04-21T02:10:31Z",
+      "updatedAt": "2025-04-23T20:23:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -1466,6 +1466,13 @@
           "body": "Yup, fair point. \"Internal\" / \"External\" is weird and confusing here. Thanks for the observation!\n\nI'll just change that to \"Pre-hash operations\" and \"Sign operations\".",
           "createdAt": "2025-04-21T02:10:30Z",
           "updatedAt": "2025-04-21T02:10:30Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "https://github.com/lamps-wg/dilithium-certificates/pull/133 should also be addressing this one. It took some of the changes from Mike's original https://github.com/lamps-wg/dilithium-certificates/pull/128 . After merging it, we could close this issue. ",
+          "createdAt": "2025-04-23T20:23:04Z",
+          "updatedAt": "2025-04-23T20:23:04Z"
         }
       ]
     },
@@ -1481,7 +1488,7 @@
       "labels": [],
       "body": "Section 10.1 says:\n\n> The security reason for disallowing HashML-DSA is that the design of the ML-DSA algorithm provides enhanced resistance against signature collision attacks, compared with conventional RSA or ECDSA signature algorithms. Specifically, ML-DSA binds the hash of the public key tr to the message to-be-signed prior to hashing, as described in line 6 of Algorithm 7 of [[FIPS204](https://lamps-wg.github.io/dilithium-certificates/draft-ietf-lamps-dilithium-certificates.html#FIPS204)]. In practice, this provides binding to the indended verification public key, preventing some attacks that would otherwise allow a signature to be successfully verified against a non-intended public key.\n\nCould someone please explain how HashML-DSA does not provide a binding to the intended verification public key? The difference between ML-DSA and HashML-DSA is:\n\n\u03bc \u2190 H(tr | 0 | len(ctx) | ctx | M)\nvs.\n\u03bc \u2190 H(tr | 1 | len(ctx) | ctx | OID_hash | hash(M))\n\nI understand the later claim about collision attacks requiring a targeted collision against SHAKE256 (with a 64-byte output) versus an untargeted attacker against the hash function used to compute the pre-hash. However, what security property is gained by binding the hash of the public key to the message _prior to hashing_?",
       "createdAt": "2025-04-01T21:02:30Z",
-      "updatedAt": "2025-04-07T12:54:04Z",
+      "updatedAt": "2025-04-23T20:38:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -1507,10 +1514,31 @@
         },
         {
           "author": "vdukhovni",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "My take is that in the context of CA-issued certificates, whether the signature is bound to the public key or not has no material security relevance. Sure, a lazy attacker *might* want a collision that's effective against every CA, but this is hardly necessary, it is sufficient to attack one CA (at a time), if it is a widely trusted issuer, no other CAs need to be attacked.\n\nAttacks that are portable across multiple signer keys could in theory be of some greater relevant in EE applications, but hardly so with CA certs and CRLs. The solution is to avoid weak hash functions, not to add unnatural constraints on use of signature algorithms in just EE applications or just PKIX.",
           "createdAt": "2025-04-07T12:54:03Z",
           "updatedAt": "2025-04-07T12:54:03Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "https://github.com/lamps-wg/dilithium-certificates/pull/131 should be addressing this. I polished off the text and removed the sentence that made it look like HashML-DSA does not bind the public key to the signed hash of the message. \n\nAfter https://github.com/lamps-wg/dilithium-certificates/pull/131 is merged in, we can close this one. ",
+          "createdAt": "2025-04-23T16:52:11Z",
+          "updatedAt": "2025-04-23T16:52:11Z"
+        },
+        {
+          "author": "HenrickStreamSec",
+          "authorAssociation": "NONE",
+          "body": "Thank you for your response. However, please note that the new text \r\nstill implies that the \"message\" (or rather ToBeSigned data of a \r\ncertificate, CRL, or OSCP message) does not bind to the public key of \r\nthe signer. This is, in itself, an incorrect claim. All of these \r\nmessages include a unique reference to the public key of the signer, \r\nalbeit not as the very first 64 octets of the data to be signed.\r\n\r\nToBeSigned data uniquely binding to the public key of the signer is a \r\nkey feature of the certificate path validation algorithm.\r\n\r\nOn 2025-04-23 18:52, Panos K. wrote:\r\n> *csosto-pk* left a comment (lamps-wg/dilithium-certificates#125) \r\n> <https://github.com/lamps-wg/dilithium-certificates/ \r\n> issues/125#issuecomment-2824935997>\r\n> \r\n> #131 <https://github.com/lamps-wg/dilithium-certificates/pull/131> \r\n> should be addressing this. I polished off the text and removed the \r\n> sentence that made it look like HashML-DSA does not bind the public key \r\n> to the signed hash of the message.\r\n> \r\n> After #131 <https://github.com/lamps-wg/dilithium-certificates/pull/131> \r\n> is merged in, we can close this one.\r\n> \r\n> \u2014\r\n> Reply to this email directly, view it on GitHub <https://github.com/ \r\n> lamps-wg/dilithium-certificates/issues/125#issuecomment-2824935997>, or \r\n> unsubscribe <https://github.com/notifications/unsubscribe-auth/ \r\n> AIAHAGTQEWOJD2B3GA5323T227ANDAVCNFSM6AAAAAB2H46UHGVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDQMRUHEZTKOJZG4>.\r\n> You are receiving this because you commented.Message ID: <lamps-wg/ \r\n> ***@***.***>\r\n> \r\n\r\n",
+          "createdAt": "2025-04-23T17:31:21Z",
+          "updatedAt": "2025-04-23T17:31:21Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@HenrickStreamSec , point taken, thank you. This text was generally for HashML-DSA, but indeed the signer public key AKI will be in the ```tbsCertificate``` structure. Maybe we can add one more sentence to point that it is not an actual problem because the signed content has a hash of the public key. \n\nBy \"reference\", you mean AKI, right? \nI think these are SHA-1 hashes of the public key. \n",
+          "createdAt": "2025-04-23T20:31:20Z",
+          "updatedAt": "2025-04-23T20:38:54Z"
         }
       ]
     }
@@ -9035,21 +9063,21 @@
       "id": "PR_kwDOIEpj4c6TPsuX",
       "title": "Major hair-cut to the External Mu section",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/128",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ounsworth",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "Closes #123 ",
+      "body": "Closes #123 \r\n\r\n\r\nWhy am I suggesting a big re-word this close to WGLC?\r\nBecause this section was written in like October, so this is an overdue refresh to fold in on-list discussions in January and February.",
       "createdAt": "2025-04-21T02:15:20Z",
-      "updatedAt": "2025-04-21T18:28:30Z",
+      "updatedAt": "2025-04-23T20:15:54Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "2f51007e4bd6e3c5d5b2561f9a6f0245fea26140",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "mikeo_appxD_tweaks",
-      "headRefOid": "54e8e4cec3f0e9dcc9b63b4ee548c19c20e9086a",
-      "closedAt": null,
+      "headRefOid": "863a00008322d61bae056f57623a41115cfc15bc",
+      "closedAt": "2025-04-23T20:15:54Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -9067,6 +9095,13 @@
           "body": "@bwesterb @csosto-pk PTAL when you get a chance.",
           "createdAt": "2025-04-21T17:44:25Z",
           "updatedAt": "2025-04-21T17:44:25Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "https://github.com/lamps-wg/dilithium-certificates/pull/132 and https://github.com/lamps-wg/dilithium-certificates/pull/133 incorporate this PR minor some overlapping parts or minor things I think were not adding to the text. \r\n\r\n@seanturner I think we can close this PR. ",
+          "createdAt": "2025-04-23T18:38:27Z",
+          "updatedAt": "2025-04-23T18:38:27Z"
         }
       ],
       "reviews": [
@@ -9121,6 +9156,421 @@
               "updatedAt": "2025-04-21T18:28:30Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6l5JU9",
+          "commit": {
+            "abbreviatedOid": "54e8e4c"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-22T08:07:37Z",
+          "updatedAt": "2025-04-22T08:07:37Z",
+          "comments": [
+            {
+              "originalPosition": 81,
+              "body": "I'd start with the bigger disadvantages. The performance difference is small enough I wouldn't even mind leaving it out, but if we mention it, let's not put it front and center.",
+              "createdAt": "2025-04-22T08:07:37Z",
+              "updatedAt": "2025-04-22T08:07:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6l5L3r",
+          "commit": {
+            "abbreviatedOid": "54e8e4c"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-22T08:11:35Z",
+          "updatedAt": "2025-04-22T08:11:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mDLwV",
+          "commit": {
+            "abbreviatedOid": "863a000"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "We appreciate the thorough text Mike, but I suggest we close this PR. \r\n\r\nWe will take your  suggested text and trim it down to include only the essential information. I want to avoid making some of the text on External Mu to be literature review or systematization of knowledge of the topic. This could go in the Appendix, but I don't think we even need that. The text ought to explain what the draft specifies and and briefly say why we chose this. \r\n\r\nWe also have the suggestions from Viktor and David in https://github.com/lamps-wg/dilithium-certificates/issues/125 about the \"The security reason for disallowing\" paragraph which may be a little misleading. \r\n\r\nSo we shall cut a new PR to include all this. @seanturner expect one this week. ",
+          "createdAt": "2025-04-23T03:41:04Z",
+          "updatedAt": "2025-04-23T03:41:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 129,
+      "id": "PR_kwDOIEpj4c6Tn9p_",
+      "title": "Trimming text in the Introduction",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/129",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Removing unnecessary details from the introduction which will only be interesting for implementers that want to understand the background.",
+      "createdAt": "2025-04-23T16:17:43Z",
+      "updatedAt": "2025-04-23T20:48:16Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "cc4a78d3b31c7caf8fc1c3b766062f833b034ec5",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-5",
+      "headRefOid": "ffac9da483017360b19c85b475ea0b57d364f33d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6mNqTJ",
+          "commit": {
+            "abbreviatedOid": "ffac9da"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:19:55Z",
+          "updatedAt": "2025-04-23T20:19:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mN3gl",
+          "commit": {
+            "abbreviatedOid": "ffac9da"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:48:16Z",
+          "updatedAt": "2025-04-23T20:48:16Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 130,
+      "id": "PR_kwDOIEpj4c6ToCsE",
+      "title": "Nit",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/130",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-23T16:27:20Z",
+      "updatedAt": "2025-04-23T20:45:35Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "cc4a78d3b31c7caf8fc1c3b766062f833b034ec5",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-6",
+      "headRefOid": "23271ba8bb0a35b34208dff77e90076e897184ab",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6mN2Vo",
+          "commit": {
+            "abbreviatedOid": "23271ba"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:45:35Z",
+          "updatedAt": "2025-04-23T20:45:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 131,
+      "id": "PR_kwDOIEpj4c6ToVby",
+      "title": "Polishing of the HashML-DSA collision risk text",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/131",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Updating paragraph to break down the ML-DSA vs HashML-DSA targeted collision vs general collision risk. \r\n- Removing the unclear sentence that makes HashML-DSA look like it is not binding the public key to the signed message / hash of the message.",
+      "createdAt": "2025-04-23T16:51:17Z",
+      "updatedAt": "2025-04-23T21:39:37Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "cc4a78d3b31c7caf8fc1c3b766062f833b034ec5",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-7",
+      "headRefOid": "72b6348b4689127fbe72b1e109cc4408890ae496",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "LGTM",
+          "createdAt": "2025-04-23T21:39:01Z",
+          "updatedAt": "2025-04-23T21:39:01Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6mNp1N",
+          "commit": {
+            "abbreviatedOid": "536946a"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-23T20:18:55Z",
+          "updatedAt": "2025-04-23T20:18:55Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nSpecifically, ML-DSA prepends the SHAKE256 hash of the public key `tr`\r\n```",
+              "createdAt": "2025-04-23T20:18:55Z",
+              "updatedAt": "2025-04-23T20:18:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mNqDq",
+          "commit": {
+            "abbreviatedOid": "536946a"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:19:24Z",
+          "updatedAt": "2025-04-23T20:19:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mN4Fw",
+          "commit": {
+            "abbreviatedOid": "72b6348"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:49:32Z",
+          "updatedAt": "2025-04-23T20:49:32Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mOMXL",
+          "commit": {
+            "abbreviatedOid": "72b6348"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T21:39:37Z",
+          "updatedAt": "2025-04-23T21:39:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 132,
+      "id": "PR_kwDOIEpj4c6Tohq9",
+      "title": "Updating text about HashML-DSA vs ML-DSA's operational challenges",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/132",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Polishing off on text in Mike's https://github.com/lamps-wg/dilithium-certificates/pull/128/files \r\n- Simplifying text a little.",
+      "createdAt": "2025-04-23T17:09:38Z",
+      "updatedAt": "2025-04-23T21:52:10Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "cc4a78d3b31c7caf8fc1c3b766062f833b034ec5",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-8",
+      "headRefOid": "e74b96d7b940d76e01112e69b9c0eb9573371735",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "LGTM",
+          "createdAt": "2025-04-23T21:35:58Z",
+          "updatedAt": "2025-04-23T21:35:58Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks [ounsworth](https://github.com/ounsworth)!",
+          "createdAt": "2025-04-23T21:52:09Z",
+          "updatedAt": "2025-04-23T21:52:09Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6mNo_4",
+          "commit": {
+            "abbreviatedOid": "e74b96d"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:17:11Z",
+          "updatedAt": "2025-04-23T20:17:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mN3AN",
+          "commit": {
+            "abbreviatedOid": "e74b96d"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:47:06Z",
+          "updatedAt": "2025-04-23T20:47:06Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mOMnf",
+          "commit": {
+            "abbreviatedOid": "e74b96d"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T21:40:20Z",
+          "updatedAt": "2025-04-23T21:40:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 133,
+      "id": "PR_kwDOIEpj4c6TpOHF",
+      "title": "Updating the Appendix regarding the ExternalMu",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/133",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Simplifying text\r\n- updating pseudo code function names based on Mike's https://github.com/lamps-wg/dilithium-certificates/pull/128/files",
+      "createdAt": "2025-04-23T18:35:56Z",
+      "updatedAt": "2025-04-23T21:40:04Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "cc4a78d3b31c7caf8fc1c3b766062f833b034ec5",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-9",
+      "headRefOid": "aa4e37416ba78cda7bfedee155b9500ff859ceea",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Oops. I missed updating the code block. Good catch.",
+          "createdAt": "2025-04-23T21:37:29Z",
+          "updatedAt": "2025-04-23T21:37:29Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6mNmqO",
+          "commit": {
+            "abbreviatedOid": "1419363"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:12:08Z",
+          "updatedAt": "2025-04-23T20:12:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mNn4M",
+          "commit": {
+            "abbreviatedOid": "1419363"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T20:14:46Z",
+          "updatedAt": "2025-04-23T20:14:50Z",
+          "comments": [
+            {
+              "originalPosition": 163,
+              "body": "```The External Mu mode also requires SHAKE256 to be available to the\r\n`ComputeMu` routine over the network may negate any performance improvements gained by pre-hashing.```\r\nThis sentence seems unnecessary. ",
+              "createdAt": "2025-04-23T20:14:46Z",
+              "updatedAt": "2025-04-23T20:14:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mN4lI",
+          "commit": {
+            "abbreviatedOid": "1419363"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-23T20:50:35Z",
+          "updatedAt": "2025-04-23T20:50:35Z",
+          "comments": [
+            {
+              "originalPosition": 163,
+              "body": "Thx Jake, fixed. ",
+              "createdAt": "2025-04-23T20:50:35Z",
+              "updatedAt": "2025-04-23T20:50:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6mOMhO",
+          "commit": {
+            "abbreviatedOid": "aa4e374"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-23T21:40:04Z",
+          "updatedAt": "2025-04-23T21:40:04Z",
+          "comments": []
         }
       ]
     }
