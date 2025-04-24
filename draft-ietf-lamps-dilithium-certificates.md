@@ -702,6 +702,13 @@ would have to perform a public-key-specific collision search in order
 to find message pairs such that `H(tr || m1) = H(tr || m2)` since a
 direct hash collision `H(m1) = H(m2)` will not suffice.
 HashML-DSA removes this enhanced security property.
+In spite of its lack of targeted collision protection, the practical
+security risk of using HashML-DSA in X.509 signatures would be
+immaterial. That is because a hash of the issuing CA's public key
+is already included in the Authority Key Identifier (AKI) extension which
+is signed as part of the tbsCertificate structure.
+Although it is a SHA-1 hash, general second pre-images against
+the AKI hash of existing issuing CAs would be impractical. 
 
 --- back
 
