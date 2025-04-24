@@ -708,7 +708,7 @@ immaterial. That is because a hash of the issuing CA's public key
 is already included in the Authority Key Identifier (AKI) extension which
 is signed as part of the tbsCertificate structure.
 Although it is a SHA-1 hash, general second pre-images against
-the AKI hash of existing issuing CAs would be impractical. 
+the AKI hash of existing issuing CAs would be impractical.
 
 --- back
 
