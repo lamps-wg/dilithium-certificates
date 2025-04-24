@@ -1288,12 +1288,8 @@ levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.<a href="#section-1-1" class="pilcro
 <p id="section-1-2"><span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines two variants of ML-DSA: a pure and a prehash variant.
 Only the former is specified in this document.
 See <a href="#sec-disallow-hash" class="auto internal xref">Section 10.1</a> for the rationale.
-The pure variant of ML-DSA supports the typical prehash flow,
-see <a href="#prehash" class="auto internal xref">Appendix D</a>. In short: one cryptographic module can compute the hash <em>mu</em>
-on line 6 of algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> and pass it to a second module
-to finish the signature. The first module only needs access to the full
-message and the public key, whereas the second module only needs access
-to hash <em>mu</em> and the private key.<a href="#section-1-2" class="pilcrow">¶</a></p>
+The pure variant of ML-DSA supports the typical prehash flow. Refer to
+<a href="#prehash" class="auto internal xref">Appendix D</a> for more details.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
 Dilithium are not compatible.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="requirements-language">
