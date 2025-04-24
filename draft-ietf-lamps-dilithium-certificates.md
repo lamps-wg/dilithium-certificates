@@ -164,7 +164,7 @@ levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
 Only the former is specified in this document.
 See {{sec-disallow-hash}} for the rationale.
 The pure variant of ML-DSA supports the typical prehash flow. Refer to
-{{prehash}} for more details.
+{{externalmu}} for more details.
 
 Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
 Dilithium are not compatible.
