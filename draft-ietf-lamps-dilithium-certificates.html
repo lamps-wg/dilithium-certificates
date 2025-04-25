@@ -1289,7 +1289,7 @@ levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.<a href="#section-1-1" class="pilcro
 Only the former is specified in this document.
 See <a href="#sec-disallow-hash" class="auto internal xref">Section 10.1</a> for the rationale.
 The pure variant of ML-DSA supports the typical prehash flow. Refer to
-<a href="#prehash" class="auto internal xref">Appendix D</a> for more details.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<a href="#externalmu" class="auto internal xref">Appendix D</a> for more details.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
 Dilithium are not compatible.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="requirements-language">
@@ -1814,26 +1814,22 @@ single OCTET STRING.<a href="#section-10-7" class="pilcrow">¶</a></p>
 used; in other words, public keys identified by
 <code>id-hash-ml-dsa-44-with-sha512</code>, <code>id-hash-ml-dsa-65-with-sha512</code>, and
 <code>id-hash-ml-dsa-87-with-sha512</code> <span class="bcp14">MUST NOT</span> be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
-<p id="section-10.1-2">This restriction is for both implementation and security reasons.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
-<p id="section-10.1-3">The implementation reason for disallowing HashML-DSA stems from the fact
+CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
+is for both implementation and security reasons.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-2">The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
-different <code>Verify()</code> routines. This forwards to the protocol the
-complexity of informing the client whether to use <code>ML-DSA.Verify()</code> or
-<code>HashML-DSA.Verify()</code> along with the hash algorithm to use. Additionally, since
+different <code>Verify()</code> routines. This introduces the complexity of
+informing the verifier whether to use <code>ML-DSA.Verify()</code> or
+<code>HashML-DSA.Verify()</code>. Additionally, since
 the same OIDs are used to identify the ML-DSA
 public keys and ML-DSA signature algorithms, an implementation would
 need to commit a given public key to be either of type <code>ML-DSA</code> or
 <code>HashML-DSA</code> at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
-know at key generation time whether the key will need to produce pure
-or pre-hashed signatures. ExternalMu-ML-DSA avoids all of these
-operational concerns by virtue of having keys and signatures that are
-indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
-mathematically equivalent algorithms). The difference between ML-DSA
-and ExternalMu-ML-DSA is merely an internal implementation detail of
-the signer and has no impact on the verifier or network protocol.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
-<p id="section-10.1-4">The security reason for disallowing HashML-DSA is that the design of the
+know whether the key will need to produce pure or pre-hashed signatures
+at key generation time. The External Mu mode described in <a href="#externalmu" class="auto internal xref">Appendix D</a>
+avoids all of these operational concerns.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
+<p id="section-10.1-3">The security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
 compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
 Specifically, ML-DSA prepends the SHAKE256 hash of the public key <code>tr</code>
@@ -1850,7 +1846,7 @@ immaterial. That is because a hash of the issuing CA's public key
 is already included in the Authority Key Identifier (AKI) extension which
 is signed as part of the tbsCertificate structure.
 Even when it is a SHA-1 hash, general second pre-images against
-the AKI hash of existing issuing CAs would be impractical.<a href="#section-10.1-4" class="pilcrow">¶</a></p>
+the AKI hash of existing issuing CAs would be impractical.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5417,7 +5413,7 @@ EGOY93BgBuQum+HvidJcJy8RqVCVxYfXE3MihN6dvTxyF7BoniHY6w/2lmg=
 </div>
 </section>
 </div>
-<div id="prehash">
+<div id="externalmu">
 <section id="appendix-D">
       <h2 id="name-pre-hashing-externalmu-ml-d">
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-pre-hashing-externalmu-ml-d" class="section-name selfRef">Pre-hashing (ExternalMu-ML-DSA)</a>
