@@ -164,7 +164,7 @@ levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
 Only the former is specified in this document.
 See {{sec-disallow-hash}} for the rationale.
 The pure variant of ML-DSA supports the typical prehash flow. Refer to
-{{prehash}} for more details.
+{{externalmu}} for more details.
 
 Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
 Dilithium are not compatible.
@@ -665,27 +665,22 @@ The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
 used; in other words, public keys identified by
 `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
 `id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols.
-
-This restriction is for both implementation and security reasons.
+CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
+is for both implementation and security reasons.
 
 The implementation reason for disallowing HashML-DSA stems from the fact
 that ML-DSA and HashML-DSA are incompatible algorithms that require
-different `Verify()` routines. This forwards to the protocol the
-complexity of informing the client whether to use `ML-DSA.Verify()` or
-`HashML-DSA.Verify()` along with the hash algorithm to use. Additionally, since
+different `Verify()` routines. This introduces the complexity of
+informing the verifier whether to use `ML-DSA.Verify()` or
+`HashML-DSA.Verify()`. Additionally, since
 the same OIDs are used to identify the ML-DSA
 public keys and ML-DSA signature algorithms, an implementation would
 need to commit a given public key to be either of type `ML-DSA` or
 `HashML-DSA` at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
-know at key generation time whether the key will need to produce pure
-or pre-hashed signatures. ExternalMu-ML-DSA avoids all of these
-operational concerns by virtue of having keys and signatures that are
-indistinguishable from ML-DSA (i.e., ML-DSA and ExternalMu-ML-DSA are
-mathematically equivalent algorithms). The difference between ML-DSA
-and ExternalMu-ML-DSA is merely an internal implementation detail of
-the signer and has no impact on the verifier or network protocol.
+know whether the key will need to produce pure or pre-hashed signatures
+at key generation time. The External Mu mode described in {{externalmu}}
+avoids all of these operational concerns.
 
 The security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
@@ -997,7 +992,7 @@ The following is the third example:
 ~~~
 
 
-# Pre-hashing (ExternalMu-ML-DSA) {#prehash}
+# Pre-hashing (ExternalMu-ML-DSA) {#externalmu}
 
 Some applications require pre-hashing, where the signature generation
 process can be separated into a pre-hash step and a core signature
