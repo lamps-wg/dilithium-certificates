@@ -688,19 +688,23 @@ and ExternalMu-ML-DSA is merely an internal implementation detail of
 the signer and has no impact on the verifier or network protocol.
 
 The security reason for disallowing HashML-DSA is that the design of the
-ML-DSA algorithm provides enhanced resistance against signature
-collision attacks, compared with conventional RSA or ECDSA signature
-algorithms. Specifically, ML-DSA binds the hash of the public key `tr`
-to the message to-be-signed prior to hashing, as described in line 6 of
-Algorithm 7 of {{FIPS204}}. In practice, this provides binding to the
-intended verification public key, preventing some attacks that would
-otherwise allow a signature to be successfully verified against a
-non-intended public key. Also, this unlikely, theoretical binding means that in the unlikely
-discovery of a collision attack against SHA-3, an attacker would
-have to perform a public-key-specific collision search in order to find
-message pairs such that `H(tr || m1) = H(tr || m2)` since a direct hash
-collision `H(m1) = H(m2)` will not suffice. HashML-DSA removes both of
-these enhanced security properties.
+ML-DSA algorithm provides enhanced resistance against collision attacks,
+compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
+Specifically, ML-DSA prepends the SHAKE256 hash of the public key `tr`
+to the message to-be-signed prior to hashing, as described in
+line 6 of Algorithm 7 of {{FIPS204}}. This means that in the unlikely
+discovery of a collision attack against the SHA-3 family, an attacker
+would have to perform a public-key-specific collision search in order
+to find message pairs such that `H(tr || m1) = H(tr || m2)` since a
+direct hash collision `H(m1) = H(m2)` will not suffice.
+HashML-DSA removes this enhanced security property.
+In spite of its lack of targeted collision protection, the practical
+security risk of using HashML-DSA in X.509 signatures would be
+immaterial. That is because a hash of the issuing CA's public key
+is already included in the Authority Key Identifier (AKI) extension which
+is signed as part of the tbsCertificate structure.
+Even when it is a SHA-1 hash, general second pre-images against
+the AKI hash of existing issuing CAs would be impractical.
 
 --- back
 
