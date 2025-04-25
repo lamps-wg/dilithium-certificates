@@ -1915,6 +1915,10 @@ the AKI hash of existing issuing CAs would be impractical.<a href="#section-10.1
         <dd>
 <span class="refAuthor">Lyubashevsky, V.</span>, <span class="refTitle">"Fiat-Shamir with aborts: Applications to lattice and factoring-based signatures"</span>, <span class="seriesInfo">International Conference on the Theory and Application of Cryptology and Information Security </span>, <time datetime="2009" class="refDate">2009</time>, <span>&lt;<a href="https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf">https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="FIPS204-ExternalMuFAQ">[FIPS204-ExternalMuFAQ]</dt>
+        <dd>
+<span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"FIPS 204 Section 6 FAQ"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf">https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="NIST-PQC">[NIST-PQC]</dt>
         <dd>
 <span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"Post-Quantum Cryptography Project"</span>, <time datetime="2016-12-20" class="refDate">20 December 2016</time>, <span>&lt;<a href="https://csrc.nist.gov/Projects/post-quantum-cryptography">https://csrc.nist.gov/Projects/post-quantum-cryptography</a>&gt;</span>. </dd>
@@ -5418,59 +5422,53 @@ EGOY93BgBuQum+HvidJcJy8RqVCVxYfXE3MihN6dvTxyF7BoniHY6w/2lmg=
       <h2 id="name-pre-hashing-externalmu-ml-d">
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-pre-hashing-externalmu-ml-d" class="section-name selfRef">Pre-hashing (ExternalMu-ML-DSA)</a>
       </h2>
-<p id="appendix-D-1">Some applications require pre-hashing, where the signature generation
-process can be separated into a pre-hash step and a core signature
-step in order to ease operational requirements around large or
-inconsistently-sized payloads. Pre-hashing can be performed at the
-protocol layer, but not all protocols support it. Examples in
-<span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> are certificates and CRLs; these do not include message
-digesting before signing. This can make signing large CRLs or a high
-volume of certificates with large public keys challenging.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">As mentioned in the introduction, pure ML-DSA signing itself
-supports a pre-hashing flow by splitting the operation over two
-modules. In this section, we make this "ExternalMu-ML-DSA"
-more explicit.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<p id="appendix-D-3">There are two steps. First an <code>ExternalMu-ML-DSA.Prehash()</code>
-followed by <code>ExternalMu-ML-DSA.Sign()</code>. Together these are functionally
-equivalent to <code>ML-DSA.Sign()</code> from <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> in that used in sequence
-they create exactly the same signatures as regular pure ML-DSA, which
-can be verified by the unmodified <code>ML-DSA.Verify()</code>.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
-<p id="appendix-D-4">An ML-DSA key and certificate can be used with either ML-DSA
-or ExternalMu-ML-DSA interchangeably.
-Note that ExternalMu-ML-DSA describes a different signature API from ML-DSA
-and therefore might require explicit support from hardware or
-software cryptographic modules.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
-<p id="appendix-D-5">Note that the signing mode defined here is different from HashML-DSA
-defined in Section 5.4 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. This specification uses exclusively
-ExternalMu-ML-DSA for pre-hashed use cases. See <a href="#sec-disallow-hash" class="auto internal xref">Section 10.1</a> for
-additional discussion of why HashML-DSA is disallowed in PKIX.<a href="#appendix-D-5" class="pilcrow">¶</a></p>
-<p id="appendix-D-6">All functions and notation used in <a href="#fig-externalmu-ml-dsa-external" class="auto internal xref">Figure 2</a>
-and <a href="#fig-externalmu-ml-dsa-internal" class="auto internal xref">Figure 3</a> are defined in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.<a href="#appendix-D-6" class="pilcrow">¶</a></p>
-<p id="appendix-D-7">External operations:<a href="#appendix-D-7" class="pilcrow">¶</a></p>
-<span id="name-external-steps-of-externalm"></span><div id="fig-externalmu-ml-dsa-external">
+<p id="appendix-D-1">Some applications require pre-hashing that ease operational
+requirements around large or inconsistently-sized payloads.
+When signing with pre-hashing, the signature generation
+process can be separated into a pre-hash step requiring only the message
+and other public information, and a core signature
+step which uses the public key.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-2">In the context of ML-DSA, pre-hashing can be performed with
+the HashML-DSA algorithm defined in Section 5.4 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+ML-DSA itself supports a External Mu pre-hashing mode which
+externalizes the message pre-hashing originally performed inside
+the signing operation. This mode is also laid out in
+<span>[<a href="#FIPS204-ExternalMuFAQ" class="cite xref">FIPS204-ExternalMuFAQ</a>]</span>. This document specifies
+only the use of ML-DSA's External Mu mode, and not HashML-DSA,
+in PKIX for reasons laid out in <a href="#sec-disallow-hash" class="auto internal xref">Section 10.1</a>.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<p id="appendix-D-3">Implementations of ML-DSA using the External Mu pre-hashing mode requires the following
+algorithms, which are modified versions of the algorithms presented in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
+The nomenclature used here has been modified from the NIST FAQ <span>[<a href="#FIPS204-ExternalMuFAQ" class="cite xref">FIPS204-ExternalMuFAQ</a>]</span>
+for clarity.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
+<p id="appendix-D-4">Pre-hash operation:<a href="#appendix-D-4" class="pilcrow">¶</a></p>
+<span id="name-computemu-prehash-operation"></span><div id="fig-externalmu-ml-dsa-external">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="appendix-D-8.1">
+        <div class="alignLeft art-text artwork" id="appendix-D-5.1">
 <pre>
-ExternalMu-ML-DSA.Prehash(pk, M):
+ComputeMu(pk, M, ctx):
 
-  # Simplified flow for computing ML-DSA's mu based on Algorithm 2 and 7
-  # of FIPS 204, with ctx being empty string.
-  # M is a bit-string, mu is byte-string.
+  # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
+  # in the FIPS 204 FAQ.
+  # M is a bit-string, mu and ctx are byte-strings.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2)) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) ∥ ctx) || M, 64)
+  # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
   return mu
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-external-steps-of-externalm" class="selfRef">External steps of ExternalMu-ML-DSA</a>
+<a href="#name-computemu-prehash-operation" class="selfRef">ComputeMu prehash operation</a>
         </figcaption></figure>
 </div>
-<p id="appendix-D-9">Internal operations:<a href="#appendix-D-9" class="pilcrow">¶</a></p>
-<span id="name-internal-steps-of-externalm"></span><div id="fig-externalmu-ml-dsa-internal">
+<p id="appendix-D-6">Sign operations:<a href="#appendix-D-6" class="pilcrow">¶</a></p>
+<span id="name-the-operations-for-signing-"></span><div id="fig-externalmu-ml-dsa-internal">
 <figure id="figure-3">
-        <div class="alignLeft art-text artwork" id="appendix-D-10.1">
+        <div class="alignLeft art-text artwork" id="appendix-D-7.1">
 <pre>
-ExternalMu-ML-DSA.Sign(sk, mu):
+SignMu(sk, mu):
+
+  # Referred to as 'ExternalMu-ML-DSA.Sign(sk, mu)'
+  # in the FIPS 204 FAQ.
 
   if |mu| != 64 then
     return error  # return an error indication if the input mu is not
@@ -5484,12 +5482,12 @@ ExternalMu-ML-DSA.Sign(sk, mu):
                   # generation failed
   end if
 
-  sigma = ExternalMu-ML-DSA.Sign_internal(sk, mu, rnd, isExternalMu=true)
+  sigma = SignMu_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
-ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
+ML-DSA.SignMu_internal(sk, M', rnd, isExternalMu=false):
     # mu can be passed as an argument instead of M'
-    # defaulting isExternalMu to false means that
+    # defaulting is ExternalMu to false means that
     # this modified version of Sign_internal can be used
     # in place of the original without interfering with
     # functioning of pure ML-DSA mode.
@@ -5501,27 +5499,26 @@ ML-DSA.Sign_internal(sk, M', rnd, isExternalMu=false):
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-internal-steps-of-externalm" class="selfRef">Internal steps of ExternalMu-ML-DSA</a>
+<a href="#name-the-operations-for-signing-" class="selfRef">The operations for signing mu</a>
         </figcaption></figure>
 </div>
-<p id="appendix-D-11">ExternalMu-ML-DSA requires the public key, or its prehash, as input to
-the <code>Prehash()</code> function. This assumes the signer generating the
-pre-hash is in possession of the public key before signing and is
-different from conventional pre-hashing which only requires the
-message and the hash function as input.<a href="#appendix-D-11" class="pilcrow">¶</a></p>
-<p id="appendix-D-12">Security-wise, during the signing operation of pure (or "one-step")
-ML-DSA, the cryptographic module extracts the public key hash <code>tr</code> from
-the secret key object, and thus there is no possibility of mismatch
-between <code>tr</code> and <code>sk</code>. In ExternalMu-ML-DSA, the public key or its hash
-needs to be provided to the <code>Prehash()</code> routine independently of the secret
-key, and while the exact mechanism by which it is delivered will be
-implementation-specific, it does open a window for mismatches between
-<code>tr</code> and <code>sk</code>. First, this will produce a signature which will fail to
-verify under the intended public key since a compliant <code>Verify()</code> routine
-will independently compute <code>tr</code> from the public key. Implementors should pay careful
-attention to how the public key or its hash is delivered to the
-<code>ExternalMu-ML-DSA.Prehash()</code> routine, and from where they are sourcing
-this data.<a href="#appendix-D-12" class="pilcrow">¶</a></p>
+<p id="appendix-D-8">There is no need to specify an External Mu <code>Verify()</code> routine because
+this is identical to the original <code>ML-DSA.Verify()</code>. This makes External
+Mu mode simply an internal optimization of the signer, and
+allows an ML-DSA key to sometimes be used with the "one-shot" <code>Sign()</code>
+API and sometimes the External Mu API without any interoperability concens.<a href="#appendix-D-8" class="pilcrow">¶</a></p>
+<p id="appendix-D-9">The External Mu mode requires the <code>ComputeMu</code> routine to have access to the
+hash of the signer's public key which may not be available in some architectures,
+or require fetching it. That may allow for mismatches between <code>tr</code> and <code>sk</code>.
+At worst, this will produce a signature which will fail to verify under the
+intended public key since a compliant <code>Verify()</code> routine will
+independently compute <code>tr</code> from the public key. That
+is not believed to be a security concern since <code>mu</code> is never used as-is
+within <code>ML-DSA.Sign_internal()</code> (Algorithm 7 in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>). Rather,
+it is hashed with values unknown to an attacker on lines 7 and 15.
+Thus, a signing oracle exposing <code>SignMu()</code> does not leak any bits of the secret
+key. The External Mu mode also requires SHAKE256 to be available to the
+<code>ComputeMu</code> routine.<a href="#appendix-D-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
