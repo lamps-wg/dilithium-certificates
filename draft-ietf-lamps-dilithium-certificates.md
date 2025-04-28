@@ -955,7 +955,7 @@ so-called "pretty print"; the certificates are the same.
 ~~~
 
 
-## Example Inconsistent Private Keys {#example-bad}
+## Example Inconsistent Seed and Expanded Private Keys {#example-bad}
 
 <aside markdown="block">
   WARNING: These private keys are purposely bad do not use them in
@@ -963,8 +963,6 @@ so-called "pretty print"; the certificates are the same.
 </aside>
 
 The following examples demonstrate inconsistent seed and expanded private keys.
-
-### ML-DSA Inconsistent Seed and Expanded Private Keys
 
 Three `ML-DSA-44-PrivateKey` examples of inconsistent seed and
 expanded private keys follow:
