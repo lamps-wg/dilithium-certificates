@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-27T01:03:47.121305+00:00",
+  "timestamp": "2025-04-29T01:00:14.822482+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -9827,6 +9827,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 135,
+      "id": "PR_kwDOIEpj4c6UNEYB",
+      "title": "clean up section header",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/135",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "working through editorial nits. This section was inconsistently formatted with comparison to others. Rather than a nested subsection only of one item, I removed the subsubsection and handle this all the subsection.",
+      "createdAt": "2025-04-28T17:20:35Z",
+      "updatedAt": "2025-04-28T17:20:35Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2472283249ffebf31d5adf12fb81c1768a6cf870",
+      "headRepository": "jakemas/dilithium-certificates",
+      "headRefName": "cleanup-1",
+      "headRefOid": "3bf98db68255ab8080ed2a660880df847c27dafe",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
