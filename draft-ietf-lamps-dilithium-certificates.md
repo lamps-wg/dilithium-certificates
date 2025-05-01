@@ -1,6 +1,7 @@
 ---
 title: >
-  Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA
+  Internet X.509 Public Key Infrastructure - Algorithm Identifiers
+  for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
 abbrev: ML-DSA in Certificates
 category: std
 
