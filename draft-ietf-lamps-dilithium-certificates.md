@@ -575,7 +575,7 @@ full key is expanded from seed and the seed discarded, the seed cannot be
 re-created even if the full expanded private key is available. For this reason
 it is RECOMMENDED that implementations retain and export the seed,
 even when also exporting the expanded private key. ML-DSA seed extraction can be
-implemented by including the random seed xi generated at line 1 of Algorithm 1
+implemented by including the seed xi randomly generated at line 1 of Algorithm 1
 `ML-DSA.KeyGen` in the returned output.
 
 # Private Key Consistency Testing
