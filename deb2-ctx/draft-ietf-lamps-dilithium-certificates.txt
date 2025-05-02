@@ -4052,7 +4052,9 @@ ComputeMu(pk, M, ctx):
 
   # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
-  # M is a bit-string, mu and ctx are byte-strings.
+  # M is the message, a bit-string
+  # mu and ctx are byte-strings.
+  # ctx is the context string, which defaults to the empy string.
 
   mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
