@@ -224,9 +224,7 @@ The OIDs are:
 ~~~
 
 The contents of the `parameters` component for each `algorithm` MUST be
-absent. The ctx value used in the ML-DSA signing and verification
-{{FIPS204}} of ML-DSA signatures defined in this specification
-(X.509 certificates, CRLs) is the empty string.
+absent.
 
 # ML-DSA Signatures in PKIX
 
@@ -319,6 +317,11 @@ encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified in {{oids}}.
+
+When creating and verifying signatures in scope of this specification
+(X.509 certificates, CRLs), the optional context string (ctx) parameter
+as defined in Section 5.2 of {{FIPS204}} is left to its default value:
+the empty string.
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PublicKey}
 
