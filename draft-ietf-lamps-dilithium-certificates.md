@@ -342,7 +342,7 @@ The fields in `SubjectPublicKeyInfo` have the following meaning:
 * `algorithm` is the algorithm identifier and parameters for the
   public key (see above).
 
-* `subjectPublicKey` contains the byte stream of the public key.
+* `subjectPublicKey` contains the public key.
 
 The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
@@ -383,7 +383,7 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
-the `subjectPublicKey BIT STRING` contains the raw byte string encoding of the
+the `subjectPublicKey BIT STRING` contains this raw byte string encoding of the
 public key.
 
 When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an
