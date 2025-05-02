@@ -1472,7 +1472,7 @@ values are specified in <a href="#oids" class="auto internal xref">Section 2</a>
 public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-5.2">
-          <p id="section-4-5.2.1"><code>subjectPublicKey</code> contains the byte stream of the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-5.2.1"><code>subjectPublicKey</code> contains the public key.<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-6">The <code>PUBLIC-KEY</code> ASN.1 types for ML-DSA are defined here:<a href="#section-4-6" class="pilcrow">¶</a></p>
@@ -1513,7 +1513,7 @@ public key (see above).<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </aside>
 <p id="section-4-9">Algorithm 22 in Section 7.2 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span> defines the raw byte string
 encoding of an ML-DSA public key. When used in a <code>SubjectPublicKeyInfo</code> type,
-the <code>subjectPublicKey BIT STRING</code> contains the raw byte string encoding of the
+the <code>subjectPublicKey BIT STRING</code> contains this raw byte string encoding of the
 public key.<a href="#section-4-9" class="pilcrow">¶</a></p>
 <p id="section-4-10">When an ML-DSA public key appears outside of a <code>SubjectPublicKeyInfo</code> type in an
 environment that uses ASN.1 encoding, it can be encoded as an <code>OCTET STRING</code> by
