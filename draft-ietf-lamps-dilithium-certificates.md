@@ -661,11 +661,6 @@ the protocols for secure routing. A full
 discussion of these properties in ML-DSA can be found at
 {{CDFFJ21}}.
 
-These properties are dependent, in part, on unambiguous public
-key serialization. It for this reason the public key structure
-defined in {{ML-DSA-PublicKey}} is intentionally encoded as a
-single OCTET STRING.
-
 ## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
 
 The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
