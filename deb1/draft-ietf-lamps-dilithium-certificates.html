@@ -1827,7 +1827,7 @@ avoids all of these operational concerns.<a href="#section-10.1-2" class="pilcro
 <p id="section-10.1-3">The security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
 compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
-Specifically, ML-DSA prepends the SHAKE256 hash of the public key <code>tr</code>
+Specifically, ML-DSA prepends the SHAKE256 hash of the public key (<code>tr</code>)
 to the message to-be-signed prior to hashing, as described in
 line 6 of Algorithm 7 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>. This means that in the unlikely
 discovery of a collision attack against the SHA-3 family, an attacker
