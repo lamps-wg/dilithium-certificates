@@ -687,7 +687,7 @@ know whether the key will need to produce pure or pre-hashed signatures
 at key generation time. The External Mu mode described in {{externalmu}}
 avoids all of these operational concerns.
 
-Another minor reason for disallowing HashML-DSA is that the design of the
+A minor security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
 compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
 Specifically, ML-DSA prepends the SHAKE256 hash of the public key `tr`
