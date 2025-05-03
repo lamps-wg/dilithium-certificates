@@ -1810,9 +1810,8 @@ used; in other words, public keys identified by
 <code>id-hash-ml-dsa-44-with-sha512</code>, <code>id-hash-ml-dsa-65-with-sha512</code>, and
 <code>id-hash-ml-dsa-87-with-sha512</code> <span class="bcp14">MUST NOT</span> be in X.509 certificates used for
 CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
-is for both implementation and security reasons.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
-<p id="section-10.1-2">The implementation reason for disallowing HashML-DSA stems from the fact
-that ML-DSA and HashML-DSA are incompatible algorithms that require
+is primarily to increase interoperability.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-2">ML-DSA and HashML-DSA are incompatible algorithms that require
 different <code>Verify()</code> routines. This introduces the complexity of
 informing the verifier whether to use <code>ML-DSA.Verify()</code> or
 <code>HashML-DSA.Verify()</code>. Additionally, since
@@ -1824,7 +1823,7 @@ to cause operational issues in contexts where the operator does not
 know whether the key will need to produce pure or pre-hashed signatures
 at key generation time. The External Mu mode described in <a href="#externalmu" class="auto internal xref">Appendix D</a>
 avoids all of these operational concerns.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
-<p id="section-10.1-3">The security reason for disallowing HashML-DSA is that the design of the
+<p id="section-10.1-3">A minor security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
 compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
 Specifically, ML-DSA prepends the SHAKE256 hash of the public key <code>tr</code>
