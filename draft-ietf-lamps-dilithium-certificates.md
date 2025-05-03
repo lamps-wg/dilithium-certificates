@@ -1028,7 +1028,8 @@ ComputeMu(pk, M, ctx):
   # in the FIPS 204 FAQ.
   # M is a bit-string, mu and ctx are byte-strings.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+                IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
   return mu
 ~~~
