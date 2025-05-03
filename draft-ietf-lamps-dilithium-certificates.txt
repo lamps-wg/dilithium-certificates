@@ -564,16 +564,17 @@ Table of Contents
    Masking countermeasures exist for ML-DSA, but come with a performance
    overhead.
 
-   A fundamental security property also associated with digital
-   signatures is non-repudiation.  Non-repudiation refers to the
-   assurance that the owner of a signature key pair that was capable of
-   generating an existing signature corresponding to certain data cannot
-   convincingly deny having signed the data.  The digital signature
-   scheme ML-DSA possess three security properties beyond
-   unforgeability, that are associated with non-repudiation.  These are
-   exclusive ownership, message-bound signatures, and non-resignability.
-   These properties are based tightly on the assumed collision
-   resistance of the hash function used (in this case SHAKE-256).
+   A security property also associated with digital signatures is non-
+   repudiation.  Non-repudiation refers to the assurance that the owner
+   of a signature key pair that was capable of generating an existing
+   signature corresponding to certain data cannot convincingly deny
+   having signed the data, unless its private key was compromised.  The
+   digital signature scheme ML-DSA possess three security properties
+   beyond unforgeability, that are associated with non-repudiation.
+   These are exclusive ownership, message-bound signatures, and non-
+   resignability.  These properties are based tightly on the assumed
+   collision resistance of the hash function used (in this case SHAKE-
+   256).
 
    Exclusive ownership is a property in which a signature sigma uniquely
    determines the public key and message for which it is valid.
