@@ -12,8 +12,8 @@ Expires: 4 November 2025                                       S. Turner
                                                               3 May 2025
 
 
-Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
-                                  DSA
+Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
+       Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
              draft-ietf-lamps-dilithium-certificates-latest
 
 Abstract
