@@ -309,7 +309,9 @@ SHALL be a `SEQUENCE` of one component, the OID id-ml-dsa-*.
 
 The `signatureValue` field contains the corresponding ML-DSA signature
 computed upon the ASN.1 DER encoded `tbsCertificate`/`tbsCertList`
-{{RFC5280}}.
+{{RFC5280}}.  The optional context string (ctx) parameter
+as defined in Section 5.2 of {{FIPS204}} is left to its default value:
+the empty string.
 
 Conforming Certification Authority (CA) implementations MUST specify
 the algorithms explicitly by using the OIDs specified in {{oids}} when
@@ -317,11 +319,6 @@ encoding ML-DSA signatures in certificates and CRLs. Conforming client
 implementations that process certificates and CRLs using ML-DSA MUST
 recognize the corresponding OIDs. Encoding rules for ML-DSA signature
 values are specified in {{oids}}.
-
-When creating and verifying signatures in scope of this specification
-(X.509 certificates, CRLs), the optional context string (ctx) parameter
-as defined in Section 5.2 of {{FIPS204}} is left to its default value:
-the empty string.
 
 # ML-DSA Public Keys in PKIX {#ML-DSA-PublicKey}
 
