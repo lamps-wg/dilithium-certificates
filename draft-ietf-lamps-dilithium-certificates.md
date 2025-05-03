@@ -672,10 +672,9 @@ used; in other words, public keys identified by
 `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
 `id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
 CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
-is for both implementation and security reasons.
+is primarily to increase interoperability.
 
-The implementation reason for disallowing HashML-DSA stems from the fact
-that ML-DSA and HashML-DSA are incompatible algorithms that require
+ML-DSA and HashML-DSA are incompatible algorithms that require
 different `Verify()` routines. This introduces the complexity of
 informing the verifier whether to use `ML-DSA.Verify()` or
 `HashML-DSA.Verify()`. Additionally, since
@@ -688,7 +687,7 @@ know whether the key will need to produce pure or pre-hashed signatures
 at key generation time. The External Mu mode described in {{externalmu}}
 avoids all of these operational concerns.
 
-The security reason for disallowing HashML-DSA is that the design of the
+A minor security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
 compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
 Specifically, ML-DSA prepends the SHAKE256 hash of the public key `tr`
