@@ -5,15 +5,15 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 3 November 2025                                       S. Turner
+Expires: 4 November 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                              2 May 2025
+                                                              3 May 2025
 
 
-Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
-                                  DSA
+Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
+       Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
              draft-ietf-lamps-dilithium-certificates-latest
 
 Abstract
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 November 2025.
+   This Internet-Draft will expire on 4 November 2025.
 
 Copyright Notice
 
@@ -151,7 +151,7 @@ Table of Contents
    The fields in AlgorithmIdentifier have the following meanings:
 
    *  algorithm identifies the cryptographic algorithm with an object
-      identifier.
+      identifier (OID).
 
    *  parameters, which are optional, are the associated parameters for
       the algorithm identifier in the algorithm field.
@@ -279,7 +279,7 @@ Table of Contents
    *  algorithm is the algorithm identifier and parameters for the
       public key (see above).
 
-   *  subjectPublicKey contains the byte stream of the public key.
+   *  subjectPublicKey contains the public key.
 
    The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 
@@ -317,7 +317,7 @@ Table of Contents
    Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
    encoding of an ML-DSA public key.  When used in a
    SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
-   the raw byte string encoding of the public key.
+   this raw byte string encoding of the public key.
 
    When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
    type in an environment that uses ASN.1 encoding, it can be encoded as
@@ -505,7 +505,7 @@ Table of Contents
    expanded private key is available.  For this reason it is RECOMMENDED
    that implementations retain and export the seed, even when also
    exporting the expanded private key.  ML-DSA seed extraction can be
-   implemented by including the random seed xi generated at line 1 of
+   implemented by including the seed xi randomly generated at line 1 of
    Algorithm 1 ML-DSA.KeyGen in the returned output.
 
 9.  Private Key Consistency Testing
@@ -562,16 +562,17 @@ Table of Contents
    When randomized, ML-DSA is easier to harden against fault and
    hardware side-channel attacks.
 
-   A fundamental security property also associated with digital
-   signatures is non-repudiation.  Non-repudiation refers to the
-   assurance that the owner of a signature key pair that was capable of
-   generating an existing signature corresponding to certain data cannot
-   convincingly deny having signed the data.  The digital signature
-   scheme ML-DSA possess three security properties beyond
-   unforgeability, that are associated with non-repudiation.  These are
-   exclusive ownership, message-bound signatures, and non-resignability.
-   These properties are based tightly on the assumed collision
-   resistance of the hash function used (in this case SHAKE-256).
+   A security property also associated with digital signatures is non-
+   repudiation.  Non-repudiation refers to the assurance that the owner
+   of a signature key pair that was capable of generating an existing
+   signature corresponding to certain data cannot convincingly deny
+   having signed the data, unless its private key was compromised.  The
+   digital signature scheme ML-DSA possess three security properties
+   beyond unforgeability, that are associated with non-repudiation.
+   These are exclusive ownership, message-bound signatures, and non-
+   resignability.  These properties are based tightly on the assumed
+   collision resistance of the hash function used (in this case SHAKE-
+   256).
 
    Exclusive ownership is a property in which a signature sigma uniquely
    determines the public key and message for which it is valid.
@@ -597,12 +598,11 @@ Table of Contents
    with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
    with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP,
    certificate issuance and related PKIX protocols.  This restriction is
-   for both implementation and security reasons.
+   primarily to increase interoperability.
 
-   The implementation reason for disallowing HashML-DSA stems from the
-   fact that ML-DSA and HashML-DSA are incompatible algorithms that
-   require different Verify() routines.  This introduces the complexity
-   of informing the verifier whether to use ML-DSA.Verify() or HashML-
+   ML-DSA and HashML-DSA are incompatible algorithms that require
+   different Verify() routines.  This introduces the complexity of
+   informing the verifier whether to use ML-DSA.Verify() or HashML-
    DSA.Verify().  Additionally, since the same OIDs are used to identify
    the ML-DSA public keys and ML-DSA signature algorithms, an
    implementation would need to commit a given public key to be either
@@ -612,17 +612,17 @@ Table of Contents
    pre-hashed signatures at key generation time.  The External Mu mode
    described in Appendix D avoids all of these operational concerns.
 
-   The security reason for disallowing HashML-DSA is that the design of
-   the ML-DSA algorithm provides enhanced resistance against collision
-   attacks, compared with HashML-DSA or conventional RSA or ECDSA
-   signature algorithms.  Specifically, ML-DSA prepends the SHAKE256
-   hash of the public key tr to the message to-be-signed prior to
-   hashing, as described in line 6 of Algorithm 7 of [FIPS204].  This
-   means that in the unlikely discovery of a collision attack against
-   the SHA-3 family, an attacker would have to perform a public-key-
-   specific collision search in order to find message pairs such that
-   H(tr || m1) = H(tr || m2) since a direct hash collision H(m1) = H(m2)
-   will not suffice.  HashML-DSA removes this enhanced security
+   A minor security reason for disallowing HashML-DSA is that the design
+   of the ML-DSA algorithm provides enhanced resistance against
+   collision attacks, compared with HashML-DSA or conventional RSA or
+   ECDSA signature algorithms.  Specifically, ML-DSA prepends the
+   SHAKE256 hash of the public key (tr) to the message to-be-signed
+   prior to hashing, as described in line 6 of Algorithm 7 of [FIPS204].
+   This means that in the unlikely discovery of a collision attack
+   against the SHA-3 family, an attacker would have to perform a public-
+   key-specific collision search in order to find message pairs such
+   that H(tr || m1) = H(tr || m2) since a direct hash collision H(m1) =
+   H(m2) will not suffice.  HashML-DSA removes this enhanced security
    property.  In spite of its lack of targeted collision protection, the
    practical security risk of using HashML-DSA in X.509 signatures would
    be immaterial.  That is because a hash of the issuing CA's public key
@@ -3815,7 +3815,7 @@ C.3.  Example Certificates
 C.4.  Example Inconsistent Seed and Expanded Private Keys
 
       |  WARNING: These private keys are purposely bad do not use them
-      |  in production systmes.
+      |  in production systems.
 
    The following examples demonstrate inconsistent seed and expanded
    private keys.
@@ -4049,7 +4049,8 @@ ComputeMu(pk, M, ctx):
   # in the FIPS 204 FAQ.
   # M is a bit-string, mu and ctx are byte-strings.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+                IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
   return mu
 
