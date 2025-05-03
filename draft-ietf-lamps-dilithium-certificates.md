@@ -1,6 +1,7 @@
 ---
 title: >
-  Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-DSA
+  Internet X.509 Public Key Infrastructure - Algorithm Identifiers
+  for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
 abbrev: ML-DSA in Certificates
 category: std
 
@@ -202,7 +203,7 @@ syntax.
 The fields in AlgorithmIdentifier have the following meanings:
 
 * `algorithm` identifies the cryptographic algorithm with an object
-identifier.
+identifier (OID).
 
 * `parameters`, which are optional, are the associated parameters for the
 algorithm identifier in the algorithm field.
@@ -342,7 +343,7 @@ The fields in `SubjectPublicKeyInfo` have the following meaning:
 * `algorithm` is the algorithm identifier and parameters for the
   public key (see above).
 
-* `subjectPublicKey` contains the byte stream of the public key.
+* `subjectPublicKey` contains the public key.
 
 The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
@@ -383,7 +384,7 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
 Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
-the `subjectPublicKey BIT STRING` contains the raw byte string encoding of the
+the `subjectPublicKey BIT STRING` contains this raw byte string encoding of the
 public key.
 
 When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an
@@ -575,7 +576,7 @@ full key is expanded from seed and the seed discarded, the seed cannot be
 re-created even if the full expanded private key is available. For this reason
 it is RECOMMENDED that implementations retain and export the seed,
 even when also exporting the expanded private key. ML-DSA seed extraction can be
-implemented by including the random seed xi generated at line 1 of Algorithm 1
+implemented by including the seed xi randomly generated at line 1 of Algorithm 1
 `ML-DSA.KeyGen` in the returned output.
 
 # Private Key Consistency Testing
@@ -632,11 +633,12 @@ signing mixes in a 256-bit random string from an approved random bit
 generator (RBG). When randomized, ML-DSA is easier to harden
 against fault and hardware side-channel attacks.
 
-A fundamental security property also associated with digital
+A security property also associated with digital
 signatures is non-repudiation. Non-repudiation refers to the
 assurance that the owner of a signature key pair that was
 capable of generating an existing signature corresponding to
-certain data cannot convincingly deny having signed the data.
+certain data cannot convincingly deny having signed the data,
+unless its private key was compromised.
 The digital signature scheme ML-DSA possess three security
 properties beyond unforgeability, that are associated with
 non-repudiation. These are exclusive ownership, message-bound
@@ -671,10 +673,9 @@ used; in other words, public keys identified by
 `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
 `id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
 CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
-is for both implementation and security reasons.
+is primarily to increase interoperability.
 
-The implementation reason for disallowing HashML-DSA stems from the fact
-that ML-DSA and HashML-DSA are incompatible algorithms that require
+ML-DSA and HashML-DSA are incompatible algorithms that require
 different `Verify()` routines. This introduces the complexity of
 informing the verifier whether to use `ML-DSA.Verify()` or
 `HashML-DSA.Verify()`. Additionally, since
@@ -687,10 +688,10 @@ know whether the key will need to produce pure or pre-hashed signatures
 at key generation time. The External Mu mode described in {{externalmu}}
 avoids all of these operational concerns.
 
-The security reason for disallowing HashML-DSA is that the design of the
+A minor security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
 compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
-Specifically, ML-DSA prepends the SHAKE256 hash of the public key `tr`
+Specifically, ML-DSA prepends the SHAKE256 hash of the public key (`tr`)
 to the message to-be-signed prior to hashing, as described in
 line 6 of Algorithm 7 of {{FIPS204}}. This means that in the unlikely
 discovery of a collision attack against the SHA-3 family, an attacker
@@ -958,7 +959,7 @@ so-called "pretty print"; the certificates are the same.
 
 <aside markdown="block">
   WARNING: These private keys are purposely bad do not use them in
-  production systmes.
+  production systems.
 </aside>
 
 The following examples demonstrate inconsistent seed and expanded private keys.
@@ -1027,7 +1028,8 @@ ComputeMu(pk, M, ctx):
   # in the FIPS 204 FAQ.
   # M is a bit-string, mu and ctx are byte-strings.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+                IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
   return mu
 ~~~
