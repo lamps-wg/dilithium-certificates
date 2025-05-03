@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 3 November 2025                                       S. Turner
+Expires: 4 November 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                              2 May 2025
+                                                              3 May 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 November 2025.
+   This Internet-Draft will expire on 4 November 2025.
 
 Copyright Notice
 
@@ -4051,7 +4051,8 @@ ComputeMu(pk, M, ctx):
   # in the FIPS 204 FAQ.
   # M is a bit-string, mu and ctx are byte-strings.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) || IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+                IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
   return mu
 
