@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 3 November 2025                                       S. Turner
+Expires: 4 November 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                              2 May 2025
+                                                              3 May 2025
 
 
 Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 November 2025.
+   This Internet-Draft will expire on 4 November 2025.
 
 Copyright Notice
 
@@ -613,12 +613,12 @@ Table of Contents
    pre-hashed signatures at key generation time.  The External Mu mode
    described in Appendix D avoids all of these operational concerns.
 
-   Another minor reason for disallowing HashML-DSA is that the design of
-   the ML-DSA algorithm provides enhanced resistance against collision
-   attacks, compared with HashML-DSA or conventional RSA or ECDSA
-   signature algorithms.  Specifically, ML-DSA prepends the SHAKE256
-   hash of the public key tr to the message to-be-signed prior to
-   hashing, as described in line 6 of Algorithm 7 of [FIPS204].  This
+   A minor security reason for disallowing HashML-DSA is that the design
+   of the ML-DSA algorithm provides enhanced resistance against
+   collision attacks, compared with HashML-DSA or conventional RSA or
+   ECDSA signature algorithms.  Specifically, ML-DSA prepends the
+   SHAKE256 hash of the public key tr to the message to-be-signed prior
+   to hashing, as described in line 6 of Algorithm 7 of [FIPS204].  This
    means that in the unlikely discovery of a collision attack against
    the SHA-3 family, an attacker would have to perform a public-key-
    specific collision search in order to find message pairs such that
