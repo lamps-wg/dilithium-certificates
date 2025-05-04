@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T01:06:17.806670+00:00",
+  "timestamp": "2025-05-04T01:06:45.812002+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -9879,6 +9879,653 @@
           "body": "",
           "createdAt": "2025-04-29T12:02:53Z",
           "updatedAt": "2025-04-29T12:02:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 136,
+      "id": "PR_kwDOIEpj4c6Ur745",
+      "title": "Nit: expand MLDSA acronym in title",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/136",
+      "state": "MERGED",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Considering unifying the naming conventions across the two drafts, as in https://github.com/lamps-wg/kyber-certificates/blob/main/draft-ietf-lamps-kyber-certificates.md?plain=1#L3-L4\r\n\r\nUsing both the full scheme name and acronym (ML-DSA) may also improve visibility/discovery.",
+      "createdAt": "2025-05-01T21:08:40Z",
+      "updatedAt": "2025-05-03T14:02:39Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "jakemas/dilithium-certificates",
+      "headRefName": "edits-title",
+      "headRefOid": "16c84bdf23f83f239152b0365cc831a9284c4c2d",
+      "closedAt": "2025-05-03T14:02:39Z",
+      "mergedAt": "2025-05-03T14:02:39Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "c5b075bc5179434ee8b04bd82f019b95adfe94ab"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6nmUqo",
+          "commit": {
+            "abbreviatedOid": "16c84bd"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-02T11:56:53Z",
+          "updatedAt": "2025-05-02T11:56:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Note: Annoyingly NIST uses `Standard` instead of `Algorithm` in the title of FIPS 204. I think using *Algorithm* here makes more sense.",
+              "createdAt": "2025-05-02T11:56:53Z",
+              "updatedAt": "2025-05-02T11:56:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nmUtx",
+          "commit": {
+            "abbreviatedOid": "16c84bd"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T11:57:01Z",
+          "updatedAt": "2025-05-02T11:57:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nonfg",
+          "commit": {
+            "abbreviatedOid": "16c84bd"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-02T16:32:48Z",
+          "updatedAt": "2025-05-02T16:32:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I agree, I wanted to use `Standard` also but felt it was more correct to abide by the `DSA` part!",
+              "createdAt": "2025-05-02T16:32:48Z",
+              "updatedAt": "2025-05-02T16:32:48Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 137,
+      "id": "PR_kwDOIEpj4c6UwsRI",
+      "title": "AD comments",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/137",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR collects the straightforward changes to address the comments of [the AD](https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/).",
+      "createdAt": "2025-05-02T14:20:27Z",
+      "updatedAt": "2025-05-03T14:02:49Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb1",
+      "headRefOid": "e8a883613b3370ab2aa29f5eb530c69b93f8f97f",
+      "closedAt": "2025-05-03T14:02:49Z",
+      "mergedAt": "2025-05-03T14:02:49Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "a19c5ee187af6701194324b530f2ca147faebb67"
+      },
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "these look good.  TY",
+          "createdAt": "2025-05-03T10:12:01Z",
+          "updatedAt": "2025-05-03T10:12:01Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6nooOI",
+          "commit": {
+            "abbreviatedOid": "e8a8836"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:34:07Z",
+          "updatedAt": "2025-05-02T16:34:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nqCeY",
+          "commit": {
+            "abbreviatedOid": "e8a8836"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T20:05:02Z",
+          "updatedAt": "2025-05-02T20:05:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 138,
+      "id": "PR_kwDOIEpj4c6UwzX0",
+      "title": "Clarify context string use",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/138",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses\r\n\r\n> Section 2, last sentence:  ctx is not defined, nor used in the main\r\n> part of the draft, only in Appendix D.  I would define it here.  If it\r\n> only applies in the Appendix D situation, then I would move the\r\n> statement (and definition) there.\r\n\r\nof https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
+      "createdAt": "2025-05-02T14:35:12Z",
+      "updatedAt": "2025-05-03T14:03:13Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb2-ctx",
+      "headRefOid": "e14b0e76cf110f63b8e247c4430e3d5f028df2ca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "This looks good to me.  TY",
+          "createdAt": "2025-05-03T10:28:06Z",
+          "updatedAt": "2025-05-03T10:28:06Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Merge at your leasure @csosto-pk ",
+          "createdAt": "2025-05-03T14:03:12Z",
+          "updatedAt": "2025-05-03T14:03:12Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6noowH",
+          "commit": {
+            "abbreviatedOid": "96f6381"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:34:58Z",
+          "updatedAt": "2025-05-02T16:34:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nqFZW",
+          "commit": {
+            "abbreviatedOid": "96f6381"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-02T20:12:47Z",
+          "updatedAt": "2025-05-02T20:12:48Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I like this, but I suggest to move it in the paragraph that mentions how these signatures are computed. \r\n\r\n> The signatureValue field contains the corresponding ML-DSA signature computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList {{RFC5280}}. ",
+              "createdAt": "2025-05-02T20:12:48Z",
+              "updatedAt": "2025-05-02T20:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nrf_w",
+          "commit": {
+            "abbreviatedOid": "96f6381"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-03T09:30:23Z",
+          "updatedAt": "2025-05-03T09:30:23Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Like this?",
+              "createdAt": "2025-05-03T09:30:23Z",
+              "updatedAt": "2025-05-03T09:30:24Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 139,
+      "id": "PR_kwDOIEpj4c6UxBT2",
+      "title": "Rewrite section on random signing",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/139",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses\r\n\r\n> Section 10, para 3:  I struggled with this paragraph. What's the\r\n> point?  have you buried the lead?  If the point is 'poor entropy',\r\n> then I think you lead with that.  If the point is side channel\r\n> protection, move that to para 4? I think you can separate these two\r\n> attack surfaces.  In addition:\r\n> First two sentences:  There are two modes, deterministic and\r\n> randomized.  Second sentence is 'non-deterministic', change that to\r\n> 'randomized'?\r\n> Sentence 3: there is a \"private random seed (rho')\" which I'm assuming\r\n> is a different value.  Any chance we can reinforce that this is\r\n> different from 'seed xi'?\r\n> throughout para 3:  rnd, rng, spell them out.  Clarify that the\r\n> 256-bit string is rnd.  random for the randomized version and a\r\n> constant string for the deterministic version.  I couldn't quite tell\r\n> if 'rng' was a typo.\r\n\r\nfrom https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
+      "createdAt": "2025-05-02T15:05:05Z",
+      "updatedAt": "2025-05-03T14:04:57Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "a19c5ee187af6701194324b530f2ca147faebb67",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb3-detsig",
+      "headRefOid": "08b9139fc1ff1971c0c55e10f9c05b540a8621d9",
+      "closedAt": "2025-05-03T14:04:57Z",
+      "mergedAt": "2025-05-03T14:04:56Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "b99d57f9f306f8d0c1f2ddf999d9a4daedd4864a"
+      },
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "This looks better.  TY",
+          "createdAt": "2025-05-03T10:33:42Z",
+          "updatedAt": "2025-05-03T10:33:42Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6nopxN",
+          "commit": {
+            "abbreviatedOid": "ccc5e95"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:35:59Z",
+          "updatedAt": "2025-05-02T16:35:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nqKQU",
+          "commit": {
+            "abbreviatedOid": "ccc5e95"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T20:23:37Z",
+          "updatedAt": "2025-05-02T20:23:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 140,
+      "id": "PR_kwDOIEpj4c6UxL5s",
+      "title": "Tweak section on non repduction",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/140",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses\r\n\r\n> Section 10, para 5:  Meh.... the ability to export/lose control of a\r\n> private key leaves an issue with non-repudiation, no?  I'm fine with\r\n> the paragraph as it stands, but add something to convey the risk of\r\n> private key exposure. [I will note that I might also disagree with\r\n> non-repudiation as a 'fundamental security property', but that is a\r\n> personal bias.]\r\n\r\nfrom https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
+      "createdAt": "2025-05-02T15:31:12Z",
+      "updatedAt": "2025-05-03T14:02:27Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb4-nonrep",
+      "headRefOid": "c8b6a19d6edf019786a278b90f24fc4ea8898088",
+      "closedAt": "2025-05-03T14:02:27Z",
+      "mergedAt": "2025-05-03T14:02:27Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "cb82a198a554e769554595dff484eef6c5c42af3"
+      },
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "better, TY",
+          "createdAt": "2025-05-03T10:35:36Z",
+          "updatedAt": "2025-05-03T10:35:36Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6noqVC",
+          "commit": {
+            "abbreviatedOid": "c8b6a19"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:36:39Z",
+          "updatedAt": "2025-05-02T16:36:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 141,
+      "id": "PR_kwDOIEpj4c6UxNzs",
+      "title": "Remove rationale for public key formatting",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/141",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Section 10, last sentence: 'These properties', which properties?  The\r\n> properties in this section?  Is this a security consideration?  Or\r\n> does it belong up in Section 4?\r\n\r\nfrom https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
+      "createdAt": "2025-05-02T15:36:00Z",
+      "updatedAt": "2025-05-03T14:02:12Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb5-pkformatting",
+      "headRefOid": "59c9c133c69f212a292d8578ad1eeec07564a089",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "removing the last paragraph is fine.  TY",
+          "createdAt": "2025-05-03T10:39:45Z",
+          "updatedAt": "2025-05-03T10:39:45Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6noqjA",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:37:04Z",
+          "updatedAt": "2025-05-02T16:37:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nqNNy",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-02T20:31:40Z",
+          "updatedAt": "2025-05-02T20:31:40Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Should we remove the paragraph above too? It talks about \"Exclusive ownership\". But it does not say anything about this draft. ML-DSA having Exclusive ownership property or not is irrelevant to this draft. ",
+              "createdAt": "2025-05-02T20:31:40Z",
+              "updatedAt": "2025-05-02T20:31:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nrf4h",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-03T09:27:08Z",
+          "updatedAt": "2025-05-03T09:27:09Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Let's discuss that as part of the answer to Deb's questions addressed in #140. I think it's fine to keep as long as it doesn't require too much bike shedding.",
+              "createdAt": "2025-05-03T09:27:08Z",
+              "updatedAt": "2025-05-03T09:27:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nriR0",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-03T10:38:58Z",
+          "updatedAt": "2025-05-03T10:38:58Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Ha!  I didn't comment on the 'Exclusive ownership' paragraph because I didn't understand it.  Remove, modify it, or leave it at your discretion.",
+              "createdAt": "2025-05-03T10:38:58Z",
+              "updatedAt": "2025-05-03T10:38:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nrqJe",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-03T14:02:12Z",
+          "updatedAt": "2025-05-03T14:02:12Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "@csosto-pk What shall we do?",
+              "createdAt": "2025-05-03T14:02:12Z",
+              "updatedAt": "2025-05-03T14:02:12Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 142,
+      "id": "PR_kwDOIEpj4c6UxQ2O",
+      "title": "Soften security risk of HashML-DSA",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/142",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses\r\n\r\n> Section 10.2, para 2:  I'd make first sentence about interoperability.\r\n> The rest can be about why these two methods don't interoperate.\r\n>\r\n> Section 10.1, para 3:  Let me summarize:  HashML-DSA loses some hash\r\n> collision protection, but it doesn't matter because of these other\r\n> things?  Did I understand that?  If that's true, I'd soften the first\r\n> sentence a bit. There is a security reason, but it isn't a strong one.\r\n> The for realsie issue is interoperability (para 2). [note:  IETF is\r\n> all about interoperability, so making this the top reason is perfect.]\r\n\r\nfrom https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
+      "createdAt": "2025-05-02T15:43:27Z",
+      "updatedAt": "2025-05-03T14:00:59Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb6-weakencol",
+      "headRefOid": "7a58b98b62f0a09fbad1b6f7b73ed4c5a20b234b",
+      "closedAt": "2025-05-03T14:00:59Z",
+      "mergedAt": "2025-05-03T14:00:59Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "ef0412e4bc0ad1ee148057bbdefa6fe2c3c56f24"
+      },
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "looks good.  TY",
+          "createdAt": "2025-05-03T10:48:59Z",
+          "updatedAt": "2025-05-03T10:48:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6noq4e",
+          "commit": {
+            "abbreviatedOid": "5762d55"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:37:48Z",
+          "updatedAt": "2025-05-02T16:37:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nqOa-",
+          "commit": {
+            "abbreviatedOid": "5762d55"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-02T20:35:04Z",
+          "updatedAt": "2025-05-02T20:35:05Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "\"minor security reason\"\r\nDon't be afraid to call it \"security\". It is \"immaterial\" or \"minor\" for sure. ",
+              "createdAt": "2025-05-02T20:35:05Z",
+              "updatedAt": "2025-05-02T20:35:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nrf0Y",
+          "commit": {
+            "abbreviatedOid": "5762d55"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-03T09:25:23Z",
+          "updatedAt": "2025-05-03T09:25:23Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "Done.",
+              "createdAt": "2025-05-03T09:25:23Z",
+              "updatedAt": "2025-05-03T09:25:23Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 143,
+      "id": "PR_kwDOIEpj4c6UxV3N",
+      "title": "Viktor's correction",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/143",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-02T15:57:01Z",
+      "updatedAt": "2025-05-03T14:00:48Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb7-mutypo",
+      "headRefOid": "55fdc5e4018d31529a5f07b1d7849949d9ddea0f",
+      "closedAt": "2025-05-03T14:00:48Z",
+      "mergedAt": "2025-05-03T14:00:48Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "54107fd2d5a88763e74e09101106f687f8d85fd0"
+      },
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "Seems fine.  Watch the line lengths.  TY",
+          "createdAt": "2025-05-03T10:51:15Z",
+          "updatedAt": "2025-05-03T10:51:15Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6norDG",
+          "commit": {
+            "abbreviatedOid": "37e8ab0"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T16:38:12Z",
+          "updatedAt": "2025-05-02T16:38:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nqSVw",
+          "commit": {
+            "abbreviatedOid": "37e8ab0"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T20:46:26Z",
+          "updatedAt": "2025-05-02T20:46:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nrePq",
+          "commit": {
+            "abbreviatedOid": "37e8ab0"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-03T08:49:43Z",
+          "updatedAt": "2025-05-03T08:49:43Z",
           "comments": []
         }
       ]
