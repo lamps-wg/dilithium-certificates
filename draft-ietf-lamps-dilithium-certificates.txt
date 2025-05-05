@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 4 November 2025                                       S. Turner
+Expires: 6 November 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                              3 May 2025
+                                                              5 May 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 November 2025.
+   This Internet-Draft will expire on 6 November 2025.
 
 Copyright Notice
 
@@ -171,9 +171,7 @@ Table of Contents
                nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 
    The contents of the parameters component for each algorithm MUST be
-   absent.  The ctx value used in the ML-DSA signing and verification
-   [FIPS204] of ML-DSA signatures defined in this specification (X.509
-   certificates, CRLs) is the empty string.
+   absent.
 
 3.  ML-DSA Signatures in PKIX
 
@@ -251,7 +249,9 @@ Table of Contents
 
    The signatureValue field contains the corresponding ML-DSA signature
    computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
-   [RFC5280].
+   [RFC5280].  The optional context string (ctx) parameter as defined in
+   Section 5.2 of [FIPS204] is left to its default value: the empty
+   string.
 
    Conforming Certification Authority (CA) implementations MUST specify
    the algorithms explicitly by using the OIDs specified in Section 2
@@ -4047,7 +4047,9 @@ ComputeMu(pk, M, ctx):
 
   # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
-  # M is a bit-string, mu and ctx are byte-strings.
+  # M is the message, a bit-string
+  # mu and ctx are byte-strings.
+  # ctx is the context string, which defaults to the empy string.
 
   mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
                 IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
