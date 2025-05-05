@@ -225,9 +225,7 @@ The OIDs are:
 ~~~
 
 The contents of the `parameters` component for each `algorithm` MUST be
-absent. The ctx value used in the ML-DSA signing and verification
-{{FIPS204}} of ML-DSA signatures defined in this specification
-(X.509 certificates, CRLs) is the empty string.
+absent.
 
 # ML-DSA Signatures in PKIX
 
@@ -312,7 +310,9 @@ SHALL be a `SEQUENCE` of one component, the OID id-ml-dsa-*.
 
 The `signatureValue` field contains the corresponding ML-DSA signature
 computed upon the ASN.1 DER encoded `tbsCertificate`/`tbsCertList`
-{{RFC5280}}.
+{{RFC5280}}.  The optional context string (ctx) parameter
+as defined in Section 5.2 of {{FIPS204}} is left to its default value:
+the empty string.
 
 Conforming Certification Authority (CA) implementations MUST specify
 the algorithms explicitly by using the OIDs specified in {{oids}} when
@@ -1026,7 +1026,9 @@ ComputeMu(pk, M, ctx):
 
   # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
-  # M is a bit-string, mu and ctx are byte-strings.
+  # M is the message, a bit-string
+  # mu and ctx are byte-strings.
+  # ctx is the context string, which defaults to the empy string.
 
   mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
                 IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
