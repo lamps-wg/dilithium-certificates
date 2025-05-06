@@ -538,6 +538,17 @@ Table of Contents
    been assumed that the attacker has access to signatures for no more
    than 2^{64} chosen messages.
 
+   ML-DSA depends on high quality random numbers that are suitable for
+   use in cryptography.  The use of inadequate pseudo-random number
+   generators (PRNGs) to generate such values can significantly
+   undermine various security properties.  For instance, using an
+   inadequate PRNG for key generation, might allow an attacker to
+   efficiently recover the private key by trying a small set of
+   possibilities, rather than brute force search the whole keyspace.
+   The generation of random numbers of a sufficient level of quality for
+   use in cryptography is difficult, and [RFC4086] offers important
+   guidance in this area.
+
    In the design of ML-DSA, care has been taken to make side-channel
    resilience easier to achieve.  For instance, ML-DSA does not depend
    on Gaussian sampling.  Implementations must still take great care not
@@ -700,6 +711,11 @@ Table of Contents
               Policy and Certification Practices Framework", RFC 3647,
               DOI 10.17487/RFC3647, November 2003,
               <https://www.rfc-editor.org/rfc/rfc3647>.
+
+   [RFC4086]  Eastlake 3rd, D., Schiller, J., and S. Crocker,
+              "Randomness Requirements for Security", BCP 106, RFC 4086,
+              DOI 10.17487/RFC4086, June 2005,
+              <https://www.rfc-editor.org/rfc/rfc4086>.
 
    [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
               PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,

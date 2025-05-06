@@ -1748,7 +1748,17 @@ under strongly existentially unforgeable under chosen message attack
 (SUF-CMA). For the purpose of estimating security strength, it has
 been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.<a href="#section-10-2" class="pilcrow">¶</a></p>
-<p id="section-10-3">In the design of ML-DSA, care has been taken to make side-channel
+<p id="section-10-3">ML-DSA depends on high quality random numbers that are suitable for
+use in cryptography.  The use of inadequate pseudo-random number
+generators (PRNGs) to generate such values can significantly undermine
+various security properties. For instance, using an inadequate PRNG
+for key generation, might allow an attacker to efficiently recover
+the private key by trying a small set of possibilities, rather than
+brute force search the whole keyspace.  The generation of random
+numbers of a sufficient level of quality for use in cryptography
+is difficult, and <span>[<a href="#RFC4086" class="cite xref">RFC4086</a>]</span> offers important guidance in this
+area.<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-4">In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
 on Gaussian sampling. Implementations must still take great care
 not to leak information via various side channels. While deliberate
@@ -1760,8 +1770,8 @@ of side-channel leakage has been demonstrated in parts of the
 signing algorithm (specifically the bit-unpacking function), from
 which a demonstration of key recovery has been made over a large
 sample of signatures. Masking countermeasures exist for
-ML-DSA, but come with a performance overhead.<a href="#section-10-3" class="pilcrow">¶</a></p>
-<p id="section-10-4">ML-DSA offers both deterministic and randomized signing. Signatures
+ML-DSA, but come with a performance overhead.<a href="#section-10-4" class="pilcrow">¶</a></p>
+<p id="section-10-5">ML-DSA offers both deterministic and randomized signing. Signatures
 generated with either mode are compatible and a verifyer can't tell
 them apart. In the deterministic case, a signature only depends
 on the private key and the message to be signed. This makes
@@ -1769,8 +1779,8 @@ the implementation easier to test and does not require
 a randomness source during signing. In the randomized case,
 signing mixes in a 256-bit random string from an approved random bit
 generator (RBG). When randomized, ML-DSA is easier to harden
-against fault and hardware side-channel attacks.<a href="#section-10-4" class="pilcrow">¶</a></p>
-<p id="section-10-5">A security property also associated with digital
+against fault and hardware side-channel attacks.<a href="#section-10-5" class="pilcrow">¶</a></p>
+<p id="section-10-6">A security property also associated with digital
 signatures is non-repudiation. Non-repudiation refers to the
 assurance that the owner of a signature key pair that was
 capable of generating an existing signature corresponding to
@@ -1782,7 +1792,7 @@ non-repudiation. These are exclusive ownership, message-bound
 signatures, and non-resignability. These properties are based
 tightly on the assumed collision resistance of the hash
 function used (in this case SHAKE-256). A full discussion
-of these properties in ML-DSA can be found at <span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.<a href="#section-10-5" class="pilcrow">¶</a></p>
+of these properties in ML-DSA can be found at <span>[<a href="#CDFFJ21" class="cite xref">CDFFJ21</a>]</span>.<a href="#section-10-6" class="pilcrow">¶</a></p>
 <div id="sec-disallow-hash">
 <section id="section-10.1">
         <h3 id="name-rationale-for-disallowing-h">
@@ -1903,6 +1913,10 @@ the AKI hash of existing issuing CAs would be impractical.<a href="#section-10.1
 <dt id="RFC3647">[RFC3647]</dt>
         <dd>
 <span class="refAuthor">Chokhani, S.</span>, <span class="refAuthor">Ford, W.</span>, <span class="refAuthor">Sabett, R.</span>, <span class="refAuthor">Merrill, C.</span>, and <span class="refAuthor">S. Wu</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Policy and Certification Practices Framework"</span>, <span class="seriesInfo">RFC 3647</span>, <span class="seriesInfo">DOI 10.17487/RFC3647</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3647">https://www.rfc-editor.org/rfc/rfc3647</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4086">[RFC4086]</dt>
+        <dd>
+<span class="refAuthor">Eastlake 3rd, D.</span>, <span class="refAuthor">Schiller, J.</span>, and <span class="refAuthor">S. Crocker</span>, <span class="refTitle">"Randomness Requirements for Security"</span>, <span class="seriesInfo">BCP 106</span>, <span class="seriesInfo">RFC 4086</span>, <span class="seriesInfo">DOI 10.17487/RFC4086</span>, <time datetime="2005-06" class="refDate">June 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4086">https://www.rfc-editor.org/rfc/rfc4086</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7468">[RFC7468]</dt>
       <dd>
