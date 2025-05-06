@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-04T01:06:45.812002+00:00",
+  "timestamp": "2025-05-06T01:01:17.509502+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10033,24 +10033,26 @@
       "id": "PR_kwDOIEpj4c6UwzX0",
       "title": "Clarify context string use",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/138",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses\r\n\r\n> Section 2, last sentence:  ctx is not defined, nor used in the main\r\n> part of the draft, only in Appendix D.  I would define it here.  If it\r\n> only applies in the Appendix D situation, then I would move the\r\n> statement (and definition) there.\r\n\r\nof https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
       "createdAt": "2025-05-02T14:35:12Z",
-      "updatedAt": "2025-05-03T14:03:13Z",
+      "updatedAt": "2025-05-05T18:32:20Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "deb2-ctx",
       "headRefOid": "e14b0e76cf110f63b8e247c4430e3d5f028df2ca",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-05T18:32:20Z",
+      "mergedAt": "2025-05-05T18:32:20Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "019be6855205324a4e564adceb861e74a427aaa1"
+      },
       "comments": [
         {
           "author": "debcooley",
@@ -10120,6 +10122,19 @@
               "updatedAt": "2025-05-03T09:30:24Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nxPE5",
+          "commit": {
+            "abbreviatedOid": "e14b0e7"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-05T12:53:21Z",
+          "updatedAt": "2025-05-05T12:53:21Z",
+          "comments": []
         }
       ]
     },
@@ -10248,7 +10263,7 @@
       "labels": [],
       "body": "> Section 10, last sentence: 'These properties', which properties?  The\r\n> properties in this section?  Is this a security consideration?  Or\r\n> does it belong up in Section 4?\r\n\r\nfrom https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
       "createdAt": "2025-05-02T15:36:00Z",
-      "updatedAt": "2025-05-03T14:02:12Z",
+      "updatedAt": "2025-05-05T18:47:14Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
@@ -10359,6 +10374,46 @@
               "body": "@csosto-pk What shall we do?",
               "createdAt": "2025-05-03T14:02:12Z",
               "updatedAt": "2025-05-03T14:02:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6nxUmC",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-05T12:59:12Z",
+          "updatedAt": "2025-05-05T12:59:13Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "I don't have an opinion on this one.",
+              "createdAt": "2025-05-05T12:59:12Z",
+              "updatedAt": "2025-05-05T12:59:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6n1PsC",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-05T18:47:14Z",
+          "updatedAt": "2025-05-05T18:47:14Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "It seems reasonable to keep, and is pretty concise! ",
+              "createdAt": "2025-05-05T18:47:14Z",
+              "updatedAt": "2025-05-05T18:47:14Z"
             }
           ]
         }
