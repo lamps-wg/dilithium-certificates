@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 6 November 2025                                       S. Turner
+Expires: 7 November 2025                                       S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                              5 May 2025
+                                                              6 May 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2025.
+   This Internet-Draft will expire on 7 November 2025.
 
 Copyright Notice
 
@@ -572,24 +572,8 @@ Table of Contents
    These are exclusive ownership, message-bound signatures, and non-
    resignability.  These properties are based tightly on the assumed
    collision resistance of the hash function used (in this case SHAKE-
-   256).
-
-   Exclusive ownership is a property in which a signature sigma uniquely
-   determines the public key and message for which it is valid.
-   Message-bound signatures is the property that a valid signature
-   uniquely determines the message for which it is valid, but not
-   necessarily the public key.  Non-resignability is the property in
-   which one cannot produce a valid signature under another key given a
-   signature sigma for some unknown message m.  These properties are not
-   provided by classical signature schemes such as DSA or ECDSA, and
-   have led to a variety of attacks such as Duplicate-Signature Key
-   Selection (DSKS) attacks, and attacks on the protocols for secure
-   routing.  A full discussion of these properties in ML-DSA can be
-   found at [CDFFJ21].
-
-   These properties are dependent, in part, on unambiguous public key
-   serialization.  It for this reason the public key structure defined
-   in Section 4 is intentionally encoded as a single OCTET STRING.
+   256).  A full discussion of these properties in ML-DSA can be found
+   at [CDFFJ21].
 
 10.1.  Rationale for disallowing HashML-DSA
 
