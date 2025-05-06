@@ -609,6 +609,17 @@ under strongly existentially unforgeable under chosen message attack
 been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.
 
+ML-DSA depends on high quality random numbers that are suitable for
+use in cryptography.  The use of inadequate pseudo-random number
+generators (PRNGs) to generate such values can significantly undermine
+various security properties. For instance, using an inadequate PRNG
+for key generation, might allow an attacker to efficiently recover
+the private key by trying a small set of possibilities, rather than
+brute force search the whole keyspace.  The generation of random
+numbers of a sufficient level of quality for use in cryptography
+is difficult, and {{?RFC4086}} offers important guidance in this
+area.
+
 In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
 on Gaussian sampling. Implementations must still take great care
