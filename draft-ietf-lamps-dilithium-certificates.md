@@ -644,22 +644,8 @@ properties beyond unforgeability, that are associated with
 non-repudiation. These are exclusive ownership, message-bound
 signatures, and non-resignability. These properties are based
 tightly on the assumed collision resistance of the hash
-function used (in this case SHAKE-256).
-
-Exclusive ownership is a property in which a signature sigma
-uniquely determines the public key and message for which it
-is valid. Message-bound signatures is the property that a
-valid signature uniquely determines the message for which it
-is valid, but not necessarily the public key.
-Non-resignability is the property in which one cannot produce
-a valid signature under another key given a signature sigma
-for some unknown message m. These properties are not provided
-by classical signature schemes such as DSA or ECDSA, and have
-led to a variety of attacks such as Duplicate-Signature Key
-Selection (DSKS) attacks, and attacks on
-the protocols for secure routing. A full
-discussion of these properties in ML-DSA can be found at
-{{CDFFJ21}}.
+function used (in this case SHAKE-256). A full discussion
+of these properties in ML-DSA can be found at {{CDFFJ21}}.
 
 ## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
 
