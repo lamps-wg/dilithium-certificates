@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-06T01:01:17.509502+00:00",
+  "timestamp": "2025-05-08T01:01:58.024710+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10256,24 +10256,26 @@
       "id": "PR_kwDOIEpj4c6UxNzs",
       "title": "Remove rationale for public key formatting",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/141",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "> Section 10, last sentence: 'These properties', which properties?  The\r\n> properties in this section?  Is this a security consideration?  Or\r\n> does it belong up in Section 4?\r\n\r\nfrom https://mailarchive.ietf.org/arch/msg/spasm/sM_xvIeqRecQZDED0T4TMjQ4xD0/",
       "createdAt": "2025-05-02T15:36:00Z",
-      "updatedAt": "2025-05-05T18:47:14Z",
+      "updatedAt": "2025-05-06T14:49:25Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
-      "baseRefOid": "2fa1aae7c2fa6b4e4e376a51817f4a70718dfebe",
+      "baseRefOid": "019be6855205324a4e564adceb861e74a427aaa1",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "deb5-pkformatting",
-      "headRefOid": "59c9c133c69f212a292d8578ad1eeec07564a089",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "18c30d10e58ac2bfe142f2fcf4dfa0c39193ca90",
+      "closedAt": "2025-05-06T10:34:51Z",
+      "mergedAt": "2025-05-06T10:34:51Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "1fd7e8ef02c7e990c0cf4da3c976579d4f5ca840"
+      },
       "comments": [
         {
           "author": "debcooley",
@@ -10287,14 +10289,14 @@
         {
           "id": "PRR_kwDOIEpj4c6noqjA",
           "commit": {
-            "abbreviatedOid": "59c9c13"
+            "abbreviatedOid": "fedf6bd"
           },
           "author": "jakemas",
           "authorAssociation": "COLLABORATOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-05-02T16:37:04Z",
-          "updatedAt": "2025-05-02T16:37:04Z",
+          "updatedAt": "2025-05-06T10:32:07Z",
           "comments": []
         },
         {
@@ -10416,6 +10418,59 @@
               "updatedAt": "2025-05-05T18:47:14Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6n4vCE",
+          "commit": {
+            "abbreviatedOid": "59c9c13"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-06T02:03:00Z",
+          "updatedAt": "2025-05-06T02:03:01Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "So we converged to remove \r\n\r\n> These properties are dependent, in part, on unambiguous public key serialization. It for this reason the public key structure defined in {{ML-DSA-PublicKey}} is intentionally encoded as a single OCTET STRING.\r\n\r\nAnd we are not sure about \r\n\r\n> Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot produce a valid signature under another key given a signature sigma for some unknown message m. These properties are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such as Duplicate-Signature Key Selection (DSKS) attacks, and attacks on the protocols for secure routing. A full discussion of these properties in ML-DSA can be found at {{CDFFJ21}}.\r\n\r\nTalking about explusive ownership and non-resignability and mentioning the DSA and ECDSA does not have them and implying that ML-DSA does, does not offer anything to the spec reader looking for \"Security Considerations\". It is like a literature review. \r\n\r\nGiven that these properties are mentioned above, I am proposing to remove a chunk of the text. Here is what I am proposing \r\n\r\n> [...]\r\n> A security property also associated with digital signatures is non-repudiation. Non-repudiation refers to the assurance that the owner of a signature key pair that was capable of generating an existing signature corresponding to certain data cannot convincingly deny having signed the data, unless its private key was compromised. The digital signature scheme ML-DSA possess three security properties beyond unforgeability, that are associated with non-repudiation. These are exclusive ownership, message-bound signatures, and non-resignability. These properties are based tightly on the assumed collision resistance of the hash function used (in this case SHAKE-256). **A full discussion of these properties in ML-DSA can be found at {{CDFFJ21}}.**\r\n> \r\n> ~~Exclusive ownership is a property in which a signature sigma uniquely determines the public key and message for which it is valid. Message-bound signatures is the property that a valid signature uniquely determines the message for which it is valid, but not necessarily the public key. Non-resignability is the property in which one cannot produce a valid signature under another key given a signature sigma for some unknown message m. These properties are not provided by classical signature schemes such as DSA or ECDSA, and have led to a variety of attacks such as Duplicate-Signature Key Selection (DSKS) attacks, and attacks on the protocols for secure routing. A full discussion of these properties in ML-DSA can be found at {{CDFFJ21}}.~~\r\n> \r\n> ~~These properties are dependent, in part, on unambiguous public key serialization. It for this reason the public key structure defined in {{ML-DSA-PublicKey}} is intentionally encoded as a single OCTET STRING.~~\r\n",
+              "createdAt": "2025-05-06T02:03:01Z",
+              "updatedAt": "2025-05-06T02:03:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6n87tX",
+          "commit": {
+            "abbreviatedOid": "fedf6bd"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-06T10:34:40Z",
+          "updatedAt": "2025-05-06T10:34:40Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Ok, let's go with Panos' suggestion.",
+              "createdAt": "2025-05-06T10:34:40Z",
+              "updatedAt": "2025-05-06T10:34:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6oAC2M",
+          "commit": {
+            "abbreviatedOid": "18c30d1"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "Looks good now. ",
+          "createdAt": "2025-05-06T14:49:25Z",
+          "updatedAt": "2025-05-06T14:49:25Z",
+          "comments": []
         }
       ]
     },
@@ -10581,6 +10636,56 @@
           "body": "",
           "createdAt": "2025-05-03T08:49:43Z",
           "updatedAt": "2025-05-03T08:49:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 144,
+      "id": "PR_kwDOIEpj4c6VFY1p",
+      "title": "Deb's ask for guidance on randomness",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/144",
+      "state": "MERGED",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Can we add a paragraph about the quality of random required (mostly\r\n> for the seed (xi))?  There is a decent version in\r\n> draft-ietf-lamps-cms-ml-dsa if you want an example.  It will add\r\n> an informative ref to RFC 4086.",
+      "createdAt": "2025-05-06T10:42:23Z",
+      "updatedAt": "2025-05-06T15:51:13Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "1fd7e8ef02c7e990c0cf4da3c976579d4f5ca840",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "deb9-rng",
+      "headRefOid": "6872e0720f32494474c9297971d58343fc10f45b",
+      "closedAt": "2025-05-06T15:51:13Z",
+      "mergedAt": "2025-05-06T15:51:13Z",
+      "mergedBy": "bwesterb",
+      "mergeCommit": {
+        "oid": "5b23428b08a53aacdb89d93422b81228433e34d8"
+      },
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I like it. ",
+          "createdAt": "2025-05-06T14:44:19Z",
+          "updatedAt": "2025-05-06T14:44:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6n_-5-",
+          "commit": {
+            "abbreviatedOid": "6872e07"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-06T14:44:27Z",
+          "updatedAt": "2025-05-06T14:44:27Z",
           "comments": []
         }
       ]
