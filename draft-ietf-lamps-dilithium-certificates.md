@@ -603,9 +603,8 @@ keys.
 The Security Considerations section of {{RFC5280}} applies to this
 specification as well.
 
-The digital signature scheme defined within this document are modeled
-under strongly existentially unforgeable under chosen message attack
-(SUF-CMA). For the purpose of estimating security strength, it has
+The ML-DSA signature scheme is strongly unforgeable under chosen message
+attacks (SUF-CMA). For the purpose of estimating security strength, it has
 been assumed that the attacker has access to signatures for no more
 than 2^{64} chosen messages.
 
