@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-08T01:01:58.024710+00:00",
+  "timestamp": "2025-05-18T01:06:33.678304+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10686,6 +10686,46 @@
           "body": "",
           "createdAt": "2025-05-06T14:44:27Z",
           "updatedAt": "2025-05-06T14:44:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 145,
+      "id": "PR_kwDOIEpj4c6WixGz",
+      "title": "Rephrasing text based on Gen-ART feedback",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/145",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-17T04:28:16Z",
+      "updatedAt": "2025-05-17T08:24:22Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "5b23428b08a53aacdb89d93422b81228433e34d8",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-10",
+      "headRefOid": "7d9583a7995914aaf7ed0cf6f7bf23931e25cb53",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6pw-Ol",
+          "commit": {
+            "abbreviatedOid": "7d9583a"
+          },
+          "author": "vdukhovni",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-17T08:24:22Z",
+          "updatedAt": "2025-05-17T08:24:22Z",
           "comments": []
         }
       ]
