@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 7 November 2025                                       S. Turner
+Expires: 20 November 2025                                      S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                              6 May 2025
+                                                             19 May 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2025.
+   This Internet-Draft will expire on 20 November 2025.
 
 Copyright Notice
 
@@ -532,11 +532,10 @@ Table of Contents
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
 
-   The digital signature scheme defined within this document are modeled
-   under strongly existentially unforgeable under chosen message attack
-   (SUF-CMA).  For the purpose of estimating security strength, it has
-   been assumed that the attacker has access to signatures for no more
-   than 2^{64} chosen messages.
+   The ML-DSA signature scheme is strongly unforgeable under chosen
+   message attacks (SUF-CMA).  For the purpose of estimating security
+   strength, it has been assumed that the attacker has access to
+   signatures for no more than 2^{64} chosen messages.
 
    ML-DSA depends on high quality random numbers that are suitable for
    use in cryptography.  The use of inadequate pseudo-random number
