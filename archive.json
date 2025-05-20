@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-18T01:06:33.678304+00:00",
+  "timestamp": "2025-05-20T01:03:00.610972+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10695,25 +10695,42 @@
       "id": "PR_kwDOIEpj4c6WixGz",
       "title": "Rephrasing text based on Gen-ART feedback",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/145",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-05-17T04:28:16Z",
-      "updatedAt": "2025-05-17T08:24:22Z",
+      "updatedAt": "2025-05-19T17:55:46Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "5b23428b08a53aacdb89d93422b81228433e34d8",
       "headRepository": "csosto-pk/dilithium-certificates",
       "headRefName": "patch-10",
       "headRefOid": "7d9583a7995914aaf7ed0cf6f7bf23931e25cb53",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-05-19T17:55:31Z",
+      "mergedAt": "2025-05-19T17:55:31Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748"
+      },
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@jakemas can you merge it in?",
+          "createdAt": "2025-05-19T17:41:44Z",
+          "updatedAt": "2025-05-19T17:41:44Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Reviewed and Merged!",
+          "createdAt": "2025-05-19T17:55:44Z",
+          "updatedAt": "2025-05-19T17:55:44Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIEpj4c6pw-Ol",
@@ -10726,6 +10743,19 @@
           "body": "",
           "createdAt": "2025-05-17T08:24:22Z",
           "updatedAt": "2025-05-17T08:24:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6p0WUz",
+          "commit": {
+            "abbreviatedOid": "7d9583a"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-18T19:34:29Z",
+          "updatedAt": "2025-05-18T19:34:29Z",
           "comments": []
         }
       ]
