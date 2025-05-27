@@ -5,15 +5,15 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 24 October 2025                                       S. Turner
+Expires: 28 November 2025                                      S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           22 April 2025
+                                                             27 May 2025
 
 
-Internet X.509 Public Key Infrastructure: Algorithm Identifiers for ML-
-                                  DSA
+Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
+       Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
              draft-ietf-lamps-dilithium-certificates-latest
 
 Abstract
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 October 2025.
+   This Internet-Draft will expire on 28 November 2025.
 
 Copyright Notice
 
@@ -102,10 +102,8 @@ Table of Contents
        C.1.3.  ML-DSA-87 Private Key Examples
      C.2.  Example Public Keys
      C.3.  Example Certificates
-     C.4.  Example Inconsistent Private Keys
-       C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
-   Appendix D.  Pre-hashing via External Mu
-     D.1.  Security Considerations of External Mu
+     C.4.  Example Inconsistent Seed and Expanded Private Keys
+   Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
    Acknowledgments
    Authors' Addresses
 
@@ -122,12 +120,7 @@ Table of Contents
    [FIPS204] defines two variants of ML-DSA: a pure and a prehash
    variant.  Only the former is specified in this document.  See
    Section 10.1 for the rationale.  The pure variant of ML-DSA supports
-   the typical prehash flow, see Appendix D.  In short: one
-   cryptographic module can compute the hash _mu_ on line 6 of algorithm
-   7 of [FIPS204] and pass it to a second module to finish the
-   signature.  The first module only needs access to the full message
-   and the public key, whereas the second module only needs access to
-   hash _mu_ and the private key.
+   the typical prehash flow.  Refer to Appendix D for more details.
 
    Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
    Dilithium are not compatible.
@@ -158,7 +151,7 @@ Table of Contents
    The fields in AlgorithmIdentifier have the following meanings:
 
    *  algorithm identifies the cryptographic algorithm with an object
-      identifier.
+      identifier (OID).
 
    *  parameters, which are optional, are the associated parameters for
       the algorithm identifier in the algorithm field.
@@ -178,9 +171,7 @@ Table of Contents
                nistAlgorithm(4) sigAlgs(3) id-ml-dsa-87(19) }
 
    The contents of the parameters component for each algorithm MUST be
-   absent.  The ctx value used in the ML-DSA signing and verification
-   [FIPS204] of ML-DSA signatures defined in this specification (X.509
-   certificates, CRLs) is the empty string.
+   absent.
 
 3.  ML-DSA Signatures in PKIX
 
@@ -258,14 +249,16 @@ Table of Contents
 
    The signatureValue field contains the corresponding ML-DSA signature
    computed upon the ASN.1 DER encoded tbsCertificate/tbsCertList
-   [RFC5280].
+   [RFC5280].  The optional context string (ctx) parameter as defined in
+   Section 5.2 of [FIPS204] is left to its default value: the empty
+   string.
 
    Conforming Certification Authority (CA) implementations MUST specify
    the algorithms explicitly by using the OIDs specified in Section 2
    when encoding ML-DSA signatures in certificates and CRLs.  Conforming
    client implementations that process certificates and CRLs using ML-
    DSA MUST recognize the corresponding OIDs.  Encoding rules for ML-DSA
-   signature values are specified Section 2.
+   signature values are specified in Section 2.
 
 4.  ML-DSA Public Keys in PKIX
 
@@ -286,7 +279,18 @@ Table of Contents
    *  algorithm is the algorithm identifier and parameters for the
       public key (see above).
 
-   *  subjectPublicKey contains the byte stream of the public key.
+   *  subjectPublicKey contains the public key.
+
+   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
+   encoding of an ML-DSA public key.  When used in a
+   SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
+   this raw byte string encoding of the public key.
+
+   When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
+   type in an environment that uses ASN.1 encoding, it can be encoded as
+   an OCTET STRING by using the ML-DSA-44-PublicKey, ML-DSA-
+   65-PublicKey, and ML-DSA-87-PublicKey types corresponding to the
+   correct key size defined below.
 
    The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 
@@ -320,17 +324,6 @@ Table of Contents
       |  NOTE: The above syntax is from [RFC5912] and is compatible with
       |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
       |  syntax.
-
-   Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
-   encoding of an ML-DSA public key.  When used in a
-   SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
-   the raw byte string encoding of the public key.
-
-   When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
-   type in an environment that uses ASN.1 encoding, it can be encoded as
-   an OCTET STRING by using the ML-DSA-44-PublicKey, ML-DSA-
-   65-PublicKey, and ML-DSA-87-PublicKey types corresponding to the
-   correct key size.
 
    [RFC5958] describes the Asymmetric Key Package's OneAsymmetricKey
    type for encoding asymmetric keypairs.  When an ML-DSA private key or
@@ -478,11 +471,11 @@ Table of Contents
    during import operations.
 
    When parsing the private key, the ASN.1 tag explicitly indicates
-   which variant of CHOICE is present.  Implementations should use tag
-   UNIVERSAL IMPLICIT [0] (raw value 0x80) for seed, OCTET STRING (0x04)
-   for expandedKey, and SEQUENCE (0x30) for both to parse the private
-   key, rather than any other heuristic like length of the enclosing
-   OCTET STRING.
+   which variant of CHOICE is present.  Implementations should use the
+   context-specific tag IMPLICIT [0] (raw value 0x80) for seed, OCTET
+   STRING (0x04) for expandedKey, and SEQUENCE (0x30) for both to parse
+   the private key, rather than any other heuristic like length of the
+   enclosing OCTET STRING.
 
    Appendix C contains example ML-DSA private keys encoded using the
    textual encoding defined in [RFC7468].
@@ -512,7 +505,7 @@ Table of Contents
    expanded private key is available.  For this reason it is RECOMMENDED
    that implementations retain and export the seed, even when also
    exporting the expanded private key.  ML-DSA seed extraction can be
-   implemented by including the random seed xi generated at line 1 of
+   implemented by including the seed xi randomly generated at line 1 of
    Algorithm 1 ML-DSA.KeyGen in the returned output.
 
 9.  Private Key Consistency Testing
@@ -539,23 +532,21 @@ Table of Contents
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
 
-   The digital signature scheme defined within this document are modeled
-   under strongly existentially unforgeable under chosen message attack
-   (SUF-CMA).  For the purpose of estimating security strength, it has
-   been assumed that the attacker has access to signatures for no more
-   than 2^{64} chosen messages.
+   The ML-DSA signature scheme is strongly unforgeable under chosen
+   message attacks (SUF-CMA).  For the purpose of estimating security
+   strength, it has been assumed that the attacker has access to
+   signatures for no more than 2^{64} chosen messages.
 
-   ML-DSA offers both deterministic and randomized signing.  By default
-   ML-DSA signatures are non-deterministic.  The private random seed
-   (rho') for the signature is pseudorandomly derived from the signer's
-   private key, the message, and a 256-bit string, rnd - where rnd
-   should be generated by an approved RBG.  In the deterministic
-   version, rng is instead a 256-bit constant string.  The source of
-   randomness in the randomized mode has been "hedged" against sources
-   of poor entropy, by including the signers private key and message
-   into the derivation.  The primary purpose of rnd is to facilitate
-   countermeasures to side-channel attacks and fault attacks on
-   deterministic signatures.
+   ML-DSA depends on high quality random numbers that are suitable for
+   use in cryptography.  The use of inadequate pseudo-random number
+   generators (PRNGs) to generate such values can significantly
+   undermine various security properties.  For instance, using an
+   inadequate PRNG for key generation, might allow an attacker to
+   efficiently recover the private key by trying a small set of
+   possibilities, rather than brute force search the whole keyspace.
+   The generation of random numbers of a sufficient level of quality for
+   use in cryptography is difficult, and [RFC4086] offers important
+   guidance in this area.
 
    In the design of ML-DSA, care has been taken to make side-channel
    resilience easier to achieve.  For instance, ML-DSA does not depend
@@ -571,33 +562,28 @@ Table of Contents
    Masking countermeasures exist for ML-DSA, but come with a performance
    overhead.
 
-   A fundamental security property also associated with digital
-   signatures is non-repudiation.  Non-repudiation refers to the
-   assurance that the owner of a signature key pair that was capable of
-   generating an existing signature corresponding to certain data cannot
-   convincingly deny having signed the data.  The digital signature
-   scheme ML-DSA possess three security properties beyond
-   unforgeability, that are associated with non-repudiation.  These are
-   exclusive ownership, message-bound signatures, and non-resignability.
-   These properties are based tightly on the assumed collision
-   resistance of the hash function used (in this case SHAKE-256).
+   ML-DSA offers both deterministic and randomized signing.  Signatures
+   generated with either mode are compatible and a verifyer can't tell
+   them apart.  In the deterministic case, a signature only depends on
+   the private key and the message to be signed.  This makes the
+   implementation easier to test and does not require a randomness
+   source during signing.  In the randomized case, signing mixes in a
+   256-bit random string from an approved random bit generator (RBG).
+   When randomized, ML-DSA is easier to harden against fault and
+   hardware side-channel attacks.
 
-   Exclusive ownership is a property in which a signature sigma uniquely
-   determines the public key and message for which it is valid.
-   Message-bound signatures is the property that a valid signature
-   uniquely determines the message for which it is valid, but not
-   necessarily the public key.  Non-resignability is the property in
-   which one cannot produce a valid signature under another key given a
-   signature sigma for some unknown message m.  These properties are not
-   provided by classical signature schemes such as DSA or ECDSA, and
-   have led to a variety of attacks such as Duplicate-Signature Key
-   Selection (DSKS) attacks, and attacks on the protocols for secure
-   routing.  A full discussion of these properties in ML-DSA can be
-   found at [CDFFJ21].
-
-   These properties are dependent, in part, on unambiguous public key
-   serialization.  It for this reason the public key structure defined
-   in Section 4 is intentionally encoded as a single OCTET STRING.
+   A security property also associated with digital signatures is non-
+   repudiation.  Non-repudiation refers to the assurance that the owner
+   of a signature key pair that was capable of generating an existing
+   signature corresponding to certain data cannot convincingly deny
+   having signed the data, unless its private key was compromised.  The
+   digital signature scheme ML-DSA possess three security properties
+   beyond unforgeability, that are associated with non-repudiation.
+   These are exclusive ownership, message-bound signatures, and non-
+   resignability.  These properties are based tightly on the assumed
+   collision resistance of the hash function used (in this case SHAKE-
+   256).  A full discussion of these properties in ML-DSA can be found
+   at [CDFFJ21].
 
 10.1.  Rationale for disallowing HashML-DSA
 
@@ -605,39 +591,39 @@ Table of Contents
    used; in other words, public keys identified by id-hash-ml-dsa-44-
    with-sha512, id-hash-ml-dsa-65-with-sha512, and id-hash-ml-dsa-87-
    with-sha512 MUST NOT be in X.509 certificates used for CRLs, OCSP,
-   certificate issuance and related PKIX protocols.
+   certificate issuance and related PKIX protocols.  This restriction is
+   primarily to increase interoperability.
 
-   This restriction is for both implementation and security reasons.
+   ML-DSA and HashML-DSA are incompatible algorithms that require
+   different Verify() routines.  This introduces the complexity of
+   informing the verifier whether to use ML-DSA.Verify() or HashML-
+   DSA.Verify().  Additionally, since the same OIDs are used to identify
+   the ML-DSA public keys and ML-DSA signature algorithms, an
+   implementation would need to commit a given public key to be either
+   of type ML-DSA or HashML-DSA at the time of certificate creation.
+   This is anticipated to cause operational issues in contexts where the
+   operator does not know whether the key will need to produce pure or
+   pre-hashed signatures at key generation time.  The External Mu mode
+   described in Appendix D avoids all of these operational concerns.
 
-   The implementation reason for disallowing HashML-DSA stems from the
-   fact that ML-DSA and HashML-DSA are incompatible algorithms that
-   require different Verify() routines.  This forwards to the protocol
-   the complexity of informing the client whether to use ML-DSA.Verify()
-   or HashML-DSA.Verify() along with the hash algorithm to use.
-   Additionally, since the same OIDs are used to identify the ML-DSA
-   public keys and ML-DSA signature algorithms, an implementation would
-   need to commit a given public key to be either of type ML-DSA or
-   HashML-DSA at the time of certificate creation.  This is anticipated
-   to cause operational issues in contexts where the operator does not
-   know at key generation time whether the key will need to produce pure
-   or pre-hashed signatures.  The External Mu mode described in
-   Appendix D avoids all of these operational concerns.
-
-   The security reason for disallowing HashML-DSA is that the design of
-   the ML-DSA algorithm provides enhanced resistance against signature
-   collision attacks, compared with conventional RSA or ECDSA signature
-   algorithms.  Specifically, ML-DSA binds the hash of the public key tr
-   to the message to-be-signed prior to hashing, as described in line 6
-   of Algorithm 7 of [FIPS204].  In practice, this provides binding to
-   the intended verification public key, preventing some attacks that
-   would otherwise allow a signature to be successfully verified against
-   a non-intended public key.  Also, this unlikely, theoretical binding
-   means that in the unlikely discovery of a collision attack against
-   SHA-3, an attacker would have to perform a public-key-specific
-   collision search in order to find message pairs such that H(tr || m1)
-   = H(tr || m2) since a direct hash collision H(m1) = H(m2) will not
-   suffice.  HashML-DSA removes both of these enhanced security
-   properties.
+   A minor security reason for disallowing HashML-DSA is that the design
+   of the ML-DSA algorithm provides enhanced resistance against
+   collision attacks, compared with HashML-DSA or conventional RSA or
+   ECDSA signature algorithms.  Specifically, ML-DSA prepends the
+   SHAKE256 hash of the public key (tr) to the message to-be-signed
+   prior to hashing, as described in line 6 of Algorithm 7 of [FIPS204].
+   This means that in the unlikely discovery of a collision attack
+   against the SHA-3 family, an attacker would have to perform a public-
+   key-specific collision search in order to find message pairs such
+   that H(tr || m1) = H(tr || m2) since a direct hash collision H(m1) =
+   H(m2) will not suffice.  HashML-DSA removes this enhanced security
+   property.  In spite of its lack of targeted collision protection, the
+   practical security risk of using HashML-DSA in X.509 signatures would
+   be immaterial.  That is because a hash of the issuing CA's public key
+   is already included in the Authority Key Identifier (AKI) extension
+   which is signed as part of the tbsCertificate structure.  Even when
+   it is a SHA-1 hash, general second pre-images against the AKI hash of
+   existing issuing CAs would be impractical.
 
 11.  References
 
@@ -724,6 +710,11 @@ Table of Contents
               Policy and Certification Practices Framework", RFC 3647,
               DOI 10.17487/RFC3647, November 2003,
               <https://www.rfc-editor.org/rfc/rfc3647>.
+
+   [RFC4086]  Eastlake 3rd, D., Schiller, J., and S. Crocker,
+              "Randomness Requirements for Security", BCP 106, RFC 4086,
+              DOI 10.17487/RFC4086, June 2005,
+              <https://www.rfc-editor.org/rfc/rfc4086>.
 
    [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
               PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,
@@ -3820,15 +3811,13 @@ C.3.  Example Certificates
    0000000000000000000000000000000000000000000040c12151d1e252c` }
    }
 
-C.4.  Example Inconsistent Private Keys
+C.4.  Example Inconsistent Seed and Expanded Private Keys
 
       |  WARNING: These private keys are purposely bad do not use them
-      |  in production systmes.
+      |  in production systems.
 
    The following examples demonstrate inconsistent seed and expanded
    private keys.
-
-C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
 
    Three ML-DSA-44-PrivateKey examples of inconsistent seed and expanded
    private keys follow:
@@ -4029,57 +4018,22 @@ C.4.1.  ML-DSA Inconsistent Seed and Expanded Private Keys
    EGOY93BgBuQum+HvidJcJy8RqVCVxYfXE3MihN6dvTxyF7BoniHY6w/2lmg=
    -----END PRIVATE KEY-----
 
-Appendix D.  Pre-hashing via External Mu
+Appendix D.  Pre-hashing (ExternalMu-ML-DSA)
 
-   Some applications require pre-hashing, where the signature generation
-   process can be separated into a pre-hash step requiring only the
-   message, context value, other public information, and then a core
-   signature step requiring the secret key in order to ease operational
-   requirements around large or inconsistently-sized payloads.
+   Some applications require pre-hashing that ease operational
+   requirements around large or inconsistently-sized payloads.  When
+   signing with pre-hashing, the signature generation process can be
+   separated into a pre-hash step requiring only the message and other
+   public information, and a core signature step which uses the public
+   key.
 
-   Prehashing can be performed with the HashML-DSA algorithm defined in
-   Section 5.4 of [FIPS204] however the HashML-DSA algorithm comes with
-   a few disadvantages.  First, ML-DSA and HashML-DSA require different
-   Verify() routines.  To address this problem, the NIST Computer
-   Security Objects Register (CSOR) has assigned different Object
-   Identifiers (OIDs) to ML-DSA and HashML-DSA.  This can pose
-   problematic for certain deployments, for example if the ML-DSA public
-   is bound to either the ML-DSA or HashML-DSA OID at key generation
-   time, for example in an X.509 certificate, then this prevents
-   context-dependant switching between producing ML-DSA and HashML-DSA
-   signatures for example depending on the size of the message being
-   signed or to optimize the backend implementation of the cryptographic
-   module holding the private key.  It also poses a potential problem
-   for applications that pin a bare public key such that the verifier
-   cannot reliably or securely know whether to use ML-DSA.Verify() or
-   HashML-DSA.Verify(), for example when using a protocol where the
-   signature algorithm is carried outside the protected content
-   envelope.  Worse, this may encourage impmelenters to treat the OIDs
-   for ML-DSA and HashML-DSA as interchangeable, thus introducing
-   further interoperability and security issues not discussed here.  And
-   second, HashML-DSA reduces the binding and signature collision
-   resistance security properties of ML-DSA.  The ML-DSA algorithm
-   concatenates both the hash of the public key and the ctx value to the
-   raw message M before performing any message digesting.  This means
-   that any attempt to construct a signature collision, i.e. a pair of
-   messages M1 and M2 that will both appear valid under the same
-   signature, will need to construct those messages against a specific
-   ML-DSA verification public key and ctx value.  This is a meaningful
-   security improvement in the design of ML-DSA compared to RSA and
-   elliptic curve signature algorithms.  HashML-DSA reverses these
-   security features of ML-DSA by sticking in front a simple pre-hash
-   such that a collision in the pre-hash automatically gives a collision
-   in the signature.
-
-   Fortunately, [FIPS204], further strengthened and clarified by the
-   accompanying FAQ [FIPS204-ExternalMuFAQ] provides another option for
-   ML-DSA pre-hashing which is to perform the computation of the message
-   digest µ (romanized as "mu") outside of ML-DSA.Sign() as a prehash
-   step performed by a second cooperating cryptographic module which
-   does not have access to the secret signig key, and which either
-   directly invokes ML-DSA.Sign() in the cryptographic module which
-   posesses the secret key, or which returns mu to the calling
-   application.
+   In the context of ML-DSA, pre-hashing can be performed with the
+   HashML-DSA algorithm defined in Section 5.4 of [FIPS204].  ML-DSA
+   itself supports a External Mu pre-hashing mode which externalizes the
+   message pre-hashing originally performed inside the signing
+   operation.  This mode is also laid out in [FIPS204-ExternalMuFAQ].
+   This document specifies only the use of ML-DSA's External Mu mode,
+   and not HashML-DSA, in PKIX for reasons laid out in Section 10.1.
 
    Implementations of ML-DSA using the External Mu pre-hashing mode
    requires the following algorithms, which are modified versions of the
@@ -4092,15 +4046,16 @@ ComputeMu(pk, M, ctx):
 
   # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
-  # M is a bit-string, mu and ctx are byte-strings.
+  # M is the message, a bit-string
+  # mu and ctx are byte-strings.
+  # ctx is the context string, which defaults to the empy string.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 2))  IntegerToBytes(|ctx|, 1) ∥ ctx) || M, 64)
+  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+                IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
+  # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
   return mu
 
                 Figure 2: ComputeMu prehash operation
-
-   The functions BytesToBits and IntegerToBytes are defined in
-   [FIPS204].
 
    Sign operations:
 
@@ -4124,10 +4079,9 @@ SignMu(sk, mu):
   sigma = SignMu_internal(sk, mu, rnd, isExternalMu=true)
   return sigma
 
-
 ML-DSA.SignMu_internal(sk, M', rnd, isExternalMu=false):
     # mu can be passed as an argument instead of M'
-    # defaulting isExternalMu to false means that
+    # defaulting is ExternalMu to false means that
     # this modified version of Sign_internal can be used
     # in place of the original without interfering with
     # functioning of pure ML-DSA mode.
@@ -4139,60 +4093,32 @@ ML-DSA.SignMu_internal(sk, M', rnd, isExternalMu=false):
 
                Figure 3: The operations for signing mu
 
-   External Mu mode of ML-DSA has the following advantage and
-   disadvantages.
+   There is no need to specify an External Mu Verify() routine because
+   this is identical to the original ML-DSA.Verify().  This makes
+   External Mu mode simply an internal optimization of the signer, and
+   allows an ML-DSA key to sometimes be used with the "one-shot" Sign()
+   API and sometimes the External Mu API without any interoperability
+   concens.
 
-   The main advantage is that External Mu mode is simply an alternate
-   API for ML-DSA.Sign() rather than a separate algorithm.  In other
-   words, given an ML-DSA signature, it is indistiguishable whether it
-   was generated by the regular "one-shot" ML-DSA.Sign() API or the two-
-   step ComputeMu() and SignMu() API.  There is no need to specify an
-   External Mu Verify() routine because this is identical to the
-   original ML-DSA.Verify().  This makes External Mu mode simply an
-   internal optimization of the signer, and allows an ML-DSA key to
-   sometimes be used with the "one-shot" Sign() API and sometimes the
-   External Mu API without any of the interoperability or security
-   concens that come with HashML-DSA and allows an ML-DSA certificate to
-   be freely used with "one-shot" or External Mu signing APIs.
-
-   The main disadvantage of External Mu mode are that it requires the
-   pre-hash routine to have access to the hash of the signer's public
-   key, which may not be available in some architectures, or the act of
-   fetching it over the network may negate any performance improvements
-   gained by pre-hashing.  Failing to retreive the correct public key
-   hash will result in signatures which cannot be verified.  Also,
-   External Mu does not allow for optimization of "multiple signature"
-   schemes where the same message digest is signed by multiple public
-   keys unless this pre-hashing is done at the application layer.  And
-   finally, ComputeMu() requires SHAKE256 which may not be available in
-   the component performing the pre-hash, particularly during the early
-   years of ML-DSA adoption.
-
-D.1.  Security Considerations of External Mu
-
-   Security-wise, during the signing operation of pure (or "one-step")
-   ML-DSA, the cryptographic module extracts the public key hash tr from
-   the secret key object, and thus there is no possibility of mismatch
-   between tr and sk.
-
-   In External Mu mode, the public key or its hash needs to be provided
-   to the ComupteMu() routine independently of the secret key, and while
-   the exact mechanism by which it is delivered will be implementation-
-   specific, it does open a window for mismatches between tr and sk.  It
-   is believed that at worst this will produce a signature which will
-   fail to verify under the intended public key since a compliant
-   Verify() routine will independently compute tr from the public key.
-   This is not believed to be a security concern since mu is never used
-   directly within ML-DSA.Sign_internal() (Algorithm 7 in [FIPS204]),
-   but rather mu is further hashed with values unknown to an attacker on
-   lines 7 and 15.  Thus a signing oracle exposing SignMu() does not
-   leak any bits of the secret key.
+   The External Mu mode requires the ComputeMu routine to have access to
+   the hash of the signer's public key which may not be available in
+   some architectures, or require fetching it.  That may allow for
+   mismatches between tr and sk.  At worst, this will produce a
+   signature which will fail to verify under the intended public key
+   since a compliant Verify() routine will independently compute tr from
+   the public key.  That is not believed to be a security concern since
+   mu is never used as-is within ML-DSA.Sign_internal() (Algorithm 7 in
+   [FIPS204]).  Rather, it is hashed with values unknown to an attacker
+   on lines 7 and 15.  Thus, a signing oracle exposing SignMu() does not
+   leak any bits of the secret key.  The External Mu mode also requires
+   SHAKE256 to be available to the ComputeMu routine.
 
 Acknowledgments
 
    The authors wish to thank the following people for their
-   contributions to this document: Deirdre Connolly, Viktor Dukhovni,
-   Russ Housley, Alicja Kario, Mike Ounsworth, and Daniel Van Geest.
+   contributions to this document: Corey Bonnell, Dierdre Connolly,
+   Viktor Dukhovni, Russ Housley, Alicja Kario, Mike Ounsworth, and
+   Daniel Van Geest.
 
    In addition, we would like to thank those who contributed to the
    private key format discussion: Tony Arcieri, Bob Beck, Dmitry
