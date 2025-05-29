@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T01:03:00.610972+00:00",
+  "timestamp": "2025-05-29T01:02:58.667162+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10756,6 +10756,125 @@
           "body": "",
           "createdAt": "2025-05-18T19:34:29Z",
           "updatedAt": "2025-05-18T19:34:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 146,
+      "id": "PR_kwDOIEpj4c6XxdBc",
+      "title": "Move definition of public key types a bit down to avoid confusion",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/146",
+      "state": "OPEN",
+      "author": "bwesterb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/spasm/LeZnHAJf1zQ6nftRAjKzuGfMI3Q/",
+      "createdAt": "2025-05-27T12:22:59Z",
+      "updatedAt": "2025-05-27T20:18:48Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "watson",
+      "headRefOid": "80d23e06b073f878a4ece1ec04965d252bdccc80",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6rKEdK",
+          "commit": {
+            "abbreviatedOid": "80d23e0"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Some suggestions",
+          "createdAt": "2025-05-27T15:21:36Z",
+          "updatedAt": "2025-05-27T15:53:04Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "I suggest to say \"it could be encoded\"",
+              "createdAt": "2025-05-27T15:21:36Z",
+              "updatedAt": "2025-05-27T15:53:04Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "Combine the two paragraphs in one since they are related. ",
+              "createdAt": "2025-05-27T15:22:03Z",
+              "updatedAt": "2025-05-27T15:53:04Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "And why \"```OCTET STRING```\" and not \"```BIT STRING```\" which is the common encoding for the ```subjectPublicKey``` from RFC5280? ",
+              "createdAt": "2025-05-27T15:51:48Z",
+              "updatedAt": "2025-05-27T15:53:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6rNqeq",
+          "commit": {
+            "abbreviatedOid": "80d23e0"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-27T20:18:47Z",
+          "updatedAt": "2025-05-27T20:18:48Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "OCTET vs BIT string is based on design philosophy here? Consistency with the established patterns in RFC5280, (even outside `SubjectPublicKeyInfo`), but OCTET more natural for ML-DSA byte-aligned keys with no need for bit level granularity?",
+              "createdAt": "2025-05-27T20:18:47Z",
+              "updatedAt": "2025-05-27T20:18:48Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 147,
+      "id": "PR_kwDOIEpj4c6X0BaA",
+      "title": "Add text about the rationale behind the KeyUsage bits normative language",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/147",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addressing Watson's [SECDIR review comment](https://mailarchive.ietf.org/arch/msg/spasm/TgrQLW1cyG6pg79EirbsT6UNf1g/) about KeyUsage bits \r\n\r\n> On section 5, it might be worth reiterating why the key usage bits need to be set the way they are.\r\n",
+      "createdAt": "2025-05-27T16:19:06Z",
+      "updatedAt": "2025-05-27T17:08:38Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-11",
+      "headRefOid": "af64c156302236ec187b4e735ee762440fc77216",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6rLa_G",
+          "commit": {
+            "abbreviatedOid": "af64c15"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-27T17:08:38Z",
+          "updatedAt": "2025-05-27T17:08:38Z",
           "comments": []
         }
       ]
