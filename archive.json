@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-29T01:02:58.667162+00:00",
+  "timestamp": "2025-06-19T01:03:56.904783+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10772,7 +10772,7 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/LeZnHAJf1zQ6nftRAjKzuGfMI3Q/",
       "createdAt": "2025-05-27T12:22:59Z",
-      "updatedAt": "2025-05-27T20:18:48Z",
+      "updatedAt": "2025-06-18T14:12:14Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748",
@@ -10783,7 +10783,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@csosto-pk @bwesterb pinging here so we can complete [SECDIR IETF](https://datatracker.ietf.org/doc/review-ietf-lamps-dilithium-certificates-11-secdir-lc-ladd-2025-05-22/) review",
+          "createdAt": "2025-06-17T19:15:28Z",
+          "updatedAt": "2025-06-17T19:15:28Z"
+        },
+        {
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @csosto-pk @bwesterb pinging here so we can complete [SECDIR IETF](https://datatracker.ietf.org/doc/review-ietf-lamps-dilithium-certificates-11-secdir-lc-ladd-2025-05-22/) review\r\n\r\nFeel free to make edits.",
+          "createdAt": "2025-06-18T14:12:14Z",
+          "updatedAt": "2025-06-18T14:12:14Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIEpj4c6rKEdK",
