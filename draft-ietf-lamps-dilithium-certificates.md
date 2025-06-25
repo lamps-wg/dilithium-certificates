@@ -349,7 +349,7 @@ Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
 encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
 the `subjectPublicKey BIT STRING` contains this raw byte string encoding of the
 public key. When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an
-environment that uses ASN.1 encoding, it can be encoded as an `OCTET STRING` by
+environment that uses ASN.1 encoding, it could be encoded as an `OCTET STRING` by
 using the `ML-DSA-44-PublicKey`, `ML-DSA-65-PublicKey`, and `ML-DSA-87-PublicKey` types
 corresponding to the correct key size defined below.
 
