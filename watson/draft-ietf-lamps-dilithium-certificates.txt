@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 28 November 2025                                      S. Turner
+Expires: 27 December 2025                                      S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                             27 May 2025
+                                                            25 June 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 November 2025.
+   This Internet-Draft will expire on 27 December 2025.
 
 Copyright Notice
 
@@ -284,13 +284,12 @@ Table of Contents
    Algorithm 22 in Section 7.2 of [FIPS204] defines the raw byte string
    encoding of an ML-DSA public key.  When used in a
    SubjectPublicKeyInfo type, the subjectPublicKey BIT STRING contains
-   this raw byte string encoding of the public key.
-
-   When an ML-DSA public key appears outside of a SubjectPublicKeyInfo
-   type in an environment that uses ASN.1 encoding, it can be encoded as
-   an OCTET STRING by using the ML-DSA-44-PublicKey, ML-DSA-
-   65-PublicKey, and ML-DSA-87-PublicKey types corresponding to the
-   correct key size defined below.
+   this raw byte string encoding of the public key.  When an ML-DSA
+   public key appears outside of a SubjectPublicKeyInfo type in an
+   environment that uses ASN.1 encoding, it can be encoded as an OCTET
+   STRING by using the ML-DSA-44-PublicKey, ML-DSA-65-PublicKey, and ML-
+   DSA-87-PublicKey types corresponding to the correct key size defined
+   below.
 
    The PUBLIC-KEY ASN.1 types for ML-DSA are defined here:
 
