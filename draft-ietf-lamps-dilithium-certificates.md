@@ -409,8 +409,12 @@ textual encoding defined in {{?RFC7468}}.
 The intended application for the key is indicated in the `keyUsage`
 certificate extension; see {{Section 4.2.1.3 of RFC5280}}. If the
 `keyUsage` extension is present in a certificate that indicates `id-ml-dsa-*`
-in the `SubjectPublicKeyInfo`, then at least one of following MUST be
-present:
+in the `SubjectPublicKeyInfo`, then the subject public key can only be used
+for verifying digital signatures on certificates or CRLs, or those used in an
+entity authentication service, a data origin authentication service, an
+integrity service, and/or a non-repudiation service that protects against
+the signing entity falsely denying some action. This means that the
+`keyUsage` extention MUST have at least one of the following bits set:
 
 ~~~
   digitalSignature; or
@@ -419,9 +423,8 @@ present:
   cRLSign.
 ~~~
 
-If the `keyUsage` extension is present in a certificate that indicates
-`id-ml-dsa-*` in the `SubjectPublicKeyInfo`, then the following MUST NOT be
-present:
+ML-DSA subject public keys cannot be used to establish keys or encrypt data, so the
+`keyUsage` extention MUST NOT have any of following bits set:
 
 ~~~
    keyEncipherment; or
