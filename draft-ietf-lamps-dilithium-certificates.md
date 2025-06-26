@@ -149,7 +149,7 @@ informative:
 --- abstract
 
 Digital signatures are used within X.509 certificates, Certificate
-Revocation Lists (CRLs), and to sign messages. This document describes
+Revocation Lists (CRLs), and to sign messages. This document specifies
 the conventions for using FIPS 204, the Module-Lattice-Based Digital
 Signature Algorithm (ML-DSA) in Internet X.509 certificates and
 certificate revocation lists.  The conventions for the associated
@@ -390,7 +390,7 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
   2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
 </aside>
 
-{{?RFC5958}} describes the Asymmetric Key Package's `OneAsymmetricKey` type for
+{{?RFC5958}} specifies the Asymmetric Key Package's `OneAsymmetricKey` type for
 encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
 a `OneAsymmetricKey`, it follows the description in {{priv-key}}.
 
@@ -441,7 +441,7 @@ still apply.
 seed (xi) and an (expanded) private key. The expanded private key (and public key)
 is computed from the seed using `ML-DSA.KeyGen_internal(xi)` (algorithm 6).
 
-"Asymmetric Key Packages" {{!RFC5958}} describes how to encode a private
+"Asymmetric Key Packages" {{!RFC5958}} specifies how to encode a private
 key in a structure that both identifies what algorithm the private key
 is for and allows for the public key and additional attributes about the
 key to be included as well. For illustration, the ASN.1 structure
