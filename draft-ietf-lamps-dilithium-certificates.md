@@ -345,6 +345,14 @@ The fields in `SubjectPublicKeyInfo` have the following meaning:
 
 * `subjectPublicKey` contains the public key.
 
+Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
+encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
+the `subjectPublicKey BIT STRING` contains this raw byte string encoding of the
+public key. When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an
+environment that uses ASN.1 encoding, it could be encoded as an `OCTET STRING` by
+using the `ML-DSA-44-PublicKey`, `ML-DSA-65-PublicKey`, and `ML-DSA-87-PublicKey` types
+corresponding to the correct key size defined below.
+
 The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
 ~~~
@@ -381,16 +389,6 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
   NOTE: The above syntax is from {{RFC5912}} and is compatible with the
   2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
 </aside>
-
-Algorithm 22 in Section 7.2 of {{FIPS204}} defines the raw byte string
-encoding of an ML-DSA public key. When used in a `SubjectPublicKeyInfo` type,
-the `subjectPublicKey BIT STRING` contains this raw byte string encoding of the
-public key.
-
-When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an
-environment that uses ASN.1 encoding, it can be encoded as an `OCTET STRING` by
-using the `ML-DSA-44-PublicKey`, `ML-DSA-65-PublicKey`, and `ML-DSA-87-PublicKey` types
-corresponding to the correct key size.
 
 {{?RFC5958}} describes the Asymmetric Key Package's `OneAsymmetricKey` type for
 encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded as
