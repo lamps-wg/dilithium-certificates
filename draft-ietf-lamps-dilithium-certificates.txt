@@ -549,8 +549,8 @@ Table of Contents
    efficiently recover the private key by trying a small set of
    possibilities, rather than brute force search the whole keyspace.
    The generation of random numbers of a sufficient level of quality for
-   use in cryptography is difficult, and [RFC4086] offers important
-   guidance in this area.
+   use in cryptography is difficult; see Section 3.6.1 of [FIPS204] for
+   some additional information.
 
    In the design of ML-DSA, care has been taken to make side-channel
    resilience easier to achieve.  For instance, ML-DSA does not depend
@@ -714,11 +714,6 @@ Table of Contents
               Policy and Certification Practices Framework", RFC 3647,
               DOI 10.17487/RFC3647, November 2003,
               <https://www.rfc-editor.org/rfc/rfc3647>.
-
-   [RFC4086]  Eastlake 3rd, D., Schiller, J., and S. Crocker,
-              "Randomness Requirements for Security", BCP 106, RFC 4086,
-              DOI 10.17487/RFC4086, June 2005,
-              <https://www.rfc-editor.org/rfc/rfc4086>.
 
    [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
               PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,
