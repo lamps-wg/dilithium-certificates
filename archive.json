@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-19T01:03:56.904783+00:00",
+  "timestamp": "2025-06-26T01:04:06.120259+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -10772,13 +10772,13 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/LeZnHAJf1zQ6nftRAjKzuGfMI3Q/",
       "createdAt": "2025-05-27T12:22:59Z",
-      "updatedAt": "2025-06-18T14:12:14Z",
+      "updatedAt": "2025-06-25T20:36:59Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "watson",
-      "headRefOid": "80d23e06b073f878a4ece1ec04965d252bdccc80",
+      "headRefOid": "f85cbb646d830c85c92a8e16ce012f93de920c94",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -10851,6 +10851,59 @@
               "updatedAt": "2025-05-27T20:18:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6wZ6SN",
+          "commit": {
+            "abbreviatedOid": "80d23e0"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-25T20:35:01Z",
+          "updatedAt": "2025-06-25T20:35:01Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\npublic key. When an ML-DSA public key appears outside of a `SubjectPublicKeyInfo` type in an\r\n```",
+              "createdAt": "2025-06-25T20:35:01Z",
+              "updatedAt": "2025-06-25T20:35:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6wZ6nB",
+          "commit": {
+            "abbreviatedOid": "7111c26"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-25T20:35:35Z",
+          "updatedAt": "2025-06-25T20:35:36Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nenvironment that uses ASN.1 encoding, it could be encoded as an `OCTET STRING` by\r\n```",
+              "createdAt": "2025-06-25T20:35:36Z",
+              "updatedAt": "2025-06-25T20:35:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6wZ7T8",
+          "commit": {
+            "abbreviatedOid": "f85cbb6"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T20:36:59Z",
+          "updatedAt": "2025-06-25T20:36:59Z",
+          "comments": []
         }
       ]
     },
@@ -10859,24 +10912,26 @@
       "id": "PR_kwDOIEpj4c6X0BaA",
       "title": "Add text about the rationale behind the KeyUsage bits normative language",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/147",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "csosto-pk",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Addressing Watson's [SECDIR review comment](https://mailarchive.ietf.org/arch/msg/spasm/TgrQLW1cyG6pg79EirbsT6UNf1g/) about KeyUsage bits \r\n\r\n> On section 5, it might be worth reiterating why the key usage bits need to be set the way they are.\r\n",
       "createdAt": "2025-05-27T16:19:06Z",
-      "updatedAt": "2025-05-27T17:08:38Z",
+      "updatedAt": "2025-06-25T20:35:59Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748",
       "headRepository": "csosto-pk/dilithium-certificates",
       "headRefName": "patch-11",
       "headRefOid": "af64c156302236ec187b4e735ee762440fc77216",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-06-25T20:35:59Z",
+      "mergedAt": "2025-06-25T20:35:59Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "333f1d541f63afbe27f6d5507cb5b4c690c89bca"
+      },
       "comments": [],
       "reviews": [
         {
@@ -10890,6 +10945,19 @@
           "body": "",
           "createdAt": "2025-05-27T17:08:38Z",
           "updatedAt": "2025-05-27T17:08:38Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6wZMAy",
+          "commit": {
+            "abbreviatedOid": "af64c15"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T19:25:51Z",
+          "updatedAt": "2025-06-25T19:25:51Z",
           "comments": []
         }
       ]
