@@ -617,7 +617,7 @@ for key generation, might allow an attacker to efficiently recover
 the private key by trying a small set of possibilities, rather than
 brute force search the whole keyspace.  The generation of random
 numbers of a sufficient level of quality for use in cryptography
-is difficult; see {{Section 3.6.1 of FIPS204}} for some additional
+is difficult; see Section 3.6.1 of {{FIPS204}} for some additional
 information.
 
 In the design of ML-DSA, care has been taken to make side-channel
