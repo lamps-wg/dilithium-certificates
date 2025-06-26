@@ -617,8 +617,8 @@ for key generation, might allow an attacker to efficiently recover
 the private key by trying a small set of possibilities, rather than
 brute force search the whole keyspace.  The generation of random
 numbers of a sufficient level of quality for use in cryptography
-is difficult, and {{?RFC4086}} offers important guidance in this
-area.
+is difficult; see {{Section 3.6.1 of FIPS204}} for some additional
+information.
 
 In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
