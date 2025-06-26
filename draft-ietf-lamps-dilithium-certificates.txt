@@ -20,7 +20,7 @@ Abstract
 
    Digital signatures are used within X.509 certificates, Certificate
    Revocation Lists (CRLs), and to sign messages.  This document
-   describes the conventions for using FIPS 204, the Module-Lattice-
+   specifies the conventions for using FIPS 204, the Module-Lattice-
    Based Digital Signature Algorithm (ML-DSA) in Internet X.509
    certificates and certificate revocation lists.  The conventions for
    the associated signatures, subject public keys, and private key are
@@ -324,7 +324,7 @@ Table of Contents
       |  the 2021 ASN.1 syntax [X680].  See [RFC5280] for the 1988 ASN.1
       |  syntax.
 
-   [RFC5958] describes the Asymmetric Key Package's OneAsymmetricKey
+   [RFC5958] specifies the Asymmetric Key Package's OneAsymmetricKey
    type for encoding asymmetric keypairs.  When an ML-DSA private key or
    keypair is encoded as a OneAsymmetricKey, it follows the description
    in Section 6.
@@ -376,7 +376,7 @@ Table of Contents
    (and public key) is computed from the seed using ML-
    DSA.KeyGen_internal(xi) (algorithm 6).
 
-   "Asymmetric Key Packages" [RFC5958] describes how to encode a private
+   "Asymmetric Key Packages" [RFC5958] specifies how to encode a private
    key in a structure that both identifies what algorithm the private
    key is for and allows for the public key and additional attributes
    about the key to be included as well.  For illustration, the ASN.1
