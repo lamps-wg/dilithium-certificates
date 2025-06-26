@@ -82,6 +82,13 @@ normative:
     date: 2023-08
     seriesinfo:
       "FIPS PUB": "204"
+  CSOR:
+    target: https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration
+    title: Computer Security Objects Register
+    author:
+      name: National Institute of Standards and Technology
+      ins: NIST
+    date: 2024-08-20
 
 informative:
   Dilithium:
@@ -167,10 +174,10 @@ specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX)
 certificates and Certificate Revocation Lists (CRLs) at three security
 levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
 
-{{FIPS204}} defines two variants of ML-DSA: a pure and a prehash variant.
+{{FIPS204}} defines two variants of ML-DSA: a pure and a pre-hash variant.
 Only the former is specified in this document.
 See {{sec-disallow-hash}} for the rationale.
-The pure variant of ML-DSA supports the typical prehash flow. Refer to
+The pure variant of ML-DSA supports the typical pre-hash flow. Refer to
 {{externalmu}} for more details.
 
 Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
@@ -208,7 +215,7 @@ identifier (OID).
 * `parameters`, which are optional, are the associated parameters for the
 algorithm identifier in the algorithm field.
 
-The OIDs are:
+The NIST registered OIDs {{CSOR}} are:
 
 ~~~
    id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
@@ -306,7 +313,8 @@ The identifiers defined in {{oids}} can be used as the
 `TBSCertificate`/`TBSCertList` in certificates and CRLs, respectively,
 {{RFC5280}}. The `parameters` of these signature algorithms MUST be
 absent, as explained in {{oids}}. That is, the `AlgorithmIdentifier`
-SHALL be a `SEQUENCE` of one component, the OID id-ml-dsa-*.
+SHALL be a `SEQUENCE` of one component, the OID id-ml-dsa-*, where *
+is 44, 65, or 87 - see {{oids}}.
 
 The `signatureValue` field contains the corresponding ML-DSA signature
 computed upon the ASN.1 DER encoded `tbsCertificate`/`tbsCertList`
@@ -406,8 +414,9 @@ textual encoding defined in {{?RFC7468}}.
 
 The intended application for the key is indicated in the `keyUsage`
 certificate extension; see {{Section 4.2.1.3 of RFC5280}}. If the
-`keyUsage` extension is present in a certificate that indicates `id-ml-dsa-*`
-in the `SubjectPublicKeyInfo`, then the subject public key can only be used
+`keyUsage` extension is present in a certificate that includes `id-ml-dsa-*`
+(where * is 44, 65, or 87 - see {{oids}}) in the `SubjectPublicKeyInfo`,
+then the subject public key can only be used
 for verifying digital signatures on certificates or CRLs, or those used in an
 entity authentication service, a data origin authentication service, an
 integrity service, and/or a non-repudiation service that protects against
@@ -415,20 +424,20 @@ the signing entity falsely denying some action. This means that the
 `keyUsage` extention MUST have at least one of the following bits set:
 
 ~~~
-  digitalSignature; or
-  nonRepudiation; or
-  keyCertSign; or
-  cRLSign.
+  digitalSignature
+  nonRepudiation
+  keyCertSign
+  cRLSign
 ~~~
 
 ML-DSA subject public keys cannot be used to establish keys or encrypt data, so the
 `keyUsage` extention MUST NOT have any of following bits set:
 
 ~~~
-   keyEncipherment; or
-   dataEncipherment; or
-   keyAgreement; or
-   encipherOnly; or
+   keyEncipherment,
+   dataEncipherment,
+   keyAgreement,
+   encipherOnly, and
    decipherOnly.
 ~~~
 
@@ -561,7 +570,9 @@ of "id-mod-x509-ml-dsa-2025". The OID for the module should be
 allocated in the "SMI Security for PKIX Module Identifier" registry
 (1.3.6.1.5.5.7.0).
 
-# Implementation Considerations
+# Operational Considerations
+
+## Private Key Format
 
 An `ML-DSA.KeyGen seed (xi)` represents the RECOMMENDED format for storing
 and transmitting ML-DSA private keys. This format is explicitly permitted
@@ -580,7 +591,11 @@ even when also exporting the expanded private key. ML-DSA seed extraction can be
 implemented by including the seed xi randomly generated at line 1 of Algorithm 1
 `ML-DSA.KeyGen` in the returned output.
 
-# Private Key Consistency Testing
+When encoding an ML-DSA private key in a OneAsymmetricKey object, any
+of these three formats may be used, though the seed format is
+RECOMMENDED for storage efficiency.
+
+## Private Key Consistency Testing
 
 When receiving a private key that contains both the seed and the
 expandedKey, the recipient SHOULD perform a seed consistency check to
@@ -598,6 +613,47 @@ the value presented in the private key.
 
 {{example-bad}} includes some examples of inconsistent seeds and expanded private
 keys.
+
+## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
+
+The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
+used; in other words, public keys identified by
+`id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
+`id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
+CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
+is primarily to increase interoperability.
+
+ML-DSA and HashML-DSA are incompatible algorithms that require
+different `Verify()` routines. This introduces the complexity of
+informing the verifier whether to use `ML-DSA.Verify()` or
+`HashML-DSA.Verify()`. Additionally, since
+the same OIDs are used to identify the ML-DSA
+public keys and ML-DSA signature algorithms, an implementation would
+need to commit a given public key to be either of type `ML-DSA` or
+`HashML-DSA` at the time of certificate creation. This is anticipated
+to cause operational issues in contexts where the operator does not
+know whether the key will need to produce pure or pre-hashed signatures
+at key generation time. The External Mu mode described in {{externalmu}}
+avoids all of these operational concerns.
+
+A minor security reason for disallowing HashML-DSA is that the design of the
+ML-DSA algorithm provides enhanced resistance against collision attacks,
+compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
+Specifically, ML-DSA prepends the SHAKE256 hash of the public key (`tr`)
+to the message to-be-signed prior to hashing, as described in
+line 6 of Algorithm 7 of {{FIPS204}}. This means that in the unlikely
+discovery of a collision attack against the SHA-3 family, an attacker
+would have to perform a public-key-specific collision search in order
+to find message pairs such that `H(tr || m1) = H(tr || m2)` since a
+direct hash collision `H(m1) = H(m2)` will not suffice.
+HashML-DSA removes this enhanced security property.
+In spite of its lack of targeted collision protection, the practical
+security risk of using HashML-DSA in X.509 signatures would be
+immaterial. That is because a hash of the issuing CA's public key
+is already included in the Authority Key Identifier (AKI) extension which
+is signed as part of the tbsCertificate structure.
+Even when it is a SHA-1 hash, general second pre-images against
+the AKI hash of existing issuing CAs would be impractical.
 
 # Security Considerations
 
@@ -657,47 +713,6 @@ signatures, and non-resignability. These properties are based
 tightly on the assumed collision resistance of the hash
 function used (in this case SHAKE-256). A full discussion
 of these properties in ML-DSA can be found at {{CDFFJ21}}.
-
-## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
-
-The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
-used; in other words, public keys identified by
-`id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
-`id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
-is primarily to increase interoperability.
-
-ML-DSA and HashML-DSA are incompatible algorithms that require
-different `Verify()` routines. This introduces the complexity of
-informing the verifier whether to use `ML-DSA.Verify()` or
-`HashML-DSA.Verify()`. Additionally, since
-the same OIDs are used to identify the ML-DSA
-public keys and ML-DSA signature algorithms, an implementation would
-need to commit a given public key to be either of type `ML-DSA` or
-`HashML-DSA` at the time of certificate creation. This is anticipated
-to cause operational issues in contexts where the operator does not
-know whether the key will need to produce pure or pre-hashed signatures
-at key generation time. The External Mu mode described in {{externalmu}}
-avoids all of these operational concerns.
-
-A minor security reason for disallowing HashML-DSA is that the design of the
-ML-DSA algorithm provides enhanced resistance against collision attacks,
-compared with HashML-DSA or conventional RSA or ECDSA signature algorithms.
-Specifically, ML-DSA prepends the SHAKE256 hash of the public key (`tr`)
-to the message to-be-signed prior to hashing, as described in
-line 6 of Algorithm 7 of {{FIPS204}}. This means that in the unlikely
-discovery of a collision attack against the SHA-3 family, an attacker
-would have to perform a public-key-specific collision search in order
-to find message pairs such that `H(tr || m1) = H(tr || m2)` since a
-direct hash collision `H(m1) = H(m2)` will not suffice.
-HashML-DSA removes this enhanced security property.
-In spite of its lack of targeted collision protection, the practical
-security risk of using HashML-DSA in X.509 signatures would be
-immaterial. That is because a hash of the issuing CA's public key
-is already included in the Authority Key Identifier (AKI) extension which
-is signed as part of the tbsCertificate structure.
-Even when it is a SHA-1 hash, general second pre-images against
-the AKI hash of existing issuing CAs would be impractical.
 
 --- back
 
