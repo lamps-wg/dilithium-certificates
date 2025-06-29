@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-26T01:04:06.120259+00:00",
+  "timestamp": "2025-06-29T01:11:30.166208+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -1569,6 +1569,69 @@
           "updatedAt": "2025-04-25T17:59:05Z"
         }
       ]
+    },
+    {
+      "number": 148,
+      "id": "I_kwDOIEpj4c69fxr0",
+      "title": "Tweak private key randomness text in SecCons",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/148",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "RFC 4086 is a wee-bit out of date so we need to either come up a new ref or reword somehow; see this [thread](https://mailarchive.ietf.org/arch/msg/spasm/1_VHGgw2AR5NzfSgucVeI94W_Ak/).",
+      "createdAt": "2025-06-26T13:54:06Z",
+      "updatedAt": "2025-06-26T17:11:21Z",
+      "closedAt": "2025-06-26T17:11:21Z",
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The randomness topic came up in SSHM as well with not so good references there either. ",
+          "createdAt": "2025-06-26T14:36:24Z",
+          "updatedAt": "2025-06-26T14:36:24Z"
+        },
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Can we get away with just referring to s3.6.1 of FIPS 204?",
+          "createdAt": "2025-06-26T14:46:52Z",
+          "updatedAt": "2025-06-26T14:46:52Z"
+        }
+      ]
+    },
+    {
+      "number": 149,
+      "id": "I_kwDOIEpj4c69fyvm",
+      "title": "Address Med's Comments",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/149",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See [email](https://mailarchive.ietf.org/arch/browse/spasm/?q=dilithium).",
+      "createdAt": "2025-06-26T13:55:28Z",
+      "updatedAt": "2025-06-26T17:45:31Z",
+      "closedAt": "2025-06-26T17:45:31Z",
+      "comments": []
+    },
+    {
+      "number": 151,
+      "id": "I_kwDOIEpj4c69gSDd",
+      "title": "Address Eric's Comments",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/issues/151",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See [email](https://mailarchive.ietf.org/arch/msg/spasm/uYtLQu7wz-QOz2j9e0uAzaWOjhk/).",
+      "createdAt": "2025-06-26T14:37:22Z",
+      "updatedAt": "2025-06-26T17:11:44Z",
+      "closedAt": "2025-06-26T17:11:44Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -10765,24 +10828,26 @@
       "id": "PR_kwDOIEpj4c6XxdBc",
       "title": "Move definition of public key types a bit down to avoid confusion",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/146",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bwesterb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/spasm/LeZnHAJf1zQ6nftRAjKzuGfMI3Q/",
       "createdAt": "2025-05-27T12:22:59Z",
-      "updatedAt": "2025-06-25T20:36:59Z",
+      "updatedAt": "2025-06-26T13:52:24Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "bcb92560fb1120726d7edaf7dd217bfe80bc3748",
       "headRepository": "lamps-wg/dilithium-certificates",
       "headRefName": "watson",
       "headRefOid": "f85cbb646d830c85c92a8e16ce012f93de920c94",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-06-26T13:52:24Z",
+      "mergedAt": "2025-06-26T13:52:24Z",
+      "mergedBy": "seanturner",
+      "mergeCommit": {
+        "oid": "22cedda1af2b907ee5954876834b350fa0e88196"
+      },
       "comments": [
         {
           "author": "jakemas",
@@ -10959,6 +11024,138 @@
           "createdAt": "2025-06-25T19:25:51Z",
           "updatedAt": "2025-06-25T19:25:51Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 150,
+      "id": "PR_kwDOIEpj4c6cP1ep",
+      "title": "Address Med's Comments",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/150",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #149",
+      "createdAt": "2025-06-26T14:31:18Z",
+      "updatedAt": "2025-06-26T17:45:31Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "22cedda1af2b907ee5954876834b350fa0e88196",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-med-comments",
+      "headRefOid": "53cf9f06048dd16849b70d88c7fb917f387d18ce",
+      "closedAt": "2025-06-26T17:45:31Z",
+      "mergedAt": "2025-06-26T17:45:31Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "5dba4285ff72113387a9c0cb80dee5fc1254ee8b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6wkjHs",
+          "commit": {
+            "abbreviatedOid": "53cf9f0"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "All look good. ",
+          "createdAt": "2025-06-26T14:34:58Z",
+          "updatedAt": "2025-06-26T14:34:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6wmugQ",
+          "commit": {
+            "abbreviatedOid": "53cf9f0"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-26T17:44:29Z",
+          "updatedAt": "2025-06-26T17:44:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 152,
+      "id": "PR_kwDOIEpj4c6cP9H6",
+      "title": "Address Eric's Comments",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/152",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #151.",
+      "createdAt": "2025-06-26T14:42:48Z",
+      "updatedAt": "2025-06-26T17:11:44Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "22cedda1af2b907ee5954876834b350fa0e88196",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-eric-comments",
+      "headRefOid": "752d7974a85c9ffb09d3235d3d149c4ab61d300a",
+      "closedAt": "2025-06-26T17:11:43Z",
+      "mergedAt": "2025-06-26T17:11:43Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "8dfbb4218df5a8387fa9f6003658c463d0a03787"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 153,
+      "id": "PR_kwDOIEpj4c6cQBcO",
+      "title": "Randomness Ref Tweak",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/153",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #148.",
+      "createdAt": "2025-06-26T14:49:30Z",
+      "updatedAt": "2025-06-26T17:11:21Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "22cedda1af2b907ee5954876834b350fa0e88196",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-random-text",
+      "headRefOid": "a4af0801e92463bc578d8b1a83f2eb00e2324c18",
+      "closedAt": "2025-06-26T17:11:20Z",
+      "mergedAt": "2025-06-26T17:11:20Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "b0b5fee62eb475ade579edc51c57be24509deb99"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6wkxWx",
+          "commit": {
+            "abbreviatedOid": "e7ba9a2"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-26T14:51:32Z",
+          "updatedAt": "2025-06-26T14:51:32Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nis difficult; see Section 3.6.1 of {{FIPS204}} for some additional\r\n```\r\n```suggestion\r\nis difficult; see {{Section 3.6.1 of FIPS204}} for some additional\r\n```",
+              "createdAt": "2025-06-26T14:51:32Z",
+              "updatedAt": "2025-06-26T14:51:32Z"
+            }
+          ]
         }
       ]
     }
