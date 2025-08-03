@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-29T01:11:30.166208+00:00",
+  "timestamp": "2025-08-03T01:16:06.567910+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -11156,6 +11156,46 @@
               "updatedAt": "2025-06-26T14:51:32Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 154,
+      "id": "PR_kwDOIEpj4c6hwLGf",
+      "title": "ASN.1 Nit",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/154",
+      "state": "OPEN",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Nit with ASN.1 exhibit from RFC 5958",
+      "createdAt": "2025-08-01T16:42:06Z",
+      "updatedAt": "2025-08-01T18:29:13Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "6bb10fb2fd678447a41b4a24fe936cbff3f2ed93",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-12",
+      "headRefOid": "d9da334bc984153636949f01c4cb28f8d51a93ec",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c63l9u7",
+          "commit": {
+            "abbreviatedOid": "d9da334"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-01T18:29:13Z",
+          "updatedAt": "2025-08-01T18:29:13Z",
+          "comments": []
         }
       ]
     }
