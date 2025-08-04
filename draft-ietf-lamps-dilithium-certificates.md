@@ -472,7 +472,7 @@ key to be included as well. For illustration, the ASN.1 structure
     [[2: publicKey       [1] BIT STRING (CONTAINING
                                PUBLIC-KEY.&Params({PublicKeySet}
                                  {@privateKeyAlgorithm.algorithm})
-                                 OPTIONAL,
+                                 OPTIONAL ]],
     ...
   }
 ~~~
