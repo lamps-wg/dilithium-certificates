@@ -74,12 +74,12 @@ normative:
       ITU-T Recommendation: X.690
       ISO/IEC: 8825-1:2021
   FIPS204:
-    target: https://csrc.nist.gov/projects/post-quantum-cryptography
+    target: https://csrc.nist.gov/pubs/fips/204/final 
     title: >
-      Module-Lattice-based Digital Signature Standard
+      Module-Lattice-Based Digital Signature Standard
     author:
     - org: National Institute of Standards and Technology (NIST)
-    date: 2023-08
+    date: 2024-08
     seriesinfo:
       "FIPS PUB": "204"
   CSOR:
