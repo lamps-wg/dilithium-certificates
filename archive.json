@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-05T01:11:19.907223+00:00",
+  "timestamp": "2025-09-09T00:58:38.696219+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -11200,6 +11200,122 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 155,
+      "id": "PR_kwDOIEpj4c6ndF5J",
+      "title": "Update link to FIPS 204",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/155",
+      "state": "OPEN",
+      "author": "jakemas",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Update link to FIPS 204 final",
+      "createdAt": "2025-09-08T20:03:52Z",
+      "updatedAt": "2025-09-08T20:39:36Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "e59b66ca61626d2a00bb790a6a7346d98daccd0d",
+      "headRepository": "jakemas/dilithium-certificates",
+      "headRefName": "update-link",
+      "headRefOid": "50d18c7771680a5e3f315eff5c08190bb8cf8e59",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Used the same trick as in https://github.com/lamps-wg/kyber-certificates/blob/main/draft-ietf-lamps-kyber-certificates.md?plain=1#L131 to autogen the reference using `{{!FIPS204=DOI.10.6028/NIST.FIPS.204}}` on the first occurrence  \ud83d\ude0e ",
+          "createdAt": "2025-09-08T20:18:50Z",
+          "updatedAt": "2025-09-08T20:18:50Z"
+        },
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Looks good. ",
+          "createdAt": "2025-09-08T20:23:54Z",
+          "updatedAt": "2025-09-08T20:23:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c6-nkhc",
+          "commit": {
+            "abbreviatedOid": "50d18c7"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-08T20:23:40Z",
+          "updatedAt": "2025-09-08T20:23:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c6-nxfI",
+          "commit": {
+            "abbreviatedOid": "50d18c7"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-08T20:39:36Z",
+          "updatedAt": "2025-09-08T20:39:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 156,
+      "id": "PR_kwDOIEpj4c6ndGy5",
+      "title": "Proper FIPS204 Reference",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/156",
+      "state": "CLOSED",
+      "author": "csosto-pk",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-08T20:05:04Z",
+      "updatedAt": "2025-09-08T20:09:31Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "e59b66ca61626d2a00bb790a6a7346d98daccd0d",
+      "headRepository": "csosto-pk/dilithium-certificates",
+      "headRefName": "patch-13",
+      "headRefOid": "527b658f3810ff4b9773bead817292a9368a3256",
+      "closedAt": "2025-09-08T20:07:44Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Ooops, already fixed in https://github.com/lamps-wg/dilithium-certificates/pull/155 by Jake. \r\nClosing this one a duplicate.",
+          "createdAt": "2025-09-08T20:07:44Z",
+          "updatedAt": "2025-09-08T20:07:44Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Aha! on it!",
+          "createdAt": "2025-09-08T20:08:00Z",
+          "updatedAt": "2025-09-08T20:08:00Z"
+        },
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "if you approve https://github.com/lamps-wg/dilithium-certificates/pull/155 I'll merge!",
+          "createdAt": "2025-09-08T20:09:31Z",
+          "updatedAt": "2025-09-08T20:09:31Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
