@@ -146,7 +146,7 @@ informative:
     author:
     - org: National Institute of Standards and Technology (NIST)
     date: 2016-12-20
-  FIPS204-ExternalMuFAQ:
+  FIPS204-ExternalμFAQ:
     target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
     title: FIPS 204 Section 6 FAQ
     author:
@@ -633,7 +633,7 @@ need to commit a given public key to be either of type `ML-DSA` or
 `HashML-DSA` at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
 know whether the key will need to produce pure or pre-hashed signatures
-at key generation time. The External Mu mode described in {{externalmu}}
+at key generation time. The External &mu; mode described in {{externalmu}}
 avoids all of these operational concerns.
 
 A minor security reason for disallowing HashML-DSA is that the design of the
@@ -1003,7 +1003,7 @@ The following is the third example:
 ~~~
 
 
-# Pre-hashing (ExternalMu-ML-DSA) {#externalmu}
+# Pre-hashing (External&mu;-ML-DSA) {#externalmu}
 
 Some applications require pre-hashing that ease operational
 requirements around large or inconsistently-sized payloads.
@@ -1014,14 +1014,14 @@ step which uses the public key.
 
 In the context of ML-DSA, pre-hashing can be performed with
 the HashML-DSA algorithm defined in Section 5.4 of {{FIPS204}}.
-ML-DSA itself supports a External Mu pre-hashing mode which
+ML-DSA itself supports a External &mu; pre-hashing mode which
 externalizes the message pre-hashing originally performed inside
 the signing operation. This mode is also laid out in
-{{FIPS204-ExternalMuFAQ}}. This document specifies
-only the use of ML-DSA's External Mu mode, and not HashML-DSA,
+{{FIPS204-ExternalμFAQ}}. This document specifies
+only the use of ML-DSA's External &mu; mode, and not HashML-DSA,
 in PKIX for reasons laid out in {{sec-disallow-hash}}.
 
-Implementations of ML-DSA using the External Mu pre-hashing mode requires the following
+Implementations of ML-DSA using the External &mu; pre-hashing mode requires the following
 algorithms, which are modified versions of the algorithms presented in {{FIPS204}}.
 The nomenclature used here has been modified from the NIST FAQ {{FIPS204-ExternalMuFAQ}}
 for clarity.
@@ -1029,31 +1029,31 @@ for clarity.
 Pre-hash operation:
 
 ~~~
-ComputeMu(pk, M, ctx):
+Computeμ(pk, M, ctx):
 
-  # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
+  # Referred to as 'Externalμ-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
   # M is the message, a bit-string
-  # mu and ctx are byte-strings.
+  # μ and ctx are byte-strings.
   # ctx is the context string, which defaults to the empy string.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+  μ = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
                 IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
-  return mu
+  return μ
 ~~~
-{: #fig-externalmu-ml-dsa-external title="ComputeMu prehash operation"}
+{: #fig-externalmu-ml-dsa-external title="Computeμ prehash operation"}
 
 Sign operations:
 
 ~~~
-SignMu(sk, mu):
+Signμ(sk, μ):
 
-  # Referred to as 'ExternalMu-ML-DSA.Sign(sk, mu)'
+  # Referred to as 'Externalμ-ML-DSA.Sign(sk, μ)'
   # in the FIPS 204 FAQ.
 
-  if |mu| != 64 then
-    return error  # return an error indication if the input mu is not
+  if |μ| != 64 then
+    return error  # return an error indication if the input μ is not
                   # 64 bytes.
   end if
 
@@ -1064,41 +1064,41 @@ SignMu(sk, mu):
                   # generation failed
   end if
 
-  sigma = SignMu_internal(sk, mu, rnd, isExternalMu=true)
+  sigma = Signμ_internal(sk, μ, rnd, isExternalμ=true)
   return sigma
 
-ML-DSA.SignMu_internal(sk, M', rnd, isExternalMu=false):
-    # mu can be passed as an argument instead of M'
-    # defaulting is ExternalMu to false means that
+ML-DSA.Signμ_internal(sk, M', rnd, isExternalμ=false):
+    # μ can be passed as an argument instead of M'
+    # defaulting is Externalμ to false means that
     # this modified version of Sign_internal can be used
     # in place of the original without interfering with
     # functioning of pure ML-DSA mode.
     # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
-  6: if (isExternalMu):
-       mu = M'
+  6: if (isExternalμ):
+       μ = M'
      else:
-       mu = H(BytesToBits(tr) || M', 64)
+       μ = H(BytesToBits(tr) || M', 64)
 ~~~
-{: #fig-externalmu-ml-dsa-internal title="The operations for signing mu"}
+{: #fig-externalmu-ml-dsa-internal title="The operations for signing &mu;"}
 
-There is no need to specify an External Mu `Verify()` routine because
+There is no need to specify an External &mu; `Verify()` routine because
 this is identical to the original `ML-DSA.Verify()`. This makes External
-Mu mode simply an internal optimization of the signer, and
+&mu; mode simply an internal optimization of the signer, and
 allows an ML-DSA key to sometimes be used with the "one-shot" `Sign()`
-API and sometimes the External Mu API without any interoperability concens.
+API and sometimes the External &mu; API without any interoperability concens.
 
-The External Mu mode requires the `ComputeMu` routine to have access to the
+The External &mu; mode requires the `Computeμ` routine to have access to the
 hash of the signer's public key which may not be available in some architectures,
 or require fetching it. That may allow for mismatches between `tr` and `sk`.
 At worst, this will produce a signature which will fail to verify under the
 intended public key since a compliant `Verify()` routine will
 independently compute `tr` from the public key. That
-is not believed to be a security concern since `mu` is never used as-is
+is not believed to be a security concern since `μ` is never used as-is
 within `ML-DSA.Sign_internal()` (Algorithm 7 in {{FIPS204}}). Rather,
 it is hashed with values unknown to an attacker on lines 7 and 15.
-Thus, a signing oracle exposing `SignMu()` does not leak any bits of the secret
-key. The External Mu mode also requires SHAKE256 to be available to the
-`ComputeMu` routine.
+Thus, a signing oracle exposing `Signμ()` does not leak any bits of the secret
+key. The External &mu; mode also requires SHAKE256 to be available to the
+`Computeμ` routine.
 
 # Acknowledgments
 {:numbered="false"}
