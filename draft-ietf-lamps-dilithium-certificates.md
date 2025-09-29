@@ -633,7 +633,7 @@ need to commit a given public key to be either of type `ML-DSA` or
 `HashML-DSA` at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
 know whether the key will need to produce pure or pre-hashed signatures
-at key generation time. The External &mu; mode described in {{externalmu}}
+at key generation time. The External &mu; (mu) mode described in {{externalmu}}
 avoids all of these operational concerns.
 
 A minor security reason for disallowing HashML-DSA is that the design of the
