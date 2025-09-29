@@ -1023,7 +1023,7 @@ in PKIX for reasons laid out in {{sec-disallow-hash}}.
 
 Implementations of ML-DSA using the External &mu; pre-hashing mode requires the following
 algorithms, which are modified versions of the algorithms presented in {{FIPS204}}.
-The nomenclature used here has been modified from the NIST FAQ {{FIPS204-ExternalMuFAQ}}
+The nomenclature used here has been modified from the NIST FAQ {{FIPS204-ExternalμFAQ}}
 for clarity.
 
 Pre-hash operation:
@@ -1079,7 +1079,7 @@ ML-DSA.Signμ_internal(sk, M', rnd, isExternalμ=false):
      else:
        μ = H(BytesToBits(tr) || M', 64)
 ~~~
-{: #fig-externalmu-ml-dsa-internal title="The operations for signing &mu;"}
+{: #fig-externalmu-ml-dsa-internal title="The operations for signing μ"}
 
 There is no need to specify an External &mu; `Verify()` routine because
 this is identical to the original `ML-DSA.Verify()`. This makes External
