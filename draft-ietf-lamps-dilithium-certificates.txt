@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 5 February 2026                                       S. Turner
+Expires: 3 April 2026                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                           4 August 2025
+                                                       30 September 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 February 2026.
+   This Internet-Draft will expire on 3 April 2026.
 
 Copyright Notice
 
@@ -646,10 +646,10 @@ Table of Contents
               2024, <https://csrc.nist.gov/projects/computer-security-
               objects-register/algorithm-registration>.
 
-   [FIPS204]  National Institute of Standards and Technology (NIST),
-              "Module-Lattice-based Digital Signature Standard", FIPS
-              PUB 204, August 2023, <https://csrc.nist.gov/projects/
-              post-quantum-cryptography>.
+   [FIPS204]  "Module-lattice-based digital signature standard",
+              National Institute of Standards and Technology (U.S.),
+              DOI 10.6028/nist.fips.204, August 2024,
+              <https://doi.org/10.6028/nist.fips.204>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
