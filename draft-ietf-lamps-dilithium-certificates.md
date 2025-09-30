@@ -1017,7 +1017,7 @@ the HashML-DSA algorithm defined in Section 5.4 of {{FIPS204}}.
 ML-DSA itself supports a External &mu; pre-hashing mode which
 externalizes the message pre-hashing originally performed inside
 the signing operation. This mode is also laid out in
-{{FIPS204-ExternalμFAQ}}. This document specifies
+{{FIPS204-ExternalMuFAQ}}. This document specifies
 only the use of ML-DSA's External &mu; mode, and not HashML-DSA,
 in PKIX for reasons laid out in {{sec-disallow-hash}}.
 
