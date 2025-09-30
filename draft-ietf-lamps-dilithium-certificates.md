@@ -1023,7 +1023,7 @@ in PKIX for reasons laid out in {{sec-disallow-hash}}.
 
 Implementations of ML-DSA using the External &mu; pre-hashing mode requires the following
 algorithms, which are modified versions of the algorithms presented in {{FIPS204}}.
-The nomenclature used here has been modified from the NIST FAQ {{FIPS204-ExternalμFAQ}}
+The nomenclature used here has been modified from the NIST FAQ {{FIPS204-ExternalMuFAQ}}
 for clarity.
 
 Pre-hash operation:
