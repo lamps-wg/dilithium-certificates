@@ -73,15 +73,6 @@ normative:
     seriesinfo:
       ITU-T Recommendation: X.690
       ISO/IEC: 8825-1:2021
-  FIPS204:
-    target: https://csrc.nist.gov/projects/post-quantum-cryptography
-    title: >
-      Module-Lattice-based Digital Signature Standard
-    author:
-    - org: National Institute of Standards and Technology (NIST)
-    date: 2023-08
-    seriesinfo:
-      "FIPS PUB": "204"
   CSOR:
     target: https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration
     title: Computer Security Objects Register
@@ -169,7 +160,7 @@ signatures, subject public keys, and private key are also described.
 The Module-Lattice-Based Digital Signature Algorithm (ML-DSA) is a
 quantum-resistant digital signature scheme standardized by the US
 National Institute of Standards and Technology (NIST) PQC project
-{{NIST-PQC}} in {{FIPS204}}. This document
+{{NIST-PQC}} in {{!FIPS204=DOI.10.6028/NIST.FIPS.204}}. This document
 specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX)
 certificates and Certificate Revocation Lists (CRLs) at three security
 levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
