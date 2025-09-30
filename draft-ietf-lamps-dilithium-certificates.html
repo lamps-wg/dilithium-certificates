@@ -2,7 +2,7 @@
 <html lang="en" class="Internet-Draft">
 <head>
 <meta charset="utf-8">
-<meta content="Common,Latin" name="scripts">
+<meta content="Common,Greek,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)</title>
 <meta content="Jake Massimo" name="author">
@@ -1259,7 +1259,7 @@ signatures, subject public keys, and private key are also described.<a href="#se
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-pre-hashing-externalmu-ml-d" class="internal xref">Pre-hashing (ExternalMu-ML-DSA)</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-pre-hashing-external-ml-dsa" class="internal xref">Pre-hashing (Externalμ-ML-DSA)</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
             <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
@@ -1772,7 +1772,7 @@ need to commit a given public key to be either of type <code>ML-DSA</code> or
 <code>HashML-DSA</code> at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
 know whether the key will need to produce pure or pre-hashed signatures
-at key generation time. The External Mu mode described in <a href="#externalmu" class="auto internal xref">Appendix D</a>
+at key generation time. The External μ (mu) mode described in <a href="#externalmu" class="auto internal xref">Appendix D</a>
 avoids all of these operational concerns.<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <p id="section-8.3-3">A minor security reason for disallowing HashML-DSA is that the design of the
 ML-DSA algorithm provides enhanced resistance against collision attacks,
@@ -5419,8 +5419,8 @@ EGOY93BgBuQum+HvidJcJy8RqVCVxYfXE3MihN6dvTxyF7BoniHY6w/2lmg=
 </div>
 <div id="externalmu">
 <section id="appendix-D">
-      <h2 id="name-pre-hashing-externalmu-ml-d">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-pre-hashing-externalmu-ml-d" class="section-name selfRef">Pre-hashing (ExternalMu-ML-DSA)</a>
+      <h2 id="name-pre-hashing-external-ml-dsa">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-pre-hashing-external-ml-dsa" class="section-name selfRef">Pre-hashing (Externalμ-ML-DSA)</a>
       </h2>
 <p id="appendix-D-1">Some applications require pre-hashing that ease operational
 requirements around large or inconsistently-sized payloads.
@@ -5430,51 +5430,51 @@ and other public information, and a core signature
 step which uses the public key.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <p id="appendix-D-2">In the context of ML-DSA, pre-hashing can be performed with
 the HashML-DSA algorithm defined in Section 5.4 of <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
-ML-DSA itself supports a External Mu pre-hashing mode which
+ML-DSA itself supports a External μ pre-hashing mode which
 externalizes the message pre-hashing originally performed inside
 the signing operation. This mode is also laid out in
 <span>[<a href="#FIPS204-ExternalMuFAQ" class="cite xref">FIPS204-ExternalMuFAQ</a>]</span>. This document specifies
-only the use of ML-DSA's External Mu mode, and not HashML-DSA,
+only the use of ML-DSA's External μ mode, and not HashML-DSA,
 in PKIX for reasons laid out in <a href="#sec-disallow-hash" class="auto internal xref">Section 8.3</a>.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<p id="appendix-D-3">Implementations of ML-DSA using the External Mu pre-hashing mode requires the following
+<p id="appendix-D-3">Implementations of ML-DSA using the External μ pre-hashing mode requires the following
 algorithms, which are modified versions of the algorithms presented in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>.
 The nomenclature used here has been modified from the NIST FAQ <span>[<a href="#FIPS204-ExternalMuFAQ" class="cite xref">FIPS204-ExternalMuFAQ</a>]</span>
 for clarity.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <p id="appendix-D-4">Pre-hash operation:<a href="#appendix-D-4" class="pilcrow">¶</a></p>
-<span id="name-computemu-prehash-operation"></span><div id="fig-externalmu-ml-dsa-external">
+<span id="name-compute-prehash-operation"></span><div id="fig-externalmu-ml-dsa-external">
 <figure id="figure-2">
         <div class="alignLeft art-text artwork" id="appendix-D-5.1">
 <pre>
-ComputeMu(pk, M, ctx):
+Computeμ(pk, M, ctx):
 
-  # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
+  # Referred to as 'Externalμ-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
   # M is the message, a bit-string
-  # mu and ctx are byte-strings.
+  # μ and ctx are byte-strings.
   # ctx is the context string, which defaults to the empy string.
 
-  mu = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
+  μ = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
                 IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
   # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
-  return mu
+  return μ
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-computemu-prehash-operation" class="selfRef">ComputeMu prehash operation</a>
+<a href="#name-compute-prehash-operation" class="selfRef">Computeμ prehash operation</a>
         </figcaption></figure>
 </div>
 <p id="appendix-D-6">Sign operations:<a href="#appendix-D-6" class="pilcrow">¶</a></p>
-<span id="name-the-operations-for-signing-"></span><div id="fig-externalmu-ml-dsa-internal">
+<span id="name-the-operations-for-signing"></span><div id="fig-externalmu-ml-dsa-internal">
 <figure id="figure-3">
         <div class="alignLeft art-text artwork" id="appendix-D-7.1">
 <pre>
-SignMu(sk, mu):
+Signμ(sk, μ):
 
-  # Referred to as 'ExternalMu-ML-DSA.Sign(sk, mu)'
+  # Referred to as 'Externalμ-ML-DSA.Sign(sk, μ)'
   # in the FIPS 204 FAQ.
 
-  if |mu| != 64 then
-    return error  # return an error indication if the input mu is not
+  if |μ| != 64 then
+    return error  # return an error indication if the input μ is not
                   # 64 bytes.
   end if
 
@@ -5485,43 +5485,43 @@ SignMu(sk, mu):
                   # generation failed
   end if
 
-  sigma = SignMu_internal(sk, mu, rnd, isExternalMu=true)
+  sigma = Signμ_internal(sk, μ, rnd, isExternalμ=true)
   return sigma
 
-ML-DSA.SignMu_internal(sk, M', rnd, isExternalMu=false):
-    # mu can be passed as an argument instead of M'
-    # defaulting is ExternalMu to false means that
+ML-DSA.Signμ_internal(sk, M', rnd, isExternalμ=false):
+    # μ can be passed as an argument instead of M'
+    # defaulting is Externalμ to false means that
     # this modified version of Sign_internal can be used
     # in place of the original without interfering with
     # functioning of pure ML-DSA mode.
     # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
-  6: if (isExternalMu):
-       mu = M'
+  6: if (isExternalμ):
+       μ = M'
      else:
-       mu = H(BytesToBits(tr) || M', 64)
+       μ = H(BytesToBits(tr) || M', 64)
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-the-operations-for-signing-" class="selfRef">The operations for signing mu</a>
+<a href="#name-the-operations-for-signing" class="selfRef">The operations for signing μ</a>
         </figcaption></figure>
 </div>
-<p id="appendix-D-8">There is no need to specify an External Mu <code>Verify()</code> routine because
+<p id="appendix-D-8">There is no need to specify an External μ <code>Verify()</code> routine because
 this is identical to the original <code>ML-DSA.Verify()</code>. This makes External
-Mu mode simply an internal optimization of the signer, and
+μ mode simply an internal optimization of the signer, and
 allows an ML-DSA key to sometimes be used with the "one-shot" <code>Sign()</code>
-API and sometimes the External Mu API without any interoperability concens.<a href="#appendix-D-8" class="pilcrow">¶</a></p>
-<p id="appendix-D-9">The External Mu mode requires the <code>ComputeMu</code> routine to have access to the
+API and sometimes the External μ API without any interoperability concens.<a href="#appendix-D-8" class="pilcrow">¶</a></p>
+<p id="appendix-D-9">The External μ mode requires the <code>Computeμ</code> routine to have access to the
 hash of the signer's public key which may not be available in some architectures,
 or require fetching it. That may allow for mismatches between <code>tr</code> and <code>sk</code>.
 At worst, this will produce a signature which will fail to verify under the
 intended public key since a compliant <code>Verify()</code> routine will
 independently compute <code>tr</code> from the public key. That
-is not believed to be a security concern since <code>mu</code> is never used as-is
+is not believed to be a security concern since <code>μ</code> is never used as-is
 within <code>ML-DSA.Sign_internal()</code> (Algorithm 7 in <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>). Rather,
 it is hashed with values unknown to an attacker on lines 7 and 15.
-Thus, a signing oracle exposing <code>SignMu()</code> does not leak any bits of the secret
-key. The External Mu mode also requires SHAKE256 to be available to the
-<code>ComputeMu</code> routine.<a href="#appendix-D-9" class="pilcrow">¶</a></p>
+Thus, a signing oracle exposing <code>Signμ()</code> does not leak any bits of the secret
+key. The External μ mode also requires SHAKE256 to be available to the
+<code>Computeμ</code> routine.<a href="#appendix-D-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
