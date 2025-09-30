@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-09T00:58:38.696219+00:00",
+  "timestamp": "2025-09-30T00:58:36.362780+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -11316,6 +11316,139 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 157,
+      "id": "PR_kwDOIEpj4c6q-yvH",
+      "title": "Use \u03bc",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/157",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-28T23:57:30Z",
+      "updatedAt": "2025-09-29T20:48:10Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "e59b66ca61626d2a00bb790a6a7346d98daccd0d",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-use-greek",
+      "headRefOid": "2b3f6043e58dde0744035f8d89c692810d284685",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c7DawQY",
+          "commit": {
+            "abbreviatedOid": "0b78507"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-29T08:41:43Z",
+          "updatedAt": "2025-09-29T08:41:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "NIST in this FAQ uses *mu* instead of *\u00b5*.",
+              "createdAt": "2025-09-29T08:41:43Z",
+              "updatedAt": "2025-09-29T08:41:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c7DazMd",
+          "commit": {
+            "abbreviatedOid": "0b78507"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-29T08:44:33Z",
+          "updatedAt": "2025-09-29T08:44:33Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "For the first reference, and in the defining paragraph, I think it'd be good to add a latinisation:\r\n\r\n> The external \u00b5 (mu) mode \r\n\r\nBoth because implementors can't always use unicode in code or communication, and because NIST uses the latinisation in their FAQ.",
+              "createdAt": "2025-09-29T08:44:33Z",
+              "updatedAt": "2025-09-29T08:44:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c7Da0Oo",
+          "commit": {
+            "abbreviatedOid": "0b78507"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I don't think this is worth the hassle, but I won't block. We should add a suggested latinisation.",
+          "createdAt": "2025-09-29T08:45:47Z",
+          "updatedAt": "2025-09-29T08:45:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c7Df63f",
+          "commit": {
+            "abbreviatedOid": "0b78507"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-29T13:44:04Z",
+          "updatedAt": "2025-09-29T13:44:04Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\nat key generation time. The External &mu; (mu) mode described in {{externalmu}}\n```",
+              "createdAt": "2025-09-29T13:44:04Z",
+              "updatedAt": "2025-09-29T13:44:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c7Df8Cf",
+          "commit": {
+            "abbreviatedOid": "0b78507"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-29T13:45:05Z",
+          "updatedAt": "2025-09-29T13:45:05Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\n  FIPS204-ExternalMuFAQ:\n```",
+              "createdAt": "2025-09-29T13:45:05Z",
+              "updatedAt": "2025-09-29T13:45:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIEpj4c7Dms2k",
+          "commit": {
+            "abbreviatedOid": "0b78507"
+          },
+          "author": "csosto-pk",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-29T20:36:46Z",
+          "updatedAt": "2025-09-29T20:36:46Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
