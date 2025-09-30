@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 2 April 2026                                          S. Turner
+Expires: 3 April 2026                                          S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                       29 September 2025
+                                                       30 September 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2026.
+   This Internet-Draft will expire on 3 April 2026.
 
 Copyright Notice
 
@@ -558,8 +558,9 @@ Table of Contents
    of type ML-DSA or HashML-DSA at the time of certificate creation.
    This is anticipated to cause operational issues in contexts where the
    operator does not know whether the key will need to produce pure or
-   pre-hashed signatures at key generation time.  The External μ mode
-   described in Appendix D avoids all of these operational concerns.
+   pre-hashed signatures at key generation time.  The External μ (mu)
+   mode described in Appendix D avoids all of these operational
+   concerns.
 
    A minor security reason for disallowing HashML-DSA is that the design
    of the ML-DSA algorithm provides enhanced resistance against
@@ -711,7 +712,7 @@ Table of Contents
               <https://www.iacr.org/archive/
               asiacrypt2009/59120596/59120596.pdf>.
 
-   [FIPS204-External_FAQ]
+   [FIPS204-ExternalMuFAQ]
               National Institute of Standards and Technology (NIST),
               "FIPS 204 Section 6 FAQ", 2025,
               <https://csrc.nist.gov/csrc/media/Projects/post-quantum-
@@ -4043,14 +4044,14 @@ Appendix D.  Pre-hashing (Externalμ-ML-DSA)
    HashML-DSA algorithm defined in Section 5.4 of [FIPS204].  ML-DSA
    itself supports a External μ pre-hashing mode which externalizes the
    message pre-hashing originally performed inside the signing
-   operation.  This mode is also laid out in [FIPS204-External_FAQ].
+   operation.  This mode is also laid out in [FIPS204-ExternalMuFAQ].
    This document specifies only the use of ML-DSA's External μ mode, and
    not HashML-DSA, in PKIX for reasons laid out in Section 8.3.
 
    Implementations of ML-DSA using the External μ pre-hashing mode
    requires the following algorithms, which are modified versions of the
    algorithms presented in [FIPS204].  The nomenclature used here has
-   been modified from the NIST FAQ [FIPS204-External_FAQ] for clarity.
+   been modified from the NIST FAQ [FIPS204-ExternalMuFAQ] for clarity.
 
    Pre-hash operation:
 
