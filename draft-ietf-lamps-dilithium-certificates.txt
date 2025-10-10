@@ -5,11 +5,11 @@
 LAMPS WG                                                      J. Massimo
 Internet-Draft                                             P. Kampanakis
 Intended status: Standards Track                                     AWS
-Expires: 3 April 2026                                          S. Turner
+Expires: 13 April 2026                                         S. Turner
                                                                    sn3rd
                                                         B. E. Westerbaan
                                                               Cloudflare
-                                                       30 September 2025
+                                                         10 October 2025
 
 
 Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2026.
+   This Internet-Draft will expire on 13 April 2026.
 
 Copyright Notice
 
@@ -847,7 +847,7 @@ Appendix A.  ASN.1 Module
 
    ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
 
-   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2602))
+   ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
 
    --
    -- Signature Algorithms
