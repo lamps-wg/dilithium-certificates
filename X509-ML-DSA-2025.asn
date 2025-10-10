@@ -105,7 +105,7 @@ ML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))
 
 ML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))
 
-ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2602))
+ML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2592))
 
 --
 -- Signature Algorithms
