@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T00:58:20.037842+00:00",
+  "timestamp": "2025-10-12T01:00:46.025087+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -11499,25 +11499,35 @@
       "id": "PR_kwDOIEpj4c6sZPnx",
       "title": "Fix ML-DSA-87-PublicKey size",
       "url": "https://github.com/lamps-wg/dilithium-certificates/pull/158",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mathias-arm",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "While looking at `X509-ML-DSA-2025.asn`, I noticed: \r\n\r\n```\r\npk-ml-dsa-44 PUBLIC-KEY ::= {\r\n  IDENTIFIER id-ml-dsa-44\r\n  -- KEY no ASN.1 wrapping; 1312 octets --\r\n[...]\r\npk-ml-dsa-65 PUBLIC-KEY ::= {\r\n  IDENTIFIER id-ml-dsa-65\r\n  -- KEY no ASN.1 wrapping; 1952 octets --\r\n[...]\r\npk-ml-dsa-87 PUBLIC-KEY ::= {\r\n  IDENTIFIER id-ml-dsa-87\r\n  -- KEY no ASN.1 wrapping; 2592 octets --\r\n[...]\r\nML-DSA-44-PublicKey ::= OCTET STRING (SIZE (1312))\r\n\r\nML-DSA-65-PublicKey ::= OCTET STRING (SIZE (1952))\r\n\r\nML-DSA-87-PublicKey ::= OCTET STRING (SIZE (2602))\r\n```\r\n\r\nThe `2602` value for `ML-DSA-87-PublicKey` should be `2592` to be consistent with the comment in `pk-ml-dsa-87` and the table in section `Security Strengths` (see below).\r\n\r\n```\r\n|=======+=======+=====+========+========+==========+==========|\r\n| Level | (k,l) | eta |  Sig.  | Public | Private  | Private  |\r\n|       |       |     |  (B)   | Key(B) | Seed(B)  | Expand(B)|\r\n|=======+=======+=====+========+========+==========+==========|\r\n|   2   | (4,4) |  2  |  2420  |  1312  |    32    |   2560   |\r\n|   3   | (6,5) |  4  |  3309  |  1952  |    32    |   4032   |\r\n|   5   | (8,7) |  2  |  4627  |  2592  |    32    |   4896   |\r\n|=======+=======+=====+========+========+==========+==========|\r\n```\r\n\r\n\r\n\r\n",
       "createdAt": "2025-10-07T00:41:48Z",
-      "updatedAt": "2025-10-07T11:37:44Z",
+      "updatedAt": "2025-10-10T04:18:41Z",
       "baseRepository": "lamps-wg/dilithium-certificates",
       "baseRefName": "main",
       "baseRefOid": "785a549e69eb7abdd1aa47e8404897a5de699455",
       "headRepository": "mathias-arm/dilithium-certificates",
       "headRefName": "fix/mldsa87-asn1-pubkey-size",
       "headRefOid": "39978f61da4a65c378bc8580274896f3ce485d6d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-10-10T02:33:53Z",
+      "mergedAt": "2025-10-10T02:33:52Z",
+      "mergedBy": "jakemas",
+      "mergeCommit": {
+        "oid": "1fcc048b8a6e3404b0e0bb80c71286551ac9604d"
+      },
+      "comments": [
+        {
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks!",
+          "createdAt": "2025-10-10T02:35:33Z",
+          "updatedAt": "2025-10-10T02:35:33Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIEpj4c7FRh5m",
