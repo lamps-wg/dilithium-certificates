@@ -1,6 +1,6 @@
 ---
 title: >
-  Internet X.509 Public Key Infrastructure - Algorithm Identifiers
+  Internet X.509 Public Key Infrastructure -- Algorithm Identifiers
   for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)
 abbrev: ML-DSA in Certificates
 category: std
@@ -64,7 +64,7 @@ normative:
   X690:
     target: https://www.itu.int/rec/T-REC-X.690
     title: >
-      Information Technology -- Abstract Syntax Notation One (ASN.1):
+      Information Technology --
       ASN.1 encoding rules: Specification of Basic Encoding Rules (BER),
       Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)
     date: 2021-02
@@ -75,22 +75,24 @@ normative:
       ISO/IEC: 8825-1:2021
   CSOR:
     target: https://csrc.nist.gov/projects/computer-security-objects-register/algorithm-registration
-    title: Computer Security Objects Register
+    title: Computer Security Objects Register (CSOR)
     author:
       name: National Institute of Standards and Technology
       ins: NIST
-    date: 2024-08-20
+    date: 13 June 2025
 
 informative:
   Dilithium:
     target: https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf
     title: >
-      CRYSTALS-Dilithium Algorithm Specifications and Supporting Documentation
+      CRYSTALS-Dilithium Algorithm Specifications and Supporting Documentation (Version 3.1)
     author:
     -
       ins: S. Bai
     -
       ins: L. Ducas
+    -
+      ins: E. Kiltz
     -
       ins: T. Lepoint
     -
@@ -101,7 +103,7 @@ informative:
       ins: G. Seiler
     -
       ins: D. Stehlé
-    date: 2021
+    date: 8 February 2021
   Fiat-Shamir:
     target: https://www.iacr.org/archive/asiacrypt2009/59120596/59120596.pdf
     title: >
@@ -113,7 +115,7 @@ informative:
     seriesinfo:
       International Conference on the Theory and Application of Cryptology and Information Security
   CDFFJ21:
-     target: https://eprint.iacr.org/2020/1525.pdf
+     target: https://eprint.iacr.org/archive/2020/1525/20231023:114351
      title: >
        BUFFing signature schemes beyond unforgeability and the case of post-quantum signatures
      author:
@@ -127,30 +129,30 @@ informative:
        ins: M. Fischlin
      -
        ins: C. Janson
-     date: 2021
+     date: October 2023
      seriesinfo:
-       In Proceedings of the 42nd IEEE Symposium on Security and Privacy
+       Cryptology ePrint Archive, Paper 2020/1525
   NIST-PQC:
     target: https://csrc.nist.gov/Projects/post-quantum-cryptography
     title: >
-      Post-Quantum Cryptography Project
+      Post-Quantum Cryptography (PQC)
     author:
-    - org: National Institute of Standards and Technology (NIST)
+    - org: NIST
     date: 2016-12-20
   FIPS204-ExternalMuFAQ:
     target: https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/faq/fips204-sec6-03192025.pdf
     title: FIPS 204 Section 6 FAQ
     author:
-    - org: National Institute of Standards and Technology (NIST)
-    date: 2025
+    - org: NIST
+    date: 28 July 2025
 
 --- abstract
 
-Digital signatures are used within X.509 certificates, Certificate
+Digital signatures are used within X.509 certificates and Certificate
 Revocation Lists (CRLs), and to sign messages. This document specifies
 the conventions for using FIPS 204, the Module-Lattice-Based Digital
 Signature Algorithm (ML-DSA) in Internet X.509 certificates and
-certificate revocation lists.  The conventions for the associated
+CRLs.  The conventions for the associated
 signatures, subject public keys, and private key are also described.
 
 --- middle
@@ -165,13 +167,13 @@ specifies the use of the ML-DSA in Public Key Infrastructure X.509 (PKIX)
 certificates and Certificate Revocation Lists (CRLs) at three security
 levels: ML-DSA-44, ML-DSA-65, and ML-DSA-87.
 
-{{FIPS204}} defines two variants of ML-DSA: a pure and a pre-hash variant.
+{{FIPS204}} defines two variants of ML-DSA: pure and pre-hash.
 Only the former is specified in this document.
 See {{sec-disallow-hash}} for the rationale.
 The pure variant of ML-DSA supports the typical pre-hash flow. Refer to
 {{externalmu}} for more details.
 
-Prior to standardisation, ML-DSA was known as Dilithium.  ML-DSA and
+Prior to standardization, ML-DSA was known as Dilithium.  ML-DSA and
 Dilithium are not compatible.
 
 ## Requirements Language
@@ -186,9 +188,9 @@ The `AlgorithmIdentifier` type is defined in {{!RFC5912}} as follows:
 ~~~
     AlgorithmIdentifier{ALGORITHM-TYPE, ALGORITHM-TYPE:AlgorithmSet} ::=
       SEQUENCE {
-        algorithm   ALGORITHM-TYPE.id({AlgorithmSet}),
+        algorithm   ALGORITHM-TYPE.&id({AlgorithmSet}),
         parameters  ALGORITHM-TYPE.
-                      Params({AlgorithmSet}{@algorithm}) OPTIONAL
+               &Params({AlgorithmSet}{@algorithm}) OPTIONAL
      }
 ~~~
 
@@ -206,7 +208,7 @@ identifier (OID).
 * `parameters`, which are optional, are the associated parameters for the
 algorithm identifier in the algorithm field.
 
-The NIST registered OIDs {{CSOR}} are:
+The NIST-registered OIDs {{CSOR}} are:
 
 ~~~
    id-ml-dsa-44 OBJECT IDENTIFIER ::= { joint-iso-itu-t(2)
@@ -231,10 +233,10 @@ ML-DSA is a digital signature scheme built upon the
 Fiat-Shamir-with-aborts framework {{Fiat-Shamir}}. The security is based
 upon the hardness of lattice problems over module lattices {{Dilithium}}.
 ML-DSA provides three parameter sets for the NIST PQC security categories
-2, 3 and 5.
+2, 3, and 5.
 
 Signatures are used in a number of different ASN.1 structures. As shown
-in the ASN.1 representation from {{RFC5280}} below, in an X.509
+in the ASN.1 representation equivalent to that in {{RFC5280}} below, in an X.509
 certificate, a signature is encoded with an algorithm identifier in the
 `signatureAlgorithm` attribute and a `signatureValue` attribute that contains
 the actual signature.
@@ -258,8 +260,8 @@ the actual signature.
   }
 ~~~
 
-Signatures are also used in the CRL list ASN.1 representation from
-{{RFC5280}} below. In a X.509 CRL, a signature is encoded with an
+Signatures are also used in the CRL list ASN.1 representation; the representation
+below is equivalent to that in {{RFC5280}}. In an X.509 CRL, a signature is encoded with an
 algorithm identifier in the `signatureAlgorithm` attribute and a
 `signatureValue` attribute that contains the actual signature.
 
@@ -295,20 +297,20 @@ ML-DSA-65, and ML-DSA-87:
 
 <aside markdown="block">
   NOTE: The above syntax is from {{RFC5912}} and is compatible with the
-  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+  2021 ASN.1 syntax {{X680}}.
 </aside>
 
 The identifiers defined in {{oids}} can be used as the
 `AlgorithmIdentifier` in the `signatureAlgorithm` field in the sequence
-`Certificate`/`CertificateList` and the `signature` field in the sequence
+`Certificate`/`CertificateList` and in the `signature` field in the sequence
 `TBSCertificate`/`TBSCertList` in certificates and CRLs, respectively,
 {{RFC5280}}. The `parameters` of these signature algorithms MUST be
 absent, as explained in {{oids}}. That is, the `AlgorithmIdentifier`
 SHALL be a `SEQUENCE` of one component, the OID id-ml-dsa-*, where *
-is 44, 65, or 87 - see {{oids}}.
+is 44, 65, or 87 -- see {{oids}}.
 
 The `signatureValue` field contains the corresponding ML-DSA signature
-computed upon the ASN.1 DER encoded `tbsCertificate`/`tbsCertList`
+computed upon the ASN.1 DER-encoded `TBSCertificate`/`TBSCertList`
 {{RFC5280}}.  The optional context string (ctx) parameter
 as defined in Section 5.2 of {{FIPS204}} is left to its default value:
 the empty string.
@@ -386,7 +388,7 @@ The `PUBLIC-KEY` ASN.1 types for ML-DSA are defined here:
 
 <aside markdown="block">
   NOTE: The above syntax is from {{RFC5912}} and is compatible with the
-  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+  2021 ASN.1 syntax {{X680}}.
 </aside>
 
 {{?RFC5958}} specifies the Asymmetric Key Package's `OneAsymmetricKey` type for
@@ -394,7 +396,7 @@ encoding asymmetric keypairs. When an ML-DSA private key or keypair is encoded a
 a `OneAsymmetricKey`, it follows the description in {{priv-key}}.
 
 When the ML-DSA private key appears outside of an Asymmetric Key Package in an
-environment that uses ASN.1 encoding, it can be encoded using one of the
+environment that uses ASN.1 encoding, it can be encoded using one of
 the `ML-DSA-PrivateKey CHOICE` formats defined in {{priv-key}}. The `seed` format
 is RECOMMENDED as it efficiently stores both the private and public key.
 
@@ -414,23 +416,19 @@ integrity service, and/or a non-repudiation service that protects against
 the signing entity falsely denying some action. This means that the
 `keyUsage` extention MUST have at least one of the following bits set:
 
-~~~
-  digitalSignature
-  nonRepudiation
-  keyCertSign
-  cRLSign
-~~~
+* digitalSignature
+* nonRepudiation
+*  keyCertSign
+*  cRLSign
 
 ML-DSA subject public keys cannot be used to establish keys or encrypt data, so the
 `keyUsage` extention MUST NOT have any of following bits set:
 
-~~~
-   keyEncipherment,
-   dataEncipherment,
-   keyAgreement,
-   encipherOnly, and
-   decipherOnly.
-~~~
+* keyEncipherment
+* dataEncipherment
+* keyAgreement
+* encipherOnly
+* decipherOnly
 
 Requirements about the `keyUsage` extension bits defined in {{RFC5280}}
 still apply.
@@ -438,8 +436,8 @@ still apply.
 #  Private Key Format {#priv-key}
 
 {{FIPS204}} specifies two formats for an ML-DSA private key: a 32-octet
-seed (xi) and an (expanded) private key. The expanded private key (and public key)
-is computed from the seed using `ML-DSA.KeyGen_internal(xi)` (algorithm 6).
+seed (`&xi;`) (GREEK SMALL LETTER XI, U+03BE) and an (expanded) private key. The expanded private key (and public key)
+is computed from the seed using `ML-DSA.KeyGen_internal(&xi;)` (algorithm 6).
 
 "Asymmetric Key Packages" {{!RFC5958}} specifies how to encode a private
 key in a structure that both identifies what algorithm the private key
@@ -475,7 +473,7 @@ key to be included as well. For illustration, the ASN.1 structure
 
 For ML-DSA private keys, the `privateKey` field in `OneAsymmetricKey` contains one of
 the following DER-encoded `CHOICE` structures. The `seed` format is a
-fixed 32 byte `OCTET STRING` (34 bytes total with the `0x8020` tag and
+fixed 32-byte `OCTET STRING` (34 bytes total with the `0x8020` tag and
 length) for all security levels, while the `expandedKey` and `both` formats
 vary in size by security level:
 
@@ -511,14 +509,14 @@ ML-DSA-87-PrivateKey ::= CHOICE {
 
 <aside markdown="block">
   NOTE: The above syntax is from {{RFC5912}} and is compatible with the
-  2021 ASN.1 syntax {{X680}}. See {{RFC5280}} for the 1988 ASN.1 syntax.
+  2021 ASN.1 syntax {{X680}}.
 </aside>
 
 The `CHOICE` allows three representations of the private key:
 
-1. The `seed` format (tag `[0]`) contains just the 32-byte seed value (xi)
+1. The `seed` format (tag `[0]`) contains just the 32-byte seed value (`&xi;`)
    from which both the expanded private key and public key can be derived
-   using `ML-DSA.KeyGen_internal(xi)`.
+   using `ML-DSA.KeyGen_internal(&xi;)`.
 
 2. The `expandedKey` format contains the expanded private key that was
    derived from the seed.
@@ -535,14 +533,16 @@ The `privateKeyAlgorithm` field uses the `AlgorithmIdentifier` structure with
 the appropriate OID as defined in {{oids}}. If present, the `publicKey`
 field will hold the encoded public key as defined in {{ML-DSA-PublicKey}}.
 
+<aside markdown="block">
 NOTE: While the private key can be stored in multiple formats, the seed-only
 format is RECOMMENDED as it is the most compact representation. Both the
 expanded private key and the public key can be deterministically derived
-from the seed using `ML-DSA.KeyGen_internal(xi)`. Alternatively, the public
+from the seed using `ML-DSA.KeyGen_internal(&xi;)`. Alternatively, the public
 key can be generated from the private key. While the `publicKey` field
 and `expandedKey` format are technically redundant when using the seed-only
 format, they MAY be included to enable keypair consistency checks during
 import operations.
+</aside>
 
 When parsing the private key, the ASN.1 tag explicitly indicates which
 variant of `CHOICE` is present. Implementations should use the context-specific tag `IMPLICIT [0]`
@@ -555,31 +555,34 @@ textual encoding defined in {{RFC7468}}.
 
 # IANA Considerations
 
-For the ASN.1 module in {{asn1}}, IANA is requested to assign an object
-identifier (OID) for the module identifier (TBD1) with a Description
-of "id-mod-x509-ml-dsa-2025". The OID for the module should be
-allocated in the "SMI Security for PKIX Module Identifier" registry
-(1.3.6.1.5.5.7.0).
+For the ASN.1 module in {{asn1}}, IANA has assigned the following object
+identifier (OID) in the "SMI Security for PKIX Module Identifier" registry
+(1.3.6.1.5.5.7.0):
+
+| Decimal | Description             | Reference |
+|:--------|:------------------------|:----------|
+| 119     | id-mod-x509-ml-dsa-2025 | RFC 9881  |
+{: #iana-cons title="Table 1: Registered ASN.1 Module"}
 
 # Operational Considerations
 
 ## Private Key Format
 
-An `ML-DSA.KeyGen seed (xi)` represents the RECOMMENDED format for storing
+An `ML-DSA.KeyGen seed (&xi;)` represents the RECOMMENDED format for storing
 and transmitting ML-DSA private keys. This format is explicitly permitted
 by {{FIPS204}} as an acceptable representation of a keypair. In particular,
 generating the seed in one cryptographic module and then importing or
 exporting it into another cryptographic module is allowed. The internal
-key generation function `ML-DSA.KeyGen_internal(xi)` can be accessed for
+key-generation function `ML-DSA.KeyGen_internal(&xi;)` can be accessed for
 this purpose.
 
 Note also that unlike other private key compression methods in other algorithms,
 expanding a private key from a seed is a one-way function, meaning that once a
 full key is expanded from seed and the seed discarded, the seed cannot be
-re-created even if the full expanded private key is available. For this reason
+recreated even if the full expanded private key is available. For this reason,
 it is RECOMMENDED that implementations retain and export the seed,
 even when also exporting the expanded private key. ML-DSA seed extraction can be
-implemented by including the seed xi randomly generated at line 1 of Algorithm 1
+implemented by including the seed &xi; that is randomly generated at line 1 of Algorithm 1
 `ML-DSA.KeyGen` in the returned output.
 
 When encoding an ML-DSA private key in a OneAsymmetricKey object, any
@@ -588,8 +591,8 @@ RECOMMENDED for storage efficiency.
 
 ## Private Key Consistency Testing
 
-When receiving a private key that contains both the seed and the
-expandedKey, the recipient SHOULD perform a seed consistency check to
+When receiving a private key that contains both the `seed` and the
+`expandedKey`, the recipient SHOULD perform a seed consistency check to
 ensure that the sender properly generated the private key. Recipients
 that do not perform this seed consistency check avoid keygen
 and compare operations, but are unable to ensure that the `seed` and
@@ -605,13 +608,13 @@ the value presented in the private key.
 {{example-bad}} includes some examples of inconsistent seeds and expanded private
 keys.
 
-## Rationale for disallowing HashML-DSA {#sec-disallow-hash}
+## Rationale for Disallowing HashML-DSA {#sec-disallow-hash}
 
 The HashML-DSA mode defined in Section 5.4 of {{FIPS204}} MUST NOT be
 used; in other words, public keys identified by
 `id-hash-ml-dsa-44-with-sha512`, `id-hash-ml-dsa-65-with-sha512`, and
 `id-hash-ml-dsa-87-with-sha512` MUST NOT be in X.509 certificates used for
-CRLs, OCSP, certificate issuance and related PKIX protocols. This restriction
+CRLs, OCSP, certificate issuance, and related PKIX protocols. This restriction
 is primarily to increase interoperability.
 
 ML-DSA and HashML-DSA are incompatible algorithms that require
@@ -624,7 +627,7 @@ need to commit a given public key to be either of type `ML-DSA` or
 `HashML-DSA` at the time of certificate creation. This is anticipated
 to cause operational issues in contexts where the operator does not
 know whether the key will need to produce pure or pre-hashed signatures
-at key generation time. The External &mu; (mu) mode described in {{externalmu}}
+at key-generation time. The External "&mu;" (mu) (GREEK SMALL LETTER MU, U+03BC) mode described in {{externalmu}}
 avoids all of these operational concerns.
 
 A minor security reason for disallowing HashML-DSA is that the design of the
@@ -635,14 +638,14 @@ to the message to-be-signed prior to hashing, as described in
 line 6 of Algorithm 7 of {{FIPS204}}. This means that in the unlikely
 discovery of a collision attack against the SHA-3 family, an attacker
 would have to perform a public-key-specific collision search in order
-to find message pairs such that `H(tr || m1) = H(tr || m2)` since a
+to find message pairs such that `H(tr || m1) = H(tr || m2)`, because a
 direct hash collision `H(m1) = H(m2)` will not suffice.
 HashML-DSA removes this enhanced security property.
 In spite of its lack of targeted collision protection, the practical
 security risk of using HashML-DSA in X.509 signatures would be
-immaterial. That is because a hash of the issuing CA's public key
-is already included in the Authority Key Identifier (AKI) extension which
-is signed as part of the tbsCertificate structure.
+immaterial. This is because a hash of the issuing CA's public key
+is already included in the Authority Key Identifier (AKI) extension, which
+is signed as part of the `TBSCertificate` structure.
 Even when it is a SHA-1 hash, general second pre-images against
 the AKI hash of existing issuing CAs would be impractical.
 
@@ -660,9 +663,9 @@ ML-DSA depends on high quality random numbers that are suitable for
 use in cryptography.  The use of inadequate pseudo-random number
 generators (PRNGs) to generate such values can significantly undermine
 various security properties. For instance, using an inadequate PRNG
-for key generation, might allow an attacker to efficiently recover
+for key generation might allow an attacker to efficiently recover
 the private key by trying a small set of possibilities, rather than
-brute force search the whole keyspace.  The generation of random
+brute-force searching the whole keyspace.  The generation of random
 numbers of a sufficient level of quality for use in cryptography
 is difficult; see Section 3.6.1 of {{FIPS204}} for some additional
 information.
@@ -671,18 +674,18 @@ In the design of ML-DSA, care has been taken to make side-channel
 resilience easier to achieve. For instance, ML-DSA does not depend
 on Gaussian sampling. Implementations must still take great care
 not to leak information via various side channels. While deliberate
-design decisions such as these can help to deliver a greater ease
-of secure implementation - particularly against side-channel
-attacks - it does not necessarily provide resistance to more
+design decisions such as these can help to deliver
+a secure implementation with greater ease -- particularly against side-channel
+attacks -- it does not necessarily provide resistance to more
 powerful attacks such as differential power analysis. Some amount
 of side-channel leakage has been demonstrated in parts of the
 signing algorithm (specifically the bit-unpacking function), from
 which a demonstration of key recovery has been made over a large
 sample of signatures. Masking countermeasures exist for
-ML-DSA, but come with a performance overhead.
+ML-DSA, but comes with performance overhead.
 
 ML-DSA offers both deterministic and randomized signing. Signatures
-generated with either mode are compatible and a verifyer can't tell
+generated with either mode are compatible and a verifier cannot tell
 them apart. In the deterministic case, a signature only depends
 on the private key and the message to be signed. This makes
 the implementation easier to test and does not require
@@ -691,13 +694,13 @@ signing mixes in a 256-bit random string from an approved random bit
 generator (RBG). When randomized, ML-DSA is easier to harden
 against fault and hardware side-channel attacks.
 
-A security property also associated with digital
+A security property that is also associated with digital
 signatures is non-repudiation. Non-repudiation refers to the
-assurance that the owner of a signature key pair that was
+assurance that the owner of a signature keypair that was
 capable of generating an existing signature corresponding to
 certain data cannot convincingly deny having signed the data,
 unless its private key was compromised.
-The digital signature scheme ML-DSA possess three security
+The digital signature scheme ML-DSA possesses three security
 properties beyond unforgeability, that are associated with
 non-repudiation. These are exclusive ownership, message-bound
 signatures, and non-resignability. These properties are based
@@ -722,20 +725,20 @@ as per {{RFC5280}}, certificates use the Distinguished Encoding Rules; see
 # Security Strengths
 
 Instead of defining the strength of a quantum algorithm
-in a traditional manner using the imprecise notion of bits
+using the common bu imprecise notion of bits
 of security, NIST has instead elected to define security
 levels by picking a reference scheme, which NIST expects
 to offer notable levels of resistance to both quantum and
-classical attack. To wit, an algorithm that achieves NIST PQC
+classical attacks. To wit, an algorithm that achieves NIST PQC
 security level 1 must require computational resources to
 break the relevant security property, which are greater than
 those required for a brute-force key search on AES-128.
-Levels 3 and 5 use AES-192 and AES-256 as reference respectively.
+Levels 3 and 5 use AES-192 and AES-256 as reference, respectively.
 Levels 2 and 4 use collision search for SHA-256 and SHA-384
-as reference.
+as references.
 
-The parameter sets defined for NIST security levels 2, 3 and 5
-are listed in the Figure 1, along with the resulting signature
+The parameter sets defined for NIST security levels 2, 3, and 5
+are listed in the Table 2, along with the resulting signature
 size, public key, and private key sizes in bytes.
 Note that these are the sizes of the raw keys, not including
 ASN.1 encoding overhead from OneAsymmetricKey and SubjectPublicKeyInfo
@@ -743,16 +746,18 @@ wrappers. Private key sizes are shown for both the seed format
 and expanded format.
 
 ~~~
-|=======+=======+=====+========+========+==========+==========|
-| Level | (k,l) | eta |  Sig.  | Public | Private  | Private  |
-|       |       |     |  (B)   | Key(B) | Seed(B)  | Expand(B)|
-|=======+=======+=====+========+========+==========+==========|
-|   2   | (4,4) |  2  |  2420  |  1312  |    32    |   2560   |
-|   3   | (6,5) |  4  |  3309  |  1952  |    32    |   4032   |
-|   5   | (8,7) |  2  |  4627  |  2592  |    32    |   4896   |
-|=======+=======+=====+========+========+==========+==========|
+|=======+=======+=====+==========+========+==========+===========|
+| Level | (k,l) | eta | Sig. (B) | Public | Private  | Private   |
+|       |       |     |          | Key(B) | Seed(B)  | Expand(B) |
+|=======+=======+=====+==========+========+==========+===========|
+| 2     | (4,4) | 2   | 2420     | 1312   | 32       | 2560      |
+|-------+-------+-----+----------+--------+----------+-----------|
+| 3     | (6,5) | 4   | 3309     | 1952   | 32       | 4032      |
+|-------+-------+-----+----------+--------+----------+-----------|
+| 5     | (8,7) | 2   | 4627     | 2592   | 32       | 4896      |
+|=======+=======+=====+==========+========+==========+===========|
 ~~~
-{: #ML-DSAParameters title="ML-DSA Parameters"}
+{: #ML-DSAParameters title="Table 2: ML-DSA Parameters"}
 
 # Examples {#examples}
 
@@ -767,8 +772,10 @@ we show the seed-only format (using a context-specific `[0]` primitive
 tag with an implicit encoding of `OCTET STRING`), the `expanded` format,
 and `both` formats together.
 
+<aside markdown="block">
 NOTE: All examples use the same seed value, showing how the same seed
 produces different expanded private keys for each security level.
+</aside>
 
 ### ML-DSA-44 Private Key Examples
 
@@ -909,7 +916,7 @@ followed by the so-called "pretty print"; the public keys are the same.
 ## Example Certificates {#example-certificates}
 
 <aside markdown="block">
-The example certificates in this section have key usage bits set to
+NOTE: The example certificates in this section have key usage bits set to
 `digitalSignature`, `keyCertSign`, and `cRLSign` to lessen the number of
 examples, i.e., brevity. Certificate Policies (CPs) {{?RFC3647}}
 for production CAs should consider whether this combination is
@@ -956,7 +963,7 @@ so-called "pretty print"; the certificates are the same.
 ## Example Inconsistent Seed and Expanded Private Keys {#example-bad}
 
 <aside markdown="block">
-  WARNING: These private keys are purposely bad do not use them in
+  WARNING: These private keys are purposely bad; do not use them in
   production systems.
 </aside>
 
@@ -965,15 +972,15 @@ The following examples demonstrate inconsistent seed and expanded private keys.
 Three `ML-DSA-44-PrivateKey` examples of inconsistent seed and
 expanded private keys follow:
 
-1. The first `ML-DSA-PrivateKey` example includes the `both CHOICE` , i.e., both `seed` and `expandedKey` are included. The `seed` and `expanded` values can be checked for inconsistencies.
+1. The first `ML-DSA-PrivateKey` example includes the `both CHOICE` , i.e., both `seed` and `expandedKey` are included. The `seed` and `expandedKey` values can be checked for inconsistencies.
 
 2. The second `ML-DSA-PrivateKey` example includes only `expandedKey`.  The public key fails to match the `tr` hash value in the private key.
 
 3. The third `ML-DSA-PrivateKey` example also includes only `expandedKey`. The private `s_1` and `s_2` vectors imply a `t` vector whose private low bits do not match the `t_0` vector portion of the private key (its high bits `t_1` are the primary content of the public key).
 
 The second and third examples would not be detected by implementations
-that do not regenerate the public key from the private key, or neglect to
-then check consistency of `tr` or `t_0`.
+that do not regenerate the public key from the private key or, when they do, they neglect to
+then check consistency of `tr` and `t_0`.
 
 The following is the first example:
 
@@ -994,18 +1001,18 @@ The following is the third example:
 ~~~
 
 
-# Pre-hashing (External&mu;-ML-DSA) {#externalmu}
+# Pre-Hashing (External&mu;-ML-DSA) {#externalmu}
 
 Some applications require pre-hashing that ease operational
 requirements around large or inconsistently-sized payloads.
-When signing with pre-hashing, the signature generation
+When signing with pre-hashing, the signature-generation
 process can be separated into a pre-hash step requiring only the message
 and other public information, and a core signature
-step which uses the public key.
+step that uses the public key.
 
 In the context of ML-DSA, pre-hashing can be performed with
 the HashML-DSA algorithm defined in Section 5.4 of {{FIPS204}}.
-ML-DSA itself supports a External &mu; pre-hashing mode which
+ML-DSA itself supports an External &mu; pre-hashing mode, which
 externalizes the message pre-hashing originally performed inside
 the signing operation. This mode is also laid out in
 {{FIPS204-ExternalMuFAQ}}. This document specifies
@@ -1020,70 +1027,73 @@ for clarity.
 Pre-hash operation:
 
 ~~~
-Computeμ(pk, M, ctx):
+  Computeμ(pk, M, ctx):
 
-  # Referred to as 'Externalμ-ML-DSA.Prehash(pk, M, ctx)'
+  # Referred to as 'ExternalMu-ML-DSA.Prehash(pk, M, ctx)'
   # in the FIPS 204 FAQ.
   # M is the message, a bit-string
   # μ and ctx are byte-strings.
-  # ctx is the context string, which defaults to the empy string.
+  # ctx is the context string, which defaults to the empty string.
 
   μ = H(BytesToBits(H(pk, 64) || IntegerToBytes(0, 1) ||
                 IntegerToBytes(|ctx|, 1) || ctx) || M, 64)
-  # The functions `BytesToBits` and `IntegerToBytes` are defined in FIPS 204.
+  # The functions `BytesToBits` and `IntegerToBytes` are defined
+  # in FIPS 204.
   return μ
 ~~~
-{: #fig-externalmu-ml-dsa-external title="Computeμ prehash operation"}
+{: #fig-externalmu-ml-dsa-external title="Figure 1: Computeμ Pre-Hash Operation"}
 
 Sign operations:
 
 ~~~
-Signμ(sk, μ):
+  Signμ(sk, μ):
 
-  # Referred to as 'Externalμ-ML-DSA.Sign(sk, μ)'
-  # in the FIPS 204 FAQ.
+    # Referred to as 'ExternalMu-ML-DSA.Sign(sk, mu)'
+    # in the FIPS 204 FAQ.
 
-  if |μ| != 64 then
-    return error  # return an error indication if the input μ is not
-                  # 64 bytes.
-  end if
+    if |μ| != 64 then
+      return error  # return an error indication if the input μ is not
+                    # 64 bytes.
+    end if
 
-  rnd = rand(32)  # for the optional deterministic variant,
-                  # set rnd to all zeroes
-  if rnd = NULL then
-    return error  # return an error indication if random bit
-                  # generation failed
-  end if
+    rnd = rand(32)  # for the optional deterministic variant,
+                    # set rnd to all zeroes
+    if rnd = NULL then
+      return error  # return an error indication if random bit
+                    # generation failed
+    end if
 
-  sigma = Signμ_internal(sk, μ, rnd, isExternalμ=true)
-  return sigma
+    sigma = Signμ_internal(sk, μ, rnd, isExternalμ=true)
+    return sigma
 
-ML-DSA.Signμ_internal(sk, M', rnd, isExternalμ=false):
-    # μ can be passed as an argument instead of M'
-    # defaulting is Externalμ to false means that
+  ML-DSA.Signμ_internal(sk, M', rnd, isExternalμ=false):
+    # μ is passed to the function via the argument M'.
+    # Defaulting is Externalμ to false means that
     # this modified version of Sign_internal can be used
     # in place of the original without interfering with
     # functioning of pure ML-DSA mode.
-    # ... identical to FIPS 204 Algorithm 7, but with Line 6 replaced with
-  6: if (isExternalμ):
-       μ = M'
-     else:
-       μ = H(BytesToBits(tr) || M', 64)
+
+    # ... identical to FIPS 204 Algorithm 7, but with Line 6
+    # replaced with
+    6: if (isExternalμ):
+         μ = M'
+       else:
+         μ = H(BytesToBits(tr) || M', 64)
 ~~~
-{: #fig-externalmu-ml-dsa-internal title="The operations for signing μ"}
+{: #fig-externalmu-ml-dsa-internal title="Figure 2: The Operations for Signing μ"}
 
 There is no need to specify an External &mu; `Verify()` routine because
 this is identical to the original `ML-DSA.Verify()`. This makes External
 &mu; mode simply an internal optimization of the signer, and
 allows an ML-DSA key to sometimes be used with the "one-shot" `Sign()`
-API and sometimes the External &mu; API without any interoperability concens.
+API to and sometimes be used with the External &mu; API without any interoperability concens.
 
 The External &mu; mode requires the `Computeμ` routine to have access to the
-hash of the signer's public key which may not be available in some architectures,
+hash of the signer's public key, which may not be available in some architectures,
 or require fetching it. That may allow for mismatches between `tr` and `sk`.
-At worst, this will produce a signature which will fail to verify under the
+At worst, this will produce a signature that will fail to verify under the
 intended public key since a compliant `Verify()` routine will
-independently compute `tr` from the public key. That
+independently compute `tr` from the public key. This
 is not believed to be a security concern since `μ` is never used as-is
 within `ML-DSA.Sign_internal()` (Algorithm 7 in {{FIPS204}}). Rather,
 it is hashed with values unknown to an attacker on lines 7 and 15.
