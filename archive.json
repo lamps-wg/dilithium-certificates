@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T01:00:46.025087+00:00",
+  "timestamp": "2025-10-30T01:02:42.708609+00:00",
   "repo": "lamps-wg/dilithium-certificates",
   "labels": [
     {
@@ -11540,6 +11540,59 @@
           "body": "",
           "createdAt": "2025-10-07T11:37:44Z",
           "updatedAt": "2025-10-07T11:37:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 159,
+      "id": "PR_kwDOIEpj4c6wLFRn",
+      "title": "Update draft-ietf-lamps-dilithium-certificates.md",
+      "url": "https://github.com/lamps-wg/dilithium-certificates/pull/159",
+      "state": "OPEN",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Aligning with AUTH48 changes (aka RFC 9881).\r\n\r\nThe only differences will be the refs:\r\n\r\n1. I don't know how to make it refer to: https://www.rfc-editor.org/info/\r\ninstead of https://www.rfc-editor.org/rfc/\r\nfor the RFC references.\r\n\r\n2. I think maybe the DOI dereference from the tools looks slightly different than the format from the RFC editor.\r\n\r\nIn both instances it does not matter because they point to the same URI.",
+      "createdAt": "2025-10-28T15:27:18Z",
+      "updatedAt": "2025-10-29T16:29:13Z",
+      "baseRepository": "lamps-wg/dilithium-certificates",
+      "baseRefName": "main",
+      "baseRefOid": "1fcc048b8a6e3404b0e0bb80c71286551ac9604d",
+      "headRepository": "lamps-wg/dilithium-certificates",
+      "headRefName": "seanturner-auth48-changes",
+      "headRefOid": "3fb11a0b53184f2fab85d9dd5085e73b2ee859d9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIEpj4c7KQeqf",
+          "commit": {
+            "abbreviatedOid": "3fb11a0"
+          },
+          "author": "bwesterb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-29T13:18:26Z",
+          "updatedAt": "2025-10-29T13:18:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIEpj4c7KV9UD",
+          "commit": {
+            "abbreviatedOid": "3fb11a0"
+          },
+          "author": "jakemas",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-29T16:29:13Z",
+          "updatedAt": "2025-10-29T16:29:13Z",
           "comments": []
         }
       ]
